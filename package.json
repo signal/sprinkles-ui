@@ -4,17 +4,31 @@
   "description": "A portable, customizable set of UI components",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/ui-harness/server --entry ./src/specs"
+    "start": "node ./node_modules/ui-harness/server --entry ./src/specs",
+    "test": "jest"
   },
   "keywords": [],
   "author": "Harrison Harnisch <hharnisch@signal.co>",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.14.6"
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6"
   },
   "devDependencies": {
     "ui-harness": "^2.0.2",
-    "lorem-ipsum": "^1.0.3"
+    "lorem-ipsum": "^1.0.3",
+    "babel-jest": "^6.0.1",
+    "jest-cli": "^0.8.2",
+    "react-addons-test-utils": "^0.14.6"
+  },
+  "jest": {
+    "scriptPreprocessor": "./node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "./node_modules/react",
+      "./node_modules/react-dom",
+      "./node_modules/react-addons-test-utils",
+      "./node_modules/fbjs"
+    ]
   },
   "repository": {
     "type": "git",
