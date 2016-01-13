@@ -1,6 +1,6 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
-import Menu from "../components/Menu";
+import Menu from "../../src/components/Menu";
 
 
 describe("Menu", function() {

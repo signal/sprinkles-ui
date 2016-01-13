@@ -1,5 +1,5 @@
 import React from "react";
-import MyComponent from "../components/MyComponent";
+import MyComponent from "../../src/components/MyComponent";
 
 /*
 Dummy spec -- for reference

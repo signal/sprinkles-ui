@@ -8,8 +8,8 @@
 */
 
 
-describe("Quick Start (Sample)", function() {
-  require("./MyComponent.spec");
-  require("./MenuItem.spec");
-  require("./Menu.spec");
+describe("Sprinkles UI", function() {
+  require("./components/MyComponent.spec"); // Dummy component
+  require("./components/MenuItem.spec");
+  require("./components/Menu.spec");
 });
