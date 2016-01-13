@@ -1,0 +1,26 @@
+{
+  "name": "sprinkles-ui",
+  "version": "0.0.1",
+  "description": "A portable, customizable set of UI components",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./node_modules/ui-harness/server --entry ./src/specs"
+  },
+  "keywords": [],
+  "author": "Harrison Harnisch <hharnisch@signal.co>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.14.6"
+  },
+  "devDependencies": {
+    "ui-harness": "^2.0.2",
+    "lorem-ipsum": "^1.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab01dv2.thebrighttag.com:dev/sprinkles-ui.git"
+  },
+  "engines": {
+    "node": ">=5.0.0"
+  }
+}
