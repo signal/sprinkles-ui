@@ -22,13 +22,18 @@
     "react-addons-test-utils": "^0.14.6"
   },
   "jest": {
-    "scriptPreprocessor": "./node_modules/babel-jest",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
-      "./node_modules/react",
-      "./node_modules/react-dom",
-      "./node_modules/react-addons-test-utils",
-      "./node_modules/fbjs"
-    ]
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/fbjs"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "testFileExtensions": ["es6", "js", "jsx"],
+    "moduleFileExtensions": ["js", "json", "es6", "jsx"]
   },
   "repository": {
     "type": "git",
