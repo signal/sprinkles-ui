@@ -25,3 +25,5 @@ Start The UI Harness
 ```sh
 $ npm start
 ```
+
+Go to http://localhost:3030
