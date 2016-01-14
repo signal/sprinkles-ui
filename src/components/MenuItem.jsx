@@ -15,7 +15,7 @@ export default class MenuItem extends React.Component {
 
   handleClick = () => {
     if (this.props.handleClick) {
-      this.props.handleClick()
+      this.props.handleClick();
     }
   };
 
