@@ -29,8 +29,7 @@ describe('Menu', () => {
     );
 
     // grab the DOM node so we can inspect it
-    const menuItemNode = ReactDOM.findDOMNode(menu);
-    [].slice.call(menuItemNode.querySelectorAll("li")).map((item,i) => {
+    TestUtils.scryRenderedDOMComponentsWithClass(menu, 'li').map((item,i) => {
       expect(item.textContent).toEqual(menuItems[i].text);
     });
   });
