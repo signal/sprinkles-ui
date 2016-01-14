@@ -27,7 +27,6 @@ describe("Menu", function() {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
       <Menu
-        color="blue"
         menuItems={ menuItems }
         handleItemClick={ handleItemClick }
       />
