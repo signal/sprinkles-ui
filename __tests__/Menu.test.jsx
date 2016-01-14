@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 
+// TODO: move this to es6 style import when its implemented in jest
 const Menu = require("../src/components/Menu").default;
 
 
