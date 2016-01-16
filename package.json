@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./node_modules/ui-harness/server --entry ./specs",
-    "test": "jest"
+    "lint": "eslint src/** specs/** __tests__/** src/**/*.jsx specs/**/*.jsx __tests__/**/*.jsx",
+    "test": "npm run lint && jest"
   },
   "keywords": [],
   "author": "Harrison Harnisch <hharnisch@signal.co>",
@@ -15,11 +16,14 @@
     "react-dom": "^0.14.6"
   },
   "devDependencies": {
-    "ui-harness": "^2.0.2",
-    "lorem-ipsum": "^1.0.3",
+    "babel-eslint": "^4.1.6",
     "babel-jest": "^6.0.1",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.15.0",
     "jest-cli": "^0.8.2",
-    "react-addons-test-utils": "^0.14.6"
+    "lorem-ipsum": "^1.0.3",
+    "react-addons-test-utils": "^0.14.6",
+    "ui-harness": "^2.0.2"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
@@ -32,8 +36,17 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ],
-    "testFileExtensions": ["es6", "js", "jsx"],
-    "moduleFileExtensions": ["js", "json", "es6", "jsx"]
+    "testFileExtensions": [
+      "es6",
+      "js",
+      "jsx"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6",
+      "jsx"
+    ]
   },
   "repository": {
     "type": "git",

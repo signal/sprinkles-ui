@@ -26,10 +26,10 @@ describe("Menu", function() {
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-      <Menu
-        menuItems={ menuItems }
-        handleItemClick={ handleItemClick }
-      />
+        <Menu
+            handleItemClick={handleItemClick}
+            menuItems={menuItems}
+        />
     );
   });
 

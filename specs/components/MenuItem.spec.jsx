@@ -8,14 +8,15 @@ describe("MenuItem", function() {
 
   before(() => {
     function handleClick() {
-      console.log('click!');
+      console.log("click!");
     }
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load( <MenuItem
-        text={ loremIpsum() }
-        handleClick={ handleClick }
-      />
+    this.load(
+        <MenuItem
+            handleClick={handleClick}
+            text={loremIpsum()}
+        />
     );
   });
 

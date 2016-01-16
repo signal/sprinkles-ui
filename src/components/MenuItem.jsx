@@ -1,11 +1,12 @@
 import React from "react";
 
 export default class MenuItem extends React.Component {
+  displayName = "MenuItem";
 
   static propTypes = {
     handleClick: React.PropTypes.func,
-    text: React.PropTypes.string,
-    style: React.PropTypes.object
+    style: React.PropTypes.object,
+    text: React.PropTypes.string
   };
 
   static defaultProps = {
@@ -21,9 +22,12 @@ export default class MenuItem extends React.Component {
 
   render () {
     return (
-      <li style={this.props.style} onClick={ this.handleClick }>
-        {this.props.text}
-      </li>
+        <li
+            onClick={this.handleClick}
+            style={this.props.style}
+        >
+          {this.props.text}
+        </li>
     );
   }
 }

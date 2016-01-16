@@ -1,12 +1,14 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 
+
 export default class Menu extends React.Component {
+  static displayName = "Menu";
 
   static propTypes = {
     handleItemClick: React.PropTypes.func,
-    menuItems: React.PropTypes.array,
     itemStyle: React.PropTypes.object,
+    menuItems: React.PropTypes.array,
     selectedItemStyle: React.PropTypes.object,
     style: React.PropTypes.object
   };
@@ -39,21 +41,21 @@ export default class Menu extends React.Component {
       let itemStyle = item.selected ?
         this.props.selectedItemStyle : this.props.itemStyle;
       return (
-        <MenuItem
-          style={itemStyle}
-          text={item.text}
-          key={item.key}
-          handleClick={ this.handleItemClick.bind(this, item) }
-        />
+          <MenuItem
+              handleClick={this.handleItemClick.bind(this, item)}
+              key={item.key}
+              style={itemStyle}
+              text={item.text}
+          />
       );
     });
   }
 
   render () {
     return (
-      <ul style={this.props.style}>
-        {this.renderMenuItems(this.props.menuItems)}
-      </ul>
+        <ul style={this.props.style}>
+          {this.renderMenuItems(this.props.menuItems)}
+        </ul>
     );
   }
 }
