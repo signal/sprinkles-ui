@@ -7,7 +7,7 @@ describe("List", function() {
   this.header(`## List`); // Markdown.
 
   before(() => {
-    let menuItems = [
+    let listItems = [
       {
         key: "1",
         text: "Item 1",
@@ -28,13 +28,13 @@ describe("List", function() {
     this.load(
         <List
             handleItemClick={handleItemClick}
-            menuItems={menuItems}
+            listItems={listItems}
         />
     );
   });
 
   it("Update List Items", () => this.props({
-    menuItems: [
+    listItems: [
       {
         key: "1",
         text: loremIpsum(),

@@ -12,7 +12,7 @@ const List = require("../src/components/List").default;
 
 describe("List", () => {
   it("Renders a List", () => {
-    const menuItems = [
+    const listItems = [
       {
         key: "1",
         text: "Item 1",
@@ -26,12 +26,12 @@ describe("List", () => {
     ];
     // Render a List with no style
     const menu = TestUtils.renderIntoDocument(
-        <List menuItems={menuItems} />
+        <List listItems={listItems} />
     );
 
     // grab the DOM node so we can inspect it
     TestUtils.scryRenderedDOMComponentsWithClass(menu, "li").map((item,i) => {
-      expect(item.textContent).toEqual(menuItems[i].text);
+      expect(item.textContent).toEqual(listItems[i].text);
     });
   });
 

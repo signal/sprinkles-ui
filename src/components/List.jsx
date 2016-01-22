@@ -8,13 +8,13 @@ export default class List extends React.Component {
   static propTypes = {
     handleItemClick: React.PropTypes.func,
     itemStyle: React.PropTypes.object,
-    menuItems: React.PropTypes.array,
+    listItems: React.PropTypes.array,
     selectedItemStyle: React.PropTypes.object,
     style: React.PropTypes.object
   };
 
   static defaultProps = {
-    menuItems: {},
+    listItems: {},
     itemStyle: {
       padding: 10,
       color: "#444"
@@ -54,7 +54,7 @@ export default class List extends React.Component {
   render () {
     return (
         <ul style={this.props.style}>
-          {this.renderListItems(this.props.menuItems)}
+          {this.renderListItems(this.props.listItems)}
         </ul>
     );
   }
