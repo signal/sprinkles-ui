@@ -10,7 +10,7 @@ const MenuItem = require("../src/components/MenuItem").default;
 
 
 describe("MenuItem", () => {
-  it("Renders a MenuItem", () => {
+  it("Does render a MenuItem", () => {
     const text = "howdy";
 
     // Render a MenuItem with no style
@@ -23,6 +23,20 @@ describe("MenuItem", () => {
     // Verify that it"s rendered with the right text
     expect(menuItemNode.textContent).toEqual(text);
 
+  });
+
+  it("Does trigger an event when clicked", (done) => {
+    function clickEvent() {
+      done();
+    }
+
+    const menuItem = TestUtils.renderIntoDocument(
+        <MenuItem handleClick={clickEvent} />
+    );
+
+    const menuItemNode = ReactDOM.findDOMNode(menuItem);
+
+    TestUtils.Simulate.click(menuItemNode);
   });
 
 });
