@@ -7,6 +7,7 @@ describe("MenuItem", function() {
   this.header(`## MenuItem`); // Markdown.
 
   before(() => {
+    this.colors = ["black", "white", "blue", "red", "green", "orange"];
     function handleClick() {
       console.log("click!");
     }
@@ -21,9 +22,15 @@ describe("MenuItem", function() {
   });
 
   it("Update Text", () => this.props({ text: loremIpsum() }));
-
-  it("Style 1", () => this.props({ style: {}}));
-  it("Style 2", () => this.props({ style: {background: "#4183F0", color: "white"}}));
+  it("Clear Style", () => this.props({ style: {}}));
+  it("Random Style", () => this.props({
+    style: {
+      padding: 10,
+      listStyleType: "none",
+      background: this.colors[Math.floor(Math.random() * this.colors.length)],
+      color: this.colors[Math.floor(Math.random() * this.colors.length)]
+    }
+  }));
 
   /**
    * Documentation (Markdown)
