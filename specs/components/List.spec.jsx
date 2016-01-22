@@ -1,10 +1,10 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
-import Menu from "../../src/components/Menu";
+import List from "../../src/components/List";
 
 
-describe("Menu", function() {
-  this.header(`## Menu`); // Markdown.
+describe("List", function() {
+  this.header(`## List`); // Markdown.
 
   before(() => {
     let menuItems = [
@@ -26,14 +26,14 @@ describe("Menu", function() {
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Menu
+        <List
             handleItemClick={handleItemClick}
             menuItems={menuItems}
         />
     );
   });
 
-  it("Update Menu Items", () => this.props({
+  it("Update List Items", () => this.props({
     menuItems: [
       {
         key: "1",
@@ -56,7 +56,7 @@ describe("Menu", function() {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Menu
+  ### List
 
   A list menu items with a selected and unselected style. Passes click events to parents.
   `);

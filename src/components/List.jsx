@@ -2,8 +2,8 @@ import React from "react";
 import ListItem from "./ListItem";
 
 
-export default class Menu extends React.Component {
-  static displayName = "Menu";
+export default class List extends React.Component {
+  static displayName = "List";
 
   static propTypes = {
     handleItemClick: React.PropTypes.func,

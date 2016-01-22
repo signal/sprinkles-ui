@@ -1,5 +1,5 @@
 // don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/Menu");
+jest.dontMock("../src/components/List");
 jest.dontMock("../src/components/ListItem");
 
 import React from "react";
@@ -7,11 +7,11 @@ import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
-const Menu = require("../src/components/Menu").default;
+const List = require("../src/components/List").default;
 
 
-describe("Menu", () => {
-  it("Renders a Menu", () => {
+describe("List", () => {
+  it("Renders a List", () => {
     const menuItems = [
       {
         key: "1",
@@ -24,9 +24,9 @@ describe("Menu", () => {
         selected: true
       }
     ];
-    // Render a Menu with no style
+    // Render a List with no style
     const menu = TestUtils.renderIntoDocument(
-        <Menu menuItems={menuItems} />
+        <List menuItems={menuItems} />
     );
 
     // grab the DOM node so we can inspect it
