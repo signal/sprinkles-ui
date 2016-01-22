@@ -1,10 +1,10 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
-import MenuItem from "../../src/components/MenuItem";
+import ListItem from "../../src/components/ListItem";
 
 
-describe("MenuItem", function() {
-  this.header(`## MenuItem`); // Markdown.
+describe("ListItem", function() {
+  this.header(`## ListItem`); // Markdown.
 
   before(() => {
     this.colors = ["black", "white", "blue", "red", "green", "orange"];
@@ -14,7 +14,7 @@ describe("MenuItem", function() {
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <MenuItem
+        <ListItem
             handleClick={handleClick}
             text={loremIpsum()}
         />
@@ -36,6 +36,6 @@ describe("MenuItem", function() {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### MenuItem
+  ### ListItem
   `);
 });

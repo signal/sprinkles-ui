@@ -1,24 +1,24 @@
 // don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/MenuItem");
+jest.dontMock("../src/components/ListItem");
 
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
-const MenuItem = require("../src/components/MenuItem").default;
+const ListItem = require("../src/components/ListItem").default;
 
 
-describe("MenuItem", () => {
-  it("Does render a MenuItem", () => {
+describe("ListItem", () => {
+  it("Does render a ListItem", () => {
     const text = "howdy";
 
-    // Render a MenuItem with no style
-    const menuItem = TestUtils.renderIntoDocument(
-        <MenuItem text= {text} />
+    // Render a ListItem with no style
+    const listItem = TestUtils.renderIntoDocument(
+        <ListItem text= {text} />
     );
     // grab the DOM node so we can inspect it
-    const menuItemNode = ReactDOM.findDOMNode(menuItem);
+    const menuItemNode = ReactDOM.findDOMNode(listItem);
 
     // Verify that it"s rendered with the right text
     expect(menuItemNode.textContent).toEqual(text);
@@ -30,11 +30,11 @@ describe("MenuItem", () => {
       done();
     }
 
-    const menuItem = TestUtils.renderIntoDocument(
-        <MenuItem handleClick={clickEvent} />
+    const listItem = TestUtils.renderIntoDocument(
+        <ListItem handleClick={clickEvent} />
     );
 
-    const menuItemNode = ReactDOM.findDOMNode(menuItem);
+    const menuItemNode = ReactDOM.findDOMNode(listItem);
 
     TestUtils.Simulate.click(menuItemNode);
   });

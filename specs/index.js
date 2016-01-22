@@ -10,6 +10,6 @@
 
 describe("Sprinkles UI", function() {
   require("./components/MyComponent.spec"); // Dummy component
-  require("./components/MenuItem.spec");
+  require("./components/ListItem.spec");
   require("./components/Menu.spec");
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import MenuItem from "./MenuItem";
+import ListItem from "./ListItem";
 
 
 export default class Menu extends React.Component {
@@ -36,12 +36,12 @@ export default class Menu extends React.Component {
     }
   }
 
-  renderMenuItems (items) {
+  renderListItems (items) {
     return items.map((item, i) => {
       let itemStyle = item.selected ?
         this.props.selectedItemStyle : this.props.itemStyle;
       return (
-          <MenuItem
+          <ListItem
               handleClick={this.handleItemClick.bind(this, item)}
               key={item.key}
               style={itemStyle}
@@ -54,7 +54,7 @@ export default class Menu extends React.Component {
   render () {
     return (
         <ul style={this.props.style}>
-          {this.renderMenuItems(this.props.menuItems)}
+          {this.renderListItems(this.props.menuItems)}
         </ul>
     );
   }
