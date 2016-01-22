@@ -37,5 +37,13 @@ describe("ListItem", function() {
    */
   this.footer(`
   ### ListItem
+
+  An &lt;li&gt; element that can be styled and fires click events
+
+  #### API
+
+  - **handleClick** *React.PropTypes.func* (optional) function to call when event is triggered
+  - **style** *React.PropTypes.object* (optional) component style
+  - **text** *React.PropTypes.string* (optional) display text
   `);
 });
