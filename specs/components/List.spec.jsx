@@ -81,6 +81,21 @@ describe("List", function() {
     }
   }));
 
+  it("Clear List Style", () => this.props({
+    style: {
+      listStyleType: "none",
+      padding: 0
+    }
+  }));
+
+  it("Random List Style", () => this.props({
+    style: {
+      listStyleType: "none",
+      padding: 0,
+      border: "2px solid " + this.colors[Math.floor(Math.random() * this.colors.length)]
+    }
+  }));
+
   /**
    * Documentation (Markdown)
    */
