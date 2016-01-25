@@ -7,6 +7,7 @@ describe("List", function() {
   this.header(`## List`); // Markdown.
 
   before(() => {
+    this.colors = ["black", "blue", "red", "green", "orange"];
     let listItems = [
       {
         key: "1",
@@ -48,9 +49,37 @@ describe("List", function() {
     ]
   }));
 
-  //
-  // it("Style 1", () => this.props({ style: {}}));
-  // it("Style 2", () => this.props({ style: {background: "#4183F0", color: "white"}}));
+  it("Clear Item Style", () => this.props({
+    itemStyle: {
+      padding: 10,
+      color: "#444"
+    }
+  }));
+
+  it("Random Item Style", () => this.props({
+    itemStyle: {
+      padding: 10,
+      listStyleType: "none",
+      color: this.colors[Math.floor(Math.random() * this.colors.length)]
+    }
+  }));
+
+  it("Clear Selected Item Style", () => this.props({
+    selectedItemStyle: {
+      padding: 10,
+      background: "#3879D9",
+      color: "white"
+    }
+  }));
+
+  it("Random Selected Item Style", () => this.props({
+    selectedItemStyle: {
+      padding: 10,
+      listStyleType: "none",
+      background: this.colors[Math.floor(Math.random() * this.colors.length)],
+      color: "white"
+    }
+  }));
 
   /**
    * Documentation (Markdown)
