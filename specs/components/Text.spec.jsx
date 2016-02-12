@@ -19,16 +19,18 @@ describe("Text", function() {
   }));
 
   it("Increase Font Size", () => {
-    var curFontSize = this.props() && this.props().fontSize
-      ? this.props().fontSize : 12;
+    var curFontSize = this.props() && this.props().fontSize ?
+      this.props().fontSize : 12;
+
     this.props({
       fontSize: Math.min(curFontSize + 2, 36)
     })
   });
 
   it("Decrease Font Size", () => {
-    var curFontSize = this.props() && this.props().fontSize
-      ? this.props().fontSize : 12;
+    var curFontSize = this.props() && this.props().fontSize ?
+      this.props().fontSize : 12;
+
     this.props({
       fontSize: Math.max(curFontSize - 2, 8)
     })
