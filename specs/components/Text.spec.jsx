@@ -22,7 +22,7 @@ describe("Text", function() {
     var curFontSize = this.props() && this.props().fontSize
       ? this.props().fontSize : 12;
     this.props({
-      fontSize: Math.min(curFontSize + 1, 36)
+      fontSize: Math.min(curFontSize + 2, 36)
     })
   });
 
@@ -30,7 +30,7 @@ describe("Text", function() {
     var curFontSize = this.props() && this.props().fontSize
       ? this.props().fontSize : 12;
     this.props({
-      fontSize: Math.max(curFontSize - 1, 8)
+      fontSize: Math.max(curFontSize - 2, 8)
     })
   });
 
