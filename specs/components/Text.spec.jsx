@@ -18,6 +18,22 @@ describe("Text", function() {
     color: "#" + Math.floor(Math.random()*16777215).toString(16)
   }));
 
+  it("Increase Font Size", () => {
+    var curFontSize = this.props() && this.props().fontSize
+      ? this.props().fontSize : 12;
+    this.props({
+      fontSize: Math.min(curFontSize + 1, 36)
+    })
+  });
+
+  it("Decrease Font Size", () => {
+    var curFontSize = this.props() && this.props().fontSize
+      ? this.props().fontSize : 12;
+    this.props({
+      fontSize: Math.max(curFontSize - 1, 8)
+    })
+  });
+
   /**
    * Documentation (Markdown)
    */
@@ -29,6 +45,7 @@ describe("Text", function() {
   #### API
 
   - **color** *React.PropTypes.string* (optional) text color
+  - **fontSize** *React.PropTypes.string* (optional) text size
 
   `);
 });

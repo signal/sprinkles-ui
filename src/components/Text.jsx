@@ -5,7 +5,8 @@ export default class Text extends ReactCSS.Component {
   displayName = "Text";
 
   static propTypes = {
-    color: React.PropTypes.string
+    color: React.PropTypes.string,
+    fontSize: React.PropTypes.number
   };
 
   classes () {
@@ -19,13 +20,19 @@ export default class Text extends ReactCSS.Component {
         span: {
           color: this.props.color
         }
+      },
+      "fontSize": {
+        span: {
+          fontSize: this.props.fontSize
+        }
       }
     };
   }
 
   styles () {
     return this.css({
-      "color": !!this.props.color
+      "color": !!this.props.color,
+      "fontSize": !!this.props.fontSize
     });
   }
 
