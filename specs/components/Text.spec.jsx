@@ -9,12 +9,14 @@ describe("Text", function() {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Text text={loremIpsum()}/>
+        <Text>{loremIpsum()}</Text>
     );
   });
 
-  it("Update Text", () => this.props({ text: loremIpsum() }));
-
+  // Thanks Paul Irish: http://www.paulirish.com/2009/random-hex-color-code-snippets/
+  it("Update Color", () => this.props({
+    color: "#" + Math.floor(Math.random()*16777215).toString(16)
+  }));
 
   /**
    * Documentation (Markdown)
@@ -26,7 +28,7 @@ describe("Text", function() {
 
   #### API
 
-  - **text** *React.PropTypes.string* (optional) display text
+  - **color** *React.PropTypes.string* (optional) text color
 
   `);
 });

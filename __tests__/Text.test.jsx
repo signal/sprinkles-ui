@@ -16,7 +16,7 @@ describe("Text", () => {
 
     // Render a Text with no style
     const textComponent = TestUtils.renderIntoDocument(
-        <Text text={text} />
+        <Text>{text}</Text>
     );
     // grab the DOM node so we can inspect it
     const textNode = ReactDOM.findDOMNode(textComponent);
