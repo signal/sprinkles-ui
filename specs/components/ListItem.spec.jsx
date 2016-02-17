@@ -4,7 +4,6 @@ import ListItem from "../../src/components/ListItem";
 import Text from "../../src/components/Text";
 
 
-
 describe("ListItem", function() {
   this.header(`## ListItem`); // Markdown.
 
