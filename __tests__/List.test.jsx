@@ -1,6 +1,8 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/List");
 jest.dontMock("../src/components/ListItem");
+jest.dontMock("../src/components/Text");
+jest.dontMock("reactcss");
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -8,69 +10,48 @@ import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
 const List = require("../src/components/List").default;
+const ListItem = require("../src/components/ListItem").default;
+const Text = require("../src/components/Text").default;
 
 describe("List", () => {
   it("Does render a List", () => {
-    const listItems = [
-      {
-        key: "1",
-        text: "Item 1",
-        selected: false
-      },
-      {
-        key: "2",
-        text: "Item 2",
-        selected: true
-      }
-    ];
-    // Render a List with no style
+    const listItems = ["Item 1", "Item 2"];
+
     const list = TestUtils.renderIntoDocument(
-        <List listItems={listItems} />
+        <List>
+          {listItems.map((item, i) => {
+            return (
+                <ListItem key={i}>
+                    <Text>{item}</Text>
+                </ListItem>
+            )
+          })}
+        </List>
     );
 
     // grab the DOM node so we can inspect it
-    TestUtils.scryRenderedDOMComponentsWithTag(list, "li").forEach((item,i) => {
-      expect(item.textContent).toEqual(listItems[i].text);
+    TestUtils.scryRenderedDOMComponentsWithTag(list, "span").forEach((item,i) => {
+      expect(item.textContent).toEqual(listItems[i]);
     });
   });
 
-  it("Does trigger an event when list item clicked", (done) => {
-    const listItems = [
-      {
-        key: "1",
-        text: "Item 1",
-        selected: false
-      },
-      {
-        key: "2",
-        text: "Item 2",
-        selected: true
-      }
-    ];
+  it("Does trigger an event when list is clicked", (done) => {
+    const listItems = ["Item 1", "Item 2"];
 
-    // create a copy of the list items
-    let setItems = new Set(listItems);
-
-    // handle click events
-    function clickEvent(item) {
-      setItems.delete(item);
-
-      // all items have been clicked
-      if (setItems.size === 0) {
-        done();
-      }
-    }
-
-    // Render a List with no style
     const list = TestUtils.renderIntoDocument(
-        <List
-            handleItemClick={clickEvent}
-            listItems={listItems}
-        />
+        <List onClick={() => done()}>
+          {listItems.map((item, i) => {
+            return (
+                <ListItem key={i}>
+                    <Text>{item}</Text>
+                </ListItem>
+            )
+          })}
+        </List>
     );
 
-    TestUtils.scryRenderedDOMComponentsWithTag(list, "li").forEach((item) => {
-      TestUtils.Simulate.click(item);
-    });
+    const listNode = ReactDOM.findDOMNode(list);
+
+    TestUtils.Simulate.click(listNode);
   });
 });

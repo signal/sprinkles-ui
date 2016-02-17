@@ -5,6 +5,7 @@ export default class Text extends ReactCSS.Component {
   displayName = "Text";
 
   static propTypes = {
+    children: React.PropTypes.node,
     color: React.PropTypes.string,
     fontSize: React.PropTypes.number
   };

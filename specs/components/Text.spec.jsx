@@ -42,12 +42,13 @@ describe("Text", function() {
   this.footer(`
   ### Text
 
-  A Text Element
+  A component for rendering text nodes
 
   #### API
 
   - **color** *React.PropTypes.string* (optional) text color
   - **fontSize** *React.PropTypes.string* (optional) text size
+  - **children** *React.PropTypes.node* (optional) child components or text nodes
 
   `);
 });

@@ -1,61 +1,32 @@
 import React from "react";
-import ListItem from "./ListItem";
+import ReactCSS from "reactcss";
 
-
-export default class List extends React.Component {
+export default class List extends ReactCSS.Component {
   static displayName = "List";
 
   static propTypes = {
-    handleItemClick: React.PropTypes.func,
-    itemStyle: React.PropTypes.object,
-    listItems: React.PropTypes.array,
-    selectedItemStyle: React.PropTypes.object,
-    style: React.PropTypes.object
+    children: React.PropTypes.node,
+    onClick: React.PropTypes.func
   };
 
-  static defaultProps = {
-    listItems: {},
-    itemStyle: {
-      padding: 10,
-      color: "#444"
-    },
-    selectedItemStyle: {
-      padding: 10,
-      background: "#3879D9",
-      color: "white"
-    },
-    style: {
-      listStyleType: "none",
-      padding: 0
-    }
-  };
+  static defaultProps = {};
 
-  handleItemClick (item) {
-    if (this.props.handleItemClick) {
-      this.props.handleItemClick(item);
-    }
-  }
-
-  renderListItems (items) {
-    return items.map((item, i) => {
-      let itemStyle = item.selected ?
-        this.props.selectedItemStyle : this.props.itemStyle;
-      return (
-          <ListItem
-              handleClick={this.handleItemClick.bind(this, item)}
-              key={item.key}
-              style={itemStyle}
-              text={item.text}
-          />
-      );
-    });
+  classes () {
+    return {
+      "default": {
+        List: {}
+      }
+    };
   }
 
   render () {
     return (
-        <ul style={this.props.style}>
-          {this.renderListItems(this.props.listItems)}
-        </ul>
+        <div
+            onClick={this.props.onClick}
+            style={this.styles().List}
+        >
+          {this.props.children}
+        </div>
     );
   }
 }

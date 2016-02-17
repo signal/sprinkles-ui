@@ -1,36 +1,21 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
 import ListItem from "../../src/components/ListItem";
+import Text from "../../src/components/Text";
+
 
 
 describe("ListItem", function() {
   this.header(`## ListItem`); // Markdown.
 
   before(() => {
-    this.colors = ["black", "white", "blue", "red", "green", "orange"];
-    function handleClick() {
-      console.log("click!");
-    }
-
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <ListItem
-            handleClick={handleClick}
-            text={loremIpsum()}
-        />
+        <ListItem onClick={() => console.log("ListItem clicked")}>
+            <Text>{loremIpsum()}</Text>
+        </ListItem>
     );
   });
-
-  it("Update Text", () => this.props({ text: loremIpsum() }));
-  it("Clear Style", () => this.props({ style: {}}));
-  it("Random Style", () => this.props({
-    style: {
-      padding: 10,
-      listStyleType: "none",
-      background: this.colors[Math.floor(Math.random() * this.colors.length)],
-      color: this.colors[Math.floor(Math.random() * this.colors.length)]
-    }
-  }));
 
   /**
    * Documentation (Markdown)
@@ -38,12 +23,10 @@ describe("ListItem", function() {
   this.footer(`
   ### ListItem
 
-  An &lt;li&gt; element that can be styled and fires click events
+  A component for rendering an individual list item.
 
   #### API
 
-  - **handleClick** *React.PropTypes.func* (optional) function to call when event is triggered
-  - **style** *React.PropTypes.object* (optional) component style
-  - **text** *React.PropTypes.string* (optional) display text
+  - coming soon!
   `);
 });
