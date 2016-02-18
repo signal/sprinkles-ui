@@ -13,10 +13,10 @@ describe("List", function() {
     this.load(
         <List onClick={() => console.log("List clicked")}>
             <ListItem>
-                <Text>{loremIpsum()}</Text>
+                <Text fontSize={16}>{loremIpsum()}</Text>
             </ListItem>
             <ListItem>
-                <Text>{loremIpsum()}</Text>
+                <Text fontSize={16}>{loremIpsum()}</Text>
             </ListItem>
         </List>
     );
@@ -32,6 +32,8 @@ describe("List", function() {
 
   #### API
 
-  - coming soon
+  - **children** *React.PropTypes.node* (optional) child components
+  - **onClick** *React.PropTypes.func* (optional) click hander function
+
   `);
 });

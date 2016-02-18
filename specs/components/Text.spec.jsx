@@ -46,9 +46,9 @@ describe("Text", function() {
 
   #### API
 
+  - **children** *React.PropTypes.node* (optional) child components or text nodes
   - **color** *React.PropTypes.string* (optional) text color
   - **fontSize** *React.PropTypes.string* (optional) text size
-  - **children** *React.PropTypes.node* (optional) child components or text nodes
 
   `);
 });

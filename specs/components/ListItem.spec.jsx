@@ -11,7 +11,7 @@ describe("ListItem", function() {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
         <ListItem onClick={() => console.log("ListItem clicked")}>
-            <Text>{loremIpsum()}</Text>
+            <Text fontSize={16}>{loremIpsum()}</Text>
         </ListItem>
     );
   });
@@ -29,6 +29,9 @@ describe("ListItem", function() {
 
   #### API
 
+  - **children** *React.PropTypes.node* (optional) child components or text nodes
+  - **onClick** *React.PropTypes.func* (optional) click hander function
   - **selected** *React.PropTypes.bool* (optional) selection state
+
   `);
 });
