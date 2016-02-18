@@ -21,9 +21,7 @@ describe("List", () => {
         <List>
           {listItems.map((item, i) => {
             return (
-                <ListItem key={i}>
-                    <Text>{item}</Text>
-                </ListItem>
+                <Text key={i}>{item}</Text>
             )
           })}
         </List>
@@ -39,15 +37,7 @@ describe("List", () => {
     const listItems = ["Item 1", "Item 2"];
 
     const list = TestUtils.renderIntoDocument(
-        <List onClick={() => done()}>
-          {listItems.map((item, i) => {
-            return (
-                <ListItem key={i}>
-                    <Text>{item}</Text>
-                </ListItem>
-            )
-          })}
-        </List>
+        <List onClick={() => done()} />
     );
 
     const listNode = ReactDOM.findDOMNode(list);

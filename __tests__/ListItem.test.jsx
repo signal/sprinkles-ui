@@ -1,6 +1,5 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/ListItem");
-jest.dontMock("../src/components/Text");
 jest.dontMock("reactcss");
 
 import React from "react";
@@ -9,7 +8,6 @@ import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
 const ListItem = require("../src/components/ListItem").default;
-const Text = require("../src/components/Text").default;
 
 
 describe("ListItem", () => {
@@ -18,9 +16,7 @@ describe("ListItem", () => {
 
     // Render a ListItem with no style
     const listItem = TestUtils.renderIntoDocument(
-        <ListItem>
-            <Text>{text}</Text>
-        </ListItem>
+        <ListItem>{text}</ListItem>
     );
     // grab the DOM node so we can inspect it
     const menuItemNode = ReactDOM.findDOMNode(listItem);
