@@ -9,9 +9,12 @@ describe("Popover", function() {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Popover>{loremIpsum()}</Popover>
+        <Popover open={true}>{loremIpsum()}</Popover>
     );
   });
+
+  it("Close Popver", () => this.props({open: false}));
+  it("Open Popver", () => this.props({open: true}));
 
     /**
    * Documentation (Markdown)
