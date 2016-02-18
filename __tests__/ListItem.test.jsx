@@ -36,4 +36,31 @@ describe("ListItem", () => {
     TestUtils.Simulate.click(listItemNode);
   });
 
+  it("Does render a selected ListItem", () => {
+    const listItem = TestUtils.renderIntoDocument(
+        <ListItem selected={true}>{"Selected"}</ListItem>
+    );
+
+    const listItemNode = ReactDOM.findDOMNode(listItem);
+
+    expect(listItem.props.selected).toEqual(true);
+  });
+
+  it("Does render a hovered ListItem", () => {
+    const listItem = TestUtils.renderIntoDocument(
+        <ListItem>{"some text"}</ListItem>
+    );
+
+    listItem.setState = jest.genMockFunction();
+
+    const listItemNode = ReactDOM.findDOMNode(listItem);
+    expect(listItem.setState).not.toBeCalled();
+
+    TestUtils.Simulate.mouseOver(listItemNode);
+    expect(listItem.setState).toBeCalledWith({isHovering: true});
+
+    TestUtils.Simulate.mouseOut(listItemNode);
+    expect(listItem.setState).toBeCalledWith({isHovering: false});
+  });
+
 });

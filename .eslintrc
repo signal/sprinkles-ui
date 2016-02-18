@@ -8,7 +8,6 @@
     "quotes": [2, "double"],
     "jsx-quotes": 1,
     "react/display-name": 1,
-    "react/jsx-boolean-value": 1,
     "react/jsx-closing-bracket-location": 1,
     "react/jsx-curly-spacing": 1,
     "react/jsx-handler-names": 1,

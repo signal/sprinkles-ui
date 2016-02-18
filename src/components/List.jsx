@@ -9,8 +9,6 @@ export default class List extends ReactCSS.Component {
     onClick: React.PropTypes.func
   };
 
-  static defaultProps = {};
-
   classes () {
     return {
       "default": {

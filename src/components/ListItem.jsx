@@ -6,7 +6,12 @@ export default class ListItem extends ReactCSS.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
-    onClick: React.PropTypes.func
+    onClick: React.PropTypes.func,
+    selected: React.PropTypes.bool
+  };
+
+  static defaultProps = {
+    selected: false
   };
 
   constructor() {
@@ -28,14 +33,19 @@ export default class ListItem extends ReactCSS.Component {
   classes () {
     return {
       "default": {
-        div: {
+        ListItem: {
           padding: 10
         }
       },
       "hovering": {
-        div: {
+        ListItem: {
+          background: "#EEEEEE",
+        }
+      },
+      "selected": {
+        ListItem: {
           background: "#4285F4",
-          color: "#F5F5F5"
+          color: "#FEFEFE"
         }
       }
     };
@@ -43,7 +53,8 @@ export default class ListItem extends ReactCSS.Component {
 
   styles () {
     return this.css({
-      "hovering": this.state.isHovering
+      "hovering": this.state.isHovering && !this.props.selected,
+      "selected": this.props.selected
     });
   }
 
@@ -53,7 +64,7 @@ export default class ListItem extends ReactCSS.Component {
             onClick={this.props.onClick}
             onMouseOut={this.handleMouseOut.bind(this)}
             onMouseOver={this.handleMouseOver.bind(this)}
-            style={this.styles().div}
+            style={this.styles().ListItem}
         >
           {this.props.children}
         </div>

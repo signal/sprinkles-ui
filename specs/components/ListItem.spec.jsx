@@ -16,6 +16,9 @@ describe("ListItem", function() {
     );
   });
 
+  it("Select ListItem", () => this.props({selected: true}));
+  it("Unselect ListItem", () => this.props({selected: false}));
+
   /**
    * Documentation (Markdown)
    */
@@ -26,6 +29,6 @@ describe("ListItem", function() {
 
   #### API
 
-  - coming soon!
+  - **selected** *React.PropTypes.bool* (optional) selection state
   `);
 });
