@@ -27,4 +27,30 @@ describe("Popover", () => {
 
   });
 
+  it("Does render an open Popover", () => {
+    // Render a Popover
+    const popovertComponent = TestUtils.renderIntoDocument(
+        <Popover open={true}/>
+    );
+
+    // grab the DOM node so we can inspect it
+    const popoverNode = ReactDOM.findDOMNode(popovertComponent);
+
+    // Verify that it"s rendered with the right text
+    expect(popoverNode.style.display).toEqual("block");
+  });
+
+  it("Does render a closed Popover", () => {
+    // Render a Popover
+    const popovertComponent = TestUtils.renderIntoDocument(
+        <Popover/>
+    );
+
+    // grab the DOM node so we can inspect it
+    const popoverNode = ReactDOM.findDOMNode(popovertComponent);
+
+    // Verify that it"s rendered with the right text
+    expect(popoverNode.style.display).toEqual("none");
+  });
+
 });
