@@ -1,7 +1,5 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/List");
-jest.dontMock("../src/components/ListItem");
-jest.dontMock("../src/components/Text");
 jest.dontMock("reactcss");
 
 import React from "react";
@@ -10,8 +8,6 @@ import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
 const List = require("../src/components/List").default;
-const ListItem = require("../src/components/ListItem").default;
-const Text = require("../src/components/Text").default;
 
 describe("List", () => {
   it("Does render a List", () => {
@@ -21,7 +17,7 @@ describe("List", () => {
         <List>
           {listItems.map((item, i) => {
             return (
-                <Text key={i}>{item}</Text>
+                <span key={i}>{item}</span>
             )
           })}
         </List>
@@ -34,7 +30,6 @@ describe("List", () => {
   });
 
   it("Does trigger an event when list is clicked", (done) => {
-    const listItems = ["Item 1", "Item 2"];
 
     const list = TestUtils.renderIntoDocument(
         <List onClick={() => done()} />
