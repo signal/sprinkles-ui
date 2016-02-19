@@ -6,6 +6,7 @@ export default class Popover extends ReactCSS.Component {
   displayName = "Popover";
 
   static propTypes = {
+    anchorEl: React.PropTypes.object,
     children: React.PropTypes.node,
     open: React.PropTypes.bool
   };
@@ -19,7 +20,8 @@ export default class Popover extends ReactCSS.Component {
       "default": {
         Popover: {
           zindex: zindex.Popover,
-          display: "none"
+          display: "none",
+          position: "absolute"
         }
       },
       "open": {
