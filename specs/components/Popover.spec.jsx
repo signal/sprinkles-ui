@@ -25,7 +25,8 @@ class PopoverWrapper extends React.Component {
       anchorDiv: {
         padding: 10,
         background: "#4285F4",
-        color: "#FEFEFE"
+        color: "#FEFEFE",
+        cursor: "pointer"
       }
     };
   }

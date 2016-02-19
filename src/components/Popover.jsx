@@ -15,18 +15,33 @@ export default class Popover extends ReactCSS.Component {
     open: false
   };
 
+  constructor () {
+    super();
+
+    this.state = {
+      top: undefined,
+      left: undefined
+    };
+  }
+
   classes () {
     return {
       "default": {
         Popover: {
           zindex: zindex.Popover,
           display: "none",
-          position: "absolute"
+          position: "fixed"
         }
       },
       "open": {
         Popover: {
           display: "block"
+        }
+      },
+      "anchored": {
+        Popover: {
+          top: this.state.top,
+          left: this.state.left
         }
       }
     }
@@ -34,8 +49,19 @@ export default class Popover extends ReactCSS.Component {
 
   styles () {
     return this.css({
-      "open": this.props.open
+      "open": this.props.open,
+      "anchored": !!this.props.anchorEl
     });
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.anchorEl) {
+      const anchor = nextProps.anchorEl.getBoundingClientRect();
+      this.setState({
+        top: anchor.bottom,
+        left: anchor.left
+      });
+    }
   }
 
   render () {
