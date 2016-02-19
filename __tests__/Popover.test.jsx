@@ -53,4 +53,27 @@ describe("Popover", () => {
     expect(popoverNode.style.display).toEqual("none");
   });
 
+  it("Does render an anchored Popover", () => {
+    const top = 1;
+    const left = 2;
+    const fakeAnchorEl = {
+      getBoundingClientRect: function () {
+        return {
+          bottom: top,
+          left: left
+        };
+      }
+    };
+
+    // Render a Popover
+    const popovertComponent = TestUtils.renderIntoDocument(
+        <Popover anchorEl={fakeAnchorEl}/>
+    );
+
+    // grab the DOM node so we can inspect it
+    const popoverNode = ReactDOM.findDOMNode(popovertComponent);
+
+    expect(popoverNode.style.top).toEqual(top + "px");
+    expect(popoverNode.style.left).toEqual(left + "px");
+  });
 });

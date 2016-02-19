@@ -55,8 +55,16 @@ export default class Popover extends ReactCSS.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.anchorEl) {
-      const anchor = nextProps.anchorEl.getBoundingClientRect();
+    this.updatePosition(nextProps.anchorEl);
+  }
+
+  componentWillMount () {
+    this.updatePosition(this.props.anchorEl);
+  }
+
+  updatePosition (anchorEl) {
+    if (anchorEl) {
+      const anchor = anchorEl.getBoundingClientRect();
       this.setState({
         top: anchor.bottom,
         left: anchor.left
