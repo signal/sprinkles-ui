@@ -7,20 +7,24 @@ export default class Popover extends ReactCSS.Component {
 
   static propTypes = {
     anchorEl: React.PropTypes.object,
+    anchorOrigin: React.PropTypes.object,
     children: React.PropTypes.node,
     open: React.PropTypes.bool
   };
 
   static defaultProps = {
-    open: false
+    open: false,
+    anchorOrigin: {
+      horizontal: "left",
+      vertical: "bottom"
+    }
   };
 
   constructor () {
     super();
 
     this.state = {
-      top: undefined,
-      left: undefined
+      position: {}
     };
   }
 
@@ -39,11 +43,28 @@ export default class Popover extends ReactCSS.Component {
         }
       },
       "anchored": {
-        Popover: {
-          top: this.state.top,
-          left: this.state.left
-        }
+        Popover: this.state.position
       }
+    }
+  }
+
+  calculatePosition (anchor, anchorOrigin) {
+    return {
+      top: this.getAnchorValue(anchor, anchorOrigin.vertical),
+      left: this.getAnchorValue(anchor, anchorOrigin.horizontal)
+    }
+  }
+
+  getAnchorValue (anchor, key) {
+    switch (key) {
+      case "top":
+        return anchor.top;
+      case "bottom":
+        return anchor.bottom;
+      case "left":
+        return anchor.left;
+      case "right":
+        return anchor.right;
     }
   }
 
@@ -55,19 +76,20 @@ export default class Popover extends ReactCSS.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.updatePosition(nextProps.anchorEl);
+    if (nextProps.anchorEl && nextProps.anchorOrigin) {
+      this.updatePosition(nextProps.anchorEl, nextProps.anchorOrigin);
+    }
   }
 
   componentWillMount () {
-    this.updatePosition(this.props.anchorEl);
+    this.updatePosition(this.props.anchorEl, this.props.anchorOrigin);
   }
 
-  updatePosition (anchorEl) {
+  updatePosition (anchorEl, anchorOrigin) {
     if (anchorEl) {
       const anchor = anchorEl.getBoundingClientRect();
       this.setState({
-        top: anchor.bottom,
-        left: anchor.left
+        position: this.calculatePosition(anchor, anchorOrigin)
       });
     }
   }

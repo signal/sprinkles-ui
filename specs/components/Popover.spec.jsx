@@ -9,6 +9,7 @@ class PopoverWrapper extends React.Component {
 
   static propTypes = {
     anchorEl: React.PropTypes.object,
+    anchorOrigin: React.PropTypes.object,
     children: React.PropTypes.node,
     onClick: React.PropTypes.func,
     open: React.PropTypes.bool
@@ -46,6 +47,7 @@ class PopoverWrapper extends React.Component {
             </div>
             <Popover
                 anchorEl={this.props.anchorEl}
+                anchorOrigin={this.props.anchorOrigin}
                 open={this.props.open}
             >
                 {this.props.children}
@@ -75,6 +77,34 @@ describe("Popover", function() {
         </PopoverWrapper>
     );
   });
+
+  it("anchorOrigin h:left, v:bottom", () => this.props({
+    anchorOrigin: {
+      horizontal: "left",
+      vertical: "bottom"
+    }
+  }));
+
+  it("anchorOrigin h:right, v:bottom", () => this.props({
+    anchorOrigin: {
+      horizontal: "right",
+      vertical: "bottom"
+    }
+  }));
+
+  it("anchorOrigin h:left, v:top", () => this.props({
+    anchorOrigin: {
+      horizontal: "left",
+      vertical: "top"
+    }
+  }));
+
+  it("anchorOrigin h:right, v:top", () => this.props({
+    anchorOrigin: {
+      horizontal: "right",
+      vertical: "top"
+    }
+  }));
 
   /**
    * Documentation (Markdown)
