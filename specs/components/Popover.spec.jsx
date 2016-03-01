@@ -117,6 +117,7 @@ describe("Popover", function() {
   #### API
 
   - **anchorEl** *React.PropTypes.object* (optional) element to anchor popover (not set for absolute center)
+  - **anchorOrigin** *React.PropTypes.object* (optional) point on the anchorEl to anchor against
   - **children** *React.PropTypes.node* (optional) child components
   - **open** *React.PropTypes.bool* (optional) popover open state
 
