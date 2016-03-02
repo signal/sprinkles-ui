@@ -12,10 +12,10 @@ const Input = require("../src/components/Input").default;
 
 describe("Input", () => {
 
-  it("Does render a Input with default text", () => {
+  it("Does render an Input with default text", () => {
     const text = "howdy";
 
-    // Render a Input
+    // Render an Input
     const inputComponent = TestUtils.renderIntoDocument(
         <Input value={text} />
     );
@@ -29,4 +29,26 @@ describe("Input", () => {
     expect(inputNode.getAttribute("value")).toEqual(text);
 
   });
+
+  it("Does render an editable input", () => {
+    const text = "howdy";
+    const changedText = "howdyA";
+
+    const handleChange = jest.genMockFunction();
+
+    // Render an editable Input
+    const inputComponent = TestUtils.renderIntoDocument(
+        <Input
+            handleChange={handleChange}
+            value={text}
+        />
+    );
+
+    const inputNode = ReactDOM.findDOMNode(inputComponent);
+
+    TestUtils.Simulate.change(inputNode, {target:{value: changedText}});
+
+    expect(handleChange).toBeCalledWith(changedText);
+  });
+
 });

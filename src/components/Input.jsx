@@ -14,10 +14,16 @@ export default class Input extends ReactCSS.Component {
     value: ""
   };
 
+  handleChange (e) {
+    if (this.props.handleChange) {
+      this.props.handleChange(e.target.value);
+    }
+  }
+
   render () {
     return (
         <input
-            onChange={this.props.handleChange}
+            onChange={this.handleChange.bind(this)}
             readOnly={!this.props.handleChange}
             value={this.props.value}
         />
