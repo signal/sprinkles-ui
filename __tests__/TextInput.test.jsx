@@ -72,4 +72,18 @@ describe("TextInput", () => {
     expect(textInputComponent.setState).toBeCalledWith({isFocused: false});
   });
 
+  it("Does render with a placeholder", () => {
+    const placeholder = "placeholder";
+    // Render an editable TextInput
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
+            placeholder={placeholder}
+        />
+    );
+
+    // grab the DOM node so we can inspect it
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+
+    expect(textInputNode.getAttribute("placeholder")).toBe(placeholder);
+  });
 });

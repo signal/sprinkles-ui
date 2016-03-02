@@ -16,12 +16,15 @@ describe("TextInput", function() {
     this.load(
         <TextInput
             handleChange={this.handleChange.bind(this)}
-            value={"Some Text..."}
+            placeholder={"Placeholder"}
         />
     ).width("100%");
   });
 
   it("Update value", () => this.props({value: loremIpsum()}));
+  it("Clear value", () => this.props({value: undefined}));
+  it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
+  it("Clear placeholder", () => this.props({placeholder: undefined}));
 
 
   /**
@@ -35,7 +38,8 @@ describe("TextInput", function() {
   #### API
 
   - **handleChange** *React.PropTypes.func* (optional) callback to handle text changes, no setting this makes the input read only
-  - **value** *React.PropTypes.string* (optional) starting text value
+  - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
+  - **value** *React.PropTypes.string* (optional) text value
 
   `);
 });

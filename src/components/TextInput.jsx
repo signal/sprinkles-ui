@@ -7,6 +7,7 @@ export default class TextInput extends ReactCSS.Component {
 
   static propTypes ={
     handleChange: React.PropTypes.func,
+    placeholder: React.PropTypes.string,
     value: React.PropTypes.string
   };
 
@@ -68,6 +69,7 @@ export default class TextInput extends ReactCSS.Component {
             onBlur={this.handleBlur.bind(this)}
             onChange={this.handleChange.bind(this)}
             onFocus={this.handleFocus.bind(this)}
+            placeholder={this.props.placeholder}
             readOnly={!this.props.handleChange}
             style={this.styles().TextInput}
             value={this.props.value}
