@@ -2,8 +2,8 @@ import React from "react";
 import ReactCSS from "reactcss";
 
 
-export default class Input extends ReactCSS.Component {
-  displayName = "Input";
+export default class TextInput extends ReactCSS.Component {
+  displayName = "TextInput";
 
   static propTypes ={
     handleChange: React.PropTypes.func,

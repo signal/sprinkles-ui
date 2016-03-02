@@ -1,5 +1,5 @@
 // don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/Input");
+jest.dontMock("../src/components/TextInput");
 jest.dontMock("reactcss");
 
 import React from "react";
@@ -7,26 +7,26 @@ import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
-const Input = require("../src/components/Input").default;
+const TextInput = require("../src/components/TextInput").default;
 
 
-describe("Input", () => {
+describe("TextInput", () => {
 
-  it("Does render an Input with default text", () => {
+  it("Does render an TextInput with default text", () => {
     const text = "howdy";
 
-    // Render an Input
-    const inputComponent = TestUtils.renderIntoDocument(
-        <Input value={text} />
+    // Render an TextInput
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput value={text} />
     );
 
     // grab the DOM node so we can inspect it
-    const inputNode = ReactDOM.findDOMNode(inputComponent);
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
 
     // Verify that it"s rendered with the right text
     // NOTE: This will ALWAYS grab the value at initialization time
     //       Use the 'value' property if you're looking for the text value
-    expect(inputNode.getAttribute("value")).toEqual(text);
+    expect(textInputNode.getAttribute("value")).toEqual(text);
 
   });
 
@@ -36,17 +36,17 @@ describe("Input", () => {
 
     const handleChange = jest.genMockFunction();
 
-    // Render an editable Input
-    const inputComponent = TestUtils.renderIntoDocument(
-        <Input
+    // Render an editable TextInput
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
             handleChange={handleChange}
             value={text}
         />
     );
 
-    const inputNode = ReactDOM.findDOMNode(inputComponent);
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
 
-    TestUtils.Simulate.change(inputNode, {target:{value: changedText}});
+    TestUtils.Simulate.change(textInputNode, {target:{value: changedText}});
 
     expect(handleChange).toBeCalledWith(changedText);
   });

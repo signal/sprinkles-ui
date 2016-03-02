@@ -1,10 +1,10 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
-import Input from "../../src/components/Input";
+import TextInput from "../../src/components/TextInput";
 
 
-describe("Input", function() {
-  this.header(`## Input`); // Markdown.
+describe("TextInput", function() {
+  this.header(`## TextInput`); // Markdown.
 
   before(() => {
 
@@ -14,7 +14,7 @@ describe("Input", function() {
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Input
+        <TextInput
             handleChange={this.handleChange.bind(this)}
             value={"Some Text..."}
         />
@@ -30,7 +30,7 @@ describe("Input", function() {
   this.footer(`
   ### Text
 
-  An Input Element
+  An TextInput Element
 
   #### API
 
