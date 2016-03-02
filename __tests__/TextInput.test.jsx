@@ -51,4 +51,25 @@ describe("TextInput", () => {
     expect(handleChange).toBeCalledWith(changedText);
   });
 
+  it("Does set isFocused when component is in focus", function () {
+    // Render an editable TextInput
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
+            handleChange={() => {}}
+        />
+    );
+
+    textInputComponent.setState = jest.genMockFunction();
+
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+    expect(textInputComponent.setState).not.toBeCalled();
+
+    TestUtils.Simulate.focus(textInputNode);
+
+    expect(textInputComponent.setState).toBeCalledWith({isFocused: true});
+
+    TestUtils.Simulate.blur(textInputNode);
+    expect(textInputComponent.setState).toBeCalledWith({isFocused: false});
+  });
+
 });

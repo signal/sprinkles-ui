@@ -18,7 +18,7 @@ describe("TextInput", function() {
             handleChange={this.handleChange.bind(this)}
             value={"Some Text..."}
         />
-    );
+    ).width("100%");
   });
 
   it("Update value", () => this.props({value: loremIpsum()}));
