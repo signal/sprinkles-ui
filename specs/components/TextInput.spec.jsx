@@ -9,17 +9,25 @@ import TextInput from "../../src/components/TextInput";
 class TextInputWrapper extends React.Component {
   displayName = "TextInputWrapper"
 
+  static propTypes = {
+    placeholder: React.PropTypes.string
+  };
+
+  static defaultProps = {
+    placeholder: "Placeholder"
+  };
+
   constructor() {
     super();
     this.state = {
-      value: "default value"
+      value: "some default value"
     };
   }
 
   render () {
     return(
         <TextInput
-            placeholder={"Placeholder"}
+            placeholder={this.props.placeholder}
             valueLink={{
               value: this.state.value,
               requestChange: (newValue) => this.setState({value: newValue})
@@ -45,7 +53,7 @@ describe("TextInput", function() {
   it("Update value", () => UIHarness.component.setState({value: loremIpsum()}));
   it("Clear value", () => UIHarness.component.setState({value: ""}));
   it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
-  it("Clear placeholder", () => this.props({placeholder: undefined}));
+  it("Clear placeholder", () => this.props({placeholder: "Placeholder"}));
 
 
   /**

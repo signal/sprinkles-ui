@@ -5,7 +5,7 @@ import ReactCSS from "reactcss";
 export default class TextInput extends ReactCSS.Component {
   displayName = "TextInput";
 
-  static propTypes ={
+  static propTypes = {
     placeholder: React.PropTypes.string,
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.string.isRequired,
