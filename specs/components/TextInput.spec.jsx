@@ -2,27 +2,48 @@ import React from "react";
 import loremIpsum from "lorem-ipsum";
 import TextInput from "../../src/components/TextInput";
 
+// Wrap the TextInput with a component. The wrapper
+// keeps track of the value in state.
+// TextInput and wrapper are kept in sync with Two-Way Binding
+// https://facebook.github.io/react/docs/two-way-binding-helpers.html
+class TextInputWrapper extends React.Component {
+  displayName = "TextInputWrapper"
+
+  constructor() {
+    super();
+    this.state = {
+      value: "default value"
+    };
+  }
+
+  render () {
+    return(
+        <TextInput
+            placeholder={"Placeholder"}
+            valueLink={{
+              value: this.state.value,
+              requestChange: (newValue) => this.setState({value: newValue})
+            }}
+        />
+    );
+  }
+}
+
 
 describe("TextInput", function() {
   this.header(`## TextInput`); // Markdown.
 
   before(() => {
-
-    this.handleChange = function (change) {
-      this.props({value: change});
-    }
-
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <TextInput
-            handleChange={this.handleChange.bind(this)}
-            placeholder={"Placeholder"}
-        />
+        <TextInputWrapper />
     ).width("100%");
   });
 
-  it("Update value", () => this.props({value: loremIpsum()}));
-  it("Clear value", () => this.props({value: undefined}));
+  // Since two-way binding is implemented changing the state of the wrapper
+  // will also update the DOM.
+  it("Update value", () => UIHarness.component.setState({value: loremIpsum()}));
+  it("Clear value", () => UIHarness.component.setState({value: ""}));
   it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
   it("Clear placeholder", () => this.props({placeholder: undefined}));
 
@@ -37,9 +58,10 @@ describe("TextInput", function() {
 
   #### API
 
-  - **handleChange** *React.PropTypes.func* (optional) callback to handle text changes, no setting this makes the input read only
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
-  - **value** *React.PropTypes.string* (optional) text value
+  - **valueLink** *React.PropTypes.shape* (optional)
+    - **value** *React.PropTypes.string* (required - if valueLink is set) text value
+    - **requestChange** *React.PropTypes.func* (optional) called with new value if value changes
 
   `);
 });

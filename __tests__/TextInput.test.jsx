@@ -17,7 +17,9 @@ describe("TextInput", () => {
 
     // Render an TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
-        <TextInput value={text} />
+        <TextInput
+            valueLink={{value: text}}
+        />
     );
 
     // grab the DOM node so we can inspect it
@@ -31,16 +33,17 @@ describe("TextInput", () => {
   });
 
   it("Does render an editable input", () => {
-    const text = "howdy";
-    const changedText = "howdyA";
+    const changedText = "howdy";
 
     const handleChange = jest.genMockFunction();
 
     // Render an editable TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
         <TextInput
-            handleChange={handleChange}
-            value={text}
+            valueLink={{
+              value: "",
+              requestChange: handleChange
+            }}
         />
     );
 
@@ -49,14 +52,13 @@ describe("TextInput", () => {
     TestUtils.Simulate.change(textInputNode, {target:{value: changedText}});
 
     expect(handleChange).toBeCalledWith(changedText);
+
   });
 
   it("Does set isFocused when component is in focus", function () {
     // Render an editable TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
-        <TextInput
-            handleChange={() => {}}
-        />
+        <TextInput />
     );
 
     textInputComponent.setState = jest.genMockFunction();

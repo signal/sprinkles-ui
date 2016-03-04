@@ -6,25 +6,17 @@ export default class TextInput extends ReactCSS.Component {
   displayName = "TextInput";
 
   static propTypes ={
-    handleChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
-    value: React.PropTypes.string
+    valueLink: React.PropTypes.shape({
+      value: React.PropTypes.string.isRequired,
+      requestChange: React.PropTypes.func
+    })
   };
 
-  static defaultProps = {
-    value: ""
-  };
-
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       isFocused: false
-    }
-  }
-
-  handleChange (e) {
-    if (this.props.handleChange) {
-      this.props.handleChange(e.target.value);
     }
   }
 
@@ -67,12 +59,10 @@ export default class TextInput extends ReactCSS.Component {
     return (
         <input
             onBlur={this.handleBlur.bind(this)}
-            onChange={this.handleChange.bind(this)}
             onFocus={this.handleFocus.bind(this)}
             placeholder={this.props.placeholder}
-            readOnly={!this.props.handleChange}
             style={this.styles().TextInput}
-            value={this.props.value}
+            valueLink={this.props.valueLink}
         />
     );
   }
