@@ -56,6 +56,7 @@ describe("TextInput", function() {
   it("Clear value", () => UIHarness.component.setState({value: ""}));
   it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
   it("Clear placeholder", () => this.props({placeholder: "Placeholder"}));
+  it("Set Warning Status", () => this.props({status: "warning"}));
   it("Set Error Status", () => this.props({status: "error"}));
   it("Clear Status", () => this.props({status: undefined}));
 

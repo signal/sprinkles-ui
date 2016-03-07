@@ -100,4 +100,16 @@ describe("TextInput", () => {
 
     expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px red");
   });
+
+  it("Does render with an orange shadow on warning status", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
+            status={"warning"}
+        />
+    );
+
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+
+    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px orange");
+  });
 });
