@@ -88,4 +88,16 @@ describe("TextInput", () => {
 
     expect(textInputNode.getAttribute("placeholder")).toBe(placeholder);
   });
+
+  it("Does render with red shadow on error status", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
+            status={"error"}
+        />
+    );
+
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+
+    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px red");
+  });
 });

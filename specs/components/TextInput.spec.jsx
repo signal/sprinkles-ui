@@ -10,7 +10,8 @@ class TextInputWrapper extends React.Component {
   displayName = "TextInputWrapper"
 
   static propTypes = {
-    placeholder: React.PropTypes.string
+    placeholder: React.PropTypes.string,
+    status: React.PropTypes.string
   };
 
   static defaultProps = {
@@ -28,6 +29,7 @@ class TextInputWrapper extends React.Component {
     return(
         <TextInput
             placeholder={this.props.placeholder}
+            status={this.props.status}
             valueLink={{
               value: this.state.value,
               requestChange: (newValue) => this.setState({value: newValue})
@@ -54,6 +56,8 @@ describe("TextInput", function() {
   it("Clear value", () => UIHarness.component.setState({value: ""}));
   it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
   it("Clear placeholder", () => this.props({placeholder: "Placeholder"}));
+  it("Set Error Status", () => this.props({status: "error"}));
+  it("Clear Status", () => this.props({status: undefined}));
 
 
   /**
@@ -67,7 +71,8 @@ describe("TextInput", function() {
   #### API
 
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
-  - **valueLink** *React.PropTypes.shape* (optional)
+  - **status** *React.PropTypes.oneOf* (optional) set status of text box (overrides focus) acceptable value are 'error'
+  - **valueLink** *React.PropTypes.shape* (optional) an object that enables [two-way binding](https://facebook.github.io/react/docs/two-way-binding-helpers.html)
     - **value** *React.PropTypes.string* (required - if valueLink is set) text value
     - **requestChange** *React.PropTypes.func* (optional) called with new value if value changes
 
