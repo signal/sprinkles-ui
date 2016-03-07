@@ -7,7 +7,7 @@ export default class TextInput extends ReactCSS.Component {
 
   static propTypes = {
     placeholder: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["error", "warning"]),
+    status: React.PropTypes.oneOf(["error", "warning", "success"]),
     valueLink: React.PropTypes.shape({
       value: React.PropTypes.string.isRequired,
       requestChange: React.PropTypes.func
@@ -47,6 +47,11 @@ export default class TextInput extends ReactCSS.Component {
           boxShadow: "0 0 3px 1px #4285F4"
         },
       },
+      "success": {
+        TextInput: {
+          boxShadow: "0 0 3px 1px green"
+        }
+      },
       "warning": {
         TextInput: {
           boxShadow: "0 0 3px 1px orange"
@@ -63,6 +68,7 @@ export default class TextInput extends ReactCSS.Component {
   styles () {
     return this.css({
       "focus": this.state.isFocused,
+      "success": this.props.status === "success",
       "warning": this.props.status === "warning",
       "error": this.props.status === "error"
     })

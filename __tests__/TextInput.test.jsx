@@ -112,4 +112,16 @@ describe("TextInput", () => {
 
     expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px orange");
   });
+
+  it("Does render with a green shadow on success status", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
+            status={"success"}
+        />
+    );
+
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+
+    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px green");
+  });
 });
