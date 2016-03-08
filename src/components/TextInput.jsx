@@ -9,7 +9,7 @@ export default class TextInput extends ReactCSS.Component {
     placeholder: React.PropTypes.string,
     status: React.PropTypes.oneOf(["error", "warning", "success"]),
     valueLink: React.PropTypes.shape({
-      value: React.PropTypes.string.isRequired,
+      value: React.PropTypes.string,
       requestChange: React.PropTypes.func
     })
   };

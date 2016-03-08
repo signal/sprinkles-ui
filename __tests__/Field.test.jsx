@@ -1,6 +1,7 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/Field");
 jest.dontMock("../src/components/TextInput");
+jest.dontMock("../src/components/Text");
 jest.dontMock("reactcss");
 
 import React from "react";
@@ -14,7 +15,7 @@ const TextInput = require("../src/components/TextInput").default;
 
 describe("Field", () => {
 
-  it("Does render an Field with TextInput", () => {
+  it("Does render a Field", () => {
     const text = "howdy";
 
     // Render an Field
@@ -34,5 +35,26 @@ describe("Field", () => {
     //       Use the 'value' property if you're looking for the text value
     expect(fieldNode.children[0].getAttribute("value")).toEqual(text);
 
+  });
+
+  it("Does render a Field with a label", () => {
+    const text = "howdy";
+
+    // Render an Field
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field
+            label={text}
+        >
+            <TextInput />
+        </Field>
+    );
+
+    // grab the DOM node so we can inspect it
+    const fieldNode = ReactDOM.findDOMNode(fieldComponent);
+
+    // Verify that it"s rendered with the right text
+    // NOTE: This will ALWAYS grab the value at initialization time
+    //       Use the 'value' property if you're looking for the text value
+    expect(fieldNode.textContent).toEqual(text);
   });
 });
