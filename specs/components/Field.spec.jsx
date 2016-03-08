@@ -25,7 +25,8 @@ describe("Field", function() {
   it("Set Warning Status", () => this.props({status: "warning"}));
   it("Set Success Status", () => this.props({status: "success"}));
   it("Clear Status", () => this.props({status: undefined}));
-
+  it("Set Error Message", () => this.props({error: "Field Error Message"}));
+  it("Clear Error Message", () => this.props({error: undefined}));
   /**
    * Documentation (Markdown)
    */

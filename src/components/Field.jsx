@@ -25,7 +25,10 @@ export default class Field extends ReactCSS.Component {
     return {
       "default": {
         Label: {
-          margin: "10px 0",
+          margin: "10px 0"
+        },
+        Error: {
+          margin: "10px 0"
         }
       }
     };
@@ -81,11 +84,28 @@ export default class Field extends ReactCSS.Component {
     }
   }
 
+  renderError () {
+    if (this.props.error) {
+      return(
+          <div style={this.styles().Error}>
+              <Text
+                  color={"red"}
+                  fontSize={16}
+                  ref={c => this.errorRef = c}
+              >
+                  {this.props.error}
+              </Text>
+          </div>
+      );
+    }
+  }
+
   render () {
     return (
         <div>
             {this.renderLabel()}
             {this.renderInput()}
+            {this.renderError()}
         </div>
     );
   }

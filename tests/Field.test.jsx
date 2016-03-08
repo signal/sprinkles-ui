@@ -116,4 +116,16 @@ describe("Field", () => {
     expect(labelNode.style.color).toBe("green");
     expect(inputNode.style.boxShadow).toBe("0 0 3px 1px green")
   });
+
+  it("Does render a Field with an error message", () => {
+    const errMessage = "Some error occured";
+
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field error={errMessage} />
+    );
+
+    const errorNode = ReactDOM.findDOMNode(fieldComponent.errorRef);
+
+    expect(errorNode.textContent).toBe(errMessage);
+  });
 });
