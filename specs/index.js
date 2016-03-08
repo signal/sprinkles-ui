@@ -16,4 +16,5 @@ describe("Sprinkles UI", function() {
   require("./components/Popover.spec");
   require("./components/TextInput.spec");
   require("./components/Field.spec");
+  require("./components/Button.spec");
 });
