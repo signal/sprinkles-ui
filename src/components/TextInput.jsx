@@ -38,8 +38,7 @@ export default class TextInput extends ReactCSS.Component {
           width: "100%",
           border: "1px solid #ccc",
           borderRadius: 3,
-          outline: "none",
-          transition: "box-shadow .2s ease"
+          outline: "none"
         }
       },
       "focus": {
