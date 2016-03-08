@@ -13,17 +13,17 @@ export default class Text extends ReactCSS.Component {
   classes () {
     return {
       "default": {
-        span: {
+        Text: {
           fontSize: 12
         }
       },
       "color": {
-        span: {
+        Text: {
           color: this.props.color
         }
       },
       "fontSize": {
-        span: {
+        Text: {
           fontSize: this.props.fontSize
         }
       }
@@ -39,7 +39,7 @@ export default class Text extends ReactCSS.Component {
 
   render () {
     return (
-        <span style={this.styles().span}>
+        <span style={this.styles().Text}>
           {this.props.children}
         </span>
     );
