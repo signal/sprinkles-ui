@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./node_modules/ui-harness/start --entry=./specs",
     "lint": "eslint src/** specs/** __tests__/** src/**/*.jsx specs/**/*.jsx __tests__/**/*.jsx",
-    "test": "npm run lint && jest"
+    "test": "npm run lint && jest --coverage"
   },
   "keywords": [],
   "author": "Harrison Harnisch <hharnisch@signal.co>",
