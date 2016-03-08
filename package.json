@@ -9,8 +9,7 @@
     "lint": "eslint src/** specs/** __tests__/** src/**/*.jsx specs/**/*.jsx __tests__/**/*.jsx",
     "postinstall": "npm run -s install:precommithook",
     "start": "node ./node_modules/ui-harness/start --entry=./specs",
-    "test": "npm run lint && jest ; echo '^^Ignore Branch Column^^ -- https://github.com/gotwarlost/istanbul/issues/544'",
-    "report:coverage": "open coverage/lcov-report/index.html"
+    "test": "npm run lint && jest"
   },
   "keywords": [],
   "author": "Harrison Harnisch <hharnisch@signal.co>",
@@ -35,7 +34,6 @@
   },
   "jest": {
     "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine2.js",
-    "collectCoverage": true,
     "testDirectoryName": "tests",
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
