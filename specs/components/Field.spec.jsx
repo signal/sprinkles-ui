@@ -19,7 +19,7 @@ describe("Field", function() {
   });
 
 
-  it("Clears Label", () => this.props({label: undefined}));
+  it("Clear Label", () => this.props({label: undefined}));
   it("Updates Label", () => this.props({label: "Field Label"}));
 
   /**
