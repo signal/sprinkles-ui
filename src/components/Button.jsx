@@ -63,12 +63,14 @@ export default class Button extends ReactCSS.Component {
 
   render () {
     return (
-      <button
-        disabled={this.state.isWorking}
-        style={this.styles().Button}
-        onMouseOut={this.handleMouseOut.bind(this)}
-        onMouseOver={this.handleMouseOver.bind(this)}
-        onClick={this.handleClick.bind(this)}>{this.props.text}</button>
+        <button
+            disabled={this.state.isWorking}
+            onClick={this.handleClick.bind(this)}
+            onMouseOut={this.handleMouseOut.bind(this)}
+            onMouseOver={this.handleMouseOver.bind(this)}
+            style={this.styles().Button}
+        >{this.props.text}
+        </button>
     );
   }
 };
