@@ -22,6 +22,7 @@ describe("Field", function() {
   it("Clear Label", () => this.props({label: undefined}));
   it("Updates Label", () => this.props({label: "Field Label"}));
   it("Set Error Status", () => this.props({status: "error"}));
+  it("Set Warning Status", () => this.props({status: "warning"}));
   it("Clear Status", () => this.props({status: undefined}));
 
   /**

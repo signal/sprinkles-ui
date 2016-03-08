@@ -75,4 +75,25 @@ describe("Field", () => {
     expect(labelNode.style.color).toBe("red");
     expect(inputNode.style.boxShadow).toBe("0 0 3px 1px red")
   });
+
+  it("Does render a Field with a warning status", () => {
+    const text = "howdy";
+
+    // Render an Field
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field
+            label={text}
+            status={"warning"}
+        >
+            <TextInput />
+        </Field>
+    );
+
+    // grab the label and input DOM nodes so we can inspect them
+    const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
+    const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
+
+    expect(labelNode.style.color).toBe("orange");
+    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px orange")
+  });
 });

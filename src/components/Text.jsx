@@ -14,7 +14,8 @@ export default class Text extends ReactCSS.Component {
     return {
       "default": {
         Text: {
-          fontSize: 12
+          fontSize: 12,
+          transition: "color .2s ease"
         }
       },
       "color": {
