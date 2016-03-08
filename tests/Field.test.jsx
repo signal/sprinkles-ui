@@ -2,7 +2,6 @@
 jest.dontMock("../src/components/Field");
 jest.dontMock("../src/components/TextInput");
 jest.dontMock("../src/components/Text");
-jest.dontMock("reactcss");
 
 import React from "react";
 import ReactDOM from "react-dom";

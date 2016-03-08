@@ -1,6 +1,5 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/List");
-jest.dontMock("reactcss");
 
 import React from "react";
 import ReactDOM from "react-dom";
