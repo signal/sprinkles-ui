@@ -10,7 +10,8 @@ export default class Field extends ReactCSS.Component {
   static propTypes = {
     children: React.PropTypes.node,
     initialValue: React.PropTypes.string,
-    label: React.PropTypes.string
+    label: React.PropTypes.string,
+    status: React.PropTypes.oneOf(["error"])
   };
 
   constructor (props) {
@@ -24,7 +25,8 @@ export default class Field extends ReactCSS.Component {
     return {
       "default": {
         Label: {
-          margin: "10px 0"
+          margin: "10px 0",
+          transition: "color .2s ease"
         }
       }
     };
@@ -42,7 +44,9 @@ export default class Field extends ReactCSS.Component {
       switch (child.type) {
         case TextInput:
           return React.cloneElement(child, {
-            valueLink: this.linkState()
+            status: this.props.status,
+            valueLink: this.linkState(),
+            ref: c => this.inputRef = c
           });
         default:
           throw new Error("Unknown Child Type")
@@ -52,10 +56,18 @@ export default class Field extends ReactCSS.Component {
 
   renderLabel () {
     if (this.props.label) {
+      let color;
+      switch (this.props.status) {
+        case "error":
+          color = "red";
+          break;
+      }
       return (
           <div style={this.styles().Label}>
               <Text
+                  color={color}
                   fontSize={18}
+                  ref={c => this.labelRef = c}
               >
                   {this.props.label}
               </Text>

@@ -52,9 +52,27 @@ describe("Field", () => {
     // grab the DOM node so we can inspect it
     const fieldNode = ReactDOM.findDOMNode(fieldComponent);
 
-    // Verify that it"s rendered with the right text
-    // NOTE: This will ALWAYS grab the value at initialization time
-    //       Use the 'value' property if you're looking for the text value
     expect(fieldNode.textContent).toEqual(text);
+  });
+
+  it("Does render a Field with an error status", () => {
+    const text = "howdy";
+
+    // Render an Field
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field
+            label={text}
+            status={"error"}
+        >
+            <TextInput />
+        </Field>
+    );
+
+    // grab the label and input DOM nodes so we can inspect them
+    const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
+    const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
+
+    expect(labelNode.style.color).toBe("red");
+    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px red")
   });
 });

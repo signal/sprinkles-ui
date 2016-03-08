@@ -73,7 +73,7 @@ describe("TextInput", function() {
   #### API
 
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
-  - **status** *React.PropTypes.oneOf* (optional) set status of text box (overrides focus) acceptable value are 'error'
+  - **status** *React.PropTypes.oneOf* (optional) set status of text box (overrides focus). Acceptable values are 'error', 'warning' and 'success'
   - **valueLink** *React.PropTypes.shape* (optional) an object that enables [two-way binding](https://facebook.github.io/react/docs/two-way-binding-helpers.html)
     - **value** *React.PropTypes.string* (required - if valueLink is set) text value
     - **requestChange** *React.PropTypes.func* (optional) called with new value if value changes
