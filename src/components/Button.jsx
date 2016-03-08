@@ -4,20 +4,22 @@ import ReactCSS from "reactcss";
 export default class Button extends ReactCSS.Component {
   displayName = "Button";
 
+  static propTypes = {
+    isWorking: React.PropTypes.bool,
+    onClick: React.PropTypes.func,
+    text: React.PropTypes.string
+  };
+
   static defaultProps = {
+    isWorking: false,
     text: "Submit"
   };
 
   constructor() {
     super();
     this.state = {
-      isHovering: false,
-      isWorking: false
+      isHovering: false
     }
-  }
-
-  handleClick () {
-    this.setState({isWorking: true})
   }
 
   handleMouseOut () {
@@ -57,15 +59,14 @@ export default class Button extends ReactCSS.Component {
   styles () {
     return this.css({
       "hovering": this.state.isHovering,
-      "working": this.state.isWorking
+      "working": this.props.isWorking
     })
   }
 
   render () {
     return (
         <button
-            disabled={this.state.isWorking}
-            onClick={this.handleClick.bind(this)}
+            disabled={this.props.isWorking}
             onMouseOut={this.handleMouseOut.bind(this)}
             onMouseOver={this.handleMouseOver.bind(this)}
             style={this.styles().Button}
