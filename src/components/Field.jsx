@@ -11,7 +11,7 @@ export default class Field extends ReactCSS.Component {
     children: React.PropTypes.node,
     initialValue: React.PropTypes.string,
     label: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["error", "warning"])
+    status: React.PropTypes.oneOf(["error", "warning", "success"])
   };
 
   constructor (props) {
@@ -62,6 +62,9 @@ export default class Field extends ReactCSS.Component {
           break;
         case "warning":
           color = "orange";
+          break;
+        case "success":
+          color = "green";
           break;
       }
       return (
