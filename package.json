@@ -4,12 +4,13 @@
   "description": "A portable, customizable set of UI components",
   "main": "index.js",
   "scripts": {
-    "git:precommit": "npm run lint && jest --coverage",
+    "git:precommit": "npm test",
     "install:precommithook": "if [ ! -f .git/hooks/pre-commit ]; then echo 'cd ../sprinkles-ui && npm run git:precommit' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit; fi",
     "lint": "eslint src/** specs/** __tests__/** src/**/*.jsx specs/**/*.jsx __tests__/**/*.jsx",
     "postinstall": "npm run -s install:precommithook",
     "start": "node ./node_modules/ui-harness/start --entry=./specs",
-    "test": "npm run lint && jest --coverage"
+    "test": "npm run lint && jest ; echo '^^Ignore Branch Column^^ -- https://github.com/gotwarlost/istanbul/issues/544'",
+    "report:coverage": "open coverage/lcov-report/index.html"
   },
   "keywords": [],
   "author": "Harrison Harnisch <hharnisch@signal.co>",
