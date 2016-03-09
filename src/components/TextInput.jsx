@@ -24,6 +24,10 @@ export default class TextInput extends ReactCSS.Component {
     }
   }
 
+  isValid () {
+    return this.state.value !== "";
+  }
+
   linkState () {
     return {
       value: this.state.value,

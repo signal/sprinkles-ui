@@ -121,4 +121,20 @@ describe("TextInput", () => {
 
     expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px green");
   });
+
+  it("Does return invalid state with empty textbox", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput />
+    );
+
+    expect(textInputComponent.isValid()).toBe(false);
+  });
+
+  it("Does return valid state when value set at initalization", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput initialValue={"a"} />
+    );
+
+    expect(textInputComponent.isValid()).toBe(true);
+  });
 });
