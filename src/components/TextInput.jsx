@@ -6,19 +6,34 @@ export default class TextInput extends ReactCSS.Component {
   displayName = "TextInput";
 
   static propTypes = {
+    initialValue: React.PropTypes.string,
+    onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["error", "warning", "success"]),
-    valueLink: React.PropTypes.shape({
-      value: React.PropTypes.string,
-      requestChange: React.PropTypes.func
-    })
+    status: React.PropTypes.oneOf(["error", "warning", "success"])
+  };
+
+  static defaultProps = {
+    initialValue: ""
   };
 
   constructor(props) {
     super();
     this.state = {
-      isFocused: false
+      isFocused: false,
+      value: props.initialValue
     }
+  }
+
+  linkState () {
+    return {
+      value: this.state.value,
+      requestChange: (newValue) => {
+        if (this.props.onChange) {
+          this.props.onChange(newValue);
+        }
+        this.setState({value: newValue})
+      }
+    };
   }
 
   handleFocus () {
@@ -80,7 +95,7 @@ export default class TextInput extends ReactCSS.Component {
             onFocus={this.handleFocus.bind(this)}
             placeholder={this.props.placeholder}
             style={this.styles().TextInput}
-            valueLink={this.props.valueLink}
+            valueLink={this.linkState()}
         />
     );
   }

@@ -17,7 +17,7 @@ describe("TextInput", () => {
     // Render an TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
         <TextInput
-            valueLink={{value: text}}
+            initialValue={text}
         />
     );
 
@@ -39,10 +39,8 @@ describe("TextInput", () => {
     // Render an editable TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
         <TextInput
-            valueLink={{
-              value: "",
-              requestChange: handleChange
-            }}
+            initialValue={""}
+            onChange={handleChange}
         />
     );
 

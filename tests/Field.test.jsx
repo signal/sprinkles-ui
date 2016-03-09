@@ -14,25 +14,18 @@ const TextInput = require("../src/components/TextInput").default;
 
 describe("Field", () => {
 
-  it("Does render a Field", () => {
+  fit("Does render a Field with an input", () => {
     const text = "howdy";
 
     // Render an Field
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field
-            initialValue={text}
-        >
-            <TextInput />
-        </Field>
+        <Field />
     );
 
     // grab the DOM node so we can inspect it
     const fieldNode = ReactDOM.findDOMNode(fieldComponent);
 
-    // Verify that it"s rendered with the right text
-    // NOTE: This will ALWAYS grab the value at initialization time
-    //       Use the 'value' property if you're looking for the text value
-    expect(fieldNode.children[0].getAttribute("value")).toEqual(text);
+    expect(fieldNode.textContent).toEqual("");
 
   });
 
@@ -41,17 +34,13 @@ describe("Field", () => {
 
     // Render an Field
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field
-            label={text}
-        >
-            <TextInput />
-        </Field>
+        <Field label={text}/>
     );
 
     // grab the DOM node so we can inspect it
-    const fieldNode = ReactDOM.findDOMNode(fieldComponent);
+    const labelRef = ReactDOM.findDOMNode(fieldComponent.labelRef);
 
-    expect(fieldNode.textContent).toEqual(text);
+    expect(labelRef.textContent).toEqual(text);
   });
 
   it("Does render a Field with an error status", () => {
