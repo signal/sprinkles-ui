@@ -23,6 +23,7 @@ describe("Field", function() {
     ).width("100%");
   });
 
+  it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.isValid()));
   it("Clear Label", () => this.props({label: undefined}));
   it("Update Label", () => this.props({label: "Field Label"}));
   it("Set Error Status", () => this.props({status: "error"}));

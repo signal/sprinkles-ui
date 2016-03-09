@@ -27,6 +27,10 @@ export default class Field extends ReactCSS.Component {
     };
   }
 
+  isValid () {
+    return this.inputRef && this.inputRef.isValid ? this.inputRef.isValid() : true;
+  }
+
   renderInput () {
     return React.Children.map(this.props.children, (child) => {
       switch (child.type) {

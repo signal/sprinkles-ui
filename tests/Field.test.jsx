@@ -14,7 +14,7 @@ const TextInput = require("../src/components/TextInput").default;
 
 describe("Field", () => {
 
-  fit("Does render a Field with an input", () => {
+  it("Does render a Field with an input", () => {
     const text = "howdy";
 
     // Render an Field
@@ -116,5 +116,33 @@ describe("Field", () => {
     const errorNode = ReactDOM.findDOMNode(fieldComponent.errorRef);
 
     expect(errorNode.textContent).toBe(errMessage);
+  });
+
+  it("Does validate a Field with input missing isValid function", () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field/>
+    );
+
+    expect(fieldComponent.isValid()).toBe(true);
+  });
+
+  it("Does validate a Field with a valid TextInput", () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field>
+            <TextInput initialValue={"a"} />
+        </Field>
+    );
+
+    expect(fieldComponent.isValid()).toBe(true);
+  });
+
+  it("Does validate a Field with an invalid TextInput", () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field>
+            <TextInput initialValue={""} />
+        </Field>
+    );
+
+    expect(fieldComponent.isValid()).toBe(false);
   });
 });
