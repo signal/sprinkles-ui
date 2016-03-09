@@ -13,7 +13,7 @@ describe("Button", () => {
   it("Does render a Button with default text", () => {
     const text = "Submit";
 
-    // Render an TextInput
+    // Render a Button
     const buttonComponent = TestUtils.renderIntoDocument(
         <Button />
     );
@@ -26,12 +26,20 @@ describe("Button", () => {
   });
 
   it("Disabled attribute is present when working propery is set", () => {
-    // Render an TextInput
     const buttonComponent = TestUtils.renderIntoDocument(
         <Button isWorking={true} />
     );
 
-    // grab the DOM node so we can inspect it
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(true);
+
+  });
+
+  it("Disabled attribute is present when isDisabled propery is set", () => {
+    const buttonComponent = TestUtils.renderIntoDocument(
+        <Button isDisabled={true} />
+    );
+
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(true);
 

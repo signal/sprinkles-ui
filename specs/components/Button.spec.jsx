@@ -16,11 +16,13 @@ describe("Button", function() {
         <Button
             onClick={handleClick.bind(this)}
         />
-    ).width("100%");
+    );
   });
 
   it("Set Working Indicator", () => this.props({isWorking: true}));
   it("Clear Working Indicator", () => this.props({isWorking: false}));
+  it("Disable Button", () => this.props({isDisabled: true}));
+  it("Enable Button", () => this.props({isDisabled: false}));
 
   /**
    * Documentation (Markdown)
@@ -34,6 +36,7 @@ describe("Button", function() {
 
   - **text** *React.PropTypes.string* (optional) text value
   - **isWorking** *React.PropTypes.bool* (optional) disable button and show it's working
+  - **isDisabled** *React.PropTypes.bool* disable button, by default set to true
 
   `);
 });

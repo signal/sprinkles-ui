@@ -1,16 +1,19 @@
 import React from "react";
 import ReactCSS from "reactcss";
+import colors from "../shared/colors";
 
 export default class Button extends ReactCSS.Component {
   displayName = "Button";
 
   static propTypes = {
+    isDisabled: React.PropTypes.bool,
     isWorking: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     text: React.PropTypes.string
   };
 
   static defaultProps = {
+    isDisabled: true,
     isWorking: false,
     text: "Submit"
   };
@@ -31,12 +34,16 @@ export default class Button extends ReactCSS.Component {
   }
 
   classes () {
+    var disabledStyles = {
+      backgroundColor: colors.ButtonDisabledBackground,
+      borderBottom: "1px solid" + colors.ButtonDisabledBorder
+    }
     return {
       "default": {
         Button: {
-          backgroundColor: "#00ADEF",
+          backgroundColor: colors.ButtonEnabledBackground,
           border: "none",
-          borderBottom: "1px solid #00688f",
+          borderBottom: "1px solid" + colors.ButtonEnabledBorder,
           borderRadius: "3px",
           color: "#fff",
           padding: "5px 25px"
@@ -44,14 +51,15 @@ export default class Button extends ReactCSS.Component {
       },
       "hovering": {
         Button: {
-          backgroundColor: "#05B2F4"
+          backgroundColor: colors.ButtonHoverBackground
         }
       },
+      "disabled": {
+        Button: disabledStyles
+      },
       "working": {
-        Button: {
-          backgroundColor: "grey"
-
-        }
+        Button: disabledStyles
+        //TODO: add some kind of working indicator here
       }
     }
   }
@@ -59,14 +67,16 @@ export default class Button extends ReactCSS.Component {
   styles () {
     return this.css({
       "hovering": this.state.isHovering,
-      "working": this.props.isWorking
+      "working": this.props.isWorking,
+      "disabled": this.props.isDisabled
     })
   }
 
   render () {
     return (
         <button
-            disabled={this.props.isWorking}
+            disabled={this.props.isWorking || this.props.isDisabled}
+            onClick={this.props.onClick}
             onMouseOut={this.handleMouseOut.bind(this)}
             onMouseOver={this.handleMouseOver.bind(this)}
             style={this.styles().Button}
