@@ -32,6 +32,8 @@ describe("Field", function() {
   it("Clear Status", () => this.props({status: undefined}));
   it("Set Error Message", () => this.props({error: "Field Error Message"}));
   it("Clear Error Message", () => this.props({error: undefined}));
+  it("Set Required", () => this.props({required: true}));
+  it("Remove Required", () => this.props({required: false}));
   /**
    * Documentation (Markdown)
    */

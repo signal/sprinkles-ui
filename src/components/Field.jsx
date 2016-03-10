@@ -11,7 +11,12 @@ export default class Field extends ReactCSS.Component {
     children: React.PropTypes.node,
     error: React.PropTypes.string,
     label: React.PropTypes.string,
+    required: React.PropTypes.bool,
     status: React.PropTypes.oneOf(["error", "warning", "success"])
+  };
+
+  static defaultProps = {
+    required: false
   };
 
   classes () {
@@ -28,7 +33,8 @@ export default class Field extends ReactCSS.Component {
   }
 
   isValid () {
-    return this.inputRef && this.inputRef.isValid ? this.inputRef.isValid() : true;
+    const valid = this.inputRef && this.inputRef.isValid ? this.inputRef.isValid() : true;
+    return !this.props.required || valid;
   }
 
   renderInput () {
@@ -55,7 +61,7 @@ export default class Field extends ReactCSS.Component {
           break;
       }
       return (
-          <div style={this.styles().Label}>
+          <span style={this.styles().Label}>
               <Text
                   color={color}
                   fontSize={18}
@@ -63,7 +69,7 @@ export default class Field extends ReactCSS.Component {
               >
                   {this.props.label}
               </Text>
-          </div>
+          </span>
       );
     }
   }
@@ -84,10 +90,29 @@ export default class Field extends ReactCSS.Component {
     }
   }
 
+  renderRequired () {
+    if(this.props.required) {
+      return(
+          <span>
+              {" "}
+              <Text
+                  color={"red"}
+                  fontSize={18}
+                  ref={c => this.requiredRef = c}
+              >
+                  {"*"}
+              </Text>
+          </span>
+      );
+    }
+  }
+
   render () {
     return (
         <div>
-            {this.renderLabel()}
+            <div>
+                {this.renderLabel()}{this.renderRequired()}
+            </div>
             {this.renderInput()}
             {this.renderError()}
         </div>

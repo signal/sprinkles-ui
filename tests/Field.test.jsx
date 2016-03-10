@@ -126,9 +126,22 @@ describe("Field", () => {
     expect(fieldComponent.isValid()).toBe(true);
   });
 
-  it("Does validate a Field with a valid TextInput", () => {
+  it("Does render a required Field", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field>
+        <Field required={true}/>
+    );
+
+    const requiredNode = ReactDOM.findDOMNode(fieldComponent.requiredRef);
+
+    expect(requiredNode.textContent).toBe("*");
+    expect(requiredNode.style.color).toBe("red");
+  });
+
+  it("Does validate a required Field with valid input as valid", () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field
+            required={true}
+        >
             <TextInput initialValue={"a"} />
         </Field>
     );
@@ -136,13 +149,39 @@ describe("Field", () => {
     expect(fieldComponent.isValid()).toBe(true);
   });
 
-  it("Does validate a Field with an invalid TextInput", () => {
+  it("Does validate a required Field with invalid input as invalid", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field>
+        <Field
+            required={true}
+        >
             <TextInput initialValue={""} />
         </Field>
     );
 
     expect(fieldComponent.isValid()).toBe(false);
+  });
+
+  it("Does validate an optional Field with valid input as valid", () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field
+            required={false}
+        >
+            <TextInput initialValue={"a"} />
+        </Field>
+    );
+
+    expect(fieldComponent.isValid()).toBe(true);
+  });
+
+  it("Does validate an optional Field with invalid input as valid", () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field
+            required={false}
+        >
+            <TextInput initialValue={""} />
+        </Field>
+    );
+
+    expect(fieldComponent.isValid()).toBe(true);
   });
 });
