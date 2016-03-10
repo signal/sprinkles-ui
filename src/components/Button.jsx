@@ -6,15 +6,15 @@ export default class Button extends ReactCSS.Component {
   displayName = "Button";
 
   static propTypes = {
-    isDisabled: React.PropTypes.bool,
-    isWorking: React.PropTypes.bool,
+    enabled: React.PropTypes.bool,
     onClick: React.PropTypes.func,
-    text: React.PropTypes.string
+    text: React.PropTypes.string,
+    working: React.PropTypes.bool,
   };
 
   static defaultProps = {
-    isDisabled: true,
-    isWorking: false,
+    enabled: true,
+    working: false,
     text: "Submit"
   };
 
@@ -67,20 +67,21 @@ export default class Button extends ReactCSS.Component {
   styles () {
     return this.css({
       "hovering": this.state.isHovering,
-      "working": this.props.isWorking,
-      "disabled": this.props.isDisabled
+      "working": this.props.working,
+      "disabled": !this.props.enabled
     })
   }
 
   render () {
     return (
         <button
-            disabled={this.props.isWorking || this.props.isDisabled}
+            disabled={this.props.working || !this.props.enabled}
             onClick={this.props.onClick}
             onMouseOut={this.handleMouseOut.bind(this)}
             onMouseOver={this.handleMouseOver.bind(this)}
             style={this.styles().Button}
-        >{this.props.text}
+        >
+            {this.props.working ? this.props.text + " (working)" : this.props.text}
         </button>
     );
   }

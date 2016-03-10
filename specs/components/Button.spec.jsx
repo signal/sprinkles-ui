@@ -8,21 +8,22 @@ describe("Button", function() {
 
     function handleClick(e) {
       this.props({
-        isWorking: true
+        working: true
       });
     }
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
         <Button
+            enabled={true}
             onClick={handleClick.bind(this)}
         />
     );
   });
 
-  it("Set Working Indicator", () => this.props({isWorking: true}));
-  it("Clear Working Indicator", () => this.props({isWorking: false}));
-  it("Disable Button", () => this.props({isDisabled: true}));
-  it("Enable Button", () => this.props({isDisabled: false}));
+  it("Set Working Indicator", () => this.props({working: true}));
+  it("Clear Working Indicator", () => this.props({working: false}));
+  it("Enable Button", () => this.props({enabled: true}));
+  it("Disable Button", () => this.props({enabled: false}));
 
   /**
    * Documentation (Markdown)
@@ -35,8 +36,8 @@ describe("Button", function() {
   #### API
 
   - **text** *React.PropTypes.string* (optional) text value
-  - **isWorking** *React.PropTypes.bool* (optional) disable button and show it's working
-  - **isDisabled** *React.PropTypes.bool* disable button, by default set to true
+  - **working** *React.PropTypes.bool* (optional) disable button and show it's working
+  - **enabled** *React.PropTypes.bool* (optional) enable or disable the button, default is true
 
   `);
 });

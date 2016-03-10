@@ -25,19 +25,37 @@ describe("Button", () => {
 
   });
 
-  it("Disabled attribute is present when working propery is set", () => {
+  it("Does disable Button when working is true", () => {
     const buttonComponent = TestUtils.renderIntoDocument(
-        <Button isWorking={true} />
+        <Button working={true} />
     );
 
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(true);
+  });
+
+  it("Does not disable Button when working is false", () => {
+    const buttonComponent = TestUtils.renderIntoDocument(
+        <Button working={false} />
+    );
+
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(false);
+  });
+
+  it("Does not disable Button when enabled is true", () => {
+    const buttonComponent = TestUtils.renderIntoDocument(
+        <Button enabled={true} />
+    );
+
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(false);
 
   });
 
-  it("Disabled attribute is present when isDisabled propery is set", () => {
+  it("Does disable Button when enabled is false", () => {
     const buttonComponent = TestUtils.renderIntoDocument(
-        <Button isDisabled={true} />
+        <Button enabled={false} />
     );
 
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
