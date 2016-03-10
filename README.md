@@ -7,6 +7,8 @@ A portable, customizable set of UI components
 - [Quickstart](#quickstart)
 - [Continuous Integration](#continuous-integration)
 - [Testing](#testing)
+- [Style Guide](#style-guide)
+- [Useful Resources](#useful-resources)
 
 ## Quickstart
 
@@ -47,3 +49,13 @@ $ docker build -t signalco/sprinkles-ui:latest .
 ```bash
 $ docker run -it signalco/sprinkles-ui:latest npm test
 ```
+
+## Style Guide
+
+**CSS**
+
+Within CSS rules, please make sure all the selectors are in alphabetical order. There's one exception, for 'height' and 'width', place these at the end and put 'height' before 'width'.
+
+## Useful Resources
+
+http://ricostacruz.com/cheatsheets/react.html
