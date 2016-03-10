@@ -33,15 +33,10 @@ export default class Field extends ReactCSS.Component {
 
   renderInput () {
     return React.Children.map(this.props.children, (child) => {
-      switch (child.type) {
-        case TextInput:
-          return React.cloneElement(child, {
-            status: this.props.status,
-            ref: c => this.inputRef = c
-          });
-        default:
-          throw new Error("Unknown Child Type")
-      }
+      return React.cloneElement(child, {
+        status: this.props.status,
+        ref: childRef => this.inputRef = childRef
+      });
     });
   }
 
