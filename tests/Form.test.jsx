@@ -1,5 +1,6 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/Form");
+jest.dontMock("../src/components/Button");
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -16,10 +17,11 @@ describe("Form", () => {
         <Form />
     );
 
-    // grab the DOM node so we can inspect it
     const formNode = ReactDOM.findDOMNode(formComponent);
+    expect(formNode).not.toBeNull();
 
-    expect(formNode).toBeDefined();
+    const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
+    expect(submitButtonNode).not.toBeNull();
 
   });
 });
