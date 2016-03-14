@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import Button from "./Button"
+import Button from "./Button";
 
 export default class Form extends ReactCSS.Component {
   displayName = "Form";
@@ -17,22 +17,40 @@ export default class Form extends ReactCSS.Component {
   constructor() {
     super();
     this.state = {
-      isValid: true
+      isValid: true,
+      inputValidations: {}
     }
   }
 
   handleClick (e) {
+    this.validate();
     if (this.state.isValid) {
       this.props.onSubmit();
     }
   }
 
+  validate () {
+    let newInputStatuses = {};
+    let isValid = true;
+    this.inputRefs.forEach((input, i) => {
+      if (!input.isValid()) {
+        isValid = false;
+      }
+      newInputStatuses[i] = input.isValid();
+    });
+    this.setState({
+      isValid: isValid,
+      inputValidations: newInputStatuses
+    });
+  }
+
   renderFields () {
     return React.Children.map(this.props.children, (child, i) => {
       return React.cloneElement(child, {
-        ref: (inputRef) =>{
+        status: this.state.inputValidations[i] === false ? "error" : undefined,
+        ref: (inputRef) => {
           if (inputRef) {
-            this.inputs.add(inputRef);
+            this.inputRefs.set(i, inputRef);
           }
         }
       });
@@ -40,7 +58,7 @@ export default class Form extends ReactCSS.Component {
   }
 
   componentWillMount () {
-    this.inputs = new Set();
+    this.inputRefs = new Map();
   }
 
   render () {

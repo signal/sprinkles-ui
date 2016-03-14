@@ -35,9 +35,12 @@ describe("Form", () => {
         <Form onSubmit={mockHandleSubmit}/>
     );
 
+    formComponent.validate = jest.genMockFunction();
+
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     TestUtils.Simulate.click(submitButtonNode);
     expect(mockHandleSubmit).toBeCalled();
+    expect(formComponent.validate).toBeCalled();
   });
 
   it("Does not submit Form when at least one Field is not valid ", () => {
@@ -46,11 +49,60 @@ describe("Form", () => {
         <Form onSubmit={mockHandleSubmit}/>
     );
 
+    formComponent.validate = jest.genMockFunction();
+
     // mark form as invalid
     formComponent.state.isValid = false;
 
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     TestUtils.Simulate.click(submitButtonNode);
     expect(mockHandleSubmit).not.toBeCalled();
+    expect(formComponent.validate).toBeCalled();
+  });
+
+  it("Does set a valid state inputs are valid", () => {
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form />
+    );
+
+    const fakeInput = {
+      isValid: () => true
+    };
+    formComponent.inputRefs.forEach = jest.genMockFunction()
+    .mockImplementation((cb) => {
+      cb(fakeInput, 0)
+    });
+    formComponent.setState = jest.genMockFunction();
+
+    formComponent.validate();
+    expect(formComponent.setState).toBeCalledWith({
+      isValid: true,
+      inputValidations: {
+        0: true
+      }
+    });
+  });
+
+  it("Does set an invalid state when inputs are invalid", () => {
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form />
+    );
+
+    const fakeInput = {
+      isValid: () => false
+    };
+    formComponent.inputRefs.forEach = jest.genMockFunction()
+    .mockImplementation((cb) => {
+      cb(fakeInput, 0)
+    });
+    formComponent.setState = jest.genMockFunction();
+
+    formComponent.validate();
+    expect(formComponent.setState).toBeCalledWith({
+      isValid: false,
+      inputValidations: {
+        0: false
+      }
+    });
   });
 });

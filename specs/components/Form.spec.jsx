@@ -11,10 +11,16 @@ describe("Form", function() {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
         <Form>
-            <Field label={"First Name"}>
+            <Field
+                label={"First Name"}
+                required={true}
+            >
                 <TextInput/>
             </Field>
-            <Field label={"Last Name"}>
+            <Field
+                label={"Last Name"}
+                required={true}
+            >
                 <TextInput/>
             </Field>
         </Form>
