@@ -15,13 +15,13 @@ describe("Form", function() {
                 label={"First Name"}
                 required={true}
             >
-                <TextInput/>
+                <TextInput placeholder={"Fred"} />
             </Field>
             <Field
                 label={"Last Name"}
                 required={true}
             >
-                <TextInput/>
+                <TextInput placeholder={"Jones"} />
             </Field>
         </Form>
     ).width("100%");
