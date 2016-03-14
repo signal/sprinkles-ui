@@ -2,54 +2,40 @@ import React from "react";
 import ReactCSS from "reactcss";
 import color from "color";
 import colors from "../shared/colors";
+import List from "../../src/components/List";
+import ListItem from "../../src/components/ListItem";
+import Text from "../../src/components/Text";
 
 export default class AlertMessage extends ReactCSS.Component {
   displayName = "AlertMessage";
 
   static propTypes = {
-    body: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.array]).isRequired,
+    body: React.PropTypes.string,
+    children: React.PropTypes.node,
     title: React.PropTypes.string,
     type: React.PropTypes.oneOf(["success", "info", "warning", "danger"]).isRequired
   };
 
-  displayContent () {
-    if (Array.isArray(this.props.body)) {
-      let _data = this.props.body;
-      return (<ul style={this.styles().list}>
-      {_data.map(function(object, i){
-        return (<li
-            className={"li"}
-            key={i}
-                >{[ object]}
-        </li>);
-      })}
-      </ul>);
-    } else {
-      return this.props.body
-    }
-
-  }
-
   classes () {
     return {
       "default": {
+        list: {
+          listStyle: "square",
+          textAlign: "left"
+        },
         AlertMessage: {
           color: "#fff",
           fontSize: 16,
-          padding: "2%",
-          textAlign: "center",
+          padding: "2% 2% 0 2%",
           width: "96%"
+        },
+        bodyWrapper: {
+          marginBottom: "2%"
         },
         title: {
           fontWeight: "bold",
           display: "inlineBlock",
           marginRight: "5px"
-        },
-        list: {
-          listStyle: "square",
-          textAlign: "left"
         }
       },
       "success": {
@@ -85,7 +71,8 @@ export default class AlertMessage extends ReactCSS.Component {
       "info": this.props.type === "info",
       "warning": this.props.type === "warning",
       "danger": this.props.type === "danger",
-      "title": "title"
+      "title": "title",
+      "body": "body"
     })
   }
 
@@ -94,7 +81,10 @@ export default class AlertMessage extends ReactCSS.Component {
         <div
             role="alert"
             style={this.styles().AlertMessage}
-        ><span style={this.styles().title}>{this.props.title}</span>{this.displayContent()}
+        >
+            <div style={this.styles().bodyWrapper}>
+                <span style={this.styles().title}>{this.props.title}</span>{this.props.body}
+            </div>{this.props.children}
         </div>
     );
   }

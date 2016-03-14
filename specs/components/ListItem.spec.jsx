@@ -31,7 +31,9 @@ describe("ListItem", function() {
 
   - **children** *React.PropTypes.node* (optional) child components or text nodes
   - **onClick** *React.PropTypes.func* (optional) click hander function
+  - **padding** *React.PropTypes.string* (optional) specify padding for additional spacing options
   - **selected** *React.PropTypes.bool* (optional) selection state
+  - **showHoverEffect** *React.PropTypes.bool* (defaults to true) changes background when user hovers
 
   `);
 });
