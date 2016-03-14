@@ -29,16 +29,15 @@ describe("Form", () => {
     expect(submitButtonNode.attributes.hasOwnProperty("disabled")).toEqual(false);
   });
 
-  it("Does submit Form when all Fields are valid", (done) => {
+  it("Does submit Form when all Fields are valid", () => {
+    let mockHandleSubmit = jest.fn();
     const formComponent = TestUtils.renderIntoDocument(
-        <Form onSubmit={() => done()}/>
+        <Form onSubmit={mockHandleSubmit}/>
     );
-
-    formComponent.isValid = jest.genMockFunction().mockReturnValue(true);
 
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     TestUtils.Simulate.click(submitButtonNode);
-    expect(formComponent.isValid).toBeCalled();
+    expect(mockHandleSubmit).toBeCalled();
   });
 
   it("Does not submit Form when at least one Field is not valid ", () => {
@@ -47,11 +46,11 @@ describe("Form", () => {
         <Form onSubmit={mockHandleSubmit}/>
     );
 
-    formComponent.isValid = jest.genMockFunction().mockReturnValue(false);
+    // mark form as invalid
+    formComponent.state.isValid = false;
 
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     TestUtils.Simulate.click(submitButtonNode);
-    expect(formComponent.isValid).toBeCalled();
     expect(mockHandleSubmit).not.toBeCalled();
   });
 });
