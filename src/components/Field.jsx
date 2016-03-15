@@ -29,6 +29,9 @@ export default class Field extends ReactCSS.Component {
         },
         Error: {
           margin: "10px 0"
+        },
+        Field: {
+          margin: "10px 0"
         }
       }
     };
@@ -116,7 +119,7 @@ export default class Field extends ReactCSS.Component {
 
   render () {
     return (
-        <div>
+        <div style={this.styles().Field}>
             <div>
                 {this.renderLabel()}{this.renderRequired()}
             </div>
