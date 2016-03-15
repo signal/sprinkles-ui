@@ -197,6 +197,6 @@ describe("Field", () => {
     const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
 
     TestUtils.Simulate.change(textInputNode, {target:{value: change}});
-    expect(mockHandleChange).toBeCalledWith(change, fieldComponent.inputRef);
+    expect(mockHandleChange).toBeCalledWith(change, fieldComponent);
   });
 });

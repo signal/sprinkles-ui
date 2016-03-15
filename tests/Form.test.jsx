@@ -105,4 +105,22 @@ describe("Form", () => {
       }
     });
   });
+
+  it("Does clear error state from Field when it changes", () => {
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form>
+            <Field
+                required={true}
+            >
+                <TextInput />
+            </Field>
+        </Form>
+    );
+    formComponent.validate();
+    const fieldComponent = formComponent.inputRefs.get(0);
+    expect(fieldComponent.props.status).toBe("error");
+    const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
+    TestUtils.Simulate.change(textInputNode, {target:{value: ""}});
+    expect(fieldComponent.props.status).toBe(undefined);
+  });
 });

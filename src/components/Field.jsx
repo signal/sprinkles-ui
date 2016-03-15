@@ -35,7 +35,7 @@ export default class Field extends ReactCSS.Component {
   }
 
   handleChange (change) {
-    this.props.onChange(change, this.inputRef)
+    this.props.onChange(change, this);
   }
 
   isValid () {

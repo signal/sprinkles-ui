@@ -29,6 +29,17 @@ export default class Form extends ReactCSS.Component {
     }
   }
 
+  handleChange (change, inputRef) {
+    let newInputStatuses = {};
+    this.inputRefs.forEach((input, i) => {
+      newInputStatuses[i] = i === inputRef.props.fieldId ?
+                                  true : this.state.inputValidations[i];
+    });
+    this.setState({
+      inputValidations: newInputStatuses
+    });
+  }
+
   validate () {
     let newInputStatuses = {};
     let isValid = true;
@@ -47,6 +58,8 @@ export default class Form extends ReactCSS.Component {
   renderFields () {
     return React.Children.map(this.props.children, (child, i) => {
       return React.cloneElement(child, {
+        fieldId: i,
+        onChange: this.handleChange.bind(this),
         status: this.state.inputValidations[i] === false ? "error" : undefined,
         ref: (inputRef) => {
           if (inputRef) {
