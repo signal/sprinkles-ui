@@ -13,10 +13,12 @@ describe("Field", function() {
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Field label={"Field Label"}>
+        <Field
+            label={"Field Label"}
+            onChange={handleChange}
+        >
             <TextInput
                 initialValue={"Initial Value"}
-                onChange={handleChange}
                 placeholder={"placeholder"}
             />
         </Field>

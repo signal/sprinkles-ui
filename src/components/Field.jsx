@@ -11,12 +11,14 @@ export default class Field extends ReactCSS.Component {
     children: React.PropTypes.node,
     error: React.PropTypes.string,
     label: React.PropTypes.string,
+    onChange: React.PropTypes.func,
     required: React.PropTypes.bool,
     status: React.PropTypes.oneOf(["error", "warning", "success"])
   };
 
   static defaultProps = {
-    required: false
+    required: false,
+    onChange: () => {}
   };
 
   classes () {
@@ -32,6 +34,10 @@ export default class Field extends ReactCSS.Component {
     };
   }
 
+  handleChange (change) {
+    this.props.onChange(change, this.inputRef)
+  }
+
   isValid () {
     const valid = this.inputRef && this.inputRef.isValid ? this.inputRef.isValid() : true;
     return !this.props.required || valid;
@@ -40,8 +46,9 @@ export default class Field extends ReactCSS.Component {
   renderInput () {
     return React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {
-        status: this.props.status,
-        ref: childRef => this.inputRef = childRef
+        onChange: this.handleChange.bind(this),
+        ref: childRef => this.inputRef = childRef,
+        status: this.props.status
       });
     });
   }

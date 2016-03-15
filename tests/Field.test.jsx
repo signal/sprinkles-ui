@@ -184,4 +184,19 @@ describe("Field", () => {
 
     expect(fieldComponent.isValid()).toBe(true);
   });
+
+  it("Does trigger onChange when the input changes", () => {
+    const change = "changed value";
+    let mockHandleChange = jest.genMockFunction();
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field onChange={mockHandleChange}>
+            <TextInput />
+        </Field>
+    );
+
+    const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
+
+    TestUtils.Simulate.change(textInputNode, {target:{value: change}});
+    expect(mockHandleChange).toBeCalledWith(change, fieldComponent.inputRef);
+  });
 });
