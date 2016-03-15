@@ -22,6 +22,16 @@ export default class Form extends ReactCSS.Component {
     }
   }
 
+  classes () {
+    return {
+      "default": {
+        Field: {
+          margin: "10px 0"
+        }
+      }
+    };
+  }
+
   handleClick (e) {
     this.validate();
     if (this.state.isValid) {
@@ -61,6 +71,7 @@ export default class Form extends ReactCSS.Component {
         fieldId: i,
         onChange: this.handleChange.bind(this),
         status: this.state.inputValidations[i] === false ? "error" : undefined,
+        style: this.styles().Field,
         ref: (inputRef) => {
           if (inputRef) {
             this.inputRefs.set(i, inputRef);

@@ -13,12 +13,14 @@ export default class Field extends ReactCSS.Component {
     label: React.PropTypes.string,
     onChange: React.PropTypes.func,
     required: React.PropTypes.bool,
-    status: React.PropTypes.oneOf(["error", "warning", "success"])
+    status: React.PropTypes.oneOf(["error", "warning", "success"]),
+    style: React.PropTypes.object
   };
 
   static defaultProps = {
+    onChange: () => {},
     required: false,
-    onChange: () => {}
+    style: {}
   };
 
   classes () {
@@ -28,9 +30,6 @@ export default class Field extends ReactCSS.Component {
           margin: "10px 0"
         },
         Error: {
-          margin: "10px 0"
-        },
-        Field: {
           margin: "10px 0"
         }
       }
@@ -119,7 +118,7 @@ export default class Field extends ReactCSS.Component {
 
   render () {
     return (
-        <div style={this.styles().Field}>
+        <div style={this.props.style}>
             <div>
                 {this.renderLabel()}{this.renderRequired()}
             </div>
