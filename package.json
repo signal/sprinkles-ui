@@ -9,7 +9,8 @@
     "lint": "eslint src/** specs/** tests/** src/**/*.jsx specs/**/*.jsx tests/**/*.jsx",
     "postinstall": "npm run -s install:precommithook",
     "start": "node ./node_modules/ui-harness/start --entry=./specs",
-    "test": "npm run lint && jest"
+    "test": "npm run lint && jest",
+    "build": "webpack --progress --colors"
   },
   "keywords": [],
   "author": "Harrison Harnisch <hharnisch@signal.co>",
@@ -31,7 +32,8 @@
     "jest-cli": "^0.9.0",
     "lorem-ipsum": "^1.0.3",
     "react-addons-test-utils": "^0.14.7",
-    "ui-harness": "3.5.4"
+    "ui-harness": "3.5.4",
+    "webpack": "^1.12.14"
   },
   "jest": {
     "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine2.js",

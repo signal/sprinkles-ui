@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Sprinkles</title>
+  </head>
+  <body>
+    <div id="button"></div>
+    <script src="build.js"></script>
+    <script>
+      function handleClick() {
+        console.log("click!");
+      }
+      ReactDOM.render(
+        React.createElement(Sprinkles.Button, {
+          onClick: handleClick,
+          text: "Click Me And Look At The Console"
+        }),
+        document.getElementById("button"));
+    </script>
+  </body>
+</html>
