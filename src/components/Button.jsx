@@ -51,7 +51,10 @@ export default class Button extends ReactCSS.Component {
       },
       "hovering": {
         Button: {
+          //Specify both to overrride global CSS
+          background: colors.ButtonHoverBackground,
           backgroundColor: colors.ButtonHoverBackground
+
         }
       },
       "disabled": {
