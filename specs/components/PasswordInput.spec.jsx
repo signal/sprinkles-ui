@@ -1,10 +1,10 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
-import TextInput from "../../src/components/TextInput";
+import PasswordInput from "../../src/components/PasswordInput";
 
 
-describe("TextInput", function() {
-  this.header(`## TextInput`); // Markdown.
+describe("PasswordInput", function() {
+  this.header(`## PasswordInput`); // Markdown.
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
@@ -14,10 +14,9 @@ describe("TextInput", function() {
     };
 
     this.load(
-        <TextInput
-            initialValue={"Initial Value"}
+        <PasswordInput
             onChange={handleChange}
-            placeholder={"placeholder"}
+            placeholder={"password"}
         />
     ).width("100%");
   });
@@ -28,7 +27,7 @@ describe("TextInput", function() {
   it("Clear value", () => UIHarness.component.setState({value: ""}));
   it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.validate()));
   it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
-  it("Clear placeholder", () => this.props({placeholder: "placeholder"}));
+  it("Clear placeholder", () => this.props({placeholder: "password"}));
   it("Set Success Status", () => this.props({status: "success"}));
   it("Set Warning Status", () => this.props({status: "warning"}));
   it("Set Error Status", () => this.props({status: "error"}));
@@ -41,11 +40,10 @@ describe("TextInput", function() {
   this.footer(`
   ### Text
 
-  A TextInput Element
+  A PasswordInput Element
 
   #### API
 
-  - **initialValue** *React.PropTypes.string* (optional) initial value of the text box
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
   - **status** *React.PropTypes.oneOf* (optional) set status of text box (overrides focus). Acceptable values are 'error', 'warning' and 'success'
