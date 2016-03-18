@@ -42,7 +42,7 @@ describe("Form", function() {
 
   #### API
 
-  - Comming soon
+  - **onSubmit** *React.PropTypes.func* (optional) called when Form has been submitted
 
   `);
 });
