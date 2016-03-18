@@ -35,7 +35,7 @@ describe("Form", () => {
         <Form onSubmit={mockHandleSubmit}/>
     );
 
-    formComponent.validate = jest.genMockFunction();
+    formComponent.validate = jest.genMockFunction().mockReturnValue(true);
 
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     TestUtils.Simulate.click(submitButtonNode);
@@ -81,7 +81,6 @@ describe("Form", () => {
     formComponent.setState = jest.genMockFunction();
     formComponent.validate();
     expect(formComponent.setState).toBeCalledWith({
-      isValid: true,
       inputValidations: {
         0: {
           valid: true,
@@ -113,7 +112,6 @@ describe("Form", () => {
     formComponent.setState = jest.genMockFunction();
     formComponent.validate();
     expect(formComponent.setState).toBeCalledWith({
-      isValid: false,
       inputValidations: {
         0: {
           valid: false,
@@ -145,7 +143,6 @@ describe("Form", () => {
     formComponent.setState = jest.genMockFunction();
     formComponent.validate();
     expect(formComponent.setState).toBeCalledWith({
-      isValid: true,
       inputValidations: {
         0: {
           valid: true,
@@ -232,5 +229,21 @@ describe("Form", () => {
     formComponent.setState = jest.genMockFunction();
     formComponent.handleChange("", {});
     expect(formComponent.setState).not.toBeCalled();
+  });
+
+  it("Does return Field data when submit button is clicked", () => {
+    let mockHandleSubmit = jest.genMockFunction();
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form onSubmit={mockHandleSubmit}>
+            <Field fieldKey={"text"}>
+                <TextInput initialValue={"yes"}/>
+            </Field>
+        </Form>
+    );
+    const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
+    TestUtils.Simulate.click(submitButtonNode);
+    expect(mockHandleSubmit).toBeCalledWith({
+      text: "yes"
+    });
   });
 });

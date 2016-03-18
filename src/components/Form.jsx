@@ -17,7 +17,6 @@ export default class Form extends ReactCSS.Component {
   constructor() {
     super();
     this.state = {
-      isValid: true,
       inputValidations: {}
     }
   }
@@ -33,9 +32,12 @@ export default class Form extends ReactCSS.Component {
   }
 
   handleClick (e) {
-    this.validate();
-    if (this.state.isValid) {
-      this.props.onSubmit();
+    if (this.validate()) {
+      let submitData = {};
+      this.inputRefs.forEach((input) => {
+        submitData[input.props.fieldKey] = input.inputRef.state.value;
+      });
+      this.props.onSubmit(submitData);
     }
   }
 
@@ -76,9 +78,9 @@ export default class Form extends ReactCSS.Component {
       };
     });
     this.setState({
-      isValid: formIsValid,
       inputValidations: newInputStatuses
     });
+    return formIsValid;
   }
 
   renderFields () {

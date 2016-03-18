@@ -10,6 +10,7 @@ export default class Field extends ReactCSS.Component {
   static propTypes = {
     children: React.PropTypes.node,
     error: React.PropTypes.string,
+    fieldKey: React.PropTypes.string,
     label: React.PropTypes.string,
     onChange: React.PropTypes.func,
     required: React.PropTypes.bool,
@@ -18,6 +19,7 @@ export default class Field extends ReactCSS.Component {
   };
 
   static defaultProps = {
+    fieldKey: "defaultKey",
     onChange: () => {},
     required: false,
     style: {}

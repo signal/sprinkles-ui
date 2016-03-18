@@ -8,16 +8,21 @@ describe("Form", function() {
   this.header(`## Form`); // Markdown.
 
   before(() => {
+    function handleSubmit(submitData) {
+      console.log("submitData", submitData);
+    }
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Field
+                fieldKey={"firstName"}
                 label={"First Name"}
                 required={true}
             >
                 <TextInput placeholder={"Fred"} />
             </Field>
             <Field
+                fieldKey={"lastName"}
                 label={"Last Name"}
                 required={true}
             >
