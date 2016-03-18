@@ -26,7 +26,7 @@ describe("TextInput", function() {
   // will also update the DOM.
   it("Update value", () => UIHarness.component.setState({value: loremIpsum()}));
   it("Clear value", () => UIHarness.component.setState({value: ""}));
-  it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.isValid()));
+  it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.validate()));
   it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
   it("Clear placeholder", () => this.props({placeholder: "Placeholder"}));
   it("Set Success Status", () => this.props({status: "success"}));
