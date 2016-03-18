@@ -40,10 +40,21 @@ export default class Form extends ReactCSS.Component {
   }
 
   handleChange (change, inputRef) {
+    if (!Object.keys(this.state.inputValidations).length) {
+      return;
+    }
     let newInputStatuses = {};
     this.inputRefs.forEach((input, i) => {
-      newInputStatuses[i] = i === inputRef.props.fieldId ?
-                                  true : this.state.inputValidations[i];
+      let valid = this.state.inputValidations[i].valid;
+      let validationError = this.state.inputValidations[i].validationError;
+      if (i === inputRef.props.fieldId) {
+        valid = true;
+        validationError = "";
+      }
+      newInputStatuses[i] = {
+        valid: valid,
+        validationError: validationError
+      }
     });
     this.setState({
       inputValidations: newInputStatuses
@@ -52,25 +63,32 @@ export default class Form extends ReactCSS.Component {
 
   validate () {
     let newInputStatuses = {};
-    let isValid = true;
+    let formIsValid = true;
     this.inputRefs.forEach((input, i) => {
-      if (!input.isValid()) {
-        isValid = false;
+      const validation = input.validate();
+      const inputIsValid = !validation.required || validation.valid;
+      if (!inputIsValid) {
+        formIsValid = false;
       }
-      newInputStatuses[i] = input.isValid();
+      newInputStatuses[i] = {
+        valid: inputIsValid,
+        validationError: inputIsValid ? "" : validation.validationError
+      };
     });
     this.setState({
-      isValid: isValid,
+      isValid: formIsValid,
       inputValidations: newInputStatuses
     });
   }
 
   renderFields () {
     return React.Children.map(this.props.children, (child, i) => {
+      const inputValidation = this.state.inputValidations[i] || {};
       return React.cloneElement(child, {
         fieldId: i,
         onChange: this.handleChange.bind(this),
-        status: this.state.inputValidations[i] === false ? "error" : undefined,
+        status: inputValidation.valid === false ? "error" : undefined,
+        error: inputValidation.validationError,
         style: this.styles().Field,
         ref: (inputRef) => {
           if (inputRef) {

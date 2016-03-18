@@ -24,8 +24,14 @@ export default class TextInput extends ReactCSS.Component {
     }
   }
 
-  isValid () {
-    return this.state.value !== "";
+  validate () {
+    const isEmpty = this.state.value === "";
+    const isInitialValue = this.state.value === this.props.initialValue;
+    return {
+      valid: !isEmpty,
+      isInitialValue: isInitialValue,
+      validationError: !isEmpty ? "" : "Field Must Not Be Empty"
+    }
   }
 
   linkState () {

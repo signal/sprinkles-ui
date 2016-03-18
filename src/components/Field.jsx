@@ -40,9 +40,14 @@ export default class Field extends ReactCSS.Component {
     this.props.onChange(change, this);
   }
 
-  isValid () {
-    const valid = this.inputRef && this.inputRef.isValid ? this.inputRef.isValid() : true;
-    return !this.props.required || valid;
+  validate () {
+    const validation = this.inputRef && this.inputRef.validate ? this.inputRef.validate() : {};
+    return {
+      valid: validation.valid === false ? false : true,
+      required: this.props.required,
+      isInitialValue: validation.isInitialValue === false ? false : true,
+      validationError: validation.validationError || ""
+    }
   }
 
   renderInput () {

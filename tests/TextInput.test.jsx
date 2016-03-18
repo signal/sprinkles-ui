@@ -122,19 +122,71 @@ describe("TextInput", () => {
     expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px green");
   });
 
-  it("Does return invalid state with empty textbox", () => {
+  it("Does return invalid state with empty TextInput", () => {
     const textInputComponent = TestUtils.renderIntoDocument(
         <TextInput />
     );
 
-    expect(textInputComponent.isValid()).toBe(false);
+    expect(textInputComponent.validate()).toEqual({
+      valid: false,
+      isInitialValue: true,
+      validationError: "Field Must Not Be Empty"
+    });
   });
 
-  it("Does return valid state when value set at initalization", () => {
+  it("Does return valid state when TextInput has a value", () => {
     const textInputComponent = TestUtils.renderIntoDocument(
         <TextInput initialValue={"a"} />
     );
 
-    expect(textInputComponent.isValid()).toBe(true);
+    expect(textInputComponent.validate()).toEqual({
+      valid: true,
+      isInitialValue: true,
+      validationError: ""
+    });
+  });
+
+  it("Does return valid state and not initial state when input changes", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput />
+    );
+
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+
+    expect(textInputComponent.validate()).toEqual({
+      valid: false,
+      isInitialValue: true,
+      validationError: "Field Must Not Be Empty"
+    });
+
+    TestUtils.Simulate.change(textInputNode, {target:{value: "a"}});
+
+    expect(textInputComponent.validate()).toEqual({
+      valid: true,
+      isInitialValue: false,
+      validationError: ""
+    });
+  });
+
+  it("Does return invalid state and not initial state when input changes", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput initialValue={"a"}/>
+    );
+
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+
+    expect(textInputComponent.validate()).toEqual({
+      valid: true,
+      isInitialValue: true,
+      validationError: ""
+    });
+
+    TestUtils.Simulate.change(textInputNode, {target:{value: ""}});
+
+    expect(textInputComponent.validate()).toEqual({
+      valid: false,
+      isInitialValue: false,
+      validationError: "Field Must Not Be Empty"
+    });
   });
 });

@@ -123,7 +123,12 @@ describe("Field", () => {
         <Field/>
     );
 
-    expect(fieldComponent.isValid()).toBe(true);
+    expect(fieldComponent.validate()).toEqual({
+      valid: true,
+      required: false,
+      isInitialValue: true,
+      validationError: ""
+    });
   });
 
   it("Does render a required Field", () => {
@@ -146,7 +151,12 @@ describe("Field", () => {
         </Field>
     );
 
-    expect(fieldComponent.isValid()).toBe(true);
+    expect(fieldComponent.validate()).toEqual({
+      valid: true,
+      required: true,
+      isInitialValue: true,
+      validationError: ""
+    });
   });
 
   it("Does validate a required Field with invalid input as invalid", () => {
@@ -158,7 +168,12 @@ describe("Field", () => {
         </Field>
     );
 
-    expect(fieldComponent.isValid()).toBe(false);
+    expect(fieldComponent.validate()).toEqual({
+      valid: false,
+      required: true,
+      isInitialValue: true,
+      validationError: "Field Must Not Be Empty"
+    });
   });
 
   it("Does validate an optional Field with valid input as valid", () => {
@@ -170,7 +185,13 @@ describe("Field", () => {
         </Field>
     );
 
-    expect(fieldComponent.isValid()).toBe(true);
+    expect(fieldComponent.validate()).toEqual({
+      valid: true,
+      required: false,
+      isInitialValue: true,
+      validationError: ""
+    });
+
   });
 
   it("Does validate an optional Field with invalid input as valid", () => {
@@ -182,7 +203,12 @@ describe("Field", () => {
         </Field>
     );
 
-    expect(fieldComponent.isValid()).toBe(true);
+    expect(fieldComponent.validate()).toEqual({
+      valid: false,
+      required: false,
+      isInitialValue: true,
+      validationError: "Field Must Not Be Empty"
+    });
   });
 
   it("Does trigger onChange when the input changes", () => {
