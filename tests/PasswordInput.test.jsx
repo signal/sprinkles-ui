@@ -16,5 +16,6 @@ describe("PasswordInput", () => {
     );
     const passwordInputNode = ReactDOM.findDOMNode(passwordInputComponent);
     expect(passwordInputNode.getAttribute("type")).toBe("password");
+    expect(passwordInputNode.getAttribute("value")).toBe("");
   });
 });
