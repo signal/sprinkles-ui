@@ -12,6 +12,34 @@ A portable, customizable set of UI components
 
 ## Quickstart
 
+Install NVM
+
+Go to https://github.com/creationix/nvm#install-script and install nvm
+
+Install Node 5.X
+
+```sh
+$ nvm install 5.9.0
+```
+
+Use Node 5.x
+
+```sh
+$ nvm use 5.9.0
+```
+
+Clone Sprinkles UI
+
+```sh
+$ git clone git@gitlab01dv2.thebrighttag.com:dev/sprinkles-ui.git
+```
+
+Change Directory To Sprinkles UI
+
+```sh
+$ cd sprinkles-ui
+```
+
 Install dependencies
 
 ```sh
