@@ -7,11 +7,13 @@ export default class Form extends ReactCSS.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
-    onSubmit: React.PropTypes.func
+    onSubmit: React.PropTypes.func,
+    submitButtonText: React.PropTypes.string
   };
 
   static defaultProps = {
-    onSubmit: () => {}
+    onSubmit: () => {},
+    submitButtonText: "Submit"
   };
 
   constructor() {
@@ -112,6 +114,7 @@ export default class Form extends ReactCSS.Component {
             <Button
                 onClick={this.handleClick.bind(this)}
                 ref={c => this.submitButtonRef = c}
+                text={this.props.submitButtonText}
             />
         </div>
     );

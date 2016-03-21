@@ -16,7 +16,7 @@ const TextInput = require("../src/components/TextInput").default;
 
 describe("Form", () => {
   it("Does render a Form", () => {
-    // Render an Form
+    // Render a Form
     const formComponent = TestUtils.renderIntoDocument(
         <Form />
     );
@@ -245,5 +245,17 @@ describe("Form", () => {
     expect(mockHandleSubmit).toBeCalledWith({
       text: "yes"
     });
+  });
+
+  it("Does update submit button text", () => {
+    const formButtonText = "A Really Cool Button";
+    // Render a Form
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form
+            submitButtonText={formButtonText}
+        />
+    );
+    const formButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
+    expect(formButtonNode.textContent).toBe(formButtonText);
   });
 });
