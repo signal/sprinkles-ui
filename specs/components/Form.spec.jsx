@@ -2,7 +2,8 @@ import React from "react";
 import loremIpsum from "lorem-ipsum";
 import Form from "../../src/components/Form";
 import Field from "../../src/components/Field";
-import TextInput from "../../src/components/TextInput";
+import EmailInput from "../../src/components/EmailInput";
+import PasswordInput from "../../src/components/PasswordInput";
 
 describe("Form", function() {
   this.header(`## Form`); // Markdown.
@@ -15,18 +16,18 @@ describe("Form", function() {
     this.load(
         <Form onSubmit={handleSubmit}>
             <Field
-                fieldKey={"firstName"}
-                label={"First Name"}
+                fieldKey={"email"}
+                label={"Email"}
                 required={true}
             >
-                <TextInput placeholder={"Fred"} />
+                <EmailInput placeholder={"test@signal.co"} />
             </Field>
             <Field
-                fieldKey={"lastName"}
-                label={"Last Name"}
+                fieldKey={"password"}
+                label={"Password"}
                 required={true}
             >
-                <TextInput placeholder={"Jones"} />
+                <PasswordInput placeholder={"password"} />
             </Field>
         </Form>
     ).width("100%");
