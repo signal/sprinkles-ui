@@ -23,7 +23,7 @@ describe("EmailInput", function() {
 
   // Since two-way binding is implemented changing the state of the wrapper
   // will also update the DOM.
-  it("Update value", () => UIHarness.component.setState({value: loremIpsum()}));
+  it("Update value", () => UIHarness.component.setState({value: "test@signal.co"}));
   it("Clear value", () => UIHarness.component.setState({value: ""}));
   it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.validate()));
   it("Update placeholder", () => this.props({placeholder: loremIpsum()}));
