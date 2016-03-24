@@ -2,9 +2,6 @@ import React from "react";
 import ReactCSS from "reactcss";
 import color from "color";
 import colors from "../shared/colors";
-import List from "../../src/components/List";
-import ListItem from "../../src/components/ListItem";
-import Text from "../../src/components/Text";
 
 export default class AlertMessage extends ReactCSS.Component {
   displayName = "AlertMessage";
@@ -70,21 +67,19 @@ export default class AlertMessage extends ReactCSS.Component {
       "success": this.props.type === "success",
       "info": this.props.type === "info",
       "warning": this.props.type === "warning",
-      "danger": this.props.type === "danger",
-      "title": "title",
-      "body": "body"
+      "danger": this.props.type === "danger"
     })
   }
 
   render () {
     return (
-        <div
-            role="alert"
-            style={this.styles().AlertMessage}
-        >
+        <div style={this.styles().AlertMessage}>
             <div style={this.styles().bodyWrapper}>
-                <span style={this.styles().title}>{this.props.title}</span>{this.props.body}
-            </div>{this.props.children}
+                <span style={this.styles().title}>
+                  {this.props.title}
+                </span>{this.props.body}
+            </div>
+            {this.props.children}
         </div>
     );
   }
