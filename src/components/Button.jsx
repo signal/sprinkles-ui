@@ -51,9 +51,9 @@ export default class Button extends ReactCSS.Component {
     return {
       "default": {
         Button: {
-          background: Colors.ButtonEnabledBackground,
+          background: Colors.default,
           border: "none",
-          borderBottom: "1px solid" + Colors.ButtonEnabledBorder,
+          borderBottom: "1px solid" + Color(Colors.default).darken(0.2).hexString(),
           borderRadius: "3px",
           color: "#fff",
           padding: "5px 25px"

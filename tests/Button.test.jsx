@@ -63,7 +63,6 @@ describe("Button", () => {
     // grab the DOM node so we can inspect it
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(Color(buttonNode.style.background).hexString()).toBe(Colors.danger);
-    // console.log("buttonNode.style", buttonNode.style);
     expect(Color(buttonNode.style["border-bottom-color"]).hexString())
       .toBe(Color(Colors.danger).darken(0.2).hexString());
   });
