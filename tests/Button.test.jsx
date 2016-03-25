@@ -55,63 +55,16 @@ describe("Button", () => {
     expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(true);
   });
 
-  it("Does render a danger button", () => {
-    // Render a Button
-    const buttonComponent = TestUtils.renderIntoDocument(
-        <Button type={"danger"}/>
-    );
-    // grab the DOM node so we can inspect it
-    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(Color(buttonNode.style.background).hexString()).toBe(Colors.danger);
-    expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-      .toBe(Color(Colors.danger).darken(0.2).hexString());
-  });
-
-  it("Does render a warning button", () => {
-    // Render a Button
-    const buttonComponent = TestUtils.renderIntoDocument(
-        <Button type={"warning"}/>
-    );
-    // grab the DOM node so we can inspect it
-    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(Color(buttonNode.style.background).hexString()).toBe(Colors.warning);
-    expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-      .toBe(Color(Colors.warning).darken(0.2).hexString());
-  });
-
-  it("Does render a success button", () => {
-    // Render a Button
-    const buttonComponent = TestUtils.renderIntoDocument(
-        <Button type={"success"}/>
-    );
-    // grab the DOM node so we can inspect it
-    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(Color(buttonNode.style.background).hexString()).toBe(Colors.success);
-    expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-      .toBe(Color(Colors.success).darken(0.2).hexString());
-  });
-
-  it("Does render an info button", () => {
-    // Render a Button
-    const buttonComponent = TestUtils.renderIntoDocument(
-        <Button type={"info"}/>
-    );
-    // grab the DOM node so we can inspect it
-    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(Color(buttonNode.style.background).hexString()).toBe(Colors.info);
-    expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-      .toBe(Color(Colors.info).darken(0.2).hexString());
-  });
-
-  it("Does render a primary button", () => {
-    // Render a Button
-    const buttonComponent = TestUtils.renderIntoDocument(
-        <Button type={"primary"}/>
-    );
-    // grab the DOM node so we can inspect it
-    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(Color(buttonNode.style.background).hexString()).toBe(Colors.primary);
-    expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-      .toBe(Color(Colors.primary).darken(0.2).hexString());
+  it("Does render a button of each type", () => {
+    ["default", "primary", "danger", "warning", "success", "info"].forEach((type) => {
+      const buttonComponent = TestUtils.renderIntoDocument(
+          <Button type={type}/>
+      );
+      // grab the DOM node so we can inspect it
+      const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+      expect(Color(buttonNode.style.background).hexString()).toBe(Colors[type]);
+      expect(Color(buttonNode.style["border-bottom-color"]).hexString())
+        .toBe(Color(Colors[type]).darken(0.2).hexString());
+    });
   });
 });
