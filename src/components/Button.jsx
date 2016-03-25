@@ -1,6 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import colors from "../shared/colors";
+import Colors from "../shared/colors";
+import Color from "color";
 
 export default class Button extends ReactCSS.Component {
   displayName = "Button";
@@ -9,13 +10,22 @@ export default class Button extends ReactCSS.Component {
     enabled: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     text: React.PropTypes.string,
+    type: React.PropTypes.oneOf([
+      "default",
+      "primary",
+      "success",
+      "info",
+      "warning",
+      "danger"
+    ]),
     working: React.PropTypes.bool
   };
 
   static defaultProps = {
     enabled: true,
     working: false,
-    text: "Submit"
+    text: "Submit",
+    type: "default"
   };
 
   constructor() {
@@ -35,15 +45,15 @@ export default class Button extends ReactCSS.Component {
 
   classes () {
     var disabledStyles = {
-      backgroundColor: colors.ButtonDisabledBackground,
-      borderBottom: "1px solid" + colors.ButtonDisabledBorder
+      background: Colors.ButtonDisabledBackground,
+      borderBottom: "1px solid" + Colors.ButtonDisabledBorder
     }
     return {
       "default": {
         Button: {
-          backgroundColor: colors.ButtonEnabledBackground,
+          background: Colors.ButtonEnabledBackground,
           border: "none",
-          borderBottom: "1px solid" + colors.ButtonEnabledBorder,
+          borderBottom: "1px solid" + Colors.ButtonEnabledBorder,
           borderRadius: "3px",
           color: "#fff",
           padding: "5px 25px"
@@ -52,8 +62,25 @@ export default class Button extends ReactCSS.Component {
       "hovering": {
         Button: {
           //Specify both to overrride global CSS
-          background: colors.ButtonHoverBackground,
-          backgroundColor: colors.ButtonHoverBackground
+          background: Colors.ButtonHoverBackground,
+        }
+      },
+      "danger": {
+        Button: {
+          background: Colors.danger,
+          borderBottom: "1px solid " + Color(Colors.danger).darken(0.2).hexString()
+        }
+      },
+      "warning": {
+        Button: {
+          background: Colors.warning,
+          borderBottom: "1px solid " + Color(Colors.warning).darken(0.2).hexString()
+        }
+      },
+      "success": {
+        Button: {
+          background: Colors.success,
+          borderBottom: "1px solid " + Color(Colors.success).darken(0.2).hexString()
         }
       },
       "disabled": {
@@ -70,7 +97,10 @@ export default class Button extends ReactCSS.Component {
     return this.css({
       "hovering": this.state.isHovering,
       "working": this.props.working,
-      "disabled": !this.props.enabled
+      "disabled": !this.props.enabled,
+      "danger": this.props.type === "danger",
+      "warning": this.props.type === "warning",
+      "success": this.props.type === "success"
     })
   }
 

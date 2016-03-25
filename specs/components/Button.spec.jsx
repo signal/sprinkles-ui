@@ -24,6 +24,10 @@ describe("Button", function() {
   it("Clear Working Indicator", () => this.props({working: false}));
   it("Enable Button", () => this.props({enabled: true}));
   it("Disable Button", () => this.props({enabled: false}));
+  it("Danger Button", () => this.props({type: "danger"}));
+  it("Warning Button", () => this.props({type: "warning"}));
+  it("Success Button", () => this.props({type: "success"}));
+  it("Default Button", () => this.props({type: "default"}));
 
   /**
    * Documentation (Markdown)
