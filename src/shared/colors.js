@@ -6,6 +6,8 @@ export default {
   info: "#4285F4",
   warning: "#EBBC62",
   danger: "#DF2E3C",
+  default: "#cccccc",
+  primary: "#0000FF",
   // button colors
   ButtonEnabledBackground: "#00ADEF",
   ButtonEnabledBorder: "#00688f",

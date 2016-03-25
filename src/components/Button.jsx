@@ -89,6 +89,12 @@ export default class Button extends ReactCSS.Component {
           borderBottom: "1px solid " + Color(Colors.info).darken(0.2).hexString()
         }
       },
+      "primary": {
+        Button: {
+          background: Colors.primary,
+          borderBottom: "1px solid " + Color(Colors.primary).darken(0.2).hexString()
+        }
+      },
       "disabled": {
         Button: disabledStyles
       },
@@ -107,7 +113,8 @@ export default class Button extends ReactCSS.Component {
       "danger": this.props.type === "danger",
       "warning": this.props.type === "warning",
       "success": this.props.type === "success",
-      "info": this.props.type === "info"
+      "info": this.props.type === "info",
+      "primary": this.props.type === "primary"
     })
   }
 

@@ -103,4 +103,16 @@ describe("Button", () => {
     expect(Color(buttonNode.style["border-bottom-color"]).hexString())
       .toBe(Color(Colors.info).darken(0.2).hexString());
   });
+
+  it("Does render a primary button", () => {
+    // Render a Button
+    const buttonComponent = TestUtils.renderIntoDocument(
+        <Button type={"primary"}/>
+    );
+    // grab the DOM node so we can inspect it
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(Color(buttonNode.style.background).hexString()).toBe(Colors.primary);
+    expect(Color(buttonNode.style["border-bottom-color"]).hexString())
+      .toBe(Color(Colors.primary).darken(0.2).hexString());
+  });
 });
