@@ -36,6 +36,9 @@ describe("Text", function() {
     })
   });
 
+  it("Font Weight: Bold", () => this.props({fontWeight: "700"}));
+  it("Font Weight: Standard", () => this.props({fontWeight: "400"}));
+
   /**
    * Documentation (Markdown)
    */

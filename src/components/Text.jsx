@@ -7,7 +7,8 @@ export default class Text extends ReactCSS.Component {
   static propTypes = {
     children: React.PropTypes.node,
     color: React.PropTypes.string,
-    fontSize: React.PropTypes.number
+    fontSize: React.PropTypes.number,
+    fontWeight: React.PropTypes.string
   };
 
   classes () {
@@ -26,6 +27,11 @@ export default class Text extends ReactCSS.Component {
         Text: {
           fontSize: this.props.fontSize
         }
+      },
+      "fontWeight": {
+        Text: {
+          fontWeight: this.props.fontWeight
+        }
       }
     };
   }
@@ -33,7 +39,8 @@ export default class Text extends ReactCSS.Component {
   styles () {
     return this.css({
       "color": !!this.props.color,
-      "fontSize": !!this.props.fontSize
+      "fontSize": !!this.props.fontSize,
+      "fontWeight": !!this.props.fontWeight
     });
   }
 
