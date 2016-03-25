@@ -9,7 +9,7 @@ export default class Button extends ReactCSS.Component {
     enabled: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     text: React.PropTypes.string,
-    working: React.PropTypes.bool,
+    working: React.PropTypes.bool
   };
 
   static defaultProps = {
@@ -54,7 +54,6 @@ export default class Button extends ReactCSS.Component {
           //Specify both to overrride global CSS
           background: colors.ButtonHoverBackground,
           backgroundColor: colors.ButtonHoverBackground
-
         }
       },
       "disabled": {

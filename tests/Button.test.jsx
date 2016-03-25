@@ -12,24 +12,19 @@ const Button = require("../src/components/Button").default;
 describe("Button", () => {
   it("Does render a Button with default text", () => {
     const text = "Submit";
-
     // Render a Button
     const buttonComponent = TestUtils.renderIntoDocument(
         <Button />
     );
-
     // grab the DOM node so we can inspect it
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-
     expect(buttonNode.innerHTML).toEqual(text);
-
   });
 
   it("Does disable Button when working is true", () => {
     const buttonComponent = TestUtils.renderIntoDocument(
         <Button working={true} />
     );
-
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(true);
   });
@@ -38,7 +33,6 @@ describe("Button", () => {
     const buttonComponent = TestUtils.renderIntoDocument(
         <Button working={false} />
     );
-
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(false);
   });
@@ -47,7 +41,6 @@ describe("Button", () => {
     const buttonComponent = TestUtils.renderIntoDocument(
         <Button enabled={true} />
     );
-
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(false);
 
@@ -57,9 +50,7 @@ describe("Button", () => {
     const buttonComponent = TestUtils.renderIntoDocument(
         <Button enabled={false} />
     );
-
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty("disabled")).toEqual(true);
-
   });
 });
