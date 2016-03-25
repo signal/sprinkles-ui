@@ -51,9 +51,9 @@ export default class Button extends ReactCSS.Component {
     return {
       "default": {
         Button: {
-          background: Colors.default,
+          background: Colors[this.props.type],
           border: "none",
-          borderBottom: "1px solid" + Color(Colors.default).darken(0.2).hexString(),
+          borderBottom: "1px solid " + Color(Colors[this.props.type]).darken(0.2).hexString(),
           borderRadius: "3px",
           color: "#fff",
           padding: "5px 25px"
@@ -63,36 +63,6 @@ export default class Button extends ReactCSS.Component {
         Button: {
           //Specify both to overrride global CSS
           background: Colors.ButtonHoverBackground,
-        }
-      },
-      "danger": {
-        Button: {
-          background: Colors.danger,
-          borderBottom: "1px solid " + Color(Colors.danger).darken(0.2).hexString()
-        }
-      },
-      "warning": {
-        Button: {
-          background: Colors.warning,
-          borderBottom: "1px solid " + Color(Colors.warning).darken(0.2).hexString()
-        }
-      },
-      "success": {
-        Button: {
-          background: Colors.success,
-          borderBottom: "1px solid " + Color(Colors.success).darken(0.2).hexString()
-        }
-      },
-      "info": {
-        Button: {
-          background: Colors.info,
-          borderBottom: "1px solid " + Color(Colors.info).darken(0.2).hexString()
-        }
-      },
-      "primary": {
-        Button: {
-          background: Colors.primary,
-          borderBottom: "1px solid " + Color(Colors.primary).darken(0.2).hexString()
         }
       },
       "disabled": {
@@ -109,12 +79,7 @@ export default class Button extends ReactCSS.Component {
     return this.css({
       "hovering": this.state.isHovering,
       "working": this.props.working,
-      "disabled": !this.props.enabled,
-      "danger": this.props.type === "danger",
-      "warning": this.props.type === "warning",
-      "success": this.props.type === "success",
-      "info": this.props.type === "info",
-      "primary": this.props.type === "primary"
+      "disabled": !this.props.enabled
     })
   }
 
