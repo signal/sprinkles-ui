@@ -30,7 +30,7 @@ describe("TextInput", () => {
     // NOTE: This will ALWAYS grab the value at initialization time
     //       Use the 'value' property if you're looking for the text value
     expect(textInputNode.getAttribute("value")).toEqual(text);
-
+    expect(textInputNode.getAttribute("autocomplete")).toBe("on");
   });
 
   it("Does render an editable input", () => {
@@ -190,5 +190,13 @@ describe("TextInput", () => {
       isInitialValue: false,
       validationError: "Field Must Not Be Empty"
     });
+  });
+
+  it("Does disable autocomplete on inputbox", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput autoComplete={false}/>
+    );
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+    expect(textInputNode.getAttribute("autocomplete")).toBe("off");
   });
 });

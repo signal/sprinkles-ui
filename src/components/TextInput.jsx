@@ -7,6 +7,7 @@ export default class TextInput extends ReactCSS.Component {
   displayName = "TextInput";
 
   static propTypes = {
+    autoComplete: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
@@ -14,6 +15,7 @@ export default class TextInput extends ReactCSS.Component {
   };
 
   static defaultProps = {
+    autoComplete: true,
     initialValue: ""
   };
 
@@ -102,6 +104,7 @@ export default class TextInput extends ReactCSS.Component {
   render () {
     return (
         <input
+            autoComplete={this.props.autoComplete ? "on" : "off"}
             onBlur={this.handleBlur.bind(this)}
             onFocus={this.handleFocus.bind(this)}
             placeholder={this.props.placeholder}

@@ -33,6 +33,8 @@ describe("TextInput", function() {
   it("Set Warning Status", () => this.props({status: "warning"}));
   it("Set Error Status", () => this.props({status: "error"}));
   it("Clear Status", () => this.props({status: undefined}));
+  it("Disable Autocomplete", () => this.props({autoComplete: false}));
+  it("Enable Autocomplete", () => this.props({autoComplete: true}));
 
 
   /**
@@ -45,6 +47,7 @@ describe("TextInput", function() {
 
   #### API
 
+  - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
   - **initialValue** *React.PropTypes.string* (optional) initial value of the text box
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
