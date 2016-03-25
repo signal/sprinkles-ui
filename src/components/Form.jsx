@@ -1,11 +1,18 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import Button from "./Button";
+import AlertMessage from "./AlertMessage";
 
 export default class Form extends ReactCSS.Component {
   displayName = "Form";
 
   static propTypes = {
+    alert: React.PropTypes.shape({
+      type: React.PropTypes.oneOf(["success", "info", "warning", "danger"]).required,
+      title: React.PropTypes.string.required,
+      details: React.PropTypes.string.required,
+      children: React.PropTypes.node
+    }),
     children: React.PropTypes.node,
     onSubmit: React.PropTypes.func,
     submitButtonText: React.PropTypes.string
@@ -103,6 +110,17 @@ export default class Form extends ReactCSS.Component {
     });
   }
 
+  renderAlertMessage () {
+    if (this.props.alert) {
+      return (
+          <AlertMessage
+              {...this.props.alert}
+              ref={c => this.alertRef = c}
+          />
+      )
+    }
+  }
+
   componentWillMount () {
     this.inputRefs = new Map();
   }
@@ -110,6 +128,7 @@ export default class Form extends ReactCSS.Component {
   render () {
     return(
         <div>
+            {this.renderAlertMessage()}
             {this.renderFields()}
             <Button
                 onClick={this.handleClick.bind(this)}

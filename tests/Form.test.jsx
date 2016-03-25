@@ -3,6 +3,8 @@ jest.dontMock("../src/components/Form");
 jest.dontMock("../src/components/Button");
 jest.dontMock("../src/components/Field");
 jest.dontMock("../src/components/TextInput");
+jest.dontMock("../src/components/AlertMessage");
+jest.dontMock("../src/components/Text");
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -257,5 +259,25 @@ describe("Form", () => {
     );
     const formButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     expect(formButtonNode.textContent).toBe(formButtonText);
+  });
+
+  it("Does show alert when alert is set", () => {
+    const title = "Danger";
+    const details = "👹👹👹";
+    const type = "danger";
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form
+            alert={{
+              type: type,
+              title: title,
+              details: details,
+              children: <div>{"Hello"}</div>
+            }}
+        />
+    );
+    expect(formComponent.alertRef.props.type).toBe(type);
+    expect(formComponent.alertRef.props.title).toBe(title);
+    expect(formComponent.alertRef.props.details).toBe(details);
+    expect(formComponent.alertRef.props.children).not.toBeUndefined();
   });
 });
