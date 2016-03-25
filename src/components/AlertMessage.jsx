@@ -63,16 +63,14 @@ export default class AlertMessage extends ReactCSS.Component {
   renderTitle () {
     if (this.props.title) {
       return(
-          <div style={this.styles().AlertItem}>
-              <Text
-                  color={"#fff"}
-                  fontSize={16}
-                  fontWeight={"bold"}
-                  ref={c => this.titleRef = c}
-              >
-                {this.props.title}
-              </Text>
-          </div>
+          <Text
+              color={"#fff"}
+              fontSize={16}
+              fontWeight={"bold"}
+              ref={c => this.titleRef = c}
+          >
+            {this.props.title}
+          </Text>
       );
     }
   }
@@ -80,7 +78,8 @@ export default class AlertMessage extends ReactCSS.Component {
   renderDetails () {
     if (this.props.details) {
       return(
-          <div style={this.styles().AlertItem}>
+          <span>
+              {" "}
               <Text
                   color={"#fff"}
                   fontSize={16}
@@ -88,7 +87,7 @@ export default class AlertMessage extends ReactCSS.Component {
               >
                 {this.props.details}
               </Text>
-          </div>
+          </span>
       );
     }
   }
@@ -106,8 +105,10 @@ export default class AlertMessage extends ReactCSS.Component {
   render () {
     return (
         <div style={this.styles().AlertMessage}>
-            {this.renderTitle()}
-            {this.renderDetails()}
+            <div style={this.styles().AlertItem}>
+                {this.renderTitle()}
+                {this.renderDetails()}
+            </div>
             {this.renderChildren()}
         </div>
     );
