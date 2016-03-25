@@ -27,6 +27,7 @@ describe("Button", function() {
   it("Danger Button", () => this.props({type: "danger"}));
   it("Warning Button", () => this.props({type: "warning"}));
   it("Success Button", () => this.props({type: "success"}));
+  it("Info Button", () => this.props({type: "info"}));
   it("Default Button", () => this.props({type: "default"}));
 
   /**

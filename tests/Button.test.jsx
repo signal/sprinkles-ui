@@ -91,4 +91,16 @@ describe("Button", () => {
     expect(Color(buttonNode.style["border-bottom-color"]).hexString())
       .toBe(Color(Colors.success).darken(0.2).hexString());
   });
+
+  it("Does render an info button", () => {
+    // Render a Button
+    const buttonComponent = TestUtils.renderIntoDocument(
+        <Button type={"info"}/>
+    );
+    // grab the DOM node so we can inspect it
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(Color(buttonNode.style.background).hexString()).toBe(Colors.info);
+    expect(Color(buttonNode.style["border-bottom-color"]).hexString())
+      .toBe(Color(Colors.info).darken(0.2).hexString());
+  });
 });
