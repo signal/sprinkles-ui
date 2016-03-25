@@ -2,6 +2,7 @@ import React from "react";
 import ReactCSS from "reactcss";
 import TextInput from "./TextInput";
 import Text from "./Text";
+import Colors from "../shared/colors";
 
 
 export default class Field extends ReactCSS.Component {
@@ -67,13 +68,13 @@ export default class Field extends ReactCSS.Component {
       let color;
       switch (this.props.status) {
         case "error":
-          color = "red";
+          color = Colors.danger;
           break;
         case "warning":
-          color = "orange";
+          color = Colors.warning;
           break;
         case "success":
-          color = "green";
+          color = Colors.success;
           break;
       }
       return (
@@ -95,7 +96,7 @@ export default class Field extends ReactCSS.Component {
       return(
           <div style={this.styles().Error}>
               <Text
-                  color={"red"}
+                  color={Colors.danger}
                   fontSize={16}
                   ref={c => this.errorRef = c}
               >
@@ -112,7 +113,7 @@ export default class Field extends ReactCSS.Component {
           <span>
               {" "}
               <Text
-                  color={"red"}
+                  color={Colors.danger}
                   fontSize={18}
                   ref={c => this.requiredRef = c}
               >

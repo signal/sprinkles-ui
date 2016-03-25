@@ -1,5 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
+import Colors from "../shared/colors";
 
 
 export default class TextInput extends ReactCSS.Component {
@@ -68,22 +69,22 @@ export default class TextInput extends ReactCSS.Component {
       },
       "focus": {
         TextInput: {
-          boxShadow: "0 0 3px 1px #4285F4"
+          boxShadow: "0 0 3px 1px " + Colors.info
         },
       },
       "success": {
         TextInput: {
-          boxShadow: "0 0 3px 1px green"
+          boxShadow: "0 0 3px 1px " + Colors.success
         }
       },
       "warning": {
         TextInput: {
-          boxShadow: "0 0 3px 1px orange"
+          boxShadow: "0 0 3px 1px " + Colors.warning
         }
       },
       "error": {
         TextInput: {
-          boxShadow: "0 0 3px 1px red"
+          boxShadow: "0 0 3px 1px " + Colors.danger
         }
       }
     }

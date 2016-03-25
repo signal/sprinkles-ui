@@ -4,9 +4,11 @@ jest.dontMock("../src/components/TextInput");
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
+import Colors from "../src/shared/colors";
 
 // TODO: move this to es6 style import when its implemented in jest
 const TextInput = require("../src/components/TextInput").default;
+
 
 
 describe("TextInput", () => {
@@ -95,7 +97,7 @@ describe("TextInput", () => {
 
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
 
-    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px red");
+    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px " + Colors.danger);
   });
 
   it("Does render with an orange shadow on warning status", () => {
@@ -107,7 +109,7 @@ describe("TextInput", () => {
 
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
 
-    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px orange");
+    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px " + Colors.warning);
   });
 
   it("Does render with a green shadow on success status", () => {
@@ -119,7 +121,7 @@ describe("TextInput", () => {
 
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
 
-    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px green");
+    expect(textInputNode.style.boxShadow).toBe("0 0 3px 1px " + Colors.success);
   });
 
   it("Does return invalid state with empty TextInput", () => {

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
+import Colors from "../shared/colors"
 
 export default class ListItem extends ReactCSS.Component {
   displayName = "ListItem";
@@ -48,7 +49,7 @@ export default class ListItem extends ReactCSS.Component {
       },
       "selected": {
         ListItem: {
-          background: "#4285F4",
+          background: Colors.info,
           color: "#FEFEFE"
         }
       }

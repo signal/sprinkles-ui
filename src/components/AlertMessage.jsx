@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import color from "color";
-import colors from "../shared/colors";
+import Color from "color";
+import Colors from "../shared/colors";
 import Text from "./Text";
 
 export default class AlertMessage extends ReactCSS.Component {
@@ -26,26 +26,26 @@ export default class AlertMessage extends ReactCSS.Component {
       },
       "success": {
         AlertMessage: {
-          backgroundColor: colors.success,
-          border: "1px solid " + color(colors.success).darken(0.1).hexString()
+          backgroundColor: Colors.success,
+          border: "1px solid " + Color(Colors.success).darken(0.1).hexString()
         }
       },
       "info": {
         AlertMessage: {
-          backgroundColor: colors.info,
-          border: "1px solid " + color(colors.info).darken(0.1).hexString()
+          backgroundColor: Colors.info,
+          border: "1px solid " + Color(Colors.info).darken(0.1).hexString()
         }
       },
       "warning": {
         AlertMessage: {
-          backgroundColor: colors.warning,
-          border: "1px solid " + color(colors.warning).darken(0.1).hexString()
+          backgroundColor: Colors.warning,
+          border: "1px solid " + Color(Colors.warning).darken(0.1).hexString()
         }
       },
       "danger": {
         AlertMessage: {
-          backgroundColor: colors.danger,
-          border: "1px solid " + color(colors.danger).darken(0.1).hexString()
+          backgroundColor: Colors.danger,
+          border: "1px solid " + Color(Colors.danger).darken(0.1).hexString()
         }
       }
     }

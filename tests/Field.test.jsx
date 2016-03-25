@@ -6,6 +6,8 @@ jest.dontMock("../src/components/Text");
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
+import Color from "color";
+import Colors from "../src/shared/colors";
 
 // TODO: move this to es6 style import when its implemented in jest
 const Field = require("../src/components/Field").default;
@@ -60,8 +62,8 @@ describe("Field", () => {
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
     const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
 
-    expect(labelNode.style.color).toBe("red");
-    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px red")
+    expect(Color(labelNode.style.color).hexString()).toBe(Colors.danger);
+    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px " + Colors.danger)
   });
 
   it("Does render a Field with a warning status", () => {
@@ -81,8 +83,8 @@ describe("Field", () => {
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
     const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
 
-    expect(labelNode.style.color).toBe("orange");
-    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px orange")
+    expect(Color(labelNode.style.color).hexString()).toBe(Colors.warning);
+    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px " + Colors.warning)
   });
 
   it("Does render a Field with a success status", () => {
@@ -102,8 +104,8 @@ describe("Field", () => {
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
     const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
 
-    expect(labelNode.style.color).toBe("green");
-    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px green")
+    expect(Color(labelNode.style.color).hexString()).toBe(Colors.success);
+    expect(inputNode.style.boxShadow).toBe("0 0 3px 1px " + Colors.success)
   });
 
   it("Does render a Field with an error message", () => {
@@ -139,7 +141,7 @@ describe("Field", () => {
     const requiredNode = ReactDOM.findDOMNode(fieldComponent.requiredRef);
 
     expect(requiredNode.textContent).toBe("*");
-    expect(requiredNode.style.color).toBe("red");
+    expect(Color(requiredNode.style.color).hexString()).toBe(Colors.danger);
   });
 
   it("Does validate a required Field with valid input as valid", () => {

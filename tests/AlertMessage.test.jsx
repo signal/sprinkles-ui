@@ -1,13 +1,12 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/AlertMessage");
 jest.dontMock("../src/components/Text");
-jest.dontMock("colors");
 
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
-import color from "color";
-import colors from "../src/shared/colors";
+import Color from "color";
+import Colors from "../src/shared/colors";
 
 // TODO: move this to es6 style import when its implemented in jest
 const AlertMessage = require("../src/components/AlertMessage").default;
@@ -22,20 +21,20 @@ function testColor(messageType) {
   );
   switch(messageType) {
     case "success":
-      colorToTest = colors.success;
+      colorToTest = Colors.success;
     break;
     case "info":
-      colorToTest = colors.info;
+      colorToTest = Colors.info;
     break;
     case "warning":
-      colorToTest = colors.warning;
+      colorToTest = Colors.warning;
     break;
-    case "danger": colors.danger;
-      colorToTest = colors.danger;
+    case "danger": Colors.danger;
+      colorToTest = Colors.danger;
     break;
   }
   const alertMessageNode = ReactDOM.findDOMNode(alertMessageComponent);
-  expect(color(alertMessageNode.style.backgroundColor).hexString()).toBe(colorToTest);
+  expect(Color(alertMessageNode.style.backgroundColor).hexString()).toBe(colorToTest);
 }
 
 describe("Alert Message", () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
 import Popover from "../../src/components/Popover";
+import Colors from "../../src/shared/colors"
 
 
 // Wrapper to contain a Popover and an anchor element
@@ -25,7 +26,7 @@ class PopoverWrapper extends React.Component {
     this.style = {
       anchorDiv: {
         padding: 10,
-        background: "#4285F4",
+        background: Colors.info,
         color: "#FEFEFE",
         cursor: "pointer"
       }
