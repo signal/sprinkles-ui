@@ -12,7 +12,7 @@ describe("AlertMessage", function() {
     this.unload();
     this.load(
         <AlertMessage
-            body={props.body}
+            details={props.details}
             title={props.title}
             type={props.type}
         >
@@ -23,49 +23,55 @@ describe("AlertMessage", function() {
 
   before(() => {
     this.loadAlertMessage({
-      body: "Test",
+      details: "Test",
       type: "info"
     });
   });
 
   it("Success message", () => this.loadAlertMessage({
-    body: "Yay! It worked",
+    details: "Yay! It worked",
     title: "",
     type: "success"
   }));
   it("Success message with title", () => this.loadAlertMessage({
-    body: "Yay! It worked",
+    details: "Yay! It worked",
     title: "WOW",
     type: "success"
   }));
   it("Info message", () => this.loadAlertMessage({
-    body: "This is some information you might like",
+    details: "This is some information you might like",
     title: "",
     type: "info"
   }));
   it("Info message with title", () => this.loadAlertMessage({
-    body: "This is some information you might like",
+    details: "This is some information you might like",
     title: "Note",
     type: "info"
   }));
   it("Warning message", () => this.loadAlertMessage({
-    body: "Be careful you might run into a problem",
+    details: "Be careful you might run into a problem",
     title: "",
     type: "warning"
   }));
   it("Warning message with title", () => this.loadAlertMessage({
-    body: "Be careful you might run into a problem",
+    details: "Be careful you might run into a problem",
     title: "Caution:",
     type: "warning"
   }));
   it("Danger message", () => this.loadAlertMessage({
     children: null,
-    body: "Yikes! You dun broke it",
+    details: "Yikes! You dun broke it",
     title: "",
     type: "danger"
   }));
   it("Danger message with title", () => this.loadAlertMessage({
-    children: <Text>{"You dun broke it"}</Text>,
+    children:
+        <Text
+            color={"white"}
+            fontSize={20}
+        >
+            {"You dun broke it"}
+        </Text>,
     title: "Warning!",
     type: "danger"
   }));
@@ -77,7 +83,10 @@ describe("AlertMessage", function() {
               padding="10px 0 5px 0"
               showHoverEffect={false}
           >
-              <Text fontSize={14}>
+              <Text
+                  color={"white"}
+                  fontSize={14}
+              >
                   <Svg
                       fill="#fff"
                       height={5}
@@ -90,7 +99,10 @@ describe("AlertMessage", function() {
               padding="0 0 15px 0"
               showHoverEffect={false}
           >
-              <Text fontSize={14}>
+              <Text
+                  color={"white"}
+                  fontSize={14}
+              >
                   <Svg
                       fill="#fff"
                       height={5}
@@ -111,7 +123,7 @@ describe("AlertMessage", function() {
   A component that provides contextural feedback messages for typical user actions.
 
   #### API
-  - **body** *React.PropTypes.oneOfType* string description or array of descriptions
+  - **details** *React.PropTypes.oneOfType* string description or array of descriptions
   - **title** *React.PropTypes.string* (optional) Bold qualifier of message
   - **type** *React.PropTypes.oneOf* Sets the color of the alert message, one option must be specified: 'success', 'info', 'warning', 'danger'
 

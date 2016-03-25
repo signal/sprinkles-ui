@@ -2,13 +2,14 @@ import React from "react";
 import ReactCSS from "reactcss";
 import color from "color";
 import colors from "../shared/colors";
+import Text from "./Text";
 
 export default class AlertMessage extends ReactCSS.Component {
   displayName = "AlertMessage";
 
   static propTypes = {
-    body: React.PropTypes.string,
     children: React.PropTypes.node,
+    details: React.PropTypes.string,
     title: React.PropTypes.string,
     type: React.PropTypes.oneOf(["success", "info", "warning", "danger"]).isRequired
   };
@@ -16,23 +17,11 @@ export default class AlertMessage extends ReactCSS.Component {
   classes () {
     return {
       "default": {
-        list: {
-          listStyle: "square",
-          textAlign: "left"
-        },
         AlertMessage: {
-          color: "#fff",
-          fontSize: 16,
-          padding: "2% 2% 0 2%",
-          width: "96%"
+          padding: "10px 10px 0 10px"
         },
-        bodyWrapper: {
-          marginBottom: "2%"
-        },
-        title: {
-          fontWeight: "bold",
-          display: "inlineBlock",
-          marginRight: "5px"
+        AlertItem: {
+          paddingBottom: "10px"
         }
       },
       "success": {
@@ -71,15 +60,55 @@ export default class AlertMessage extends ReactCSS.Component {
     })
   }
 
+  renderTitle () {
+    if (this.props.title) {
+      return(
+          <div style={this.styles().AlertItem}>
+              <Text
+                  color={"#fff"}
+                  fontSize={16}
+                  fontWeight={"bold"}
+                  ref={c => this.titleRef = c}
+              >
+                {this.props.title}
+              </Text>
+          </div>
+      );
+    }
+  }
+
+  renderDetails () {
+    if (this.props.details) {
+      return(
+          <div style={this.styles().AlertItem}>
+              <Text
+                  color={"#fff"}
+                  fontSize={16}
+                  ref={c => this.detailsRef = c}
+              >
+                {this.props.details}
+              </Text>
+          </div>
+      );
+    }
+  }
+
+  renderChildren () {
+    if (this.props.children) {
+      return (
+          <div style={this.styles().AlertItem}>
+              {this.props.children}
+          </div>
+      );
+    }
+  }
+
   render () {
     return (
         <div style={this.styles().AlertMessage}>
-            <div style={this.styles().bodyWrapper}>
-                <span style={this.styles().title}>
-                  {this.props.title}
-                </span>{this.props.body}
-            </div>
-            {this.props.children}
+            {this.renderTitle()}
+            {this.renderDetails()}
+            {this.renderChildren()}
         </div>
     );
   }

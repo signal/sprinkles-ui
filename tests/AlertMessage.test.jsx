@@ -1,5 +1,6 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/AlertMessage");
+jest.dontMock("../src/components/Text");
 jest.dontMock("colors");
 
 import React from "react";
@@ -15,11 +16,10 @@ function testColor(messageType) {
   let colorToTest;
   const alertMessageComponent = TestUtils.renderIntoDocument(
       <AlertMessage
-          body="Some description"
+          details="Some description"
           type={messageType}
       />
   );
-
   switch(messageType) {
     case "success":
       colorToTest = colors.success;
@@ -34,38 +34,37 @@ function testColor(messageType) {
       colorToTest = colors.danger;
     break;
   }
-
   const alertMessageNode = ReactDOM.findDOMNode(alertMessageComponent);
-  expect(color(alertMessageNode.style.backgroundColor).hexString()).toEqual(colorToTest);
+  expect(color(alertMessageNode.style.backgroundColor).hexString()).toBe(colorToTest);
 }
 
 describe("Alert Message", () => {
-  it("Does render an info Alert Message with body description", () => {
+  it("Does render an info Alert Message with description", () => {
     const description = "An info message";
     const alertMessageComponent = TestUtils.renderIntoDocument(
         <AlertMessage
-            body={description}
+            details={description}
             type="info"
         />
     );
-
-    const alertMessageNode = ReactDOM.findDOMNode(alertMessageComponent);
-    expect(alertMessageNode.getElementsByTagName("span")[1].textContent).toEqual(description);
+    const detailsNode = ReactDOM.findDOMNode(alertMessageComponent.detailsRef);
+    expect(detailsNode.textContent).toBe(description);
   });
-  it("Does render an info Alert Message with body description and title", () => {
+
+  it("Does render an info Alert Message with description and title", () => {
     const description = "An info message";
     const title = "Info title"
     const alertMessageComponent = TestUtils.renderIntoDocument(
         <AlertMessage
-            body={description}
+            details={description}
             title={title}
             type="info"
         />
     );
-
-    const alertMessageNode = ReactDOM.findDOMNode(alertMessageComponent);
-    expect(alertMessageNode.getElementsByTagName("span")[1].textContent).toEqual(description);
-    expect(alertMessageNode.getElementsByTagName("span")[0].textContent).toEqual(title);
+    const titleNode = ReactDOM.findDOMNode(alertMessageComponent.titleRef);
+    const detailsNode = ReactDOM.findDOMNode(alertMessageComponent.detailsRef);
+    expect(detailsNode.textContent).toBe(description);
+    expect(titleNode.textContent).toBe(title);
   });
   it("Displays the correct color for the success type", () => {
     testColor("success");
