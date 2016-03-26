@@ -44,10 +44,6 @@ export default class Button extends ReactCSS.Component {
   }
 
   classes () {
-    var disabledStyles = {
-      background: ButtonColors.ButtonDisabledBackground,
-      borderBottom: "1px solid" + ButtonColors.ButtonDisabledBorder
-    }
     const borderButtonColor = Color(ButtonColors[this.props.type])
         .darken(0.3).hexString();
     const hoverButtonColor =  Color(ButtonColors[this.props.type])
@@ -75,6 +71,7 @@ export default class Button extends ReactCSS.Component {
       "hovering": {
         Button: {
           background: hoverButtonColor,
+          cursor: "pointer"
         }
       },
       "disabled": {
