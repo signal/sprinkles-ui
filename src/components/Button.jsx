@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import Colors from "../shared/colors";
+import { ButtonColors } from "../shared/colors";
 import Color from "color";
 
 export default class Button extends ReactCSS.Component {
@@ -11,7 +11,7 @@ export default class Button extends ReactCSS.Component {
     onClick: React.PropTypes.func,
     text: React.PropTypes.string,
     type: React.PropTypes.oneOf([
-      "default",
+      "secondary",
       "primary",
       "success",
       "info",
@@ -25,7 +25,7 @@ export default class Button extends ReactCSS.Component {
     enabled: true,
     working: false,
     text: "Submit",
-    type: "default"
+    type: "secondary"
   };
 
   constructor() {
@@ -45,24 +45,24 @@ export default class Button extends ReactCSS.Component {
 
   classes () {
     var disabledStyles = {
-      background: Colors.ButtonDisabledBackground,
-      borderBottom: "1px solid" + Colors.ButtonDisabledBorder
+      background: ButtonColors.ButtonDisabledBackground,
+      borderBottom: "1px solid" + ButtonColors.ButtonDisabledBorder
     }
     return {
       "default": {
         Button: {
-          background: Colors[this.props.type],
+          background: ButtonColors[this.props.type],
           border: "none",
-          borderBottom: "1px solid " + Color(Colors[this.props.type]).darken(0.2).hexString(),
+          borderBottom: "1px solid " + Color(ButtonColors[this.props.type]).darken(0.2).hexString(),
           borderRadius: "3px",
-          color: "#fff",
+          color: this.props.type === "secondary" ? "#222222" : "#FEFEFE",
           padding: "5px 25px"
         }
       },
       "hovering": {
         Button: {
           //Specify both to overrride global CSS
-          background: Colors.ButtonHoverBackground,
+          background: ButtonColors.ButtonHoverBackground,
         }
       },
       "disabled": {

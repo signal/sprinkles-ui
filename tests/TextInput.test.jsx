@@ -4,7 +4,7 @@ jest.dontMock("../src/components/TextInput");
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
-import Colors from "../src/shared/colors";
+import { Colors } from "../src/shared/colors";
 
 // TODO: move this to es6 style import when its implemented in jest
 const TextInput = require("../src/components/TextInput").default;

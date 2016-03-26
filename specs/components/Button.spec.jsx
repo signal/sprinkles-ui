@@ -29,7 +29,7 @@ describe("Button", function() {
   it("Success Button", () => this.props({type: "success"}));
   it("Info Button", () => this.props({type: "info"}));
   it("Primary Button", () => this.props({type: "primary"}));
-  it("Default Button", () => this.props({type: "default"}));
+  it("Secondary (Default) Button", () => this.props({type: "secondary"}));
 
   /**
    * Documentation (Markdown)

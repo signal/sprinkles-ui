@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import Colors from "../shared/colors"
+import { Colors } from "../shared/colors"
 
 export default class ListItem extends ReactCSS.Component {
   displayName = "ListItem";

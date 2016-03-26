@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import Color from "color";
-import Colors from "../shared/colors";
+import { Colors } from "../shared/colors";
 import Text from "./Text";
 
 export default class AlertMessage extends ReactCSS.Component {

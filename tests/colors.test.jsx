@@ -1,10 +1,10 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/shared/colors");
 
-const colors = require("../src/shared/colors").default;
+const Colors = require("../src/shared/colors").Colors;
 
-describe("colors", () => {
+describe("Colors", () => {
   it("Does have expected color values", () => {
-    expect(colors.ButtonEnabledBackground).toEqual("#00ADEF");
+    expect(Colors.danger).toEqual("#DF2E3C");
   });
 });

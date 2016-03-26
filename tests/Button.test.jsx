@@ -5,7 +5,7 @@ jest.dontMock("reactcss");
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
-import Colors from "../src/shared/colors";
+import { ButtonColors } from "../src/shared/colors";
 import Color from "color";
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -56,15 +56,15 @@ describe("Button", () => {
   });
 
   it("Does render a button of each type", () => {
-    ["default", "primary", "danger", "warning", "success", "info"].forEach((type) => {
+    ["secondary", "primary", "danger", "warning", "success", "info"].forEach((type) => {
       const buttonComponent = TestUtils.renderIntoDocument(
           <Button type={type}/>
       );
       // grab the DOM node so we can inspect it
       const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-      expect(Color(buttonNode.style.background).hexString()).toBe(Colors[type]);
+      expect(Color(buttonNode.style.background).hexString()).toBe(ButtonColors[type]);
       expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-        .toBe(Color(Colors[type]).darken(0.2).hexString());
+        .toBe(Color(ButtonColors[type]).darken(0.2).hexString());
     });
   });
 });

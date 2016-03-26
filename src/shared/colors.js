@@ -1,17 +1,15 @@
 //Store all common style colors here
 
-export default {
-  // general purpose colors
+export const Colors = {
   success: "#00C20D",
-  info: "#4285F4",
+  info: "#5BC0DE",
   warning: "#EBBC62",
-  danger: "#DF2E3C",
-  default: "#CCCCCC",
-  primary: "#0000FF",
-  // button colors
-  ButtonEnabledBackground: "#00ADEF",
-  ButtonEnabledBorder: "#00688f",
-  ButtonDisabledBackground: "#D7D7D7",
-  ButtonDisabledBorder: "#C5C5C5",
-  ButtonHoverBackground: "#05B2F4"
+  danger: "#DF2E3C"
 };
+
+export const ButtonColors = Object.assign({
+  secondary: "#FEFEFE",
+  primary: "#0275D8",
+  ButtonDisabledBackground: "#555555",
+  ButtonDisabledBorder: "#333333"
+}, Colors);

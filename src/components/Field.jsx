@@ -2,7 +2,7 @@ import React from "react";
 import ReactCSS from "reactcss";
 import TextInput from "./TextInput";
 import Text from "./Text";
-import Colors from "../shared/colors";
+import { Colors } from "../shared/colors";
 
 
 export default class Field extends ReactCSS.Component {
