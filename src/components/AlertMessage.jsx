@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import Color from "color";
-import { Colors } from "../shared/colors";
+import { Colors, TextColors } from "../shared/colors";
 import Text from "./Text";
 
 export default class AlertMessage extends ReactCSS.Component {
@@ -64,7 +64,7 @@ export default class AlertMessage extends ReactCSS.Component {
     if (this.props.title) {
       return(
           <Text
-              color={"#fff"}
+              color={TextColors.light}
               fontSize={16}
               fontWeight={"bold"}
               ref={c => this.titleRef = c}
@@ -81,7 +81,7 @@ export default class AlertMessage extends ReactCSS.Component {
           <span>
               {" "}
               <Text
-                  color={"#fff"}
+                  color={TextColors.light}
                   fontSize={16}
                   ref={c => this.detailsRef = c}
               >

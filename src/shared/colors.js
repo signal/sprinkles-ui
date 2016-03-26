@@ -13,3 +13,8 @@ export const ButtonColors = Object.assign({
   ButtonDisabledBackground: "#555555",
   ButtonDisabledBorder: "#333333"
 }, Colors);
+
+export const TextColors = {
+  dark: "#4F4F4F",
+  light:"#F5F5F5"
+};

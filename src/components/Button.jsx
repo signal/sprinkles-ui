@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import { ButtonColors } from "../shared/colors";
+import { ButtonColors, TextColors } from "../shared/colors";
 import Color from "color";
 
 export default class Button extends ReactCSS.Component {
@@ -48,28 +48,46 @@ export default class Button extends ReactCSS.Component {
       background: ButtonColors.ButtonDisabledBackground,
       borderBottom: "1px solid" + ButtonColors.ButtonDisabledBorder
     }
+    const borderButtonColor = Color(ButtonColors[this.props.type])
+        .darken(0.2).hexString();
+    const hoverButtonColor =  Color(ButtonColors[this.props.type])
+        .darken(0.1).hexString();
+    const disabledButtonColor =  Color(ButtonColors[this.props.type])
+        .lighten(0.2).hexString();
     return {
       "default": {
         Button: {
-          background: ButtonColors[this.props.type],
-          border: "none",
-          borderBottom: "1px solid " + Color(ButtonColors[this.props.type]).darken(0.2).hexString(),
+          background: ButtonColors.secondary,
+          border: "1px solid " + borderButtonColor,
           borderRadius: "3px",
-          color: this.props.type === "secondary" ? "#222222" : "#FEFEFE",
+          color: TextColors.dark,
           padding: "5px 25px"
+        }
+      },
+      "typeColor": {
+        Button: {
+          background: ButtonColors[this.props.type],
+          border: "1px solid transparent",
+          borderBottom: "1px solid " + borderButtonColor,
+          color: TextColors.light
         }
       },
       "hovering": {
         Button: {
-          //Specify both to overrride global CSS
-          background: ButtonColors.ButtonHoverBackground,
+          background: hoverButtonColor,
         }
       },
       "disabled": {
-        Button: disabledStyles
+        Button: {
+          background: this.props.type === "secondary" ? hoverButtonColor : disabledButtonColor,
+          cursor: "not-allowed"
+        }
       },
       "working": {
-        Button: disabledStyles
+        Button: {
+          background: this.props.type === "secondary" ? hoverButtonColor : disabledButtonColor,
+          cursor: "wait"
+        }
         //TODO: add some kind of working indicator here
       }
     }
@@ -77,9 +95,10 @@ export default class Button extends ReactCSS.Component {
 
   styles () {
     return this.css({
+      "typeColor": this.props.type !== "secondary",
       "hovering": this.state.isHovering,
-      "working": this.props.working,
-      "disabled": !this.props.enabled
+      "disabled": !this.props.enabled,
+      "working": this.props.working
     })
   }
 
