@@ -1,17 +1,15 @@
 //Store all common style colors here
 
 export const Colors = {
-  success: "#00C20D",
+  success: "#5CB85C",
   info: "#5BC0DE",
-  warning: "#EBBC62",
-  danger: "#DF2E3C"
+  warning: "#F0AD4E",
+  danger: "#D9534F"
 };
 
 export const ButtonColors = Object.assign({
   secondary: "#FEFEFE",
-  primary: "#0275D8",
-  ButtonDisabledBackground: "#555555",
-  ButtonDisabledBorder: "#333333"
+  primary: "#0275D8"
 }, Colors);
 
 export const TextColors = {

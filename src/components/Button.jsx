@@ -49,11 +49,11 @@ export default class Button extends ReactCSS.Component {
       borderBottom: "1px solid" + ButtonColors.ButtonDisabledBorder
     }
     const borderButtonColor = Color(ButtonColors[this.props.type])
-        .darken(0.2).hexString();
+        .darken(0.3).hexString();
     const hoverButtonColor =  Color(ButtonColors[this.props.type])
         .darken(0.1).hexString();
     const disabledButtonColor =  Color(ButtonColors[this.props.type])
-        .lighten(0.2).hexString();
+        .lighten(0.3).hexString();
     return {
       "default": {
         Button: {

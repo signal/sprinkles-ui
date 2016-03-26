@@ -64,7 +64,7 @@ describe("Button", () => {
       const buttonNode = ReactDOM.findDOMNode(buttonComponent);
       expect(Color(buttonNode.style.background).hexString()).toBe(ButtonColors[type]);
       expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-        .toBe(Color(ButtonColors[type]).darken(0.2).hexString());
+        .toBe(Color(ButtonColors[type]).darken(0.3).hexString());
     });
   });
 });
