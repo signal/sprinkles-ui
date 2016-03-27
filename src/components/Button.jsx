@@ -43,18 +43,38 @@ export default class Button extends ReactCSS.Component {
     this.setState({isHovering: true});
   }
 
+  componentWillReceiveProps (nextProps) {
+    if(this.props.working !== nextProps.working && nextProps.working) {
+      this.setState({isHovering: false});
+    }
+  }
+
+  componentWillMount () {
+    this.keyframe = document.createElement("style");
+    this.keyframe.innerHTML = `@keyframes button-working {
+      from { background-position: 0 0; }
+      to { background-position: 14px 0px; }
+    }`;
+    document.head.appendChild(this.keyframe);
+  }
+
+  componentWillUnmount () {
+    document.head.removeChild(this.keyframe);
+  }
+
   classes () {
-    const borderButtonColor = Color(ButtonColors[this.props.type])
+    const veryDarkened = Color(ButtonColors[this.props.type])
         .darken(0.3).hexString();
-    const hoverButtonColor =  Color(ButtonColors[this.props.type])
+    const darkened =  Color(ButtonColors[this.props.type])
         .darken(0.1).hexString();
-    const disabledButtonColor =  Color(ButtonColors[this.props.type])
+    const lightened =  Color(ButtonColors[this.props.type])
         .lighten(0.3).hexString();
+    const workingColor = this.props.type === "secondary" ? darkened : veryDarkened;
     return {
       "default": {
         Button: {
           background: ButtonColors.secondary,
-          border: "1px solid " + borderButtonColor,
+          border: "1px solid " + veryDarkened,
           borderRadius: "3px",
           color: TextColors.dark,
           padding: "5px 25px",
@@ -65,28 +85,35 @@ export default class Button extends ReactCSS.Component {
         Button: {
           background: ButtonColors[this.props.type],
           border: "1px solid transparent",
-          borderBottom: "1px solid " + borderButtonColor,
+          borderBottom: "1px solid " + veryDarkened,
           color: TextColors.light
         }
       },
       "hovering": {
         Button: {
-          background: hoverButtonColor,
+          background: darkened,
           cursor: "pointer"
         }
       },
       "disabled": {
         Button: {
-          background: this.props.type === "secondary" ? hoverButtonColor : disabledButtonColor,
+          background: this.props.type === "secondary" ? darkened : lightened,
           cursor: "not-allowed"
         }
       },
       "working": {
         Button: {
-          background: this.props.type === "secondary" ? hoverButtonColor : disabledButtonColor,
-          cursor: "wait"
+          cursor: "wait",
+          backgroundImage: `repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 7px,
+            `+ workingColor +` 7px,
+            `+ workingColor +` 14px
+          )`,
+          animation: "button-working 0.5s linear infinite",
+          backgroundSize: "14px auto"
         }
-        //TODO: add some kind of working indicator here
       }
     }
   }
@@ -94,7 +121,7 @@ export default class Button extends ReactCSS.Component {
   styles () {
     return this.css({
       "typeColor": this.props.type !== "secondary",
-      "hovering": this.state.isHovering,
+      "hovering": this.state.isHovering && !this.props.working,
       "disabled": !this.props.enabled,
       "working": this.props.working
     })
@@ -109,7 +136,7 @@ export default class Button extends ReactCSS.Component {
             onMouseOver={this.handleMouseOver.bind(this)}
             style={this.styles().Button}
         >
-            {this.props.working ? this.props.text + " (working)" : this.props.text}
+            {this.props.text}
         </button>
     );
   }

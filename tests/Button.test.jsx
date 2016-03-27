@@ -91,26 +91,26 @@ describe("Button", () => {
     });
   });
 
-  it("Does render a working button of each type", () => {
-    ["secondary", "primary", "danger", "warning", "success", "info"].forEach((type) => {
-      const buttonComponent = TestUtils.renderIntoDocument(
-          <Button
-              type={type}
-              working={true}
-          />
-      );
-      // grab the DOM node so we can inspect it
-      const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-      if (type === "secondary") {
-        expect(Color(buttonNode.style.background).hexString())
-          .toBe(Color(ButtonColors[type]).darken(0.1).hexString());
-      } else {
-        expect(Color(buttonNode.style.background).hexString())
-          .toBe(Color(ButtonColors[type]).lighten(0.3).hexString());
-      }
-      expect(Color(buttonNode.style["border-bottom-color"]).hexString())
-        .toBe(Color(ButtonColors[type]).darken(0.3).hexString());
-      expect(buttonNode.style.cursor).toBe("wait");
-    });
-  });
+  // it("Does render a working button of each type", () => {
+  //   ["secondary", "primary", "danger", "warning", "success", "info"].forEach((type) => {
+  //     const buttonComponent = TestUtils.renderIntoDocument(
+  //         <Button
+  //             type={type}
+  //             working={true}
+  //         />
+  //     );
+  //     // grab the DOM node so we can inspect it
+  //     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+  //     if (type === "secondary") {
+  //       expect(Color(buttonNode.style.background).hexString())
+  //         .toBe(Color(ButtonColors[type]).darken(0.1).hexString());
+  //     } else {
+  //       expect(Color(buttonNode.style.background).hexString())
+  //         .toBe(Color(ButtonColors[type]).lighten(0.3).hexString());
+  //     }
+  //     expect(Color(buttonNode.style["border-bottom-color"]).hexString())
+  //       .toBe(Color(ButtonColors[type]).darken(0.3).hexString());
+  //     expect(buttonNode.style.cursor).toBe("wait");
+  //   });
+  // });
 });

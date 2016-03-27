@@ -1,4 +1,5 @@
 import React from "react";
+import loremIpsum from "lorem-ipsum";
 import Button from "../../src/components/Button";
 
 describe("Button", function() {
@@ -30,6 +31,8 @@ describe("Button", function() {
   it("Info Button", () => this.props({type: "info"}));
   it("Primary Button", () => this.props({type: "primary"}));
   it("Secondary (Default) Button", () => this.props({type: "secondary"}));
+  it("Updates Button Text", () => this.props({text: loremIpsum()}))
+  it("Resets Button Text", () => this.props({text: undefined}))
 
   /**
    * Documentation (Markdown)
