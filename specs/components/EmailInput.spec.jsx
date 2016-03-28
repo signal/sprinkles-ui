@@ -32,7 +32,10 @@ describe("EmailInput", function() {
   it("Set Warning Status", () => this.props({status: "warning"}));
   it("Set Error Status", () => this.props({status: "error"}));
   it("Clear Status", () => this.props({status: undefined}));
-
+  it("Disable Autocomplete", () => this.props({autoComplete: false}));
+  it("Enable Autocomplete", () => this.props({autoComplete: true}));
+  it("Disable Input", () => this.props({enabled: false}));
+  it("Enable Input", () => this.props({enabled: true}));
 
   /**
    * Documentation (Markdown)
