@@ -49,6 +49,7 @@ describe("Field", function() {
   #### API
 
   - **children** *React.PropTypes.node* current supported nodes: TextInput *(TODO: add more Documentation on how props passed down to children)*
+  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
   - **error** *React.PropTypes.string* (optional) an error message that is displayed with the Field
   - **label** *React.PropTypes.string* (optional) a label to distingush the field
   - **onChange** *React.PropTypes.func* (optional) called when the input changes

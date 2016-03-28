@@ -95,6 +95,8 @@ describe("Form", function() {
   it("Clear Alert", () => this.props({alert: undefined}));
   it("Button Text: My Button", () => this.props({submitButtonText: "My Button"}));
   it("Button Text: Login", () => this.props({submitButtonText: "Login"}));
+  it("Set Working", () => this.props({working: true}));
+  it("Clear Working", () => this.props({working: false}));
 
   /**
    * Documentation (Markdown)
@@ -113,6 +115,7 @@ describe("Form", function() {
     - **type** *React.PropTypes.oneOf* Alert type one of: ["success", "info", "warning", "danger"]
   - **onSubmit** *React.PropTypes.func* (optional) called when Form has been submitted
   - **submitButtonText** *React.PropTypes.string* (optional) set form submit button text
+  - **working** *React.PropTypes.bool* (optional) disables user input and shows working state on submit button when set to true
 
   `);
 });

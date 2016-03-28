@@ -48,9 +48,12 @@ describe("PasswordInput", function() {
 
   #### API
 
+  - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
+  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
+  - **initialValue** *React.PropTypes.string* (optional) initial value of the input
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
-  - **status** *React.PropTypes.oneOf* (optional) set status of text box (overrides focus). Acceptable values are 'error', 'warning' and 'success'
+  - **status** *React.PropTypes.oneOf* (optional) set status of the input (overrides focus). Acceptable values are 'error', 'warning' and 'success'
 
   `);
 });
