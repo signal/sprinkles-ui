@@ -32,6 +32,8 @@ describe("PasswordInput", function() {
   it("Set Warning Status", () => this.props({status: "warning"}));
   it("Set Error Status", () => this.props({status: "error"}));
   it("Clear Status", () => this.props({status: undefined}));
+  it("Disable Input", () => this.props({enabled: false}));
+  it("Enable Input", () => this.props({enabled: true}));
 
 
   /**

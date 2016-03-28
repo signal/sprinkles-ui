@@ -18,4 +18,12 @@ describe("PasswordInput", () => {
     expect(passwordInputNode.getAttribute("type")).toBe("password");
     expect(passwordInputNode.getAttribute("value")).toBe("");
   });
+
+  it("Does render a disabled password input", () => {
+    const passwordInputComponent = TestUtils.renderIntoDocument(
+        <PasswordInput enabled={false}/>
+    );
+    const passwordInputNode = ReactDOM.findDOMNode(passwordInputComponent);
+    expect(passwordInputNode.disabled).toBe(true);
+  });
 });
