@@ -1,7 +1,7 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
 import Popover from "../../src/components/Popover";
-import Colors from "../../src/shared/colors"
+import { Colors } from "../../src/shared/colors"
 
 
 // Wrapper to contain a Popover and an anchor element
