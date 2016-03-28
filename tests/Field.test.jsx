@@ -227,4 +227,15 @@ describe("Field", () => {
     TestUtils.Simulate.change(textInputNode, {target:{value: change}});
     expect(mockHandleChange).toBeCalledWith(change, fieldComponent);
   });
+
+  it("Does render a disabled Field", () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+        <Field enabled={false}>
+            <TextInput />
+        </Field>
+    );
+
+    const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
+    expect(textInputNode.disabled).toBe(true);
+  });
 });

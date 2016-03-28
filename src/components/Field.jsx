@@ -2,7 +2,8 @@ import React from "react";
 import ReactCSS from "reactcss";
 import TextInput from "./TextInput";
 import Text from "./Text";
-import { Colors } from "../shared/colors";
+import { Colors, TextColors } from "../shared/colors";
+import Color from "color";
 
 
 export default class Field extends ReactCSS.Component {
@@ -10,6 +11,7 @@ export default class Field extends ReactCSS.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
+    enabled: React.PropTypes.bool,
     error: React.PropTypes.string,
     fieldKey: React.PropTypes.string,
     label: React.PropTypes.string,
@@ -20,6 +22,7 @@ export default class Field extends ReactCSS.Component {
   };
 
   static defaultProps = {
+    enabled: true,
     fieldKey: "defaultKey",
     onChange: () => {},
     required: false,
@@ -30,13 +33,25 @@ export default class Field extends ReactCSS.Component {
     return {
       "default": {
         Label: {
-          margin: "10px 0"
+          margin: "10px 0",
+          color: TextColors.dark
         },
         Error: {
           margin: "10px 0"
         }
+      },
+      "disabled": {
+        Label: {
+          color: Color(TextColors.dark).lighten(0.9).hexString()
+        }
       }
     };
+  }
+
+  styles () {
+    return this.css({
+      "disabled": !this.props.enabled
+    })
   }
 
   handleChange (change) {
@@ -56,6 +71,7 @@ export default class Field extends ReactCSS.Component {
   renderInput () {
     return React.Children.map(this.props.children, (child) => {
       return React.cloneElement(child, {
+        enabled: this.props.enabled,
         onChange: this.handleChange.bind(this),
         ref: childRef => this.inputRef = childRef,
         status: this.props.status
