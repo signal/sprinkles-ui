@@ -10,7 +10,7 @@
 
 describe("Sprinkles UI", function() {
   require("./components/MyComponent.spec"); // Dummy component
-  require("./components/AlertMessage.spec");
+  require("./components/Alert.spec");
   require("./components/ListItem.spec");
   require("./components/List.spec");
   require("./components/Text.spec");

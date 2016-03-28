@@ -1,70 +1,70 @@
 import React from "react";
-import AlertMessage from "../../src/components/AlertMessage";
+import Alert from "../../src/components/Alert";
 import List from "../../src/components/List";
 import ListItem from "../../src/components/ListItem";
 import Text from "../../src/components/Text";
 import Svg from "../../src/components/SVG";
 
-describe("AlertMessage", function() {
+describe("Alert", function() {
   this.header(`## Alert Message`); // Markdown.
 
-  this.loadAlertMessage = (props) => {
+  this.loadAlert = (props) => {
     this.unload();
     this.load(
-        <AlertMessage
+        <Alert
             details={props.details}
             title={props.title}
             type={props.type}
         >
             {props.children}
-        </AlertMessage>
+        </Alert>
     ).width("100%");
   }
 
   before(() => {
-    this.loadAlertMessage({
+    this.loadAlert({
       details: "Test",
       type: "info"
     });
   });
 
-  it("Success message", () => this.loadAlertMessage({
+  it("Success message", () => this.loadAlert({
     details: "Yay! It worked",
     title: "",
     type: "success"
   }));
-  it("Success message with title", () => this.loadAlertMessage({
+  it("Success message with title", () => this.loadAlert({
     details: "Yay! It worked",
     title: "WOW",
     type: "success"
   }));
-  it("Info message", () => this.loadAlertMessage({
+  it("Info message", () => this.loadAlert({
     details: "This is some information you might like",
     title: "",
     type: "info"
   }));
-  it("Info message with title", () => this.loadAlertMessage({
+  it("Info message with title", () => this.loadAlert({
     details: "This is some information you might like",
     title: "Note",
     type: "info"
   }));
-  it("Warning message", () => this.loadAlertMessage({
+  it("Warning message", () => this.loadAlert({
     details: "Be careful you might run into a problem",
     title: "",
     type: "warning"
   }));
-  it("Warning message with title", () => this.loadAlertMessage({
+  it("Warning message with title", () => this.loadAlert({
     details: "Be careful you might run into a problem",
     title: "Caution:",
     type: "warning"
   }));
-  it("Danger message", () => this.loadAlertMessage({
+  it("Danger message", () => this.loadAlert({
     children: null,
     details: "Yikes! You dun broke it",
     title: "",
     type: "danger"
   }));
-  it("Danger message with title", () => this.loadAlertMessage({
+  it("Danger message with title", () => this.loadAlert({
     children:
         <Text
             color={"white"}
@@ -75,7 +75,7 @@ describe("AlertMessage", function() {
     title: "Warning!",
     type: "danger"
   }));
-  it("Danger message with child nodes", () => this.loadAlertMessage({
+  it("Danger message with child nodes", () => this.loadAlert({
       title: "Please reset your password using the following criteria:",
       type: "danger",
       children: <List onClick={() => console.log("List clicked")}>

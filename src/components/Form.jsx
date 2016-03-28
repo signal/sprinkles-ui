@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import Button from "./Button";
-import AlertMessage from "./AlertMessage";
+import Alert from "./Alert";
 
 export default class Form extends ReactCSS.Component {
   displayName = "Form";
@@ -113,10 +113,10 @@ export default class Form extends ReactCSS.Component {
     });
   }
 
-  renderAlertMessage () {
+  renderAlert () {
     if (this.props.alert) {
       return (
-          <AlertMessage
+          <Alert
               {...this.props.alert}
               ref={c => this.alertRef = c}
           />
@@ -131,7 +131,7 @@ export default class Form extends ReactCSS.Component {
   render () {
     return(
         <div>
-            {this.renderAlertMessage()}
+            {this.renderAlert()}
             {this.renderFields()}
             <Button
                 onClick={this.handleClick.bind(this)}

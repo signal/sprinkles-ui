@@ -4,8 +4,8 @@ import Color from "color";
 import { Colors, TextColors } from "../shared/colors";
 import Text from "./Text";
 
-export default class AlertMessage extends ReactCSS.Component {
-  displayName = "AlertMessage";
+export default class Alert extends ReactCSS.Component {
+  displayName = "Alert";
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -17,7 +17,7 @@ export default class AlertMessage extends ReactCSS.Component {
   classes () {
     return {
       "default": {
-        AlertMessage: {
+        Alert: {
           padding: "10px 10px 0 10px"
         },
         AlertItem: {
@@ -25,25 +25,25 @@ export default class AlertMessage extends ReactCSS.Component {
         }
       },
       "success": {
-        AlertMessage: {
+        Alert: {
           backgroundColor: Colors.success,
           border: "1px solid " + Color(Colors.success).darken(0.1).hexString()
         }
       },
       "info": {
-        AlertMessage: {
+        Alert: {
           backgroundColor: Colors.info,
           border: "1px solid " + Color(Colors.info).darken(0.1).hexString()
         }
       },
       "warning": {
-        AlertMessage: {
+        Alert: {
           backgroundColor: Colors.warning,
           border: "1px solid " + Color(Colors.warning).darken(0.1).hexString()
         }
       },
       "danger": {
-        AlertMessage: {
+        Alert: {
           backgroundColor: Colors.danger,
           border: "1px solid " + Color(Colors.danger).darken(0.1).hexString()
         }
@@ -104,7 +104,7 @@ export default class AlertMessage extends ReactCSS.Component {
 
   render () {
     return (
-        <div style={this.styles().AlertMessage}>
+        <div style={this.styles().Alert}>
             <div style={this.styles().AlertItem}>
                 {this.renderTitle()}
                 {this.renderDetails()}

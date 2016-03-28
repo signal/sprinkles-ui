@@ -3,7 +3,7 @@ jest.dontMock("../src/components/Form");
 jest.dontMock("../src/components/Button");
 jest.dontMock("../src/components/Field");
 jest.dontMock("../src/components/TextInput");
-jest.dontMock("../src/components/AlertMessage");
+jest.dontMock("../src/components/Alert");
 jest.dontMock("../src/components/Text");
 
 import React from "react";

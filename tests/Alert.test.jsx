@@ -1,5 +1,5 @@
 // don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/AlertMessage");
+jest.dontMock("../src/components/Alert");
 jest.dontMock("../src/components/Text");
 
 import React from "react";
@@ -9,12 +9,12 @@ import Color from "color";
 import { Colors } from "../src/shared/colors";
 
 // TODO: move this to es6 style import when its implemented in jest
-const AlertMessage = require("../src/components/AlertMessage").default;
+const Alert = require("../src/components/Alert").default;
 
 function testColor(messageType) {
   let colorToTest;
-  const alertMessageComponent = TestUtils.renderIntoDocument(
-      <AlertMessage
+  const alertComponent = TestUtils.renderIntoDocument(
+      <Alert
           details="Some description"
           type={messageType}
       />
@@ -33,35 +33,35 @@ function testColor(messageType) {
       colorToTest = Colors.danger;
     break;
   }
-  const alertMessageNode = ReactDOM.findDOMNode(alertMessageComponent);
-  expect(Color(alertMessageNode.style.backgroundColor).hexString()).toBe(colorToTest);
+  const alertNode = ReactDOM.findDOMNode(alertComponent);
+  expect(Color(alertNode.style.backgroundColor).hexString()).toBe(colorToTest);
 }
 
 describe("Alert Message", () => {
   it("Does render an info Alert Message with description", () => {
     const description = "An info message";
-    const alertMessageComponent = TestUtils.renderIntoDocument(
-        <AlertMessage
+    const alertComponent = TestUtils.renderIntoDocument(
+        <Alert
             details={description}
             type="info"
         />
     );
-    const detailsNode = ReactDOM.findDOMNode(alertMessageComponent.detailsRef);
+    const detailsNode = ReactDOM.findDOMNode(alertComponent.detailsRef);
     expect(detailsNode.textContent).toBe(description);
   });
 
   it("Does render an info Alert Message with description and title", () => {
     const description = "An info message";
     const title = "Info title"
-    const alertMessageComponent = TestUtils.renderIntoDocument(
-        <AlertMessage
+    const alertComponent = TestUtils.renderIntoDocument(
+        <Alert
             details={description}
             title={title}
             type="info"
         />
     );
-    const titleNode = ReactDOM.findDOMNode(alertMessageComponent.titleRef);
-    const detailsNode = ReactDOM.findDOMNode(alertMessageComponent.detailsRef);
+    const titleNode = ReactDOM.findDOMNode(alertComponent.titleRef);
+    const detailsNode = ReactDOM.findDOMNode(alertComponent.detailsRef);
     expect(detailsNode.textContent).toBe(description);
     expect(titleNode.textContent).toBe(title);
   });
