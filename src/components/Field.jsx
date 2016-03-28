@@ -33,10 +33,14 @@ export default class Field extends ReactCSS.Component {
     return {
       "default": {
         Label: {
-          margin: "10px 0",
           color: TextColors.dark
         },
         Error: {
+          margin: "10px 0"
+        }
+      },
+      "haveLabel": {
+        Label: {
           margin: "10px 0"
         }
       },
@@ -50,7 +54,8 @@ export default class Field extends ReactCSS.Component {
 
   styles () {
     return this.css({
-      "disabled": !this.props.enabled
+      "disabled": !this.props.enabled,
+      "haveLabel": !!this.props.label || this.props.required
     })
   }
 
@@ -94,15 +99,13 @@ export default class Field extends ReactCSS.Component {
           break;
       }
       return (
-          <span style={this.styles().Label}>
-              <Text
-                  color={color}
-                  fontSize={18}
-                  ref={c => this.labelRef = c}
-              >
-                  {this.props.label}
-              </Text>
-          </span>
+          <Text
+              color={color}
+              fontSize={18}
+              ref={c => this.labelRef = c}
+          >
+              {this.props.label}
+          </Text>
       );
     }
   }
@@ -143,7 +146,7 @@ export default class Field extends ReactCSS.Component {
   render () {
     return (
         <div style={this.props.style}>
-            <div>
+            <div style={this.styles().Label}>
                 {this.renderLabel()}{this.renderRequired()}
             </div>
             {this.renderInput()}
