@@ -1,6 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import { Colors } from "../shared/colors";
+import { Colors, TextColors } from "../shared/colors";
+import Color from "color";
 
 
 export default class TextInput extends ReactCSS.Component {
@@ -8,6 +9,7 @@ export default class TextInput extends ReactCSS.Component {
 
   static propTypes = {
     autoComplete: React.PropTypes.bool,
+    enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
@@ -16,6 +18,7 @@ export default class TextInput extends ReactCSS.Component {
 
   static defaultProps = {
     autoComplete: true,
+    enabled: true,
     initialValue: ""
   };
 
@@ -66,7 +69,8 @@ export default class TextInput extends ReactCSS.Component {
           width: "100%",
           border: "1px solid #ccc",
           borderRadius: 3,
-          outline: "none"
+          outline: "none",
+          color: TextColors.dark
         }
       },
       "focus": {
@@ -88,6 +92,12 @@ export default class TextInput extends ReactCSS.Component {
         TextInput: {
           boxShadow: "0 0 3px 1px " + Colors.danger
         }
+      },
+      "disabled": {
+        TextInput: {
+          color: Color(TextColors.dark).lighten(0.9).hexString(),
+          cursor: "not-allowed"
+        }
       }
     }
   }
@@ -97,7 +107,8 @@ export default class TextInput extends ReactCSS.Component {
       "focus": this.state.isFocused,
       "success": this.props.status === "success",
       "warning": this.props.status === "warning",
-      "error": this.props.status === "error"
+      "error": this.props.status === "error",
+      "disabled": !this.props.enabled
     })
   }
 
@@ -105,6 +116,7 @@ export default class TextInput extends ReactCSS.Component {
     return (
         <input
             autoComplete={this.props.autoComplete ? "on" : "off"}
+            disabled={this.props.enabled ? undefined : "disabled"}
             onBlur={this.handleBlur.bind(this)}
             onFocus={this.handleFocus.bind(this)}
             placeholder={this.props.placeholder}

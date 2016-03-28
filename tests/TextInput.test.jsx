@@ -199,4 +199,12 @@ describe("TextInput", () => {
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputNode.getAttribute("autocomplete")).toBe("off");
   });
+
+  it("Does render a disabled text input", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput enabled={false}/>
+    );
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+    expect(textInputNode.disabled).toBe(true);
+  });
 });
