@@ -15,12 +15,14 @@ export default class Form extends ReactCSS.Component {
     }),
     children: React.PropTypes.node,
     onSubmit: React.PropTypes.func,
-    submitButtonText: React.PropTypes.string
+    submitButtonText: React.PropTypes.string,
+    working: React.PropTypes.bool
   };
 
   static defaultProps = {
     onSubmit: () => {},
-    submitButtonText: "Submit"
+    submitButtonText: "Submit",
+    working: false
   };
 
   constructor() {
@@ -105,7 +107,8 @@ export default class Form extends ReactCSS.Component {
           if (inputRef) {
             this.inputRefs.set(i, inputRef);
           }
-        }
+        },
+        enabled: !this.props.working
       });
     });
   }
@@ -134,6 +137,8 @@ export default class Form extends ReactCSS.Component {
                 onClick={this.handleClick.bind(this)}
                 ref={c => this.submitButtonRef = c}
                 text={this.props.submitButtonText}
+                type={"primary"}
+                working={this.props.working}
             />
         </div>
     );

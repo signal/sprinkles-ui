@@ -15,12 +15,25 @@ describe("Form", function() {
 
   before(() => {
     function handleSubmit(submitData) {
-      console.log("submitData", submitData);
+      this.props({
+        alert: null,
+        working: true
+      });
+      setTimeout(() => {
+        this.props({
+          alert: {
+            type: "success",
+            title: "Woo Hoo!",
+            details: "You're logged in"
+          },
+          working: false
+        });
+      }, 2000);
     }
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
         <Form
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit.bind(this)}
             submitButtonText={"Login"}
         >
             <Field

@@ -280,4 +280,18 @@ describe("Form", () => {
     expect(formComponent.alertRef.props.details).toBe(details);
     expect(formComponent.alertRef.props.children).not.toBeUndefined();
   });
+
+  it("Does show a Form in working state", () => {
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form working={true}>
+            <Field>
+                <TextInput />
+            </Field>
+        </Form>
+    );
+    formComponent.inputRefs.forEach((input) => {
+        expect(input.inputRef.props.enabled).toBe(false);
+    });
+    expect(formComponent.submitButtonRef.props.working).toBe(true);
+  });
 });
