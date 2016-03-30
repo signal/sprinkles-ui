@@ -97,6 +97,52 @@ describe("Form", function() {
   it("Button Text: Login", () => this.props({submitButtonText: "Login"}));
   it("Set Working", () => this.props({working: true}));
   it("Clear Working", () => this.props({working: false}));
+  it("Simulate Server Error", () => {
+    UIHarness.component.invalidateFields([
+      {
+        fieldKey:"password",
+        validationError:"Server says this thing isn't cool"
+      }
+    ]);
+    this.props({alert: {
+      type: "danger",
+      title: "Please reset your password using the following criteria:",
+      children: <List onClick={() => console.log("List clicked")}>
+          <ListItem
+              padding="10px 0 5px 0"
+              showHoverEffect={false}
+          >
+              <Text
+                  color={"white"}
+                  fontSize={14}
+              >
+                  <Svg
+                      fill="#fff"
+                      height={5}
+                      padding="0 5px 2px 0"
+                      type="square"
+                      width={5}
+                  />{"At least 1 special character (e.g. ][?/<~!$#%)"}</Text>
+          </ListItem>
+          <ListItem
+              padding="0 0 15px 0"
+              showHoverEffect={false}
+          >
+              <Text
+                  color={"white"}
+                  fontSize={14}
+              >
+                  <Svg
+                      fill="#fff"
+                      height={5}
+                      padding="0 5px 2px 0"
+                      type="square"
+                      width={5}
+                  />{"At least 1 numeric character"}</Text>
+          </ListItem>
+      </List>
+    }});
+  });
 
   /**
    * Documentation (Markdown)
@@ -116,6 +162,9 @@ describe("Form", function() {
   - **onSubmit** *React.PropTypes.func* (optional) called when Form has been submitted
   - **submitButtonText** *React.PropTypes.string* (optional) set form submit button text
   - **working** *React.PropTypes.bool* (optional) disables user input and shows working state on submit button when set to true
-
+  - **invalidFields** *class function* invalidate Form fields with a fieldKey with a given message
+    - **arguments** a collection where each item has the following keys
+      - **fieldKey** *string* they field to apply the error
+      - **validationError** *string* the error message to apply to the field
   `);
 });

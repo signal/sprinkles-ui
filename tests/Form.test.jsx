@@ -294,4 +294,47 @@ describe("Form", () => {
     });
     expect(formComponent.submitButtonRef.props.working).toBe(true);
   });
+
+  it("Does set error on Field with fieldKey", () => {
+    const validationError = "Something on the server broke";
+    const fieldKey = "myField";
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form>
+            <Field fieldKey={fieldKey}/>
+        </Form>
+    );
+    formComponent.setState = jest.genMockFunction();
+    formComponent.invalidateFields([
+      {
+        fieldKey: fieldKey,
+        validationError: validationError
+      }
+    ]);
+    expect(formComponent.setState).toBeCalledWith({
+      inputValidations: {
+        0: {
+          valid: false,
+          validationError: validationError
+        }
+      }
+    });
+  });
+
+  it("Does not set error when fieldKey does not exist", () => {
+    const validationError = "Something on the server broke";
+    const fieldKey = "myField";
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form>
+            <Field fieldKey={fieldKey}/>
+        </Form>
+    );
+    formComponent.setState = jest.genMockFunction();
+    formComponent.invalidateFields([
+      {
+        fieldKey: "invalidKey",
+        validationError: validationError
+      }
+    ]);
+    expect(formComponent.setState).not.toBeCalled();
+  });
 });

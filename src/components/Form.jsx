@@ -58,15 +58,18 @@ export default class Form extends ReactCSS.Component {
     }
     let newInputStatuses = {};
     this.inputRefs.forEach((input, i) => {
-      let valid = this.state.inputValidations[i].valid;
-      let validationError = this.state.inputValidations[i].validationError;
-      if (i === inputRef.props.fieldId) {
-        valid = true;
-        validationError = "";
-      }
-      newInputStatuses[i] = {
-        valid: valid,
-        validationError: validationError
+      const inputValidation = this.state.inputValidations[i];
+      if (inputValidation) {
+        let valid = inputValidation.valid;
+        let validationError = inputValidation.validationError;
+        if (i === inputRef.props.fieldId) {
+          valid = true;
+          validationError = "";
+        }
+        newInputStatuses[i] = {
+          valid: valid,
+          validationError: validationError
+        }
       }
     });
     this.setState({
@@ -92,6 +95,29 @@ export default class Form extends ReactCSS.Component {
       inputValidations: newInputStatuses
     });
     return formIsValid;
+  }
+
+  invalidateFields (invalidFields) {
+    let invalidationMap = {};
+    let newInputStatuses = {};
+    invalidFields.forEach((invalidation) => {
+      invalidationMap[invalidation.fieldKey] = invalidation.validationError;
+    });
+    this.inputRefs.forEach((input, i) => {
+      const fieldKey = input.props.fieldKey;
+      if (invalidationMap[fieldKey]) {
+        newInputStatuses[i] = {
+          valid: false,
+          validationError: invalidationMap[fieldKey]
+        };
+      }
+    });
+    if (Object.keys(newInputStatuses).length === 0) {
+      return;
+    }
+    this.setState({
+      inputValidations: newInputStatuses
+    });
   }
 
   renderFields () {
