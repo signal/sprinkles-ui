@@ -1,0 +1,71 @@
+import React from "react";
+import loremIpsum from "lorem-ipsum";
+import VectorGraphic from "../../src/components/VectorGraphic";
+
+
+describe("VectorGraphic", function() {
+  this.header(`## VectorGraphic`); // Markdown.
+
+  this.loadSvg = (props) => {
+    this.unload();
+    this.load(
+        <VectorGraphic>{props.children}</VectorGraphic>
+    )
+  }
+
+  before(() => {
+    // Runs when the Suite loads.  Use this to host your component-under-test.
+    this.loadSvg({
+      children:
+          <circle
+              cx="5"
+              cy="5"
+              fill="red"
+              r="5"
+          ></circle>
+    });
+  });
+
+  it("Black Square", () => this.loadSvg({
+    children:
+        <g
+            fill="none"
+            fill-rule="evenodd"
+            stroke="none"
+            strokeWidth="1"
+        >
+            <rect
+                fill="black"
+                height="10"
+                width="10"
+                x="0"
+                y="0"
+            ></rect>
+        </g>
+  }));
+
+  it("Red Circle", () => this.loadSvg({
+    children:
+        <circle
+            cx="5"
+            cy="5"
+            fill="red"
+            r="5"
+        ></circle>
+    }));
+
+
+  /**
+   * Documentation (Markdown)
+   */
+  this.footer(`
+  ### Text
+
+  A component for rendering SVG
+
+  #### API
+
+  - coming soon
+
+  `);
+});

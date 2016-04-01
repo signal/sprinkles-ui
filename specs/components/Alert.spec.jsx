@@ -3,7 +3,6 @@ import Alert from "../../src/components/Alert";
 import List from "../../src/components/List";
 import ListItem from "../../src/components/ListItem";
 import Text from "../../src/components/Text";
-import Svg from "../../src/components/SVG";
 
 describe("Alert", function() {
   this.header(`## Alert Message`); // Markdown.
@@ -87,13 +86,8 @@ describe("Alert", function() {
                   color={"white"}
                   fontSize={14}
               >
-                  <Svg
-                      fill="#fff"
-                      height={5}
-                      padding="0 5px 2px 0"
-                      type="square"
-                      width={5}
-                  />{"At least 1 special character (e.g. ][?/<~!$#%)"}</Text>
+                {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
+              </Text>
           </ListItem>
           <ListItem
               padding="0 0 15px 0"
@@ -103,13 +97,8 @@ describe("Alert", function() {
                   color={"white"}
                   fontSize={14}
               >
-                  <Svg
-                      fill="#fff"
-                      height={5}
-                      padding="0 5px 2px 0"
-                      type="square"
-                      width={5}
-                  />{"At least 1 numeric character"}</Text>
+                  {"◼︎ At least 1 numeric character"}
+              </Text>
           </ListItem>
       </List>
   }));
