@@ -65,7 +65,9 @@ describe("VectorGraphic", function() {
 
   #### API
 
-  - coming soon
+  - **chilren** *React.PropTypes.number* (optional) the SVG data to render
+  - **height** *React.PropTypes.number* (optional) the SVG canvas height
+  - **width** *React.PropTypes.number* (optional) the SVG canvas width
 
   `);
 });
