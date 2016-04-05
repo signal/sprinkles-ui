@@ -59,7 +59,7 @@ describe("VectorGraphic", function() {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Text
+  ### Vector Graphic
 
   A component for rendering SVG
 

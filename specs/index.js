@@ -22,4 +22,5 @@ describe("Sprinkles UI", function() {
   require("./components/Form.spec");
   require("./components/Button.spec");
   require("./components/VectorGraphic.spec");
+  require("./components/Version.spec");
 });
