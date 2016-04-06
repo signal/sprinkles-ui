@@ -3,10 +3,13 @@ var webpack = require("webpack");
 
 // sample config file, not production ready
 module.exports = {
-  entry: "./src/sprinkles.jsx",
+  entry: "./src/sprinklesClientBundle.jsx",
   output: {
     path: path.join(__dirname, "build"),
     filename: "build.js"
+  },
+  resolve: {
+    extensions: ["", ".js", ".jsx"]
   },
   module: {
     loaders: [
@@ -19,5 +22,5 @@ module.exports = {
         }
       }
     ]
-  },
+  }
 };

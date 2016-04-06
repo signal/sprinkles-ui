@@ -1,17 +1,19 @@
 {
   "name": "sprinkles-ui",
-  "version": "0.0.1",
+  "version": "0.0.1beta18",
   "description": "A portable, customizable set of UI components",
-  "main": "index.js",
+  "main": "./lib/Sprinkles.js",
   "scripts": {
-    "git:precommit": "npm test",
-    "install:precommithook": "if [ ! -f .git/hooks/pre-commit ]; then echo 'cd ../sprinkles-ui && npm run git:precommit' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit; fi",
     "lint": "eslint src/** specs/** tests/** src/**/*.jsx specs/**/*.jsx tests/**/*.jsx",
-    "postinstall": "npm run -s install:precommithook",
     "start": "node ./node_modules/ui-harness/start --entry=./specs",
     "test": "npm run lint && jest",
     "test:watch": "node_modules/nodemon/bin/nodemon.js -w tests -w ./src -w ./specs -e js,jsx -x npm test",
-    "build": "node_modules/webpack/bin/webpack.js --progress --colors"
+    "build": "babel ./src --ignore *.spec.js --out-dir ./lib",
+    "bundle": "node_modules/webpack/bin/webpack.js --progress --colors",
+    "prepublish": "npm run build",
+    "postinstall": "if [ -d .git/hooks/ ]; then npm run -s install:precommithook; fi",
+    "install:precommithook": "if [ ! -f .git/hooks/pre-commit ]; then echo 'cd ../sprinkles-ui && npm run git:precommit' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit; fi",
+    "git:precommit": "npm test"
   },
   "keywords": [],
   "author": "Harrison Harnisch <hharnisch@signal.co>",
@@ -40,6 +42,10 @@
     "webpack": "^1.12.15",
     "nodemon": "^1.9.1"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
   "jest": {
     "testDirectoryName": "tests",
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
