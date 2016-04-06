@@ -16,3 +16,8 @@ export const TextColors = {
   dark: "#4F4F4F",
   light:"#F5F5F5"
 };
+
+export const BackgroundColors = {
+  dark: "#4F4F4F",
+  light:"#F5F5F5"
+}
