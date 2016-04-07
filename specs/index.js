@@ -23,4 +23,5 @@ describe("Sprinkles UI", function() {
   require("./components/Button.spec");
   require("./components/VectorGraphic.spec");
   require("./components/Version.spec");
+  require("./components/RadioButtonInput.spec");
 });
