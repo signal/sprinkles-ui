@@ -207,4 +207,30 @@ describe("TextInput", () => {
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputNode.disabled).toBe(true);
   });
+
+  it("Does render a TextInput with a bound value", () => {
+    const boundValue = "howdy";
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput boundValue={boundValue}/>
+    );
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+    expect(textInputNode.getAttribute("value")).toBe(boundValue);
+    TestUtils.Simulate.change(textInputNode, {target:{value: ""}});
+    expect(textInputNode.getAttribute("value")).toBe(boundValue);
+  });
+
+  it("Does trigger onChange event on boundInput", () => {
+    const boundValue = "howdy";
+    const changedText = "hi";
+    const mockHandleChange = jest.genMockFunction();
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
+            boundValue={boundValue}
+            onChange={mockHandleChange}
+        />
+    );
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+    TestUtils.Simulate.change(textInputNode, {target:{value: changedText}});
+    expect(mockHandleChange).toBeCalledWith(changedText);
+  });
 });

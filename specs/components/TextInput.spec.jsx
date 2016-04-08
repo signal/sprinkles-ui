@@ -50,6 +50,7 @@ describe("TextInput", function() {
   #### API
 
   - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
+  - **boundValue** *React.PropTypes.string* (optional) bound value of the text box, value is managed outside of the component
   - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
   - **initialValue** *React.PropTypes.string* (optional) initial value of the text box
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes

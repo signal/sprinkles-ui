@@ -9,6 +9,7 @@ export default class TextInput extends ReactCSS.Component {
 
   static propTypes = {
     autoComplete: React.PropTypes.bool,
+    boundValue: React.PropTypes.string,
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
     onChange: React.PropTypes.func,
@@ -19,7 +20,8 @@ export default class TextInput extends ReactCSS.Component {
   static defaultProps = {
     autoComplete: true,
     enabled: true,
-    initialValue: ""
+    initialValue: "",
+    onChange: () => {}
   };
 
   constructor(props) {
@@ -44,9 +46,7 @@ export default class TextInput extends ReactCSS.Component {
     return {
       value: this.state.value,
       requestChange: (newValue) => {
-        if (this.props.onChange) {
-          this.props.onChange(newValue);
-        }
+        this.props.onChange(newValue);
         this.setState({value: newValue})
       }
     };
@@ -58,6 +58,10 @@ export default class TextInput extends ReactCSS.Component {
 
   handleBlur () {
     this.setState({isFocused: false});
+  }
+
+  handleChange (changeEvent) {
+    this.props.onChange(changeEvent.target.value);
   }
 
   classes () {
@@ -118,10 +122,12 @@ export default class TextInput extends ReactCSS.Component {
             autoComplete={this.props.autoComplete ? "on" : "off"}
             disabled={this.props.enabled ? undefined : "disabled"}
             onBlur={this.handleBlur.bind(this)}
+            onChange={this.props.boundValue ? this.handleChange.bind(this) : undefined}
             onFocus={this.handleFocus.bind(this)}
             placeholder={this.props.placeholder}
             style={this.styles().TextInput}
-            valueLink={this.linkState()}
+            value={this.props.boundValue ? this.props.boundValue : undefined}
+            valueLink={!this.props.boundValue ? this.linkState() : undefined}
         />
     );
   }
