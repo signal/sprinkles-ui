@@ -23,6 +23,15 @@ describe("KeyValueInput", function() {
     ).width(600);
   });
 
+  it("Key Label: My Key Label", () => this.props({keyLabel: "My Key Label"}));
+  it("Key Label: Key", () => this.props({keyLabel: undefined}));
+  it("Value Label: My Value Label", () => this.props({valueLabel: "My Value Label"}));
+  it("Value Label: Value", () => this.props({valueLabel: undefined}));
+  it("Add Button: My Add Button", () => this.props({addButtonText: "My Add Button"}));
+  it("Add Button: Add", () => this.props({addButtonText: undefined}));
+  it("Disable", () => this.props({enabled: false}));
+  it("Enable", () => this.props({enabled: true}));
+
   /**
    * Documentation (Markdown)
    */

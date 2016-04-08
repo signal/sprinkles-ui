@@ -77,7 +77,7 @@ export default class Button extends ReactCSS.Component {
           border: "1px solid " + veryDarkened,
           borderRadius: "3px",
           color: TextColors.dark,
-          padding: "5px 25px",
+          padding: "5px 15px",
           outline: "none"
         }
       },

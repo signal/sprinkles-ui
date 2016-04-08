@@ -116,18 +116,22 @@ export default class TextInput extends ReactCSS.Component {
     })
   }
 
+  isBound () {
+    return this.props.boundValue !== undefined;
+  }
+
   render () {
     return (
         <input
             autoComplete={this.props.autoComplete ? "on" : "off"}
             disabled={this.props.enabled ? undefined : "disabled"}
             onBlur={this.handleBlur.bind(this)}
-            onChange={this.props.boundValue ? this.handleChange.bind(this) : undefined}
+            onChange={this.isBound() ? this.handleChange.bind(this) : undefined}
             onFocus={this.handleFocus.bind(this)}
             placeholder={this.props.placeholder}
             style={this.styles().TextInput}
-            value={this.props.boundValue ? this.props.boundValue : undefined}
-            valueLink={!this.props.boundValue ? this.linkState() : undefined}
+            value={this.isBound() ? this.props.boundValue : undefined}
+            valueLink={!this.isBound() ? this.linkState() : undefined}
         />
     );
   }
