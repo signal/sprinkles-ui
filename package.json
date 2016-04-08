@@ -16,10 +16,11 @@
   "author": "Harrison Harnisch <hharnisch@signal.co>",
   "license": "MIT",
   "dependencies": {
+    "color": "^0.11.1",
+    "immutable": "^3.7.6",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "reactcss": "^0.4.3",
-    "color": "^0.11.1"
+    "reactcss": "^0.4.3"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",
@@ -45,7 +46,8 @@
       "react-addons-test-utils",
       "fbjs",
       "reactcss",
-      "color"
+      "color",
+      "immutable"
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>/node_modules/"
