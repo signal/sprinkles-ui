@@ -13,6 +13,10 @@ describe("Form", function() {
   this.header(`## Form`); // Markdown.
 
   before(() => {
+    function handleChange(formData) {
+      console.log("formData", formData);
+    }
+
     function handleSubmit(submitData) {
       this.props({
         alert: null,
@@ -32,6 +36,7 @@ describe("Form", function() {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
         <Form
+            onChange={handleChange}
             onSubmit={handleSubmit.bind(this)}
             submitButtonText={"Login"}
         >

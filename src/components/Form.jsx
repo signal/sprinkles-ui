@@ -14,12 +14,14 @@ export default class Form extends ReactCSS.Component {
       children: React.PropTypes.node
     }),
     children: React.PropTypes.node,
+    onChange: React.PropTypes.func,
     onSubmit: React.PropTypes.func,
     submitButtonText: React.PropTypes.string,
     working: React.PropTypes.bool
   };
 
   static defaultProps = {
+    onChange: () => {},
     onSubmit: () => {},
     submitButtonText: "Submit",
     working: false
@@ -42,17 +44,22 @@ export default class Form extends ReactCSS.Component {
     };
   }
 
+  currentValues () {
+    let submitData = {};
+    this.inputRefs.forEach((input) => {
+      submitData[input.props.fieldKey] = input.inputRef.state.value;
+    });
+    return submitData;
+  }
+
   handleClick (e) {
     if (this.validate()) {
-      let submitData = {};
-      this.inputRefs.forEach((input) => {
-        submitData[input.props.fieldKey] = input.inputRef.state.value;
-      });
-      this.props.onSubmit(submitData);
+      this.props.onSubmit(this.currentValues());
     }
   }
 
   handleChange (change, inputRef) {
+    this.props.onChange(this.currentValues());
     if (!Object.keys(this.state.inputValidations).length) {
       return;
     }

@@ -169,6 +169,7 @@ describe("Form", () => {
         }
       }
     };
+    formComponent.currentValues = jest.genMockFunction();
     formComponent.inputRefs.forEach = jest.genMockFunction()
     .mockImplementation((cb) => {
       cb(fakeInput, fieldId);
@@ -336,5 +337,30 @@ describe("Form", () => {
       }
     ]);
     expect(formComponent.setState).not.toBeCalled();
+  });
+
+  it("Does trigger onChange event when any form field changes", () => {
+    const mockHandleChange = jest.genMockFunction();
+    const changedText = "changed a";
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form onChange={mockHandleChange}>
+            <Field
+                fieldKey={"a"}
+            >
+                <TextInput initialValue={"init a"}/>
+            </Field>
+            <Field
+                fieldKey={"b"}
+            >
+                <TextInput initialValue={"init b"}/>
+            </Field>
+        </Form>
+    );
+    const textInputNode = ReactDOM.findDOMNode(formComponent.inputRefs.get(0).inputRef);
+    TestUtils.Simulate.change(textInputNode, {target:{value: changedText}});
+    expect(mockHandleChange).toBeCalledWith({
+      a: changedText,
+      b: "init b"
+    })
   });
 });

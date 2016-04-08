@@ -46,8 +46,9 @@ export default class TextInput extends ReactCSS.Component {
     return {
       value: this.state.value,
       requestChange: (newValue) => {
-        this.props.onChange(newValue);
-        this.setState({value: newValue})
+        this.setState({value: newValue}, () => {
+          this.props.onChange(newValue);
+        });
       }
     };
   }
