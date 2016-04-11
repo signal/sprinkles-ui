@@ -13,7 +13,7 @@ export default class Field extends ReactCSS.Component {
     children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
     error: React.PropTypes.string,
-    fieldKey: React.PropTypes.string,
+    fieldKey: React.PropTypes.string.isRequired,
     label: React.PropTypes.string,
     onChange: React.PropTypes.func,
     required: React.PropTypes.bool,

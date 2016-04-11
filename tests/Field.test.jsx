@@ -21,7 +21,7 @@ describe("Field", () => {
 
     // Render an Field
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field />
+        <Field fieldKey={"key"}/>
     );
 
     // grab the DOM node so we can inspect it
@@ -36,7 +36,10 @@ describe("Field", () => {
 
     // Render an Field
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field label={text}/>
+        <Field
+            fieldKey={"key"}
+            label={text}
+        />
     );
 
     // grab the DOM node so we can inspect it
@@ -51,6 +54,7 @@ describe("Field", () => {
     // Render an Field
     const fieldComponent = TestUtils.renderIntoDocument(
         <Field
+            fieldKey={"key"}
             label={text}
             status={"error"}
         >
@@ -72,6 +76,7 @@ describe("Field", () => {
     // Render an Field
     const fieldComponent = TestUtils.renderIntoDocument(
         <Field
+            fieldKey={"key"}
             label={text}
             status={"warning"}
         >
@@ -93,6 +98,7 @@ describe("Field", () => {
     // Render an Field
     const fieldComponent = TestUtils.renderIntoDocument(
         <Field
+            fieldKey={"key"}
             label={text}
             status={"success"}
         >
@@ -112,7 +118,10 @@ describe("Field", () => {
     const errMessage = "Some error occured";
 
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field error={errMessage} />
+        <Field
+            error={errMessage}
+            fieldKey={"key"}
+        />
     );
 
     const errorNode = ReactDOM.findDOMNode(fieldComponent.errorRef);
@@ -122,7 +131,7 @@ describe("Field", () => {
 
   it("Does validate a Field with input missing isValid function", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field/>
+        <Field fieldKey={"key"}/>
     );
 
     expect(fieldComponent.validate()).toEqual({
@@ -135,7 +144,10 @@ describe("Field", () => {
 
   it("Does render a required Field", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field required={true}/>
+        <Field
+            fieldKey={"key"}
+            required={true}
+        />
     );
 
     const requiredNode = ReactDOM.findDOMNode(fieldComponent.requiredRef);
@@ -147,6 +159,7 @@ describe("Field", () => {
   it("Does validate a required Field with valid input as valid", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
         <Field
+            fieldKey={"key"}
             required={true}
         >
             <TextInput initialValue={"a"} />
@@ -164,6 +177,7 @@ describe("Field", () => {
   it("Does validate a required Field with invalid input as invalid", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
         <Field
+            fieldKey={"key"}
             required={true}
         >
             <TextInput initialValue={""} />
@@ -181,6 +195,7 @@ describe("Field", () => {
   it("Does validate an optional Field with valid input as valid", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
         <Field
+            fieldKey={"key"}
             required={false}
         >
             <TextInput initialValue={"a"} />
@@ -199,6 +214,7 @@ describe("Field", () => {
   it("Does validate an optional Field with invalid input as valid", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
         <Field
+            fieldKey={"key"}
             required={false}
         >
             <TextInput initialValue={""} />
@@ -217,7 +233,10 @@ describe("Field", () => {
     const change = "changed value";
     let mockHandleChange = jest.genMockFunction();
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field onChange={mockHandleChange}>
+        <Field
+            fieldKey={"key"}
+            onChange={mockHandleChange}
+        >
             <TextInput />
         </Field>
     );
@@ -230,7 +249,10 @@ describe("Field", () => {
 
   it("Does render a disabled Field", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
-        <Field enabled={false}>
+        <Field
+            enabled={false}
+            fieldKey={"key"}
+        >
             <TextInput />
         </Field>
     );
