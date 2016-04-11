@@ -111,6 +111,7 @@ export default class Form extends ReactCSS.Component {
   }
 
   renderFields () {
+    this.inputRefs = Map();
     return React.Children.map(this.props.children, (child) => {
       if (child) {
         const inputValidation = this.state.inputValidations.get(child.props.fieldKey) || Map();
@@ -139,10 +140,6 @@ export default class Form extends ReactCSS.Component {
           />
       )
     }
-  }
-
-  componentWillMount () {
-    this.inputRefs = Map();
   }
 
   render () {
