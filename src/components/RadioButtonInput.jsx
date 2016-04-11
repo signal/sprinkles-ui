@@ -44,9 +44,13 @@ export default class RadioButtonInput extends ReactCSS.Component {
   validate () {
     return {
       valid: true,
-      isInitialValue: this.state.value === this.initialValue(this.props),
+      isInitialValue: this.value() === this.initialValue(this.props),
       validationError: ""
     }
+  }
+
+  value () {
+    return this.state.value;
   }
 
   classes () {
@@ -80,7 +84,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
   }
 
   handleClick (newValue) {
-    if (this.props.enabled && newValue !== this.state.value) {
+    if (this.props.enabled && newValue !== this.value()) {
       this.setState({
         value: newValue
       });
@@ -118,7 +122,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
               style={i === this.props.items.length -1 ? {} : this.styles().RadioItem}
           >
               <input
-                  checked={item.value === this.state.value}
+                  checked={item.value === this.value()}
                   disabled={!this.props.enabled}
                   key={i}
                   name={item.name}

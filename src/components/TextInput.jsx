@@ -33,8 +33,8 @@ export default class TextInput extends ReactCSS.Component {
   }
 
   validate () {
-    const isEmpty = this.state.value === "";
-    const isInitialValue = this.state.value === this.props.initialValue;
+    const isEmpty = this.value() === "";
+    const isInitialValue = this.value() === this.props.initialValue;
     return {
       valid: !isEmpty,
       isInitialValue: isInitialValue,
@@ -42,9 +42,13 @@ export default class TextInput extends ReactCSS.Component {
     }
   }
 
+  value () {
+    return this.state.value;
+  }
+
   linkState () {
     return {
-      value: this.state.value,
+      value: this.value(),
       requestChange: (newValue) => {
         this.setState({value: newValue}, () => {
           this.props.onChange(newValue);

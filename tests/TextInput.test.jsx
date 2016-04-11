@@ -233,4 +233,14 @@ describe("TextInput", () => {
     TestUtils.Simulate.change(textInputNode, {target:{value: changedText}});
     expect(mockHandleChange).toBeCalledWith(changedText);
   });
+
+  it("Does return the expected initial value", () => {
+    const value = "value";
+    const textInputComponent = TestUtils.renderIntoDocument(
+        <TextInput
+            initialValue={value}
+        />
+    );
+    expect(textInputComponent.value()).toBe(value);
+  });
 });

@@ -64,6 +64,10 @@ export default class KeyValueInput extends ReactCSS.Component {
     };
   }
 
+  value () {
+    return this.state.value.toJS();
+  }
+
   validate () {
     const valid = !this.state.value.find((item, i) => {
       if (!item.get("key") || !item.get("value")) {
@@ -84,24 +88,21 @@ export default class KeyValueInput extends ReactCSS.Component {
     }));
     this.setState({
       value: newStateValue
-    });
-    this.props.onChange(newStateValue.toJS());
+    }, () => this.props.onChange(this.value()));
   }
 
   handleDeleteClick (i) {
     const newStateValue = this.state.value.delete(i);
     this.setState({
       value: this.state.value.delete(i)
-    });
-    this.props.onChange(newStateValue.toJS());
+    }, () => this.props.onChange(this.value()));
   }
 
   handleChange (i, type, newValue) {
     const newStateValue = this.state.value.set(i, this.state.value.get(i).set(type, newValue));
     this.setState({
       value: newStateValue
-    });
-    this.props.onChange(newStateValue.toJS());
+    }, () => this.props.onChange(this.value()));
   }
 
   renderKeyValueLabels () {

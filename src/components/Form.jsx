@@ -47,7 +47,7 @@ export default class Form extends ReactCSS.Component {
   currentValues () {
     let submitData = {};
     this.inputRefs.forEach((input) => {
-      submitData[input.props.fieldKey] = input.inputRef.state.value;
+      submitData[input.props.fieldKey] = input.inputRef.value();
     });
     return submitData;
   }
