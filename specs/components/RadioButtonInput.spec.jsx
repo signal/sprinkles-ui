@@ -26,6 +26,7 @@ describe("RadioButtonInput", function() {
     );
   });
 
+  it("Value (output on console)", () => console.log("Current Value: ", UIHarness.component.value()));
   it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.validate()));
   it("Disable", () => this.props({enabled: false}));
   it("Enable", () => this.props({enabled: true}));

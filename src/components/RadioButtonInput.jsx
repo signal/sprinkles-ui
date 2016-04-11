@@ -87,8 +87,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
     if (this.props.enabled && newValue !== this.value()) {
       this.setState({
         value: newValue
-      });
-      this.props.onChange(newValue);
+      }, () => this.props.onChange(this.value()));
     }
   }
 
