@@ -44,7 +44,7 @@ export default class Form extends ReactCSS.Component {
     };
   }
 
-  currentValues () {
+  value () {
     let submitData = {};
     this.inputRefs.forEach((input) => {
       submitData[input.props.fieldKey] = input.inputRef.value();
@@ -54,12 +54,12 @@ export default class Form extends ReactCSS.Component {
 
   handleClick (e) {
     if (this.validate()) {
-      this.props.onSubmit(this.currentValues());
+      this.props.onSubmit(this.value());
     }
   }
 
   handleChange (change, inputRef) {
-    this.props.onChange(this.currentValues());
+    this.props.onChange(this.value());
     if (!Object.keys(this.state.inputValidations).length) {
       return;
     }

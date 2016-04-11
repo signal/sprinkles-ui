@@ -169,7 +169,7 @@ describe("Form", () => {
         }
       }
     };
-    formComponent.currentValues = jest.genMockFunction();
+    formComponent.value = jest.genMockFunction();
     formComponent.inputRefs.forEach = jest.genMockFunction()
     .mockImplementation((cb) => {
       cb(fakeInput, fieldId);
