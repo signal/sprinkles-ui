@@ -10,6 +10,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 
+import Immutable from "immutable";
+
 // TODO: move this to es6 style import when its implemented in jest
 const Form = require("../src/components/Form").default;
 const Field = require("../src/components/Field").default;
@@ -67,6 +69,9 @@ describe("Form", () => {
         <Form />
     );
     const fakeInput = {
+      props: {
+        fieldKey: "key"
+      },
       validate: () => {
         return {
           valid: true,
@@ -78,16 +83,14 @@ describe("Form", () => {
     };
     formComponent.inputRefs.forEach = jest.genMockFunction()
     .mockImplementation((cb) => {
-      cb(fakeInput, 0)
+      cb(fakeInput)
     });
     formComponent.setState = jest.genMockFunction();
     formComponent.validate();
-    expect(formComponent.setState).toBeCalledWith({
-      inputValidations: {
-        0: {
-          valid: true,
-          validationError: ""
-        }
+    expect(formComponent.setState.mock.calls[0][0].inputValidations.toJS()).toEqual({
+      key: {
+        valid: true,
+        validationError: ""
       }
     });
   });
@@ -98,6 +101,9 @@ describe("Form", () => {
         <Form />
     );
     const fakeInput = {
+      props: {
+        fieldKey: "key"
+      },
       validate: () => {
         return {
           valid: false,
@@ -109,16 +115,14 @@ describe("Form", () => {
     };
     formComponent.inputRefs.forEach = jest.genMockFunction()
     .mockImplementation((cb) => {
-      cb(fakeInput, 0)
+      cb(fakeInput)
     });
     formComponent.setState = jest.genMockFunction();
     formComponent.validate();
-    expect(formComponent.setState).toBeCalledWith({
-      inputValidations: {
-        0: {
-          valid: false,
-          validationError: validationError
-        }
+    expect(formComponent.setState.mock.calls[0][0].inputValidations.toJS()).toEqual({
+      key: {
+        valid: false,
+        validationError: validationError
       }
     });
   });
@@ -129,6 +133,9 @@ describe("Form", () => {
         <Form />
     );
     const fakeInput = {
+      props: {
+        fieldKey: "key"
+      },
       validate: () => {
         return {
           valid: false,
@@ -140,61 +147,43 @@ describe("Form", () => {
     };
     formComponent.inputRefs.forEach = jest.genMockFunction()
     .mockImplementation((cb) => {
-      cb(fakeInput, 0)
+      cb(fakeInput)
     });
     formComponent.setState = jest.genMockFunction();
     formComponent.validate();
-    expect(formComponent.setState).toBeCalledWith({
-      inputValidations: {
-        0: {
-          valid: true,
-          validationError: ""
-        }
+    expect(formComponent.setState.mock.calls[0][0].inputValidations.toJS()).toEqual({
+      key: {
+        valid: true,
+        validationError: ""
       }
     });
   });
 
   it("Does update Form state in Field change handler", () => {
-    const fieldId = 0;
+    // const fieldId = 0;
     const formComponent = TestUtils.renderIntoDocument(
-        <Form />
+        <Form/>
     );
-    const fakeInput = {
-      validate: () => {
-        return {
-          valid: false,
-          required: false,
-          isInitialValue: true,
-          validationError: validationError
-        }
+    const inputValidations = Immutable.fromJS({
+      "key": {
+        valid: false,
+        validationError: "Some Validation Error"
       }
-    };
+    });
     formComponent.value = jest.genMockFunction();
-    formComponent.inputRefs.forEach = jest.genMockFunction()
-    .mockImplementation((cb) => {
-      cb(fakeInput, fieldId);
-    });
-    formComponent.setState({
-      isValid: false,
-      inputValidations: {
-        0: { // fieldId
-          valid: false,
-          validationError: "some error"
-        }
-      }
-    });
+    formComponent.state = {
+      inputValidations: inputValidations
+    };
     formComponent.setState = jest.genMockFunction();
     formComponent.handleChange("", {
       props: {
-        fieldId: fieldId
+        fieldKey: "key"
       }
-    })
-    expect(formComponent.setState).toBeCalledWith({
-      inputValidations: {
-        0: {
-          valid: true,
-          validationError: ""
-        }
+    });
+    expect(formComponent.setState.mock.calls[0][0].inputValidations.toJS()).toEqual({
+      key: {
+        valid: true,
+        validationError: ""
       }
     });
   });
@@ -203,6 +192,7 @@ describe("Form", () => {
     const formComponent = TestUtils.renderIntoDocument(
         <Form>
             <Field
+                fieldKey={"key"}
                 required={true}
             >
                 <TextInput />
@@ -210,28 +200,13 @@ describe("Form", () => {
         </Form>
     );
     formComponent.validate();
-    const fieldComponent = formComponent.inputRefs.get(0);
+    const fieldComponent = formComponent.inputRefs.get("key");
     expect(fieldComponent.props.status).toBe("error");
     expect(fieldComponent.props.error).toBe("Field Must Not Be Empty");
     const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
     TestUtils.Simulate.change(textInputNode, {target:{value: ""}});
     expect(fieldComponent.props.status).toBe(undefined);
     expect(fieldComponent.props.error).toBe("");
-  });
-
-  it("Does not update state when a Field is changed before being validated", () => {
-    const formComponent = TestUtils.renderIntoDocument(
-        <Form>
-            <Field
-                required={true}
-            >
-                <TextInput />
-            </Field>
-        </Form>
-    );
-    formComponent.setState = jest.genMockFunction();
-    formComponent.handleChange("", {});
-    expect(formComponent.setState).not.toBeCalled();
   });
 
   it("Does return Field data when submit button is clicked", () => {
@@ -311,12 +286,10 @@ describe("Form", () => {
         validationError: validationError
       }
     ]);
-    expect(formComponent.setState).toBeCalledWith({
-      inputValidations: {
-        0: {
-          valid: false,
-          validationError: validationError
-        }
+    expect(formComponent.setState.mock.calls[0][0].inputValidations.toJS()).toEqual({
+      myField: {
+        valid: false,
+        validationError: validationError
       }
     });
   });
@@ -356,11 +329,33 @@ describe("Form", () => {
             </Field>
         </Form>
     );
-    const textInputNode = ReactDOM.findDOMNode(formComponent.inputRefs.get(0).inputRef);
+    const textInputNode = ReactDOM.findDOMNode(formComponent.inputRefs.get("a").inputRef);
     TestUtils.Simulate.change(textInputNode, {target:{value: changedText}});
     expect(mockHandleChange).toBeCalledWith({
       a: changedText,
       b: "init b"
-    })
+    });
+  });
+
+  it("Does skip rendering empty fields", () => {
+    const formComponent = TestUtils.renderIntoDocument(
+        <Form>
+            <Field
+                fieldKey={"a"}
+            >
+                <TextInput initialValue={"init a"}/>
+            </Field>
+            {undefined}
+            <Field
+                fieldKey={"b"}
+            >
+                <TextInput initialValue={"init b"}/>
+            </Field>
+        </Form>
+    );
+    expect(formComponent.value()).toEqual({
+      a: "init a",
+      b: "init b"
+    });
   });
 });

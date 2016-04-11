@@ -2,6 +2,7 @@ import React from "react";
 import ReactCSS from "reactcss";
 import Button from "./Button";
 import Alert from "./Alert";
+import { Map } from "immutable";
 
 export default class Form extends ReactCSS.Component {
   displayName = "Form";
@@ -30,7 +31,7 @@ export default class Form extends ReactCSS.Component {
   constructor() {
     super();
     this.state = {
-      inputValidations: {}
+      inputValidations: Map()
     }
   }
 
@@ -60,89 +61,72 @@ export default class Form extends ReactCSS.Component {
 
   handleChange (change, inputRef) {
     this.props.onChange(this.value());
-    if (!Object.keys(this.state.inputValidations).length) {
-      return;
-    }
-    let newInputStatuses = {};
-    this.inputRefs.forEach((input, i) => {
-      const inputValidation = this.state.inputValidations[i];
-      if (inputValidation) {
-        let valid = inputValidation.valid;
-        let validationError = inputValidation.validationError;
-        if (i === inputRef.props.fieldId) {
-          valid = true;
-          validationError = "";
-        }
-        newInputStatuses[i] = {
-          valid: valid,
-          validationError: validationError
-        }
-      }
-    });
     this.setState({
-      inputValidations: newInputStatuses
+      inputValidations: this.state.inputValidations.set(
+        inputRef.props.fieldKey,
+        Map({
+          valid: true,
+          validationError: ""
+        })
+      )
     });
   }
 
   validate () {
-    let newInputStatuses = {};
+    let newInputValidations = this.state.inputValidations;
     let formIsValid = true;
-    this.inputRefs.forEach((input, i) => {
+    this.inputRefs.forEach((input) => {
       const validation = input.validate();
       const inputIsValid = !validation.required || validation.valid;
       if (!inputIsValid) {
         formIsValid = false;
       }
-      newInputStatuses[i] = {
+
+      newInputValidations = newInputValidations.set(input.props.fieldKey, Map({
         valid: inputIsValid,
         validationError: inputIsValid ? "" : validation.validationError
-      };
+      }));
     });
     this.setState({
-      inputValidations: newInputStatuses
+      inputValidations: newInputValidations
     });
     return formIsValid;
   }
 
   invalidateFields (invalidFields) {
-    let invalidationMap = {};
-    let newInputStatuses = {};
+    let newInputValidations = this.state.inputValidations;
     invalidFields.forEach((invalidation) => {
-      invalidationMap[invalidation.fieldKey] = invalidation.validationError;
-    });
-    this.inputRefs.forEach((input, i) => {
-      const fieldKey = input.props.fieldKey;
-      if (invalidationMap[fieldKey]) {
-        newInputStatuses[i] = {
+      if (this.inputRefs.get(invalidation.fieldKey)) {
+        newInputValidations = newInputValidations.set(invalidation.fieldKey, Map({
           valid: false,
-          validationError: invalidationMap[fieldKey]
-        };
+          validationError: invalidation.validationError
+        }));
       }
     });
-    if (Object.keys(newInputStatuses).length === 0) {
-      return;
+    if (newInputValidations != this.state.inputValidations) {
+      this.setState({
+        inputValidations: newInputValidations
+      });
     }
-    this.setState({
-      inputValidations: newInputStatuses
-    });
   }
 
   renderFields () {
-    return React.Children.map(this.props.children, (child, i) => {
-      const inputValidation = this.state.inputValidations[i] || {};
-      return React.cloneElement(child, {
-        fieldId: i,
-        onChange: this.handleChange.bind(this),
-        status: inputValidation.valid === false ? "error" : undefined,
-        error: inputValidation.validationError,
-        style: this.styles().Field,
-        ref: (inputRef) => {
-          if (inputRef) {
-            this.inputRefs.set(i, inputRef);
-          }
-        },
-        enabled: !this.props.working
-      });
+    return React.Children.map(this.props.children, (child) => {
+      if (child) {
+        const inputValidation = this.state.inputValidations.get(child.props.fieldKey) || Map();
+        return React.cloneElement(child, {
+          onChange: this.handleChange.bind(this),
+          status: inputValidation.get("valid") === false ? "error" : undefined,
+          error: inputValidation.get("validationError"),
+          style: this.styles().Field,
+          ref: (inputRef) => {
+            if (inputRef) {
+              this.inputRefs = this.inputRefs.set(child.props.fieldKey, inputRef);
+            }
+          },
+          enabled: !this.props.working
+        });
+      }
     });
   }
 
@@ -158,7 +142,7 @@ export default class Form extends ReactCSS.Component {
   }
 
   componentWillMount () {
-    this.inputRefs = new Map();
+    this.inputRefs = Map();
   }
 
   render () {
