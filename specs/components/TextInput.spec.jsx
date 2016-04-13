@@ -62,6 +62,7 @@ describe("TextInput", function () {
   - **boundValue** *React.PropTypes.string* (optional) bound value of the text box, value is managed outside of the component
   - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
   - **initialValue** *React.PropTypes.string* (optional) initial value of the text box
+  - **multiline** *React.PropTypes.bool* (optional) text input is a multiline textarea
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
   - **status** *React.PropTypes.oneOf* (optional) set status of text box (overrides focus). Acceptable values are 'error', 'warning' and 'success'
