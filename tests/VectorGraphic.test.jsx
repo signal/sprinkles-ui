@@ -19,22 +19,22 @@ describe("VectorGraphic", () => {
 
   it("Does render an SVG element with children", () => {
     const svgComponent = TestUtils.renderIntoDocument(
-        <VectorGraphic>
-            <g
-                fill="none"
-                fill-rule="evenodd"
-                stroke="none"
-                strokeWidth="1"
-            >
-                <rect
-                    fill="black"
-                    height="10"
-                    width="10"
-                    x="0"
-                    y="0"
-                />
-            </g>
-        </VectorGraphic>
+      <VectorGraphic>
+        <g
+          fill="none"
+          fill-rule="evenodd"
+          stroke="none"
+          strokeWidth="1"
+        >
+          <rect
+            fill="black"
+            height="10"
+            width="10"
+            x="0"
+            y="0"
+          />
+        </g>
+      </VectorGraphic>
     );
     const svgNode = ReactDOM.findDOMNode(svgComponent);
     expect(svgNode.children).not.toEqual({});

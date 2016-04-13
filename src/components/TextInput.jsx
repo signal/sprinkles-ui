@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import { Colors, TextColors } from "../shared/colors";
-import Color from "color";
+import color from "color";
 
 
 export default class TextInput extends ReactCSS.Component {
@@ -14,62 +14,62 @@ export default class TextInput extends ReactCSS.Component {
     initialValue: React.PropTypes.string,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["error", "warning", "success"])
+    status: React.PropTypes.oneOf(["error", "warning", "success"]),
   };
 
   static defaultProps = {
     autoComplete: true,
     enabled: true,
     initialValue: "",
-    onChange: () => {}
+    onChange: () => {},
   };
 
   constructor(props) {
     super();
     this.state = {
       isFocused: false,
-      value: props.initialValue
-    }
+      value: props.initialValue,
+    };
   }
 
-  validate () {
+  validate() {
     const isEmpty = this.value() === "";
     const isInitialValue = this.value() === this.props.initialValue;
     return {
       valid: !isEmpty,
-      isInitialValue: isInitialValue,
-      validationError: !isEmpty ? "" : "Field Must Not Be Empty"
-    }
-  }
-
-  value () {
-    return this.state.value;
-  }
-
-  linkState () {
-    return {
-      value: this.value(),
-      requestChange: (newValue) => {
-        this.setState({value: newValue}, () => this.props.onChange(this.value()));
-      }
+      isInitialValue,
+      validationError: !isEmpty ? "" : "Field Must Not Be Empty",
     };
   }
 
-  handleFocus () {
-    this.setState({isFocused: true});
+  value() {
+    return this.state.value;
   }
 
-  handleBlur () {
-    this.setState({isFocused: false});
+  linkState() {
+    return {
+      value: this.value(),
+      requestChange: (newValue) => {
+        this.setState({ value: newValue }, () => this.props.onChange(this.value()));
+      },
+    };
   }
 
-  handleChange (changeEvent) {
+  handleFocus() {
+    this.setState({ isFocused: true });
+  }
+
+  handleBlur() {
+    this.setState({ isFocused: false });
+  }
+
+  handleChange(changeEvent) {
     this.props.onChange(changeEvent.target.value);
   }
 
-  classes () {
+  classes() {
     return {
-      "default": {
+      default: {
         TextInput: {
           fontSize: 16,
           padding: "12px",
@@ -77,65 +77,65 @@ export default class TextInput extends ReactCSS.Component {
           border: "1px solid #ccc",
           borderRadius: 3,
           outline: "none",
-          color: TextColors.dark
-        }
-      },
-      "focus": {
-        TextInput: {
-          boxShadow: "0 0 3px 1px " + Colors.info
+          color: TextColors.dark,
         },
       },
-      "success": {
+      focus: {
         TextInput: {
-          boxShadow: "0 0 3px 1px " + Colors.success
-        }
+          boxShadow: `0 0 3px 1px ${Colors.info}`,
+        },
       },
-      "warning": {
+      success: {
         TextInput: {
-          boxShadow: "0 0 3px 1px " + Colors.warning
-        }
+          boxShadow: `0 0 3px 1px ${Colors.success}`,
+        },
       },
-      "error": {
+      warning: {
         TextInput: {
-          boxShadow: "0 0 3px 1px " + Colors.danger
-        }
+          boxShadow: `0 0 3px 1px ${Colors.warning}`,
+        },
       },
-      "disabled": {
+      error: {
         TextInput: {
-          color: Color(TextColors.dark).lighten(0.9).hexString(),
-          cursor: "not-allowed"
-        }
-      }
-    }
+          boxShadow: `0 0 3px 1px ${Colors.danger}`,
+        },
+      },
+      disabled: {
+        TextInput: {
+          color: color(TextColors.dark).lighten(0.9).hexString(),
+          cursor: "not-allowed",
+        },
+      },
+    };
   }
 
-  styles () {
+  styles() {
     return this.css({
-      "focus": this.state.isFocused,
-      "success": this.props.status === "success",
-      "warning": this.props.status === "warning",
-      "error": this.props.status === "error",
-      "disabled": !this.props.enabled
-    })
+      focus: this.state.isFocused,
+      success: this.props.status === "success",
+      warning: this.props.status === "warning",
+      error: this.props.status === "error",
+      disabled: !this.props.enabled,
+    });
   }
 
-  isBound () {
+  isBound() {
     return this.props.boundValue !== undefined;
   }
 
-  render () {
+  render() {
     return (
-        <input
-            autoComplete={this.props.autoComplete ? "on" : "off"}
-            disabled={this.props.enabled ? undefined : "disabled"}
-            onBlur={this.handleBlur.bind(this)}
-            onChange={this.isBound() ? this.handleChange.bind(this) : undefined}
-            onFocus={this.handleFocus.bind(this)}
-            placeholder={this.props.placeholder}
-            style={this.styles().TextInput}
-            value={this.isBound() ? this.props.boundValue : undefined}
-            valueLink={!this.isBound() ? this.linkState() : undefined}
-        />
+      <input
+        autoComplete={this.props.autoComplete ? "on" : "off"}
+        disabled={this.props.enabled ? undefined : "disabled"}
+        onBlur={this.handleBlur.bind(this)}
+        onChange={this.isBound() ? this.handleChange.bind(this) : undefined}
+        onFocus={this.handleFocus.bind(this)}
+        placeholder={this.props.placeholder}
+        style={this.styles().TextInput}
+        value={this.isBound() ? this.props.boundValue : undefined}
+        valueLink={!this.isBound() ? this.linkState() : undefined}
+      />
     );
   }
-};
+}

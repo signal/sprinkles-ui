@@ -1,21 +1,24 @@
+/* eslint func-names: "off" */
+
 import React from "react";
 import MyComponent from "../../src/components/MyComponent";
 
 /*
 Dummy spec -- for reference
 */
-describe("MyComponent", function() {
-  this.header(`## A Simple Component`); // Markdown.
+describe("MyComponent", function () {
+  this.header(`
+  ## A Simple Component
+  `); // Markdown.
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load( <MyComponent color="blue"/> );
+    this.load(<MyComponent color="blue" />);
   });
 
   it("red", () => this.props({ color: "red" }));
   it("green", () => this.props({ color: "green" }));
   it("blue", () => this.props({ color: "blue" }));
-
 
   /**
    * Introductory footer text (markdown).
@@ -48,6 +51,4 @@ describe("MyComponent", function() {
   Play around extending this component or get to work creating your own amazing components!
   For more strategies on using the UIHarness see the [docs](https://github.com/philcockfield/ui-harness/blob/master/docs/index.md).
   `);
-
-
 });

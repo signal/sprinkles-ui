@@ -1,10 +1,14 @@
+/* eslint func-names: "off" */
+
 import React from "react";
 import loremIpsum from "lorem-ipsum";
 import Text from "../../src/components/Text";
 
 
-describe("Text", function() {
-  this.header(`## Text`); // Markdown.
+describe("Text", function () {
+  this.header(`
+  ## Text
+  `); // Markdown.
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
@@ -14,30 +18,33 @@ describe("Text", function() {
   });
 
   // Thanks Paul Irish: http://www.paulirish.com/2009/random-hex-color-code-snippets/
-  it("Update Color", () => this.props({
-    color: "#" + Math.floor(Math.random()*16777215).toString(16)
-  }));
+  it("Update Color", () => {
+    const color = Math.floor(Math.random() * 16777215).toString(16);
+    this.props({
+      color: `#${color}`,
+    });
+  });
 
   it("Increase Font Size", () => {
-    var curFontSize = this.props() && this.props().fontSize ?
+    const curFontSize = this.props() && this.props().fontSize ?
       this.props().fontSize : 12;
 
     this.props({
-      fontSize: Math.min(curFontSize + 2, 36)
-    })
+      fontSize: Math.min(curFontSize + 2, 36),
+    });
   });
 
   it("Decrease Font Size", () => {
-    var curFontSize = this.props() && this.props().fontSize ?
+    const curFontSize = this.props() && this.props().fontSize ?
       this.props().fontSize : 12;
 
     this.props({
-      fontSize: Math.max(curFontSize - 2, 8)
-    })
+      fontSize: Math.max(curFontSize - 2, 8),
+    });
   });
 
-  it("Font Weight: Bold", () => this.props({fontWeight: "700"}));
-  it("Font Weight: Standard", () => this.props({fontWeight: "400"}));
+  it("Font Weight: Bold", () => this.props({ fontWeight: "700" }));
+  it("Font Weight: Standard", () => this.props({ fontWeight: "400" }));
 
   /**
    * Documentation (Markdown)

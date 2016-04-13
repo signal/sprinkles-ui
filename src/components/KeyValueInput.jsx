@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import Color from "color";
+import color from "color";
 import Text from "./Text";
 import TextInput from "./TextInput";
 import Button from "./Button";
@@ -21,7 +21,7 @@ export default class KeyValueInput extends ReactCSS.Component {
     ),
     keyLabel: React.PropTypes.string,
     onChange: React.PropTypes.func,
-    valueLabel: React.PropTypes.string
+    valueLabel: React.PropTypes.string,
   };
 
   static defaultProps = {
@@ -29,164 +29,165 @@ export default class KeyValueInput extends ReactCSS.Component {
     enabled: true,
     initialValue: [{
       key: "",
-      value: ""
+      value: "",
     }],
     keyLabel: "Key",
     onChange: () => {},
-    valueLabel: "Value"
+    valueLabel: "Value",
   };
 
   constructor(props) {
     super();
     this.state = {
-      value: fromJS(props.initialValue)
+      value: fromJS(props.initialValue),
     };
   }
 
-  classes () {
+  classes() {
     return {
-      "default": {
+      default: {
         KeyValuePair: {
           display: "flex",
-          marginBottom: 15
+          marginBottom: 15,
         },
         TextInput: {
 
           flex: "4",
-          marginRight: 15
+          marginRight: 15,
         },
         DeleteButton: {
           flex: "1",
           minWidth: 50,
-          alignSelf: "center"
-        }
-      }
+          alignSelf: "center",
+        },
+      },
     };
   }
 
-  value () {
+  value() {
     return this.state.value.toJS();
   }
 
-  validate () {
-    const valid = !this.state.value.find((item, i) => {
+  validate() {
+    const valid = !this.state.value.find((item) => {
       if (!item.get("key") || !item.get("value")) {
         return true;
       }
+      return undefined;
     });
     return {
-      valid: valid,
+      valid,
       isInitialValue: Immutable.is(fromJS(this.props.initialValue), this.state.value),
-      validationError: valid ? "": "All Fields Must Not Be Empty"
-    }
+      validationError: valid ? "" : "All Fields Must Not Be Empty",
+    };
   }
 
-  handleAddClick () {
-    const newStateValue = this.state.value.push(Map({
+  handleAddClick() {
+    const newStateValue = this.state.value.push(new Map({
       key: "",
-      value: ""
+      value: "",
     }));
     this.setState({
-      value: newStateValue
+      value: newStateValue,
     }, () => this.props.onChange(this.value()));
   }
 
-  handleDeleteClick (i) {
-    const newStateValue = this.state.value.delete(i);
+  handleDeleteClick(i) {
     this.setState({
-      value: this.state.value.delete(i)
+      value: this.state.value.delete(i),
     }, () => this.props.onChange(this.value()));
   }
 
-  handleChange (i, type, newValue) {
+  handleChange(i, type, newValue) {
     const newStateValue = this.state.value.set(i, this.state.value.get(i).set(type, newValue));
     this.setState({
-      value: newStateValue
+      value: newStateValue,
     }, () => this.props.onChange(this.value()));
   }
 
-  renderKeyValueLabels () {
-    const textColor = this.props.enabled ? TextColors.dark : Color(TextColors.dark).lighten(0.9).hexString();
-    return(
-        <div style={this.styles().KeyValuePair}>
-            <span style={this.styles().TextInput}>
-                <Text
-                    color={textColor}
-                    fontSize={14}
-                    ref={(c) => this.keyLabelRef = c}
-                >
-                  {this.props.keyLabel}
-                </Text>
-            </span>
-            <span style={this.styles().TextInput}>
-                <Text
-                    color={textColor}
-                    fontSize={14}
-                    ref={(c) => this.valueLabelRef = c}
-                >
-                  {this.props.valueLabel}
-                </Text>
-            </span>
-            <span style={this.styles().DeleteButton}/>
-        </div>
+  renderKeyValueLabels() {
+    const textColor = this.props.enabled ?
+      TextColors.dark : color(TextColors.dark).lighten(0.9).hexString();
+    return (
+      <div style={this.styles().KeyValuePair}>
+        <span style={this.styles().TextInput}>
+          <Text
+            color={textColor}
+            fontSize={14}
+            ref={(c) => this.keyLabelRef = c}
+          >
+            {this.props.keyLabel}
+          </Text>
+        </span>
+        <span style={this.styles().TextInput}>
+          <Text
+            color={textColor}
+            fontSize={14}
+            ref={(c) => this.valueLabelRef = c}
+          >
+            {this.props.valueLabel}
+          </Text>
+        </span>
+        <span style={this.styles().DeleteButton} />
+      </div>
     );
   }
 
-  renderKeyValuePairs () {
+  renderKeyValuePairs() {
     return this.state.value.map((item, i) => {
       let deleteButton;
       if (i !== 0) {
         deleteButton = (
-            <Button
-                enabled={this.props.enabled}
-                onClick={this.handleDeleteClick.bind(this, i)}
-                ref={(c) => this["deleteButtonRef"+i] = c}
-                text={"✕"}
-                type={"danger"}
-            />
+          <Button
+            enabled={this.props.enabled}
+            onClick={this.handleDeleteClick.bind(this, i)}
+            ref={(c) => this[`deleteButtonRef${i}`] = c}
+            text={"✕"}
+            type={"danger"}
+          />
         );
       }
       return (
-          <div
-              key={i}
-              style={this.styles().KeyValuePair}
-          >
-              <span style={this.styles().TextInput}>
-                  <TextInput
-                      boundValue={item.get("key")}
-                      enabled={this.props.enabled}
-                      onChange={this.handleChange.bind(this, i, "key")}
-                      ref={(c) => this["keyInputRef" + i] = c}
-                  />
-              </span>
-              <span style={this.styles().TextInput}>
-                  <TextInput
-                      boundValue={item.get("value")}
-                      enabled={this.props.enabled}
-                      onChange={this.handleChange.bind(this, i, "value")}
-                      ref={(c) => this["valueInputRef" + i] = c}
-                  />
-              </span>
-              <span style={this.styles().DeleteButton}>
-                  {deleteButton}
-              </span>
-          </div>
+        <div
+          key={i}
+          style={this.styles().KeyValuePair}
+        >
+          <span style={this.styles().TextInput}>
+            <TextInput
+              boundValue={item.get("key")}
+              enabled={this.props.enabled}
+              onChange={this.handleChange.bind(this, i, "key")}
+              ref={(c) => this[`keyInputRef${i}`] = c}
+            />
+          </span>
+          <span style={this.styles().TextInput}>
+            <TextInput
+              boundValue={item.get("value")}
+              enabled={this.props.enabled}
+              onChange={this.handleChange.bind(this, i, "value")}
+              ref={(c) => this[`valueInputRef${i}`] = c}
+            />
+          </span>
+          <span style={this.styles().DeleteButton}>
+              {deleteButton}
+          </span>
+        </div>
       );
     });
   }
 
-  render () {
-    return(
-        <div>
-            {this.renderKeyValueLabels()}
-            {this.renderKeyValuePairs()}
-            <Button
-                enabled={this.props.enabled}
-                onClick={this.handleAddClick.bind(this)}
-                ref={(c) => this.addButtonRef = c}
-                text={this.props.addButtonText}
-            />
-        </div>
+  render() {
+    return (
+      <div>
+        {this.renderKeyValueLabels()}
+        {this.renderKeyValuePairs()}
+        <Button
+          enabled={this.props.enabled}
+          onClick={this.handleAddClick.bind(this)}
+          ref={(c) => this.addButtonRef = c}
+          text={this.props.addButtonText}
+        />
+      </div>
     );
   }
-};
+}

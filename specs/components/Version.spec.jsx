@@ -1,44 +1,49 @@
+/* eslint func-names: "off" */
+/* eslint max-len: "off" */
+
 import React from "react";
 import Version from "../../src/components/Version";
 
 
-describe("Version", function() {
-  this.header(`## Version`); // Markdown.
+describe("Version", function () {
+  this.header(`
+  ## Version
+  `); // Markdown.
 
   before(() => {
     const versionSelector = "<=0.10.1";
     const tagSelector = "has burrito";
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Version
-            tag={"has burrito"}
-            tagSelector={tagSelector}
-            version={"0.9.0"}
-            versionSelector={versionSelector}
-        >
-            <div>
-                <div>
-                    {"My Version Selector Is " + versionSelector}
-                </div>
-                <div>
-                    {"My Tag Selector Is " + versionSelector}
-                </div>
-                <div>
-                    {"I get rendered when the version is less than or equal to 0.10.1"}
-                </div>
-                <div>
-                    {"I also get rendered when the tag=\"has burrito\""}
-                </div>
-            </div>
-        </Version>
+      <Version
+        tag={"has burrito"}
+        tagSelector={tagSelector}
+        version={"0.9.0"}
+        versionSelector={versionSelector}
+      >
+        <div>
+          <div>
+            {`My Version Selector Is ${versionSelector}`}
+          </div>
+          <div>
+            {`My Tag Selector Is ${tagSelector}`}
+          </div>
+          <div>
+              {"I get rendered when the version is less than or equal to 0.10.1"}
+          </div>
+          <div>
+              {"I also get rendered when the tag=\"has burrito\""}
+          </div>
+        </div>
+      </Version>
     ).width("100%");
   });
 
-  it("Sets version to 0.11.0", () => this.props({version: "0.11.0"}));
-  it("Sets version to 0.9.0", () => this.props({version: "0.9.0"}));
-  it("Sets version to 0.10.1", () => this.props({version: "0.10.1"}));
-  it("Sets tag to \"no burrito\"", () => this.props({tag: "no burrito"}));
-  it("Sets tag to \"has burrito\"", () => this.props({tag: "has burrito"}));
+  it("Sets version to 0.11.0", () => this.props({ version: "0.11.0" }));
+  it("Sets version to 0.9.0", () => this.props({ version: "0.9.0" }));
+  it("Sets version to 0.10.1", () => this.props({ version: "0.10.1" }));
+  it("Sets tag to \"no burrito\"", () => this.props({ tag: "no burrito" }));
+  it("Sets tag to \"has burrito\"", () => this.props({ tag: "has burrito" }));
 
 
   /**

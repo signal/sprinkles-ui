@@ -8,47 +8,47 @@ export default class Text extends ReactCSS.Component {
     children: React.PropTypes.node,
     color: React.PropTypes.string,
     fontSize: React.PropTypes.number,
-    fontWeight: React.PropTypes.string
+    fontWeight: React.PropTypes.string,
   };
 
-  classes () {
+  classes() {
     return {
-      "default": {
+      default: {
         Text: {
-          fontSize: 12
-        }
+          fontSize: 12,
+        },
       },
-      "color": {
+      color: {
         Text: {
-          color: this.props.color
-        }
+          color: this.props.color,
+        },
       },
-      "fontSize": {
+      fontSize: {
         Text: {
-          fontSize: this.props.fontSize
-        }
+          fontSize: this.props.fontSize,
+        },
       },
-      "fontWeight": {
+      fontWeight: {
         Text: {
-          fontWeight: this.props.fontWeight
-        }
-      }
+          fontWeight: this.props.fontWeight,
+        },
+      },
     };
   }
 
-  styles () {
+  styles() {
     return this.css({
-      "color": !!this.props.color,
-      "fontSize": !!this.props.fontSize,
-      "fontWeight": !!this.props.fontWeight
+      color: !!this.props.color,
+      fontSize: !!this.props.fontSize,
+      fontWeight: !!this.props.fontWeight,
     });
   }
 
-  render () {
+  render() {
     return (
         <span style={this.styles().Text}>
           {this.props.children}
         </span>
     );
   }
-};
+}

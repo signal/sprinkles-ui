@@ -1,43 +1,49 @@
+/* eslint func-names: "off" */
+/* eslint no-console: "off" */
+/* eslint max-len: "off" */
+
 import React from "react";
-import loremIpsum from "lorem-ipsum";
 import Field from "../../src/components/Field";
 import TextInput from "../../src/components/TextInput";
 
-describe("Field", function() {
-  this.header(`## Field`); // Markdown.
+describe("Field", function () {
+  this.header(`
+  ## Field
+  `); // Markdown.
 
   before(() => {
-    function handleChange(newValue) {
+    const handleChange = (newValue) => {
       console.log("newValue", newValue);
     };
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Field
-            label={"Field Label"}
-            onChange={handleChange}
-        >
-            <TextInput
-                initialValue={"Initial Value"}
-                placeholder={"placeholder"}
-            />
-        </Field>
+      <Field
+        label={"Field Label"}
+        onChange={handleChange}
+      >
+        <TextInput
+          initialValue={"Initial Value"}
+          placeholder={"placeholder"}
+        />
+      </Field>
     ).width("100%");
   });
 
-  it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.validate()));
-  it("Clear Label", () => this.props({label: undefined}));
-  it("Update Label", () => this.props({label: "Field Label"}));
-  it("Set Error Status", () => this.props({status: "error"}));
-  it("Set Warning Status", () => this.props({status: "warning"}));
-  it("Set Success Status", () => this.props({status: "success"}));
-  it("Clear Status", () => this.props({status: undefined}));
-  it("Set Error Message", () => this.props({error: "Field Error Message"}));
-  it("Clear Error Message", () => this.props({error: undefined}));
-  it("Set Required", () => this.props({required: true}));
-  it("Remove Required", () => this.props({required: false}));
-  it("Disables Field", () => this.props({enabled: false}));
-  it("Enables Field", () => this.props({enabled: true}));
+  it("Validate (output on console)", () =>
+    console.log("Is Valid: ", UIHarness.component.validate()));
+  it("Clear Label", () => this.props({ label: undefined }));
+  it("Update Label", () => this.props({ label: "Field Label" }));
+  it("Set Error Status", () => this.props({ status: "error" }));
+  it("Set Warning Status", () => this.props({ status: "warning" }));
+  it("Set Success Status", () => this.props({ status: "success" }));
+  it("Clear Status", () => this.props({ status: undefined }));
+  it("Set Error Message", () => this.props({ error: "Field Error Message" }));
+  it("Clear Error Message", () => this.props({ error: undefined }));
+  it("Set Required", () => this.props({ required: true }));
+  it("Remove Required", () => this.props({ required: false }));
+  it("Disables Field", () => this.props({ enabled: false }));
+  it("Enables Field", () => this.props({ enabled: true }));
   /**
    * Documentation (Markdown)
    */

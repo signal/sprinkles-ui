@@ -21,7 +21,7 @@ describe("PasswordInput", () => {
 
   it("Does render a disabled password input", () => {
     const passwordInputComponent = TestUtils.renderIntoDocument(
-        <PasswordInput enabled={false}/>
+      <PasswordInput enabled={false} />
     );
     const passwordInputNode = ReactDOM.findDOMNode(passwordInputComponent);
     expect(passwordInputNode.disabled).toBe(true);

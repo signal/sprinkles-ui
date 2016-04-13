@@ -1,9 +1,8 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import TextInput from "./TextInput";
 import Text from "./Text";
 import { Colors, TextColors } from "../shared/colors";
-import Color from "color";
+import color from "color";
 
 
 export default class Field extends ReactCSS.Component {
@@ -18,7 +17,7 @@ export default class Field extends ReactCSS.Component {
     onChange: React.PropTypes.func,
     required: React.PropTypes.bool,
     status: React.PropTypes.oneOf(["error", "warning", "success"]),
-    style: React.PropTypes.object
+    style: React.PropTypes.object,
   };
 
   static defaultProps = {
@@ -26,132 +25,140 @@ export default class Field extends ReactCSS.Component {
     fieldKey: "defaultKey",
     onChange: () => {},
     required: false,
-    style: {}
+    style: {},
   };
 
-  classes () {
+  classes() {
     return {
-      "default": {
+      default: {
         Label: {
-          color: TextColors.dark
+          color: TextColors.dark,
         },
         Error: {
-          margin: "10px 0"
-        }
+          margin: "10px 0",
+        },
       },
-      "haveLabel": {
+      haveLabel: {
         Label: {
-          margin: "10px 0"
-        }
+          margin: "10px 0",
+        },
       },
-      "disabled": {
+      disabled: {
         Label: {
-          color: Color(TextColors.dark).lighten(0.9).hexString()
-        }
-      }
+          color: color(TextColors.dark).lighten(0.9).hexString(),
+        },
+      },
     };
   }
 
-  styles () {
+  styles() {
     return this.css({
-      "disabled": !this.props.enabled,
-      "haveLabel": !!this.props.label || this.props.required
-    })
-  }
-
-  handleChange (change) {
-    this.props.onChange(change, this);
-  }
-
-  validate () {
-    const validation = this.inputRef && this.inputRef.validate ? this.inputRef.validate() : {};
-    return {
-      valid: validation.valid === false ? false : true,
-      required: this.props.required,
-      isInitialValue: validation.isInitialValue === false ? false : true,
-      validationError: validation.validationError || ""
-    }
-  }
-
-  renderInput () {
-    return React.Children.map(this.props.children, (child) => {
-      return React.cloneElement(child, {
-        enabled: this.props.enabled,
-        onChange: this.handleChange.bind(this),
-        ref: childRef => this.inputRef = childRef,
-        status: this.props.status
-      });
+      disabled: !this.props.enabled,
+      haveLabel: !!this.props.label || this.props.required,
     });
   }
 
-  renderLabel () {
+  handleChange(change) {
+    this.props.onChange(change, this);
+  }
+
+  validate() {
+    const validation = this.inputRef && this.inputRef.validate ? this.inputRef.validate() : {
+      valid: true,
+      isInitialValue: true,
+    };
+    return {
+      valid: validation.valid,
+      required: this.props.required,
+      isInitialValue: validation.isInitialValue,
+      validationError: validation.validationError || "",
+    };
+  }
+
+  renderInput() {
+    return React.Children.map(this.props.children, (child) =>
+      React.cloneElement(child, {
+        enabled: this.props.enabled,
+        onChange: this.handleChange.bind(this),
+        ref: childRef => this.inputRef = childRef,
+        status: this.props.status,
+      })
+    );
+  }
+
+  renderLabel() {
     if (this.props.label) {
-      let color;
+      let labelColor;
       switch (this.props.status) {
         case "error":
-          color = Colors.danger;
+          labelColor = Colors.danger;
           break;
         case "warning":
-          color = Colors.warning;
+          labelColor = Colors.warning;
           break;
         case "success":
-          color = Colors.success;
+          labelColor = Colors.success;
+          break;
+        default:
           break;
       }
       return (
-          <Text
-              color={color}
-              fontSize={18}
-              ref={c => this.labelRef = c}
-          >
-              {this.props.label}
-          </Text>
+        <Text
+          color={labelColor}
+          fontSize={18}
+          ref={c => this.labelRef = c}
+        >
+          {this.props.label}
+        </Text>
       );
     }
+    return null;
   }
 
-  renderError () {
+  renderError() {
     if (this.props.error) {
-      return(
-          <div style={this.styles().Error}>
-              <Text
-                  color={Colors.danger}
-                  fontSize={16}
-                  ref={c => this.errorRef = c}
-              >
-                  {this.props.error}
-              </Text>
-          </div>
-      );
-    }
-  }
-
-  renderRequired () {
-    if(this.props.required) {
-      return(
-          <span>
-              {" "}
-              <Text
-                  color={Colors.danger}
-                  fontSize={18}
-                  ref={c => this.requiredRef = c}
-              >
-                  {"*"}
-              </Text>
-          </span>
-      );
-    }
-  }
-
-  render () {
-    return (
-        <div style={this.props.style}>
-            <div style={this.styles().Label}>
-                {this.renderLabel()}{this.renderRequired()}
-            </div>
-            {this.renderInput()}
-            {this.renderError()}
+      return (
+        <div style={this.styles().Error}>
+          <Text
+            color={Colors.danger}
+            fontSize={16}
+            ref={c => this.errorRef = c}
+          >
+            {this.props.error}
+          </Text>
         </div>
+      );
+    }
+    return null;
+  }
+
+  renderRequired() {
+    if (this.props.required) {
+      return (
+        <span>
+          {" "}
+          <Text
+            color={Colors.danger}
+            fontSize={18}
+            ref={c => this.requiredRef = c}
+          >
+            {"*"}
+          </Text>
+        </span>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    return (
+      <div style={this.props.style}>
+        <div style={this.styles().Label}>
+          {this.renderLabel()}{this.renderRequired()}
+        </div>
+        {this.renderInput()}
+        {this.renderError()}
+      </div>
     );
   }
-};
+}

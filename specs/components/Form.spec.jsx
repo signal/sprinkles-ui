@@ -1,5 +1,8 @@
+/* eslint func-names: "off" */
+/* eslint no-console: "off" */
+/* eslint max-len: "off" */
+
 import React from "react";
-import loremIpsum from "lorem-ipsum";
 import Form from "../../src/components/Form";
 import Field from "../../src/components/Field";
 import EmailInput from "../../src/components/EmailInput";
@@ -9,122 +12,126 @@ import List from "../../src/components/List";
 import Text from "../../src/components/Text";
 
 
-describe("Form", function() {
-  this.header(`## Form`); // Markdown.
+describe("Form", function () {
+  this.header(`
+  ## Form
+  `); // Markdown.
 
   before(() => {
-    function handleChange(formData) {
+    const handleChange = (formData) => {
       console.log("formData", formData);
-    }
+    };
 
-    function handleSubmit(submitData) {
+    const handleSubmit = () => {
       this.props({
         alert: null,
-        working: true
+        working: true,
       });
       setTimeout(() => {
         this.props({
           alert: {
             type: "success",
             title: "Woo Hoo!",
-            details: "You're logged in"
+            details: "You're logged in",
           },
-          working: false
+          working: false,
         });
       }, 2000);
-    }
+    };
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Form
-            onChange={handleChange}
-            onSubmit={handleSubmit.bind(this)}
-            submitButtonText={"Login"}
+      <Form
+        onChange={handleChange}
+        onSubmit={handleSubmit.bind(this)}
+        submitButtonText={"Login"}
+      >
+        <Field
+          fieldKey={"email"}
+          label={"Email"}
+          required={true}
         >
-            <Field
-                fieldKey={"email"}
-                label={"Email"}
-                required={true}
-            >
-                <EmailInput placeholder={"test@signal.co"} />
-            </Field>
-            <Field
-                fieldKey={"password"}
-                label={"Password"}
-                required={true}
-            >
-                <PasswordInput placeholder={"password"} />
-            </Field>
-        </Form>
+          <EmailInput placeholder={"test@signal.co"} />
+        </Field>
+        <Field
+          fieldKey={"password"}
+          label={"Password"}
+          required={true}
+        >
+          <PasswordInput placeholder={"password"} />
+        </Field>
+      </Form>
     ).width("100%");
   });
 
-  it("Set Alert", () => this.props({alert: {
+  it("Set Alert", () => this.props({ alert: {
     type: "danger",
     title: "Please reset your password using the following criteria:",
-    children: <List onClick={() => console.log("List clicked")}>
+    children:
+      <List onClick={() => console.log("List clicked")}>
         <ListItem
-            padding="10px 0 5px 0"
-            showHoverEffect={false}
+          padding="10px 0 5px 0"
+          showHoverEffect={false}
         >
-            <Text
-                color={"white"}
-                fontSize={14}
-            >
-            {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}</Text>
+          <Text
+            color={"white"}
+            fontSize={14}
+          >
+          {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}</Text>
         </ListItem>
         <ListItem
-            padding="0 0 15px 0"
-            showHoverEffect={false}
+          padding="0 0 15px 0"
+          showHoverEffect={false}
         >
-            <Text
-                color={"white"}
-                fontSize={14}
-            >
-              {"◼︎ At least 1 numeric character"}
-            </Text>
+          <Text
+            color={"white"}
+            fontSize={14}
+          >
+            {"◼︎ At least 1 numeric character"}
+          </Text>
         </ListItem>
-    </List>
-  }}));
-  it("Clear Alert", () => this.props({alert: undefined}));
-  it("Button Text: My Button", () => this.props({submitButtonText: "My Button"}));
-  it("Button Text: Login", () => this.props({submitButtonText: "Login"}));
-  it("Set Working", () => this.props({working: true}));
-  it("Clear Working", () => this.props({working: false}));
+    </List>,
+  } }));
+  it("Clear Alert", () => this.props({ alert: undefined }));
+  it("Button Text: My Button", () => this.props({ submitButtonText: "My Button" }));
+  it("Button Text: Login", () => this.props({ submitButtonText: "Login" }));
+  it("Set Working", () => this.props({ working: true }));
+  it("Clear Working", () => this.props({ working: false }));
   it("Simulate Server Error", () => {
     UIHarness.component.invalidateFields([
       {
-        fieldKey:"password",
-        validationError:"Server says this thing isn't cool"
-      }
+        fieldKey: "password",
+        validationError: "Server says this thing isn't cool",
+      },
     ]);
-    this.props({alert: {
+    this.props({ alert: {
       type: "danger",
       title: "Please reset your password using the following criteria:",
-      children: <List onClick={() => console.log("List clicked")}>
+      children:
+        <List onClick={() => console.log("List clicked")}>
           <ListItem
-              padding="10px 0 5px 0"
-              showHoverEffect={false}
+            padding="10px 0 5px 0"
+            showHoverEffect={false}
           >
-              <Text
-                  color={"white"}
-                  fontSize={14}
-              >
-                {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
-              </Text>
+            <Text
+              color={"white"}
+              fontSize={14}
+            >
+              {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
+            </Text>
           </ListItem>
           <ListItem
-              padding="0 0 15px 0"
-              showHoverEffect={false}
+            padding="0 0 15px 0"
+            showHoverEffect={false}
           >
-              <Text
-                  color={"white"}
-                  fontSize={14}
-              >
-                {"◼︎ At least 1 numeric character"}
-              </Text>
+            <Text
+              color={"white"}
+              fontSize={14}
+            >
+              {"◼︎ At least 1 numeric character"}
+            </Text>
           </ListItem>
-      </List>
-    }});
+      </List>,
+    } });
   });
 
   /**

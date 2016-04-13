@@ -9,94 +9,101 @@ export default class Popover extends ReactCSS.Component {
     anchorEl: React.PropTypes.object,
     anchorOrigin: React.PropTypes.object,
     children: React.PropTypes.node,
-    open: React.PropTypes.bool
+    open: React.PropTypes.bool,
   };
 
   static defaultProps = {
     open: false,
     anchorOrigin: {
       horizontal: "left",
-      vertical: "bottom"
-    }
+      vertical: "bottom",
+    },
   };
 
-  constructor () {
+  constructor() {
     super();
-
     this.state = {
-      position: {}
+      position: {},
     };
   }
 
-  classes () {
+  classes() {
     return {
-      "default": {
+      default: {
         Popover: {
           zindex: zindex.Popover,
           display: "none",
-          position: "fixed"
-        }
+          position: "fixed",
+        },
       },
-      "open": {
+      open: {
         Popover: {
-          display: "block"
-        }
+          display: "block",
+        },
       },
-      "anchored": {
-        Popover: this.state.position
-      }
-    }
+      anchored: {
+        Popover: this.state.position,
+      },
+    };
   }
 
-  calculatePosition (anchor, anchorOrigin) {
+  calculatePosition(anchor, anchorOrigin) {
     return {
       top: this.getAnchorValue(anchor, anchorOrigin.vertical),
-      left: this.getAnchorValue(anchor, anchorOrigin.horizontal)
-    }
+      left: this.getAnchorValue(anchor, anchorOrigin.horizontal),
+    };
   }
 
-  getAnchorValue (anchor, key) {
+  getAnchorValue(anchor, key) {
+    let anchorValue;
     switch (key) {
       case "top":
-        return anchor.top;
+        anchorValue = anchor.top;
+        break;
       case "bottom":
-        return anchor.bottom;
+        anchorValue = anchor.bottom;
+        break;
       case "left":
-        return anchor.left;
+        anchorValue = anchor.left;
+        break;
       case "right":
-        return anchor.right;
+        anchorValue = anchor.right;
+        break;
+      default:
+        break;
     }
+    return anchorValue;
   }
 
-  styles () {
+  styles() {
     return this.css({
-      "open": this.props.open,
-      "anchored": !!this.props.anchorEl
+      open: this.props.open,
+      anchored: !!this.props.anchorEl,
     });
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.anchorEl && nextProps.anchorOrigin) {
       this.updatePosition(nextProps.anchorEl, nextProps.anchorOrigin);
     }
   }
 
-  componentWillMount () {
+  componentWillMount() {
     this.updatePosition(this.props.anchorEl, this.props.anchorOrigin);
   }
 
-  updatePosition (anchorEl, anchorOrigin) {
+  updatePosition(anchorEl, anchorOrigin) {
     if (anchorEl) {
       const anchor = anchorEl.getBoundingClientRect();
       this.setState({
-        position: this.calculatePosition(anchor, anchorOrigin)
+        position: this.calculatePosition(anchor, anchorOrigin),
       });
     }
   }
 
-  render () {
+  render() {
     return (
         <div style={this.styles().Popover}>{this.props.children}</div>
     );
   }
-};
+}

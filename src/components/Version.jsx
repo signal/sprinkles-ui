@@ -9,7 +9,7 @@ export default class Version extends ReactCSS.Component {
     tag: React.PropTypes.string,
     tagSelector: React.PropTypes.string,
     version: React.PropTypes.string,
-    versionSelector: React.PropTypes.string
+    versionSelector: React.PropTypes.string,
   };
 
   constructor() {
@@ -18,27 +18,27 @@ export default class Version extends ReactCSS.Component {
     this.validateVersionRegex = RegExp(/^([\d.]+)$/);
   }
 
-  validVersionSelector (version) {
+  validVersionSelector(version) {
     const matches = this.validateVersionSelectorRegex.exec(version);
     if (!matches) {
-      return false
+      return false;
     }
-    return matches[1].split(".").find((item) => item === "") == undefined;
+    return matches[1].split(".").find((item) => item === "") === undefined;
   }
 
-  validVersion (version) {
+  validVersion(version) {
     const matches = this.validateVersionRegex.exec(version);
     if (!matches) {
-      return false
+      return false;
     }
-    return matches[1].split(".").find((item) => item === "") == undefined;
+    return matches[1].split(".").find((item) => item === "") === undefined;
   }
 
-  versionComparitor (versionA, versionB) {
-    const vASplit = versionA.split(".").map((item) => parseInt(item));
-    const vBSplit = versionB.split(".").map((item) => parseInt(item));
+  versionComparitor(versionA, versionB) {
+    const vASplit = versionA.split(".").map((item) => parseInt(item, 10));
+    const vBSplit = versionB.split(".").map((item) => parseInt(item, 10));
     const longer = vASplit.length > vBSplit.length ? vASplit : vBSplit;
-    const shorter = longer == vASplit ? vBSplit : vASplit;
+    const shorter = longer === vASplit ? vBSplit : vASplit;
     return longer.reduce((p, longVal, i) => {
       if (p !== 0) {
         return p;
@@ -46,25 +46,24 @@ export default class Version extends ReactCSS.Component {
       const shortVal = shorter.length > i ? shorter[i] : 0;
       if (longVal === shortVal) {
         return 0;
-      } else if (longVal > shortVal){
-        return vASplit == longer ? 1 : -1;
-      } else {
-        return vASplit == longer ? -1 : 1;
+      } else if (longVal > shortVal) {
+        return vASplit === longer ? 1 : -1;
       }
+      return vASplit === longer ? -1 : 1;
     }, 0);
   }
 
-  matchingTag (props) {
+  matchingTag(props) {
     return !!props.tag && props.tag === props.tagSelector;
   }
 
-  matchingVersion (props) {
+  matchingVersion(props) {
     if (!this.validVersion(props.version) || !this.validVersionSelector(props.versionSelector)) {
       return false;
     }
     const version = this.validateVersionSelectorRegex.exec(props.version)[1];
     const selectorVersion = this.validateVersionSelectorRegex.exec(props.versionSelector)[1];
-    let validComps = [];
+    const validComps = [];
     if (props.versionSelector.indexOf(">") >= 0) {
       validComps.push(1);
     }
@@ -77,11 +76,11 @@ export default class Version extends ReactCSS.Component {
     return validComps.indexOf(this.versionComparitor(version, selectorVersion)) >= 0;
   }
 
-  showVersion () {
+  showVersion() {
     return this.matchingTag(this.props) || this.matchingVersion(this.props);
   }
 
-  render () {
+  render() {
     if (this.showVersion()) {
       return (
           <span>{this.props.children}</span>
@@ -89,4 +88,4 @@ export default class Version extends ReactCSS.Component {
     }
     return null;
   }
-};
+}

@@ -4,9 +4,9 @@ import Button from "./components/Button.jsx";
 
 // export Sprinkles, React and ReactDOM globally
 window.Sprinkles = {
-  Button: Button,
-  React: React,
-  ReactDOM: ReactDOM
+  Button,
+  React,
+  ReactDOM,
 };
 window.React = React;
 window.ReactDOM = ReactDOM;

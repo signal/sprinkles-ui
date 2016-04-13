@@ -7,7 +7,7 @@ describe("zindex", () => {
   it("Does have expected zindex values", () => {
     expect(zindex).toEqual({
       Drawer: 1300,
-      Popover: 2100
+      Popover: 2100,
     });
   });
 });

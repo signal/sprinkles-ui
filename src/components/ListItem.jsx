@@ -1,6 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import { Colors } from "../shared/colors"
+import { Colors } from "../shared/colors";
 
 export default class ListItem extends ReactCSS.Component {
   displayName = "ListItem";
@@ -10,69 +10,69 @@ export default class ListItem extends ReactCSS.Component {
     onClick: React.PropTypes.func,
     padding: React.PropTypes.string,
     selected: React.PropTypes.bool,
-    showHoverEffect: React.PropTypes.bool
+    showHoverEffect: React.PropTypes.bool,
   };
 
   static defaultProps = {
     padding: "10px",
     selected: false,
-    showHoverEffect: true
+    showHoverEffect: true,
   };
 
   constructor() {
     super();
 
     this.state = {
-      isHovering: false
+      isHovering: false,
     };
   }
 
-  handleMouseOut () {
-    this.setState({isHovering: false});
+  handleMouseOut() {
+    this.setState({ isHovering: false });
   }
 
-  handleMouseOver () {
-    this.setState({isHovering: true});
+  handleMouseOver() {
+    this.setState({ isHovering: true });
   }
 
-  classes () {
+  classes() {
     return {
-      "default": {
+      default: {
         ListItem: {
-          padding: this.props.padding
-        }
+          padding: this.props.padding,
+        },
       },
-      "hovering": {
+      hovering: {
         ListItem: {
           background: "#EEEEEE",
-        }
+        },
       },
-      "selected": {
+      selected: {
         ListItem: {
           background: Colors.info,
-          color: "#FEFEFE"
-        }
-      }
+          color: "#FEFEFE",
+        },
+      },
     };
   }
 
-  styles () {
+  styles() {
     return this.css({
-      "hovering": this.state.isHovering && !this.props.selected,
-      "selected": this.props.selected
+      hovering: this.state.isHovering && !this.props.selected,
+      selected: this.props.selected,
     });
   }
 
-  render () {
+  render() {
     return (
-        <div
-            onClick={this.props.onClick}
-            onMouseOut={this.props.showHoverEffect ? this.handleMouseOut.bind(this) : null}
-            onMouseOver={this.props.showHoverEffect ? this.handleMouseOver.bind(this) : null}
-            style={this.styles().ListItem}
-        >
-          {this.props.children}
-        </div>
+      <div
+        onClick={this.props.onClick}
+        onMouseOut={this.props.showHoverEffect ? this.handleMouseOut.bind(this) : null}
+        onMouseOver={this.props.showHoverEffect ? this.handleMouseOver.bind(this) : null}
+        style={this.styles().ListItem}
+      >
+        {this.props.children}
+      </div>
     );
   }
 }

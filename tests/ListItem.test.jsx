@@ -12,17 +12,14 @@ const ListItem = require("../src/components/ListItem").default;
 describe("ListItem", () => {
   it("Does render a ListItem", () => {
     const text = "howdy";
-
     // Render a ListItem with no style
     const listItem = TestUtils.renderIntoDocument(
         <ListItem>{text}</ListItem>
     );
     // grab the DOM node so we can inspect it
     const menuItemNode = ReactDOM.findDOMNode(listItem);
-
     // Verify that it"s rendered with the right text
     expect(menuItemNode.textContent).toEqual(text);
-
   });
 
   it("Does trigger an event when clicked", (done) => {
@@ -39,9 +36,6 @@ describe("ListItem", () => {
     const listItem = TestUtils.renderIntoDocument(
         <ListItem selected={true}>{"Selected"}</ListItem>
     );
-
-    const listItemNode = ReactDOM.findDOMNode(listItem);
-
     expect(listItem.props.selected).toEqual(true);
   });
 
@@ -49,17 +43,12 @@ describe("ListItem", () => {
     const listItem = TestUtils.renderIntoDocument(
         <ListItem>{"some text"}</ListItem>
     );
-
     listItem.setState = jest.genMockFunction();
-
     const listItemNode = ReactDOM.findDOMNode(listItem);
     expect(listItem.setState).not.toBeCalled();
-
     TestUtils.Simulate.mouseOver(listItemNode);
-    expect(listItem.setState).toBeCalledWith({isHovering: true});
-
+    expect(listItem.setState).toBeCalledWith({ isHovering: true });
     TestUtils.Simulate.mouseOut(listItemNode);
-    expect(listItem.setState).toBeCalledWith({isHovering: false});
+    expect(listItem.setState).toBeCalledWith({ isHovering: false });
   });
-
 });

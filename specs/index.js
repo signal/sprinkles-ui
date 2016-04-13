@@ -8,7 +8,7 @@
 */
 
 
-describe("Sprinkles UI", function() {
+describe("Sprinkles UI", () => {
   require("./components/MyComponent.spec"); // Dummy component
   require("./components/Alert.spec");
   require("./components/ListItem.spec");

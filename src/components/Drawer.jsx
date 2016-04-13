@@ -1,7 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import zindex from "../shared/zindex";
-import {BackgroundColors} from "../shared/colors";
+import { BackgroundColors } from "../shared/colors";
 
 export default class Drawer extends ReactCSS.Component {
   displayName = "Drawer";
@@ -11,18 +11,18 @@ export default class Drawer extends ReactCSS.Component {
     children: React.PropTypes.node,
     open: React.PropTypes.bool,
     openFrom: React.PropTypes.oneOf(["left", "right"]),
-    width: React.PropTypes.number
+    width: React.PropTypes.number,
   };
 
   static defaultProps = {
     open: false,
     openFrom: "right",
-    width: 300 //pixels
+    width: 300,
   };
 
-  classes () {
+  classes() {
     return {
-      "default": {
+      default: {
         Drawer: {
           width: this.props.width,
           height: "100%",
@@ -32,37 +32,37 @@ export default class Drawer extends ReactCSS.Component {
           left: this.props.openFrom === "left" ? this.props.width * -1 : undefined,
           background: BackgroundColors.light,
           zIndex: zindex.Drawer,
-          transition: "all 0.3s ease"
-        }
+          transition: "all 0.3s ease",
+        },
       },
-      "open": {
+      open: {
         Drawer: {
           right: this.props.openFrom === "right" ? 0 : undefined,
-          left: this.props.openFrom === "left" ? 0 : undefined
-        }
+          left: this.props.openFrom === "left" ? 0 : undefined,
+        },
       },
-      "backgroundColor": {
+      backgroundColor: {
         Drawer: {
-          background: this.props.backgroundColor
-        }
-      }
-    }
+          background: this.props.backgroundColor,
+        },
+      },
+    };
   }
 
-  styles () {
+  styles() {
     return this.css({
-      "open": this.props.open,
-      "backgroundColor": !!this.props.backgroundColor
+      open: this.props.open,
+      backgroundColor: !!this.props.backgroundColor,
     });
   }
 
-  render () {
-    return(
-        <div
-            style={this.styles().Drawer}
-        >
-          {this.props.children}
-        </div>
+  render() {
+    return (
+      <div
+        style={this.styles().Drawer}
+      >
+        {this.props.children}
+      </div>
     );
   }
-};
+}

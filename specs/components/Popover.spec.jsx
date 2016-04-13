@@ -1,26 +1,29 @@
+/* eslint func-names: "off" */
+/* eslint max-len: "off" */
+
 import React from "react";
 import loremIpsum from "lorem-ipsum";
 import Popover from "../../src/components/Popover";
-import { Colors } from "../../src/shared/colors"
+import { Colors } from "../../src/shared/colors";
 
 
 // Wrapper to contain a Popover and an anchor element
 class PopoverWrapper extends React.Component {
-  displayName = "PopoverWrapper";
-
   static propTypes = {
     anchorEl: React.PropTypes.object,
     anchorOrigin: React.PropTypes.object,
     children: React.PropTypes.node,
     onClick: React.PropTypes.func,
-    open: React.PropTypes.bool
+    open: React.PropTypes.bool,
   };
 
   static defaultProps = {
-    text: ""
+    text: "",
   };
 
-  constructor () {
+  displayName = "PopoverWrapper";
+
+  constructor() {
     super();
 
     this.style = {
@@ -28,83 +31,85 @@ class PopoverWrapper extends React.Component {
         padding: 10,
         background: Colors.info,
         color: "#FEFEFE",
-        cursor: "pointer"
-      }
+        cursor: "pointer",
+      },
     };
   }
 
-  handleClick (e) {
+  handleClick(e) {
     this.props.onClick(e);
   }
 
-  render () {
-    return(
-        <div>
-            <div
-                onClick={this.handleClick.bind(this)}
-                style={this.style.anchorDiv}
-            >
-                {"Click Me"}
-            </div>
-            <Popover
-                anchorEl={this.props.anchorEl}
-                anchorOrigin={this.props.anchorOrigin}
-                open={this.props.open}
-            >
-                {this.props.children}
-            </Popover>
+  render() {
+    return (
+      <div>
+        <div
+          onClick={this.handleClick.bind(this)}
+          style={this.style.anchorDiv}
+        >
+          {"Click Me"}
         </div>
+        <Popover
+          anchorEl={this.props.anchorEl}
+          anchorOrigin={this.props.anchorOrigin}
+          open={this.props.open}
+        >
+          {this.props.children}
+        </Popover>
+      </div>
     );
   }
 }
 
-describe("Popover", function() {
-  this.header(`## Popover`); // Markdown.
+describe("Popover", function () {
+  this.header(`
+  ## Popover
+  `); // Markdown.
 
   before(() => {
     function handleClick(e) {
       this.props({
         anchorEl: e.currentTarget,
-        open: true
-      })
+        open: true,
+      });
     }
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <PopoverWrapper
-            onClick={handleClick.bind(this)}
-        >
-            {loremIpsum()}
-        </PopoverWrapper>
+      <PopoverWrapper
+        onClick={handleClick.bind(this)}
+      >
+        {loremIpsum()}
+      </PopoverWrapper>
     );
   });
 
   it("anchorOrigin h:left, v:bottom", () => this.props({
     anchorOrigin: {
       horizontal: "left",
-      vertical: "bottom"
-    }
+      vertical: "bottom",
+    },
   }));
 
   it("anchorOrigin h:right, v:bottom", () => this.props({
     anchorOrigin: {
       horizontal: "right",
-      vertical: "bottom"
-    }
+      vertical: "bottom",
+    },
   }));
 
   it("anchorOrigin h:left, v:top", () => this.props({
     anchorOrigin: {
       horizontal: "left",
-      vertical: "top"
-    }
+      vertical: "top",
+    },
   }));
 
   it("anchorOrigin h:right, v:top", () => this.props({
     anchorOrigin: {
       horizontal: "right",
-      vertical: "top"
-    }
+      vertical: "top",
+    },
   }));
 
   /**

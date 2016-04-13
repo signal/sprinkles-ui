@@ -6,25 +6,25 @@ export default class List extends ReactCSS.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
-    onClick: React.PropTypes.func
+    onClick: React.PropTypes.func,
   };
 
-  classes () {
+  classes() {
     return {
-      "default": {
-        List: {}
-      }
+      default: {
+        List: {},
+      },
     };
   }
 
-  render () {
+  render() {
     return (
-        <div
-            onClick={this.props.onClick}
-            style={this.styles().List}
-        >
-          {this.props.children}
-        </div>
+      <div
+        onClick={this.props.onClick}
+        style={this.styles().List}
+      >
+        {this.props.children}
+      </div>
     );
   }
 }

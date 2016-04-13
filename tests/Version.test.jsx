@@ -2,7 +2,6 @@
 jest.dontMock("../src/components/Version");
 
 import React from "react";
-import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -23,7 +22,7 @@ describe("Version", () => {
     );
     expect(versionComponent.matchingTag({
       tag: "a",
-      tagVersion: "a"
+      tagVersion: "a",
     })).toBe(false);
   });
 
@@ -34,7 +33,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingTag({
         tag: "a",
-        tagVersion: "b"
+        tagVersion: "b",
       })).toBe(false);
     });
 
@@ -43,7 +42,7 @@ describe("Version", () => {
           <Version />
       );
       expect(versionComponent.matchingTag({
-        tagVersion: "b"
+        tagVersion: "b",
       })).toBe(false);
     });
 
@@ -52,7 +51,7 @@ describe("Version", () => {
           <Version />
       );
       expect(versionComponent.matchingTag({
-        tag: "a"
+        tag: "a",
       })).toBe(false);
     });
 
@@ -95,7 +94,6 @@ describe("Version", () => {
       expect(versionComponent.validVersion("<3.12.1")).toBe(false);
       expect(versionComponent.validVersion("<=3.12.1")).toBe(false);
       expect(versionComponent.validVersion(">=3.12.1")).toBe(false);
-
     });
   });
 
@@ -204,7 +202,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.1",
-        versionSelector: "0.0.1"
+        versionSelector: "0.0.1",
       })).toBe(true);
     });
     it("Does return true when version is greater than versionSelector", () => {
@@ -213,7 +211,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.1",
-        versionSelector: "<0.0.2"
+        versionSelector: "<0.0.2",
       })).toBe(true);
     });
     it("Does return true when version is greater than versionSelector", () => {
@@ -222,7 +220,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.3",
-        versionSelector: ">0.0.2"
+        versionSelector: ">0.0.2",
       })).toBe(true);
     });
     it("Does return true when version is less than or equal to versionSelector", () => {
@@ -231,7 +229,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.2",
-        versionSelector: "<=0.0.2"
+        versionSelector: "<=0.0.2",
       })).toBe(true);
     });
     it("Does return true when version is greater than or equal to versionSelector", () => {
@@ -240,7 +238,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.2",
-        versionSelector: ">=0.0.2"
+        versionSelector: ">=0.0.2",
       })).toBe(true);
     });
     it("Does return false when version is less than versionSelector", () => {
@@ -249,7 +247,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.1",
-        versionSelector: ">0.0.2"
+        versionSelector: ">0.0.2",
       })).toBe(false);
     });
     it("Does return false when version is greater than versionSelector", () => {
@@ -258,7 +256,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.3",
-        versionSelector: "<0.0.2"
+        versionSelector: "<0.0.2",
       })).toBe(false);
     });
     it("Does return false when version is less than or greater to versionSelector", () => {
@@ -267,7 +265,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.1",
-        versionSelector: ">=0.0.2"
+        versionSelector: ">=0.0.2",
       })).toBe(false);
     });
     it("Does return false when version is greater than or equal to versionSelector", () => {
@@ -276,7 +274,7 @@ describe("Version", () => {
       );
       expect(versionComponent.matchingVersion({
         version: "0.0.3",
-        versionSelector: "<=0.0.2"
+        versionSelector: "<=0.0.2",
       })).toBe(false);
     });
   });

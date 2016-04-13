@@ -12,67 +12,67 @@ export default class Form extends ReactCSS.Component {
       type: React.PropTypes.oneOf(["success", "info", "warning", "danger"]).required,
       title: React.PropTypes.string.required,
       details: React.PropTypes.string.required,
-      children: React.PropTypes.node
+      children: React.PropTypes.node,
     }),
     children: React.PropTypes.node,
     onChange: React.PropTypes.func,
     onSubmit: React.PropTypes.func,
     submitButtonText: React.PropTypes.string,
-    working: React.PropTypes.bool
+    working: React.PropTypes.bool,
   };
 
   static defaultProps = {
     onChange: () => {},
     onSubmit: () => {},
     submitButtonText: "Submit",
-    working: false
+    working: false,
   };
 
   constructor() {
     super();
     this.state = {
-      inputValidations: Map()
-    }
-  }
-
-  classes () {
-    return {
-      "default": {
-        Field: {
-          margin: "10px 0"
-        }
-      }
+      inputValidations: new Map(),
     };
   }
 
-  value () {
-    let submitData = {};
+  classes() {
+    return {
+      default: {
+        Field: {
+          margin: "10px 0",
+        },
+      },
+    };
+  }
+
+  value() {
+    const submitData = {};
     this.inputRefs.forEach((input) => {
       submitData[input.props.fieldKey] = input.inputRef.value();
     });
     return submitData;
   }
 
-  handleClick (e) {
+  handleClick() {
     if (this.validate()) {
       this.props.onSubmit(this.value());
     }
   }
 
-  handleChange (change, inputRef) {
+  handleChange(change, inputRef) {
     this.props.onChange(this.value());
     this.setState({
       inputValidations: this.state.inputValidations.set(
         inputRef.props.fieldKey,
-        Map({
+        new Map({
           valid: true,
-          validationError: ""
+          validationError: "",
         })
-      )
+      ),
     });
   }
 
-  validate () {
+  validate() {
     let newInputValidations = this.state.inputValidations;
     let formIsValid = true;
     this.inputRefs.forEach((input) => {
@@ -82,39 +82,39 @@ export default class Form extends ReactCSS.Component {
         formIsValid = false;
       }
 
-      newInputValidations = newInputValidations.set(input.props.fieldKey, Map({
+      newInputValidations = newInputValidations.set(input.props.fieldKey, new Map({
         valid: inputIsValid,
-        validationError: inputIsValid ? "" : validation.validationError
+        validationError: inputIsValid ? "" : validation.validationError,
       }));
     });
     this.setState({
-      inputValidations: newInputValidations
+      inputValidations: newInputValidations,
     });
     return formIsValid;
   }
 
-  invalidateFields (invalidFields) {
+  invalidateFields(invalidFields) {
     let newInputValidations = this.state.inputValidations;
     invalidFields.forEach((invalidation) => {
       if (this.inputRefs.get(invalidation.fieldKey)) {
-        newInputValidations = newInputValidations.set(invalidation.fieldKey, Map({
+        newInputValidations = newInputValidations.set(invalidation.fieldKey, new Map({
           valid: false,
-          validationError: invalidation.validationError
+          validationError: invalidation.validationError,
         }));
       }
     });
-    if (newInputValidations != this.state.inputValidations) {
+    if (newInputValidations !== this.state.inputValidations) {
       this.setState({
-        inputValidations: newInputValidations
+        inputValidations: newInputValidations,
       });
     }
   }
 
-  renderFields () {
-    this.inputRefs = Map();
+  renderFields() {
+    this.inputRefs = new Map();
     return React.Children.map(this.props.children, (child) => {
       if (child) {
-        const inputValidation = this.state.inputValidations.get(child.props.fieldKey) || Map();
+        const inputValidation = this.state.inputValidations.get(child.props.fieldKey) || new Map();
         return React.cloneElement(child, {
           onChange: this.handleChange.bind(this),
           status: inputValidation.get("valid") === false ? "error" : undefined,
@@ -125,36 +125,38 @@ export default class Form extends ReactCSS.Component {
               this.inputRefs = this.inputRefs.set(child.props.fieldKey, inputRef);
             }
           },
-          enabled: !this.props.working
+          enabled: !this.props.working,
         });
       }
+      return undefined;
     });
   }
 
-  renderAlert () {
+  renderAlert() {
     if (this.props.alert) {
       return (
-          <Alert
-              {...this.props.alert}
-              ref={c => this.alertRef = c}
-          />
-      )
+        <Alert
+          {...this.props.alert}
+          ref={c => this.alertRef = c}
+        />
+      );
     }
+    return null;
   }
 
-  render () {
-    return(
-        <div>
-            {this.renderAlert()}
-            {this.renderFields()}
-            <Button
-                onClick={this.handleClick.bind(this)}
-                ref={c => this.submitButtonRef = c}
-                text={this.props.submitButtonText}
-                type={"primary"}
-                working={this.props.working}
-            />
-        </div>
+  render() {
+    return (
+      <div>
+        {this.renderAlert()}
+        {this.renderFields()}
+        <Button
+          onClick={this.handleClick.bind(this)}
+          ref={c => this.submitButtonRef = c}
+          text={this.props.submitButtonText}
+          type={"primary"}
+          working={this.props.working}
+        />
+      </div>
     );
   }
-};
+}
