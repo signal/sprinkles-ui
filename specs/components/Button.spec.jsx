@@ -1,4 +1,5 @@
 /* eslint func-names: "off" */
+/* eslint max-len: "off" */
 
 import React from "react";
 import loremIpsum from "lorem-ipsum";
@@ -47,6 +48,7 @@ describe("Button", function () {
 
   #### API
 
+  - **children** *React.PropTypes.node* (optional) overides text, render children of any kind inside the button
   - **text** *React.PropTypes.string* (optional) text value
   - **working** *React.PropTypes.bool* (optional) disable button and show it's working
   - **enabled** *React.PropTypes.bool* (optional) enable or disable the button, default is true

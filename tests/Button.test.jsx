@@ -1,6 +1,6 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/Button");
-jest.dontMock("reactcss");
+jest.dontMock("../src/components/Text");
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -10,6 +10,7 @@ import color from "color";
 
 // TODO: move this to es6 style import when its implemented in jest
 const Button = require("../src/components/Button").default;
+const Text = require("../src/components/Text").default;
 
 describe("Button", () => {
   it("Does render a Button with default text", () => {
@@ -89,5 +90,16 @@ describe("Button", () => {
         .toBe(color(ButtonColors[type]).darken(0.3).hexString());
       expect(buttonNode.style.cursor).toBe("not-allowed");
     });
+  });
+
+  it("Does render a button with a child element", () => {
+    const childText = "Howdy";
+    const buttonComponent = TestUtils.renderIntoDocument(
+      <Button>
+        <Text>{childText}</Text>
+      </Button>
+    );
+    const buttonTextNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(buttonTextNode.textContent).toBe(childText);
   });
 });

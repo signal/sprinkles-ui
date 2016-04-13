@@ -7,6 +7,7 @@ export default class Button extends ReactCSS.Component {
   displayName = "Button";
 
   static propTypes = {
+    children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     text: React.PropTypes.string,
@@ -127,6 +128,13 @@ export default class Button extends ReactCSS.Component {
     });
   }
 
+  renderChildren() {
+    if (this.props.children) {
+      return this.props.children;
+    }
+    return this.props.text;
+  }
+
   render() {
     return (
       <button
@@ -136,7 +144,7 @@ export default class Button extends ReactCSS.Component {
         onMouseOver={this.handleMouseOver.bind(this)}
         style={this.styles().Button}
       >
-        {this.props.text}
+        {this.renderChildren()}
       </button>
     );
   }
