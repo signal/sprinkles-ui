@@ -44,6 +44,8 @@ describe("TextInput", function () {
   it("Enable Autocomplete", () => this.props({ autoComplete: true }));
   it("Disable Input", () => this.props({ enabled: false }));
   it("Enable Input", () => this.props({ enabled: true }));
+  it("Multiline", () => this.props({ multiline: true }));
+  it("Single Line", () => this.props({ multiline: false }));
 
 
   /**

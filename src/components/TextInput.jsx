@@ -12,6 +12,7 @@ export default class TextInput extends ReactCSS.Component {
     boundValue: React.PropTypes.string,
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
+    multiline: React.PropTypes.bool,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
     status: React.PropTypes.oneOf(["error", "warning", "success"]),
@@ -20,6 +21,7 @@ export default class TextInput extends ReactCSS.Component {
   static defaultProps = {
     autoComplete: true,
     enabled: true,
+    multiline: false,
     initialValue: "",
     onChange: () => {},
   };
@@ -124,18 +126,24 @@ export default class TextInput extends ReactCSS.Component {
   }
 
   render() {
+    const props = {
+      autoComplete: this.props.autoComplete ? "on" : "off",
+      disabled: this.props.enabled ? undefined : "disabled",
+      onBlur: this.handleBlur.bind(this),
+      onChange: this.isBound() ? this.handleChange.bind(this) : undefined,
+      onFocus: this.handleFocus.bind(this),
+      placeholder: this.props.placeholder,
+      style: this.styles().TextInput,
+      value: this.isBound() ? this.props.boundValue : undefined,
+      valueLink: !this.isBound() ? this.linkState() : undefined,
+    };
+    if (this.props.multiline) {
+      return (
+        <textarea {...props} />
+      );
+    }
     return (
-      <input
-        autoComplete={this.props.autoComplete ? "on" : "off"}
-        disabled={this.props.enabled ? undefined : "disabled"}
-        onBlur={this.handleBlur.bind(this)}
-        onChange={this.isBound() ? this.handleChange.bind(this) : undefined}
-        onFocus={this.handleFocus.bind(this)}
-        placeholder={this.props.placeholder}
-        style={this.styles().TextInput}
-        value={this.isBound() ? this.props.boundValue : undefined}
-        valueLink={!this.isBound() ? this.linkState() : undefined}
-      />
+      <input {...props} />
     );
   }
 }

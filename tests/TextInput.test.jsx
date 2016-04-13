@@ -213,4 +213,12 @@ describe("TextInput", () => {
     );
     expect(textInputComponent.value()).toBe(value);
   });
+
+  it("Does render a multiline TextInput", () => {
+    const textInputComponent = TestUtils.renderIntoDocument(
+      <TextInput multiline={true} />
+    );
+    const textInputNode = ReactDOM.findDOMNode(textInputComponent);
+    expect(textInputNode.nodeName).toBe("TEXTAREA");
+  });
 });
