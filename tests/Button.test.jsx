@@ -117,6 +117,7 @@ describe("Button", () => {
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.style.borderRadius).toBe("0px");
+    expect(buttonNode.style.borderLeft).toBe("0px");
   });
 
   it("Does render a right position button", () => {
@@ -125,5 +126,6 @@ describe("Button", () => {
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.style.borderRadius).toBe("0 3px 3px 0");
+    expect(buttonNode.style.borderLeft).toBe("0px");
   });
 });

@@ -20,12 +20,28 @@ export default class ButtonGroup extends ReactCSS.Component {
 
   renderButtons() {
     this.buttonRefs = new Map();
-    return React.Children.map(this.props.children, (child) => {
+    return React.Children.map(this.props.children, (child, i) => {
       if (child) {
         if (!child.props.buttonKey) {
           throw new Error("Button missing buttonKey prop");
         }
+        let groupPosition;
+        const numChildren = this.props.children.length;
+        if (numChildren > 1) {
+          switch (i) {
+            case 0:
+              groupPosition = "left";
+              break;
+            case numChildren - 1:
+              groupPosition = "right";
+              break;
+            default:
+              groupPosition = "center";
+              break;
+          }
+        }
         return React.cloneElement(child, {
+          groupPosition,
           onClick: this.handleClick.bind(this, child.props.buttonKey),
           ref: (buttonRef) => {
             if (buttonRef) {

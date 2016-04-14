@@ -124,11 +124,13 @@ export default class Button extends ReactCSS.Component {
       },
       groupPositionCenter: {
         Button: {
+          borderLeft: "0",
           borderRadius: "0",
         },
       },
       groupPositionRight: {
         Button: {
+          borderLeft: "0",
           borderRadius: "0 3px 3px 0",
         },
       },

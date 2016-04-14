@@ -61,4 +61,44 @@ describe("ButtonGroup", () => {
     TestUtils.Simulate.click(buttonNode);
     expect(mockHandleClick).toBeCalledWith(buttonKey);
   });
+
+  it("Does display one button with correct borderRadius", () => {
+    const buttonKey = "1";
+    const component = TestUtils.renderIntoDocument(
+        <ButtonGroup>
+          <Button buttonKey={buttonKey} />
+        </ButtonGroup>
+    );
+    const buttonNode = ReactDOM.findDOMNode(component.buttonRefs.get(buttonKey));
+    expect(buttonNode.style.borderRadius).toBe("3px");
+  });
+
+  it("Does display two buttons with correct borderRadius", () => {
+    const component = TestUtils.renderIntoDocument(
+        <ButtonGroup>
+          <Button buttonKey={"1"} />
+          <Button buttonKey={"2"} />
+        </ButtonGroup>
+    );
+    const buttonNodeOne = ReactDOM.findDOMNode(component.buttonRefs.get("1"));
+    const buttonNodeTwo = ReactDOM.findDOMNode(component.buttonRefs.get("2"));
+    expect(buttonNodeOne.style.borderRadius).toBe("3px 0 0 3px");
+    expect(buttonNodeTwo.style.borderRadius).toBe("0 3px 3px 0");
+  });
+
+  it("Does display 3+ buttons with correct borderRadius", () => {
+    const component = TestUtils.renderIntoDocument(
+        <ButtonGroup>
+          <Button buttonKey={"1"} />
+          <Button buttonKey={"2"} />
+          <Button buttonKey={"3"} />
+        </ButtonGroup>
+    );
+    const buttonNodeOne = ReactDOM.findDOMNode(component.buttonRefs.get("1"));
+    const buttonNodeTwo = ReactDOM.findDOMNode(component.buttonRefs.get("2"));
+    const buttonNodeThree = ReactDOM.findDOMNode(component.buttonRefs.get("3"));
+    expect(buttonNodeOne.style.borderRadius).toBe("3px 0 0 3px");
+    expect(buttonNodeTwo.style.borderRadius).toBe("0px");
+    expect(buttonNodeThree.style.borderRadius).toBe("0 3px 3px 0");
+  });
 });
