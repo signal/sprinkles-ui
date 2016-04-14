@@ -4,6 +4,8 @@ jest.dontMock("../src/components/Button");
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
+import { ButtonColors } from "../src/shared/colors";
+import color from "color";
 
 const ButtonGroup = require("../src/components/ButtonGroup").default;
 const Button = require("../src/components/Button").default;
@@ -100,5 +102,37 @@ describe("ButtonGroup", () => {
     expect(buttonNodeOne.style.borderRadius).toBe("3px 0 0 3px");
     expect(buttonNodeTwo.style.borderRadius).toBe("0px");
     expect(buttonNodeThree.style.borderRadius).toBe("0 3px 3px 0");
+  });
+
+  it("Does render all child buttons with expected type", () => {
+    const component = TestUtils.renderIntoDocument(
+        <ButtonGroup type={"danger"}>
+          <Button buttonKey={"1"} />
+          <Button buttonKey={"2"} />
+          <Button buttonKey={"3"} />
+        </ButtonGroup>
+    );
+    ["1", "2", "3"].forEach((buttonRef) => {
+      const buttonNode = ReactDOM.findDOMNode(component.buttonRefs.get(buttonRef));
+      expect(color(buttonNode.style.background).hexString()).toBe(ButtonColors.danger);
+    });
+  });
+
+  it("Does render a selected button in a button group", () => {
+    const component = TestUtils.renderIntoDocument(
+        <ButtonGroup
+          selectedButton={"1"}
+        >
+          <Button buttonKey={"1"} />
+          <Button buttonKey={"2"} />
+          <Button buttonKey={"3"} />
+        </ButtonGroup>
+    );
+    const buttonNodeOne = ReactDOM.findDOMNode(component.buttonRefs.get("1"));
+    const buttonNodeTwo = ReactDOM.findDOMNode(component.buttonRefs.get("2"));
+    const buttonNodeThree = ReactDOM.findDOMNode(component.buttonRefs.get("3"));
+    expect(color(buttonNodeOne.style.background).hexString()).toBe(ButtonColors.primary);
+    expect(color(buttonNodeTwo.style.background).hexString()).toBe(ButtonColors.secondary);
+    expect(color(buttonNodeThree.style.background).hexString()).toBe(ButtonColors.secondary);
   });
 });

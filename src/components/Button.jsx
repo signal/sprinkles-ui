@@ -76,7 +76,10 @@ export default class Button extends ReactCSS.Component {
       default: {
         Button: {
           background: ButtonColors.secondary,
-          border: `1px solid ${veryDarkened}`,
+          borderTop: `1px solid ${veryDarkened}`,
+          borderLeft: `1px solid ${veryDarkened}`,
+          borderBottom: `1px solid ${veryDarkened}`,
+          borderRight: `1px solid ${veryDarkened}`,
           borderRadius: "3px",
           color: TextColors.dark,
           padding: "5px 15px",
@@ -86,8 +89,10 @@ export default class Button extends ReactCSS.Component {
       typeColor: {
         Button: {
           background: ButtonColors[this.props.type],
-          border: "1px solid transparent",
+          borderTop: `1px solid ${ButtonColors[this.props.type]}`,
+          borderLeft: `1px solid ${ButtonColors[this.props.type]}`,
           borderBottom: `1px solid ${veryDarkened}`,
+          borderRight: `1px solid ${ButtonColors[this.props.type]}`,
           color: TextColors.light,
         },
       },
@@ -120,11 +125,13 @@ export default class Button extends ReactCSS.Component {
       groupPositionLeft: {
         Button: {
           borderRadius: "3px 0 0 3px",
+          borderRight: `1px solid ${veryDarkened}`,
         },
       },
       groupPositionCenter: {
         Button: {
           borderLeft: "0",
+          borderRight: `1px solid ${veryDarkened}`,
           borderRadius: "0",
         },
       },

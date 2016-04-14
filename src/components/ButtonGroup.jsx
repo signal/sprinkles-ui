@@ -8,6 +8,15 @@ export default class ButtonGroup extends ReactCSS.Component {
   static propTypes = {
     children: React.PropTypes.node,
     onClick: React.PropTypes.func,
+    selectedButton: React.PropTypes.string,
+    type: React.PropTypes.oneOf([
+      "secondary",
+      "primary",
+      "success",
+      "info",
+      "warning",
+      "danger",
+    ]),
   };
 
   static defaultProps = {
@@ -40,6 +49,12 @@ export default class ButtonGroup extends ReactCSS.Component {
               break;
           }
         }
+        let type;
+        if (this.props.selectedButton && this.props.selectedButton === child.props.buttonKey) {
+          type = this.props.type ? this.props.type : "primary";
+        } else {
+          type = this.props.type && !this.props.selectedButton ? this.props.type : "secondary";
+        }
         return React.cloneElement(child, {
           groupPosition,
           onClick: this.handleClick.bind(this, child.props.buttonKey),
@@ -51,6 +66,7 @@ export default class ButtonGroup extends ReactCSS.Component {
               this.buttonRefs = this.buttonRefs.set(child.props.buttonKey, buttonRef);
             }
           },
+          type,
         });
       }
       return undefined;
