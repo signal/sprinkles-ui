@@ -26,4 +26,5 @@ describe("Sprinkles UI", () => {
   require("./components/RadioButtonInput.spec");
   require("./components/KeyValueInput.spec");
   require("./components/Drawer.spec");
+  require("./components/ButtonGroup.spec");
 });
