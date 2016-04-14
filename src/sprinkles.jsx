@@ -1,5 +1,6 @@
 export Alert from "./components/Alert";
 export Button from "./components/Button";
+export ButtonGroup from "./components/ButtonGroup";
 export Drawer from "./components/Drawer";
 export EmailInput from "./components/EmailInput";
 export Field from "./components/Field";
