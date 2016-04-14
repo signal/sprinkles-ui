@@ -9,6 +9,7 @@ export default class Button extends ReactCSS.Component {
   static propTypes = {
     children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
+    groupPosition: React.PropTypes.oneOf(["left", "center", "right"]),
     onClick: React.PropTypes.func,
     text: React.PropTypes.string,
     type: React.PropTypes.oneOf([
@@ -116,6 +117,21 @@ export default class Button extends ReactCSS.Component {
           backgroundSize: "14px auto",
         },
       },
+      groupPositionLeft: {
+        Button: {
+          borderRadius: "3px 0 0 3px",
+        },
+      },
+      groupPositionCenter: {
+        Button: {
+          borderRadius: "0",
+        },
+      },
+      groupPositionRight: {
+        Button: {
+          borderRadius: "0 3px 3px 0",
+        },
+      },
     };
   }
 
@@ -125,6 +141,9 @@ export default class Button extends ReactCSS.Component {
       hovering: this.state.isHovering && !this.props.working,
       disabled: !this.props.enabled,
       working: this.props.working,
+      groupPositionLeft: this.props.groupPosition === "left",
+      groupPositionCenter: this.props.groupPosition === "center",
+      groupPositionRight: this.props.groupPosition === "right",
     });
   }
 

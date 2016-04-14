@@ -37,6 +37,9 @@ describe("Button", function () {
   it("Secondary (Default) Button", () => this.props({ type: "secondary" }));
   it("Updates Button Text", () => this.props({ text: loremIpsum() }));
   it("Resets Button Text", () => this.props({ text: undefined }));
+  it("Group Position: Left", () => this.props({ groupPosition: "left" }));
+  it("Group Position: Center", () => this.props({ groupPosition: "center" }));
+  it("Group Position: Right", () => this.props({ groupPosition: "right" }));
 
   /**
    * Documentation (Markdown)

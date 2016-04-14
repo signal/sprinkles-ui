@@ -102,4 +102,28 @@ describe("Button", () => {
     const buttonTextNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonTextNode.textContent).toBe(childText);
   });
+
+  it("Does render a left position button", () => {
+    const buttonComponent = TestUtils.renderIntoDocument(
+      <Button groupPosition={"left"} />
+    );
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(buttonNode.style.borderRadius).toBe("3px 0 0 3px");
+  });
+
+  it("Does render a center position button", () => {
+    const buttonComponent = TestUtils.renderIntoDocument(
+      <Button groupPosition={"center"} />
+    );
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(buttonNode.style.borderRadius).toBe("0px");
+  });
+
+  it("Does render a right position button", () => {
+    const buttonComponent = TestUtils.renderIntoDocument(
+      <Button groupPosition={"right"} />
+    );
+    const buttonNode = ReactDOM.findDOMNode(buttonComponent);
+    expect(buttonNode.style.borderRadius).toBe("0 3px 3px 0");
+  });
 });
