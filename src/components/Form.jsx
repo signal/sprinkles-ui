@@ -125,7 +125,7 @@ export default class Form extends ReactCSS.Component {
               this.inputRefs = this.inputRefs.set(child.props.fieldKey, inputRef);
             }
           },
-          enabled: !this.props.working ? "true" : "false",
+          enabled: !this.props.working,
         });
       }
       return undefined;

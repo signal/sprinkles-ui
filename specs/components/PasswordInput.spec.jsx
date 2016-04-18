@@ -39,8 +39,8 @@ describe("PasswordInput", function () {
   it("Set Warning Status", () => this.props({ status: "warning" }));
   it("Set Error Status", () => this.props({ status: "error" }));
   it("Clear Status", () => this.props({ status: undefined }));
-  it("Disable Input", () => this.props({ enabled: "false" }));
-  it("Enable Input", () => this.props({ enabled: "true" }));
+  it("Disable Input", () => this.props({ enabled: false }));
+  it("Enable Input", () => this.props({ enabled: true }));
   it("Disable Input", () => this.props({ enabled: false }));
   it("Enable Input", () => this.props({ enabled: true }));
 
@@ -56,7 +56,7 @@ describe("PasswordInput", function () {
   #### API
 
   - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
-  - **enabled** *React.PropTypes.oneOf(["true", "false"])* (optional) enable/disable user input
+  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
   - **initialValue** *React.PropTypes.string* (optional) initial value of the input
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty

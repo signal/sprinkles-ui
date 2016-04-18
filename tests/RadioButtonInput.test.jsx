@@ -146,7 +146,7 @@ describe("RadioButtonInput", () => {
     ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput
-        enabled={"false"}
+        enabled={false}
         items={items}
       />
     );

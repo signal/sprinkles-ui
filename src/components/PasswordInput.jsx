@@ -12,7 +12,7 @@ export default class PasswordInput extends TextInput {
   render() {
     return (
       <input
-        disabled={this.props.enabled === "true" ? undefined : "disabled"}
+        disabled={this.props.enabled ? undefined : "disabled"}
         onBlur={this.handleBlur.bind(this)}
         onFocus={this.handleFocus.bind(this)}
         placeholder={this.props.placeholder}

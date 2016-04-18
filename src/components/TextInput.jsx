@@ -10,7 +10,7 @@ export default class TextInput extends ReactCSS.Component {
   static propTypes = {
     autoComplete: React.PropTypes.bool,
     boundValue: React.PropTypes.string,
-    enabled: React.PropTypes.oneOf(["true", "false"]),
+    enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
     multiline: React.PropTypes.bool,
     onChange: React.PropTypes.func,
@@ -20,7 +20,7 @@ export default class TextInput extends ReactCSS.Component {
 
   static defaultProps = {
     autoComplete: true,
-    enabled: "true",
+    enabled: true,
     multiline: false,
     initialValue: "",
     onChange: () => {},
@@ -117,7 +117,7 @@ export default class TextInput extends ReactCSS.Component {
       success: this.props.status === "success",
       warning: this.props.status === "warning",
       error: this.props.status === "error",
-      disabled: this.props.enabled === "false",
+      disabled: !this.props.enabled,
     });
   }
 
@@ -128,7 +128,7 @@ export default class TextInput extends ReactCSS.Component {
   render() {
     const props = {
       autoComplete: this.props.autoComplete ? "on" : "off",
-      disabled: this.props.enabled === "true" ? undefined : "disabled",
+      disabled: this.props.enabled ? undefined : "disabled",
       onBlur: this.handleBlur.bind(this),
       onChange: this.isBound() ? this.handleChange.bind(this) : undefined,
       onFocus: this.handleFocus.bind(this),

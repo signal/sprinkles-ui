@@ -10,7 +10,7 @@ export default class Field extends ReactCSS.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
-    enabled: React.PropTypes.oneOf(["true", "false"]),
+    enabled: React.PropTypes.bool,
     error: React.PropTypes.string,
     fieldKey: React.PropTypes.string.isRequired,
     label: React.PropTypes.string,
@@ -21,7 +21,7 @@ export default class Field extends ReactCSS.Component {
   };
 
   static defaultProps = {
-    enabled: "true",
+    enabled: true,
     fieldKey: "defaultKey",
     onChange: () => {},
     required: false,
@@ -53,7 +53,7 @@ export default class Field extends ReactCSS.Component {
 
   styles() {
     return this.css({
-      disabled: this.props.enabled === "false",
+      disabled: !this.props.enabled,
       haveLabel: !!this.props.label || this.props.required,
     });
   }

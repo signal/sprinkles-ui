@@ -41,8 +41,8 @@ describe("EmailInput", function () {
   it("Clear Status", () => this.props({ status: undefined }));
   it("Disable Autocomplete", () => this.props({ autoComplete: false }));
   it("Enable Autocomplete", () => this.props({ autoComplete: true }));
-  it("Disable Input", () => this.props({ enabled: "false" }));
-  it("Enable Input", () => this.props({ enabled: "true" }));
+  it("Disable Input", () => this.props({ enabled: false }));
+  it("Enable Input", () => this.props({ enabled: true }));
 
   /**
    * Documentation (Markdown)
@@ -55,7 +55,7 @@ describe("EmailInput", function () {
   #### API
 
   - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
-  - **enabled** *React.PropTypes.oneOf(["true", "false"])* (optional) enable/disable user input
+  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
   - **initialValue** *React.PropTypes.string* (optional) initial value of the input
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
   - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty

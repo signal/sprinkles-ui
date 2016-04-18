@@ -42,8 +42,8 @@ describe("TextInput", function () {
   it("Clear Status", () => this.props({ status: undefined }));
   it("Disable Autocomplete", () => this.props({ autoComplete: false }));
   it("Enable Autocomplete", () => this.props({ autoComplete: true }));
-  it("Disable Input", () => this.props({ enabled: "false" }));
-  it("Enable Input", () => this.props({ enabled: "true" }));
+  it("Disable Input", () => this.props({ enabled: false }));
+  it("Enable Input", () => this.props({ enabled: true }));
   it("Multiline", () => this.props({ multiline: true }));
   it("Single Line", () => this.props({ multiline: false }));
 
@@ -60,7 +60,7 @@ describe("TextInput", function () {
 
   - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
   - **boundValue** *React.PropTypes.string* (optional) bound value of the text box, value is managed outside of the component
-  - **enabled** *React.PropTypes.oneOf(["true", "false"])* (optional) enable/disable user input
+  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
   - **initialValue** *React.PropTypes.string* (optional) initial value of the text box
   - **multiline** *React.PropTypes.bool* (optional) text input is a multiline textarea
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
