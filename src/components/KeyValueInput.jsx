@@ -12,7 +12,7 @@ export default class KeyValueInput extends ReactCSS.Component {
 
   static propTypes = {
     addButtonText: React.PropTypes.string,
-    enabled: React.PropTypes.bool,
+    enabled: React.PropTypes.oneOf(["true", "false"]),
     initialValue: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         key: React.PropTypes.string,
@@ -26,7 +26,7 @@ export default class KeyValueInput extends ReactCSS.Component {
 
   static defaultProps = {
     addButtonText: "Add",
-    enabled: true,
+    enabled: "true",
     initialValue: [{
       key: "",
       value: "",
@@ -106,7 +106,7 @@ export default class KeyValueInput extends ReactCSS.Component {
   }
 
   renderKeyValueLabels() {
-    const textColor = this.props.enabled ?
+    const textColor = this.props.enabled === "true" ?
       TextColors.dark : color(TextColors.dark).lighten(0.9).hexString();
     return (
       <div style={this.styles().KeyValuePair}>
@@ -139,7 +139,7 @@ export default class KeyValueInput extends ReactCSS.Component {
       if (i !== 0) {
         deleteButton = (
           <Button
-            enabled={this.props.enabled}
+            enabled={this.props.enabled === "true"}
             onClick={this.handleDeleteClick.bind(this, i)}
             ref={(c) => this[`deleteButtonRef${i}`] = c}
             text={"✕"}
@@ -182,7 +182,7 @@ export default class KeyValueInput extends ReactCSS.Component {
         {this.renderKeyValueLabels()}
         {this.renderKeyValuePairs()}
         <Button
-          enabled={this.props.enabled}
+          enabled={this.props.enabled === "true"}
           onClick={this.handleAddClick.bind(this)}
           ref={(c) => this.addButtonRef = c}
           text={this.props.addButtonText}

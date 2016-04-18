@@ -172,7 +172,7 @@ describe("TextInput", () => {
 
   it("Does render a disabled text input", () => {
     const textInputComponent = TestUtils.renderIntoDocument(
-      <TextInput enabled={false} />
+      <TextInput enabled={"false"} />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputNode.disabled).toBe(true);

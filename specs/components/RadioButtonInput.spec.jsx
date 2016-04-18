@@ -36,8 +36,8 @@ describe("RadioButtonInput", function () {
     console.log("Current Value: ", UIHarness.component.value()));
   it("Validate (output on console)", () =>
     console.log("Is Valid: ", UIHarness.component.validate()));
-  it("Disable", () => this.props({ enabled: false }));
-  it("Enable", () => this.props({ enabled: true }));
+  it("Disable", () => this.props({ enabled: "false" }));
+  it("Enable", () => this.props({ enabled: "true" }));
   it("Set Success Status", () => this.props({ status: "success" }));
   it("Set Warning Status", () => this.props({ status: "warning" }));
   it("Set Error Status", () => this.props({ status: "error" }));
@@ -53,7 +53,7 @@ describe("RadioButtonInput", function () {
   A RadioButtonInput Element
 
   #### API
-  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
+  - **enabled** *React.PropTypes.oneOf(["true", "false"])* (optional) enable/disable user input
   - **initialValue** *React.PropTypes.string* (optional) initial value of the radio button group
   - **onChange** *React.PropTypes.func* (optional) callback called when the value of the radio button group changes
   - **status** *React.PropTypes.oneOf* (optional) set status of the RadioButtonInput. Acceptable value are 'error', 'warning' and 'success'

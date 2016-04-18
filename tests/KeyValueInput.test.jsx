@@ -161,7 +161,7 @@ describe("KeyValueInput", () => {
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
-        enabled={false}
+        enabled={"false"}
         initialValue={initialValue}
       />
     );

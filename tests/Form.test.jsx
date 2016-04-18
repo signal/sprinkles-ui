@@ -258,7 +258,7 @@ describe("Form", () => {
       </Form>
     );
     formComponent.inputRefs.forEach((input) => {
-      expect(input.inputRef.props.enabled).toBe(false);
+      expect(input.inputRef.props.enabled).toBe("false");
     });
     expect(formComponent.submitButtonRef.props.working).toBe(true);
   });

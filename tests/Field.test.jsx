@@ -223,7 +223,7 @@ describe("Field", () => {
   it("Does render a disabled Field", () => {
     const fieldComponent = TestUtils.renderIntoDocument(
       <Field
-        enabled={false}
+        enabled={"false"}
         fieldKey={"key"}
       >
         <TextInput />

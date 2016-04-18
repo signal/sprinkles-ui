@@ -8,7 +8,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
   displayName = "RadioButtonInput";
 
   static propTypes = {
-    enabled: React.PropTypes.bool,
+    enabled: React.PropTypes.oneOf(["true", "false"]),
     initialValue: React.PropTypes.string,
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
@@ -21,7 +21,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
   };
 
   static defaultProps = {
-    enabled: true,
+    enabled: "true",
     items: [],
     onChange: () => {},
   };
@@ -79,12 +79,12 @@ export default class RadioButtonInput extends ReactCSS.Component {
 
   styles() {
     return this.css({
-      disabled: !this.props.enabled,
+      disabled: this.props.enabled === "false",
     });
   }
 
   handleClick(newValue) {
-    if (this.props.enabled && newValue !== this.value()) {
+    if (this.props.enabled === "true" && newValue !== this.value()) {
       this.setState({
         value: newValue,
       }, () => this.props.onChange(this.value()));
@@ -108,7 +108,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
         textColor = TextColors.dark;
         break;
     }
-    if (!this.props.enabled) {
+    if (this.props.enabled === "false") {
       const factor = textColor === TextColors.dark ? 0.9 : 0.2;
       textColor = color(textColor).lighten(factor).hexString();
     }
@@ -121,7 +121,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
         >
           <input
             checked={item.value === this.value()}
-            disabled={!this.props.enabled}
+            disabled={this.props.enabled === "false"}
             key={i}
             name={item.name}
             onChange={() => {}}
