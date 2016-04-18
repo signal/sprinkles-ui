@@ -345,4 +345,24 @@ describe("Form", () => {
       b: "init b",
     });
   });
+
+  it("Does allow disabling one field", () => {
+    const formComponent = TestUtils.renderIntoDocument(
+      <Form>
+        <Field
+          fieldKey={"a"}
+        >
+          <TextInput initialValue={"init a"} />
+        </Field>
+        <Field
+          fieldKey={"b"}
+          enabled={false}
+        >
+          <TextInput initialValue={"init b"} />
+        </Field>
+      </Form>
+    );
+    const bTextInputNode = ReactDOM.findDOMNode(formComponent.inputRefs.get("b").inputRef);
+    expect(bTextInputNode.disabled).toBe(true);
+  });
 });
