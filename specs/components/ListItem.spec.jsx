@@ -5,7 +5,7 @@
 import React from "react";
 import loremIpsum from "lorem-ipsum";
 import ListItem from "../../src/components/ListItem";
-import Text from "../../src/components/Text";
+import TextListItem from "../../src/components/TextListItem";
 
 
 describe("ListItem", function () {
@@ -17,7 +17,9 @@ describe("ListItem", function () {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
         <ListItem onClick={() => console.log("ListItem clicked")}>
-            <Text fontSize={16}>{loremIpsum()}</Text>
+            <TextListItem
+              text={loremIpsum()}
+            />
         </ListItem>
     );
   });
@@ -35,11 +37,10 @@ describe("ListItem", function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* (optional) child components or text nodes
+  - **children** *React.PropTypes.node* (optional) child components
+  // TODO: document what props are passed to children (or look at TextListItem as an example)
   - **onClick** *React.PropTypes.func* (optional) click hander function
-  - **padding** *React.PropTypes.string* (optional) specify padding for additional spacing options
   - **selected** *React.PropTypes.bool* (optional) selection state
-  - **showHoverEffect** *React.PropTypes.bool* (defaults to true) changes background when user hovers
 
   `);
 });

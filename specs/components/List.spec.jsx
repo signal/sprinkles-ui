@@ -5,7 +5,7 @@ import React from "react";
 import loremIpsum from "lorem-ipsum";
 import List from "../../src/components/List";
 import ListItem from "../../src/components/ListItem";
-import Text from "../../src/components/Text";
+import TextListItem from "../../src/components/TextListItem";
 
 
 describe("List", function () {
@@ -18,10 +18,19 @@ describe("List", function () {
     this.load(
       <List onClick={() => console.log("List clicked")}>
         <ListItem>
-          <Text fontSize={16}>{loremIpsum()}</Text>
+          <TextListItem
+            text={loremIpsum()}
+          />
         </ListItem>
         <ListItem>
-          <Text fontSize={16}>{loremIpsum()}</Text>
+          <TextListItem
+            text={loremIpsum()}
+          />
+        </ListItem>
+        <ListItem>
+          <TextListItem
+            text={loremIpsum()}
+          />
         </ListItem>
       </List>
     );
@@ -38,7 +47,6 @@ describe("List", function () {
   #### API
 
   - **children** *React.PropTypes.node* (optional) child components
-  - **onClick** *React.PropTypes.func* (optional) click hander function
 
   `);
 });

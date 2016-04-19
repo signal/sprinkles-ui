@@ -1,27 +1,22 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import { Colors } from "../shared/colors";
 
 export default class ListItem extends ReactCSS.Component {
   displayName = "ListItem";
 
   static propTypes = {
     children: React.PropTypes.node,
+    listPosition: React.PropTypes.oneOf(["first", "middle", "last"]),
     onClick: React.PropTypes.func,
-    padding: React.PropTypes.string,
     selected: React.PropTypes.bool,
-    showHoverEffect: React.PropTypes.bool,
   };
 
   static defaultProps = {
-    padding: "10px",
     selected: false,
-    showHoverEffect: true,
   };
 
   constructor() {
     super();
-
     this.state = {
       isHovering: false,
     };
@@ -35,31 +30,17 @@ export default class ListItem extends ReactCSS.Component {
     this.setState({ isHovering: true });
   }
 
-  classes() {
-    return {
-      default: {
-        ListItem: {
-          padding: this.props.padding,
-        },
-      },
-      hovering: {
-        ListItem: {
-          background: "#EEEEEE",
-        },
-      },
-      selected: {
-        ListItem: {
-          background: Colors.info,
-          color: "#FEFEFE",
-        },
-      },
-    };
-  }
-
-  styles() {
-    return this.css({
-      hovering: this.state.isHovering && !this.props.selected,
-      selected: this.props.selected,
+  renderChildren() {
+    return React.Children.map(this.props.children, (child) => {
+      if (child) {
+        return React.cloneElement(child, {
+          hovered: this.state.isHovering,
+          listPosition: this.props.listPosition,
+          ref: c => this.listItemRef = c,
+          selected: this.props.selected,
+        });
+      }
+      return undefined;
     });
   }
 
@@ -67,11 +48,10 @@ export default class ListItem extends ReactCSS.Component {
     return (
       <div
         onClick={this.props.onClick}
-        onMouseOut={this.props.showHoverEffect ? this.handleMouseOut.bind(this) : null}
-        onMouseOver={this.props.showHoverEffect ? this.handleMouseOver.bind(this) : null}
-        style={this.styles().ListItem}
+        onMouseOut={this.handleMouseOut.bind(this)}
+        onMouseOver={this.handleMouseOver.bind(this)}
       >
-        {this.props.children}
+        {this.renderChildren()}
       </div>
     );
   }

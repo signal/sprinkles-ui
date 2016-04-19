@@ -1,54 +1,99 @@
 // don"t mock our CUT or components it depends on
 jest.dontMock("../src/components/ListItem");
+jest.dontMock("../src/components/TextListItem");
+jest.dontMock("../src/shared/Colors");
 
 import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
+import color from "color";
+import { Colors, TextColors } from "../src/shared/Colors";
 
 // TODO: move this to es6 style import when its implemented in jest
 const ListItem = require("../src/components/ListItem").default;
+const TextListItem = require("../src/components/TextListItem").default;
 
 
 describe("ListItem", () => {
   it("Does render a ListItem", () => {
-    const text = "howdy";
-    // Render a ListItem with no style
-    const listItem = TestUtils.renderIntoDocument(
-        <ListItem>{text}</ListItem>
+    const listItemComponent = TestUtils.renderIntoDocument(
+      <ListItem />
     );
-    // grab the DOM node so we can inspect it
-    const menuItemNode = ReactDOM.findDOMNode(listItem);
-    // Verify that it"s rendered with the right text
-    expect(menuItemNode.textContent).toEqual(text);
+    expect(listItemComponent).toBeDefined();
   });
 
-  it("Does trigger an event when clicked", (done) => {
-    const listItem = TestUtils.renderIntoDocument(
-        <ListItem onClick={() => done()} />
+  it("Does trigger an event when clicked", () => {
+    const mockHandleClick = jest.genMockFunction();
+    const listItemComponent = TestUtils.renderIntoDocument(
+      <ListItem onClick={mockHandleClick} />
     );
-
-    const listItemNode = ReactDOM.findDOMNode(listItem);
-
+    const listItemNode = ReactDOM.findDOMNode(listItemComponent);
     TestUtils.Simulate.click(listItemNode);
+    expect(mockHandleClick).toBeCalled();
   });
 
-  it("Does render a selected ListItem", () => {
-    const listItem = TestUtils.renderIntoDocument(
-        <ListItem selected={true}>{"Selected"}</ListItem>
+  it("Does set hover prop on children when hovered", () => {
+    const listItemComponent = TestUtils.renderIntoDocument(
+      <ListItem>
+        <TextListItem />
+      </ListItem>
     );
-    expect(listItem.props.selected).toEqual(true);
-  });
-
-  it("Does render a hovered ListItem", () => {
-    const listItem = TestUtils.renderIntoDocument(
-        <ListItem>{"some text"}</ListItem>
-    );
-    listItem.setState = jest.genMockFunction();
-    const listItemNode = ReactDOM.findDOMNode(listItem);
-    expect(listItem.setState).not.toBeCalled();
+    const listItemNode = ReactDOM.findDOMNode(listItemComponent);
     TestUtils.Simulate.mouseOver(listItemNode);
-    expect(listItem.setState).toBeCalledWith({ isHovering: true });
+    let textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
+    expect(textListItemNode.style.cursor).toBe("pointer");
     TestUtils.Simulate.mouseOut(listItemNode);
-    expect(listItem.setState).toBeCalledWith({ isHovering: false });
+    textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
+    expect(textListItemNode.style.cursor).toBe("");
+  });
+
+  it("Does set selected prop on children when selected", () => {
+    const listItemComponent = TestUtils.renderIntoDocument(
+      <ListItem
+        selected={true}
+      >
+        <TextListItem />
+      </ListItem>
+    );
+    const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
+    expect(color(textListItemNode.style.background).hexString()).toBe(Colors.info);
+  });
+
+  it("Does render first TextListItem", () => {
+    const listItemComponent = TestUtils.renderIntoDocument(
+        <ListItem
+          listPosition={"first"}
+        >
+          <TextListItem />
+        </ListItem>
+    );
+    const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
+    expect(textListItemNode.style.borderBottom)
+      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+  });
+
+  it("Does render middle ListItem", () => {
+    const listItemComponent = TestUtils.renderIntoDocument(
+        <ListItem
+          listPosition={"middle"}
+        >
+          <TextListItem />
+        </ListItem>
+    );
+    const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
+    expect(textListItemNode.style.borderBottom)
+      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+  });
+
+  it("Does render last ListItem", () => {
+    const listItemComponent = TestUtils.renderIntoDocument(
+        <ListItem
+          listPosition={"last"}
+        >
+          <TextListItem />
+        </ListItem>
+    );
+    const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
+    expect(textListItemNode.style.borderBottom).toBe("");
   });
 });
