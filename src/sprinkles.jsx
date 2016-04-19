@@ -13,6 +13,7 @@ export Popover from "./components/Popover";
 export RadioButtonInput from "./components/RadioButtonInput";
 export Text from "./components/Text";
 export TextInput from "./components/TextInput";
+export TextListItem from "./components/TextListItem";
 export VectorGraphic from "./components/VectorGraphic";
 export Version from "./components/Version";
 export {

@@ -20,6 +20,7 @@ import {
   Text,
   TextColors,
   TextInput,
+  TextListItem,
   VectorGraphic,
   Version,
 } from "./Sprinkles";
@@ -46,6 +47,7 @@ window.Sprinkles = {
   Text,
   TextColors,
   TextInput,
+  TextListItem,
   VectorGraphic,
   Version,
 };
