@@ -39,7 +39,7 @@ export default class Form extends ReactCSS.Component {
     return {
       default: {
         Field: {
-          margin: "10px 0",
+          margin: "0 0 25px 0",
         },
       },
     };
