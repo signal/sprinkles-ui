@@ -7,7 +7,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import color from "color";
-import { Colors, TextColors } from "../src/shared/Colors";
+import { Colors, StructuralColors } from "../src/shared/Colors";
 
 // TODO: move this to es6 style import when its implemented in jest
 const ListItem = require("../src/components/ListItem").default;
@@ -69,7 +69,7 @@ describe("ListItem", () => {
     );
     const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
     expect(textListItemNode.style.borderBottom)
-      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+      .toBe(`1px solid ${StructuralColors.divider}`);
   });
 
   it("Does render middle ListItem", () => {
@@ -82,7 +82,7 @@ describe("ListItem", () => {
     );
     const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
     expect(textListItemNode.style.borderBottom)
-      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+      .toBe(`1px solid ${StructuralColors.divider}`);
   });
 
   it("Does render last ListItem", () => {

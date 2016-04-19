@@ -1,6 +1,5 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import color from "color";
 import Text from "./Text";
 import TextInput from "./TextInput";
 import Button from "./Button";
@@ -107,7 +106,7 @@ export default class KeyValueInput extends ReactCSS.Component {
 
   renderKeyValueLabels() {
     const textColor = this.props.enabled ?
-      TextColors.dark : color(TextColors.dark).lighten(0.9).hexString();
+      TextColors.primary : TextColors.secondary;
     return (
       <div style={this.styles().KeyValuePair}>
         <span style={this.styles().TextInput}>

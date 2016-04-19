@@ -18,7 +18,7 @@ describe("Drawer", function () {
         <div style={{ padding: 20 }}>
           <div style={{ marginBottom: 20 }}>
             <Text
-              color={TextColors.dark}
+              color={TextColors.primary}
               fontSize={24}
             >
               {"Sup, I'm a drawer"}
@@ -26,7 +26,7 @@ describe("Drawer", function () {
           </div>
           <div>
             <Text
-              color={TextColors.dark}
+              color={TextColors.primary}
               fontSize={14}
             >
               {"And there's so much room for things!"}

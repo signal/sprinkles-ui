@@ -30,7 +30,7 @@ describe("Drawer", () => {
     expect(drawerNode.style.top).toBe("0px");
     expect(drawerNode.style.right).toBe("-300px"); // not showing
     expect(drawerNode.style.zIndex).toBe("1300");
-    expect(color(drawerNode.style.background).hexString()).toBe(BackgroundColors.light);
+    expect(color(drawerNode.style.background).hexString()).toBe(BackgroundColors.primary);
   });
 
   it("Does render children in the Drawer", () => {

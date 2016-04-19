@@ -7,8 +7,6 @@ import Form from "../../src/components/Form";
 import Field from "../../src/components/Field";
 import EmailInput from "../../src/components/EmailInput";
 import PasswordInput from "../../src/components/PasswordInput";
-import ListItem from "../../src/components/ListItem";
-import List from "../../src/components/List";
 import Text from "../../src/components/Text";
 
 
@@ -67,29 +65,32 @@ describe("Form", function () {
     type: "danger",
     title: "Please reset your password using the following criteria:",
     children:
-      <List onClick={() => console.log("List clicked")}>
-        <ListItem
-          padding="10px 0 5px 0"
-          showHoverEffect={false}
-        >
-          <Text
-            color={"white"}
-            fontSize={14}
+      <div>
+          <div
+            style={{
+              padding: "10px 0 5px 0",
+            }}
           >
-          {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}</Text>
-        </ListItem>
-        <ListItem
-          padding="0 0 15px 0"
-          showHoverEffect={false}
-        >
-          <Text
-            color={"white"}
-            fontSize={14}
+              <Text
+                color={"white"}
+                fontSize={14}
+              >
+                {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
+              </Text>
+          </div>
+          <div
+            style={{
+              padding: "10px 0 5px 0",
+            }}
           >
-            {"◼︎ At least 1 numeric character"}
-          </Text>
-        </ListItem>
-    </List>,
+            <Text
+              color={"white"}
+              fontSize={14}
+            >
+                {"◼︎ At least 1 numeric character"}
+            </Text>
+          </div>
+      </div>,
   } }));
   it("Clear Alert", () => this.props({ alert: undefined }));
   it("Button Text: My Button", () => this.props({ submitButtonText: "My Button" }));
@@ -107,30 +108,32 @@ describe("Form", function () {
       type: "danger",
       title: "Please reset your password using the following criteria:",
       children:
-        <List onClick={() => console.log("List clicked")}>
-          <ListItem
-            padding="10px 0 5px 0"
-            showHoverEffect={false}
-          >
-            <Text
-              color={"white"}
-              fontSize={14}
+        <div>
+            <div
+              style={{
+                padding: "10px 0 5px 0",
+              }}
             >
-              {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
-            </Text>
-          </ListItem>
-          <ListItem
-            padding="0 0 15px 0"
-            showHoverEffect={false}
-          >
-            <Text
-              color={"white"}
-              fontSize={14}
+                <Text
+                  color={"white"}
+                  fontSize={14}
+                >
+                  {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
+                </Text>
+            </div>
+            <div
+              style={{
+                padding: "10px 0 5px 0",
+              }}
             >
-              {"◼︎ At least 1 numeric character"}
-            </Text>
-          </ListItem>
-      </List>,
+              <Text
+                color={"white"}
+                fontSize={14}
+              >
+                  {"◼︎ At least 1 numeric character"}
+              </Text>
+            </div>
+        </div>,
     } });
   });
 

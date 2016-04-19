@@ -2,7 +2,6 @@ import React from "react";
 import ReactCSS from "reactcss";
 import Text from "./Text";
 import { Colors, TextColors } from "../shared/colors";
-import color from "color";
 
 
 export default class Field extends ReactCSS.Component {
@@ -32,7 +31,7 @@ export default class Field extends ReactCSS.Component {
     return {
       default: {
         Label: {
-          color: TextColors.dark,
+          color: TextColors.primary,
         },
         Error: {
           margin: "10px 0",
@@ -45,7 +44,7 @@ export default class Field extends ReactCSS.Component {
       },
       disabled: {
         Label: {
-          color: color(TextColors.dark).lighten(0.9).hexString(),
+          color: TextColors.secondary,
         },
       },
     };

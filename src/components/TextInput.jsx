@@ -1,7 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import { Colors, TextColors } from "../shared/colors";
-import color from "color";
 
 
 export default class TextInput extends ReactCSS.Component {
@@ -79,7 +78,7 @@ export default class TextInput extends ReactCSS.Component {
           border: "1px solid #ccc",
           borderRadius: 3,
           outline: "none",
-          color: TextColors.dark,
+          color: TextColors.primary,
         },
       },
       focus: {
@@ -104,7 +103,7 @@ export default class TextInput extends ReactCSS.Component {
       },
       disabled: {
         TextInput: {
-          color: color(TextColors.dark).lighten(0.9).hexString(),
+          color: TextColors.secondary,
           cursor: "not-allowed",
         },
       },

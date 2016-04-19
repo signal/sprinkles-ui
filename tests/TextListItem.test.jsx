@@ -11,6 +11,7 @@ import {
   BackgroundColors,
   Colors,
   TextColors,
+  StructuralColors,
 } from "../src/shared/colors";
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -54,8 +55,8 @@ describe("TextListItem", () => {
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(color(textListItemNode.style.backgroundColor).hexString())
-      .toBe(color(BackgroundColors.dark).lighten(1.3).hexString());
-    expect(color(textListItemNode.style.color).hexString()).toBe(TextColors.light);
+      .toBe(BackgroundColors.accent);
+    expect(color(textListItemNode.style.color).hexString()).toBe(TextColors.accent);
   });
 
   it("Does render first TextListItem", () => {
@@ -66,7 +67,7 @@ describe("TextListItem", () => {
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(textListItemNode.style.borderBottom)
-      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+      .toBe(`1px solid ${StructuralColors.divider}`);
   });
 
   it("Does render middle TextListItem", () => {
@@ -77,7 +78,7 @@ describe("TextListItem", () => {
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(textListItemNode.style.borderBottom)
-      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+      .toBe(`1px solid ${StructuralColors.divider}`);
   });
 
   it("Does render last TextListItem", () => {

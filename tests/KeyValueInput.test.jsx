@@ -175,10 +175,10 @@ describe("KeyValueInput", () => {
     expect(addButtonNode.disabled).toBe(true);
     const keyLabelNode = ReactDOM.findDOMNode(keyValueInputComponent.keyLabelRef);
     expect(color(keyLabelNode.style.color).hexString())
-      .toBe(color(TextColors.dark).lighten(0.9).hexString());
+      .toBe(TextColors.secondary);
     const valueLabelNode = ReactDOM.findDOMNode(keyValueInputComponent.valueLabelRef);
     expect(color(valueLabelNode.style.color).hexString())
-      .toBe(color(TextColors.dark).lighten(0.9).hexString());
+      .toBe(TextColors.secondary);
   });
 
   it("Does trigger an onChange event when a text input changes", () => {

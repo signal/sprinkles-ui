@@ -1,11 +1,11 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import color from "color";
 import Text from "./Text";
 import {
   Colors,
   BackgroundColors,
   TextColors,
+  StructuralColors,
  } from "../shared/colors";
 
 export default class TextListItem extends ReactCSS.Component {
@@ -24,7 +24,7 @@ export default class TextListItem extends ReactCSS.Component {
         Text: {
           padding: 10,
           background: "#FEFEFE",
-          color: TextColors.dark,
+          color: TextColors.primary,
         },
       },
       selected: {
@@ -35,19 +35,19 @@ export default class TextListItem extends ReactCSS.Component {
       },
       hovered: {
         Text: {
-          background: color(BackgroundColors.dark).lighten(1.3).hexString(),
-          color: TextColors.light,
+          background: BackgroundColors.accent,
+          color: TextColors.accent,
           cursor: "pointer",
         },
       },
       first: {
         Text: {
-          borderBottom: `1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`,
+          borderBottom: `1px solid ${StructuralColors.divider}`,
         },
       },
       middle: {
         Text: {
-          borderBottom: `1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`,
+          borderBottom: `1px solid ${StructuralColors.divider}`,
         },
       },
     };

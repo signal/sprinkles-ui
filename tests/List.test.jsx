@@ -7,8 +7,7 @@ jest.dontMock("../src/shared/colors");
 
 import React from "react";
 import ReactDOM from "react-dom";
-import color from "color";
-import { TextColors } from "../src/shared/colors";
+import { StructuralColors } from "../src/shared/colors";
 import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -65,7 +64,7 @@ describe("List", () => {
     const firstTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(0).listItemRef);
     expect(firstTextListItemNode.style.borderBottom)
-      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+      .toBe(`1px solid ${StructuralColors.divider}`);
     const lastTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(1).listItemRef);
     expect(lastTextListItemNode.style.borderBottom).toBe("");
@@ -88,11 +87,11 @@ describe("List", () => {
     const firstTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(0).listItemRef);
     expect(firstTextListItemNode.style.borderBottom)
-      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+      .toBe(`1px solid ${StructuralColors.divider}`);
     const secondTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(1).listItemRef);
     expect(secondTextListItemNode.style.borderBottom)
-      .toBe(`1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`);
+      .toBe(`1px solid ${StructuralColors.divider}`);
     const lastTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(2).listItemRef);
     expect(lastTextListItemNode.style.borderBottom).toBe("");

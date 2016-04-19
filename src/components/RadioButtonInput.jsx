@@ -105,11 +105,11 @@ export default class RadioButtonInput extends ReactCSS.Component {
         textColor = Colors.success;
         break;
       default:
-        textColor = TextColors.dark;
+        textColor = TextColors.primary;
         break;
     }
     if (!this.props.enabled) {
-      const factor = textColor === TextColors.dark ? 0.9 : 0.2;
+      const factor = textColor === TextColors.primary ? 0.9 : 0.2;
       textColor = color(textColor).lighten(factor).hexString();
     }
     return this.props.items.map((item, i) => (

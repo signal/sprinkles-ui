@@ -30,7 +30,7 @@ export default class Drawer extends ReactCSS.Component {
           top: 0,
           right: this.props.openFrom === "right" ? this.props.width * -1 : undefined,
           left: this.props.openFrom === "left" ? this.props.width * -1 : undefined,
-          background: BackgroundColors.light,
+          background: BackgroundColors.primary,
           zIndex: zindex.Drawer,
           transition: "all 0.3s ease",
         },

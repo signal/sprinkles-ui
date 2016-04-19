@@ -21,4 +21,5 @@ export {
   ButtonColors,
   TextColors,
   BackgroundColors,
+  StructuralColors,
 } from "./shared/colors";

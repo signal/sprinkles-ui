@@ -1,6 +1,6 @@
 export const Colors = {
   success: "#5CB85C",
-  info: "#5BC0DE",
+  info: "#3FA9E2",
   warning: "#F0AD4E",
   danger: "#D9534F",
 };
@@ -11,11 +11,18 @@ export const ButtonColors = Object.assign({
 }, Colors);
 
 export const TextColors = {
-  dark: "#4F4F4F",
-  light: "#F5F5F5",
+  primary: "#212121",
+  secondary: "#727272",
+  light: "#FEFEFE",
+  accent: "#3FA9E2",
 };
 
 export const BackgroundColors = {
-  dark: "#4F4F4F",
-  light: "#F5F5F5",
+  primary: "#FEFEFE",
+  secondary: "#F8FAFB",
+  accent: "#B3E5FC",
+};
+
+export const StructuralColors = {
+  divider: "#E7E7E7",
 };

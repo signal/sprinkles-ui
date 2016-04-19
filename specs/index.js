@@ -28,4 +28,5 @@ describe("Sprinkles UI", () => {
   require("./components/Drawer.spec");
   require("./components/ButtonGroup.spec");
   require("./components/TextListItem.spec");
+  require("./components/colors.spec");
 });

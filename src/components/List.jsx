@@ -1,8 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import color from "color";
 import { Map } from "immutable";
-import { TextColors } from "../shared/colors";
+import { StructuralColors } from "../shared/colors";
 
 export default class List extends ReactCSS.Component {
   static displayName = "List";
@@ -15,7 +14,7 @@ export default class List extends ReactCSS.Component {
     return {
       default: {
         List: {
-          border: `1px solid ${color(TextColors.dark).lighten(1.5).hexString()}`,
+          border: `1px solid ${StructuralColors.divider}`,
         },
       },
     };
