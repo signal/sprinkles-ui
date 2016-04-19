@@ -104,7 +104,8 @@ export default class Field extends ReactCSS.Component {
       return (
         <Text
           color={labelColor}
-          fontSize={18}
+          fontSize={16}
+          fontWeight={"bold"}
           ref={c => this.labelRef = c}
         >
           {this.props.label}
