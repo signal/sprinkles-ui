@@ -9,24 +9,29 @@
 
 
 describe("Sprinkles UI", () => {
-  require("./components/MyComponent.spec"); // Dummy component
+  describe("Form, Field and Inputs", () => {
+    require("./components/Field.spec");
+    require("./components/Form.spec");
+    require("./components/TextInput.spec");
+    require("./components/PasswordInput.spec");
+    require("./components/EmailInput.spec");
+    require("./components/RadioButtonInput.spec");
+    require("./components/KeyValueInput.spec");
+  });
+  describe("List and List Item", () => {
+    require("./components/List.spec");
+    require("./components/ListItem.spec");
+    require("./components/TextListItem.spec");
+  });
+  describe("Buttons", () => {
+    require("./components/Button.spec");
+    require("./components/ButtonGroup.spec");
+  });
   require("./components/Alert.spec");
-  require("./components/ListItem.spec");
-  require("./components/List.spec");
   require("./components/Text.spec");
   require("./components/Popover.spec");
-  require("./components/TextInput.spec");
-  require("./components/PasswordInput.spec");
-  require("./components/EmailInput.spec");
-  require("./components/Field.spec");
-  require("./components/Form.spec");
-  require("./components/Button.spec");
   require("./components/VectorGraphic.spec");
   require("./components/Version.spec");
-  require("./components/RadioButtonInput.spec");
-  require("./components/KeyValueInput.spec");
   require("./components/Drawer.spec");
-  require("./components/ButtonGroup.spec");
-  require("./components/TextListItem.spec");
   require("./components/colors.spec");
 });
