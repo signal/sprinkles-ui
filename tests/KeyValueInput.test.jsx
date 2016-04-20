@@ -8,7 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import color from "color";
-import { TextColors } from "../src/shared/colors";
+import { Colors, TextColors } from "../src/shared/colors";
 
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -294,5 +294,99 @@ describe("KeyValueInput", () => {
       isInitialValue: true,
       validationError: "All Fields Must Not Be Empty",
     });
+  });
+
+  it("Does display success status", () => {
+    const keyValueInputComponent = TestUtils.renderIntoDocument(
+      <KeyValueInput
+        status={"success"}
+      />
+    );
+    const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
+    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+    const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
+    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+  });
+
+  it("Does display error status", () => {
+    const keyValueInputComponent = TestUtils.renderIntoDocument(
+      <KeyValueInput
+        status={"error"}
+      />
+    );
+    const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
+    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
+    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+  });
+
+  it("Does only display error status on invalid fields", () => {
+    const initialValue = [{
+      key: "key 1",
+      value: "",
+    }];
+    const keyValueInputComponent = TestUtils.renderIntoDocument(
+      <KeyValueInput
+        initialValue={initialValue}
+        status={"error"}
+      />
+    );
+    const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
+    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
+    expect(keyInputNode.style.boxShadow).toBe("");
+  });
+
+  it("Does fail validation with duplicate keys when uniqueKeys=true", () => {
+    const initialValue = [{
+      key: "key 1",
+      value: "value 1",
+    }, {
+      key: "key 1",
+      value: "value 1",
+    }];
+    const keyValueInputComponent = TestUtils.renderIntoDocument(
+      <KeyValueInput
+        initialValue={initialValue}
+        uniqueKeys={true}
+      />
+    );
+    expect(keyValueInputComponent.validate()).toEqual({
+      valid: false,
+      isInitialValue: true,
+      validationError: "All keys must be unique, found duplicate \"key 1\"",
+    });
+  });
+
+  it("Does display error status on all duplicate key fields", () => {
+    const initialValue = [{
+      key: "key 1",
+      value: "value 1",
+    }, {
+      key: "key 2",
+      value: "value 1",
+    }, {
+      key: "key 1",
+      value: "value 1",
+    }];
+    const keyValueInputComponent = TestUtils.renderIntoDocument(
+      <KeyValueInput
+        initialValue={initialValue}
+        uniqueKeys={true}
+        status={"error"}
+      />
+    );
+    const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
+    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
+    expect(valueInputNode.style.boxShadow).toBe("");
+    const keyInputNode2 = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef1);
+    expect(keyInputNode2.style.boxShadow).toBe("");
+    const valueInputNode2 = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef1);
+    expect(valueInputNode2.style.boxShadow).toBe("");
+    const keyInputNode3 = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef2);
+    expect(keyInputNode3.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    const valueInputNode3 = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef2);
+    expect(valueInputNode3.style.boxShadow).toBe("");
   });
 });

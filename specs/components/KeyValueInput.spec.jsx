@@ -35,6 +35,12 @@ describe("KeyValueInput", function () {
   it("Add Button: Add", () => this.props({ addButtonText: undefined }));
   it("Disable", () => this.props({ enabled: false }));
   it("Enable", () => this.props({ enabled: true }));
+  it("Status: success", () => this.props({ status: "success" }));
+  it("Status: error", () => this.props({ status: "error" }));
+  it("Clear Status", () => this.props({ status: undefined }));
+  it("Valid if all keys unique", () => this.props({ uniqueKeys: true }));
+  it("Valid with any non-empty keys", () => this.props({ uniqueKeys: false }));
+
 
   /**
    * Documentation (Markdown)
