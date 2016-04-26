@@ -104,7 +104,7 @@ export default class Field extends ReactCSS.Component {
       return (
         <Text
           color={labelColor}
-          fontSize={16}
+          fontSize={1}
           fontWeight={"bold"}
           ref={c => this.labelRef = c}
         >
@@ -121,7 +121,7 @@ export default class Field extends ReactCSS.Component {
         <div style={this.styles().Error}>
           <Text
             color={Colors.danger}
-            fontSize={16}
+            fontSize={1}
             ref={c => this.errorRef = c}
           >
             {this.props.error}
@@ -139,7 +139,7 @@ export default class Field extends ReactCSS.Component {
           {" "}
           <Text
             color={Colors.danger}
-            fontSize={18}
+            fontSize={1}
             ref={c => this.requiredRef = c}
           >
             {"*"}

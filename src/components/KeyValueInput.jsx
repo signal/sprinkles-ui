@@ -163,7 +163,7 @@ export default class KeyValueInput extends ReactCSS.Component {
         <span style={this.styles().TextInput}>
           <Text
             color={textColor}
-            fontSize={14}
+            fontSize={0.8}
             ref={(c) => this.keyLabelRef = c}
           >
             {this.props.keyLabel}
@@ -172,7 +172,7 @@ export default class KeyValueInput extends ReactCSS.Component {
         <span style={this.styles().TextInput}>
           <Text
             color={textColor}
-            fontSize={14}
+            fontSize={0.8}
             ref={(c) => this.valueLabelRef = c}
           >
             {this.props.valueLabel}

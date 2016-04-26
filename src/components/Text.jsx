@@ -15,7 +15,7 @@ export default class Text extends ReactCSS.Component {
     return {
       default: {
         Text: {
-          fontSize: 12,
+          fontSize: "1rem",
         },
       },
       color: {
@@ -25,7 +25,7 @@ export default class Text extends ReactCSS.Component {
       },
       fontSize: {
         Text: {
-          fontSize: this.props.fontSize,
+          fontSize: `${this.props.fontSize}rem`,
         },
       },
       fontWeight: {

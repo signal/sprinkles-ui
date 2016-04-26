@@ -66,7 +66,7 @@ export default class TextListItem extends ReactCSS.Component {
     return (
       <div style={this.styles().Text}>
         <Text
-          fontSize={16}
+          fontSize={1}
         >
           {this.props.text}
         </Text>

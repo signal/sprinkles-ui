@@ -65,7 +65,7 @@ export default class Alert extends ReactCSS.Component {
       return (
         <Text
           color={TextColors.light}
-          fontSize={16}
+          fontSize={1}
           fontWeight={"bold"}
           ref={c => this.titleRef = c}
         >
@@ -83,7 +83,7 @@ export default class Alert extends ReactCSS.Component {
           {" "}
           <Text
             color={TextColors.light}
-            fontSize={16}
+            fontSize={1}
             ref={c => this.detailsRef = c}
           >
             {this.props.details}

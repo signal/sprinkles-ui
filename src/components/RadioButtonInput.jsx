@@ -132,7 +132,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
           <span style={this.styles().Text}>
             <Text
               color={textColor}
-              fontSize={16}
+              fontSize={1}
             >
               {item.name}
             </Text>
