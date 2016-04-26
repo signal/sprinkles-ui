@@ -71,7 +71,7 @@ describe("Alert", function () {
     children:
       <Text
         color={"white"}
-        fontSize={20}
+        fontSize={1.5}
       >
         {"You dun broke it"}
       </Text>,
@@ -90,7 +90,7 @@ describe("Alert", function () {
           >
               <Text
                 color={"white"}
-                fontSize={14}
+                fontSize={0.8}
               >
                 {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
               </Text>
@@ -102,7 +102,7 @@ describe("Alert", function () {
           >
             <Text
               color={"white"}
-              fontSize={14}
+              fontSize={0.8}
             >
                 {"◼︎ At least 1 numeric character"}
             </Text>

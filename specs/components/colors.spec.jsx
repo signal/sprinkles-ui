@@ -43,7 +43,7 @@ describe("Colors", function () {
         <div>
           <Text
             fontWeight={"bold"}
-            fontSize={18}
+            fontSize={1}
           >
             {"Colors"}
           </Text>
@@ -63,7 +63,7 @@ describe("Colors", function () {
         <div style={{ marginTop: 20 }}>
           <Text
             fontWeight={"bold"}
-            fontSize={18}
+            fontSize={1}
           >
             {"ButtonColors"}
           </Text>
@@ -79,7 +79,7 @@ describe("Colors", function () {
         <div style={{ marginTop: 20 }}>
           <Text
             fontWeight={"bold"}
-            fontSize={18}
+            fontSize={1}
           >
             {"TextColors"}
           </Text>
@@ -99,7 +99,7 @@ describe("Colors", function () {
         <div style={{ marginTop: 20 }}>
           <Text
             fontWeight={"bold"}
-            fontSize={18}
+            fontSize={1}
           >
             {"BackgroundColors"}
           </Text>

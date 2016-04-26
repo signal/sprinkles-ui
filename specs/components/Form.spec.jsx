@@ -73,7 +73,7 @@ describe("Form", function () {
           >
               <Text
                 color={"white"}
-                fontSize={14}
+                fontSize={0.8}
               >
                 {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
               </Text>
@@ -85,7 +85,7 @@ describe("Form", function () {
           >
             <Text
               color={"white"}
-              fontSize={14}
+              fontSize={0.8}
             >
                 {"◼︎ At least 1 numeric character"}
             </Text>
@@ -116,7 +116,7 @@ describe("Form", function () {
             >
                 <Text
                   color={"white"}
-                  fontSize={14}
+                  fontSize={0.8}
                 >
                   {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
                 </Text>
@@ -128,7 +128,7 @@ describe("Form", function () {
             >
               <Text
                 color={"white"}
-                fontSize={14}
+                fontSize={0.8}
               >
                   {"◼︎ At least 1 numeric character"}
               </Text>
