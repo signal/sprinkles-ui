@@ -1,12 +1,17 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import { BackgroundColors } from "../shared/colors";
+import Text from "./Text";
+import {
+  BackgroundColors,
+  TextColors,
+} from "../shared/colors";
 
 export default class NavBar extends ReactCSS.Component {
   displayName = "NavBar";
 
   static propTypes = {
     position: React.PropTypes.oneOf(["fixed", undefined]),
+    title: React.PropTypes.string,
   }
 
   classes() {
@@ -37,7 +42,15 @@ export default class NavBar extends ReactCSS.Component {
 
   render() {
     return (
-      <div style={this.styles().NavBar}></div>
+      <div style={this.styles().NavBar}>
+        <Text
+          fontSize={1.5}
+          color={TextColors.light}
+          ref={c => this.titleRef = c}
+        >
+          {this.props.title}
+        </Text>
+      </div>
     );
   }
 }

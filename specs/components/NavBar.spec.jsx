@@ -11,12 +11,16 @@ describe("NavBar", function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-      <NavBar />
+      <NavBar
+        title={"A Cool App"}
+      />
     ).width("100%");
   });
 
   it("Fixed position", () => this.props({ position: "fixed" }));
   it("Relative position", () => this.props({ position: undefined }));
+  it("Title: My App", () => this.props({ title: "My App" }));
+  it("Title: A Cool App", () => this.props({ title: "A Cool App" }));
 
   /**
    * Documentation (Markdown)
