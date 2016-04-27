@@ -72,11 +72,11 @@ export default class TextInput extends ReactCSS.Component {
     return {
       default: {
         TextInput: {
-          fontSize: "1rem",
-          padding: "10px",
+          fontSize: "0.875rem",
+          padding: "0.5rem",
           width: "100%",
           border: "1px solid #ccc",
-          borderRadius: 3,
+          borderRadius: 4,
           outline: "none",
           color: TextColors.primary,
         },

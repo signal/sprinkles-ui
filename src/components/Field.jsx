@@ -34,12 +34,10 @@ export default class Field extends ReactCSS.Component {
           color: TextColors.primary,
         },
         Error: {
-          margin: "10px 0",
         },
       },
       haveLabel: {
         Label: {
-          margin: "10px 0",
         },
       },
       disabled: {
@@ -104,8 +102,7 @@ export default class Field extends ReactCSS.Component {
       return (
         <Text
           color={labelColor}
-          fontSize={1}
-          fontWeight={"bold"}
+          fontSize={0.875}
           ref={c => this.labelRef = c}
         >
           {this.props.label}
@@ -121,7 +118,7 @@ export default class Field extends ReactCSS.Component {
         <div style={this.styles().Error}>
           <Text
             color={Colors.danger}
-            fontSize={1}
+            fontSize={0.875}
             ref={c => this.errorRef = c}
           >
             {this.props.error}
@@ -139,7 +136,7 @@ export default class Field extends ReactCSS.Component {
           {" "}
           <Text
             color={Colors.danger}
-            fontSize={1}
+            fontSize={0.875}
             ref={c => this.requiredRef = c}
           >
             {"*"}
