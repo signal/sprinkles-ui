@@ -17,6 +17,7 @@ describe("Sprinkles UI", () => {
     require("./components/EmailInput.spec");
     require("./components/RadioButtonInput.spec");
     require("./components/KeyValueInput.spec");
+    require("./components/SelectInput.spec");
   });
   describe("List and List Item", () => {
     require("./components/List.spec");

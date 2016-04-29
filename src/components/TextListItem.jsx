@@ -23,7 +23,7 @@ export default class TextListItem extends ReactCSS.Component {
       default: {
         Text: {
           padding: 10,
-          background: "#FEFEFE",
+          background: BackgroundColors.primary,
           color: TextColors.primary,
         },
       },
