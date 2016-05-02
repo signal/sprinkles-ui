@@ -11,8 +11,11 @@ describe("SecondaryNav", function () {
   before(() => {
     const itemStyle = {
       flex: 1,
+      maxWidth: 55,
+      textAlign: "center",
     };
-    const leftItems = ["L Item 1", "L Item 2"];
+    const leftItems = ["Bread", ">", "Crumbs"];
+    const rightItems = ["User ▾"];
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
       <SecondaryNav
@@ -27,8 +30,19 @@ describe("SecondaryNav", function () {
               </div>
           ))
         }
+        rightItems={
+          rightItems.map((item, i) =>
+            (
+              <div
+                key={i}
+                style={itemStyle}
+              >
+                {item}
+              </div>
+          ))
+        }
       />
-    ).width("100%");
+    ).width("100%").height(60);
   });
 
   /**
