@@ -1,5 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
+import { BackgroundColors } from "../shared/colors";
 
 export default class SecondaryNav extends ReactCSS.Component {
   displayName = "SecondaryNav";
@@ -18,6 +19,7 @@ export default class SecondaryNav extends ReactCSS.Component {
           height: "100%",
           alignItems: "center",
           padding: "0 20px",
+          background: BackgroundColors.primary,
         },
         LeftItems: {
           flex: 1,
