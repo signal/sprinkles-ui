@@ -24,6 +24,10 @@ describe("Sprinkles UI", () => {
     require("./components/ListItem.spec");
     require("./components/TextListItem.spec");
   });
+  describe("Navigation", () => {
+    require("./components/SecondaryNav.spec");
+    require("./components/NavBar.spec");
+  });
   describe("Buttons", () => {
     require("./components/Button.spec");
     require("./components/ButtonGroup.spec");
@@ -34,7 +38,6 @@ describe("Sprinkles UI", () => {
   require("./components/VectorGraphic.spec");
   require("./components/Version.spec");
   require("./components/Drawer.spec");
-  require("./components/NavBar.spec");
   require("./components/colors.spec");
   require("./components/ButtonGroup.spec");
   require("./components/Panel.spec");
