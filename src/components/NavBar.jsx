@@ -18,9 +18,14 @@ export default class NavBar extends ReactCSS.Component {
     return {
       default: {
         NavBar: {
-          width: "100%",
           height: 55,
           background: BackgroundColors.navBar,
+          display: "flex",
+          alignItems: "center",
+          padding: "0 20px",
+        },
+        Title: {
+          flex: 1,
         },
       },
       fixed: {
@@ -43,13 +48,17 @@ export default class NavBar extends ReactCSS.Component {
   render() {
     return (
       <div style={this.styles().NavBar}>
-        <Text
-          fontSize={1.5}
-          color={TextColors.light}
-          ref={c => this.titleRef = c}
+        <div
+          style={this.styles().Title}
         >
-          {this.props.title}
-        </Text>
+          <Text
+            fontSize={1.5}
+            color={TextColors.light}
+            ref={c => this.titleRef = c}
+          >
+            {this.props.title}
+          </Text>
+        </div>
       </div>
     );
   }

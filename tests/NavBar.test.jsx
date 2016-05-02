@@ -25,8 +25,10 @@ describe("List", () => {
       <NavBar />
     );
     const navBarNode = ReactDOM.findDOMNode(navBarComponent);
-    expect(navBarNode.style.width).toBe("100%");
     expect(navBarNode.style.height).toBe("55px");
+    expect(navBarNode.style.display).toBe("flex");
+    expect(navBarNode.style.alignItems).toBe("center");
+    expect(navBarNode.style.padding).toBe("0px 20px");
     expect(color(navBarNode.style.background).hexString()).toBe(BackgroundColors.navBar);
   });
 
