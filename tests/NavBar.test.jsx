@@ -29,7 +29,7 @@ describe("List", () => {
     expect(navBarNode.style.display).toBe("flex");
     expect(navBarNode.style.alignItems).toBe("center");
     expect(navBarNode.style.padding).toBe("0px 20px");
-    expect(color(navBarNode.style.background).hexString()).toBe(BackgroundColors.navBar);
+    expect(color(navBarNode.style.background).hexString()).toBe(BackgroundColors.secondaryNavBar);
   });
 
   it("does render a fixed NavBar", () => {

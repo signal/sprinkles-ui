@@ -20,7 +20,7 @@ export default class NavBar extends ReactCSS.Component {
       default: {
         NavBar: {
           height: 55,
-          background: BackgroundColors.navBar,
+          background: BackgroundColors.secondaryNavBar,
           display: "flex",
           alignItems: "center",
           padding: "0 20px",

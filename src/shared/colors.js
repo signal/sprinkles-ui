@@ -21,7 +21,8 @@ export const BackgroundColors = {
   primary: "#FEFEFE",
   secondary: "#F8FAFB",
   accent: "#B3E5FC",
-  navBar: "#212121",
+  primaryNavBar: "#2B333D",
+  secondaryNavBar: "#2B333D",
 };
 
 export const StructuralColors = {
