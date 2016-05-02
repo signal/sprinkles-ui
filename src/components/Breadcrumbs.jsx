@@ -1,6 +1,7 @@
 import React from "react";
 import ReactCSS from "reactcss";
 import Text from "./Text";
+import { TextColors } from "../shared/colors";
 import { Map } from "immutable";
 
 export default class Breadcrumbs extends ReactCSS.Component {
@@ -60,7 +61,14 @@ export default class Breadcrumbs extends ReactCSS.Component {
     this.pathRefs = new Map();
     return this.props.path.map((item, i) => {
       const isLast = i === this.props.path.length - 1;
-      const divider = !isLast ? (<Text>{" / "}</Text>) : undefined;
+      const divider = !isLast ? (
+        <Text
+          color={TextColors.primary}
+          fontSize={1.5}
+        >
+          {" / "}
+        </Text>
+      ) : undefined;
       const textDecoration = i === this.state.isHovered && !isLast ? "underline" : undefined;
       return (
         <span
@@ -74,7 +82,9 @@ export default class Breadcrumbs extends ReactCSS.Component {
           style={!isLast ? this.styles().ClickableCrumb : this.styles().Crumb}
         >
           <Text
+            color={TextColors.primary}
             textDecoration={textDecoration}
+            fontSize={1.5}
           >
             {item.display}
           </Text>
