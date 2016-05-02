@@ -92,4 +92,31 @@ describe("Breadcrumbs", () => {
     TestUtils.Simulate.mouseOut(lvl1Node);
     expect(lvl1Node.style.textDecoration).toBe("");
   });
+
+  it("does not trigger a click event on leaf node", () => {
+    const mockHandleClick = jest.fn();
+    const path = [
+      {
+        display: "Level 1",
+        url: "/lvl-1",
+      },
+      {
+        display: "Level 2",
+        url: "/lvl-1/lvl-2",
+      },
+      {
+        display: "Level 3",
+        url: "/lvl-1/lvl-2/lvl-3",
+      },
+    ];
+    const breadcrumbsComponent = TestUtils.renderIntoDocument(
+      <Breadcrumbs
+        onClick={mockHandleClick}
+        path={path}
+      />
+    );
+    const leafNode = ReactDOM.findDOMNode(breadcrumbsComponent.pathRefs.get(2));
+    TestUtils.Simulate.click(leafNode);
+    expect(mockHandleClick).not.toBeCalled();
+  });
 });

@@ -65,7 +65,7 @@ export default class Breadcrumbs extends ReactCSS.Component {
       return (
         <span
           key={i}
-          onClick={this.handleClick.bind(this, item)}
+          onClick={!isLast ? this.handleClick.bind(this, item) : undefined}
           onMouseOver={this.handleMouseOver.bind(this, i)}
           onMouseOut={this.handleMouseOut.bind(this)}
           ref={c => {
