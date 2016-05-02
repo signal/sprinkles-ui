@@ -2,6 +2,9 @@
 jest.dontMock("../src/components/SelectInput");
 jest.dontMock("../src/components/TextListItem");
 jest.dontMock("../src/components/Text");
+jest.dontMock("../src/components/List");
+jest.dontMock("../src/components/ListItem");
+jest.dontMock("../src/components/Popover");
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -30,5 +33,28 @@ describe("SelectInput", () => {
     const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     expect(displayNode.textContent).toBe("--");
     expect(color(displayNode.style.background).hexString()).toBe(BackgroundColors.primary);
+  });
+
+  it("Does contain a list of items to select", () => {
+    const items = [
+      {
+        key: "key",
+        value: "value",
+      },
+    ];
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput items={items} />
+    );
+    expect(selectInputComponent.itemsRef.listItemRefs.count()).toBe(1);
+  });
+
+  it("Does show a popover when SelectInput is clicked", () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    TestUtils.Simulate.click(selectInputNode);
+    const selectInputPopeverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef);
+    expect(selectInputPopeverNode.style.display).toBe("block");
   });
 });
