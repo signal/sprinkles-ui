@@ -1,4 +1,5 @@
 /* eslint func-names: "off" */
+/* eslint max-len: "off" */
 
 import React from "react";
 import loremIpsum from "lorem-ipsum";
@@ -45,6 +46,10 @@ describe("Text", function () {
 
   it("Font Weight: Bold", () => this.props({ fontWeight: "700" }));
   it("Font Weight: Standard", () => this.props({ fontWeight: "400" }));
+  it("Text Decoration: underline", () => this.props({ textDecoration: "underline" }));
+  it("Text Decoration: overline", () => this.props({ textDecoration: "overline" }));
+  it("Text Decoration: line-through", () => this.props({ textDecoration: "line-through" }));
+  it("Text Decoration: none", () => this.props({ textDecoration: undefined }));
 
   /**
    * Documentation (Markdown)
@@ -59,6 +64,8 @@ describe("Text", function () {
   - **children** *React.PropTypes.node* (optional) child components or text nodes
   - **color** *React.PropTypes.string* (optional) text color
   - **fontSize** *React.PropTypes.string* (optional) text size
+  - **fontWeight** *React.PropTypes.string* (optional) text weight
+  - **textDecoration** *React.PropTypes.oneOf(["underline", "overline", "line-through"])* (optional) add text decoration
 
   `);
 });

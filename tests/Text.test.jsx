@@ -30,4 +30,34 @@ describe("Text", () => {
     const textNode = ReactDOM.findDOMNode(textComponent);
     expect(textNode.style.fontWeight).toEqual("bold");
   });
+
+  it("Does render underlined text", () => {
+    const text = "howdy";
+    const decoration = "underline";
+    const textComponent = TestUtils.renderIntoDocument(
+        <Text textDecoration={decoration}>{text}</Text>
+    );
+    const textNode = ReactDOM.findDOMNode(textComponent);
+    expect(textNode.style.textDecoration).toEqual(decoration);
+  });
+
+  it("Does render overlined text", () => {
+    const text = "howdy";
+    const decoration = "overline";
+    const textComponent = TestUtils.renderIntoDocument(
+        <Text textDecoration={decoration}>{text}</Text>
+    );
+    const textNode = ReactDOM.findDOMNode(textComponent);
+    expect(textNode.style.textDecoration).toEqual(decoration);
+  });
+
+  it("Does render line-through text", () => {
+    const text = "howdy";
+    const decoration = "line-through";
+    const textComponent = TestUtils.renderIntoDocument(
+        <Text textDecoration={decoration}>{text}</Text>
+    );
+    const textNode = ReactDOM.findDOMNode(textComponent);
+    expect(textNode.style.textDecoration).toEqual(decoration);
+  });
 });

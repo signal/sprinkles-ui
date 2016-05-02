@@ -9,6 +9,7 @@ export default class Text extends ReactCSS.Component {
     color: React.PropTypes.string,
     fontSize: React.PropTypes.number,
     fontWeight: React.PropTypes.string,
+    textDecoration: React.PropTypes.oneOf(["underline", "overline", "line-through"]),
   };
 
   classes() {
@@ -33,6 +34,11 @@ export default class Text extends ReactCSS.Component {
           fontWeight: this.props.fontWeight,
         },
       },
+      textDecoration: {
+        Text: {
+          textDecoration: this.props.textDecoration,
+        },
+      },
     };
   }
 
@@ -41,6 +47,7 @@ export default class Text extends ReactCSS.Component {
       color: !!this.props.color,
       fontSize: !!this.props.fontSize,
       fontWeight: !!this.props.fontWeight,
+      textDecoration: !!this.props.textDecoration,
     });
   }
 
