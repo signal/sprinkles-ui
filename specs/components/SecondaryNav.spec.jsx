@@ -9,9 +9,25 @@ describe("SecondaryNav", function () {
   `); // Markdown.
 
   before(() => {
+    const itemStyle = {
+      flex: 1,
+    };
+    const leftItems = ["L Item 1", "L Item 2"];
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-      <SecondaryNav />
+      <SecondaryNav
+        leftItems={
+          leftItems.map((item, i) =>
+            (
+              <div
+                key={i}
+                style={itemStyle}
+              >
+                {item}
+              </div>
+          ))
+        }
+      />
     ).width("100%");
   });
 

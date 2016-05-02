@@ -2,7 +2,7 @@
 jest.dontMock("../src/components/SecondaryNav");
 
 import React from "react";
-// import ReactDOM from "react-dom";
+import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -14,5 +14,15 @@ describe("List", () => {
       <SecondaryNav />
     );
     expect(secNavComponent).toBeDefined();
+  });
+
+  it("does render left children", () => {
+    const text = "left text";
+    const secNavComponent = TestUtils.renderIntoDocument(
+      <SecondaryNav leftItems={<div>{text}</div>} />
+    );
+    const leftItemsNode = ReactDOM.findDOMNode(secNavComponent.leftItemsRef);
+    expect(leftItemsNode.textContent).toBe(text);
+    expect(leftItemsNode.style.display).toBe("flex");
   });
 });
