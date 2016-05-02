@@ -52,4 +52,22 @@ describe("List", () => {
     const titleNode = ReactDOM.findDOMNode(navBarComponent.titleRef);
     expect(titleNode.textContent).toBe(titleText);
   });
+
+  it("does not render title if not set", () => {
+    const navBarComponent = TestUtils.renderIntoDocument(
+      <NavBar />
+    );
+    expect(navBarComponent.titleRef).not.toBeDefined();
+  });
+
+  it("does render children", () => {
+    const text = "Menu Item";
+    const navBarComponent = TestUtils.renderIntoDocument(
+      <NavBar>
+        <div>{text}</div>
+      </NavBar>
+    );
+    const navBarNode = ReactDOM.findDOMNode(navBarComponent);
+    expect(navBarNode.textContent).toBe(text);
+  });
 });

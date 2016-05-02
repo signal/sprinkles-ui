@@ -2,6 +2,8 @@
 
 import React from "react";
 import NavBar from "../../src/components/NavBar";
+import Text from "../../src/components/Text";
+import { TextColors } from "../../src/shared/colors";
 
 describe("NavBar", function () {
   this.header(`
@@ -13,7 +15,13 @@ describe("NavBar", function () {
     this.load(
       <NavBar
         title={"Title"}
-      />
+      >
+        <Text
+          color={TextColors.light}
+        >
+          John
+        </Text>
+      </NavBar>
     ).width("100%");
   });
 

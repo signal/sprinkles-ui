@@ -10,6 +10,7 @@ export default class NavBar extends ReactCSS.Component {
   displayName = "NavBar";
 
   static propTypes = {
+    children: React.PropTypes.node,
     position: React.PropTypes.oneOf(["fixed", undefined]),
     title: React.PropTypes.string,
   }
@@ -26,6 +27,12 @@ export default class NavBar extends ReactCSS.Component {
         },
         Title: {
           flex: 1,
+        },
+        NavItems: {
+          flex: 3,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-end",
         },
       },
       fixed: {
@@ -45,9 +52,9 @@ export default class NavBar extends ReactCSS.Component {
     });
   }
 
-  render() {
-    return (
-      <div style={this.styles().NavBar}>
+  renderTitle() {
+    if (this.props.title) {
+      return (
         <div
           style={this.styles().Title}
         >
@@ -58,6 +65,20 @@ export default class NavBar extends ReactCSS.Component {
           >
             {this.props.title}
           </Text>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    return (
+      <div style={this.styles().NavBar}>
+        {this.renderTitle()}
+        <div
+          style={this.styles().NavItems}
+        >
+          {this.props.children}
         </div>
       </div>
     );
