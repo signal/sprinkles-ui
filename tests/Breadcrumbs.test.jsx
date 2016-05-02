@@ -65,4 +65,31 @@ describe("Breadcrumbs", () => {
     TestUtils.Simulate.click(lvl1Node);
     expect(mockHandleClick).toBeCalledWith(path[0]);
   });
+
+  it("does underline crumbs when hovered", () => {
+    const path = [
+      {
+        display: "Level 1",
+        url: "/lvl-1",
+      },
+      {
+        display: "Level 2",
+        url: "/lvl-1/lvl-2",
+      },
+      {
+        display: "Level 3",
+        url: "/lvl-1/lvl-2/lvl-3",
+      },
+    ];
+    const breadcrumbsComponent = TestUtils.renderIntoDocument(
+      <Breadcrumbs
+        path={path}
+      />
+    );
+    const lvl1Node = ReactDOM.findDOMNode(breadcrumbsComponent.pathRefs.get(0));
+    TestUtils.Simulate.mouseOver(lvl1Node);
+    expect(lvl1Node.children[0].style.textDecoration).toBe("underline");
+    TestUtils.Simulate.mouseOut(lvl1Node);
+    expect(lvl1Node.style.textDecoration).toBe("");
+  });
 });

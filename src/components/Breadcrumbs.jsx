@@ -20,6 +20,38 @@ export default class Breadcrumbs extends ReactCSS.Component {
     onClick: () => {},
   }
 
+  constructor() {
+    super();
+    this.state = {
+      isHovered: undefined,
+    };
+  }
+
+  classes() {
+    return {
+      default: {
+        Crumb: {
+          cursor: "default",
+        },
+        ClickableCrumb: {
+          cursor: "pointer",
+        },
+      },
+    };
+  }
+
+  handleMouseOver(i) {
+    this.setState({
+      isHovered: i,
+    });
+  }
+
+  handleMouseOut() {
+    this.setState({
+      isHovered: undefined,
+    });
+  }
+
   handleClick(itemData) {
     this.props.onClick(itemData);
   }
@@ -27,16 +59,23 @@ export default class Breadcrumbs extends ReactCSS.Component {
   renderPath() {
     this.pathRefs = new Map();
     return this.props.path.map((item, i) => {
-      const divider = i !== this.props.path.length - 1 ? (<Text>{" / "}</Text>) : undefined;
+      const isLast = i === this.props.path.length - 1;
+      const divider = !isLast ? (<Text>{" / "}</Text>) : undefined;
+      const textDecoration = i === this.state.isHovered && !isLast ? "underline" : undefined;
       return (
         <span
           key={i}
           onClick={this.handleClick.bind(this, item)}
+          onMouseOver={this.handleMouseOver.bind(this, i)}
+          onMouseOut={this.handleMouseOut.bind(this)}
           ref={c => {
             this.pathRefs = this.pathRefs.set(i, c);
           }}
+          style={!isLast ? this.styles().ClickableCrumb : this.styles().Crumb}
         >
-          <Text>
+          <Text
+            textDecoration={textDecoration}
+          >
             {item.display}
           </Text>
           <span>{divider}</span>
