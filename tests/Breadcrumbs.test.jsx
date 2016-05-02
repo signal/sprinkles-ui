@@ -38,4 +38,31 @@ describe("Breadcrumbs", () => {
     const breadcrumbsNode = ReactDOM.findDOMNode(breadcrumbsComponent);
     expect(breadcrumbsNode.textContent).toBe("Level 1 / Level 2 / Level 3");
   });
+
+  it("Does trigger a click event when a non-leaf path is clicked", () => {
+    const mockHandleClick = jest.fn();
+    const path = [
+      {
+        display: "Level 1",
+        url: "/lvl-1",
+      },
+      {
+        display: "Level 2",
+        url: "/lvl-1/lvl-2",
+      },
+      {
+        display: "Level 3",
+        url: "/lvl-1/lvl-2/lvl-3",
+      },
+    ];
+    const breadcrumbsComponent = TestUtils.renderIntoDocument(
+      <Breadcrumbs
+        onClick={mockHandleClick}
+        path={path}
+      />
+    );
+    const lvl1Node = ReactDOM.findDOMNode(breadcrumbsComponent.pathRefs.get(0));
+    TestUtils.Simulate.click(lvl1Node);
+    expect(mockHandleClick).toBeCalledWith(path[0]);
+  });
 });

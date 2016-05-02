@@ -11,6 +11,9 @@ describe("Breadcrumbs", function () {
   `); // Markdown.
 
   before(() => {
+    const handleClick = (itemData) => {
+      console.log(`Item Clicked: ${JSON.stringify(itemData, null, 2)}`);
+    };
     const path = [
       {
         display: "Level 1",
@@ -27,6 +30,7 @@ describe("Breadcrumbs", function () {
     ];
     this.load(
       <Breadcrumbs
+        onClick={handleClick}
         path={path}
       />
     ).width("100%");
