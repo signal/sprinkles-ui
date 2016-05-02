@@ -36,4 +36,6 @@ describe("Sprinkles UI", () => {
   require("./components/Drawer.spec");
   require("./components/NavBar.spec");
   require("./components/colors.spec");
+  require("./components/ButtonGroup.spec");
+  require("./components/Panel.spec");
 });
