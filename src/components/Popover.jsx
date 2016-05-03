@@ -111,17 +111,26 @@ export default class Popover extends ReactCSS.Component {
     }
   }
 
+  renderCloseLayer() {
+    if (this.props.useLayerForClickAway) {
+      return (
+        <div
+          style={this.styles().CloseLayer}
+          onClick={this.props.onRequestClose}
+          ref={c => this.closeLayerRef = c}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
         <div style={this.styles().Popover}>
           <div style={this.styles().Popover}>
             {this.props.children}
           </div>
-          <div
-            style={this.styles().CloseLayer}
-            onClick={this.props.useLayerForClickAway ? this.props.onRequestClose : undefined}
-            ref={c => this.closeLayerRef = c}
-          />
+          {this.renderCloseLayer()}
         </div>
     );
   }

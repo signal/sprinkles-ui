@@ -139,4 +139,11 @@ describe("Popover", () => {
     TestUtils.Simulate.click(closeLayerNode);
     expect(mockHandleRequestClose).toBeCalled();
   });
+
+  it("Does not render a self closing popover by default", () => {
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover />
+    );
+    expect(popoverComponent.closeLayerRef).not.toBeDefined();
+  });
 });

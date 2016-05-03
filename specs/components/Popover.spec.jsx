@@ -142,6 +142,8 @@ describe("Popover", function () {
   - **anchorOrigin** *React.PropTypes.object* (optional) point on the anchorEl to anchor against
   - **children** *React.PropTypes.node* (optional) child components
   - **open** *React.PropTypes.bool* (optional) popover open state
+  - **onRequestClose** *React.PropTypes.func* (optional) callback called when popover is requesting to close
+  - **useLayerForClickAway** *React.PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
 
   `);
 });
