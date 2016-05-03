@@ -148,4 +148,23 @@ describe("Dropdown", () => {
     );
     expect(dropdownComponent.popoverRef.closeLayerRef).not.toBeDefined();
   });
+
+  it("Does trigger a click event when an item is clicked", () => {
+    const mockHandleClick = jest.fn();
+    const items = [
+      {
+        key: "key",
+        value: "value",
+      },
+    ];
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown
+        items={items}
+        onClick={mockHandleClick}
+      />
+    );
+    const listItem = ReactDOM.findDOMNode(dropdownComponent.itemsRef.listItemRefs.get(0));
+    TestUtils.Simulate.click(listItem);
+    expect(mockHandleClick).toBeCalledWith(items[0]);
+  });
 });

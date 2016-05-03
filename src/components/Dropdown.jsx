@@ -19,6 +19,7 @@ export default class Dropdown extends ReactCSS.Component {
       })
     ),
     open: React.PropTypes.bool,
+    onClick: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
     useLayerForClickAway: React.PropTypes.bool,
   }
@@ -26,6 +27,11 @@ export default class Dropdown extends ReactCSS.Component {
   static defaultProps = {
     items: [],
     open: false,
+    onClick: () => {},
+  }
+
+  handleClick(item) {
+    this.props.onClick(item);
   }
 
   renderItems() {
@@ -53,7 +59,10 @@ export default class Dropdown extends ReactCSS.Component {
     }
     return this.props.items.map((item, i) =>
       (
-        <ListItem key={i}>
+        <ListItem
+          key={i}
+          onClick={this.handleClick.bind(this, item)}
+        >
           <TextListItem text={item.value} />
         </ListItem>
       )

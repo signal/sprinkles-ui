@@ -1,4 +1,5 @@
 /* eslint func-names: "off" */
+/* eslint no-console: "off" */
 
 import React from "react";
 import Dropdown from "../../src/components/Dropdown";
@@ -14,6 +15,7 @@ class DropdownWrapper extends React.Component {
         value: React.PropTypes.string,
       })
     ),
+    onAnchorClick: React.PropTypes.func,
     onClick: React.PropTypes.func,
     open: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
@@ -36,7 +38,7 @@ class DropdownWrapper extends React.Component {
   }
 
   handleClick(e) {
-    this.props.onClick(e);
+    this.props.onAnchorClick(e);
   }
 
   render() {
@@ -53,6 +55,7 @@ class DropdownWrapper extends React.Component {
           anchorOrigin={this.props.anchorOrigin}
           open={this.props.open}
           items={this.props.items}
+          onClick={this.props.onClick}
           onRequestClose={this.props.onRequestClose}
           useLayerForClickAway={this.props.useLayerForClickAway}
         />
@@ -67,10 +70,16 @@ describe("Dropdown", function () {
   `); // Markdown.
 
   before(() => {
-    const handleClick = (e) => {
+    const handleAnchorClick = (e) => {
       this.props({
         anchorEl: e.currentTarget,
         open: true,
+      });
+    };
+    const handleClick = (item) => {
+      console.log("Item Clicked", item);
+      this.props({
+        open: false,
       });
     };
     const handleRequestClose = () => this.props({ open: false });
@@ -88,6 +97,7 @@ describe("Dropdown", function () {
         ]}
         open={false}
         onClick={handleClick}
+        onAnchorClick={handleAnchorClick}
         onRequestClose={handleRequestClose}
         useLayerForClickAway={true}
       />
