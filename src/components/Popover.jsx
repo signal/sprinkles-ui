@@ -7,7 +7,10 @@ export default class Popover extends ReactCSS.Component {
 
   static propTypes = {
     anchorEl: React.PropTypes.object,
-    anchorOrigin: React.PropTypes.object,
+    anchorOrigin: React.PropTypes.shape({
+      horizontal: React.PropTypes.oneOf(["left", "right"]),
+      vertical: React.PropTypes.oneOf(["top", "bottom"]),
+    }),
     children: React.PropTypes.node,
     open: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
