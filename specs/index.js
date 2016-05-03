@@ -36,6 +36,7 @@ describe("Sprinkles UI", () => {
   require("./components/Alert.spec");
   require("./components/Text.spec");
   require("./components/Popover.spec");
+  require("./components/Dropdown.spec");
   require("./components/VectorGraphic.spec");
   require("./components/Version.spec");
   require("./components/Drawer.spec");
