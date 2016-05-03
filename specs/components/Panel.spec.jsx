@@ -4,9 +4,9 @@
 import React from "react";
 import Panel from "../../src/components/Panel";
 
-describe("Pannel", function () {
+describe("Panel", function () {
   this.header(`
-  ## Pannel
+  ## Panel
   `); // Markdown.
 
   this.loadPanel = (props) => {
