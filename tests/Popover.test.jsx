@@ -18,6 +18,7 @@ describe("Popover", () => {
           bottom: 2,
           left: 3,
           right: 4,
+          width: 5,
         };
       },
     };
@@ -145,5 +146,17 @@ describe("Popover", () => {
       <Popover />
     );
     expect(popoverComponent.closeLayerRef).not.toBeDefined();
+  });
+
+  it("Does constrain the width to the anchorEl width", () => {
+    const fakeAnchorEl = generateFakeAnchorEl();
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        anchorEl={fakeAnchorEl}
+        contstrainWidth={true}
+      />
+    );
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
+    expect(popoverNode.style.width).toEqual("5px");
   });
 });

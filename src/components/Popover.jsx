@@ -12,12 +12,14 @@ export default class Popover extends ReactCSS.Component {
       vertical: React.PropTypes.oneOf(["top", "bottom"]),
     }),
     children: React.PropTypes.node,
+    contstrainWidth: React.PropTypes.bool,
     open: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
     useLayerForClickAway: React.PropTypes.bool,
   };
 
   static defaultProps = {
+    contstrainWidth: false,
     open: false,
     anchorOrigin: {
       horizontal: "left",
@@ -64,6 +66,7 @@ export default class Popover extends ReactCSS.Component {
     return {
       top: this.getAnchorValue(anchor, anchorOrigin.vertical),
       left: this.getAnchorValue(anchor, anchorOrigin.horizontal),
+      width: this.props.contstrainWidth ? anchor.width : undefined,
     };
   }
 
