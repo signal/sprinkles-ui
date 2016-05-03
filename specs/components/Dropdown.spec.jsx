@@ -22,9 +22,13 @@ describe("Dropdown", function () {
             value: "Thing 2",
           },
         ]}
+        open={true}
       />
-    ).width("100%");
+    );
   });
+
+  it("Close Dropdown", () => this.props({ open: false }));
+  it("Open Dropdown", () => this.props({ open: true }));
 
   /**
    * Documentation (Markdown)

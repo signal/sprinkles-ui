@@ -3,9 +3,10 @@ jest.dontMock("../src/components/Dropdown");
 jest.dontMock("../src/components/List");
 jest.dontMock("../src/components/ListItem");
 jest.dontMock("../src/components/TextListItem");
+jest.dontMock("../src/components/Popover");
 
 import React from "react";
-// import ReactDOM from "react-dom";
+import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -31,5 +32,21 @@ describe("Dropdown", () => {
       <Dropdown items={items} />
     );
     expect(dropdownComponent.itemsRef.listItemRefs.count()).toBe(1);
+  });
+
+  it("Does render a closed dropdown", () => {
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown />
+    );
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(popoverNode.style.display).toBe("none");
+  });
+
+  it("Does render an opened dropdown", () => {
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown open={true} />
+    );
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(popoverNode.style.display).toBe("block");
   });
 });

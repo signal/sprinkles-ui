@@ -3,6 +3,7 @@ import ReactCSS from "reactcss";
 import List from "./List";
 import ListItem from "./ListItem";
 import TextListItem from "./TextListItem";
+import Popover from "./Popover";
 
 export default class Dropdown extends ReactCSS.Component {
   static propTypes = {
@@ -12,19 +13,26 @@ export default class Dropdown extends ReactCSS.Component {
         value: React.PropTypes.string,
       })
     ),
+    open: React.PropTypes.bool,
   }
 
   static defaultProps = {
     items: [],
+    open: false,
   }
 
   renderItems() {
     return (
-      <List
-        ref={c => this.itemsRef = c}
+      <Popover
+        ref={c => this.popoverRef = c}
+        open={this.props.open}
       >
-        {this.renderItem()}
-      </List>
+        <List
+          ref={c => this.itemsRef = c}
+        >
+          {this.renderItem()}
+        </List>
+      </Popover>
     );
   }
 
