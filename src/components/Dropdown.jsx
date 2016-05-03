@@ -39,9 +39,10 @@ export default class Dropdown extends ReactCSS.Component {
       <Popover
         anchorEl={this.props.anchorEl}
         anchorOrigin={this.props.anchorOrigin}
-        ref={c => this.popoverRef = c}
+        constrainWidth={true}
         open={this.props.open}
         onRequestClose={this.props.onRequestClose}
+        ref={c => this.popoverRef = c}
         useLayerForClickAway={this.props.useLayerForClickAway}
       >
         <List

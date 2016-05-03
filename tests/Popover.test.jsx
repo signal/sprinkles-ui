@@ -153,7 +153,7 @@ describe("Popover", () => {
     const popoverComponent = TestUtils.renderIntoDocument(
       <Popover
         anchorEl={fakeAnchorEl}
-        contstrainWidth={true}
+        constrainWidth={true}
       />
     );
     const popoverNode = ReactDOM.findDOMNode(popoverComponent);

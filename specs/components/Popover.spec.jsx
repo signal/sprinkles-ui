@@ -13,7 +13,7 @@ class PopoverWrapper extends React.Component {
     anchorEl: React.PropTypes.object,
     anchorOrigin: React.PropTypes.object,
     children: React.PropTypes.node,
-    contstrainWidth: React.PropTypes.bool,
+    constrainWidth: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     open: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
@@ -55,7 +55,7 @@ class PopoverWrapper extends React.Component {
         <Popover
           anchorEl={this.props.anchorEl}
           anchorOrigin={this.props.anchorOrigin}
-          contstrainWidth={this.props.contstrainWidth}
+          constrainWidth={this.props.constrainWidth}
           open={this.props.open}
           onRequestClose={this.props.onRequestClose}
           useLayerForClickAway={this.props.useLayerForClickAway}
@@ -131,11 +131,11 @@ describe("Popover", function () {
   }));
 
   it("constrain width: true", () => this.props({
-    contstrainWidth: true,
+    constrainWidth: true,
   }));
 
   it("constrain width: false", () => this.props({
-    contstrainWidth: false,
+    constrainWidth: false,
   }));
 
   /**
@@ -151,7 +151,7 @@ describe("Popover", function () {
   - **anchorEl** *React.PropTypes.object* (optional) element to anchor popover (not set for absolute center)
   - **anchorOrigin** *React.PropTypes.object* (optional) point on the anchorEl to anchor against
   - **children** *React.PropTypes.node* (optional) child components
-  - **contstrainWidth** *React.PropTypes.bool* (optional) when true keeps the width of the popover the same as the parent
+  - **constrainWidth** *React.PropTypes.bool* (optional) when true keeps the width of the popover the same as the parent
   - **open** *React.PropTypes.bool* (optional) popover open state
   - **onRequestClose** *React.PropTypes.func* (optional) callback called when popover is requesting to close
   - **useLayerForClickAway** *React.PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
