@@ -127,7 +127,7 @@ describe("Popover", () => {
     expect(popoverNode.style.left).toEqual("4px");
   });
 
-  it("Does render a self closing popever", () => {
+  it("Does render a self closing popover", () => {
     const mockHandleRequestClose = jest.fn();
     const popoverComponent = TestUtils.renderIntoDocument(
       <Popover

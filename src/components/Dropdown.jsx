@@ -8,6 +8,10 @@ import Popover from "./Popover";
 export default class Dropdown extends ReactCSS.Component {
   static propTypes = {
     anchorEl: React.PropTypes.object,
+    anchorOrigin: React.PropTypes.shape({
+      horizontal: React.PropTypes.oneOf(["left", "right"]),
+      vertical: React.PropTypes.oneOf(["top", "bottom"]),
+    }),
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         key: React.PropTypes.string,
@@ -15,6 +19,8 @@ export default class Dropdown extends ReactCSS.Component {
       })
     ),
     open: React.PropTypes.bool,
+    onRequestClose: React.PropTypes.func,
+    useLayerForClickAway: React.PropTypes.bool,
   }
 
   static defaultProps = {
@@ -26,8 +32,11 @@ export default class Dropdown extends ReactCSS.Component {
     return (
       <Popover
         anchorEl={this.props.anchorEl}
+        anchorOrigin={this.props.anchorOrigin}
         ref={c => this.popoverRef = c}
         open={this.props.open}
+        onRequestClose={this.props.onRequestClose}
+        useLayerForClickAway={this.props.useLayerForClickAway}
       >
         <List
           ref={c => this.itemsRef = c}

@@ -70,4 +70,82 @@ describe("Dropdown", () => {
     expect(dropdownNode.style.top).toEqual("2px");
     expect(dropdownNode.style.left).toEqual("3px");
   });
+
+  it("Does set anchorOrigin h:left, v:bottom", () => {
+    const fakeAnchorEl = generateFakeAnchorEl();
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown
+        anchorEl={fakeAnchorEl}
+        anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+      />
+    );
+
+    // grab the DOM node so we can inspect it
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(popoverNode.style.top).toEqual("2px");
+    expect(popoverNode.style.left).toEqual("3px");
+  });
+
+  it("Does set anchorOrigin h:left, v:top", () => {
+    const fakeAnchorEl = generateFakeAnchorEl();
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown
+        anchorEl={fakeAnchorEl}
+        anchorOrigin={{ horizontal: "left", vertical: "top" }}
+      />
+    );
+    // grab the DOM node so we can inspect it
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(popoverNode.style.top).toEqual("1px");
+    expect(popoverNode.style.left).toEqual("3px");
+  });
+
+  it("Does set anchorOrigin h:right, v:bottom", () => {
+    const fakeAnchorEl = generateFakeAnchorEl();
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown
+        anchorEl={fakeAnchorEl}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      />
+    );
+    // grab the DOM node so we can inspect it
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(popoverNode.style.top).toEqual("2px");
+    expect(popoverNode.style.left).toEqual("4px");
+  });
+
+  it("Does set anchorOrigin h:right, v:top", () => {
+    const fakeAnchorEl = generateFakeAnchorEl();
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown
+        anchorEl={fakeAnchorEl}
+        anchorOrigin={{ horizontal: "right", vertical: "top" }}
+      />
+    );
+
+    // grab the DOM node so we can inspect it
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(popoverNode.style.top).toEqual("1px");
+    expect(popoverNode.style.left).toEqual("4px");
+  });
+
+  it("Does render a self closing popover", () => {
+    const mockHandleRequestClose = jest.fn();
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown
+        onRequestClose={mockHandleRequestClose}
+        useLayerForClickAway={true}
+      />
+    );
+    const closeLayerNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.closeLayerRef);
+    TestUtils.Simulate.click(closeLayerNode);
+    expect(mockHandleRequestClose).toBeCalled();
+  });
+
+  it("Does not render a self closing popover by default", () => {
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown />
+    );
+    expect(dropdownComponent.popoverRef.closeLayerRef).not.toBeDefined();
+  });
 });
