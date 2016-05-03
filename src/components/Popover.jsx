@@ -10,6 +10,8 @@ export default class Popover extends ReactCSS.Component {
     anchorOrigin: React.PropTypes.object,
     children: React.PropTypes.node,
     open: React.PropTypes.bool,
+    onRequestClose: React.PropTypes.func,
+    useLayerForClickAway: React.PropTypes.bool,
   };
 
   static defaultProps = {
@@ -34,6 +36,14 @@ export default class Popover extends ReactCSS.Component {
           zindex: zindex.Popover,
           display: "none",
           position: "fixed",
+        },
+        CloseLayer: {
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zindex: zindex.PopoverClose,
         },
       },
       open: {
@@ -103,7 +113,14 @@ export default class Popover extends ReactCSS.Component {
 
   render() {
     return (
-        <div style={this.styles().Popover}>{this.props.children}</div>
+        <div style={this.styles().Popover}>
+          {this.props.children}
+          <div
+            style={this.styles().CloseLayer}
+            onClick={this.props.useLayerForClickAway ? this.props.onRequestClose : undefined}
+            ref={c => this.closeLayerRef = c}
+          />
+        </div>
     );
   }
 }

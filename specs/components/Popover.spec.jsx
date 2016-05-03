@@ -15,6 +15,8 @@ class PopoverWrapper extends React.Component {
     children: React.PropTypes.node,
     onClick: React.PropTypes.func,
     open: React.PropTypes.bool,
+    onRequestClose: React.PropTypes.func,
+    useLayerForClickAway: React.PropTypes.bool,
   };
 
   static defaultProps = {
@@ -53,6 +55,8 @@ class PopoverWrapper extends React.Component {
           anchorEl={this.props.anchorEl}
           anchorOrigin={this.props.anchorOrigin}
           open={this.props.open}
+          onRequestClose={this.props.onRequestClose}
+          useLayerForClickAway={this.props.useLayerForClickAway}
         >
           {this.props.children}
         </Popover>
@@ -67,19 +71,31 @@ describe("Popover", function () {
   `); // Markdown.
 
   before(() => {
-    function handleClick(e) {
+    const handleClick = (e) => {
       this.props({
         anchorEl: e.currentTarget,
         open: true,
       });
-    }
+    };
 
+    const handleRequestClose = () => {
+      this.props({
+        open: false,
+      });
+    };
+
+    const popoverStyle = {
+      background: "white",
+      border: "1px solid grey",
+    };
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
       <PopoverWrapper
         onClick={handleClick.bind(this)}
+        onRequestClose={handleRequestClose}
+        useLayerForClickAway={true}
       >
-        {loremIpsum()}
+        <div style={popoverStyle}>{loremIpsum()}</div>
       </PopoverWrapper>
     );
   });
