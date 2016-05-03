@@ -22,13 +22,13 @@ export default class Dropdown extends ReactCSS.Component {
     onClick: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
     useLayerForClickAway: React.PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     items: [],
     open: false,
     onClick: () => {},
-  }
+  };
 
   handleClick(item) {
     this.props.onClick(item);

@@ -10,7 +10,6 @@ describe("PrimaryNav", function () {
   ## PrimaryNav
   `); // Markdown.
 
-  this.expanded = false;
   this.loadPrimaryNav = (props) => {
     const handleRequestExpandToggle = () => {
       const curProps = props;
@@ -81,7 +80,7 @@ describe("PrimaryNav", function () {
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.loadPrimaryNav({});
+    this.loadPrimaryNav({ expanded: true });
   });
   it("Expands navigation", () => this.loadPrimaryNav({ expanded: true }));
   it("Collapses navigation", () => this.loadPrimaryNav({ expanded: false }));

@@ -23,6 +23,7 @@ describe("Sprinkles UI", () => {
     require("./components/List.spec");
     require("./components/ListItem.spec");
     require("./components/TextListItem.spec");
+    require("./components/NavListItem.spec");
   });
   describe("Navigation", () => {
     require("./components/Breadcrumbs.spec");

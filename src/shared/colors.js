@@ -15,6 +15,8 @@ export const TextColors = {
   secondary: "#727272",
   light: "#FEFEFE",
   accent: "#3FA9E2",
+  primaryNav: "#C5D0DE",
+  selectedNavItem: "#FFF8F9",
 };
 
 export const BackgroundColors = {

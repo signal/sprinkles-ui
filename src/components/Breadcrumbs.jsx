@@ -14,12 +14,12 @@ export default class Breadcrumbs extends ReactCSS.Component {
       }),
     ),
     onClick: React.PropTypes.func,
-  }
+  };
 
   static defaultProps = {
     path: [],
     onClick: () => {},
-  }
+  };
 
   constructor() {
     super();

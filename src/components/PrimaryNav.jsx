@@ -3,7 +3,7 @@ import ReactCSS from "reactcss";
 import Text from "./Text";
 import List from "./List";
 import ListItem from "./ListItem";
-import TextListItem from "./TextListItem";
+import NavListItem from "./NavListItem";
 import VectorGraphic from "./VectorGraphic";
 import {
   BackgroundColors,
@@ -27,13 +27,13 @@ export default class PrimaryNav extends ReactCSS.Component {
     onNavItemClick: React.PropTypes.func,
     onRequestExpandToggle: React.PropTypes.func,
     showSectionBorders: React.PropTypes.bool,
-  }
+  };
 
   static defaultProps = {
     expanded: true,
     navItems: [],
     onNavItemClick: () => {},
-  }
+  };
 
   classes() {
     return {
@@ -123,7 +123,11 @@ export default class PrimaryNav extends ReactCSS.Component {
           onClick={this.handleNavItemClick.bind(this, item.key)}
           key={i}
         >
-          <TextListItem text={item.label} />
+          <NavListItem
+            text={item.label}
+            icon={item.icon}
+            expanded={this.props.expanded}
+          />
         </ListItem>
       )
     );

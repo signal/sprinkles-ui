@@ -8,7 +8,7 @@ export default class SecondaryNav extends ReactCSS.Component {
   static propTypes = {
     leftItems: React.PropTypes.node,
     rightItems: React.PropTypes.node,
-  }
+  };
 
   classes() {
     return {
