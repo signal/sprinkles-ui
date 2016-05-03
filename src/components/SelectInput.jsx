@@ -16,7 +16,7 @@ export default class SelectInput extends ReactCSS.Component {
         value: React.PropTypes.string,
       })
     ),
-  };
+  }
 
   static defaultProps = {
     items: [],

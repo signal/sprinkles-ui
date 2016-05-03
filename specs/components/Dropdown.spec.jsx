@@ -11,7 +11,18 @@ describe("Dropdown", function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-      <Dropdown />
+      <Dropdown
+        items={[
+          {
+            key: "thing1",
+            value: "Thing 1",
+          },
+          {
+            key: "thing2",
+            value: "Thing 2",
+          },
+        ]}
+      />
     ).width("100%");
   });
 
