@@ -7,6 +7,7 @@ import Popover from "./Popover";
 
 export default class Dropdown extends ReactCSS.Component {
   static propTypes = {
+    anchorEl: React.PropTypes.object,
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         key: React.PropTypes.string,
@@ -24,6 +25,7 @@ export default class Dropdown extends ReactCSS.Component {
   renderItems() {
     return (
       <Popover
+        anchorEl={this.props.anchorEl}
         ref={c => this.popoverRef = c}
         open={this.props.open}
       >

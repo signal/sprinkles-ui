@@ -123,7 +123,6 @@ describe("Popover", () => {
 
     // grab the DOM node so we can inspect it
     const popoverNode = ReactDOM.findDOMNode(popovertComponent);
-
     expect(popoverNode.style.top).toEqual("1px");
     expect(popoverNode.style.left).toEqual("4px");
   });

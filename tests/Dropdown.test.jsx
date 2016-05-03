@@ -14,6 +14,17 @@ const Dropdown = require("../src/components/Dropdown").default;
 
 
 describe("Dropdown", () => {
+  const generateFakeAnchorEl = () => ({
+    getBoundingClientRect() {
+      return {
+        top: 1,
+        bottom: 2,
+        left: 3,
+        right: 4,
+      };
+    },
+  });
+
   it("Does render a Dropdown", () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
         <Dropdown />
@@ -38,15 +49,25 @@ describe("Dropdown", () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown />
     );
-    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(popoverNode.style.display).toBe("none");
+    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(dropdownNode.style.display).toBe("none");
   });
 
   it("Does render an opened dropdown", () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown open={true} />
     );
-    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(popoverNode.style.display).toBe("block");
+    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(dropdownNode.style.display).toBe("block");
+  });
+
+  it("Does render an anchored Dropdown", () => {
+    const fakeAnchorEl = generateFakeAnchorEl();
+    const dropdownComponent = TestUtils.renderIntoDocument(
+      <Dropdown anchorEl={fakeAnchorEl} />
+    );
+    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
+    expect(dropdownNode.style.top).toEqual("2px");
+    expect(dropdownNode.style.left).toEqual("3px");
   });
 });
