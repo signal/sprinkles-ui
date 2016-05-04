@@ -87,7 +87,7 @@ export default class PrimaryNav extends ReactCSS.Component {
       },
       expanded: {
         ExpandToggle: {
-          transform: "rotate(0deg)",
+          transform: "rotate(360deg)",
         },
       },
       hovered: {
@@ -175,14 +175,14 @@ export default class PrimaryNav extends ReactCSS.Component {
         <div
           style={this.styles().ExpandToggle}
         >
-          <VectorGraphic height={30} width={14}>
+          <VectorGraphic height={40} width={14}>
             <polyline
               fill="none"
               stroke={TextColors.light}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              points="10,9 2,15 10,21"
+              points="10,14 2,20 10,26"
             />
           </VectorGraphic>
         </div>
