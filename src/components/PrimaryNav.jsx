@@ -9,6 +9,7 @@ import {
   BackgroundColors,
   TextColors,
 } from "../shared/colors";
+import color from "color";
 
 export default class PrimaryNav extends ReactCSS.Component {
   displayName = "PrimaryNav";
@@ -35,6 +36,25 @@ export default class PrimaryNav extends ReactCSS.Component {
     onNavItemClick: () => {},
   };
 
+  handleMouseOver() {
+    this.setState({
+      hovered: true,
+    });
+  }
+
+  handleMouseOut() {
+    this.setState({
+      hovered: false,
+    });
+  }
+
+  constructor() {
+    super();
+    this.state = {
+      hovered: false,
+    };
+  }
+
   classes() {
     return {
       default: {
@@ -56,6 +76,9 @@ export default class PrimaryNav extends ReactCSS.Component {
         NavItems: {
           flexGrow: 1,
         },
+        ExpandToggleWrapper: {
+          cursor: "pointer",
+        },
         ExpandToggle: {
           textAlign: "center",
           transform: "rotate(180deg)",
@@ -67,12 +90,18 @@ export default class PrimaryNav extends ReactCSS.Component {
           transform: "rotate(0deg)",
         },
       },
+      hovered: {
+        ExpandToggleWrapper: {
+          background: color(BackgroundColors.primaryNav).darken(0.5).hexString(),
+        },
+      },
     };
   }
 
   styles() {
     return this.css({
       expanded: this.props.expanded,
+      hovered: this.state.hovered,
     });
   }
 
@@ -110,6 +139,7 @@ export default class PrimaryNav extends ReactCSS.Component {
       >
         <List
           ref={c => this.listItemRef = c}
+          showBorder={false}
         >
           {this.renderNavItem()}
         </List>
@@ -138,18 +168,24 @@ export default class PrimaryNav extends ReactCSS.Component {
       <div
         onClick={this.props.onRequestExpandToggle}
         ref={c => this.expandToggleRef = c}
-        style={this.styles().ExpandToggle}
+        style={this.styles().ExpandToggleWrapper}
+        onMouseOut={this.handleMouseOut.bind(this)}
+        onMouseOver={this.handleMouseOver.bind(this)}
       >
-        <VectorGraphic height={30} width={14}>
-          <polyline
-            fill="none"
-            stroke={TextColors.light}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            points="10,9 2,15 10,21"
-          />
-        </VectorGraphic>
+        <div
+          style={this.styles().ExpandToggle}
+        >
+          <VectorGraphic height={30} width={14}>
+            <polyline
+              fill="none"
+              stroke={TextColors.light}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              points="10,9 2,15 10,21"
+            />
+          </VectorGraphic>
+        </div>
       </div>
     );
   }
