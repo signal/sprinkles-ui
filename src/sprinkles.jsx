@@ -13,7 +13,7 @@ export ListItem from "./components/ListItem";
 export Panel from "./components/Panel";
 export PasswordInput from "./components/PasswordInput";
 export Popover from "./components/Popover";
-export PrimaryNavBar from "./components/PrimaryNavBar";
+export PrimaryNav from "./components/PrimaryNav";
 export RadioButtonInput from "./components/RadioButtonInput";
 export SecondaryNav from "./components/SecondaryNav";
 export SelectInput from "./components/SelectInput";
