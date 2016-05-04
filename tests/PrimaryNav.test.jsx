@@ -67,10 +67,6 @@ describe("Primary Navigation Bar", () => {
       <PrimaryNav navItems={navItems} />
     );
     expect(primaryNavComponent.listItemRef.listItemRefs.count()).toBe(1);
-    const listItem = ReactDOM.findDOMNode(
-      primaryNavComponent.listItemRef.listItemRefs.get(0)
-    );
-    expect(listItem.textContent).toBe(navItems[0].label);
   });
 
   it("does render PrimaryNav expandToggle", () => {
