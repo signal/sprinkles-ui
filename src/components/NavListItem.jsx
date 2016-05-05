@@ -35,6 +35,7 @@ export default class NavListItem extends ReactCSS.Component {
           alignItems: "center",
         },
         TextWrapper: {
+          flex: 5,
           marginLeft: 10,
           whiteSpace: "nowrap",
           textOverflow: "ellipsis",
