@@ -29,6 +29,7 @@ export default class PrimaryNav extends ReactCSS.Component {
     ),
     onNavItemClick: React.PropTypes.func,
     onRequestExpandToggle: React.PropTypes.func,
+    selectedNavItem: React.PropTypes.string,
     showSectionBorders: React.PropTypes.bool,
   };
 
@@ -153,6 +154,7 @@ export default class PrimaryNav extends ReactCSS.Component {
     return this.props.navItems.map((item, i) => (
         <ListItem
           onClick={this.handleNavItemClick.bind(this, item.key)}
+          selected={this.props.selectedNavItem === item.key}
           key={i}
         >
           <NavListItem

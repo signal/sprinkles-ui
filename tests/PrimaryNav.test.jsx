@@ -110,4 +110,23 @@ describe("Primary Navigation Bar", () => {
     TestUtils.Simulate.click(listItem);
     expect(mockHandleNavItemClick).toBeCalledWith(navItems[0].key);
   });
+
+  it("does set selectedNavItem", () => {
+    const navItems = [
+      {
+        icon: <div></div>,
+        label: "Item 1",
+        key: "item-1",
+      },
+    ];
+    const selectedNavItem = "item-1";
+    const primaryNavComponent = TestUtils.renderIntoDocument(
+      <PrimaryNav
+        navItems={navItems}
+        selectedNavItem={selectedNavItem}
+      />
+    );
+    expect(primaryNavComponent.listItemRef.listItemRefs.get(0).props.selected)
+      .toBe(true);
+  });
 });

@@ -10,7 +10,7 @@ describe("PrimaryNav", function () {
   ## PrimaryNav
   `); // Markdown.
 
-  this.loadPrimaryNav = (props) => {
+  this.loadPrimaryNav = (props = { expanded: true }) => {
     const handleRequestExpandToggle = () => {
       const curProps = props;
       curProps.expanded = !curProps.expanded;
@@ -74,6 +74,7 @@ describe("PrimaryNav", function () {
         expanded={props.expanded}
         onRequestExpandToggle={handleRequestExpandToggle}
         onNavItemClick={handleNavItemClick}
+        selectedNavItem={props.selectedNavItem}
       />
   ).width(props.expanded ? "200px" : "60px").height("500px");
   };
@@ -86,4 +87,6 @@ describe("PrimaryNav", function () {
   it("Collapses navigation", () => this.loadPrimaryNav({ expanded: false }));
   it("Shows sectional borders", () => this.loadPrimaryNav({ showSectionBorders: true }));
   it("Hides sectional borders", () => this.loadPrimaryNav({ showSectionBorders: false }));
+  it("Selects the first nav item", () => this.loadPrimaryNav({ selectedNavItem: "item-1" }));
+  it("Selects nothing", () => this.loadPrimaryNav({ selectedNavItem: undefined }));
 });
