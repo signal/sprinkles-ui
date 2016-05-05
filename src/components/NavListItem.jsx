@@ -36,6 +36,13 @@ export default class NavListItem extends ReactCSS.Component {
         },
         TextWrapper: {
           marginLeft: 10,
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+          overflow: "hidden",
+        },
+        Icon: {
+          flex: 1,
+          textAlign: "center",
         },
       },
       selected: {
@@ -79,7 +86,7 @@ export default class NavListItem extends ReactCSS.Component {
   render() {
     return (
       <div style={this.styles().NavListItem}>
-        <div>
+        <div style={this.styles().Icon}>
           <VectorGraphic
             height={12}
             width={12}
