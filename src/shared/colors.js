@@ -17,6 +17,7 @@ export const TextColors = {
   accent: "#3FA9E2",
   primaryNav: "#C5D0DE",
   selectedNavItem: "#FFF8F9",
+  tableHead: "#767575",
 };
 
 export const BackgroundColors = {
@@ -25,6 +26,7 @@ export const BackgroundColors = {
   accent: "#B3E5FC",
   primaryNav: "#2B333D",
   secondaryNav: "#FEFEFE",
+  table: "#EFEFEF",
 };
 
 export const StructuralColors = {
