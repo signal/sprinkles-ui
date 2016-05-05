@@ -18,30 +18,24 @@ export default class NavListItem extends ReactCSS.Component {
     icon: React.PropTypes.node,
     selected: React.PropTypes.bool,
     text: React.PropTypes.string,
-    paddingLeft: React.PropTypes.number,
   };
 
   static defaultProps = {
     expanded: true,
-    paddingLeft: 17,
   };
 
   classes() {
-    const darkened = color(BackgroundColors[this.props.type])
-        .darken(0.5).hexString();
     return {
       default: {
         NavListItem: {
           padding: 10,
           background: BackgroundColors.primaryNavBar,
           color: TextColors.primaryNav,
+          display: "flex",
+          alignItems: "center",
         },
         TextWrapper: {
-          marginLeft: 20,
-        },
-        NavIcon: {
-          display: "inline-block",
-          paddingLeft: this.props.paddingLeft,
+          marginLeft: 10,
         },
       },
       selected: {
@@ -52,7 +46,7 @@ export default class NavListItem extends ReactCSS.Component {
       },
       hovered: {
         NavListItem: {
-          background: darkened,
+          background: color(BackgroundColors[this.props.type]).darken(0.5).hexString(),
           color: TextColors.selectedNavItem,
           cursor: "pointer",
         },
@@ -70,13 +64,13 @@ export default class NavListItem extends ReactCSS.Component {
   renderText() {
     if (this.props.text && this.props.expanded) {
       return (
-        <span style={this.styles().TextWrapper}>
+        <div style={this.styles().TextWrapper}>
           <Text
             fontSize={1}
           >
             {this.props.text}
           </Text>
-        </span>
+        </div>
       );
     }
     return null;
@@ -85,10 +79,10 @@ export default class NavListItem extends ReactCSS.Component {
   render() {
     return (
       <div style={this.styles().NavListItem}>
-        <div style={this.styles().NavIcon}>
+        <div>
           <VectorGraphic
-            height={10}
-            width={10}
+            height={12}
+            width={12}
           >
             {this.props.icon}
           </VectorGraphic>

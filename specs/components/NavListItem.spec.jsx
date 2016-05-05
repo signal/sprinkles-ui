@@ -16,10 +16,10 @@ describe("NavListItem", function () {
         <NavListItem
           icon={
             <circle
-              cx="5"
-              cy="5"
+              cx="6"
+              cy="6"
               fill="red"
-              r="5"
+              r="6"
             ></circle>
           }
           text={loremIpsum()}
