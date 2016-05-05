@@ -38,7 +38,6 @@ export default class NavListItem extends ReactCSS.Component {
           flex: 5,
           marginLeft: 10,
           whiteSpace: "nowrap",
-          textOverflow: "ellipsis",
           overflow: "hidden",
         },
         Icon: {
