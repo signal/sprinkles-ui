@@ -14,10 +14,12 @@ export default class NavListItem extends ReactCSS.Component {
 
   static propTypes = {
     expanded: React.PropTypes.bool,
+    height: React.PropTypes.number,
     hovered: React.PropTypes.bool,
     icon: React.PropTypes.node,
     selected: React.PropTypes.bool,
     text: React.PropTypes.string,
+    width: React.PropTypes.number,
   };
 
   static defaultProps = {
@@ -89,8 +91,8 @@ export default class NavListItem extends ReactCSS.Component {
       <div style={this.styles().NavListItem}>
         <div style={this.styles().Icon}>
           <VectorGraphic
-            height={12}
-            width={12}
+            height={this.props.height}
+            width={this.props.width}
           >
             {this.props.icon}
           </VectorGraphic>

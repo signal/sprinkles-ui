@@ -33,6 +33,14 @@ describe("NavListItem", function () {
   it("Not Hovered", () => this.props({ hovered: false }));
   it("Expanded", () => this.props({ expanded: true }));
   it("Not Expanded", () => this.props({ expanded: false }));
+  it("Make Icon Bigger", () => this.props({
+    height: 30,
+    width: 30,
+  }));
+  it("Make Icon Smaller", () => this.props({
+    height: 20,
+    width: 20,
+  }));
 
   /**
    * Documentation (Markdown)
