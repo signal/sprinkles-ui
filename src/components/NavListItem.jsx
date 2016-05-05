@@ -24,6 +24,8 @@ export default class NavListItem extends ReactCSS.Component {
 
   static defaultProps = {
     expanded: true,
+    height: 20,
+    width: 20,
   };
 
   classes() {

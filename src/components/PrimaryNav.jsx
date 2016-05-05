@@ -20,9 +20,11 @@ export default class PrimaryNav extends ReactCSS.Component {
     expanded: React.PropTypes.bool,
     navItems: React.PropTypes.arrayOf(
       React.PropTypes.shape({
+        height: React.PropTypes.number,
         icon: React.PropTypes.node,
         label: React.PropTypes.string,
         key: React.PropTypes.string,
+        width: React.PropTypes.number,
       })
     ),
     onNavItemClick: React.PropTypes.func,
@@ -154,9 +156,11 @@ export default class PrimaryNav extends ReactCSS.Component {
           key={i}
         >
           <NavListItem
+            height={item.height}
             text={item.label}
             icon={item.icon}
             expanded={this.props.expanded}
+            width={item.width}
           />
         </ListItem>
       )

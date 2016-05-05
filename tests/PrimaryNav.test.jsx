@@ -58,9 +58,11 @@ describe("Primary Navigation Bar", () => {
   it("does render PrimaryNav navItems", () => {
     const navItems = [
       {
+        height: 20,
         icon: <div></div>,
         label: "Item 1",
         key: "item-1",
+        width: 20,
       },
     ];
     const primaryNavComponent = TestUtils.renderIntoDocument(
