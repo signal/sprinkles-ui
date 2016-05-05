@@ -43,6 +43,7 @@ export default class NavListItem extends ReactCSS.Component {
         },
         Icon: {
           flex: 1,
+          maxWidth: 60,
           textAlign: "center",
         },
       },
