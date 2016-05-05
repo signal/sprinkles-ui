@@ -1,6 +1,10 @@
 {
   "name": "sprinkles-ui",
+<<<<<<< HEAD
   "version": "0.0.1beta38",
+=======
+  "version": "0.0.1beta37",
+>>>>>>> increment package number
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
