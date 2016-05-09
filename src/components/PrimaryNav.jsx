@@ -153,15 +153,16 @@ export default class PrimaryNav extends ReactCSS.Component {
   renderNavItem() {
     return this.props.navItems.map((item, i) => (
         <ListItem
+          key={i}
           onClick={this.handleNavItemClick.bind(this, item.key)}
           selected={this.props.selectedNavItem === item.key}
-          key={i}
         >
           <NavListItem
-            height={item.height}
-            text={item.label}
-            icon={item.icon}
             expanded={this.props.expanded}
+            height={item.height}
+            icon={item.icon}
+            key={i}
+            text={item.label}
             width={item.width}
           />
         </ListItem>
