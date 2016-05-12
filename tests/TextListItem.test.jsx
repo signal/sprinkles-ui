@@ -90,4 +90,14 @@ describe("TextListItem", () => {
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(textListItemNode.style.borderBottom).toBe("");
   });
+
+  it("Does trigger onClick when clicked", () => {
+    const mockHandleClick = jest.fn();
+    const textListItemComponent = TestUtils.renderIntoDocument(
+        <TextListItem onClick={mockHandleClick} />
+    );
+    const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
+    TestUtils.Simulate.click(textListItemNode);
+    expect(mockHandleClick).toBeCalled();
+  });
 });

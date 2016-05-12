@@ -14,6 +14,7 @@ export default class TextListItem extends ReactCSS.Component {
   static propTypes = {
     hovered: React.PropTypes.bool,
     listPosition: React.PropTypes.oneOf(["first", "middle", "last"]),
+    onClick: React.PropTypes.func,
     selected: React.PropTypes.bool,
     text: React.PropTypes.string,
   };
@@ -64,7 +65,10 @@ export default class TextListItem extends ReactCSS.Component {
 
   render() {
     return (
-      <div style={this.styles().Text}>
+      <div
+        onClick={this.props.onClick}
+        style={this.styles().Text}
+      >
         <Text
           fontSize={1}
         >
