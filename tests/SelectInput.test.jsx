@@ -48,13 +48,16 @@ describe("SelectInput", () => {
     expect(selectInputComponent.itemsRef.listItemRefs.count()).toBe(1);
   });
 
-  it("Does show a popover when SelectInput is clicked", () => {
+  it("Does toggle a popover when SelectInput is clicked and clicked away", () => {
     const selectInputComponent = TestUtils.renderIntoDocument(
       <SelectInput />
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     TestUtils.Simulate.click(selectInputNode);
-    const selectInputPopeverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef);
-    expect(selectInputPopeverNode.style.display).toBe("block");
+    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef);
+    expect(selectInputPopoverNode.style.display).toBe("block");
+    const closeLayerNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.closeLayerRef);
+    TestUtils.Simulate.click(closeLayerNode);
+    expect(selectInputPopoverNode.style.display).toBe("none");
   });
 });

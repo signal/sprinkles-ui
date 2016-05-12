@@ -35,6 +35,12 @@ export default class SelectInput extends ReactCSS.Component {
     });
   }
 
+  handleRequestClose() {
+    this.setState({
+      open: false,
+    });
+  }
+
   classes() {
     return {
       default: {
@@ -49,6 +55,8 @@ export default class SelectInput extends ReactCSS.Component {
     return (
       <Popover
         open={this.state.open}
+        useLayerForClickAway={true}
+        onRequestClose={this.handleRequestClose.bind(this)}
         ref={c => this.popoverRef = c}
       >
         <List
@@ -76,10 +84,10 @@ export default class SelectInput extends ReactCSS.Component {
   render() {
     return (
       <div
-        onClick={this.handleClick.bind(this)}
         style={this.styles().SelectInput}
       >
         <TextListItem
+          onClick={this.handleClick.bind(this)}
           ref={c => this.displayRef = c}
           text={"--"}
         />
