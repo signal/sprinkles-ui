@@ -10,10 +10,11 @@ export default class SelectInput extends ReactCSS.Component {
   displayName = "SelectInput";
 
   static propTypes = {
+    initialValue: React.PropTypes.string,
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
-        key: React.PropTypes.string,
         value: React.PropTypes.string,
+        label: React.PropTypes.string,
       })
     ),
   };
@@ -22,10 +23,11 @@ export default class SelectInput extends ReactCSS.Component {
     items: [],
   };
 
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       open: false,
+      value: props.initialValue,
     };
   }
 
@@ -49,6 +51,13 @@ export default class SelectInput extends ReactCSS.Component {
         },
       },
     };
+  }
+
+  calculateDisplayLabel() {
+    if (this.state.value) {
+      return this.props.items.find((item) => item.value === this.state.value) || {};
+    }
+    return { label: "--" };
   }
 
   renderItems() {
@@ -89,7 +98,7 @@ export default class SelectInput extends ReactCSS.Component {
         <TextListItem
           onClick={this.handleClick.bind(this)}
           ref={c => this.displayRef = c}
-          text={"--"}
+          text={this.calculateDisplayLabel().label}
         />
       {this.renderItems()}
       </div>

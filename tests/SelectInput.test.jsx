@@ -38,8 +38,8 @@ describe("SelectInput", () => {
   it("Does contain a list of items to select", () => {
     const items = [
       {
-        key: "key",
         value: "value",
+        label: "label",
       },
     ];
     const selectInputComponent = TestUtils.renderIntoDocument(
@@ -59,5 +59,23 @@ describe("SelectInput", () => {
     const closeLayerNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.closeLayerRef);
     TestUtils.Simulate.click(closeLayerNode);
     expect(selectInputPopoverNode.style.display).toBe("none");
+  });
+
+  it("Does allow an initial value to be set", () => {
+    const items = [
+      {
+        value: "value",
+        label: "label",
+      },
+    ];
+    const initialValue = "value";
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        initialValue={initialValue}
+        items={items}
+      />
+    );
+    const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
+    expect(displayNode.textContent).toBe(items[0].label);
   });
 });
