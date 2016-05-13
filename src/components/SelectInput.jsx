@@ -4,7 +4,11 @@ import TextListItem from "./TextListItem";
 import List from "./List";
 import ListItem from "./ListItem";
 import Popover from "./Popover";
-import { StructuralColors } from "../shared/colors";
+import VectorGraphic from "./VectorGraphic";
+import {
+  StructuralColors,
+  TextColors,
+} from "../shared/colors";
 
 export default class SelectInput extends ReactCSS.Component {
   displayName = "SelectInput";
@@ -60,9 +64,29 @@ export default class SelectInput extends ReactCSS.Component {
         },
         Display: {
           cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+        },
+        Text: {
+          flexGrow: 1,
+        },
+        Icon: {
+          margin: "0 15px",
+          transition: "transform 0.2s ease",
+        },
+      },
+      open: {
+        Icon: {
+          transform: "rotate(180deg)",
         },
       },
     };
+  }
+
+  styles() {
+    return this.css({
+      open: this.state.open,
+    });
   }
 
   calculateDisplayLabel() {
@@ -118,13 +142,31 @@ export default class SelectInput extends ReactCSS.Component {
         style={this.styles().SelectInput}
       >
         <div
+          onClick={this.handleClick.bind(this)}
           style={this.styles().Display}
         >
-          <TextListItem
-            onClick={this.handleClick.bind(this)}
-            ref={c => this.displayRef = c}
-            text={this.calculateDisplayLabel().label}
-          />
+          <div
+            style={this.styles().Text}
+          >
+            <TextListItem
+              ref={c => this.displayRef = c}
+              text={this.calculateDisplayLabel().label}
+            />
+          </div>
+          <div
+            style={this.styles().Icon}
+          >
+            <VectorGraphic>
+              <g stroke={TextColors.primary} >
+                <path
+                  fill="none"
+                  d="M1 2 L5 7 L9 2"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </g>
+            </VectorGraphic>
+          </div>
         </div>
       {this.renderDropdown()}
       </div>
