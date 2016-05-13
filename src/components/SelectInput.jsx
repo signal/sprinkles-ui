@@ -26,13 +26,15 @@ export default class SelectInput extends ReactCSS.Component {
   constructor(props) {
     super();
     this.state = {
+      anchorEl: undefined,
       open: false,
       value: props.initialValue,
     };
   }
 
-  handleClick() {
+  handleClick(e) {
     this.setState({
+      anchorEl: e.currentTarget,
       open: true,
     });
   }
@@ -49,6 +51,9 @@ export default class SelectInput extends ReactCSS.Component {
         SelectInput: {
           border: `1px solid ${StructuralColors.divider}`,
         },
+        Display: {
+          cursor: "pointer",
+        },
       },
     };
   }
@@ -63,6 +68,8 @@ export default class SelectInput extends ReactCSS.Component {
   renderItems() {
     return (
       <Popover
+        anchorEl={this.state.anchorEl}
+        constrainWidth={true}
         open={this.state.open}
         useLayerForClickAway={true}
         onRequestClose={this.handleRequestClose.bind(this)}
@@ -84,7 +91,7 @@ export default class SelectInput extends ReactCSS.Component {
     return this.props.items.map((item, i) =>
       (
         <ListItem key={i}>
-          <TextListItem text={item.value} />
+          <TextListItem text={item.label} />
         </ListItem>
       )
     );
@@ -95,11 +102,15 @@ export default class SelectInput extends ReactCSS.Component {
       <div
         style={this.styles().SelectInput}
       >
-        <TextListItem
-          onClick={this.handleClick.bind(this)}
-          ref={c => this.displayRef = c}
-          text={this.calculateDisplayLabel().label}
-        />
+        <div
+          style={this.styles().Display}
+        >
+          <TextListItem
+            onClick={this.handleClick.bind(this)}
+            ref={c => this.displayRef = c}
+            text={this.calculateDisplayLabel().label}
+          />
+        </div>
       {this.renderItems()}
       </div>
     );
