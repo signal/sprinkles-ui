@@ -100,4 +100,23 @@ describe("SelectInput", () => {
     const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     expect(displayNode.textContent).toBe(items[0].label);
   });
+
+  it("Does highlight selected value in dropdown", () => {
+    const items = [
+      {
+        value: "value",
+        label: "label",
+      },
+    ];
+    const initialValue = "value";
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        initialValue={initialValue}
+        items={items}
+      />
+    );
+    expect(
+      selectInputComponent.itemsRef.listItemRefs.get(0).listItemRef.props.selected
+    ).toBe(true);
+  });
 });

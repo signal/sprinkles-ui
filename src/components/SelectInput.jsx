@@ -72,7 +72,7 @@ export default class SelectInput extends ReactCSS.Component {
     return { label: "--" };
   }
 
-  renderItems() {
+  renderDropdown() {
     return (
       <Popover
         anchorEl={this.state.anchorEl}
@@ -85,25 +85,30 @@ export default class SelectInput extends ReactCSS.Component {
         <List
           ref={c => this.itemsRef = c}
         >
-          {this.renderItem()}
+          {this.renderItems()}
         </List>
       </Popover>
     );
   }
 
-  renderItem() {
+  renderItems() {
     if (this.props.items.length === 0) {
       return null;
     }
-    return this.props.items.map((item, i) =>
-      (
-        <ListItem key={i}>
-          <TextListItem
-            onClick={this.handleItemClick.bind(this, item)}
-            text={item.label}
-          />
-        </ListItem>
-      )
+    return this.props.items.map(this.renderItem.bind(this));
+  }
+
+  renderItem(item, i) {
+    return (
+      <ListItem
+        key={i}
+        selected={item.value === this.state.value}
+      >
+        <TextListItem
+          onClick={this.handleItemClick.bind(this, item)}
+          text={item.label}
+        />
+      </ListItem>
     );
   }
 
@@ -121,7 +126,7 @@ export default class SelectInput extends ReactCSS.Component {
             text={this.calculateDisplayLabel().label}
           />
         </div>
-      {this.renderItems()}
+      {this.renderDropdown()}
       </div>
     );
   }
