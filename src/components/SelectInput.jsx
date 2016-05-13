@@ -39,6 +39,13 @@ export default class SelectInput extends ReactCSS.Component {
     });
   }
 
+  handleItemClick(item) {
+    this.setState({
+      value: item.value,
+      open: false,
+    });
+  }
+
   handleRequestClose() {
     this.setState({
       open: false,
@@ -91,7 +98,10 @@ export default class SelectInput extends ReactCSS.Component {
     return this.props.items.map((item, i) =>
       (
         <ListItem key={i}>
-          <TextListItem text={item.label} />
+          <TextListItem
+            onClick={this.handleItemClick.bind(this, item)}
+            text={item.label}
+          />
         </ListItem>
       )
     );

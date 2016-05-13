@@ -13,8 +13,14 @@ describe("SelectInput", function () {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
       <SelectInput items={[{
-        value: "value",
-        label: "Label",
+        value: "thing-1",
+        label: "Thing 1",
+      }, {
+        value: "thing-2",
+        label: "Thing 2",
+      }, {
+        value: "thing-3",
+        label: "Thing 3",
       }]}
       />
     ).width(200);

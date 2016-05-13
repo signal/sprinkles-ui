@@ -78,4 +78,26 @@ describe("SelectInput", () => {
     const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     expect(displayNode.textContent).toBe(items[0].label);
   });
+
+  it("Does set value when an item is clicked", () => {
+    const items = [
+      {
+        value: "value",
+        label: "label",
+      },
+    ];
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        items={items}
+      />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
+    TestUtils.Simulate.click(selectInputNode);
+    const itemNode = ReactDOM.findDOMNode(
+      selectInputComponent.itemsRef.listItemRefs.get(0).listItemRef
+    );
+    TestUtils.Simulate.click(itemNode);
+    const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
+    expect(displayNode.textContent).toBe(items[0].label);
+  });
 });
