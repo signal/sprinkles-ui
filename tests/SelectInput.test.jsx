@@ -119,4 +119,27 @@ describe("SelectInput", () => {
       selectInputComponent.itemsRef.listItemRefs.get(0).listItemRef.props.selected
     ).toBe(true);
   });
+
+  it("does trigger onChange event when a value is selected", () => {
+    const mockHandleChange = jest.fn();
+    const items = [
+      {
+        value: "value",
+        label: "label",
+      },
+    ];
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        items={items}
+        onChange={mockHandleChange}
+      />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
+    TestUtils.Simulate.click(selectInputNode);
+    const itemNode = ReactDOM.findDOMNode(
+      selectInputComponent.itemsRef.listItemRefs.get(0).listItemRef
+    );
+    TestUtils.Simulate.click(itemNode);
+    expect(mockHandleChange).toBeCalledWith(items[0].value);
+  });
 });

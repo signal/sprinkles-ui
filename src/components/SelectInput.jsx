@@ -21,10 +21,12 @@ export default class SelectInput extends ReactCSS.Component {
         label: React.PropTypes.string,
       })
     ),
+    onChange: React.PropTypes.func,
   };
 
   static defaultProps = {
     items: [],
+    onChange: () => {},
   };
 
   constructor(props) {
@@ -47,7 +49,7 @@ export default class SelectInput extends ReactCSS.Component {
     this.setState({
       value: item.value,
       open: false,
-    });
+    }, () => this.props.onChange(item.value));
   }
 
   handleRequestClose() {
