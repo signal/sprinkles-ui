@@ -138,39 +138,57 @@ export default class SelectInput extends ReactCSS.Component {
     );
   }
 
+  renderDisplay() {
+    return (
+      <div
+        onClick={this.handleClick.bind(this)}
+        style={this.styles().Display}
+      >
+        {this.renderDisplayText()}
+        {this.renderDisplayIcon()}
+      </div>
+    );
+  }
+
+  renderDisplayText() {
+    return (
+      <div
+        style={this.styles().Text}
+      >
+        <TextListItem
+          ref={c => this.displayRef = c}
+          text={this.calculateDisplayLabel().label}
+        />
+      </div>
+    );
+  }
+
+  renderDisplayIcon() {
+    return (
+      <div
+        style={this.styles().Icon}
+      >
+        <VectorGraphic>
+          <g stroke={TextColors.primary} >
+            <path
+              fill="none"
+              d="M1 2 L5 7 L9 2"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </g>
+        </VectorGraphic>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div
         style={this.styles().SelectInput}
       >
-        <div
-          onClick={this.handleClick.bind(this)}
-          style={this.styles().Display}
-        >
-          <div
-            style={this.styles().Text}
-          >
-            <TextListItem
-              ref={c => this.displayRef = c}
-              text={this.calculateDisplayLabel().label}
-            />
-          </div>
-          <div
-            style={this.styles().Icon}
-          >
-            <VectorGraphic>
-              <g stroke={TextColors.primary} >
-                <path
-                  fill="none"
-                  d="M1 2 L5 7 L9 2"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </g>
-            </VectorGraphic>
-          </div>
-        </div>
-      {this.renderDropdown()}
+        {this.renderDisplay()}
+        {this.renderDropdown()}
       </div>
     );
   }
