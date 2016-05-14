@@ -27,6 +27,8 @@ describe("TextListItem", function () {
   it("List Position: Middle", () => this.props({ listPosition: "middle" }));
   it("List Position: Last", () => this.props({ listPosition: "last" }));
   it("List Position: Undefined", () => this.props({ listPosition: undefined }));
+  it("Disabled", () => this.props({ enabled: false }));
+  it("Enabled", () => this.props({ enabled: true }));
 
   /**
    * Documentation (Markdown)

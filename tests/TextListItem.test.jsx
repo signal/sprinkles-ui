@@ -94,10 +94,22 @@ describe("TextListItem", () => {
   it("Does trigger onClick when clicked", () => {
     const mockHandleClick = jest.fn();
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem onClick={mockHandleClick} />
+      <TextListItem onClick={mockHandleClick} />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     TestUtils.Simulate.click(textListItemNode);
     expect(mockHandleClick).toBeCalled();
+  });
+
+  it("Does render a disabled TextListItem", () => {
+    const textListItemComponent = TestUtils.renderIntoDocument(
+      <TextListItem
+        enabled={false}
+      />
+    );
+    const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
+    expect(color(textListItemNode.style.color).hexString()).toBe(TextColors.secondary);
+    expect(color(textListItemNode.style.background).hexString()).toBe(BackgroundColors.secondary);
+    expect(textListItemNode.style.cursor).toBe("not-allowed");
   });
 });
