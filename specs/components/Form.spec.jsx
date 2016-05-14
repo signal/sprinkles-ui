@@ -7,6 +7,7 @@ import Form from "../../src/components/Form";
 import Field from "../../src/components/Field";
 import EmailInput from "../../src/components/EmailInput";
 import PasswordInput from "../../src/components/PasswordInput";
+import SelectInput from "../../src/components/SelectInput";
 import Text from "../../src/components/Text";
 
 
@@ -56,6 +57,24 @@ describe("Form", function () {
           required={true}
         >
           <PasswordInput placeholder={"password"} />
+        </Field>
+        <Field
+          fieldKey={"userType"}
+          label={"User Type"}
+          required={true}
+        >
+          <SelectInput
+            items={[
+              {
+                value: "admin",
+                label: "Admin",
+              },
+              {
+                value: "standard",
+                label: "Standard",
+              },
+            ]}
+          />
         </Field>
       </Form>
     ).width("100%");
