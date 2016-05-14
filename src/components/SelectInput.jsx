@@ -63,6 +63,20 @@ export default class SelectInput extends ReactCSS.Component {
     });
   }
 
+  value() {
+    return this.state.value;
+  }
+
+  validate() {
+    const isEmpty = this.value() === undefined;
+    const isInitialValue = this.value() === this.props.initialValue;
+    return {
+      valid: !isEmpty,
+      isInitialValue,
+      validationError: !isEmpty ? "" : "A value must be selected",
+    };
+  }
+
   classes() {
     return {
       default: {

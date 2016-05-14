@@ -204,4 +204,67 @@ describe("SelectInput", () => {
     const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
     expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
   });
+
+  it("Does return a valid state when a value has been selected", () => {
+    const items = [
+      {
+        value: "value",
+        label: "label",
+      },
+    ];
+    const initialValue = "value";
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        items={items}
+        initialValue={initialValue}
+      />
+    );
+    expect(selectInputComponent.validate()).toEqual({
+      valid: true,
+      isInitialValue: true,
+      validationError: "",
+    });
+  });
+
+  it("Does return valid state and not initial state when input changes", () => {
+    const items = [
+      {
+        value: "value",
+        label: "label",
+      },
+      {
+        value: "value2",
+        label: "label2",
+      },
+    ];
+    const initialValue = "value2";
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        items={items}
+        initialValue={initialValue}
+      />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
+    TestUtils.Simulate.click(selectInputNode);
+    const itemNode = ReactDOM.findDOMNode(
+      selectInputComponent.itemsRef.listItemRefs.get(0).listItemRef
+    );
+    TestUtils.Simulate.click(itemNode);
+    expect(selectInputComponent.validate()).toEqual({
+      valid: true,
+      isInitialValue: false,
+      validationError: "",
+    });
+  });
+
+  it("does return invalid state", () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput />
+    );
+    expect(selectInputComponent.validate()).toEqual({
+      valid: false,
+      isInitialValue: true,
+      validationError: "A value must be selected",
+    });
+  });
 });
