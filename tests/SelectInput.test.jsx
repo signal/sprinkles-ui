@@ -33,7 +33,7 @@ describe("SelectInput", () => {
     );
     const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
     expect(selectInputNode.style.border)
-      .toBe(`1px solid ${StructuralColors.divider.toLowerCase()}`);
+      .toBe(`1px solid ${StructuralColors.inputBorder.toLowerCase()}`);
     const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     expect(displayNode.textContent).toBe("--");
     expect(color(displayNode.style.background).hexString()).toBe(BackgroundColors.primary);

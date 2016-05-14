@@ -31,4 +31,5 @@ export const BackgroundColors = {
 
 export const StructuralColors = {
   divider: "#E7E7E7",
+  inputBorder: "#ccc",
 };

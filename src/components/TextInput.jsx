@@ -1,6 +1,10 @@
 import React from "react";
 import ReactCSS from "reactcss";
-import { Colors, TextColors } from "../shared/colors";
+import {
+  Colors,
+  TextColors,
+  StructuralColors,
+} from "../shared/colors";
 
 
 export default class TextInput extends ReactCSS.Component {
@@ -75,7 +79,7 @@ export default class TextInput extends ReactCSS.Component {
           fontSize: "1rem",
           padding: "10px",
           width: "100%",
-          border: "1px solid #ccc",
+          border: `1px solid ${StructuralColors.inputBorder}`,
           borderRadius: 3,
           outline: "none",
           color: TextColors.primary,

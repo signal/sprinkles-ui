@@ -81,7 +81,7 @@ export default class SelectInput extends ReactCSS.Component {
     return {
       default: {
         SelectInput: {
-          border: `1px solid ${StructuralColors.divider}`,
+          border: `1px solid ${StructuralColors.inputBorder}`,
           borderRadius: 3,
         },
         Display: {
