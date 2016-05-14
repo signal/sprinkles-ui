@@ -6,6 +6,7 @@ import ListItem from "./ListItem";
 import Popover from "./Popover";
 import VectorGraphic from "./VectorGraphic";
 import {
+  BackgroundColors,
   StructuralColors,
   TextColors,
 } from "../shared/colors";
@@ -85,6 +86,9 @@ export default class SelectInput extends ReactCSS.Component {
         },
       },
       disabled: {
+        SelectInput: {
+          background: BackgroundColors.secondary,
+        },
         Display: {
           cursor: "not-allowed",
         },
@@ -178,7 +182,7 @@ export default class SelectInput extends ReactCSS.Component {
         style={this.styles().Icon}
       >
         <VectorGraphic>
-          <g stroke={TextColors.primary} >
+          <g stroke={this.props.enabled ? TextColors.primary : TextColors.secondary} >
             <path
               fill="none"
               d="M1 2 L5 7 L9 2"
