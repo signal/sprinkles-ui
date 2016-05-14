@@ -32,6 +32,10 @@ describe("SelectInput", function () {
 
   it("disabled", () => this.props({ enabled: false }));
   it("enabled", () => this.props({ enabled: true }));
+  it("Set Success Status", () => this.props({ status: "success" }));
+  it("Set Warning Status", () => this.props({ status: "warning" }));
+  it("Set Error Status", () => this.props({ status: "error" }));
+  it("Clear Status", () => this.props({ status: undefined }));
 
   /**
    * Documentation (Markdown)

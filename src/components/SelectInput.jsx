@@ -7,6 +7,7 @@ import Popover from "./Popover";
 import VectorGraphic from "./VectorGraphic";
 import {
   BackgroundColors,
+  Colors,
   StructuralColors,
   TextColors,
 } from "../shared/colors";
@@ -24,6 +25,7 @@ export default class SelectInput extends ReactCSS.Component {
       })
     ),
     onChange: React.PropTypes.func,
+    status: React.PropTypes.oneOf(["error", "warning", "success"]),
   };
 
   static defaultProps = {
@@ -66,6 +68,7 @@ export default class SelectInput extends ReactCSS.Component {
       default: {
         SelectInput: {
           border: `1px solid ${StructuralColors.divider}`,
+          borderRadius: 3,
         },
         Display: {
           cursor: "pointer",
@@ -93,6 +96,24 @@ export default class SelectInput extends ReactCSS.Component {
           cursor: "not-allowed",
         },
       },
+      success: {
+        SelectInput: {
+          boxShadow: `0 0 3px 1px ${Colors.success}`,
+          border: "1px solid transparent",
+        },
+      },
+      warning: {
+        SelectInput: {
+          boxShadow: `0 0 3px 1px ${Colors.warning}`,
+          border: "1px solid transparent",
+        },
+      },
+      error: {
+        SelectInput: {
+          boxShadow: `0 0 3px 1px ${Colors.danger}`,
+          border: "1px solid transparent",
+        },
+      },
     };
   }
 
@@ -100,6 +121,9 @@ export default class SelectInput extends ReactCSS.Component {
     return this.css({
       open: this.state.open,
       disabled: !this.props.enabled,
+      success: this.props.status === "success",
+      warning: this.props.status === "warning",
+      error: this.props.status === "error",
     });
   }
 

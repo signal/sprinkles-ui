@@ -10,7 +10,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import TestUtils from "react-addons-test-utils";
 import color from "color";
-import { BackgroundColors, StructuralColors } from "../src/shared/colors";
+import {
+  Colors,
+  BackgroundColors,
+  StructuralColors,
+} from "../src/shared/colors";
 
 // TODO: move this to es6 style import when its implemented in jest
 const SelectInput = require("../src/components/SelectInput").default;
@@ -169,5 +173,35 @@ describe("SelectInput", () => {
     TestUtils.Simulate.click(selectInputNode);
     const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef);
     expect(selectInputPopoverNode.style.display).toBe("none");
+  });
+
+  it("Does render with red shadow on error status", () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        status={"error"}
+      />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+  });
+
+  it("Does render with an orange shadow on warning status", () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        status={"warning"}
+      />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
+  });
+
+  it("Does render with a green shadow on success status", () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        status={"success"}
+      />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
   });
 });
