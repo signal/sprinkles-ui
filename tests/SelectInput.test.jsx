@@ -142,4 +142,32 @@ describe("SelectInput", () => {
     TestUtils.Simulate.click(itemNode);
     expect(mockHandleChange).toBeCalledWith(items[0].value);
   });
+
+  it("does render a disabled text input", () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        enabled={false}
+      />
+    );
+    expect(selectInputComponent.displayRef.props.enabled).toBe(false);
+  });
+
+  it("does not open dropdown when disabled", () => {
+    const items = [
+      {
+        value: "value",
+        label: "label",
+      },
+    ];
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput
+        enabled={false}
+        items={items}
+      />
+    );
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
+    TestUtils.Simulate.click(selectInputNode);
+    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef);
+    expect(selectInputPopoverNode.style.display).toBe("none");
+  });
 });

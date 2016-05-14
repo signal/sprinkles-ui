@@ -14,6 +14,7 @@ export default class SelectInput extends ReactCSS.Component {
   displayName = "SelectInput";
 
   static propTypes = {
+    enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
@@ -27,6 +28,7 @@ export default class SelectInput extends ReactCSS.Component {
   static defaultProps = {
     items: [],
     onChange: () => {},
+    enabled: true,
   };
 
   constructor(props) {
@@ -82,12 +84,18 @@ export default class SelectInput extends ReactCSS.Component {
           transform: "rotate(180deg)",
         },
       },
+      disabled: {
+        Display: {
+          cursor: "not-allowed",
+        },
+      },
     };
   }
 
   styles() {
     return this.css({
       open: this.state.open,
+      disabled: !this.props.enabled,
     });
   }
 
@@ -141,7 +149,7 @@ export default class SelectInput extends ReactCSS.Component {
   renderDisplay() {
     return (
       <div
-        onClick={this.handleClick.bind(this)}
+        onClick={this.props.enabled ? this.handleClick.bind(this) : undefined}
         style={this.styles().Display}
       >
         {this.renderDisplayText()}
@@ -156,6 +164,7 @@ export default class SelectInput extends ReactCSS.Component {
         style={this.styles().Text}
       >
         <TextListItem
+          enabled={this.props.enabled}
           ref={c => this.displayRef = c}
           text={this.calculateDisplayLabel().label}
         />

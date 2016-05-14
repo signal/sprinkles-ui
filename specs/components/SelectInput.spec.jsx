@@ -30,6 +30,9 @@ describe("SelectInput", function () {
     ).width(200);
   });
 
+  it("disabled", () => this.props({ enabled: false }));
+  it("enabled", () => this.props({ enabled: true }));
+
   /**
    * Documentation (Markdown)
    */
