@@ -1,5 +1,6 @@
 import React from "react";
 import ReactCSS from "reactcss";
+import color from "color";
 import {
   Colors,
   BackgroundColors,
@@ -10,10 +11,12 @@ export default class ToggleInput extends ReactCSS.Component {
   displayName = "ToggleInput";
 
   static propTypes = {
+    enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.bool,
   };
 
   static defaultProps = {
+    enabled: true,
     initialValue: false,
   };
 
@@ -30,7 +33,7 @@ export default class ToggleInput extends ReactCSS.Component {
         ToggleInput: {
           border: `1px solid ${StructuralColors.inputBorder}`,
           background: BackgroundColors.primary,
-          width: 52,
+          width: 42,
           height: 26,
           borderRadius: "13px",
           position: "relative",
@@ -38,23 +41,35 @@ export default class ToggleInput extends ReactCSS.Component {
           transition: "background 0.2s ease",
         },
         ToggleSwitch: {
-          border: `1px solid ${StructuralColors.inputBorder}`,
           background: BackgroundColors.primary,
-          width: 26,
-          height: 26,
+          boxShadow: "0 1px 2px #888",
+          width: 24,
+          height: 24,
           borderRadius: "13px",
           position: "absolute",
-          top: -1,
-          left: -1,
+          top: 1,
+          left: 0,
           transition: "left 0.2s ease",
+        },
+      },
+      disabled: {
+        ToggleInput: {
+          background: BackgroundColors.secondary,
+          cursor: "not-allowed",
+        },
+        ToggleSwitch: {
+          background: BackgroundColors.secondary,
         },
       },
       activated: {
         ToggleInput: {
-          background: Colors.success,
+          border: `1px solid ${this.props.enabled ? Colors.success :
+            color(Colors.success).lighten(0.4).hexString()}`,
+          background: this.props.enabled ? Colors.success :
+            color(Colors.success).lighten(0.4).hexString(),
         },
         ToggleSwitch: {
-          left: 26,
+          left: 18,
         },
       },
     };
@@ -62,6 +77,7 @@ export default class ToggleInput extends ReactCSS.Component {
 
   styles() {
     return this.css({
+      disabled: !this.props.enabled,
       activated: this.state.value,
     });
   }
@@ -75,7 +91,7 @@ export default class ToggleInput extends ReactCSS.Component {
   render() {
     return (
       <div
-        onClick={this.handleClick.bind(this)}
+        onClick={this.props.enabled ? this.handleClick.bind(this) : undefined}
         style={this.styles().ToggleInput}
       >
         <div

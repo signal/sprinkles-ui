@@ -16,6 +16,9 @@ describe("ToggleInput", function () {
     );
   });
 
+  it("disable", () => this.props({ enabled: false }));
+  it("enable", () => this.props({ enabled: true }));
+
   /**
    * Documentation (Markdown)
    */

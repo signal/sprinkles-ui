@@ -32,7 +32,7 @@ describe("ToggleInput", () => {
     expect(toggleInputNode.style.border)
       .toBe(`1px solid ${StructuralColors.inputBorder.toLowerCase()}`);
     expect(toggleInputNode.style.width)
-      .toBe("52px");
+      .toBe("42px");
     expect(toggleInputNode.style.height)
       .toBe("26px");
     expect(toggleInputNode.style.borderRadius)
@@ -47,13 +47,13 @@ describe("ToggleInput", () => {
     expect(switchNode.style.position)
       .toBe("absolute");
     expect(switchNode.style.top)
-      .toBe("-1px");
+      .toBe("1px");
     expect(switchNode.style.left)
-      .toBe("-1px");
+      .toBe("0px");
     expect(switchNode.style.width)
-      .toBe("26px");
+      .toBe("24px");
     expect(switchNode.style.height)
-      .toBe("26px");
+      .toBe("24px");
     expect(color(toggleInputNode.style.background).hexString())
       .toBe(BackgroundColors.primary);
     expect(toggleInputNode.style.borderRadius)
@@ -69,9 +69,11 @@ describe("ToggleInput", () => {
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(color(toggleInputNode.style.background).hexString())
       .toBe(Colors.success);
+    expect(toggleInputNode.style.border)
+      .toBe(`1px solid ${Colors.success.toLowerCase()}`);
     const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
     expect(switchNode.style.left)
-      .toBe("26px");
+      .toBe("18px");
   });
 
   it("does toggle the value with the ToggleInput is clicked", () => {
@@ -81,5 +83,38 @@ describe("ToggleInput", () => {
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     TestUtils.Simulate.click(toggleInputNode);
     expect(toggleInputComponent.state.value).toBe(true);
+  });
+
+  it("does render a disabled ToggleInput", () => {
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput enabled={false} />
+    );
+    const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
+    expect(color(toggleInputNode.style.background).hexString())
+      .toBe(BackgroundColors.secondary);
+    expect(toggleInputNode.style.cursor)
+      .toBe("not-allowed");
+    const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
+    expect(color(switchNode.style.background).hexString())
+      .toBe(BackgroundColors.secondary);
+    TestUtils.Simulate.click(toggleInputNode);
+    expect(toggleInputComponent.state.value).toBe(false);
+  });
+
+  it("does disable a ToggleInput who's value=true", () => {
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput
+        enabled={false}
+        initialValue={true}
+      />
+    );
+    const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
+    expect(color(toggleInputNode.style.background).hexString())
+      .toBe(color(Colors.success).lighten(0.4).hexString());
+    expect(toggleInputNode.style.border)
+      .toBe(`1px solid ${color(Colors.success).lighten(0.4).hexString().toLowerCase()}`);
+    const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
+    expect(color(switchNode.style.background).hexString())
+      .toBe(BackgroundColors.secondary);
   });
 });
