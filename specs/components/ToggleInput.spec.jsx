@@ -1,4 +1,5 @@
 /* eslint func-names: "off" */
+/* eslint no-console: "off" */
 
 import React from "react";
 import ToggleInput from "../../src/components/ToggleInput";
@@ -10,9 +11,12 @@ describe("ToggleInput", function () {
   `); // Markdown.
 
   before(() => {
+    const handleChange = (value) => console.log("Value: ", value);
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <ToggleInput />
+        <ToggleInput
+          onChange={handleChange}
+        />
     );
   });
 

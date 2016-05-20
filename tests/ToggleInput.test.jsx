@@ -117,4 +117,16 @@ describe("ToggleInput", () => {
     expect(color(switchNode.style.background).hexString())
       .toBe(BackgroundColors.secondary);
   });
+
+  it("does trigger an onChange event when the value changes", () => {
+    const mockHandleChange = jest.fn();
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput
+        onChange={mockHandleChange}
+      />
+    );
+    const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
+    TestUtils.Simulate.click(toggleInputNode);
+    expect(mockHandleChange).toBeCalledWith(true);
+  });
 });

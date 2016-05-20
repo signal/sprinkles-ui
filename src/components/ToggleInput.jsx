@@ -13,11 +13,13 @@ export default class ToggleInput extends ReactCSS.Component {
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.bool,
+    onChange: React.PropTypes.func,
   };
 
   static defaultProps = {
     enabled: true,
     initialValue: false,
+    onChange: () => {},
   };
 
   constructor(props) {
@@ -85,7 +87,7 @@ export default class ToggleInput extends ReactCSS.Component {
   handleClick() {
     this.setState({
       value: !this.state.value,
-    });
+    }, () => this.props.onChange(this.state.value));
   }
 
   render() {
