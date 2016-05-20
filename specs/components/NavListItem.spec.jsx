@@ -2,18 +2,26 @@
 
 import React from "react";
 import loremIpsum from "lorem-ipsum";
-import TextListItem from "../../src/components/TextListItem";
+import NavListItem from "../../src/components/NavListItem";
 
 
-describe("TextListItem", function () {
+describe("NavListItem", function () {
   this.header(`
-  ## TextListItem
+  ## NavListItem
   `); // Markdown.
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <TextListItem
+        <NavListItem
+          icon={
+            <circle
+              cx="6"
+              cy="6"
+              fill="red"
+              r="6"
+            ></circle>
+          }
           text={loremIpsum()}
         />
     );
@@ -23,18 +31,22 @@ describe("TextListItem", function () {
   it("Not Selected", () => this.props({ selected: false }));
   it("Hovered", () => this.props({ hovered: true }));
   it("Not Hovered", () => this.props({ hovered: false }));
-  it("List Position: First", () => this.props({ listPosition: "first" }));
-  it("List Position: Middle", () => this.props({ listPosition: "middle" }));
-  it("List Position: Last", () => this.props({ listPosition: "last" }));
-  it("List Position: Undefined", () => this.props({ listPosition: undefined }));
-  it("Disabled", () => this.props({ enabled: false }));
-  it("Enabled", () => this.props({ enabled: true }));
+  it("Expanded", () => this.props({ expanded: true }));
+  it("Not Expanded", () => this.props({ expanded: false }));
+  it("Make Icon Bigger", () => this.props({
+    height: 30,
+    width: 30,
+  }));
+  it("Make Icon Smaller", () => this.props({
+    height: 20,
+    width: 20,
+  }));
 
   /**
    * Documentation (Markdown)
    */
   this.footer(`
-  ### TextListItem
+  ### NavListItem
 
   A component for rendering text list items
 

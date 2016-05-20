@@ -1,30 +1,28 @@
 /* eslint func-names: "off" */
-/* eslint max-len: "off" */
+/* eslint no-console: "off" */
 
 import React from "react";
-import loremIpsum from "lorem-ipsum";
-import Popover from "../../src/components/Popover";
+import Dropdown from "../../src/components/Dropdown";
 import { Colors } from "../../src/shared/colors";
 
-
-// Wrapper to contain a Popover and an anchor element
-class PopoverWrapper extends React.Component {
+class DropdownWrapper extends React.Component {
   static propTypes = {
     anchorEl: React.PropTypes.object,
     anchorOrigin: React.PropTypes.object,
-    children: React.PropTypes.node,
-    constrainWidth: React.PropTypes.bool,
+    items: React.PropTypes.arrayOf(
+      React.PropTypes.shape({
+        key: React.PropTypes.string,
+        value: React.PropTypes.string,
+      })
+    ),
+    onAnchorClick: React.PropTypes.func,
     onClick: React.PropTypes.func,
     open: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
     useLayerForClickAway: React.PropTypes.bool,
   };
 
-  static defaultProps = {
-    text: "",
-  };
-
-  displayName = "PopoverWrapper";
+  displayName = "DropdownWrapper";
 
   constructor() {
     super();
@@ -40,7 +38,7 @@ class PopoverWrapper extends React.Component {
   }
 
   handleClick(e) {
-    this.props.onClick(e);
+    this.props.onAnchorClick(e);
   }
 
   render() {
@@ -50,58 +48,64 @@ class PopoverWrapper extends React.Component {
           onClick={this.handleClick.bind(this)}
           style={this.style.anchorDiv}
         >
-          {"Click Me"}
+          {"Dropdown"}
         </div>
-        <Popover
+        <Dropdown
           anchorEl={this.props.anchorEl}
           anchorOrigin={this.props.anchorOrigin}
-          constrainWidth={this.props.constrainWidth}
           open={this.props.open}
+          items={this.props.items}
+          onClick={this.props.onClick}
           onRequestClose={this.props.onRequestClose}
           useLayerForClickAway={this.props.useLayerForClickAway}
-        >
-          {this.props.children}
-        </Popover>
+        />
       </div>
     );
   }
 }
 
-describe("Popover", function () {
+describe("Dropdown", function () {
   this.header(`
-  ## Popover
+  ## Dropdown
   `); // Markdown.
 
   before(() => {
-    const handleClick = (e) => {
+    const handleAnchorClick = (e) => {
       this.props({
         anchorEl: e.currentTarget,
         open: true,
       });
     };
-
-    const handleRequestClose = () => {
+    const handleClick = (item) => {
+      console.log("Item Clicked", item);
       this.props({
         open: false,
       });
     };
-
-    const popoverStyle = {
-      background: "white",
-      border: "1px solid grey",
-    };
-    // Runs when the Suite loads.  Use this to host your component-under-test.
+    const handleRequestClose = () => this.props({ open: false });
     this.load(
-      <PopoverWrapper
-        onClick={handleClick.bind(this)}
+      <DropdownWrapper
+        items={[
+          {
+            key: "thing1",
+            value: "Thing 1",
+          },
+          {
+            key: "thing2",
+            value: "Thing 2",
+          },
+        ]}
+        open={false}
+        onClick={handleClick}
+        onAnchorClick={handleAnchorClick}
         onRequestClose={handleRequestClose}
         useLayerForClickAway={true}
-      >
-        <div style={popoverStyle}>{loremIpsum()}</div>
-      </PopoverWrapper>
+      />
     );
   });
 
+  it("Open Dropdown", () => this.props({ open: true }));
+  it("Close Dropdown", () => this.props({ open: false }));
   it("anchorOrigin h:left, v:bottom", () => this.props({
     anchorOrigin: {
       horizontal: "left",
@@ -130,31 +134,17 @@ describe("Popover", function () {
     },
   }));
 
-  it("constrain width: true", () => this.props({
-    constrainWidth: true,
-  }));
-
-  it("constrain width: false", () => this.props({
-    constrainWidth: false,
-  }));
-
   /**
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Text
+  ### Dropdown
 
-  A Popver element
+  A dropdown component
 
   #### API
 
-  - **anchorEl** *React.PropTypes.object* (optional) element to anchor popover (not set for absolute center)
-  - **anchorOrigin** *React.PropTypes.object* (optional) point on the anchorEl to anchor against
-  - **children** *React.PropTypes.node* (optional) child components
-  - **constrainWidth** *React.PropTypes.bool* (optional) when true keeps the width of the popover the same as the parent
-  - **open** *React.PropTypes.bool* (optional) popover open state
-  - **onRequestClose** *React.PropTypes.func* (optional) callback called when popover is requesting to close
-  - **useLayerForClickAway** *React.PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
+  - coming soon
 
   `);
 });

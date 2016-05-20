@@ -7,12 +7,19 @@ export default class Popover extends ReactCSS.Component {
 
   static propTypes = {
     anchorEl: React.PropTypes.object,
-    anchorOrigin: React.PropTypes.object,
+    anchorOrigin: React.PropTypes.shape({
+      horizontal: React.PropTypes.oneOf(["left", "right"]),
+      vertical: React.PropTypes.oneOf(["top", "bottom"]),
+    }),
     children: React.PropTypes.node,
+    constrainWidth: React.PropTypes.bool,
     open: React.PropTypes.bool,
+    onRequestClose: React.PropTypes.func,
+    useLayerForClickAway: React.PropTypes.bool,
   };
 
   static defaultProps = {
+    constrainWidth: false,
     open: false,
     anchorOrigin: {
       horizontal: "left",
@@ -31,9 +38,17 @@ export default class Popover extends ReactCSS.Component {
     return {
       default: {
         Popover: {
-          zindex: zindex.Popover,
+          zIndex: zindex.Popover,
           display: "none",
           position: "fixed",
+        },
+        CloseLayer: {
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: zindex.PopoverClose,
         },
       },
       open: {
@@ -51,6 +66,7 @@ export default class Popover extends ReactCSS.Component {
     return {
       top: this.getAnchorValue(anchor, anchorOrigin.vertical),
       left: this.getAnchorValue(anchor, anchorOrigin.horizontal),
+      width: this.props.constrainWidth ? anchor.width : undefined,
     };
   }
 
@@ -101,9 +117,27 @@ export default class Popover extends ReactCSS.Component {
     }
   }
 
+  renderCloseLayer() {
+    if (this.props.useLayerForClickAway) {
+      return (
+        <div
+          style={this.styles().CloseLayer}
+          onClick={this.props.onRequestClose}
+          ref={c => this.closeLayerRef = c}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     return (
-        <div style={this.styles().Popover}>{this.props.children}</div>
+        <div style={this.styles().Popover}>
+          <div style={this.styles().Popover}>
+            {this.props.children}
+          </div>
+          {this.renderCloseLayer()}
+        </div>
     );
   }
 }

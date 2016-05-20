@@ -1,6 +1,10 @@
 {
   "name": "sprinkles-ui",
+<<<<<<< HEAD
   "version": "0.0.1beta27",
+=======
+  "version": "0.0.1beta39",
+>>>>>>> 2a11f687de96f0e6e892515cc444c0d128c790f2
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
@@ -9,6 +13,7 @@
     "test": "npm run lint && jest",
     "test:watch": "node_modules/nodemon/bin/nodemon.js -w tests -w ./src -w ./specs -e js,jsx -x npm test",
     "build": "babel ./src --ignore *.spec.js --out-dir ./lib",
+    "build:watch": "node_modules/nodemon/bin/nodemon.js -w ./src -e js,jsx -x npm run build",
     "bundle": "node_modules/webpack/bin/webpack.js --progress --colors",
     "prepublish": "npm run build",
     "postinstall": "if [ -d .git/hooks/ ]; then npm run -s install:precommithook; fi",

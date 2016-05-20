@@ -8,16 +8,27 @@ export default class List extends ReactCSS.Component {
 
   static propTypes = {
     children: React.PropTypes.node,
+    showBorder: React.PropTypes.bool,
+  };
+
+  static defaultProps = {
+    showBorder: true,
   };
 
   classes() {
     return {
-      default: {
+      border: {
         List: {
           border: `1px solid ${StructuralColors.divider}`,
         },
       },
     };
+  }
+
+  styles() {
+    return this.css({
+      border: this.props.showBorder,
+    });
   }
 
   renderChildren() {

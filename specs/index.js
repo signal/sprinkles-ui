@@ -17,11 +17,19 @@ describe("Sprinkles UI", () => {
     require("./components/EmailInput.spec");
     require("./components/RadioButtonInput.spec");
     require("./components/KeyValueInput.spec");
+    require("./components/SelectInput.spec");
+    require("./components/ToggleInput.spec");
   });
   describe("List and List Item", () => {
     require("./components/List.spec");
     require("./components/ListItem.spec");
     require("./components/TextListItem.spec");
+    require("./components/NavListItem.spec");
+  });
+  describe("Navigation", () => {
+    require("./components/Breadcrumbs.spec");
+    require("./components/SecondaryNav.spec");
+    require("./components/PrimaryNav.spec");
   });
   describe("Buttons", () => {
     require("./components/Button.spec");
@@ -30,8 +38,12 @@ describe("Sprinkles UI", () => {
   require("./components/Alert.spec");
   require("./components/Text.spec");
   require("./components/Popover.spec");
+  require("./components/Dropdown.spec");
   require("./components/VectorGraphic.spec");
   require("./components/Version.spec");
   require("./components/Drawer.spec");
   require("./components/colors.spec");
+  require("./components/ButtonGroup.spec");
+  require("./components/Panel.spec");
+  require("./components/Table.spec");
 });
