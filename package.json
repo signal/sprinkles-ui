@@ -8,7 +8,7 @@
     "start": "node ./node_modules/ui-harness/start --entry=./specs",
     "test": "npm run lint && jest",
     "test:watch": "node_modules/nodemon/bin/nodemon.js -w tests -w ./src -w ./specs -e js,jsx -x npm test",
-    "build": "babel ./src --ignore *.spec.js --out-dir ./lib",
+    "build": "node_modules/babel-cli/bin/babel.js ./src --ignore *.spec.js --out-dir ./lib",
     "build:watch": "node_modules/nodemon/bin/nodemon.js -w ./src -e js,jsx -x npm run build",
     "bundle": "node_modules/webpack/bin/webpack.js --progress --colors",
     "prepublish": "npm run build",
@@ -27,6 +27,7 @@
     "reactcss": "^0.4.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.9.0",
     "babel-core": "^6.7.6",
     "babel-eslint": "^6.0.2",
     "babel-jest": "^11.0.0",
@@ -35,13 +36,13 @@
     "eslint": "^2.7.0",
     "eslint-config-airbnb": "^7.0.0",
     "eslint-plugin-jsx-a11y": "^0.6.2",
-    "eslint-plugin-react":"^4.3.0",
+    "eslint-plugin-react": "^4.3.0",
     "jest-cli": "^11.0.0",
     "lorem-ipsum": "^1.0.3",
+    "nodemon": "^1.9.1",
     "react-addons-test-utils": "^0.14.8",
     "ui-harness": "3.5.4",
-    "webpack": "^1.12.15",
-    "nodemon": "^1.9.1"
+    "webpack": "^1.12.15"
   },
   "files": [
     "lib",
