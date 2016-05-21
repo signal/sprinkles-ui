@@ -2,13 +2,13 @@
 /* eslint no-console: "off" */
 /* eslint max-len: "off" */
 
-import React from "react";
-import loremIpsum from "lorem-ipsum";
-import ListItem from "../../src/components/ListItem";
-import TextListItem from "../../src/components/TextListItem";
+import React from 'react';
+import loremIpsum from 'lorem-ipsum';
+import ListItem from '../../src/components/ListItem';
+import TextListItem from '../../src/components/TextListItem';
 
 
-describe("ListItem", function () {
+describe('ListItem', function () {
   this.header(`
   ## ListItem
   `); // Markdown.
@@ -16,7 +16,7 @@ describe("ListItem", function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <ListItem onClick={() => console.log("ListItem clicked")}>
+        <ListItem onClick={() => console.log('ListItem clicked')}>
             <TextListItem
               text={loremIpsum()}
             />
@@ -24,8 +24,8 @@ describe("ListItem", function () {
     );
   });
 
-  it("Select ListItem", () => this.props({ selected: true }));
-  it("Unselect ListItem", () => this.props({ selected: false }));
+  it('Select ListItem', () => this.props({ selected: true }));
+  it('Unselect ListItem', () => this.props({ selected: false }));
 
   /**
    * Documentation (Markdown)

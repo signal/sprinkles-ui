@@ -1,25 +1,25 @@
-// don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/TextListItem");
-jest.dontMock("../src/components/Text");
-jest.dontMock("../src/shared/colors");
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/TextListItem');
+jest.dontMock('../src/components/Text');
+jest.dontMock('../src/shared/colors');
 
-import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import color from "color";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import color from 'color';
 import {
   BackgroundColors,
   Colors,
   TextColors,
   StructuralColors,
-} from "../src/shared/colors";
+} from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
-const TextListItem = require("../src/components/TextListItem").default;
+const TextListItem = require('../src/components/TextListItem').default;
 
 
-describe("TextListItem", () => {
-  it("Does render a TextListItem", () => {
+describe('TextListItem', () => {
+  it('Does render a TextListItem', () => {
     // Render a ListItem with no style
     const textListItemComponent = TestUtils.renderIntoDocument(
         <TextListItem />
@@ -27,8 +27,8 @@ describe("TextListItem", () => {
     expect(textListItemComponent).toBeDefined();
   });
 
-  it("Does render a TextListItem text", () => {
-    const text = "howdy";
+  it('Does render a TextListItem text', () => {
+    const text = 'howdy';
     const textListItemComponent = TestUtils.renderIntoDocument(
         <TextListItem text={text} />
     );
@@ -36,7 +36,7 @@ describe("TextListItem", () => {
     expect(textListItemNode.textContent).toBe(text);
   });
 
-  it("Does render a selected TextListItem", () => {
+  it('Does render a selected TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
         <TextListItem
           selected={true}
@@ -47,7 +47,7 @@ describe("TextListItem", () => {
     expect(color(textListItemNode.style.color).hexString()).toBe(TextColors.light);
   });
 
-  it("Does render a hovered TextListItem", () => {
+  it('Does render a hovered TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
         <TextListItem
           hovered={true}
@@ -59,10 +59,10 @@ describe("TextListItem", () => {
     expect(color(textListItemNode.style.color).hexString()).toBe(TextColors.accent);
   });
 
-  it("Does render first TextListItem", () => {
+  it('Does render first TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
         <TextListItem
-          listPosition={"first"}
+          listPosition={'first'}
         />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
@@ -70,10 +70,10 @@ describe("TextListItem", () => {
       .toBe(`1px solid ${StructuralColors.divider}`);
   });
 
-  it("Does render middle TextListItem", () => {
+  it('Does render middle TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
         <TextListItem
-          listPosition={"middle"}
+          listPosition={'middle'}
         />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
@@ -81,17 +81,17 @@ describe("TextListItem", () => {
       .toBe(`1px solid ${StructuralColors.divider}`);
   });
 
-  it("Does render last TextListItem", () => {
+  it('Does render last TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
         <TextListItem
-          listPosition={"last"}
+          listPosition={'last'}
         />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
-    expect(textListItemNode.style.borderBottom).toBe("");
+    expect(textListItemNode.style.borderBottom).toBe('');
   });
 
-  it("Does trigger onClick when clicked", () => {
+  it('Does trigger onClick when clicked', () => {
     const mockHandleClick = jest.fn();
     const textListItemComponent = TestUtils.renderIntoDocument(
       <TextListItem onClick={mockHandleClick} />
@@ -101,7 +101,7 @@ describe("TextListItem", () => {
     expect(mockHandleClick).toBeCalled();
   });
 
-  it("Does render a disabled TextListItem", () => {
+  it('Does render a disabled TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
       <TextListItem
         enabled={false}
@@ -110,6 +110,6 @@ describe("TextListItem", () => {
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(color(textListItemNode.style.color).hexString()).toBe(TextColors.secondary);
     expect(color(textListItemNode.style.background).hexString()).toBe(BackgroundColors.secondary);
-    expect(textListItemNode.style.cursor).toBe("not-allowed");
+    expect(textListItemNode.style.cursor).toBe('not-allowed');
   });
 });

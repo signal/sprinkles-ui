@@ -1,24 +1,24 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import { ButtonColors, TextColors } from "../shared/colors";
-import color from "color";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import { ButtonColors, TextColors } from '../shared/colors';
+import color from 'color';
 
 export default class Button extends ReactCSS.Component {
-  displayName = "Button";
+  displayName = 'Button';
 
   static propTypes = {
     children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
-    groupPosition: React.PropTypes.oneOf(["left", "center", "right"]),
+    groupPosition: React.PropTypes.oneOf(['left', 'center', 'right']),
     onClick: React.PropTypes.func,
     text: React.PropTypes.string,
     type: React.PropTypes.oneOf([
-      "secondary",
-      "primary",
-      "success",
-      "info",
-      "warning",
-      "danger",
+      'secondary',
+      'primary',
+      'success',
+      'info',
+      'warning',
+      'danger',
     ]),
     working: React.PropTypes.bool,
   };
@@ -26,8 +26,8 @@ export default class Button extends ReactCSS.Component {
   static defaultProps = {
     enabled: true,
     working: false,
-    text: "Submit",
-    type: "secondary",
+    text: 'Submit',
+    type: 'secondary',
   };
 
   constructor() {
@@ -52,7 +52,7 @@ export default class Button extends ReactCSS.Component {
   }
 
   componentWillMount() {
-    this.keyframe = document.createElement("style");
+    this.keyframe = document.createElement('style');
     this.keyframe.innerHTML = `@keyframes button-working {
       from { background-position: 0 0; }
       to { background-position: 14px 0px; }
@@ -71,7 +71,7 @@ export default class Button extends ReactCSS.Component {
         .darken(0.1).hexString();
     const lightened = color(ButtonColors[this.props.type])
         .lighten(0.3).hexString();
-    const workingColor = this.props.type === "secondary" ? darkened : veryDarkened;
+    const workingColor = this.props.type === 'secondary' ? darkened : veryDarkened;
     return {
       default: {
         Button: {
@@ -80,10 +80,10 @@ export default class Button extends ReactCSS.Component {
           borderLeft: `1px solid ${veryDarkened}`,
           borderBottom: `1px solid ${veryDarkened}`,
           borderRight: `1px solid ${veryDarkened}`,
-          borderRadius: "3px",
+          borderRadius: '3px',
           color: TextColors.primary,
-          padding: "5px 15px",
-          outline: "none",
+          padding: '5px 15px',
+          outline: 'none',
         },
       },
       typeColor: {
@@ -99,18 +99,18 @@ export default class Button extends ReactCSS.Component {
       hovering: {
         Button: {
           background: darkened,
-          cursor: "pointer",
+          cursor: 'pointer',
         },
       },
       disabled: {
         Button: {
-          background: this.props.type === "secondary" ? darkened : lightened,
-          cursor: "not-allowed",
+          background: this.props.type === 'secondary' ? darkened : lightened,
+          cursor: 'not-allowed',
         },
       },
       working: {
         Button: {
-          cursor: "wait",
+          cursor: 'wait',
           backgroundImage: `repeating-linear-gradient(
             90deg,
             transparent,
@@ -118,27 +118,27 @@ export default class Button extends ReactCSS.Component {
             ${workingColor} 7px,
             ${workingColor} 14px
           )`,
-          animation: "button-working 0.5s linear infinite",
-          backgroundSize: "14px auto",
+          animation: 'button-working 0.5s linear infinite',
+          backgroundSize: '14px auto',
         },
       },
       groupPositionLeft: {
         Button: {
-          borderRadius: "3px 0 0 3px",
+          borderRadius: '3px 0 0 3px',
           borderRight: `1px solid ${veryDarkened}`,
         },
       },
       groupPositionCenter: {
         Button: {
-          borderLeft: "0",
+          borderLeft: '0',
           borderRight: `1px solid ${veryDarkened}`,
-          borderRadius: "0",
+          borderRadius: '0',
         },
       },
       groupPositionRight: {
         Button: {
-          borderLeft: "0",
-          borderRadius: "0 3px 3px 0",
+          borderLeft: '0',
+          borderRadius: '0 3px 3px 0',
         },
       },
     };
@@ -146,13 +146,13 @@ export default class Button extends ReactCSS.Component {
 
   styles() {
     return this.css({
-      typeColor: this.props.type !== "secondary",
+      typeColor: this.props.type !== 'secondary',
       hovering: this.state.isHovering && !this.props.working,
       disabled: !this.props.enabled,
       working: this.props.working,
-      groupPositionLeft: this.props.groupPosition === "left",
-      groupPositionCenter: this.props.groupPosition === "center",
-      groupPositionRight: this.props.groupPosition === "right",
+      groupPositionLeft: this.props.groupPosition === 'left',
+      groupPositionCenter: this.props.groupPosition === 'center',
+      groupPositionRight: this.props.groupPosition === 'right',
     });
   }
 

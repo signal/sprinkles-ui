@@ -2,11 +2,11 @@
 /* eslint no-console: "off" */
 /* eslint max-len: "off" */
 
-import React from "react";
-import Alert from "../../src/components/Alert";
-import Text from "../../src/components/Text";
+import React from 'react';
+import Alert from '../../src/components/Alert';
+import Text from '../../src/components/Text';
 
-describe("Alert", function () {
+describe('Alert', function () {
   this.header(`
   ## Alert Message
   `); // Markdown.
@@ -21,90 +21,90 @@ describe("Alert", function () {
       >
         {props.children}
       </Alert>
-    ).width("100%");
+    ).width('100%');
   };
 
   before(() => {
     this.loadAlert({
-      details: "Test",
-      type: "info",
+      details: 'Test',
+      type: 'info',
     });
   });
 
-  it("Success message", () => this.loadAlert({
-    details: "Yay! It worked",
-    title: "",
-    type: "success",
+  it('Success message', () => this.loadAlert({
+    details: 'Yay! It worked',
+    title: '',
+    type: 'success',
   }));
-  it("Success message with title", () => this.loadAlert({
-    details: "Yay! It worked",
-    title: "WOW",
-    type: "success",
+  it('Success message with title', () => this.loadAlert({
+    details: 'Yay! It worked',
+    title: 'WOW',
+    type: 'success',
   }));
-  it("Info message", () => this.loadAlert({
-    details: "This is some information you might like",
-    title: "",
-    type: "info",
+  it('Info message', () => this.loadAlert({
+    details: 'This is some information you might like',
+    title: '',
+    type: 'info',
   }));
-  it("Info message with title", () => this.loadAlert({
-    details: "This is some information you might like",
-    title: "Note",
-    type: "info",
+  it('Info message with title', () => this.loadAlert({
+    details: 'This is some information you might like',
+    title: 'Note',
+    type: 'info',
   }));
-  it("Warning message", () => this.loadAlert({
-    details: "Be careful you might run into a problem",
-    title: "",
-    type: "warning",
+  it('Warning message', () => this.loadAlert({
+    details: 'Be careful you might run into a problem',
+    title: '',
+    type: 'warning',
   }));
-  it("Warning message with title", () => this.loadAlert({
-    details: "Be careful you might run into a problem",
-    title: "Caution:",
-    type: "warning",
+  it('Warning message with title', () => this.loadAlert({
+    details: 'Be careful you might run into a problem',
+    title: 'Caution:',
+    type: 'warning',
   }));
-  it("Danger message", () => this.loadAlert({
+  it('Danger message', () => this.loadAlert({
     children: null,
-    details: "Yikes! You dun broke it",
-    title: "",
-    type: "danger",
+    details: 'Yikes! You dun broke it',
+    title: '',
+    type: 'danger',
   }));
-  it("Danger message with title", () => this.loadAlert({
+  it('Danger message with title', () => this.loadAlert({
     children:
       <Text
-        color={"white"}
+        color={'white'}
         fontSize={1.5}
       >
-        {"You dun broke it"}
+        {'You dun broke it'}
       </Text>,
-    title: "Warning!",
-    type: "danger",
+    title: 'Warning!',
+    type: 'danger',
   }));
-  it("Danger message with child nodes", () => this.loadAlert({
-    title: "Please reset your password using the following criteria:",
-    type: "danger",
+  it('Danger message with child nodes', () => this.loadAlert({
+    title: 'Please reset your password using the following criteria:',
+    type: 'danger',
     children:
       <div>
           <div
             style={{
-              padding: "10px 0 5px 0",
+              padding: '10px 0 5px 0',
             }}
           >
               <Text
-                color={"white"}
+                color={'white'}
                 fontSize={0.8}
               >
-                {"◼︎ At least 1 special character (e.g. ][?/<~!$#%)"}
+                {'◼︎ At least 1 special character (e.g. ][?/<~!$#%)'}
               </Text>
           </div>
           <div
             style={{
-              padding: "10px 0 5px 0",
+              padding: '10px 0 5px 0',
             }}
           >
             <Text
-              color={"white"}
+              color={'white'}
               fontSize={0.8}
             >
-                {"◼︎ At least 1 numeric character"}
+                {'◼︎ At least 1 numeric character'}
             </Text>
           </div>
       </div>,

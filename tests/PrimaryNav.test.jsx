@@ -1,41 +1,41 @@
-// don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/PrimaryNav");
-jest.dontMock("../src/components/Text");
-jest.dontMock("../src/shared/colors");
-jest.dontMock("../src/components/List");
-jest.dontMock("../src/components/ListItem");
-jest.dontMock("../src/components/TextListItem");
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/PrimaryNav');
+jest.dontMock('../src/components/Text');
+jest.dontMock('../src/shared/colors');
+jest.dontMock('../src/components/List');
+jest.dontMock('../src/components/ListItem');
+jest.dontMock('../src/components/TextListItem');
 
-import React from "react";
-import ReactDOM from "react-dom";
-import color from "color";
-import TestUtils from "react-addons-test-utils";
-import { BackgroundColors } from "../src/shared/colors";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import color from 'color';
+import TestUtils from 'react-addons-test-utils';
+import { BackgroundColors } from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
-const PrimaryNav = require("../src/components/PrimaryNav").default;
+const PrimaryNav = require('../src/components/PrimaryNav').default;
 
-describe("Primary Navigation Bar", () => {
-  it("does render a Bar", () => {
+describe('Primary Navigation Bar', () => {
+  it('does render a Bar', () => {
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav />
     );
     expect(primaryNavComponent).toBeDefined();
   });
 
-  it("does render a PrimaryNav with expected style", () => {
+  it('does render a PrimaryNav with expected style', () => {
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav />
     );
     const primaryNavNode = ReactDOM.findDOMNode(primaryNavComponent);
     expect(color(primaryNavNode.style.background).hexString()).toBe(BackgroundColors.primaryNav);
-    expect(primaryNavNode.style.flexDirection).toBe("column");
-    expect(primaryNavNode.style.alignItems).toBe("stretch");
-    expect(primaryNavNode.style.height).toBe("100%");
-    expect(primaryNavNode.style.width).toBe("100%");
+    expect(primaryNavNode.style.flexDirection).toBe('column');
+    expect(primaryNavNode.style.alignItems).toBe('stretch');
+    expect(primaryNavNode.style.height).toBe('100%');
+    expect(primaryNavNode.style.width).toBe('100%');
   });
 
-  it("does render a PrimaryNav app icon", () => {
+  it('does render a PrimaryNav app icon', () => {
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav appIcon={
           <div></div>
@@ -45,8 +45,8 @@ describe("Primary Navigation Bar", () => {
     expect(primaryNavComponent.appIconRef).toBeDefined();
   });
 
-  it("does render a PrimaryNav app name", () => {
-    const appName = "My Cool App";
+  it('does render a PrimaryNav app name', () => {
+    const appName = 'My Cool App';
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav appName={appName} />
     );
@@ -55,13 +55,13 @@ describe("Primary Navigation Bar", () => {
     expect(primaryNavComponent.appNameRef).toBeDefined();
   });
 
-  it("does render PrimaryNav navItems", () => {
+  it('does render PrimaryNav navItems', () => {
     const navItems = [
       {
         height: 20,
         icon: <div></div>,
-        label: "Item 1",
-        key: "item-1",
+        label: 'Item 1',
+        key: 'item-1',
         width: 20,
       },
     ];
@@ -71,14 +71,14 @@ describe("Primary Navigation Bar", () => {
     expect(primaryNavComponent.listItemRef.listItemRefs.count()).toBe(1);
   });
 
-  it("does render PrimaryNav expandToggle", () => {
+  it('does render PrimaryNav expandToggle', () => {
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav />
     );
     expect(primaryNavComponent.expandToggleRef).toBeDefined();
   });
 
-  it("does trigger onRequestExpandToggle callback when expandToggle clicked", () => {
+  it('does trigger onRequestExpandToggle callback when expandToggle clicked', () => {
     const mockHandleRequestExpandToggle = jest.fn();
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav onRequestExpandToggle={mockHandleRequestExpandToggle} />
@@ -88,13 +88,13 @@ describe("Primary Navigation Bar", () => {
     expect(mockHandleRequestExpandToggle).toBeCalled();
   });
 
-  it("does trigger onNavItemClick callback when navItem clicked", () => {
+  it('does trigger onNavItemClick callback when navItem clicked', () => {
     const mockHandleNavItemClick = jest.fn();
     const navItems = [
       {
         icon: <div></div>,
-        label: "Item 1",
-        key: "item-1",
+        label: 'Item 1',
+        key: 'item-1',
       },
     ];
     const primaryNavComponent = TestUtils.renderIntoDocument(
@@ -111,15 +111,15 @@ describe("Primary Navigation Bar", () => {
     expect(mockHandleNavItemClick).toBeCalledWith(navItems[0].key);
   });
 
-  it("does set selectedNavItem", () => {
+  it('does set selectedNavItem', () => {
     const navItems = [
       {
         icon: <div></div>,
-        label: "Item 1",
-        key: "item-1",
+        label: 'Item 1',
+        key: 'item-1',
       },
     ];
-    const selectedNavItem = "item-1";
+    const selectedNavItem = 'item-1';
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav
         navItems={navItems}

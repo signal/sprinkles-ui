@@ -1,10 +1,10 @@
 /* eslint func-names: "off" */
 /* eslint max-len: "off" */
 
-import React from "react";
-import loremIpsum from "lorem-ipsum";
-import Popover from "../../src/components/Popover";
-import { Colors } from "../../src/shared/colors";
+import React from 'react';
+import loremIpsum from 'lorem-ipsum';
+import Popover from '../../src/components/Popover';
+import { Colors } from '../../src/shared/colors';
 
 
 // Wrapper to contain a Popover and an anchor element
@@ -21,10 +21,10 @@ class PopoverWrapper extends React.Component {
   };
 
   static defaultProps = {
-    text: "",
+    text: '',
   };
 
-  displayName = "PopoverWrapper";
+  displayName = 'PopoverWrapper';
 
   constructor() {
     super();
@@ -33,8 +33,8 @@ class PopoverWrapper extends React.Component {
       anchorDiv: {
         padding: 10,
         background: Colors.info,
-        color: "#FEFEFE",
-        cursor: "pointer",
+        color: '#FEFEFE',
+        cursor: 'pointer',
       },
     };
   }
@@ -50,7 +50,7 @@ class PopoverWrapper extends React.Component {
           onClick={this.handleClick.bind(this)}
           style={this.style.anchorDiv}
         >
-          {"Click Me"}
+          {'Click Me'}
         </div>
         <Popover
           anchorEl={this.props.anchorEl}
@@ -67,7 +67,7 @@ class PopoverWrapper extends React.Component {
   }
 }
 
-describe("Popover", function () {
+describe('Popover', function () {
   this.header(`
   ## Popover
   `); // Markdown.
@@ -87,8 +87,8 @@ describe("Popover", function () {
     };
 
     const popoverStyle = {
-      background: "white",
-      border: "1px solid grey",
+      background: 'white',
+      border: '1px solid grey',
     };
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
@@ -102,39 +102,39 @@ describe("Popover", function () {
     );
   });
 
-  it("anchorOrigin h:left, v:bottom", () => this.props({
+  it('anchorOrigin h:left, v:bottom', () => this.props({
     anchorOrigin: {
-      horizontal: "left",
-      vertical: "bottom",
+      horizontal: 'left',
+      vertical: 'bottom',
     },
   }));
 
-  it("anchorOrigin h:right, v:bottom", () => this.props({
+  it('anchorOrigin h:right, v:bottom', () => this.props({
     anchorOrigin: {
-      horizontal: "right",
-      vertical: "bottom",
+      horizontal: 'right',
+      vertical: 'bottom',
     },
   }));
 
-  it("anchorOrigin h:left, v:top", () => this.props({
+  it('anchorOrigin h:left, v:top', () => this.props({
     anchorOrigin: {
-      horizontal: "left",
-      vertical: "top",
+      horizontal: 'left',
+      vertical: 'top',
     },
   }));
 
-  it("anchorOrigin h:right, v:top", () => this.props({
+  it('anchorOrigin h:right, v:top', () => this.props({
     anchorOrigin: {
-      horizontal: "right",
-      vertical: "top",
+      horizontal: 'right',
+      vertical: 'top',
     },
   }));
 
-  it("constrain width: true", () => this.props({
+  it('constrain width: true', () => this.props({
     constrainWidth: true,
   }));
 
-  it("constrain width: false", () => this.props({
+  it('constrain width: false', () => this.props({
     constrainWidth: false,
   }));
 

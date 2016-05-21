@@ -1,20 +1,20 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Text from "./Text";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Text from './Text';
 import {
   Colors,
   BackgroundColors,
   TextColors,
   StructuralColors,
- } from "../shared/colors";
+ } from '../shared/colors';
 
 export default class TextListItem extends ReactCSS.Component {
-  displayName = "TextListItem";
+  displayName = 'TextListItem';
 
   static propTypes = {
     enabled: React.PropTypes.bool,
     hovered: React.PropTypes.bool,
-    listPosition: React.PropTypes.oneOf(["first", "middle", "last"]),
+    listPosition: React.PropTypes.oneOf(['first', 'middle', 'last']),
     onClick: React.PropTypes.func,
     selected: React.PropTypes.bool,
     text: React.PropTypes.string,
@@ -43,7 +43,7 @@ export default class TextListItem extends ReactCSS.Component {
         Text: {
           background: BackgroundColors.accent,
           color: TextColors.accent,
-          cursor: "pointer",
+          cursor: 'pointer',
         },
       },
       first: {
@@ -59,7 +59,7 @@ export default class TextListItem extends ReactCSS.Component {
       disabled: {
         Text: {
           color: TextColors.secondary,
-          cursor: "not-allowed",
+          cursor: 'not-allowed',
           background: BackgroundColors.secondary,
         },
       },
@@ -70,8 +70,8 @@ export default class TextListItem extends ReactCSS.Component {
     return this.css({
       hovered: !!this.props.hovered,
       selected: !!this.props.selected,
-      first: this.props.listPosition === "first",
-      middle: this.props.listPosition === "middle",
+      first: this.props.listPosition === 'first',
+      middle: this.props.listPosition === 'middle',
       disabled: !this.props.enabled,
     });
   }

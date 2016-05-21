@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import {
   Alert,
   Breadcrumbs,
@@ -32,7 +32,7 @@ import {
   Colors,
   StructuralColors,
   TextColors,
-} from "./Sprinkles";
+} from './Sprinkles';
 
 
 // export Sprinkles, React and ReactDOM globally

@@ -1,17 +1,17 @@
-// don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/TextInput");
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/TextInput');
 
-import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import { Colors } from "../src/shared/colors";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import { Colors } from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
-const TextInput = require("../src/components/TextInput").default;
+const TextInput = require('../src/components/TextInput').default;
 
-describe("TextInput", () => {
-  it("Does render an TextInput with default text", () => {
-    const text = "howdy";
+describe('TextInput', () => {
+  it('Does render an TextInput with default text', () => {
+    const text = 'howdy';
 
     // Render an TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
@@ -23,22 +23,22 @@ describe("TextInput", () => {
     // grab the DOM node so we can inspect it
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
 
-    // Verify that it"s rendered with the right text
+    // Verify that it's rendered with the right text
     // NOTE: This will ALWAYS grab the value at initialization time
     //       Use the 'value' property if you're looking for the text value
-    expect(textInputNode.getAttribute("value")).toEqual(text);
-    expect(textInputNode.getAttribute("autocomplete")).toBe("on");
+    expect(textInputNode.getAttribute('value')).toEqual(text);
+    expect(textInputNode.getAttribute('autocomplete')).toBe('on');
   });
 
-  it("Does render an editable input", () => {
-    const changedText = "howdy";
+  it('Does render an editable input', () => {
+    const changedText = 'howdy';
 
     const handleChange = jest.genMockFunction();
 
     // Render an editable TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
-        initialValue={""}
+        initialValue={''}
         onChange={handleChange}
       />
     );
@@ -47,7 +47,7 @@ describe("TextInput", () => {
     expect(handleChange).toBeCalledWith(changedText);
   });
 
-  it("Does set isFocused when component is in focus", () => {
+  it('Does set isFocused when component is in focus', () => {
     // Render an editable TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput />
@@ -61,8 +61,8 @@ describe("TextInput", () => {
     expect(textInputComponent.setState).toBeCalledWith({ isFocused: false });
   });
 
-  it("Does render with a placeholder", () => {
-    const placeholder = "placeholder";
+  it('Does render with a placeholder', () => {
+    const placeholder = 'placeholder';
     // Render an editable TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
@@ -71,62 +71,62 @@ describe("TextInput", () => {
     );
     // grab the DOM node so we can inspect it
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.getAttribute("placeholder")).toBe(placeholder);
+    expect(textInputNode.getAttribute('placeholder')).toBe(placeholder);
   });
 
-  it("Does render with red shadow on error status", () => {
+  it('Does render with red shadow on error status', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
-        status={"error"}
+        status={'error'}
       />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
   });
 
-  it("Does render with an orange shadow on warning status", () => {
+  it('Does render with an orange shadow on warning status', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
-        status={"warning"}
+        status={'warning'}
       />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
   });
 
-  it("Does render with a green shadow on success status", () => {
+  it('Does render with a green shadow on success status', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
-        status={"success"}
+        status={'success'}
       />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
   });
 
-  it("Does return invalid state with empty TextInput", () => {
+  it('Does return invalid state with empty TextInput', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
         <TextInput />
     );
     expect(textInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: true,
-      validationError: "Field Must Not Be Empty",
+      validationError: 'Field Must Not Be Empty',
     });
   });
 
-  it("Does return valid state when TextInput has a value", () => {
+  it('Does return valid state when TextInput has a value', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
-        <TextInput initialValue={"a"} />
+        <TextInput initialValue={'a'} />
     );
     expect(textInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: true,
-      validationError: "",
+      validationError: '',
     });
   });
 
-  it("Does return valid state and not initial state when input changes", () => {
+  it('Does return valid state and not initial state when input changes', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
         <TextInput />
     );
@@ -134,43 +134,43 @@ describe("TextInput", () => {
     expect(textInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: true,
-      validationError: "Field Must Not Be Empty",
+      validationError: 'Field Must Not Be Empty',
     });
-    TestUtils.Simulate.change(textInputNode, { target: { value: "a" } });
+    TestUtils.Simulate.change(textInputNode, { target: { value: 'a' } });
     expect(textInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,
-      validationError: "",
+      validationError: '',
     });
   });
 
-  it("Does return invalid state and not initial state when input changes", () => {
+  it('Does return invalid state and not initial state when input changes', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
-      <TextInput initialValue={"a"} />
+      <TextInput initialValue={'a'} />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: true,
-      validationError: "",
+      validationError: '',
     });
-    TestUtils.Simulate.change(textInputNode, { target: { value: "" } });
+    TestUtils.Simulate.change(textInputNode, { target: { value: '' } });
     expect(textInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: false,
-      validationError: "Field Must Not Be Empty",
+      validationError: 'Field Must Not Be Empty',
     });
   });
 
-  it("Does disable autocomplete on inputbox", () => {
+  it('Does disable autocomplete on inputbox', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput autoComplete={false} />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.getAttribute("autocomplete")).toBe("off");
+    expect(textInputNode.getAttribute('autocomplete')).toBe('off');
   });
 
-  it("Does render a disabled text input", () => {
+  it('Does render a disabled text input', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput enabled={false} />
     );
@@ -178,20 +178,20 @@ describe("TextInput", () => {
     expect(textInputNode.disabled).toBe(true);
   });
 
-  it("Does render a TextInput with a bound value", () => {
-    const boundValue = "howdy";
+  it('Does render a TextInput with a bound value', () => {
+    const boundValue = 'howdy';
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput boundValue={boundValue} />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.getAttribute("value")).toBe(boundValue);
-    TestUtils.Simulate.change(textInputNode, { target: { value: "" } });
-    expect(textInputNode.getAttribute("value")).toBe(boundValue);
+    expect(textInputNode.getAttribute('value')).toBe(boundValue);
+    TestUtils.Simulate.change(textInputNode, { target: { value: '' } });
+    expect(textInputNode.getAttribute('value')).toBe(boundValue);
   });
 
-  it("Does trigger onChange event on boundInput", () => {
-    const boundValue = "howdy";
-    const changedText = "hi";
+  it('Does trigger onChange event on boundInput', () => {
+    const boundValue = 'howdy';
+    const changedText = 'hi';
     const mockHandleChange = jest.genMockFunction();
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
@@ -204,8 +204,8 @@ describe("TextInput", () => {
     expect(mockHandleChange).toBeCalledWith(changedText);
   });
 
-  it("Does return the expected initial value", () => {
-    const value = "value";
+  it('Does return the expected initial value', () => {
+    const value = 'value';
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
         initialValue={value}
@@ -214,11 +214,11 @@ describe("TextInput", () => {
     expect(textInputComponent.value()).toBe(value);
   });
 
-  it("Does render a multiline TextInput", () => {
+  it('Does render a multiline TextInput', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput multiline={true} />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.nodeName).toBe("TEXTAREA");
+    expect(textInputNode.nodeName).toBe('TEXTAREA');
   });
 });

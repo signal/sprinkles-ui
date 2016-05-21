@@ -1,10 +1,10 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import { Map } from "immutable";
-import { StructuralColors } from "../shared/colors";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import { Map } from 'immutable';
+import { StructuralColors } from '../shared/colors';
 
 export default class List extends ReactCSS.Component {
-  static displayName = "List";
+  static displayName = 'List';
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -40,13 +40,13 @@ export default class List extends ReactCSS.Component {
         if (lenChildren > 0) {
           switch (i) {
             case 0:
-              listPosition = "first";
+              listPosition = 'first';
               break;
             case lenChildren - 1:
-              listPosition = "last";
+              listPosition = 'last';
               break;
             default:
-              listPosition = "middle";
+              listPosition = 'middle';
               break;
           }
         }

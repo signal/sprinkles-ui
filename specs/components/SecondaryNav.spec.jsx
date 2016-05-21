@@ -1,9 +1,9 @@
 /* eslint func-names: "off" */
 
-import React from "react";
-import SecondaryNav from "../../src/components/SecondaryNav";
+import React from 'react';
+import SecondaryNav from '../../src/components/SecondaryNav';
 
-describe("SecondaryNav", function () {
+describe('SecondaryNav', function () {
   this.header(`
   ## SecondaryNav
   `); // Markdown.
@@ -12,10 +12,10 @@ describe("SecondaryNav", function () {
     const itemStyle = {
       flex: 1,
       maxWidth: 55,
-      textAlign: "center",
+      textAlign: 'center',
     };
-    const leftItems = ["Bread", ">", "Crumbs"];
-    const rightItems = ["User ▾"];
+    const leftItems = ['Bread', '>', 'Crumbs'];
+    const rightItems = ['User ▾'];
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
       <SecondaryNav
@@ -42,7 +42,7 @@ describe("SecondaryNav", function () {
           ))
         }
       />
-    ).width("100%").height(60);
+    ).width('100%').height(60);
   });
 
   /**

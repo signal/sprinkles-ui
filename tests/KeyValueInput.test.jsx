@@ -1,22 +1,22 @@
-// don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/KeyValueInput");
-jest.dontMock("../src/components/TextInput");
-jest.dontMock("../src/components/Text");
-jest.dontMock("../src/components/Button");
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/KeyValueInput');
+jest.dontMock('../src/components/TextInput');
+jest.dontMock('../src/components/Text');
+jest.dontMock('../src/components/Button');
 
-import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import color from "color";
-import { Colors, TextColors } from "../src/shared/colors";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import color from 'color';
+import { Colors, TextColors } from '../src/shared/colors';
 
 
 // TODO: move this to es6 style import when its implemented in jest
-const KeyValueInput = require("../src/components/KeyValueInput").default;
+const KeyValueInput = require('../src/components/KeyValueInput').default;
 
 
-describe("KeyValueInput", () => {
-  it("Does render a KeyValueInput", () => {
+describe('KeyValueInput', () => {
+  it('Does render a KeyValueInput', () => {
     // Render a KeyValueInput with no style
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput />
@@ -24,24 +24,24 @@ describe("KeyValueInput", () => {
     expect(keyValueInputComponent).toBeDefined();
   });
 
-  it("Does render an empty KeyValueInput", () => {
+  it('Does render an empty KeyValueInput', () => {
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput />
     );
     expect(keyValueInputComponent.state.value.toJS()).toEqual([{
-      key: "",
-      value: "",
+      key: '',
+      value: '',
     }]);
     const keyLabelNode = ReactDOM.findDOMNode(keyValueInputComponent.keyLabelRef);
-    expect(keyLabelNode.textContent).toBe("Key");
+    expect(keyLabelNode.textContent).toBe('Key');
     const valueLabelNode = ReactDOM.findDOMNode(keyValueInputComponent.valueLabelRef);
-    expect(valueLabelNode.textContent).toBe("Value");
+    expect(valueLabelNode.textContent).toBe('Value');
     const addButtonNode = ReactDOM.findDOMNode(keyValueInputComponent.addButtonRef);
-    expect(addButtonNode.textContent).toBe("Add");
+    expect(addButtonNode.textContent).toBe('Add');
   });
 
-  it("Does update key when key input changes", () => {
-    const newKey = "new key";
+  it('Does update key when key input changes', () => {
+    const newKey = 'new key';
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput />
     );
@@ -49,24 +49,24 @@ describe("KeyValueInput", () => {
     TestUtils.Simulate.change(keyInputNode, { target: { value: newKey } });
     expect(keyValueInputComponent.state.value.toJS()).toEqual([{
       key: newKey,
-      value: "",
+      value: '',
     }]);
   });
 
-  it("Does update value when value input changes", () => {
-    const newValue = "new value";
+  it('Does update value when value input changes', () => {
+    const newValue = 'new value';
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput />
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
     TestUtils.Simulate.change(valueInputNode, { target: { value: newValue } });
     expect(keyValueInputComponent.state.value.toJS()).toEqual([{
-      key: "",
+      key: '',
       value: newValue,
     }]);
   });
 
-  it("Does add new key value pair when add button is clicked", () => {
+  it('Does add new key value pair when add button is clicked', () => {
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput />
     );
@@ -74,22 +74,22 @@ describe("KeyValueInput", () => {
     TestUtils.Simulate.click(addButtonNode);
     expect(keyValueInputComponent.state.value.toJS()).toEqual([
       {
-        key: "",
-        value: "",
+        key: '',
+        value: '',
       }, {
-        key: "",
-        value: "",
+        key: '',
+        value: '',
       },
     ]);
   });
 
-  it("Does set initialValue of key value pairs", () => {
+  it('Does set initialValue of key value pairs', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }, {
-      key: "key 2",
-      value: "value 2",
+      key: 'key 2',
+      value: 'value 2',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput initialValue={initialValue} />
@@ -97,16 +97,16 @@ describe("KeyValueInput", () => {
     expect(keyValueInputComponent.state.value.toJS()).toEqual(initialValue);
   });
 
-  it("Does delete a key value pair when delete button is clicked", () => {
+  it('Does delete a key value pair when delete button is clicked', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }, {
-      key: "key 2",
-      value: "value 2",
+      key: 'key 2',
+      value: 'value 2',
     }, {
-      key: "key 3",
-      value: "value 3",
+      key: 'key 3',
+      value: 'value 3',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput initialValue={initialValue} />
@@ -115,17 +115,17 @@ describe("KeyValueInput", () => {
     TestUtils.Simulate.click(deleteButtonNode);
     expect(keyValueInputComponent.state.value.toJS()).toEqual([
       {
-        key: "key 1",
-        value: "value 1",
+        key: 'key 1',
+        value: 'value 1',
       }, {
-        key: "key 3",
-        value: "value 3",
+        key: 'key 3',
+        value: 'value 3',
       },
     ]);
   });
 
-  it("Does allow key label customization", () => {
-    const myKeyLabel = "My Key Label";
+  it('Does allow key label customization', () => {
+    const myKeyLabel = 'My Key Label';
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput keyLabel={myKeyLabel} />
     );
@@ -133,8 +133,8 @@ describe("KeyValueInput", () => {
     expect(keyLabelNode.textContent).toBe(myKeyLabel);
   });
 
-  it("Does allow value label customization", () => {
-    const myValueLabel = "My Value Label";
+  it('Does allow value label customization', () => {
+    const myValueLabel = 'My Value Label';
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput valueLabel={myValueLabel} />
     );
@@ -142,8 +142,8 @@ describe("KeyValueInput", () => {
     expect(valueLabelNode.textContent).toBe(myValueLabel);
   });
 
-  it("Does allow add button text customization", () => {
-    const myAddButtonText = "A Really Cool Button";
+  it('Does allow add button text customization', () => {
+    const myAddButtonText = 'A Really Cool Button';
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput addButtonText={myAddButtonText} />
     );
@@ -151,13 +151,13 @@ describe("KeyValueInput", () => {
     expect(addButtonNode.textContent).toBe(myAddButtonText);
   });
 
-  it("Does render a disabled KeyValueInput", () => {
+  it('Does render a disabled KeyValueInput', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }, {
-      key: "key 2",
-      value: "value 2",
+      key: 'key 2',
+      value: 'value 2',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
@@ -181,8 +181,8 @@ describe("KeyValueInput", () => {
       .toBe(TextColors.secondary);
   });
 
-  it("Does trigger an onChange event when a text input changes", () => {
-    const newKey = "new key";
+  it('Does trigger an onChange event when a text input changes', () => {
+    const newKey = 'new key';
     const mockHandleChange = jest.genMockFunction();
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput onChange={mockHandleChange} />
@@ -192,22 +192,22 @@ describe("KeyValueInput", () => {
     expect(mockHandleChange).toBeCalledWith([
       {
         key: newKey,
-        value: "",
+        value: '',
       },
     ]);
   });
 
-  it("Does trigger an onChange event when a delete button is clicked", () => {
+  it('Does trigger an onChange event when a delete button is clicked', () => {
     const mockHandleChange = jest.genMockFunction();
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }, {
-      key: "key 2",
-      value: "value 2",
+      key: 'key 2',
+      value: 'value 2',
     }, {
-      key: "key 3",
-      value: "value 3",
+      key: 'key 3',
+      value: 'value 3',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
@@ -219,20 +219,20 @@ describe("KeyValueInput", () => {
     TestUtils.Simulate.click(deleteButtonNode);
     expect(mockHandleChange).toBeCalledWith([
       {
-        key: "key 1",
-        value: "value 1",
+        key: 'key 1',
+        value: 'value 1',
       }, {
-        key: "key 3",
-        value: "value 3",
+        key: 'key 3',
+        value: 'value 3',
       },
     ]);
   });
 
-  it("Does trigger an onChange event when the add button is clicked", () => {
+  it('Does trigger an onChange event when the add button is clicked', () => {
     const mockHandleChange = jest.genMockFunction();
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
@@ -244,19 +244,19 @@ describe("KeyValueInput", () => {
     TestUtils.Simulate.click(addButtonNode);
     expect(mockHandleChange).toBeCalledWith([
       {
-        key: "key 1",
-        value: "value 1",
+        key: 'key 1',
+        value: 'value 1',
       }, {
-        key: "",
-        value: "",
+        key: '',
+        value: '',
       },
     ]);
   });
 
-  it("Does validate as valid when all text boxes have content", () => {
+  it('Does validate as valid when all text boxes have content', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput initialValue={initialValue} />
@@ -264,42 +264,42 @@ describe("KeyValueInput", () => {
     expect(keyValueInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: true,
-      validationError: "",
+      validationError: '',
     });
   });
 
-  it("Does validate and detect isInitialValue change", () => {
+  it('Does validate and detect isInitialValue change', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput initialValue={initialValue} />
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    TestUtils.Simulate.change(keyInputNode, { target: { value: "another key" } });
+    TestUtils.Simulate.change(keyInputNode, { target: { value: 'another key' } });
     expect(keyValueInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,
-      validationError: "",
+      validationError: '',
     });
   });
 
-  it("Does validate as invalid if a value is empty", () => {
+  it('Does validate as invalid if a value is empty', () => {
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput />
     );
     expect(keyValueInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: true,
-      validationError: "All Fields Must Not Be Empty",
+      validationError: 'All Fields Must Not Be Empty',
     });
   });
 
-  it("Does display success status", () => {
+  it('Does display success status', () => {
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
-        status={"success"}
+        status={'success'}
       />
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
@@ -308,10 +308,10 @@ describe("KeyValueInput", () => {
     expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
   });
 
-  it("Does display error status", () => {
+  it('Does display error status', () => {
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
-        status={"error"}
+        status={'error'}
       />
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
@@ -320,30 +320,30 @@ describe("KeyValueInput", () => {
     expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
   });
 
-  it("Does only display error status on invalid fields", () => {
+  it('Does only display error status on invalid fields', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "",
+      key: 'key 1',
+      value: '',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
         initialValue={initialValue}
-        status={"error"}
+        status={'error'}
       />
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
     expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    expect(keyInputNode.style.boxShadow).toBe("");
+    expect(keyInputNode.style.boxShadow).toBe('');
   });
 
-  it("Does fail validation with duplicate keys when uniqueKeys=true", () => {
+  it('Does fail validation with duplicate keys when uniqueKeys=true', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }, {
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
@@ -354,39 +354,39 @@ describe("KeyValueInput", () => {
     expect(keyValueInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: true,
-      validationError: "All keys must be unique, found duplicate \"key 1\"",
+      validationError: 'All keys must be unique, found duplicate \'key 1\'',
     });
   });
 
-  it("Does display error status on all duplicate key fields", () => {
+  it('Does display error status on all duplicate key fields', () => {
     const initialValue = [{
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }, {
-      key: "key 2",
-      value: "value 1",
+      key: 'key 2',
+      value: 'value 1',
     }, {
-      key: "key 1",
-      value: "value 1",
+      key: 'key 1',
+      value: 'value 1',
     }];
     const keyValueInputComponent = TestUtils.renderIntoDocument(
       <KeyValueInput
         initialValue={initialValue}
         uniqueKeys={true}
-        status={"error"}
+        status={'error'}
       />
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
     expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
-    expect(valueInputNode.style.boxShadow).toBe("");
+    expect(valueInputNode.style.boxShadow).toBe('');
     const keyInputNode2 = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef1);
-    expect(keyInputNode2.style.boxShadow).toBe("");
+    expect(keyInputNode2.style.boxShadow).toBe('');
     const valueInputNode2 = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef1);
-    expect(valueInputNode2.style.boxShadow).toBe("");
+    expect(valueInputNode2.style.boxShadow).toBe('');
     const keyInputNode3 = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef2);
     expect(keyInputNode3.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
     const valueInputNode3 = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef2);
-    expect(valueInputNode3.style.boxShadow).toBe("");
+    expect(valueInputNode3.style.boxShadow).toBe('');
   });
 });

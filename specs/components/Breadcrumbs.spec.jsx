@@ -2,10 +2,10 @@
 /* eslint no-console: "off" */
 /* eslint max-len: "off" */
 
-import React from "react";
-import Breadcrumbs from "../../src/components/Breadcrumbs";
+import React from 'react';
+import Breadcrumbs from '../../src/components/Breadcrumbs';
 
-describe("Breadcrumbs", function () {
+describe('Breadcrumbs', function () {
   this.header(`
   ## Breadcrumbs
   `); // Markdown.
@@ -16,16 +16,16 @@ describe("Breadcrumbs", function () {
     };
     const path = [
       {
-        display: "Level 1",
-        url: "/lvl-1",
+        display: 'Level 1',
+        url: '/lvl-1',
       },
       {
-        display: "Level 2",
-        url: "/lvl-1/lvl-2",
+        display: 'Level 2',
+        url: '/lvl-1/lvl-2',
       },
       {
-        display: "Level 3",
-        url: "/lvl-1/lvl-2/lvl-3",
+        display: 'Level 3',
+        url: '/lvl-1/lvl-2/lvl-3',
       },
     ];
     this.load(
@@ -33,7 +33,7 @@ describe("Breadcrumbs", function () {
         onClick={handleClick}
         path={path}
       />
-    ).width("100%");
+    ).width('100%');
   });
 
   /**

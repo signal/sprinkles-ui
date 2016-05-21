@@ -1,15 +1,15 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Button from "./Button";
-import Alert from "./Alert";
-import { Map } from "immutable";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Button from './Button';
+import Alert from './Alert';
+import { Map } from 'immutable';
 
 export default class Form extends ReactCSS.Component {
-  displayName = "Form";
+  displayName = 'Form';
 
   static propTypes = {
     alert: React.PropTypes.shape({
-      type: React.PropTypes.oneOf(["success", "info", "warning", "danger"]).required,
+      type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']).required,
       title: React.PropTypes.string.required,
       details: React.PropTypes.string.required,
       children: React.PropTypes.node,
@@ -24,7 +24,7 @@ export default class Form extends ReactCSS.Component {
   static defaultProps = {
     onChange: () => {},
     onSubmit: () => {},
-    submitButtonText: "Submit",
+    submitButtonText: 'Submit',
     working: false,
   };
 
@@ -39,7 +39,7 @@ export default class Form extends ReactCSS.Component {
     return {
       default: {
         Field: {
-          margin: "0 0 1rem 0",
+          margin: '0 0 1rem 0',
         },
       },
     };
@@ -66,7 +66,7 @@ export default class Form extends ReactCSS.Component {
         inputRef.props.fieldKey,
         new Map({
           valid: true,
-          validationError: "",
+          validationError: '',
         })
       ),
     });
@@ -84,7 +84,7 @@ export default class Form extends ReactCSS.Component {
 
       newInputValidations = newInputValidations.set(input.props.fieldKey, new Map({
         valid: inputIsValid,
-        validationError: inputIsValid ? "" : validation.validationError,
+        validationError: inputIsValid ? '' : validation.validationError,
       }));
     });
     this.setState({
@@ -117,8 +117,8 @@ export default class Form extends ReactCSS.Component {
         const inputValidation = this.state.inputValidations.get(child.props.fieldKey) || new Map();
         return React.cloneElement(child, {
           onChange: this.handleChange.bind(this),
-          status: inputValidation.get("valid") === false ? "error" : undefined,
-          error: inputValidation.get("validationError"),
+          status: inputValidation.get('valid') === false ? 'error' : undefined,
+          error: inputValidation.get('validationError'),
           style: this.styles().Field,
           ref: (inputRef) => {
             if (inputRef) {
@@ -153,7 +153,7 @@ export default class Form extends ReactCSS.Component {
           onClick={this.handleClick.bind(this)}
           ref={c => this.submitButtonRef = c}
           text={this.props.submitButtonText}
-          type={"primary"}
+          type={'primary'}
           working={this.props.working}
         />
       </div>

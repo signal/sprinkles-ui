@@ -1,13 +1,13 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Text from "./Text";
-import TextInput from "./TextInput";
-import Button from "./Button";
-import { TextColors, Colors } from "../shared/colors";
-import Immutable, { Map, fromJS } from "immutable";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Text from './Text';
+import TextInput from './TextInput';
+import Button from './Button';
+import { TextColors, Colors } from '../shared/colors';
+import Immutable, { Map, fromJS } from 'immutable';
 
 export default class KeyValueInput extends ReactCSS.Component {
-  displayName = "KeyValueInput";
+  displayName = 'KeyValueInput';
 
   static propTypes = {
     addButtonText: React.PropTypes.string,
@@ -22,20 +22,20 @@ export default class KeyValueInput extends ReactCSS.Component {
     onChange: React.PropTypes.func,
     uniqueKeys: React.PropTypes.bool,
     valueLabel: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["success", "error"]),
+    status: React.PropTypes.oneOf(['success', 'error']),
   };
 
   static defaultProps = {
-    addButtonText: "Add",
+    addButtonText: 'Add',
     enabled: true,
     initialValue: [{
-      key: "",
-      value: "",
+      key: '',
+      value: '',
     }],
-    keyLabel: "Key",
+    keyLabel: 'Key',
     onChange: () => {},
     uniqueKeys: false,
-    valueLabel: "Value",
+    valueLabel: 'Value',
   };
 
   constructor(props) {
@@ -49,17 +49,17 @@ export default class KeyValueInput extends ReactCSS.Component {
     return {
       default: {
         KeyValuePair: {
-          display: "flex",
+          display: 'flex',
           marginBottom: 15,
         },
         TextInput: {
-          flex: "4",
+          flex: '4',
           marginRight: 15,
         },
         DeleteButton: {
-          flex: "1",
+          flex: '1',
           minWidth: 50,
-          alignSelf: "center",
+          alignSelf: 'center',
         },
       },
     };
@@ -70,7 +70,7 @@ export default class KeyValueInput extends ReactCSS.Component {
   }
 
   inputIsValid(inputValue, isKey, duplicateKeySet) {
-    const isEmpty = inputValue === "";
+    const isEmpty = inputValue === '';
     if (this.props.uniqueKeys && isKey) {
       return !duplicateKeySet.has(inputValue) && !isEmpty;
     }
@@ -81,7 +81,7 @@ export default class KeyValueInput extends ReactCSS.Component {
     const seenKeys = new Set();
     const duplicateKeys = new Set();
     this.state.value.forEach((item) => {
-      const key = item.get("key");
+      const key = item.get('key');
       if (key) {
         if (seenKeys.has(key)) {
           duplicateKeys.add(key);
@@ -95,7 +95,7 @@ export default class KeyValueInput extends ReactCSS.Component {
 
   hasEmptyInputs() {
     return this.state.value.find((item) => {
-      if (!item.get("key") || !item.get("value")) {
+      if (!item.get('key') || !item.get('value')) {
         return true;
       }
       return undefined;
@@ -105,13 +105,13 @@ export default class KeyValueInput extends ReactCSS.Component {
   validate() {
     const duplicateKeys = this.duplicateKeys();
     const valid = duplicateKeys.size === 0 && !this.hasEmptyInputs();
-    let validationError = "";
+    let validationError = '';
     if (!valid) {
       if (duplicateKeys.size > 0) {
-        const duplicateString = [...duplicateKeys].join(",");
-        validationError = `All keys must be unique, found duplicate \"${duplicateString}\"`;
+        const duplicateString = [...duplicateKeys].join(',');
+        validationError = `All keys must be unique, found duplicate \'${duplicateString}\'`;
       } else {
-        validationError = "All Fields Must Not Be Empty";
+        validationError = 'All Fields Must Not Be Empty';
       }
     }
     return {
@@ -123,8 +123,8 @@ export default class KeyValueInput extends ReactCSS.Component {
 
   handleAddClick() {
     const newStateValue = this.state.value.push(new Map({
-      key: "",
-      value: "",
+      key: '',
+      value: '',
     }));
     this.setState({
       value: newStateValue,
@@ -147,10 +147,10 @@ export default class KeyValueInput extends ReactCSS.Component {
   renderKeyValueLabels() {
     let textColor;
     switch (this.props.status) {
-      case "success":
+      case 'success':
         textColor = Colors.success;
         break;
-      case "error":
+      case 'error':
         textColor = Colors.danger;
         break;
       default:
@@ -188,14 +188,14 @@ export default class KeyValueInput extends ReactCSS.Component {
     return this.state.value.map((item, i) => {
       const inputStatus = {};
       switch (this.props.status) {
-        case "success":
-          inputStatus.key = "success";
-          inputStatus.value = "success";
+        case 'success':
+          inputStatus.key = 'success';
+          inputStatus.value = 'success';
           break;
-        case "error":
+        case 'error':
           inputStatus.key = !this.inputIsValid(
-            item.get("key"), true, duplicateKeys) ? "error" : undefined;
-          inputStatus.value = !this.inputIsValid(item.get("value")) ? "error" : undefined;
+            item.get('key'), true, duplicateKeys) ? 'error' : undefined;
+          inputStatus.value = !this.inputIsValid(item.get('value')) ? 'error' : undefined;
           break;
         default:
           break;
@@ -207,8 +207,8 @@ export default class KeyValueInput extends ReactCSS.Component {
             enabled={this.props.enabled}
             onClick={this.handleDeleteClick.bind(this, i)}
             ref={(c) => this[`deleteButtonRef${i}`] = c}
-            text={"✕"}
-            type={"danger"}
+            text={'✕'}
+            type={'danger'}
           />
         );
       }
@@ -219,18 +219,18 @@ export default class KeyValueInput extends ReactCSS.Component {
         >
           <span style={this.styles().TextInput}>
             <TextInput
-              boundValue={item.get("key")}
+              boundValue={item.get('key')}
               enabled={this.props.enabled}
-              onChange={this.handleChange.bind(this, i, "key")}
+              onChange={this.handleChange.bind(this, i, 'key')}
               ref={(c) => this[`keyInputRef${i}`] = c}
               status={inputStatus.key}
             />
           </span>
           <span style={this.styles().TextInput}>
             <TextInput
-              boundValue={item.get("value")}
+              boundValue={item.get('value')}
               enabled={this.props.enabled}
-              onChange={this.handleChange.bind(this, i, "value")}
+              onChange={this.handleChange.bind(this, i, 'value')}
               ref={(c) => this[`valueInputRef${i}`] = c}
               status={inputStatus.value}
             />

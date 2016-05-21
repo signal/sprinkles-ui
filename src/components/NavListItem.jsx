@@ -1,16 +1,16 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Text from "./Text";
-import VectorGraphic from "./VectorGraphic";
-import color from "color";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Text from './Text';
+import VectorGraphic from './VectorGraphic';
+import color from 'color';
 import {
   Colors,
   BackgroundColors,
   TextColors,
- } from "../shared/colors";
+ } from '../shared/colors';
 
 export default class NavListItem extends ReactCSS.Component {
-  displayName = "NavListItem";
+  displayName = 'NavListItem';
 
   static propTypes = {
     expanded: React.PropTypes.bool,
@@ -35,19 +35,19 @@ export default class NavListItem extends ReactCSS.Component {
           padding: 10,
           background: BackgroundColors.primaryNavBar,
           color: TextColors.primaryNav,
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
         },
         TextWrapper: {
           flex: 5,
           marginLeft: 10,
-          whiteSpace: "nowrap",
-          overflow: "hidden",
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
         },
         Icon: {
           flex: 1,
           maxWidth: 60,
-          textAlign: "center",
+          textAlign: 'center',
         },
       },
       selected: {
@@ -60,7 +60,7 @@ export default class NavListItem extends ReactCSS.Component {
         NavListItem: {
           background: color(BackgroundColors[this.props.type]).darken(0.5).hexString(),
           color: TextColors.selectedNavItem,
-          cursor: "pointer",
+          cursor: 'pointer',
         },
       },
     };

@@ -1,10 +1,10 @@
 /* eslint func-names: "off" */
 
-import React from "react";
-import VectorGraphic from "../../src/components/VectorGraphic";
+import React from 'react';
+import VectorGraphic from '../../src/components/VectorGraphic';
 
 
-describe("VectorGraphic", function () {
+describe('VectorGraphic', function () {
   this.header(`
   ## VectorGraphic
   `); // Markdown.
@@ -21,39 +21,39 @@ describe("VectorGraphic", function () {
     this.loadSvg({
       children:
         <circle
-          cx="5"
-          cy="5"
-          fill="red"
-          r="5"
+          cx={'5'}
+          cy={'5'}
+          fill={'red'}
+          r={'5'}
         ></circle>,
     });
   });
 
-  it("Black Square", () => this.loadSvg({
+  it('Black Square', () => this.loadSvg({
     children:
       <g
-        fill="none"
-        fill-rule="evenodd"
-        stroke="none"
-        strokeWidth="1"
+        fill={'none'}
+        fill-rule={'evenodd'}
+        stroke={'none'}
+        strokeWidth={'1'}
       >
         <rect
-          fill="black"
-          height="10"
-          width="10"
-          x="0"
-          y="0"
+          fill={'black'}
+          height={'10'}
+          width={'10'}
+          x={'0'}
+          y={'0'}
         ></rect>
       </g>,
   }));
 
-  it("Red Circle", () => this.loadSvg({
+  it('Red Circle', () => this.loadSvg({
     children:
       <circle
-        cx="5"
-        cy="5"
-        fill="red"
-        r="5"
+        cx={'5'}
+        cy={'5'}
+        fill={'red'}
+        r={'5'}
       ></circle>,
   }));
 

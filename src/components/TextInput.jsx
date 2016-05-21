@@ -1,14 +1,14 @@
-import React from "react";
-import ReactCSS from "reactcss";
+import React from 'react';
+import ReactCSS from 'reactcss';
 import {
   Colors,
   TextColors,
   StructuralColors,
-} from "../shared/colors";
+} from '../shared/colors';
 
 
 export default class TextInput extends ReactCSS.Component {
-  displayName = "TextInput";
+  displayName = 'TextInput';
 
   static propTypes = {
     autoComplete: React.PropTypes.bool,
@@ -18,14 +18,14 @@ export default class TextInput extends ReactCSS.Component {
     multiline: React.PropTypes.bool,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
-    status: React.PropTypes.oneOf(["error", "warning", "success"]),
+    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {
     autoComplete: true,
     enabled: true,
     multiline: false,
-    initialValue: "",
+    initialValue: '',
     onChange: () => {},
   };
 
@@ -38,12 +38,12 @@ export default class TextInput extends ReactCSS.Component {
   }
 
   validate() {
-    const isEmpty = this.value() === "";
+    const isEmpty = this.value() === '';
     const isInitialValue = this.value() === this.props.initialValue;
     return {
       valid: !isEmpty,
       isInitialValue,
-      validationError: !isEmpty ? "" : "Field Must Not Be Empty",
+      validationError: !isEmpty ? '' : 'Field Must Not Be Empty',
     };
   }
 
@@ -76,12 +76,12 @@ export default class TextInput extends ReactCSS.Component {
     return {
       default: {
         TextInput: {
-          fontSize: "0.875rem",
-          padding: "0.5rem",
-          width: "100%",
+          fontSize: '0.875rem',
+          padding: '0.5rem',
+          width: '100%',
           border: `1px solid ${StructuralColors.inputBorder}`,
           borderRadius: 3,
-          outline: "none",
+          outline: 'none',
           color: TextColors.primary,
         },
       },
@@ -108,7 +108,7 @@ export default class TextInput extends ReactCSS.Component {
       disabled: {
         TextInput: {
           color: TextColors.secondary,
-          cursor: "not-allowed",
+          cursor: 'not-allowed',
         },
       },
     };
@@ -117,9 +117,9 @@ export default class TextInput extends ReactCSS.Component {
   styles() {
     return this.css({
       focus: this.state.isFocused,
-      success: this.props.status === "success",
-      warning: this.props.status === "warning",
-      error: this.props.status === "error",
+      success: this.props.status === 'success',
+      warning: this.props.status === 'warning',
+      error: this.props.status === 'error',
       disabled: !this.props.enabled,
     });
   }
@@ -130,8 +130,8 @@ export default class TextInput extends ReactCSS.Component {
 
   render() {
     const props = {
-      autoComplete: this.props.autoComplete ? "on" : "off",
-      disabled: this.props.enabled ? undefined : "disabled",
+      autoComplete: this.props.autoComplete ? 'on' : 'off',
+      disabled: this.props.enabled ? undefined : 'disabled',
       onBlur: this.handleBlur.bind(this),
       onChange: this.isBound() ? this.handleChange.bind(this) : undefined,
       onFocus: this.handleFocus.bind(this),

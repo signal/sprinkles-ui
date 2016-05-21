@@ -1,8 +1,8 @@
-import React from "react";
-import ReactCSS from "reactcss";
+import React from 'react';
+import ReactCSS from 'reactcss';
 
 export default class Version extends ReactCSS.Component {
-  displayName = "Version";
+  displayName = 'Version';
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -23,7 +23,7 @@ export default class Version extends ReactCSS.Component {
     if (!matches) {
       return false;
     }
-    return matches[1].split(".").find((item) => item === "") === undefined;
+    return matches[1].split('.').find((item) => item === '') === undefined;
   }
 
   validVersion(version) {
@@ -31,12 +31,12 @@ export default class Version extends ReactCSS.Component {
     if (!matches) {
       return false;
     }
-    return matches[1].split(".").find((item) => item === "") === undefined;
+    return matches[1].split('.').find((item) => item === '') === undefined;
   }
 
   versionComparitor(versionA, versionB) {
-    const vASplit = versionA.split(".").map((item) => parseInt(item, 10));
-    const vBSplit = versionB.split(".").map((item) => parseInt(item, 10));
+    const vASplit = versionA.split('.').map((item) => parseInt(item, 10));
+    const vBSplit = versionB.split('.').map((item) => parseInt(item, 10));
     const longer = vASplit.length > vBSplit.length ? vASplit : vBSplit;
     const shorter = longer === vASplit ? vBSplit : vASplit;
     return longer.reduce((p, longVal, i) => {
@@ -64,13 +64,13 @@ export default class Version extends ReactCSS.Component {
     const version = this.validateVersionSelectorRegex.exec(props.version)[1];
     const selectorVersion = this.validateVersionSelectorRegex.exec(props.versionSelector)[1];
     const validComps = [];
-    if (props.versionSelector.indexOf(">") >= 0) {
+    if (props.versionSelector.indexOf('>') >= 0) {
       validComps.push(1);
     }
-    if (props.versionSelector.indexOf("<") >= 0) {
+    if (props.versionSelector.indexOf('<') >= 0) {
       validComps.push(-1);
     }
-    if (props.versionSelector.indexOf("=") >= 0 || validComps.length === 0) {
+    if (props.versionSelector.indexOf('=') >= 0 || validComps.length === 0) {
       validComps.push(0);
     }
     return validComps.indexOf(this.versionComparitor(version, selectorVersion)) >= 0;

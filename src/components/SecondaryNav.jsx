@@ -1,9 +1,9 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import { BackgroundColors } from "../shared/colors";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import { BackgroundColors } from '../shared/colors';
 
 export default class SecondaryNav extends ReactCSS.Component {
-  displayName = "SecondaryNav";
+  displayName = 'SecondaryNav';
 
   static propTypes = {
     leftItems: React.PropTypes.node,
@@ -14,21 +14,21 @@ export default class SecondaryNav extends ReactCSS.Component {
     return {
       default: {
         SecondaryNav: {
-          display: "flex",
-          flexWrap: "nowrap",
-          height: "100%",
-          alignItems: "center",
-          padding: "0 20px",
+          display: 'flex',
+          flexWrap: 'nowrap',
+          height: '100%',
+          alignItems: 'center',
+          padding: '0 20px',
           background: BackgroundColors.primary,
         },
         LeftItems: {
           flex: 1,
-          display: "flex",
+          display: 'flex',
         },
         RightItems: {
           flex: 1,
-          display: "flex",
-          justifyContent: "flex-end",
+          display: 'flex',
+          justifyContent: 'flex-end',
         },
       },
     };

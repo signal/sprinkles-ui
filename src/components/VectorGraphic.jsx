@@ -1,8 +1,8 @@
-import React from "react";
-import ReactCSS from "reactcss";
+import React from 'react';
+import ReactCSS from 'reactcss';
 
 export default class VectorGraphic extends ReactCSS.Component {
-  displayName = "VectorGraphic";
+  displayName = 'VectorGraphic';
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -19,10 +19,10 @@ export default class VectorGraphic extends ReactCSS.Component {
     return (
         <svg
           height={this.props.height}
-          version="1.1"
+          version={'1.1'}
           viewBox={`0 0 ${this.props.width} ${this.props.height}`}
           width={this.props.width}
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns={'http://www.w3.org/2000/svg'}
         >
           {this.props.children}
         </svg>

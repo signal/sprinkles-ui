@@ -1,11 +1,11 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Text from "./Text";
-import { TextColors } from "../shared/colors";
-import { Map } from "immutable";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Text from './Text';
+import { TextColors } from '../shared/colors';
+import { Map } from 'immutable';
 
 export default class Breadcrumbs extends ReactCSS.Component {
-  displayName = "Breadcrumbs";
+  displayName = 'Breadcrumbs';
   static propTypes = {
     path: React.PropTypes.arrayOf(
       React.PropTypes.shape({
@@ -32,10 +32,10 @@ export default class Breadcrumbs extends ReactCSS.Component {
     return {
       default: {
         Crumb: {
-          cursor: "default",
+          cursor: 'default',
         },
         ClickableCrumb: {
-          cursor: "pointer",
+          cursor: 'pointer',
         },
       },
     };
@@ -66,10 +66,10 @@ export default class Breadcrumbs extends ReactCSS.Component {
           color={TextColors.primary}
           fontSize={1.5}
         >
-          {" / "}
+          {' / '}
         </Text>
       ) : undefined;
-      const textDecoration = i === this.state.isHovered && !isLast ? "underline" : undefined;
+      const textDecoration = i === this.state.isHovered && !isLast ? 'underline' : undefined;
       return (
         <span
           key={i}

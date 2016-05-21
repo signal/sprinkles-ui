@@ -1,16 +1,16 @@
 /* eslint func-names: "off" */
 /* eslint max-len: "off" */
 
-import React from "react";
-import Table from "../../src/components/Table";
+import React from 'react';
+import Table from '../../src/components/Table';
 
 
-describe("Table", function () {
+describe('Table', function () {
   this.tableData = {
-    headers: ["Header 1", "Header 2"],
+    headers: ['Header 1', 'Header 2'],
     data: [
-      ["Foo", "Bar"],
-      ["Bar", "Baz"],
+      ['Foo', 'Bar'],
+      ['Bar', 'Baz'],
     ],
   };
 
@@ -28,14 +28,14 @@ describe("Table", function () {
     );
   });
 
-  it("Adds More Rows", () => this.props({ tableData: {
-    headers: ["Header 1", "Header 2"],
+  it('Adds More Rows', () => this.props({ tableData: {
+    headers: ['Header 1', 'Header 2'],
     data: [
-      ["Foo", "Bar"],
-      ["Bar", "Baz"],
-      ["Bar", "Baz"],
-      ["Bar", "Baz"],
-      ["Bar", "Baz"],
+      ['Foo', 'Bar'],
+      ['Bar', 'Baz'],
+      ['Bar', 'Baz'],
+      ['Bar', 'Baz'],
+      ['Bar', 'Baz'],
     ],
   },
   }

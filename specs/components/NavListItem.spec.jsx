@@ -1,11 +1,11 @@
 /* eslint func-names: "off" */
 
-import React from "react";
-import loremIpsum from "lorem-ipsum";
-import NavListItem from "../../src/components/NavListItem";
+import React from 'react';
+import loremIpsum from 'lorem-ipsum';
+import NavListItem from '../../src/components/NavListItem';
 
 
-describe("NavListItem", function () {
+describe('NavListItem', function () {
   this.header(`
   ## NavListItem
   `); // Markdown.
@@ -16,10 +16,10 @@ describe("NavListItem", function () {
         <NavListItem
           icon={
             <circle
-              cx="6"
-              cy="6"
-              fill="red"
-              r="6"
+              cx={'6'}
+              cy={'6'}
+              fill={'red'}
+              r={'6'}
             ></circle>
           }
           text={loremIpsum()}
@@ -27,17 +27,17 @@ describe("NavListItem", function () {
     );
   });
 
-  it("Selected", () => this.props({ selected: true }));
-  it("Not Selected", () => this.props({ selected: false }));
-  it("Hovered", () => this.props({ hovered: true }));
-  it("Not Hovered", () => this.props({ hovered: false }));
-  it("Expanded", () => this.props({ expanded: true }));
-  it("Not Expanded", () => this.props({ expanded: false }));
-  it("Make Icon Bigger", () => this.props({
+  it('Selected', () => this.props({ selected: true }));
+  it('Not Selected', () => this.props({ selected: false }));
+  it('Hovered', () => this.props({ hovered: true }));
+  it('Not Hovered', () => this.props({ hovered: false }));
+  it('Expanded', () => this.props({ expanded: true }));
+  it('Not Expanded', () => this.props({ expanded: false }));
+  it('Make Icon Bigger', () => this.props({
     height: 30,
     width: 30,
   }));
-  it("Make Icon Smaller", () => this.props({
+  it('Make Icon Smaller', () => this.props({
     height: 20,
     width: 20,
   }));

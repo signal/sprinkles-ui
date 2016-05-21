@@ -1,9 +1,9 @@
-import { BackgroundColors, TextColors } from "../shared/colors";
-import React from "react";
-import ReactCSS from "reactcss";
+import { BackgroundColors, TextColors } from '../shared/colors';
+import React from 'react';
+import ReactCSS from 'reactcss';
 
 export default class Panel extends ReactCSS.Component {
-  static displayName = "Panel";
+  static displayName = 'Panel';
 
   static propTypes = {
     backgroundColor: React.PropTypes.string,
@@ -18,7 +18,7 @@ export default class Panel extends ReactCSS.Component {
   static defaultProps = {
     backgroundColor: BackgroundColors.primary,
     color: TextColors.primary,
-    padding: "10px",
+    padding: '10px',
   };
 
   static bs = {

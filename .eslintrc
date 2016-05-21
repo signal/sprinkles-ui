@@ -7,7 +7,6 @@
     },
     "extends": "airbnb",
     "rules": {
-      "quotes": [2, "double"],
       "no-return-assign": 0,
       "react/jsx-boolean-value": 0,
       "react/jsx-no-bind": 0

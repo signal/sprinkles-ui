@@ -1,9 +1,9 @@
 /* eslint func-names: "off" */
 /* eslint no-console: "off" */
 
-import React from "react";
-import Dropdown from "../../src/components/Dropdown";
-import { Colors } from "../../src/shared/colors";
+import React from 'react';
+import Dropdown from '../../src/components/Dropdown';
+import { Colors } from '../../src/shared/colors';
 
 class DropdownWrapper extends React.Component {
   static propTypes = {
@@ -22,7 +22,7 @@ class DropdownWrapper extends React.Component {
     useLayerForClickAway: React.PropTypes.bool,
   };
 
-  displayName = "DropdownWrapper";
+  displayName = 'DropdownWrapper';
 
   constructor() {
     super();
@@ -31,8 +31,8 @@ class DropdownWrapper extends React.Component {
       anchorDiv: {
         padding: 10,
         background: Colors.info,
-        color: "#FEFEFE",
-        cursor: "pointer",
+        color: '#FEFEFE',
+        cursor: 'pointer',
       },
     };
   }
@@ -48,7 +48,7 @@ class DropdownWrapper extends React.Component {
           onClick={this.handleClick.bind(this)}
           style={this.style.anchorDiv}
         >
-          {"Dropdown"}
+          {'Dropdown'}
         </div>
         <Dropdown
           anchorEl={this.props.anchorEl}
@@ -64,7 +64,7 @@ class DropdownWrapper extends React.Component {
   }
 }
 
-describe("Dropdown", function () {
+describe('Dropdown', function () {
   this.header(`
   ## Dropdown
   `); // Markdown.
@@ -77,7 +77,7 @@ describe("Dropdown", function () {
       });
     };
     const handleClick = (item) => {
-      console.log("Item Clicked", item);
+      console.log('Item Clicked', item);
       this.props({
         open: false,
       });
@@ -87,12 +87,12 @@ describe("Dropdown", function () {
       <DropdownWrapper
         items={[
           {
-            key: "thing1",
-            value: "Thing 1",
+            key: 'thing1',
+            value: 'Thing 1',
           },
           {
-            key: "thing2",
-            value: "Thing 2",
+            key: 'thing2',
+            value: 'Thing 2',
           },
         ]}
         open={false}
@@ -104,33 +104,33 @@ describe("Dropdown", function () {
     );
   });
 
-  it("Open Dropdown", () => this.props({ open: true }));
-  it("Close Dropdown", () => this.props({ open: false }));
-  it("anchorOrigin h:left, v:bottom", () => this.props({
+  it('Open Dropdown', () => this.props({ open: true }));
+  it('Close Dropdown', () => this.props({ open: false }));
+  it('anchorOrigin h:left, v:bottom', () => this.props({
     anchorOrigin: {
-      horizontal: "left",
-      vertical: "bottom",
+      horizontal: 'left',
+      vertical: 'bottom',
     },
   }));
 
-  it("anchorOrigin h:right, v:bottom", () => this.props({
+  it('anchorOrigin h:right, v:bottom', () => this.props({
     anchorOrigin: {
-      horizontal: "right",
-      vertical: "bottom",
+      horizontal: 'right',
+      vertical: 'bottom',
     },
   }));
 
-  it("anchorOrigin h:left, v:top", () => this.props({
+  it('anchorOrigin h:left, v:top', () => this.props({
     anchorOrigin: {
-      horizontal: "left",
-      vertical: "top",
+      horizontal: 'left',
+      vertical: 'top',
     },
   }));
 
-  it("anchorOrigin h:right, v:top", () => this.props({
+  it('anchorOrigin h:right, v:top', () => this.props({
     anchorOrigin: {
-      horizontal: "right",
-      vertical: "top",
+      horizontal: 'right',
+      vertical: 'top',
     },
   }));
 

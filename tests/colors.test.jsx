@@ -1,10 +1,10 @@
-// don"t mock our CUT or components it depends on
-jest.dontMock("../src/shared/colors");
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/shared/colors');
 
-const Colors = require("../src/shared/colors").Colors;
+const Colors = require('../src/shared/colors').Colors;
 
-describe("Colors", () => {
-  it("Does have expected color values", () => {
-    expect(Colors.danger).toEqual("#D9534F");
+describe('Colors', () => {
+  it('Does have expected color values', () => {
+    expect(Colors.danger).toEqual('#D9534F');
   });
 });

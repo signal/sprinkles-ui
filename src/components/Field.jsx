@@ -1,11 +1,11 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Text from "./Text";
-import { Colors, TextColors } from "../shared/colors";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Text from './Text';
+import { Colors, TextColors } from '../shared/colors';
 
 
 export default class Field extends ReactCSS.Component {
-  displayName = "Field";
+  displayName = 'Field';
 
   static propTypes = {
     children: React.PropTypes.node,
@@ -15,13 +15,13 @@ export default class Field extends ReactCSS.Component {
     label: React.PropTypes.string,
     onChange: React.PropTypes.func,
     required: React.PropTypes.bool,
-    status: React.PropTypes.oneOf(["error", "warning", "success"]),
+    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
     style: React.PropTypes.object,
   };
 
   static defaultProps = {
     enabled: true,
-    fieldKey: "defaultKey",
+    fieldKey: 'defaultKey',
     onChange: () => {},
     required: false,
     style: {},
@@ -68,7 +68,7 @@ export default class Field extends ReactCSS.Component {
       valid: validation.valid,
       required: this.props.required,
       isInitialValue: validation.isInitialValue,
-      validationError: validation.validationError || "",
+      validationError: validation.validationError || '',
     };
   }
 
@@ -87,13 +87,13 @@ export default class Field extends ReactCSS.Component {
     if (this.props.label) {
       let labelColor;
       switch (this.props.status) {
-        case "error":
+        case 'error':
           labelColor = Colors.danger;
           break;
-        case "warning":
+        case 'warning':
           labelColor = Colors.warning;
           break;
-        case "success":
+        case 'success':
           labelColor = Colors.success;
           break;
         default:
@@ -133,13 +133,13 @@ export default class Field extends ReactCSS.Component {
     if (this.props.required) {
       return (
         <span>
-          {" "}
+          {' '}
           <Text
             color={Colors.danger}
             fontSize={0.875}
             ref={c => this.requiredRef = c}
           >
-            {"*"}
+            {'*'}
           </Text>
         </span>
       );

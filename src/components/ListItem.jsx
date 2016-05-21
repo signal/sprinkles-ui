@@ -1,12 +1,12 @@
-import React from "react";
-import ReactCSS from "reactcss";
+import React from 'react';
+import ReactCSS from 'reactcss';
 
 export default class ListItem extends ReactCSS.Component {
-  displayName = "ListItem";
+  displayName = 'ListItem';
 
   static propTypes = {
     children: React.PropTypes.node,
-    listPosition: React.PropTypes.oneOf(["first", "middle", "last"]),
+    listPosition: React.PropTypes.oneOf(['first', 'middle', 'last']),
     onClick: React.PropTypes.func,
     selected: React.PropTypes.bool,
   };

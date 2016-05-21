@@ -1,30 +1,30 @@
-// don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/ToggleInput");
-jest.dontMock("../src/shared/colors");
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/ToggleInput');
+jest.dontMock('../src/shared/colors');
 
-import React from "react";
-import ReactDOM from "react-dom";
-import TestUtils from "react-addons-test-utils";
-import color from "color";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import color from 'color';
 import {
   BackgroundColors,
   Colors,
   StructuralColors,
-} from "../src/shared/colors";
+} from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
-const ToggleInput = require("../src/components/ToggleInput").default;
+const ToggleInput = require('../src/components/ToggleInput').default;
 
 
-describe("ToggleInput", () => {
-  it("does render a ToggleInput", () => {
+describe('ToggleInput', () => {
+  it('does render a ToggleInput', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput />
     );
     expect(toggleInputComponent).toBeDefined();
   });
 
-  it("does render a ToggleInput with expected style", () => {
+  it('does render a ToggleInput with expected style', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput />
     );
@@ -32,37 +32,37 @@ describe("ToggleInput", () => {
     expect(toggleInputNode.style.border)
       .toBe(`1px solid ${StructuralColors.inputBorder.toLowerCase()}`);
     expect(toggleInputNode.style.width)
-      .toBe("42px");
+      .toBe('42px');
     expect(toggleInputNode.style.height)
-      .toBe("26px");
+      .toBe('26px');
     expect(toggleInputNode.style.borderRadius)
-      .toBe("13px");
+      .toBe('13px');
     expect(toggleInputNode.style.position)
-      .toBe("relative");
+      .toBe('relative');
     expect(toggleInputNode.style.cursor)
-      .toBe("pointer");
+      .toBe('pointer');
     expect(color(toggleInputNode.style.background).hexString())
       .toBe(BackgroundColors.primary);
     const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
     expect(switchNode.style.position)
-      .toBe("absolute");
+      .toBe('absolute');
     expect(switchNode.style.top)
-      .toBe("1px");
+      .toBe('1px');
     expect(switchNode.style.left)
-      .toBe("0px");
+      .toBe('0px');
     expect(switchNode.style.width)
-      .toBe("24px");
+      .toBe('24px');
     expect(switchNode.style.height)
-      .toBe("24px");
+      .toBe('24px');
     expect(color(toggleInputNode.style.background).hexString())
       .toBe(BackgroundColors.primary);
     expect(toggleInputNode.style.borderRadius)
-      .toBe("13px");
+      .toBe('13px');
     expect(toggleInputNode.style.border)
       .toBe(`1px solid ${StructuralColors.inputBorder.toLowerCase()}`);
   });
 
-  it("does render ToggleInput with initialValue=true", () => {
+  it('does render ToggleInput with initialValue=true', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput initialValue={true} />
     );
@@ -73,10 +73,10 @@ describe("ToggleInput", () => {
       .toBe(`1px solid ${Colors.success.toLowerCase()}`);
     const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
     expect(switchNode.style.left)
-      .toBe("18px");
+      .toBe('18px');
   });
 
-  it("does toggle the value with the ToggleInput is clicked", () => {
+  it('does toggle the value with the ToggleInput is clicked', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput />
     );
@@ -85,7 +85,7 @@ describe("ToggleInput", () => {
     expect(toggleInputComponent.state.value).toBe(true);
   });
 
-  it("does render a disabled ToggleInput", () => {
+  it('does render a disabled ToggleInput', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput enabled={false} />
     );
@@ -93,7 +93,7 @@ describe("ToggleInput", () => {
     expect(color(toggleInputNode.style.background).hexString())
       .toBe(BackgroundColors.secondary);
     expect(toggleInputNode.style.cursor)
-      .toBe("not-allowed");
+      .toBe('not-allowed');
     const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
     expect(color(switchNode.style.background).hexString())
       .toBe(BackgroundColors.secondary);
@@ -101,7 +101,7 @@ describe("ToggleInput", () => {
     expect(toggleInputComponent.state.value).toBe(false);
   });
 
-  it("does disable a ToggleInput who's value=true", () => {
+  it('does disable a ToggleInput who\'s value=true', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput
         enabled={false}
@@ -118,7 +118,7 @@ describe("ToggleInput", () => {
       .toBe(BackgroundColors.secondary);
   });
 
-  it("does trigger an onChange event when the value changes", () => {
+  it('does trigger an onChange event when the value changes', () => {
     const mockHandleChange = jest.fn();
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput
@@ -130,48 +130,48 @@ describe("ToggleInput", () => {
     expect(mockHandleChange).toBeCalledWith(true);
   });
 
-  it("Does render with red shadow on error status", () => {
+  it('Does render with red shadow on error status', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput
-        status={"error"}
+        status={'error'}
       />
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
   });
 
-  it("Does render with an orange shadow on warning status", () => {
+  it('Does render with an orange shadow on warning status', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput
-        status={"warning"}
+        status={'warning'}
       />
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
   });
 
-  it("Does render with a green shadow on success status", () => {
+  it('Does render with a green shadow on success status', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput
-        status={"success"}
+        status={'success'}
       />
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
   });
 
-  it("Does return a valid state when validated", () => {
+  it('Does return a valid state when validated', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput />
     );
     expect(toggleInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: true,
-      validationError: "",
+      validationError: '',
     });
   });
 
-  it("Does return isInitialValue=false when value changes", () => {
+  it('Does return isInitialValue=false when value changes', () => {
     const toggleInputComponent = TestUtils.renderIntoDocument(
       <ToggleInput />
     );
@@ -180,7 +180,7 @@ describe("ToggleInput", () => {
     expect(toggleInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,
-      validationError: "",
+      validationError: '',
     });
   });
 });

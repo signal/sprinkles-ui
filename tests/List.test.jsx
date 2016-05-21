@@ -1,30 +1,30 @@
-// don"t mock our CUT or components it depends on
-jest.dontMock("../src/components/List");
-jest.dontMock("../src/components/ListItem");
-jest.dontMock("../src/components/TextListItem");
-jest.dontMock("../src/components/Text");
-jest.dontMock("../src/shared/colors");
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/List');
+jest.dontMock('../src/components/ListItem');
+jest.dontMock('../src/components/TextListItem');
+jest.dontMock('../src/components/Text');
+jest.dontMock('../src/shared/colors');
 
-import React from "react";
-import ReactDOM from "react-dom";
-import { StructuralColors } from "../src/shared/colors";
-import TestUtils from "react-addons-test-utils";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { StructuralColors } from '../src/shared/colors';
+import TestUtils from 'react-addons-test-utils';
 
 // TODO: move this to es6 style import when its implemented in jest
-const List = require("../src/components/List").default;
-const ListItem = require("../src/components/ListItem").default;
-const TextListItem = require("../src/components/TextListItem").default;
+const List = require('../src/components/List').default;
+const ListItem = require('../src/components/ListItem').default;
+const TextListItem = require('../src/components/TextListItem').default;
 
-describe("List", () => {
-  it("Does render a List", () => {
+describe('List', () => {
+  it('Does render a List', () => {
     const listComponent = TestUtils.renderIntoDocument(
       <List />
     );
     expect(listComponent).toBeDefined();
   });
 
-  it("Does render list children", () => {
-    const text = "howdy";
+  it('Does render list children', () => {
+    const text = 'howdy';
     const listComponent = TestUtils.renderIntoDocument(
       <List>
         <ListItem>
@@ -38,7 +38,7 @@ describe("List", () => {
     expect(textListItemNode.textContent).toBe(text);
   });
 
-  it("Does render single list item with expected styles", () => {
+  it('Does render single list item with expected styles', () => {
     const listComponent = TestUtils.renderIntoDocument(
       <List>
         <ListItem>
@@ -47,10 +47,10 @@ describe("List", () => {
       </List>
     );
     const textListItemNode = ReactDOM.findDOMNode(listComponent.listItemRefs.get(0).listItemRef);
-    expect(textListItemNode.style.borderBottom).toBe("");
+    expect(textListItemNode.style.borderBottom).toBe('');
   });
 
-  it("Does render 2 item list item with expected styles", () => {
+  it('Does render 2 item list item with expected styles', () => {
     const listComponent = TestUtils.renderIntoDocument(
       <List>
         <ListItem>
@@ -67,10 +67,10 @@ describe("List", () => {
       .toBe(`1px solid ${StructuralColors.divider}`);
     const lastTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(1).listItemRef);
-    expect(lastTextListItemNode.style.borderBottom).toBe("");
+    expect(lastTextListItemNode.style.borderBottom).toBe('');
   });
 
-  it("Does render 3 item list item with expected styles", () => {
+  it('Does render 3 item list item with expected styles', () => {
     const listComponent = TestUtils.renderIntoDocument(
       <List>
         <ListItem>
@@ -94,6 +94,6 @@ describe("List", () => {
       .toBe(`1px solid ${StructuralColors.divider}`);
     const lastTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(2).listItemRef);
-    expect(lastTextListItemNode.style.borderBottom).toBe("");
+    expect(lastTextListItemNode.style.borderBottom).toBe('');
   });
 });

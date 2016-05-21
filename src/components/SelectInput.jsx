@@ -1,19 +1,19 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import TextListItem from "./TextListItem";
-import List from "./List";
-import ListItem from "./ListItem";
-import Popover from "./Popover";
-import VectorGraphic from "./VectorGraphic";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import TextListItem from './TextListItem';
+import List from './List';
+import ListItem from './ListItem';
+import Popover from './Popover';
+import VectorGraphic from './VectorGraphic';
 import {
   BackgroundColors,
   Colors,
   StructuralColors,
   TextColors,
-} from "../shared/colors";
+} from '../shared/colors';
 
 export default class SelectInput extends ReactCSS.Component {
-  displayName = "SelectInput";
+  displayName = 'SelectInput';
 
   static propTypes = {
     enabled: React.PropTypes.bool,
@@ -25,7 +25,7 @@ export default class SelectInput extends ReactCSS.Component {
       })
     ),
     onChange: React.PropTypes.func,
-    status: React.PropTypes.oneOf(["error", "warning", "success"]),
+    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {
@@ -73,7 +73,7 @@ export default class SelectInput extends ReactCSS.Component {
     return {
       valid: !isEmpty,
       isInitialValue,
-      validationError: !isEmpty ? "" : "A value must be selected",
+      validationError: !isEmpty ? '' : 'A value must be selected',
     };
   }
 
@@ -85,21 +85,21 @@ export default class SelectInput extends ReactCSS.Component {
           borderRadius: 3,
         },
         Display: {
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
         },
         Text: {
           flexGrow: 1,
         },
         Icon: {
-          margin: "0 15px",
-          transition: "transform 0.2s ease",
+          margin: '0 15px',
+          transition: 'transform 0.2s ease',
         },
       },
       open: {
         Icon: {
-          transform: "rotate(180deg)",
+          transform: 'rotate(180deg)',
         },
       },
       disabled: {
@@ -107,25 +107,25 @@ export default class SelectInput extends ReactCSS.Component {
           background: BackgroundColors.secondary,
         },
         Display: {
-          cursor: "not-allowed",
+          cursor: 'not-allowed',
         },
       },
       success: {
         SelectInput: {
           boxShadow: `0 0 3px 1px ${Colors.success}`,
-          border: "1px solid transparent",
+          border: '1px solid transparent',
         },
       },
       warning: {
         SelectInput: {
           boxShadow: `0 0 3px 1px ${Colors.warning}`,
-          border: "1px solid transparent",
+          border: '1px solid transparent',
         },
       },
       error: {
         SelectInput: {
           boxShadow: `0 0 3px 1px ${Colors.danger}`,
-          border: "1px solid transparent",
+          border: '1px solid transparent',
         },
       },
     };
@@ -135,9 +135,9 @@ export default class SelectInput extends ReactCSS.Component {
     return this.css({
       open: this.state.open,
       disabled: !this.props.enabled,
-      success: this.props.status === "success",
-      warning: this.props.status === "warning",
-      error: this.props.status === "error",
+      success: this.props.status === 'success',
+      warning: this.props.status === 'warning',
+      error: this.props.status === 'error',
     });
   }
 
@@ -145,7 +145,7 @@ export default class SelectInput extends ReactCSS.Component {
     if (this.state.value) {
       return this.props.items.find((item) => item.value === this.state.value) || {};
     }
-    return { label: "--" };
+    return { label: '--' };
   }
 
   renderDropdown() {
@@ -222,10 +222,10 @@ export default class SelectInput extends ReactCSS.Component {
         <VectorGraphic>
           <g stroke={this.props.enabled ? TextColors.primary : TextColors.secondary} >
             <path
-              fill="none"
-              d="M1 2 L5 7 L9 2"
-              strokeWidth="2"
-              strokeLinecap="round"
+              fill={'none'}
+              d={'M1 2 L5 7 L9 2'}
+              strokeWidth={'2'}
+              strokeLinecap={'round'}
             />
           </g>
         </VectorGraphic>

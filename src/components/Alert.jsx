@@ -1,27 +1,27 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import color from "color";
-import { Colors, TextColors } from "../shared/colors";
-import Text from "./Text";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import color from 'color';
+import { Colors, TextColors } from '../shared/colors';
+import Text from './Text';
 
 export default class Alert extends ReactCSS.Component {
-  displayName = "Alert";
+  displayName = 'Alert';
 
   static propTypes = {
     children: React.PropTypes.node,
     details: React.PropTypes.string,
     title: React.PropTypes.string,
-    type: React.PropTypes.oneOf(["success", "info", "warning", "danger"]).isRequired,
+    type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']).isRequired,
   };
 
   classes() {
     return {
       default: {
         Alert: {
-          padding: "10px 10px 0 10px",
+          padding: '10px 10px 0 10px',
         },
         AlertItem: {
-          paddingBottom: "10px",
+          paddingBottom: '10px',
         },
       },
       success: {
@@ -53,10 +53,10 @@ export default class Alert extends ReactCSS.Component {
 
   styles() {
     return this.css({
-      success: this.props.type === "success",
-      info: this.props.type === "info",
-      warning: this.props.type === "warning",
-      danger: this.props.type === "danger",
+      success: this.props.type === 'success',
+      info: this.props.type === 'info',
+      warning: this.props.type === 'warning',
+      danger: this.props.type === 'danger',
     });
   }
 
@@ -66,7 +66,7 @@ export default class Alert extends ReactCSS.Component {
         <Text
           color={TextColors.light}
           fontSize={1}
-          fontWeight={"bold"}
+          fontWeight={'bold'}
           ref={c => this.titleRef = c}
         >
           {this.props.title}
@@ -80,7 +80,7 @@ export default class Alert extends ReactCSS.Component {
     if (this.props.details) {
       return (
         <span>
-          {" "}
+          {' '}
           <Text
             color={TextColors.light}
             fontSize={1}

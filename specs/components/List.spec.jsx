@@ -1,14 +1,14 @@
 /* eslint func-names: "off" */
 /* eslint no-console: "off" */
 
-import React from "react";
-import loremIpsum from "lorem-ipsum";
-import List from "../../src/components/List";
-import ListItem from "../../src/components/ListItem";
-import TextListItem from "../../src/components/TextListItem";
+import React from 'react';
+import loremIpsum from 'lorem-ipsum';
+import List from '../../src/components/List';
+import ListItem from '../../src/components/ListItem';
+import TextListItem from '../../src/components/TextListItem';
 
 
-describe("List", function () {
+describe('List', function () {
   this.header(`
   ## List
   `); // Markdown.
@@ -16,7 +16,7 @@ describe("List", function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-      <List onClick={() => console.log("List clicked")}>
+      <List onClick={() => console.log('List clicked')}>
         <ListItem>
           <TextListItem
             text={loremIpsum()}

@@ -1,20 +1,20 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import color from "color";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import color from 'color';
 import {
   Colors,
   BackgroundColors,
   StructuralColors,
-} from "../shared/colors";
+} from '../shared/colors';
 
 export default class ToggleInput extends ReactCSS.Component {
-  displayName = "ToggleInput";
+  displayName = 'ToggleInput';
 
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.bool,
     onChange: React.PropTypes.func,
-    status: React.PropTypes.oneOf(["error", "warning", "success"]),
+    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {
@@ -38,7 +38,7 @@ export default class ToggleInput extends ReactCSS.Component {
     return {
       valid: true,
       isInitialValue: this.value() === this.props.initialValue,
-      validationError: "",
+      validationError: '',
     };
   }
 
@@ -50,27 +50,27 @@ export default class ToggleInput extends ReactCSS.Component {
           background: BackgroundColors.primary,
           width: 42,
           height: 26,
-          borderRadius: "13px",
-          position: "relative",
-          cursor: "pointer",
-          transition: "background 0.2s ease",
+          borderRadius: '13px',
+          position: 'relative',
+          cursor: 'pointer',
+          transition: 'background 0.2s ease',
         },
         ToggleSwitch: {
           background: BackgroundColors.primary,
-          boxShadow: "0 1px 2px #888",
+          boxShadow: '0 1px 2px #888',
           width: 24,
           height: 24,
-          borderRadius: "13px",
-          position: "absolute",
+          borderRadius: '13px',
+          position: 'absolute',
           top: 1,
           left: 0,
-          transition: "left 0.2s ease",
+          transition: 'left 0.2s ease',
         },
       },
       disabled: {
         ToggleInput: {
           background: BackgroundColors.secondary,
-          cursor: "not-allowed",
+          cursor: 'not-allowed',
         },
         ToggleSwitch: {
           background: BackgroundColors.secondary,
@@ -90,19 +90,19 @@ export default class ToggleInput extends ReactCSS.Component {
       success: {
         ToggleInput: {
           boxShadow: `0 0 3px 1px ${Colors.success}`,
-          border: "1px solid transparent",
+          border: '1px solid transparent',
         },
       },
       warning: {
         ToggleInput: {
           boxShadow: `0 0 3px 1px ${Colors.warning}`,
-          border: "1px solid transparent",
+          border: '1px solid transparent',
         },
       },
       error: {
         ToggleInput: {
           boxShadow: `0 0 3px 1px ${Colors.danger}`,
-          border: "1px solid transparent",
+          border: '1px solid transparent',
         },
       },
     };
@@ -112,9 +112,9 @@ export default class ToggleInput extends ReactCSS.Component {
     return this.css({
       disabled: !this.props.enabled,
       activated: this.state.value,
-      success: this.props.status === "success",
-      warning: this.props.status === "warning",
-      error: this.props.status === "error",
+      success: this.props.status === 'success',
+      warning: this.props.status === 'warning',
+      error: this.props.status === 'error',
     });
   }
 

@@ -1,24 +1,24 @@
 /* eslint func-names: "off" */
 
-import React from "react";
-import MyComponent from "../../src/components/MyComponent";
+import React from 'react';
+import MyComponent from '../../src/components/MyComponent';
 
 /*
 Dummy spec -- for reference
 */
-describe("MyComponent", function () {
+describe('MyComponent', function () {
   this.header(`
   ## A Simple Component
   `); // Markdown.
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(<MyComponent color="blue" />);
+    this.load(<MyComponent color={'blue'} />);
   });
 
-  it("red", () => this.props({ color: "red" }));
-  it("green", () => this.props({ color: "green" }));
-  it("blue", () => this.props({ color: "blue" }));
+  it('red', () => this.props({ color: 'red' }));
+  it('green', () => this.props({ color: 'green' }));
+  it('blue', () => this.props({ color: 'blue' }));
 
   /**
    * Introductory footer text (markdown).
@@ -31,17 +31,17 @@ describe("MyComponent", function () {
   can build with precision, focusing on just one level of complexity at
   a time.
 
-  Drill into the suite by clicking on "MyComponent" in the left-hand index.
+  Drill into the suite by clicking on 'MyComponent' in the left-hand index.
 
-  The "red/green/blue" options are the result of \`"it"\`
+  The 'red/green/blue' options are the result of \`'it'\`
   test statements in the \`MyComponent.spec.jsx\` file:
 
       // MyComponent.spec.jsx
-      it("red",   () => this.props({ color: "red" }));
-      it("green", () => this.props({ color: "green" }));
-      it("blue",  () => this.props({ color: "blue" }));
+      it('red',   () => this.props({ color: 'red' }));
+      it('green', () => this.props({ color: 'green' }));
+      it('blue',  () => this.props({ color: 'blue' }));
 
-  **Try clicking on them.**  Each click invokes the \`"it"\` statement's function.
+  **Try clicking on them.**  Each click invokes the \`'it'\` statement's function.
   Now you have the tools to manipulate your component in precise and useful
   ways while you are crafting it.
 

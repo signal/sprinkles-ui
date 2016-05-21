@@ -3,12 +3,12 @@
 /* eslint max-len: "off" */
 
 
-import React from "react";
-import loremIpsum from "lorem-ipsum";
-import TextInput from "../../src/components/TextInput";
+import React from 'react';
+import loremIpsum from 'lorem-ipsum';
+import TextInput from '../../src/components/TextInput';
 
 
-describe("TextInput", function () {
+describe('TextInput', function () {
   this.header(`
   ## TextInput
   `); // Markdown.
@@ -17,35 +17,35 @@ describe("TextInput", function () {
     // Runs when the Suite loads.  Use this to host your component-under-test.
 
     const handleChange = (newValue) => {
-      console.log("newValue", newValue);
+      console.log('newValue', newValue);
     };
 
     this.load(
       <TextInput
-        initialValue={"Initial Value"}
+        initialValue={'Initial Value'}
         onChange={handleChange}
-        placeholder={"placeholder"}
+        placeholder={'placeholder'}
       />
-    ).width("100%");
+    ).width('100%');
   });
 
   // Since two-way binding is implemented changing the state of the wrapper
   // will also update the DOM.
-  it("Update value", () => UIHarness.component.setState({ value: loremIpsum() }));
-  it("Clear value", () => UIHarness.component.setState({ value: "" }));
-  it("Validate (output on console)", () => console.log("Is Valid: ", UIHarness.component.validate()));
-  it("Update placeholder", () => this.props({ placeholder: loremIpsum() }));
-  it("Clear placeholder", () => this.props({ placeholder: "placeholder" }));
-  it("Set Success Status", () => this.props({ status: "success" }));
-  it("Set Warning Status", () => this.props({ status: "warning" }));
-  it("Set Error Status", () => this.props({ status: "error" }));
-  it("Clear Status", () => this.props({ status: undefined }));
-  it("Disable Autocomplete", () => this.props({ autoComplete: false }));
-  it("Enable Autocomplete", () => this.props({ autoComplete: true }));
-  it("Disable Input", () => this.props({ enabled: false }));
-  it("Enable Input", () => this.props({ enabled: true }));
-  it("Multiline", () => this.props({ multiline: true }));
-  it("Single Line", () => this.props({ multiline: false }));
+  it('Update value', () => UIHarness.component.setState({ value: loremIpsum() }));
+  it('Clear value', () => UIHarness.component.setState({ value: '' }));
+  it('Validate (output on console)', () => console.log('Is Valid: ', UIHarness.component.validate()));
+  it('Update placeholder', () => this.props({ placeholder: loremIpsum() }));
+  it('Clear placeholder', () => this.props({ placeholder: 'placeholder' }));
+  it('Set Success Status', () => this.props({ status: 'success' }));
+  it('Set Warning Status', () => this.props({ status: 'warning' }));
+  it('Set Error Status', () => this.props({ status: 'error' }));
+  it('Clear Status', () => this.props({ status: undefined }));
+  it('Disable Autocomplete', () => this.props({ autoComplete: false }));
+  it('Enable Autocomplete', () => this.props({ autoComplete: true }));
+  it('Disable Input', () => this.props({ enabled: false }));
+  it('Enable Input', () => this.props({ enabled: true }));
+  it('Multiline', () => this.props({ multiline: true }));
+  it('Single Line', () => this.props({ multiline: false }));
 
 
   /**

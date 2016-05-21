@@ -1,18 +1,18 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Text from "./Text";
-import List from "./List";
-import ListItem from "./ListItem";
-import NavListItem from "./NavListItem";
-import VectorGraphic from "./VectorGraphic";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Text from './Text';
+import List from './List';
+import ListItem from './ListItem';
+import NavListItem from './NavListItem';
+import VectorGraphic from './VectorGraphic';
 import {
   BackgroundColors,
   TextColors,
-} from "../shared/colors";
-import color from "color";
+} from '../shared/colors';
+import color from 'color';
 
 export default class PrimaryNav extends ReactCSS.Component {
-  displayName = "PrimaryNav";
+  displayName = 'PrimaryNav';
 
   static propTypes = {
     appIcon: React.PropTypes.node,
@@ -63,15 +63,15 @@ export default class PrimaryNav extends ReactCSS.Component {
       default: {
         PrimaryNav: {
           background: BackgroundColors.primaryNav,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "stretch",
-          height: "100%",
-          width: "100%",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          height: '100%',
+          width: '100%',
         },
         Branding: {
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
         },
         AppName: {
           marginLeft: 10,
@@ -80,17 +80,17 @@ export default class PrimaryNav extends ReactCSS.Component {
           flexGrow: 1,
         },
         ExpandToggleWrapper: {
-          cursor: "pointer",
+          cursor: 'pointer',
         },
         ExpandToggle: {
-          textAlign: "center",
-          transform: "rotate(180deg)",
-          transition: "transform 0.2s ease",
+          textAlign: 'center',
+          transform: 'rotate(180deg)',
+          transition: 'transform 0.2s ease',
         },
       },
       expanded: {
         ExpandToggle: {
-          transform: "rotate(360deg)",
+          transform: 'rotate(360deg)',
         },
       },
       hovered: {
@@ -184,12 +184,12 @@ export default class PrimaryNav extends ReactCSS.Component {
         >
           <VectorGraphic height={40} width={14}>
             <polyline
-              fill="none"
+              fill={'none'}
               stroke={TextColors.light}
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              points="10,14 2,20 10,26"
+              strokeWidth={'2'}
+              strokeLinecap={'round'}
+              strokeLinejoin={'round'}
+              points={'10,14 2,20 10,26'}
             />
           </VectorGraphic>
         </div>

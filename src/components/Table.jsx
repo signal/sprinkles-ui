@@ -1,13 +1,13 @@
-import React from "react";
-import ReactCSS from "reactcss";
+import React from 'react';
+import ReactCSS from 'reactcss';
 import {
   BackgroundColors,
   StructuralColors,
   TextColors,
-} from "../shared/colors";
+} from '../shared/colors';
 
 export default class Table extends ReactCSS.Component {
-  displayName = "Table";
+  displayName = 'Table';
 
   static propTypes = {
     tableData: React.PropTypes.object.isRequired,
@@ -53,7 +53,7 @@ export default class Table extends ReactCSS.Component {
     return {
       default: {
         Table: {
-          border: "none",
+          border: 'none',
         },
         Thead: {
           background: BackgroundColors.table,
@@ -61,14 +61,14 @@ export default class Table extends ReactCSS.Component {
         },
         TheadItems: {
           color: TextColors.tableHead,
-          padding: "20px",
-          fontWeight: "bold",
-          textAlign: "left",
+          padding: '20px',
+          fontWeight: 'bold',
+          textAlign: 'left',
         },
         TBodyItems: {
           borderBottom: `1px solid ${StructuralColors.divider}`,
           color: TextColors.primary,
-          padding: "20px",
+          padding: '20px',
         },
       },
     };

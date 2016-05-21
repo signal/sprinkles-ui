@@ -1,21 +1,21 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import { Map } from "immutable";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import { Map } from 'immutable';
 
 export default class ButtonGroup extends ReactCSS.Component {
-  displayName = "ButtonGroup";
+  displayName = 'ButtonGroup';
 
   static propTypes = {
     children: React.PropTypes.node,
     onClick: React.PropTypes.func,
     selectedButton: React.PropTypes.string,
     type: React.PropTypes.oneOf([
-      "secondary",
-      "primary",
-      "success",
-      "info",
-      "warning",
-      "danger",
+      'secondary',
+      'primary',
+      'success',
+      'info',
+      'warning',
+      'danger',
     ]),
   };
 
@@ -32,28 +32,28 @@ export default class ButtonGroup extends ReactCSS.Component {
     return React.Children.map(this.props.children, (child, i) => {
       if (child) {
         if (!child.props.buttonKey) {
-          throw new Error("Button missing buttonKey prop");
+          throw new Error('Button missing buttonKey prop');
         }
         let groupPosition;
         const numChildren = this.props.children.length;
         if (numChildren > 1) {
           switch (i) {
             case 0:
-              groupPosition = "left";
+              groupPosition = 'left';
               break;
             case numChildren - 1:
-              groupPosition = "right";
+              groupPosition = 'right';
               break;
             default:
-              groupPosition = "center";
+              groupPosition = 'center';
               break;
           }
         }
         let type;
         if (this.props.selectedButton && this.props.selectedButton === child.props.buttonKey) {
-          type = this.props.type ? this.props.type : "primary";
+          type = this.props.type ? this.props.type : 'primary';
         } else {
-          type = this.props.type && !this.props.selectedButton ? this.props.type : "secondary";
+          type = this.props.type && !this.props.selectedButton ? this.props.type : 'secondary';
         }
         return React.cloneElement(child, {
           groupPosition,
@@ -61,7 +61,7 @@ export default class ButtonGroup extends ReactCSS.Component {
           ref: (buttonRef) => {
             if (buttonRef) {
               if (!!this.buttonRefs.get(child.props.buttonKey)) {
-                throw new Error(`buttonKey prop "${child.props.buttonKey}" is not unique`);
+                throw new Error(`buttonKey prop '${child.props.buttonKey}' is not unique`);
               }
               this.buttonRefs = this.buttonRefs.set(child.props.buttonKey, buttonRef);
             }

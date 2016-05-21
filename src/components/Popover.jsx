@@ -1,15 +1,15 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import zindex from "../shared/zindex";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import zindex from '../shared/zindex';
 
 export default class Popover extends ReactCSS.Component {
-  displayName = "Popover";
+  displayName = 'Popover';
 
   static propTypes = {
     anchorEl: React.PropTypes.object,
     anchorOrigin: React.PropTypes.shape({
-      horizontal: React.PropTypes.oneOf(["left", "right"]),
-      vertical: React.PropTypes.oneOf(["top", "bottom"]),
+      horizontal: React.PropTypes.oneOf(['left', 'right']),
+      vertical: React.PropTypes.oneOf(['top', 'bottom']),
     }),
     children: React.PropTypes.node,
     constrainWidth: React.PropTypes.bool,
@@ -22,8 +22,8 @@ export default class Popover extends ReactCSS.Component {
     constrainWidth: false,
     open: false,
     anchorOrigin: {
-      horizontal: "left",
-      vertical: "bottom",
+      horizontal: 'left',
+      vertical: 'bottom',
     },
   };
 
@@ -39,11 +39,11 @@ export default class Popover extends ReactCSS.Component {
       default: {
         Popover: {
           zIndex: zindex.Popover,
-          display: "none",
-          position: "fixed",
+          display: 'none',
+          position: 'fixed',
         },
         CloseLayer: {
-          position: "fixed",
+          position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
@@ -53,7 +53,7 @@ export default class Popover extends ReactCSS.Component {
       },
       open: {
         Popover: {
-          display: "block",
+          display: 'block',
         },
       },
       anchored: {
@@ -73,16 +73,16 @@ export default class Popover extends ReactCSS.Component {
   getAnchorValue(anchor, key) {
     let anchorValue;
     switch (key) {
-      case "top":
+      case 'top':
         anchorValue = anchor.top;
         break;
-      case "bottom":
+      case 'bottom':
         anchorValue = anchor.bottom;
         break;
-      case "left":
+      case 'left':
         anchorValue = anchor.left;
         break;
-      case "right":
+      case 'right':
         anchorValue = anchor.right;
         break;
       default:

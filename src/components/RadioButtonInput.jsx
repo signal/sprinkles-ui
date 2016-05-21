@@ -1,11 +1,11 @@
-import React from "react";
-import ReactCSS from "reactcss";
-import Text from "./Text";
-import { Colors, TextColors } from "../shared/colors";
-import color from "color";
+import React from 'react';
+import ReactCSS from 'reactcss';
+import Text from './Text';
+import { Colors, TextColors } from '../shared/colors';
+import color from 'color';
 
 export default class RadioButtonInput extends ReactCSS.Component {
-  displayName = "RadioButtonInput";
+  displayName = 'RadioButtonInput';
 
   static propTypes = {
     enabled: React.PropTypes.bool,
@@ -17,7 +17,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
       })
     ),
     onChange: React.PropTypes.func,
-    status: React.PropTypes.oneOf(["error", "warning", "success"]),
+    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {
@@ -45,7 +45,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
     return {
       valid: true,
       isInitialValue: this.value() === this.initialValue(this.props),
-      validationError: "",
+      validationError: '',
     };
   }
 
@@ -57,7 +57,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
     return {
       default: {
         RadioItems: {
-          cursor: "pointer",
+          cursor: 'pointer',
         },
         RadioItem: {
           paddingBottom: 10,
@@ -68,10 +68,10 @@ export default class RadioButtonInput extends ReactCSS.Component {
       },
       disabled: {
         Input: {
-          cursor: "not-allowed",
+          cursor: 'not-allowed',
         },
         RadioItems: {
-          cursor: "not-allowed",
+          cursor: 'not-allowed',
         },
       },
     };
@@ -95,13 +95,13 @@ export default class RadioButtonInput extends ReactCSS.Component {
     this.radioInputRefs = [];
     let textColor;
     switch (this.props.status) {
-      case "error":
+      case 'error':
         textColor = Colors.danger;
         break;
-      case "warning":
+      case 'warning':
         textColor = Colors.warning;
         break;
-      case "success":
+      case 'success':
         textColor = Colors.success;
         break;
       default:
@@ -126,7 +126,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
             name={item.name}
             onChange={() => {}}
             style={this.styles().Input}
-            type="radio"
+            type={'radio'}
             value={item.value}
           />
           <span style={this.styles().Text}>
