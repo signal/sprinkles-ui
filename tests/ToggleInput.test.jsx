@@ -159,4 +159,28 @@ describe("ToggleInput", () => {
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
   });
+
+  it("Does return a valid state when validated", () => {
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput />
+    );
+    expect(toggleInputComponent.validate()).toEqual({
+      valid: true,
+      isInitialValue: true,
+      validationError: "",
+    });
+  });
+
+  it("Does return isInitialValue=false when value changes", () => {
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput />
+    );
+    const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
+    TestUtils.Simulate.click(toggleInputNode);
+    expect(toggleInputComponent.validate()).toEqual({
+      valid: true,
+      isInitialValue: false,
+      validationError: "",
+    });
+  });
 });

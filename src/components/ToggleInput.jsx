@@ -30,6 +30,18 @@ export default class ToggleInput extends ReactCSS.Component {
     };
   }
 
+  value() {
+    return this.state.value;
+  }
+
+  validate() {
+    return {
+      valid: true,
+      isInitialValue: this.value() === this.props.initialValue,
+      validationError: "",
+    };
+  }
+
   classes() {
     return {
       default: {
