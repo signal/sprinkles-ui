@@ -8,6 +8,7 @@ import Field from "../../src/components/Field";
 import EmailInput from "../../src/components/EmailInput";
 import PasswordInput from "../../src/components/PasswordInput";
 import SelectInput from "../../src/components/SelectInput";
+import ToggleInput from "../../src/components/ToggleInput";
 import Text from "../../src/components/Text";
 
 
@@ -75,6 +76,13 @@ describe("Form", function () {
               },
             ]}
           />
+        </Field>
+        <Field
+          fieldKey={"stayLoggedIn"}
+          label={"Stay Logged In"}
+          required={true}
+        >
+          <ToggleInput />
         </Field>
       </Form>
     ).width("100%");
