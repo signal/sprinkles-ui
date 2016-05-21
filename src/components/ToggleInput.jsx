@@ -14,6 +14,7 @@ export default class ToggleInput extends ReactCSS.Component {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.bool,
     onChange: React.PropTypes.func,
+    status: React.PropTypes.oneOf(["error", "warning", "success"]),
   };
 
   static defaultProps = {
@@ -74,6 +75,24 @@ export default class ToggleInput extends ReactCSS.Component {
           left: 18,
         },
       },
+      success: {
+        ToggleInput: {
+          boxShadow: `0 0 3px 1px ${Colors.success}`,
+          border: "1px solid transparent",
+        },
+      },
+      warning: {
+        ToggleInput: {
+          boxShadow: `0 0 3px 1px ${Colors.warning}`,
+          border: "1px solid transparent",
+        },
+      },
+      error: {
+        ToggleInput: {
+          boxShadow: `0 0 3px 1px ${Colors.danger}`,
+          border: "1px solid transparent",
+        },
+      },
     };
   }
 
@@ -81,6 +100,9 @@ export default class ToggleInput extends ReactCSS.Component {
     return this.css({
       disabled: !this.props.enabled,
       activated: this.state.value,
+      success: this.props.status === "success",
+      warning: this.props.status === "warning",
+      error: this.props.status === "error",
     });
   }
 

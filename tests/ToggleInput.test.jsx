@@ -129,4 +129,34 @@ describe("ToggleInput", () => {
     TestUtils.Simulate.click(toggleInputNode);
     expect(mockHandleChange).toBeCalledWith(true);
   });
+
+  it("Does render with red shadow on error status", () => {
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput
+        status={"error"}
+      />
+    );
+    const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
+    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+  });
+
+  it("Does render with an orange shadow on warning status", () => {
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput
+        status={"warning"}
+      />
+    );
+    const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
+    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
+  });
+
+  it("Does render with a green shadow on success status", () => {
+    const toggleInputComponent = TestUtils.renderIntoDocument(
+      <ToggleInput
+        status={"success"}
+      />
+    );
+    const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
+    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+  });
 });
