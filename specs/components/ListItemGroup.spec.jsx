@@ -2,6 +2,8 @@
 
 import React from 'react';
 import ListItemGroup from '../../src/components/ListItemGroup';
+import ListItem from '../../src/components/ListItem';
+import TextListItem from '../../src/components/TextListItem';
 
 describe('ListItemGroup', function () {
   this.header(`
@@ -10,7 +12,18 @@ describe('ListItemGroup', function () {
 
   before(() => {
     this.load(
-      <ListItemGroup label={"Group"} />
+      <ListItemGroup label={"Group"}>
+        <ListItem>
+          <TextListItem
+            text={"Cheese"}
+          />
+        </ListItem>
+        <ListItem>
+          <TextListItem
+            text={"Crackers"}
+          />
+        </ListItem>
+      </ListItemGroup>
     );
   });
 
