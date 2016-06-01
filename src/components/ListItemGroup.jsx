@@ -29,7 +29,23 @@ export default class ListItemGroup extends ReactCSS.Component {
     this.listItemRefs = new Map();
     return React.Children.map(this.props.children, (child, i) => {
       if (child) {
+        const lenChildren = this.props.children.length;
+        let listPosition;
+        if (lenChildren > 0) {
+          switch (i) {
+            case 0:
+              listPosition = 'first';
+              break;
+            case lenChildren - 1:
+              listPosition = 'last';
+              break;
+            default:
+              listPosition = 'middle';
+              break;
+          }
+        }
         return React.cloneElement(child, {
+          listPosition,
           ref: (childComponent) => {
             this.listItemRefs = this.listItemRefs.set(i, childComponent);
           },
