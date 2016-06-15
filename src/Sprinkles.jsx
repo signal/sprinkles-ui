@@ -18,6 +18,7 @@ export PrimaryNav from './components/PrimaryNav';
 export RadioButtonInput from './components/RadioButtonInput';
 export SecondaryNav from './components/SecondaryNav';
 export SelectInput from './components/SelectInput';
+export Table from './components/Table';
 export Text from './components/Text';
 export TextInput from './components/TextInput';
 export TextListItem from './components/TextListItem';
