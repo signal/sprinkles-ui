@@ -7,51 +7,90 @@ import {
 } from '../shared/colors';
 
 export default class Table extends React.Component {
+
   static propTypes = {
-    tableData: React.PropTypes.object.isRequired,
+    headers: React.PropTypes.object,
+    records: React.PropTypes.array.isRequired,
+    recordInclusion: React.PropTypes.array,
+    onClick: React.PropTypes.func,
+    selectedRow: React.PropTypes.number,
   }
 
   displayName = 'Table';
 
-  renderHeaderItem(style) {
-    return this.props.tableData.headers.map((item, i) => (
+  filteredSubRecords(record) {
+    const self = this;
+    const filteredRecord = {};
+    Object.getOwnPropertyNames(record).forEach((val) => {
+      if (self.props.recordInclusion.indexOf(val) > -1) {
+        filteredRecord[val] = record[val];
+      }
+    });
+    return filteredRecord;
+  }
+
+  filteredRecords() {
+    return this.props.records.map((record) => this.filteredSubRecords(record));
+  }
+
+  handleClick(itemData, i, cellData) {
+    this.props.onClick(itemData, i, cellData);
+  }
+
+  renderHeaderItem(style, records) {
+    const firstRecord = records[0];
+    return Object.keys(firstRecord).map((item, i) => (
       <th style={style.TheadItems} key={i}>
-        {item}
+        {this.props.headers ? this.props.headers[item] : item}
       </th>
       )
     );
   }
 
-  renderHeaderItems(style) {
+  renderHeaderItems(style, records) {
     return (<tr style={style.Thead}>
-      {this.renderHeaderItem(style)}
+      {this.renderHeaderItem(style, records)}
     </tr>
     );
   }
 
-  renderItems(style, item, i) {
+  renderItems(style, columnKey, i, row) {
+    const cellData = row[columnKey];
     return (
-      <td style={style.TBodyItems} key={i}>
-      {item}
+      <td
+        onClick={this.handleClick.bind(this, columnKey, i, cellData)}
+        style={style.TBodyItems} key={i}
+      >
+        {cellData}
       </td>
     );
   }
 
   renderRow(style, row, i) {
     return (
-      <tr key={i}>
-        {row.map((item, ri) => this.renderItems(style, item, ri))}
+      <tr
+        key={i}
+        style={i === this.props.selectedRow ? style.selected : null}
+      >
+      {
+        Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row))
+      }
       </tr>
     );
   }
 
-  renderRows(style) {
-    return this.props.tableData.data.map((item, i) => this.renderRow(style, item, i));
+  renderRows(style, records) {
+    return records.map((item, i) => this.renderRow(style, item, i));
   }
 
   render() {
+    const recordProp = this.props.records;
+    const records = this.props.recordInclusion ? this.filteredRecords(recordProp) : recordProp;
     const style = reactCSS({
       default: {
+        selected: {
+          background: BackgroundColors.selected,
+        },
         Table: {
           border: 'none',
         },
@@ -72,13 +111,14 @@ export default class Table extends React.Component {
         },
       },
     });
+
     return (
       <table style={style.Table}>
         <thead>
-          {this.renderHeaderItems(style)}
+          {this.renderHeaderItems(style, records)}
         </thead>
         <tbody>
-          {this.renderRows(style)}
+          {this.renderRows(style, records)}
         </tbody>
       </table>
     );

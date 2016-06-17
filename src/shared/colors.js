@@ -21,11 +21,12 @@ export const TextColors = {
 };
 
 export const BackgroundColors = {
-  primary: '#FEFEFE',
-  secondary: '#F8FAFB',
   accent: '#B3E5FC',
+  primary: '#FEFEFE',
   primaryNav: '#2B333D',
+  secondary: '#F8FAFB',
   secondaryNav: '#FEFEFE',
+  selected: '#CFF5F9',
   table: '#EFEFEF',
 };
 
