@@ -1,56 +1,56 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import {
   BackgroundColors,
   StructuralColors,
   TextColors,
 } from '../shared/colors';
 
-export default class Table extends ReactCSS.Component {
-  displayName = 'Table';
-
+export default class Table extends React.Component {
   static propTypes = {
     tableData: React.PropTypes.object.isRequired,
   }
 
-  renderHeaderItem() {
+  displayName = 'Table';
+
+  renderHeaderItem(style) {
     return this.props.tableData.headers.map((item, i) => (
-      <th style={this.styles().TheadItems} key={i}>
+      <th style={style.TheadItems} key={i}>
         { item }
       </th>
       )
     );
   }
 
-  renderHeaderItems() {
-    return (<tr style={this.styles().Thead}>
-      { this.renderHeaderItem() }
+  renderHeaderItems(style) {
+    return (<tr style={style.Thead}>
+      { this.renderHeaderItem(style) }
     </tr>
     );
   }
 
-  renderItems(item, i) {
+  renderItems(style, item, i) {
     return (
-      <td style={this.styles().TBodyItems} key={i}>
+      <td style={style.TBodyItems} key={i}>
       { item }
       </td>
     );
   }
 
-  renderRow(row, i) {
+  renderRow(style, row, i) {
     return (
       <tr key={i}>
-        { row.map((item, ri) => this.renderItems(item, ri)) }
+        { row.map((item, ri) => this.renderItems(style, item, ri)) }
       </tr>
     );
   }
 
-  renderRows() {
-    return this.props.tableData.data.map((item, i) => this.renderRow(item, i));
+  renderRows(style) {
+    return this.props.tableData.data.map((item, i) => this.renderRow(style, item, i));
   }
 
-  classes() {
-    return {
+  render() {
+    const style = reactCSS({
       default: {
         Table: {
           border: 'none',
@@ -71,17 +71,14 @@ export default class Table extends ReactCSS.Component {
           padding: '20px',
         },
       },
-    };
-  }
-
-  render() {
+    });
     return (
-      <table style={this.styles().Table}>
+      <table style={style.Table}>
         <thead>
-          { this.renderHeaderItems() }
+          { this.renderHeaderItems(style) }
         </thead>
         <tbody>
-          { this.renderRows() }
+          { this.renderRows(style) }
         </tbody>
       </table>
     );

@@ -1,10 +1,8 @@
 import { BackgroundColors, TextColors } from '../shared/colors';
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 
-export default class Panel extends ReactCSS.Component {
-  static displayName = 'Panel';
-
+export default class Panel extends React.Component {
   static propTypes = {
     backgroundColor: React.PropTypes.string,
     borderRadius: React.PropTypes.number,
@@ -21,6 +19,8 @@ export default class Panel extends ReactCSS.Component {
     padding: '10px',
   };
 
+  static displayName = 'Panel';
+
   static bs = {
     RGBA1: [0.12, 0.16, 0.19, 0.25, 0.3],
     OffsetY1: [1, 3, 10, 14, 19],
@@ -29,13 +29,6 @@ export default class Panel extends ReactCSS.Component {
     OffsetY2: [1, 3, 6, 10, 15],
     Blur2: [4, 10, 10, 18, 20],
   };
-
-  styles() {
-    return this.css({
-      roundedCorners: !!this.props.borderRadius,
-      dropShadow: !!this.props.boxShadowStrength,
-    });
-  }
 
   constructBoxShadow(bi) {
     const BS1 = `${Panel.bs.OffsetY1[bi]}px
@@ -49,8 +42,12 @@ export default class Panel extends ReactCSS.Component {
     return `0 ${BS1}, 0 ${BS2}`;
   }
 
-  classes() {
-    return {
+  renderChildren() {
+    return (this.props.children) ? this.props.children : this.props.text;
+  }
+
+  render() {
+    const style = reactCSS({
       default: {
         Panel: {
           backgroundColor: this.props.backgroundColor,
@@ -68,16 +65,12 @@ export default class Panel extends ReactCSS.Component {
           boxShadow: `${this.constructBoxShadow(this.props.boxShadowStrength - 1)}`,
         },
       },
-    };
-  }
-
-  renderChildren() {
-    return (this.props.children) ? this.props.children : this.props.text;
-  }
-
-  render() {
+    }, {
+      roundedCorners: !!this.props.borderRadius,
+      dropShadow: !!this.props.boxShadowStrength,
+    });
     return (
-      <div style={this.styles().Panel}>{this.renderChildren()}</div>
+      <div style={style.Panel}>{this.renderChildren()}</div>
     );
   }
 

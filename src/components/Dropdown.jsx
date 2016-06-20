@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
 import List from './List';
 import ListItem from './ListItem';
 import TextListItem from './TextListItem';
 import Popover from './Popover';
 
-export default class Dropdown extends ReactCSS.Component {
+export default class Dropdown extends React.Component {
   static propTypes = {
     anchorEl: React.PropTypes.object,
     anchorOrigin: React.PropTypes.shape({
@@ -29,6 +28,8 @@ export default class Dropdown extends ReactCSS.Component {
     open: false,
     onClick: () => {},
   };
+
+  displayName = 'Dropdown';
 
   handleClick(item) {
     this.props.onClick(item);

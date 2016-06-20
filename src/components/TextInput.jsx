@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import {
   Colors,
   TextColors,
@@ -7,9 +7,7 @@ import {
 } from '../shared/colors';
 
 
-export default class TextInput extends ReactCSS.Component {
-  displayName = 'TextInput';
-
+export default class TextInput extends React.Component {
   static propTypes = {
     autoComplete: React.PropTypes.bool,
     boundValue: React.PropTypes.string,
@@ -28,6 +26,8 @@ export default class TextInput extends ReactCSS.Component {
     initialValue: '',
     onChange: () => {},
   };
+
+  displayName = 'TextInput';
 
   constructor(props) {
     super();
@@ -72,8 +72,12 @@ export default class TextInput extends ReactCSS.Component {
     this.props.onChange(changeEvent.target.value);
   }
 
-  classes() {
-    return {
+  isBound() {
+    return this.props.boundValue !== undefined;
+  }
+
+  style() {
+    return reactCSS({
       default: {
         TextInput: {
           fontSize: '0.875rem',
@@ -111,21 +115,13 @@ export default class TextInput extends ReactCSS.Component {
           cursor: 'not-allowed',
         },
       },
-    };
-  }
-
-  styles() {
-    return this.css({
+    }, {
       focus: this.state.isFocused,
       success: this.props.status === 'success',
       warning: this.props.status === 'warning',
       error: this.props.status === 'error',
       disabled: !this.props.enabled,
     });
-  }
-
-  isBound() {
-    return this.props.boundValue !== undefined;
   }
 
   render() {
@@ -136,7 +132,7 @@ export default class TextInput extends ReactCSS.Component {
       onChange: this.isBound() ? this.handleChange.bind(this) : undefined,
       onFocus: this.handleFocus.bind(this),
       placeholder: this.props.placeholder,
-      style: this.styles().TextInput,
+      style: this.style().TextInput,
       value: this.isBound() ? this.props.boundValue : undefined,
       valueLink: !this.isBound() ? this.linkState() : undefined,
     };

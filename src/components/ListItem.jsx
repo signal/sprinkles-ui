@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
 
-export default class ListItem extends ReactCSS.Component {
-  displayName = 'ListItem';
-
+export default class ListItem extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     listPosition: React.PropTypes.oneOf(['first', 'middle', 'last']),
@@ -14,6 +11,8 @@ export default class ListItem extends ReactCSS.Component {
   static defaultProps = {
     selected: false,
   };
+
+  displayName = 'ListItem';
 
   constructor() {
     super();

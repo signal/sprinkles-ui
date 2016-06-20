@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import TextListItem from './TextListItem';
 import List from './List';
 import ListItem from './ListItem';
@@ -12,9 +12,7 @@ import {
   TextColors,
 } from '../shared/colors';
 
-export default class SelectInput extends ReactCSS.Component {
-  displayName = 'SelectInput';
-
+export default class SelectInput extends React.Component {
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
@@ -33,6 +31,8 @@ export default class SelectInput extends ReactCSS.Component {
     onChange: () => {},
     enabled: true,
   };
+
+  displayName = 'SelectInput';
 
   constructor(props) {
     super();
@@ -75,70 +75,6 @@ export default class SelectInput extends ReactCSS.Component {
       isInitialValue,
       validationError: !isEmpty ? '' : 'A value must be selected',
     };
-  }
-
-  classes() {
-    return {
-      default: {
-        SelectInput: {
-          border: `1px solid ${StructuralColors.inputBorder}`,
-          borderRadius: 3,
-        },
-        Display: {
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-        },
-        Text: {
-          flexGrow: 1,
-        },
-        Icon: {
-          margin: '0 15px',
-          transition: 'transform 0.2s ease',
-        },
-      },
-      open: {
-        Icon: {
-          transform: 'rotate(180deg)',
-        },
-      },
-      disabled: {
-        SelectInput: {
-          background: BackgroundColors.secondary,
-        },
-        Display: {
-          cursor: 'not-allowed',
-        },
-      },
-      success: {
-        SelectInput: {
-          boxShadow: `0 0 3px 1px ${Colors.success}`,
-          border: '1px solid transparent',
-        },
-      },
-      warning: {
-        SelectInput: {
-          boxShadow: `0 0 3px 1px ${Colors.warning}`,
-          border: '1px solid transparent',
-        },
-      },
-      error: {
-        SelectInput: {
-          boxShadow: `0 0 3px 1px ${Colors.danger}`,
-          border: '1px solid transparent',
-        },
-      },
-    };
-  }
-
-  styles() {
-    return this.css({
-      open: this.state.open,
-      disabled: !this.props.enabled,
-      success: this.props.status === 'success',
-      warning: this.props.status === 'warning',
-      error: this.props.status === 'error',
-    });
   }
 
   calculateDisplayLabel() {
@@ -188,22 +124,22 @@ export default class SelectInput extends ReactCSS.Component {
     );
   }
 
-  renderDisplay() {
+  renderDisplay(style) {
     return (
       <div
         onClick={this.props.enabled ? this.handleClick.bind(this) : undefined}
-        style={this.styles().Display}
+        style={style.Display}
       >
-        {this.renderDisplayText()}
-        {this.renderDisplayIcon()}
+        {this.renderDisplayText(style)}
+        {this.renderDisplayIcon(style)}
       </div>
     );
   }
 
-  renderDisplayText() {
+  renderDisplayText(style) {
     return (
       <div
-        style={this.styles().Text}
+        style={style.Text}
       >
         <TextListItem
           enabled={this.props.enabled}
@@ -214,10 +150,10 @@ export default class SelectInput extends ReactCSS.Component {
     );
   }
 
-  renderDisplayIcon() {
+  renderDisplayIcon(style) {
     return (
       <div
-        style={this.styles().Icon}
+        style={style.Icon}
       >
         <VectorGraphic>
           <g stroke={this.props.enabled ? TextColors.primary : TextColors.secondary} >
@@ -234,11 +170,68 @@ export default class SelectInput extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        SelectInput: {
+          border: `1px solid ${StructuralColors.inputBorder}`,
+          borderRadius: 3,
+        },
+        Display: {
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+        },
+        Text: {
+          flexGrow: 1,
+        },
+        Icon: {
+          margin: '0 15px',
+          transition: 'transform 0.2s ease',
+        },
+      },
+      open: {
+        Icon: {
+          transform: 'rotate(180deg)',
+        },
+      },
+      disabled: {
+        SelectInput: {
+          background: BackgroundColors.secondary,
+        },
+        Display: {
+          cursor: 'not-allowed',
+        },
+      },
+      success: {
+        SelectInput: {
+          boxShadow: `0 0 3px 1px ${Colors.success}`,
+          border: '1px solid transparent',
+        },
+      },
+      warning: {
+        SelectInput: {
+          boxShadow: `0 0 3px 1px ${Colors.warning}`,
+          border: '1px solid transparent',
+        },
+      },
+      error: {
+        SelectInput: {
+          boxShadow: `0 0 3px 1px ${Colors.danger}`,
+          border: '1px solid transparent',
+        },
+      },
+    }, {
+      open: this.state.open,
+      disabled: !this.props.enabled,
+      success: this.props.status === 'success',
+      warning: this.props.status === 'warning',
+      error: this.props.status === 'error',
+    });
     return (
       <div
-        style={this.styles().SelectInput}
+        style={style.SelectInput}
       >
-        {this.renderDisplay()}
+        {this.renderDisplay(style)}
         {this.renderDropdown()}
       </div>
     );

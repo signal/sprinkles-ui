@@ -1,11 +1,9 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import { ButtonColors, TextColors } from '../shared/colors';
 import color from 'color';
 
-export default class Button extends ReactCSS.Component {
-  displayName = 'Button';
-
+export default class Button extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
@@ -30,25 +28,13 @@ export default class Button extends ReactCSS.Component {
     type: 'secondary',
   };
 
+  displayName = 'Button';
+
   constructor() {
     super();
     this.state = {
       isHovering: false,
     };
-  }
-
-  handleMouseOut() {
-    this.setState({ isHovering: false });
-  }
-
-  handleMouseOver() {
-    this.setState({ isHovering: true });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.working !== nextProps.working && nextProps.working) {
-      this.setState({ isHovering: false });
-    }
   }
 
   componentWillMount() {
@@ -60,11 +46,32 @@ export default class Button extends ReactCSS.Component {
     document.head.appendChild(this.keyframe);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.working !== nextProps.working && nextProps.working) {
+      this.setState({ isHovering: false });
+    }
+  }
+
   componentWillUnmount() {
     document.head.removeChild(this.keyframe);
   }
 
-  classes() {
+  handleMouseOut() {
+    this.setState({ isHovering: false });
+  }
+
+  handleMouseOver() {
+    this.setState({ isHovering: true });
+  }
+
+  renderChildren() {
+    if (this.props.children) {
+      return this.props.children;
+    }
+    return this.props.text;
+  }
+
+  render() {
     const veryDarkened = color(ButtonColors[this.props.type])
         .darken(0.3).hexString();
     const darkened = color(ButtonColors[this.props.type])
@@ -72,7 +79,7 @@ export default class Button extends ReactCSS.Component {
     const lightened = color(ButtonColors[this.props.type])
         .lighten(0.3).hexString();
     const workingColor = this.props.type === 'secondary' ? darkened : veryDarkened;
-    return {
+    const style = reactCSS({
       default: {
         Button: {
           background: ButtonColors.secondary,
@@ -141,11 +148,7 @@ export default class Button extends ReactCSS.Component {
           borderRadius: '0 3px 3px 0',
         },
       },
-    };
-  }
-
-  styles() {
-    return this.css({
+    }, {
       typeColor: this.props.type !== 'secondary',
       hovering: this.state.isHovering && !this.props.working,
       disabled: !this.props.enabled,
@@ -154,23 +157,13 @@ export default class Button extends ReactCSS.Component {
       groupPositionCenter: this.props.groupPosition === 'center',
       groupPositionRight: this.props.groupPosition === 'right',
     });
-  }
-
-  renderChildren() {
-    if (this.props.children) {
-      return this.props.children;
-    }
-    return this.props.text;
-  }
-
-  render() {
     return (
       <button
         disabled={this.props.working || !this.props.enabled}
         onClick={this.props.onClick}
         onMouseOut={this.handleMouseOut.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}
-        style={this.styles().Button}
+        style={style.Button}
       >
         {this.renderChildren()}
       </button>

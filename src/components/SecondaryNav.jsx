@@ -1,17 +1,45 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import { BackgroundColors } from '../shared/colors';
 
-export default class SecondaryNav extends ReactCSS.Component {
-  displayName = 'SecondaryNav';
-
+export default class SecondaryNav extends React.Component {
   static propTypes = {
     leftItems: React.PropTypes.node,
     rightItems: React.PropTypes.node,
   };
 
-  classes() {
-    return {
+  displayName = 'SecondaryNav';
+
+  renderLeftItems(style) {
+    if (this.props.leftItems) {
+      return (
+        <div
+          style={style.LeftItems}
+          ref={c => this.leftItemsRef = c}
+        >
+          { this.props.leftItems }
+        </div>
+      );
+    }
+    return null;
+  }
+
+  renderRightItems(style) {
+    if (this.props.rightItems) {
+      return (
+        <div
+          style={style.RightItems}
+          ref={c => this.rightItemsRef = c}
+        >
+          { this.props.rightItems }
+        </div>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    const style = reactCSS({
       default: {
         SecondaryNav: {
           display: 'flex',
@@ -31,44 +59,13 @@ export default class SecondaryNav extends ReactCSS.Component {
           justifyContent: 'flex-end',
         },
       },
-    };
-  }
-
-  renderLeftItems() {
-    if (this.props.leftItems) {
-      return (
-        <div
-          style={this.styles().LeftItems}
-          ref={c => this.leftItemsRef = c}
-        >
-          { this.props.leftItems }
-        </div>
-      );
-    }
-    return null;
-  }
-
-  renderRightItems() {
-    if (this.props.rightItems) {
-      return (
-        <div
-          style={this.styles().RightItems}
-          ref={c => this.rightItemsRef = c}
-        >
-          { this.props.rightItems }
-        </div>
-      );
-    }
-    return null;
-  }
-
-  render() {
+    });
     return (
       <div
-        style={this.styles().SecondaryNav}
+        style={style.SecondaryNav}
       >
-        {this.renderLeftItems()}
-        {this.renderRightItems()}
+        {this.renderLeftItems(style)}
+        {this.renderRightItems(style)}
       </div>
     );
   }

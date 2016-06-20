@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
 import { Map } from 'immutable';
 
-export default class ButtonGroup extends ReactCSS.Component {
-  displayName = 'ButtonGroup';
-
+export default class ButtonGroup extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     onClick: React.PropTypes.func,
@@ -22,6 +19,8 @@ export default class ButtonGroup extends ReactCSS.Component {
   static defaultProps = {
     onClick: () => {},
   };
+
+  displayName = 'ButtonGroup';
 
   handleClick(buttonKey) {
     this.props.onClick(buttonKey);

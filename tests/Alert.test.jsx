@@ -39,7 +39,7 @@ function testColor(messageType) {
   expect(color(alertNode.style.backgroundColor).hexString()).toBe(colorToTest);
 }
 
-describe('Alert Message', () => {
+fdescribe('Alert Message', () => {
   it('Does render an info Alert Message with description', () => {
     const description = 'An info message';
     const alertComponent = TestUtils.renderIntoDocument(

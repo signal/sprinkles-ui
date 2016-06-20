@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import color from 'color';
 import { Colors, TextColors } from '../shared/colors';
 import Text from './Text';
 
-export default class Alert extends ReactCSS.Component {
-  displayName = 'Alert';
-
+export default class Alert extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     details: React.PropTypes.string,
@@ -14,51 +12,7 @@ export default class Alert extends ReactCSS.Component {
     type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']).isRequired,
   };
 
-  classes() {
-    return {
-      default: {
-        Alert: {
-          padding: '10px 10px 0 10px',
-        },
-        AlertItem: {
-          paddingBottom: '10px',
-        },
-      },
-      success: {
-        Alert: {
-          backgroundColor: Colors.success,
-          border: `1px solid ${color(Colors.success).darken(0.1).hexString()}`,
-        },
-      },
-      info: {
-        Alert: {
-          backgroundColor: Colors.info,
-          border: `1px solid ${color(Colors.info).darken(0.1).hexString()}`,
-        },
-      },
-      warning: {
-        Alert: {
-          backgroundColor: Colors.warning,
-          border: `1px solid ${color(Colors.warning).darken(0.1).hexString()}`,
-        },
-      },
-      danger: {
-        Alert: {
-          backgroundColor: Colors.danger,
-          border: `1px solid ${color(Colors.danger).darken(0.1).hexString()}`,
-        },
-      },
-    };
-  }
-
-  styles() {
-    return this.css({
-      success: this.props.type === 'success',
-      info: this.props.type === 'info',
-      warning: this.props.type === 'warning',
-      danger: this.props.type === 'danger',
-    });
-  }
+  displayName = 'Alert';
 
   renderTitle() {
     if (this.props.title) {
@@ -94,10 +48,10 @@ export default class Alert extends ReactCSS.Component {
     return null;
   }
 
-  renderChildren() {
+  renderChildren(style) {
     if (this.props.children) {
       return (
-        <div style={this.styles().AlertItem}>
+        <div style={style.AlertItem}>
           {this.props.children}
         </div>
       );
@@ -106,13 +60,53 @@ export default class Alert extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        Alert: {
+          padding: '10px 10px 0 10px',
+        },
+        AlertItem: {
+          paddingBottom: '10px',
+        },
+      },
+      success: {
+        Alert: {
+          backgroundColor: Colors.success,
+          border: `1px solid ${color(Colors.success).darken(0.1).hexString()}`,
+        },
+      },
+      info: {
+        Alert: {
+          backgroundColor: Colors.info,
+          border: `1px solid ${color(Colors.info).darken(0.1).hexString()}`,
+        },
+      },
+      warning: {
+        Alert: {
+          backgroundColor: Colors.warning,
+          border: `1px solid ${color(Colors.warning).darken(0.1).hexString()}`,
+        },
+      },
+      danger: {
+        Alert: {
+          backgroundColor: Colors.danger,
+          border: `1px solid ${color(Colors.danger).darken(0.1).hexString()}`,
+        },
+      },
+    }, {
+      success: this.props.type === 'success',
+      info: this.props.type === 'info',
+      warning: this.props.type === 'warning',
+      danger: this.props.type === 'danger',
+    });
+
     return (
-      <div style={this.styles().Alert}>
-        <div style={this.styles().AlertItem}>
+      <div style={style.Alert}>
+        <div style={style.AlertItem}>
           {this.renderTitle()}
           {this.renderDetails()}
         </div>
-        {this.renderChildren()}
+        {this.renderChildren(style)}
       </div>
     );
   }

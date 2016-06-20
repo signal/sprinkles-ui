@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
 
-export default class VectorGraphic extends ReactCSS.Component {
-  displayName = 'VectorGraphic';
-
+export default class VectorGraphic extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     height: React.PropTypes.number,
@@ -14,6 +11,8 @@ export default class VectorGraphic extends ReactCSS.Component {
     height: 10,
     width: 10,
   };
+
+  displayName = 'VectorGraphic';
 
   render() {
     return (

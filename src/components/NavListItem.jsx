@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Text from './Text';
 import VectorGraphic from './VectorGraphic';
 import color from 'color';
@@ -9,9 +9,7 @@ import {
   TextColors,
  } from '../shared/colors';
 
-export default class NavListItem extends ReactCSS.Component {
-  displayName = 'NavListItem';
-
+export default class NavListItem extends React.Component {
   static propTypes = {
     expanded: React.PropTypes.bool,
     height: React.PropTypes.number,
@@ -20,6 +18,7 @@ export default class NavListItem extends ReactCSS.Component {
     selected: React.PropTypes.bool,
     text: React.PropTypes.string,
     width: React.PropTypes.number,
+    type: React.PropTypes.string,
   };
 
   static defaultProps = {
@@ -28,8 +27,25 @@ export default class NavListItem extends ReactCSS.Component {
     width: 20,
   };
 
-  classes() {
-    return {
+  displayName = 'NavListItem';
+
+  renderText(style) {
+    if (this.props.text && this.props.expanded) {
+      return (
+        <div style={style.TextWrapper}>
+          <Text
+            fontSize={1}
+          >
+            {this.props.text}
+          </Text>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  render() {
+    const style = reactCSS({
       default: {
         NavListItem: {
           padding: 10,
@@ -63,35 +79,13 @@ export default class NavListItem extends ReactCSS.Component {
           cursor: 'pointer',
         },
       },
-    };
-  }
-
-  styles() {
-    return this.css({
+    }, {
       hovered: !!this.props.hovered,
       selected: !!this.props.selected,
     });
-  }
-
-  renderText() {
-    if (this.props.text && this.props.expanded) {
-      return (
-        <div style={this.styles().TextWrapper}>
-          <Text
-            fontSize={1}
-          >
-            {this.props.text}
-          </Text>
-        </div>
-      );
-    }
-    return null;
-  }
-
-  render() {
     return (
-      <div style={this.styles().NavListItem}>
-        <div style={this.styles().Icon}>
+      <div style={style.NavListItem}>
+        <div style={style.Icon}>
           <VectorGraphic
             height={this.props.height}
             width={this.props.width}
@@ -99,7 +93,7 @@ export default class NavListItem extends ReactCSS.Component {
             {this.props.icon}
           </VectorGraphic>
         </div>
-        {this.renderText()}
+        {this.renderText(style)}
       </div>
     );
   }

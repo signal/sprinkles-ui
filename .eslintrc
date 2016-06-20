@@ -9,7 +9,8 @@
     "rules": {
       "no-return-assign": 0,
       "react/jsx-boolean-value": 0,
-      "react/jsx-no-bind": 0
+      "react/jsx-no-bind": 0,
+      "react/prefer-stateless-function": 0
     },
     "globals": {
       "before": true,

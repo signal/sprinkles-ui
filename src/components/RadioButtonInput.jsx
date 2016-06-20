@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Text from './Text';
 import { Colors, TextColors } from '../shared/colors';
 import color from 'color';
 
-export default class RadioButtonInput extends ReactCSS.Component {
-  displayName = 'RadioButtonInput';
-
+export default class RadioButtonInput extends React.Component {
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
@@ -25,6 +23,8 @@ export default class RadioButtonInput extends ReactCSS.Component {
     items: [],
     onChange: () => {},
   };
+
+  displayName = 'RadioButtonInput';
 
   constructor(props) {
     super();
@@ -53,36 +53,6 @@ export default class RadioButtonInput extends ReactCSS.Component {
     return this.state.value;
   }
 
-  classes() {
-    return {
-      default: {
-        RadioItems: {
-          cursor: 'pointer',
-        },
-        RadioItem: {
-          paddingBottom: 10,
-        },
-        Text: {
-          marginLeft: 10,
-        },
-      },
-      disabled: {
-        Input: {
-          cursor: 'not-allowed',
-        },
-        RadioItems: {
-          cursor: 'not-allowed',
-        },
-      },
-    };
-  }
-
-  styles() {
-    return this.css({
-      disabled: !this.props.enabled,
-    });
-  }
-
   handleClick(newValue) {
     if (this.props.enabled && newValue !== this.value()) {
       this.setState({
@@ -91,7 +61,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
     }
   }
 
-  renderItems() {
+  renderItems(style) {
     this.radioInputRefs = [];
     let textColor;
     switch (this.props.status) {
@@ -117,7 +87,7 @@ export default class RadioButtonInput extends ReactCSS.Component {
           key={i}
           onClick={this.handleClick.bind(this, item.value)}
           ref={(c) => this.radioInputRefs.push(c)}
-          style={i === this.props.items.length - 1 ? {} : this.styles().RadioItem}
+          style={i === this.props.items.length - 1 ? {} : style.RadioItem}
         >
           <input
             checked={item.value === this.value()}
@@ -125,11 +95,11 @@ export default class RadioButtonInput extends ReactCSS.Component {
             key={i}
             name={item.name}
             onChange={() => {}}
-            style={this.styles().Input}
+            style={style.Input}
             type={'radio'}
             value={item.value}
           />
-          <span style={this.styles().Text}>
+          <span style={style.Text}>
             <Text
               color={textColor}
               fontSize={1}
@@ -143,9 +113,32 @@ export default class RadioButtonInput extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        RadioItems: {
+          cursor: 'pointer',
+        },
+        RadioItem: {
+          paddingBottom: 10,
+        },
+        Text: {
+          marginLeft: 10,
+        },
+      },
+      disabled: {
+        Input: {
+          cursor: 'not-allowed',
+        },
+        RadioItems: {
+          cursor: 'not-allowed',
+        },
+      },
+    }, {
+      disabled: !this.props.enabled,
+    });
     return (
-        <div style={this.styles().RadioItems}>
-          {this.renderItems()}
+        <div style={style.RadioItems}>
+          {this.renderItems(style)}
         </div>
     );
   }

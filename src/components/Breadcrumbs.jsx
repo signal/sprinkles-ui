@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Text from './Text';
 import { TextColors } from '../shared/colors';
 import { Map } from 'immutable';
 
-export default class Breadcrumbs extends ReactCSS.Component {
-  displayName = 'Breadcrumbs';
+export default class Breadcrumbs extends React.Component {
   static propTypes = {
     path: React.PropTypes.arrayOf(
       React.PropTypes.shape({
@@ -21,23 +20,12 @@ export default class Breadcrumbs extends ReactCSS.Component {
     onClick: () => {},
   };
 
+  displayName = 'Breadcrumbs';
+
   constructor() {
     super();
     this.state = {
       isHovered: undefined,
-    };
-  }
-
-  classes() {
-    return {
-      default: {
-        Crumb: {
-          cursor: 'default',
-        },
-        ClickableCrumb: {
-          cursor: 'pointer',
-        },
-      },
     };
   }
 
@@ -57,7 +45,7 @@ export default class Breadcrumbs extends ReactCSS.Component {
     this.props.onClick(itemData);
   }
 
-  renderPath() {
+  renderPath(style) {
     this.pathRefs = new Map();
     return this.props.path.map((item, i) => {
       const isLast = i === this.props.path.length - 1;
@@ -79,7 +67,7 @@ export default class Breadcrumbs extends ReactCSS.Component {
           ref={c => {
             this.pathRefs = this.pathRefs.set(i, c);
           }}
-          style={!isLast ? this.styles().ClickableCrumb : this.styles().Crumb}
+          style={!isLast ? style.ClickableCrumb : style.Crumb}
         >
           <Text
             color={TextColors.primary}
@@ -95,9 +83,19 @@ export default class Breadcrumbs extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        Crumb: {
+          cursor: 'default',
+        },
+        ClickableCrumb: {
+          cursor: 'pointer',
+        },
+      },
+    });
     return (
       <div>
-        {this.renderPath()}
+        {this.renderPath(style)}
       </div>
     );
   }

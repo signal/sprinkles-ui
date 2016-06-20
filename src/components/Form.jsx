@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Button from './Button';
 import Alert from './Alert';
 import { Map } from 'immutable';
 
-export default class Form extends ReactCSS.Component {
-  displayName = 'Form';
-
+export default class Form extends React.Component {
   static propTypes = {
     alert: React.PropTypes.shape({
       type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']).required,
@@ -28,20 +26,12 @@ export default class Form extends ReactCSS.Component {
     working: false,
   };
 
+  displayName = 'Form';
+
   constructor() {
     super();
     this.state = {
       inputValidations: new Map(),
-    };
-  }
-
-  classes() {
-    return {
-      default: {
-        Field: {
-          margin: '0 0 1rem 0',
-        },
-      },
     };
   }
 
@@ -110,7 +100,7 @@ export default class Form extends ReactCSS.Component {
     }
   }
 
-  renderFields() {
+  renderFields(style) {
     this.inputRefs = new Map();
     return React.Children.map(this.props.children, (child) => {
       if (child) {
@@ -119,7 +109,7 @@ export default class Form extends ReactCSS.Component {
           onChange: this.handleChange.bind(this),
           status: inputValidation.get('valid') === false ? 'error' : undefined,
           error: inputValidation.get('validationError'),
-          style: this.styles().Field,
+          style: style.Field,
           ref: (inputRef) => {
             if (inputRef) {
               this.inputRefs = this.inputRefs.set(child.props.fieldKey, inputRef);
@@ -145,10 +135,17 @@ export default class Form extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        Field: {
+          margin: '0 0 1rem 0',
+        },
+      },
+    });
     return (
       <div>
         {this.renderAlert()}
-        {this.renderFields()}
+        {this.renderFields(style)}
         <Button
           onClick={this.handleClick.bind(this)}
           ref={c => this.submitButtonRef = c}

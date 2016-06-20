@@ -1,9 +1,7 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 
-export default class Text extends ReactCSS.Component {
-  displayName = 'Text';
-
+export default class Text extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     color: React.PropTypes.string,
@@ -12,8 +10,10 @@ export default class Text extends ReactCSS.Component {
     textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through']),
   };
 
-  classes() {
-    return {
+  displayName = 'Text';
+
+  render() {
+    const style = reactCSS({
       default: {
         Text: {
           fontSize: '1rem',
@@ -39,21 +39,14 @@ export default class Text extends ReactCSS.Component {
           textDecoration: this.props.textDecoration,
         },
       },
-    };
-  }
-
-  styles() {
-    return this.css({
+    }, {
       color: !!this.props.color,
       fontSize: !!this.props.fontSize,
       fontWeight: !!this.props.fontWeight,
       textDecoration: !!this.props.textDecoration,
     });
-  }
-
-  render() {
     return (
-        <span style={this.styles().Text}>
+        <span style={style.Text}>
           {this.props.children}
         </span>
     );

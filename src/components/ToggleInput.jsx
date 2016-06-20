@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import color from 'color';
 import {
   Colors,
@@ -7,9 +7,7 @@ import {
   StructuralColors,
 } from '../shared/colors';
 
-export default class ToggleInput extends ReactCSS.Component {
-  displayName = 'ToggleInput';
-
+export default class ToggleInput extends React.Component {
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.bool,
@@ -22,6 +20,8 @@ export default class ToggleInput extends ReactCSS.Component {
     initialValue: false,
     onChange: () => {},
   };
+
+  displayName = 'ToggleInput';
 
   constructor(props) {
     super();
@@ -42,8 +42,14 @@ export default class ToggleInput extends ReactCSS.Component {
     };
   }
 
-  classes() {
-    return {
+  handleClick() {
+    this.setState({
+      value: !this.state.value,
+    }, () => this.props.onChange(this.state.value));
+  }
+
+  render() {
+    const style = reactCSS({
       default: {
         ToggleInput: {
           border: `1px solid ${StructuralColors.inputBorder}`,
@@ -105,34 +111,21 @@ export default class ToggleInput extends ReactCSS.Component {
           border: '1px solid transparent',
         },
       },
-    };
-  }
-
-  styles() {
-    return this.css({
+    }, {
       disabled: !this.props.enabled,
       activated: this.state.value,
       success: this.props.status === 'success',
       warning: this.props.status === 'warning',
       error: this.props.status === 'error',
     });
-  }
-
-  handleClick() {
-    this.setState({
-      value: !this.state.value,
-    }, () => this.props.onChange(this.state.value));
-  }
-
-  render() {
     return (
       <div
         onClick={this.props.enabled ? this.handleClick.bind(this) : undefined}
-        style={this.styles().ToggleInput}
+        style={style.ToggleInput}
       >
         <div
           ref={(c) => this.switchRef = c}
-          style={this.styles().ToggleSwitch}
+          style={style.ToggleSwitch}
         />
       </div>
     );

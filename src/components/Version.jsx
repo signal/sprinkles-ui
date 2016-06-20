@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
 
-export default class Version extends ReactCSS.Component {
-  displayName = 'Version';
-
+export default class Version extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     tag: React.PropTypes.string,
@@ -11,6 +8,8 @@ export default class Version extends ReactCSS.Component {
     version: React.PropTypes.string,
     versionSelector: React.PropTypes.string,
   };
+
+  displayName = 'Version';
 
   constructor() {
     super();

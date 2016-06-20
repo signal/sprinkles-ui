@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Text from './Text';
 import List from './List';
 import ListItem from './ListItem';
@@ -11,9 +11,7 @@ import {
 } from '../shared/colors';
 import color from 'color';
 
-export default class PrimaryNav extends ReactCSS.Component {
-  displayName = 'PrimaryNav';
-
+export default class PrimaryNav extends React.Component {
   static propTypes = {
     appIcon: React.PropTypes.node,
     appName: React.PropTypes.string,
@@ -39,6 +37,15 @@ export default class PrimaryNav extends ReactCSS.Component {
     onNavItemClick: () => {},
   };
 
+  displayName = 'PrimaryNav';
+
+  constructor() {
+    super();
+    this.state = {
+      hovered: false,
+    };
+  }
+
   handleMouseOver() {
     this.setState({
       hovered: true,
@@ -51,15 +58,97 @@ export default class PrimaryNav extends ReactCSS.Component {
     });
   }
 
-  constructor() {
-    super();
-    this.state = {
-      hovered: false,
-    };
+  handleNavItemClick(item) {
+    this.props.onNavItemClick(item);
   }
 
-  classes() {
-    return {
+  renderBranding(style) {
+    return (
+      <div style={style.Branding}>
+        <div
+          ref={c => this.appIconRef = c}
+        >
+          {this.props.appIcon}
+        </div>
+        <div
+          style={style.AppName}
+        >
+          <Text
+            fontSize={1.2}
+            ref={c => this.appNameRef = c}
+            color={TextColors.light}
+          >
+            {this.props.appName}
+          </Text>
+        </div>
+      </div>
+    );
+  }
+
+  renderNavItems(style) {
+    return (
+      <div
+        style={style.NavItems}
+      >
+        <List
+          ref={c => this.listItemRef = c}
+          showBorder={false}
+        >
+          {this.renderNavItem()}
+        </List>
+      </div>
+    );
+  }
+
+  renderNavItem() {
+    return this.props.navItems.map((item, i) => (
+        <ListItem
+          key={i}
+          onClick={this.handleNavItemClick.bind(this, item.key)}
+          selected={this.props.selectedNavItem === item.key}
+        >
+          <NavListItem
+            expanded={this.props.expanded}
+            height={item.height}
+            icon={item.icon}
+            key={i}
+            text={item.label}
+            width={item.width}
+          />
+        </ListItem>
+      )
+    );
+  }
+
+  renderExpandToggle(style) {
+    return (
+      <div
+        onClick={this.props.onRequestExpandToggle}
+        ref={c => this.expandToggleRef = c}
+        style={style.ExpandToggleWrapper}
+        onMouseOut={this.handleMouseOut.bind(this)}
+        onMouseOver={this.handleMouseOver.bind(this)}
+      >
+        <div
+          style={style.ExpandToggle}
+        >
+          <VectorGraphic height={40} width={14}>
+            <polyline
+              fill={'none'}
+              stroke={TextColors.light}
+              strokeWidth={'2'}
+              strokeLinecap={'round'}
+              strokeLinejoin={'round'}
+              points={'10,14 2,20 10,26'}
+            />
+          </VectorGraphic>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const style = reactCSS({
       default: {
         PrimaryNav: {
           background: BackgroundColors.primaryNav,
@@ -98,111 +187,15 @@ export default class PrimaryNav extends ReactCSS.Component {
           background: color(BackgroundColors.primaryNav).darken(0.5).hexString(),
         },
       },
-    };
-  }
-
-  styles() {
-    return this.css({
+    }, {
       expanded: this.props.expanded,
       hovered: this.state.hovered,
     });
-  }
-
-  handleNavItemClick(item) {
-    this.props.onNavItemClick(item);
-  }
-
-  renderBranding() {
     return (
-      <div style={this.styles().Branding}>
-        <div
-          ref={c => this.appIconRef = c}
-        >
-          {this.props.appIcon}
-        </div>
-        <div
-          style={this.styles().AppName}
-        >
-          <Text
-            fontSize={1.2}
-            ref={c => this.appNameRef = c}
-            color={TextColors.light}
-          >
-            {this.props.appName}
-          </Text>
-        </div>
-      </div>
-    );
-  }
-
-  renderNavItems() {
-    return (
-      <div
-        style={this.styles().NavItems}
-      >
-        <List
-          ref={c => this.listItemRef = c}
-          showBorder={false}
-        >
-          {this.renderNavItem()}
-        </List>
-      </div>
-    );
-  }
-
-  renderNavItem() {
-    return this.props.navItems.map((item, i) => (
-        <ListItem
-          key={i}
-          onClick={this.handleNavItemClick.bind(this, item.key)}
-          selected={this.props.selectedNavItem === item.key}
-        >
-          <NavListItem
-            expanded={this.props.expanded}
-            height={item.height}
-            icon={item.icon}
-            key={i}
-            text={item.label}
-            width={item.width}
-          />
-        </ListItem>
-      )
-    );
-  }
-
-  renderExpandToggle() {
-    return (
-      <div
-        onClick={this.props.onRequestExpandToggle}
-        ref={c => this.expandToggleRef = c}
-        style={this.styles().ExpandToggleWrapper}
-        onMouseOut={this.handleMouseOut.bind(this)}
-        onMouseOver={this.handleMouseOver.bind(this)}
-      >
-        <div
-          style={this.styles().ExpandToggle}
-        >
-          <VectorGraphic height={40} width={14}>
-            <polyline
-              fill={'none'}
-              stroke={TextColors.light}
-              strokeWidth={'2'}
-              strokeLinecap={'round'}
-              strokeLinejoin={'round'}
-              points={'10,14 2,20 10,26'}
-            />
-          </VectorGraphic>
-        </div>
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div style={this.styles().PrimaryNav}>
-        {this.renderBranding()}
-        {this.renderNavItems()}
-        {this.renderExpandToggle()}
+      <div style={style.PrimaryNav}>
+        {this.renderBranding(style)}
+        {this.renderNavItems(style)}
+        {this.renderExpandToggle(style)}
       </div>
     );
   }

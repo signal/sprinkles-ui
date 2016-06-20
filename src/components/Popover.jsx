@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import zindex from '../shared/zindex';
 
-export default class Popover extends ReactCSS.Component {
-  displayName = 'Popover';
-
+export default class Popover extends React.Component {
   static propTypes = {
     anchorEl: React.PropTypes.object,
     anchorOrigin: React.PropTypes.shape({
@@ -27,6 +25,8 @@ export default class Popover extends ReactCSS.Component {
     },
   };
 
+  displayName = 'Popover';
+
   constructor() {
     super();
     this.state = {
@@ -34,40 +34,14 @@ export default class Popover extends ReactCSS.Component {
     };
   }
 
-  classes() {
-    return {
-      default: {
-        Popover: {
-          zIndex: zindex.Popover,
-          display: 'none',
-          position: 'fixed',
-        },
-        CloseLayer: {
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: zindex.PopoverClose,
-        },
-      },
-      open: {
-        Popover: {
-          display: 'block',
-        },
-      },
-      anchored: {
-        Popover: this.state.position,
-      },
-    };
+  componentWillMount() {
+    this.updatePosition(this.props.anchorEl, this.props.anchorOrigin);
   }
 
-  calculatePosition(anchor, anchorOrigin) {
-    return {
-      top: this.getAnchorValue(anchor, anchorOrigin.vertical),
-      left: this.getAnchorValue(anchor, anchorOrigin.horizontal),
-      width: this.props.constrainWidth ? anchor.width : undefined,
-    };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.anchorEl && nextProps.anchorOrigin) {
+      this.updatePosition(nextProps.anchorEl, nextProps.anchorOrigin);
+    }
   }
 
   getAnchorValue(anchor, key) {
@@ -91,21 +65,12 @@ export default class Popover extends ReactCSS.Component {
     return anchorValue;
   }
 
-  styles() {
-    return this.css({
-      open: this.props.open,
-      anchored: !!this.props.anchorEl,
-    });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.anchorEl && nextProps.anchorOrigin) {
-      this.updatePosition(nextProps.anchorEl, nextProps.anchorOrigin);
-    }
-  }
-
-  componentWillMount() {
-    this.updatePosition(this.props.anchorEl, this.props.anchorOrigin);
+  calculatePosition(anchor, anchorOrigin) {
+    return {
+      top: this.getAnchorValue(anchor, anchorOrigin.vertical),
+      left: this.getAnchorValue(anchor, anchorOrigin.horizontal),
+      width: this.props.constrainWidth ? anchor.width : undefined,
+    };
   }
 
   updatePosition(anchorEl, anchorOrigin) {
@@ -117,11 +82,11 @@ export default class Popover extends ReactCSS.Component {
     }
   }
 
-  renderCloseLayer() {
+  renderCloseLayer(style) {
     if (this.props.useLayerForClickAway) {
       return (
         <div
-          style={this.styles().CloseLayer}
+          style={style.CloseLayer}
           onClick={this.props.onRequestClose}
           ref={c => this.closeLayerRef = c}
         />
@@ -131,12 +96,40 @@ export default class Popover extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        Popover: {
+          zIndex: zindex.Popover,
+          display: 'none',
+          position: 'fixed',
+        },
+        CloseLayer: {
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: zindex.PopoverClose,
+        },
+      },
+      open: {
+        Popover: {
+          display: 'block',
+        },
+      },
+      anchored: {
+        Popover: this.state.position,
+      },
+    }, {
+      open: this.props.open,
+      anchored: !!this.props.anchorEl,
+    });
     return (
-        <div style={this.styles().Popover}>
-          <div style={this.styles().Popover}>
+        <div style={style.Popover}>
+          <div style={style.Popover}>
             {this.props.children}
           </div>
-          {this.renderCloseLayer()}
+          {this.renderCloseLayer(style)}
         </div>
     );
   }

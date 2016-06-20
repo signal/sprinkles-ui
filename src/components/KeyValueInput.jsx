@@ -1,14 +1,12 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Text from './Text';
 import TextInput from './TextInput';
 import Button from './Button';
 import { TextColors, Colors } from '../shared/colors';
 import Immutable, { Map, fromJS } from 'immutable';
 
-export default class KeyValueInput extends ReactCSS.Component {
-  displayName = 'KeyValueInput';
-
+export default class KeyValueInput extends React.Component {
   static propTypes = {
     addButtonText: React.PropTypes.string,
     enabled: React.PropTypes.bool,
@@ -38,30 +36,12 @@ export default class KeyValueInput extends ReactCSS.Component {
     valueLabel: 'Value',
   };
 
+  displayName = 'KeyValueInput';
+
   constructor(props) {
     super();
     this.state = {
       value: fromJS(props.initialValue),
-    };
-  }
-
-  classes() {
-    return {
-      default: {
-        KeyValuePair: {
-          display: 'flex',
-          marginBottom: 15,
-        },
-        TextInput: {
-          flex: '4',
-          marginRight: 15,
-        },
-        DeleteButton: {
-          flex: '1',
-          minWidth: 50,
-          alignSelf: 'center',
-        },
-      },
     };
   }
 
@@ -144,7 +124,7 @@ export default class KeyValueInput extends ReactCSS.Component {
     }, () => this.props.onChange(this.value()));
   }
 
-  renderKeyValueLabels() {
+  renderKeyValueLabels(style) {
     let textColor;
     switch (this.props.status) {
       case 'success':
@@ -159,8 +139,8 @@ export default class KeyValueInput extends ReactCSS.Component {
         break;
     }
     return (
-      <div style={this.styles().KeyValuePair}>
-        <span style={this.styles().TextInput}>
+      <div style={style.KeyValuePair}>
+        <span style={style.TextInput}>
           <Text
             color={textColor}
             fontSize={0.8}
@@ -169,7 +149,7 @@ export default class KeyValueInput extends ReactCSS.Component {
             {this.props.keyLabel}
           </Text>
         </span>
-        <span style={this.styles().TextInput}>
+        <span style={style.TextInput}>
           <Text
             color={textColor}
             fontSize={0.8}
@@ -178,12 +158,12 @@ export default class KeyValueInput extends ReactCSS.Component {
             {this.props.valueLabel}
           </Text>
         </span>
-        <span style={this.styles().DeleteButton} />
+        <span style={style.DeleteButton} />
       </div>
     );
   }
 
-  renderKeyValuePairs() {
+  renderKeyValuePairs(style) {
     const duplicateKeys = this.duplicateKeys();
     return this.state.value.map((item, i) => {
       const inputStatus = {};
@@ -215,9 +195,9 @@ export default class KeyValueInput extends ReactCSS.Component {
       return (
         <div
           key={i}
-          style={this.styles().KeyValuePair}
+          style={style.KeyValuePair}
         >
-          <span style={this.styles().TextInput}>
+          <span style={style.TextInput}>
             <TextInput
               boundValue={item.get('key')}
               enabled={this.props.enabled}
@@ -226,7 +206,7 @@ export default class KeyValueInput extends ReactCSS.Component {
               status={inputStatus.key}
             />
           </span>
-          <span style={this.styles().TextInput}>
+          <span style={style.TextInput}>
             <TextInput
               boundValue={item.get('value')}
               enabled={this.props.enabled}
@@ -235,7 +215,7 @@ export default class KeyValueInput extends ReactCSS.Component {
               status={inputStatus.value}
             />
           </span>
-          <span style={this.styles().DeleteButton}>
+          <span style={style.DeleteButton}>
               {deleteButton}
           </span>
         </div>
@@ -244,10 +224,27 @@ export default class KeyValueInput extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        KeyValuePair: {
+          display: 'flex',
+          marginBottom: 15,
+        },
+        TextInput: {
+          flex: '4',
+          marginRight: 15,
+        },
+        DeleteButton: {
+          flex: '1',
+          minWidth: 50,
+          alignSelf: 'center',
+        },
+      },
+    });
     return (
       <div>
-        {this.renderKeyValueLabels()}
-        {this.renderKeyValuePairs()}
+        {this.renderKeyValueLabels(style)}
+        {this.renderKeyValuePairs(style)}
         <Button
           enabled={this.props.enabled}
           onClick={this.handleAddClick.bind(this)}

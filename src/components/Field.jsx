@@ -1,12 +1,10 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Text from './Text';
 import { Colors, TextColors } from '../shared/colors';
 
 
-export default class Field extends ReactCSS.Component {
-  displayName = 'Field';
-
+export default class Field extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
@@ -27,33 +25,7 @@ export default class Field extends ReactCSS.Component {
     style: {},
   };
 
-  classes() {
-    return {
-      default: {
-        Label: {
-          color: TextColors.primary,
-        },
-        Error: {
-        },
-      },
-      haveLabel: {
-        Label: {
-        },
-      },
-      disabled: {
-        Label: {
-          color: TextColors.secondary,
-        },
-      },
-    };
-  }
-
-  styles() {
-    return this.css({
-      disabled: !this.props.enabled,
-      haveLabel: !!this.props.label || this.props.required,
-    });
-  }
+  displayName = 'Field';
 
   handleChange(change) {
     this.props.onChange(change, this);
@@ -112,10 +84,10 @@ export default class Field extends ReactCSS.Component {
     return null;
   }
 
-  renderError() {
+  renderError(style) {
     if (this.props.error) {
       return (
-        <div style={this.styles().Error}>
+        <div style={style.Error}>
           <Text
             color={Colors.danger}
             fontSize={0.875}
@@ -148,13 +120,34 @@ export default class Field extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        Label: {
+          color: TextColors.primary,
+        },
+        Error: {
+        },
+      },
+      haveLabel: {
+        Label: {
+        },
+      },
+      disabled: {
+        Label: {
+          color: TextColors.secondary,
+        },
+      },
+    }, {
+      disabled: !this.props.enabled,
+      haveLabel: !!this.props.label || this.props.required,
+    });
     return (
       <div style={this.props.style}>
-        <div style={this.styles().Label}>
+        <div style={style.Label}>
           {this.renderLabel()}{this.renderRequired()}
         </div>
         {this.renderInput()}
-        {this.renderError()}
+        {this.renderError(style)}
       </div>
     );
   }

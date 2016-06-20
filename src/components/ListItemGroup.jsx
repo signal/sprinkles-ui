@@ -1,11 +1,9 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import { Map } from 'immutable';
 import Text from './Text';
 
-export default class ListItemGroup extends ReactCSS.Component {
-  displayName = 'ListItemGroup';
-
+export default class ListItemGroup extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     label: React.PropTypes.string,
@@ -15,15 +13,7 @@ export default class ListItemGroup extends ReactCSS.Component {
     label: 'Group',
   }
 
-  classes() {
-    return {
-      default: {
-        Label: {
-          padding: 10,
-        },
-      },
-    };
-  }
+  displayName = 'ListItemGroup';
 
   renderChildren() {
     this.listItemRefs = new Map();
@@ -56,10 +46,17 @@ export default class ListItemGroup extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        Label: {
+          padding: 10,
+        },
+      },
+    });
     return (
       <div>
         <div
-          style={this.styles().Label}
+          style={style.Label}
         >
           <Text
             ref={(child) => this.labelRef = child}

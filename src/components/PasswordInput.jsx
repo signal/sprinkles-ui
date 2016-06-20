@@ -16,7 +16,7 @@ export default class PasswordInput extends TextInput {
         onBlur={this.handleBlur.bind(this)}
         onFocus={this.handleFocus.bind(this)}
         placeholder={this.props.placeholder}
-        style={this.styles().TextInput}
+        style={this.style().TextInput}
         type={'password'}
         valueLink={this.linkState()}
       />

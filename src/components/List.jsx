@@ -1,11 +1,9 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import { Map } from 'immutable';
 import { StructuralColors } from '../shared/colors';
 
-export default class List extends ReactCSS.Component {
-  static displayName = 'List';
-
+export default class List extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     showBorder: React.PropTypes.bool,
@@ -15,21 +13,7 @@ export default class List extends ReactCSS.Component {
     showBorder: true,
   };
 
-  classes() {
-    return {
-      border: {
-        List: {
-          border: `1px solid ${StructuralColors.divider}`,
-        },
-      },
-    };
-  }
-
-  styles() {
-    return this.css({
-      border: this.props.showBorder,
-    });
-  }
+  displayName = 'List';
 
   renderChildren() {
     this.listItemRefs = new Map();
@@ -62,8 +46,17 @@ export default class List extends ReactCSS.Component {
   }
 
   render() {
+    const style = reactCSS({
+      border: {
+        List: {
+          border: `1px solid ${StructuralColors.divider}`,
+        },
+      },
+    }, {
+      border: this.props.showBorder,
+    });
     return (
-      <div style={this.styles().List}>
+      <div style={style.List}>
         {this.renderChildren()}
       </div>
     );

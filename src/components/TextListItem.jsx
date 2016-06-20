@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactCSS from 'reactcss';
+import reactCSS from 'reactcss';
 import Text from './Text';
 import {
   Colors,
@@ -8,9 +8,7 @@ import {
   StructuralColors,
  } from '../shared/colors';
 
-export default class TextListItem extends ReactCSS.Component {
-  displayName = 'TextListItem';
-
+export default class TextListItem extends React.Component {
   static propTypes = {
     enabled: React.PropTypes.bool,
     hovered: React.PropTypes.bool,
@@ -24,8 +22,10 @@ export default class TextListItem extends ReactCSS.Component {
     enabled: true,
   };
 
-  classes() {
-    return {
+  displayName = 'TextListItem';
+
+  render() {
+    const style = reactCSS({
       default: {
         Text: {
           padding: 10,
@@ -63,24 +63,17 @@ export default class TextListItem extends ReactCSS.Component {
           background: BackgroundColors.secondary,
         },
       },
-    };
-  }
-
-  styles() {
-    return this.css({
+    }, {
       hovered: !!this.props.hovered,
       selected: !!this.props.selected,
       first: this.props.listPosition === 'first',
       middle: this.props.listPosition === 'middle',
       disabled: !this.props.enabled,
     });
-  }
-
-  render() {
     return (
       <div
         onClick={this.props.onClick}
-        style={this.styles().Text}
+        style={style.Text}
       >
         <Text
           fontSize={1}
