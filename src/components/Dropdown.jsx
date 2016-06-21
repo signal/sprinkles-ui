@@ -60,14 +60,12 @@ export default class Dropdown extends React.Component {
       return null;
     }
     return this.props.items.map((item, i) =>
-      (
-        <ListItem
-          key={i}
-          onClick={this.handleClick.bind(this, item)}
-        >
-          <TextListItem text={item.value} />
-        </ListItem>
-      )
+      <ListItem
+        key={i}
+        onClick={this.handleClick.bind(this, item)}
+      >
+        <TextListItem text={item.value} />
+      </ListItem>
     );
   }
 

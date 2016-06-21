@@ -12,7 +12,7 @@ const Panel = require('../src/components/Panel').default;
 describe('Panel', () => {
   it('Does render a Panel with default props', () => {
     const panelComponent = TestUtils.renderIntoDocument(
-        <Panel />
+      <Panel />
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(color(panelNode.style.backgroundColor).hexString()).toBe('#FEFEFE');
@@ -24,7 +24,7 @@ describe('Panel', () => {
 
   it('Does render a Panel with rounded corners', () => {
     const panelComponent = TestUtils.renderIntoDocument(
-        <Panel borderRadius={2} />
+      <Panel borderRadius={2} />
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.borderRadius).toBe('2px');
@@ -32,7 +32,7 @@ describe('Panel', () => {
 
   it('Does render a Panel with box shadows', () => {
     const panelComponent = TestUtils.renderIntoDocument(
-        <Panel boxShadowStrength={2} />
+      <Panel boxShadowStrength={2} />
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.boxShadow).not.toBeUndefined();
@@ -40,7 +40,7 @@ describe('Panel', () => {
 
   it('Does render a Panel with text color', () => {
     const panelComponent = TestUtils.renderIntoDocument(
-        <Panel color={'#999999'} />
+      <Panel color={'#999999'} />
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(color(panelNode.style.color).hexString()).toBe('#999999');
@@ -48,7 +48,7 @@ describe('Panel', () => {
 
   it('Does render a Panel with custom padding', () => {
     const panelComponent = TestUtils.renderIntoDocument(
-        <Panel padding={'10px 5px 20px 3px'} />
+      <Panel padding={'10px 5px 20px 3px'} />
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.padding).toBe('10px 5px 20px 3px');
@@ -56,7 +56,7 @@ describe('Panel', () => {
 
   it('Does render a Panel with children', () => {
     const panelComponent = TestUtils.renderIntoDocument(
-        <Panel children={ <div>{'Hello'}</div> } />
+      <Panel children={<div>{'Hello'}</div>} />
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.children).not.toBeUndefined();

@@ -22,7 +22,7 @@ describe('Form', () => {
   it('Does render a Form', () => {
     // Render a Form
     const formComponent = TestUtils.renderIntoDocument(
-        <Form />
+      <Form />
     );
 
     const formNode = ReactDOM.findDOMNode(formComponent);
@@ -66,7 +66,7 @@ describe('Form', () => {
 
   it('Does set a valid state inputs are valid', () => {
     const formComponent = TestUtils.renderIntoDocument(
-        <Form />
+      <Form />
     );
     const fakeInput = {
       props: {
@@ -96,7 +96,7 @@ describe('Form', () => {
   it('Does set an invalid state when inputs are invalid', () => {
     const validationError = 'some validation error';
     const formComponent = TestUtils.renderIntoDocument(
-        <Form />
+      <Form />
     );
     const fakeInput = {
       props: {
@@ -126,7 +126,7 @@ describe('Form', () => {
   it('Does not set form invalid when Field is not required ', () => {
     const validationError = 'some validation error';
     const formComponent = TestUtils.renderIntoDocument(
-        <Form />
+      <Form />
     );
     const fakeInput = {
       props: {
@@ -326,7 +326,7 @@ describe('Form', () => {
 
   it('Does skip rendering empty fields', () => {
     const formComponent = TestUtils.renderIntoDocument(
-    <Form>
+      <Form>
         <Field
           fieldKey={'a'}
         >

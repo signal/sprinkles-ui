@@ -28,7 +28,7 @@ describe('Popover', () => {
     const text = 'howdy';
     // Render a Popover
     const popoverComponent = TestUtils.renderIntoDocument(
-        <Popover open={true}>{text}</Popover>
+      <Popover open={true}>{text}</Popover>
     );
     // grab the DOM node so we can inspect it
     const popoverNode = ReactDOM.findDOMNode(popoverComponent);

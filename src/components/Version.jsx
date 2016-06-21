@@ -82,7 +82,7 @@ export default class Version extends React.Component {
   render() {
     if (this.showVersion()) {
       return (
-          <span>{this.props.children}</span>
+        <span>{this.props.children}</span>
       );
     }
     return null;

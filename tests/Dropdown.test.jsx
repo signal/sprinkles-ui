@@ -27,7 +27,7 @@ describe('Dropdown', () => {
 
   it('Does render a Dropdown', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
-        <Dropdown />
+      <Dropdown />
     );
     expect(dropdownComponent).toBeDefined();
   });

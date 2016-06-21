@@ -20,7 +20,7 @@ describe('Panel', function () {
         padding={props.padding}
         text={props.text}
       >
-        { props.children }
+        {props.children}
       </Panel>
     ).width('100%');
   };

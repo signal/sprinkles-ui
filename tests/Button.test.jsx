@@ -17,7 +17,7 @@ describe('Button', () => {
     const text = 'Submit';
     // Render a Button
     const buttonComponent = TestUtils.renderIntoDocument(
-        <Button />
+      <Button />
     );
     // grab the DOM node so we can inspect it
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
@@ -26,7 +26,7 @@ describe('Button', () => {
 
   it('Does disable Button when working is true', () => {
     const buttonComponent = TestUtils.renderIntoDocument(
-        <Button working={true} />
+      <Button working={true} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(true);
@@ -34,7 +34,7 @@ describe('Button', () => {
 
   it('Does not disable Button when working is false', () => {
     const buttonComponent = TestUtils.renderIntoDocument(
-        <Button working={false} />
+      <Button working={false} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(false);
@@ -42,7 +42,7 @@ describe('Button', () => {
 
   it('Does not disable Button when enabled is true', () => {
     const buttonComponent = TestUtils.renderIntoDocument(
-        <Button enabled={true} />
+      <Button enabled={true} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(false);
@@ -50,7 +50,7 @@ describe('Button', () => {
 
   it('Does disable Button when enabled is false', () => {
     const buttonComponent = TestUtils.renderIntoDocument(
-        <Button enabled={false} />
+      <Button enabled={false} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(true);

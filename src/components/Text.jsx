@@ -46,9 +46,9 @@ export default class Text extends React.Component {
       textDecoration: !!this.props.textDecoration,
     });
     return (
-        <span style={style.Text}>
-          {this.props.children}
-        </span>
+      <span style={style.Text}>
+        {this.props.children}
+      </span>
     );
   }
 }

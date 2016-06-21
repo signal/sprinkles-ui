@@ -1,3 +1,4 @@
+/* eslint global-require: "off" */
 /*
   The index of specs.
 

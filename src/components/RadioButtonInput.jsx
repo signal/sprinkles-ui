@@ -83,31 +83,31 @@ export default class RadioButtonInput extends React.Component {
       textColor = color(textColor).lighten(factor).hexString();
     }
     return this.props.items.map((item, i) => (
-        <div
+      <div
+        key={i}
+        onClick={this.handleClick.bind(this, item.value)}
+        ref={(c) => this.radioInputRefs.push(c)}
+        style={i === this.props.items.length - 1 ? {} : style.RadioItem}
+      >
+        <input
+          checked={item.value === this.value()}
+          disabled={!this.props.enabled}
           key={i}
-          onClick={this.handleClick.bind(this, item.value)}
-          ref={(c) => this.radioInputRefs.push(c)}
-          style={i === this.props.items.length - 1 ? {} : style.RadioItem}
-        >
-          <input
-            checked={item.value === this.value()}
-            disabled={!this.props.enabled}
-            key={i}
-            name={item.name}
-            onChange={() => {}}
-            style={style.Input}
-            type={'radio'}
-            value={item.value}
-          />
-          <span style={style.Text}>
-            <Text
-              color={textColor}
-              fontSize={1}
-            >
-              {item.name}
-            </Text>
-          </span>
-        </div>
+          name={item.name}
+          onChange={() => {}}
+          style={style.Input}
+          type={'radio'}
+          value={item.value}
+        />
+        <span style={style.Text}>
+          <Text
+            color={textColor}
+            fontSize={1}
+          >
+            {item.name}
+          </Text>
+        </span>
+      </div>
       )
     );
   }
@@ -137,9 +137,9 @@ export default class RadioButtonInput extends React.Component {
       disabled: !this.props.enabled,
     });
     return (
-        <div style={style.RadioItems}>
-          {this.renderItems(style)}
-        </div>
+      <div style={style.RadioItems}>
+        {this.renderItems(style)}
+      </div>
     );
   }
 }

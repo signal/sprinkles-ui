@@ -48,7 +48,7 @@ describe('Field', () => {
         label={text}
         status={'error'}
       >
-          <TextInput />
+        <TextInput />
       </Field>
     );
     // grab the label and input DOM nodes so we can inspect them

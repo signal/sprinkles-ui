@@ -14,7 +14,7 @@ describe('Text', function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Text>{loremIpsum()}</Text>
+      <Text>{loremIpsum()}</Text>
     );
   });
 

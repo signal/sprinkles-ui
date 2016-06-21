@@ -17,22 +17,22 @@ describe('Colors', function () {
 
   before(() => {
     const renderColor = (color) =>
-      (
-        <div style={{
+      <div
+        style={{
           backgroundColor: color,
           flex: 1,
           height: 120,
           width: 120,
           marginRight: 10,
         }}
-        />
-      );
+      />;
     const renderLabel = (label) =>
-      <div style={{
-        flex: 1,
-        width: 120,
-        marginRight: 10,
-      }}
+      <div
+        style={{
+          flex: 1,
+          width: 120,
+          marginRight: 10,
+        }}
       >
         <Text>{label}</Text>
       </div>;

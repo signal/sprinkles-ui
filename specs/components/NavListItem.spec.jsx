@@ -13,17 +13,17 @@ describe('NavListItem', function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <NavListItem
-          icon={
-            <circle
-              cx={'6'}
-              cy={'6'}
-              fill={'red'}
-              r={'6'}
-            ></circle>
-          }
-          text={loremIpsum()}
-        />
+      <NavListItem
+        icon={
+          <circle
+            cx={'6'}
+            cy={'6'}
+            fill={'red'}
+            r={'6'}
+          ></circle>
+        }
+        text={loremIpsum()}
+      />
     );
   });
 

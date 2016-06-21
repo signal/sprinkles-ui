@@ -21,10 +21,11 @@ describe('Table', function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <Table tableData={
-            this.tableData
-          }
-        />
+      <Table
+        tableData={
+          this.tableData
+        }
+      />
     );
   });
 

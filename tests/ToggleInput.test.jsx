@@ -112,7 +112,10 @@ describe('ToggleInput', () => {
     expect(color(toggleInputNode.style.background).hexString())
       .toBe(color(Colors.success).lighten(0.4).hexString());
     expect(toggleInputNode.style.border)
-      .toBe(`1px solid ${color(Colors.success).lighten(0.4).hexString().toLowerCase()}`);
+      .toBe(`1px solid ${color(Colors.success)
+        .lighten(0.4)
+        .hexString()
+        .toLowerCase()}`);
     const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
     expect(color(switchNode.style.background).hexString())
       .toBe(BackgroundColors.secondary);

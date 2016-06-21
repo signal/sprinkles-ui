@@ -106,7 +106,7 @@ describe('TextInput', () => {
 
   it('Does return invalid state with empty TextInput', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
-        <TextInput />
+      <TextInput />
     );
     expect(textInputComponent.validate()).toEqual({
       valid: false,
@@ -117,7 +117,7 @@ describe('TextInput', () => {
 
   it('Does return valid state when TextInput has a value', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
-        <TextInput initialValue={'a'} />
+      <TextInput initialValue={'a'} />
     );
     expect(textInputComponent.validate()).toEqual({
       valid: true,
@@ -128,7 +128,7 @@ describe('TextInput', () => {
 
   it('Does return valid state and not initial state when input changes', () => {
     const textInputComponent = TestUtils.renderIntoDocument(
-        <TextInput />
+      <TextInput />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
     expect(textInputComponent.validate()).toEqual({

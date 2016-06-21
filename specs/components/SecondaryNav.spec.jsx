@@ -21,25 +21,23 @@ describe('SecondaryNav', function () {
       <SecondaryNav
         leftItems={
           leftItems.map((item, i) =>
-            (
-              <div
-                key={i}
-                style={itemStyle}
-              >
-                {item}
-              </div>
-          ))
+            <div
+              key={i}
+              style={itemStyle}
+            >
+              {item}
+            </div>
+          )
         }
         rightItems={
           rightItems.map((item, i) =>
-            (
-              <div
-                key={i}
-                style={itemStyle}
-              >
-                {item}
-              </div>
-          ))
+            <div
+              key={i}
+              style={itemStyle}
+            >
+              {item}
+            </div>
+          )
         }
       />
     ).width('100%').height(60);

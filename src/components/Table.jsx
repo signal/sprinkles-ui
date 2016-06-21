@@ -16,7 +16,7 @@ export default class Table extends React.Component {
   renderHeaderItem(style) {
     return this.props.tableData.headers.map((item, i) => (
       <th style={style.TheadItems} key={i}>
-        { item }
+        {item}
       </th>
       )
     );
@@ -24,7 +24,7 @@ export default class Table extends React.Component {
 
   renderHeaderItems(style) {
     return (<tr style={style.Thead}>
-      { this.renderHeaderItem(style) }
+      {this.renderHeaderItem(style)}
     </tr>
     );
   }
@@ -32,7 +32,7 @@ export default class Table extends React.Component {
   renderItems(style, item, i) {
     return (
       <td style={style.TBodyItems} key={i}>
-      { item }
+      {item}
       </td>
     );
   }
@@ -40,7 +40,7 @@ export default class Table extends React.Component {
   renderRow(style, row, i) {
     return (
       <tr key={i}>
-        { row.map((item, ri) => this.renderItems(style, item, ri)) }
+        {row.map((item, ri) => this.renderItems(style, item, ri))}
       </tr>
     );
   }
@@ -75,10 +75,10 @@ export default class Table extends React.Component {
     return (
       <table style={style.Table}>
         <thead>
-          { this.renderHeaderItems(style) }
+          {this.renderHeaderItems(style)}
         </thead>
         <tbody>
-          { this.renderRows(style) }
+          {this.renderRows(style)}
         </tbody>
       </table>
     );

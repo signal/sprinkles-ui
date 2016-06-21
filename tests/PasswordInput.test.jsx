@@ -12,7 +12,7 @@ const PasswordInput = require('../src/components/PasswordInput').default;
 describe('PasswordInput', () => {
   it('Does render a PasswordInput', () => {
     const passwordInputComponent = TestUtils.renderIntoDocument(
-        <PasswordInput />
+      <PasswordInput />
     );
     const passwordInputNode = ReactDOM.findDOMNode(passwordInputComponent);
     expect(passwordInputNode.getAttribute('type')).toBe('password');

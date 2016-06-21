@@ -37,9 +37,10 @@ describe('Primary Navigation Bar', () => {
 
   it('does render a PrimaryNav app icon', () => {
     const primaryNavComponent = TestUtils.renderIntoDocument(
-      <PrimaryNav appIcon={
+      <PrimaryNav
+        appIcon={
           <div></div>
-      }
+        }
       />
     );
     expect(primaryNavComponent.appIconRef).toBeDefined();

@@ -16,11 +16,11 @@ describe('ListItem', function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
-        <ListItem onClick={() => console.log('ListItem clicked')}>
-            <TextListItem
-              text={loremIpsum()}
-            />
-        </ListItem>
+      <ListItem onClick={() => console.log('ListItem clicked')}>
+        <TextListItem
+          text={loremIpsum()}
+        />
+      </ListItem>
     );
   });
 

@@ -61,11 +61,11 @@ describe('ListItem', () => {
 
   it('Does render first TextListItem', () => {
     const listItemComponent = TestUtils.renderIntoDocument(
-        <ListItem
-          listPosition={'first'}
-        >
-          <TextListItem />
-        </ListItem>
+      <ListItem
+        listPosition={'first'}
+      >
+        <TextListItem />
+      </ListItem>
     );
     const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
     expect(textListItemNode.style.borderBottom)
@@ -74,11 +74,11 @@ describe('ListItem', () => {
 
   it('Does render middle ListItem', () => {
     const listItemComponent = TestUtils.renderIntoDocument(
-        <ListItem
-          listPosition={'middle'}
-        >
-          <TextListItem />
-        </ListItem>
+      <ListItem
+        listPosition={'middle'}
+      >
+        <TextListItem />
+      </ListItem>
     );
     const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
     expect(textListItemNode.style.borderBottom)
@@ -87,11 +87,11 @@ describe('ListItem', () => {
 
   it('Does render last ListItem', () => {
     const listItemComponent = TestUtils.renderIntoDocument(
-        <ListItem
-          listPosition={'last'}
-        >
-          <TextListItem />
-        </ListItem>
+      <ListItem
+        listPosition={'last'}
+      >
+        <TextListItem />
+      </ListItem>
     );
     const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
     expect(textListItemNode.style.borderBottom).toBe('');

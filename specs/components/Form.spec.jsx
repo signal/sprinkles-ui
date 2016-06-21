@@ -93,30 +93,30 @@ describe('Form', function () {
     title: 'Please reset your password using the following criteria:',
     children:
       <div>
-          <div
-            style={{
-              padding: '10px 0 5px 0',
-            }}
+        <div
+          style={{
+            padding: '10px 0 5px 0',
+          }}
+        >
+          <Text
+            color={'white'}
+            fontSize={0.8}
           >
-              <Text
-                color={'white'}
-                fontSize={0.8}
-              >
-                {'◼︎ At least 1 special character (e.g. ][?/<~!$#%)'}
-              </Text>
-          </div>
-          <div
-            style={{
-              padding: '10px 0 5px 0',
-            }}
+            {'◼︎ At least 1 special character (e.g. ][?/<~!$#%)'}
+          </Text>
+        </div>
+        <div
+          style={{
+            padding: '10px 0 5px 0',
+          }}
+        >
+          <Text
+            color={'white'}
+            fontSize={0.8}
           >
-            <Text
-              color={'white'}
-              fontSize={0.8}
-            >
-                {'◼︎ At least 1 numeric character'}
-            </Text>
-          </div>
+              {'◼︎ At least 1 numeric character'}
+          </Text>
+        </div>
       </div>,
   } }));
   it('Clear Alert', () => this.props({ alert: undefined }));
@@ -136,30 +136,30 @@ describe('Form', function () {
       title: 'Please reset your password using the following criteria:',
       children:
         <div>
-            <div
-              style={{
-                padding: '10px 0 5px 0',
-              }}
+          <div
+            style={{
+              padding: '10px 0 5px 0',
+            }}
+          >
+            <Text
+              color={'white'}
+              fontSize={0.8}
             >
-                <Text
-                  color={'white'}
-                  fontSize={0.8}
-                >
-                  {'◼︎ At least 1 special character (e.g. ][?/<~!$#%)'}
-                </Text>
-            </div>
-            <div
-              style={{
-                padding: '10px 0 5px 0',
-              }}
+              {'◼︎ At least 1 special character (e.g. ][?/<~!$#%)'}
+            </Text>
+          </div>
+          <div
+            style={{
+              padding: '10px 0 5px 0',
+            }}
+          >
+            <Text
+              color={'white'}
+              fontSize={0.8}
             >
-              <Text
-                color={'white'}
-                fontSize={0.8}
-              >
-                  {'◼︎ At least 1 numeric character'}
-              </Text>
-            </div>
+                {'◼︎ At least 1 numeric character'}
+            </Text>
+          </div>
         </div>,
     } });
   });

@@ -22,7 +22,7 @@ describe('TextListItem', () => {
   it('Does render a TextListItem', () => {
     // Render a ListItem with no style
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem />
+      <TextListItem />
     );
     expect(textListItemComponent).toBeDefined();
   });
@@ -30,7 +30,7 @@ describe('TextListItem', () => {
   it('Does render a TextListItem text', () => {
     const text = 'howdy';
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem text={text} />
+      <TextListItem text={text} />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(textListItemNode.textContent).toBe(text);
@@ -38,9 +38,9 @@ describe('TextListItem', () => {
 
   it('Does render a selected TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem
-          selected={true}
-        />
+      <TextListItem
+        selected={true}
+      />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(color(textListItemNode.style.backgroundColor).hexString()).toBe(Colors.info);
@@ -49,9 +49,9 @@ describe('TextListItem', () => {
 
   it('Does render a hovered TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem
-          hovered={true}
-        />
+      <TextListItem
+        hovered={true}
+      />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(color(textListItemNode.style.backgroundColor).hexString())
@@ -61,9 +61,9 @@ describe('TextListItem', () => {
 
   it('Does render first TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem
-          listPosition={'first'}
-        />
+      <TextListItem
+        listPosition={'first'}
+      />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(textListItemNode.style.borderBottom)
@@ -72,9 +72,9 @@ describe('TextListItem', () => {
 
   it('Does render middle TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem
-          listPosition={'middle'}
-        />
+      <TextListItem
+        listPosition={'middle'}
+      />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(textListItemNode.style.borderBottom)
@@ -83,9 +83,9 @@ describe('TextListItem', () => {
 
   it('Does render last TextListItem', () => {
     const textListItemComponent = TestUtils.renderIntoDocument(
-        <TextListItem
-          listPosition={'last'}
-        />
+      <TextListItem
+        listPosition={'last'}
+      />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
     expect(textListItemNode.style.borderBottom).toBe('');

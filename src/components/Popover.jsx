@@ -125,12 +125,12 @@ export default class Popover extends React.Component {
       anchored: !!this.props.anchorEl,
     });
     return (
+      <div style={style.Popover}>
         <div style={style.Popover}>
-          <div style={style.Popover}>
-            {this.props.children}
-          </div>
-          {this.renderCloseLayer(style)}
+          {this.props.children}
         </div>
+        {this.renderCloseLayer(style)}
+      </div>
     );
   }
 }

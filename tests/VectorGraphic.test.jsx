@@ -11,7 +11,7 @@ const VectorGraphic = require('../src/components/VectorGraphic').default;
 describe('VectorGraphic', () => {
   it('Does render an VectorGraphic element', () => {
     const svgComponent = TestUtils.renderIntoDocument(
-        <VectorGraphic />
+      <VectorGraphic />
     );
     const svgNode = ReactDOM.findDOMNode(svgComponent);
     expect(svgNode.nodeName).toEqual('svg');

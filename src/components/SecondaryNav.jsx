@@ -17,7 +17,7 @@ export default class SecondaryNav extends React.Component {
           style={style.LeftItems}
           ref={c => this.leftItemsRef = c}
         >
-          { this.props.leftItems }
+          {this.props.leftItems}
         </div>
       );
     }
@@ -31,7 +31,7 @@ export default class SecondaryNav extends React.Component {
           style={style.RightItems}
           ref={c => this.rightItemsRef = c}
         >
-          { this.props.rightItems }
+          {this.props.rightItems}
         </div>
       );
     }
