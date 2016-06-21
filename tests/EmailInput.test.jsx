@@ -11,11 +11,12 @@ const EmailInput = require('../src/components/EmailInput').default;
 
 describe('EmailInput', () => {
   it('Does render a EmailInput', () => {
+    const email = 'test@signal.co';
     const emailInputComponent = TestUtils.renderIntoDocument(
-      <EmailInput initialValue={'test@signal.co'} />
+      <EmailInput initialValue={email} />
     );
-    const emailInputNode = ReactDOM.findDOMNode(emailInputComponent);
-    expect(emailInputNode.getAttribute('value')).toBe('test@signal.co');
+    expect(emailInputComponent.inputRef.value)
+      .toBe(email);
   });
 
   it('Does validate valid email addresses', () => {

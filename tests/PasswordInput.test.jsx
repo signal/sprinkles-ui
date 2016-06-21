@@ -15,8 +15,9 @@ describe('PasswordInput', () => {
       <PasswordInput />
     );
     const passwordInputNode = ReactDOM.findDOMNode(passwordInputComponent);
+    expect(passwordInputComponent.inputRef.value)
+      .toBe('');
     expect(passwordInputNode.getAttribute('type')).toBe('password');
-    expect(passwordInputNode.getAttribute('value')).toBe('');
   });
 
   it('Does render a disabled password input', () => {

@@ -12,30 +12,21 @@ const TextInput = require('../src/components/TextInput').default;
 describe('TextInput', () => {
   it('Does render an TextInput with default text', () => {
     const text = 'howdy';
-
-    // Render an TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
         initialValue={text}
       />
     );
-
-    // grab the DOM node so we can inspect it
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-
-    // Verify that it's rendered with the right text
-    // NOTE: This will ALWAYS grab the value at initialization time
-    //       Use the 'value' property if you're looking for the text value
-    expect(textInputNode.getAttribute('value')).toEqual(text);
-    expect(textInputNode.getAttribute('autocomplete')).toBe('on');
+    expect(textInputComponent.inputRef.value)
+      .toBe(text);
+    expect(textInputNode.getAttribute('autocomplete'))
+      .toBe('on');
   });
 
   it('Does render an editable input', () => {
     const changedText = 'howdy';
-
     const handleChange = jest.genMockFunction();
-
-    // Render an editable TextInput
     const textInputComponent = TestUtils.renderIntoDocument(
       <TextInput
         initialValue={''}
@@ -184,9 +175,11 @@ describe('TextInput', () => {
       <TextInput boundValue={boundValue} />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.getAttribute('value')).toBe(boundValue);
+    expect(textInputComponent.inputRef.value)
+      .toBe(boundValue);
     TestUtils.Simulate.change(textInputNode, { target: { value: '' } });
-    expect(textInputNode.getAttribute('value')).toBe(boundValue);
+    expect(textInputComponent.inputRef.value)
+      .toBe(boundValue);
   });
 
   it('Does trigger onChange event on boundInput', () => {

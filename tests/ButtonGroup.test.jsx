@@ -100,7 +100,7 @@ describe('ButtonGroup', () => {
     const buttonNodeTwo = ReactDOM.findDOMNode(component.buttonRefs.get('2'));
     const buttonNodeThree = ReactDOM.findDOMNode(component.buttonRefs.get('3'));
     expect(buttonNodeOne.style.borderRadius).toBe('3px 0 0 3px');
-    expect(buttonNodeTwo.style.borderRadius).toBe('0px');
+    expect(buttonNodeTwo.style.borderRadius).toBe('0');
     expect(buttonNodeThree.style.borderRadius).toBe('0 3px 3px 0');
   });
 

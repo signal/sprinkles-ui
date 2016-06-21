@@ -18,7 +18,9 @@ export default class PasswordInput extends TextInput {
         placeholder={this.props.placeholder}
         style={this.style().TextInput}
         type={'password'}
-        valueLink={this.linkState()}
+        value={this.state.value}
+        onChange={this.handleChange.bind(this)}
+        ref={(comp) => this.inputRef = comp}
       />
     );
   }

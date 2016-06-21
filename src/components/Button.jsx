@@ -137,14 +137,14 @@ export default class Button extends React.Component {
       },
       groupPositionCenter: {
         Button: {
-          borderLeft: '0',
+          borderLeft: 0,
           borderRight: `1px solid ${veryDarkened}`,
-          borderRadius: '0',
+          borderRadius: 0,
         },
       },
       groupPositionRight: {
         Button: {
-          borderLeft: '0',
+          borderLeft: 0,
           borderRadius: '0 3px 3px 0',
         },
       },

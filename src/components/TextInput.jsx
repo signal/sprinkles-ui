@@ -51,15 +51,6 @@ export default class TextInput extends React.Component {
     return this.state.value;
   }
 
-  linkState() {
-    return {
-      value: this.value(),
-      requestChange: (newValue) => {
-        this.setState({ value: newValue }, () => this.props.onChange(this.value()));
-      },
-    };
-  }
-
   handleFocus() {
     this.setState({ isFocused: true });
   }
@@ -69,7 +60,12 @@ export default class TextInput extends React.Component {
   }
 
   handleChange(changeEvent) {
-    this.props.onChange(changeEvent.target.value);
+    const value = changeEvent.target.value;
+    if (!this.isBound()) {
+      this.setState({ value }, () => this.props.onChange(value));
+    } else {
+      this.props.onChange(value);
+    }
   }
 
   isBound() {
@@ -129,12 +125,12 @@ export default class TextInput extends React.Component {
       autoComplete: this.props.autoComplete ? 'on' : 'off',
       disabled: this.props.enabled ? undefined : 'disabled',
       onBlur: this.handleBlur.bind(this),
-      onChange: this.isBound() ? this.handleChange.bind(this) : undefined,
+      onChange: this.handleChange.bind(this),
       onFocus: this.handleFocus.bind(this),
       placeholder: this.props.placeholder,
       style: this.style().TextInput,
-      value: this.isBound() ? this.props.boundValue : undefined,
-      valueLink: !this.isBound() ? this.linkState() : undefined,
+      value: this.isBound() ? this.props.boundValue : this.state.value,
+      ref: (comp) => this.inputRef = comp,
     };
     if (this.props.multiline) {
       return (
