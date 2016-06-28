@@ -39,13 +39,13 @@ describe('Table', function () {
   `); // Markdown.
 
   before(() => {
-    const handleClick = (column, i, cellData) => {
+    const handleClick = (column, i, cellData, rowData) => {
       console.log({
         Column: column,
         Index: i,
         'Cell Data': cellData,
+        'Row Data': rowData,
       });
-      console.log(`Cell: ${cellData}`);
       this.props({
         selectedRow: i,
       });

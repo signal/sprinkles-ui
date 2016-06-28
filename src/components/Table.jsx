@@ -33,8 +33,8 @@ export default class Table extends React.Component {
     return this.props.records.map((record) => this.filteredSubRecords(record));
   }
 
-  handleClick(itemData, i, cellData) {
-    this.props.onClick(itemData, i, cellData);
+  handleClick(itemData, i, cellData, rowData) {
+    this.props.onClick(itemData, i, cellData, rowData);
   }
 
   renderHeaderItem(style, records) {
@@ -58,7 +58,7 @@ export default class Table extends React.Component {
     const cellData = row[columnKey];
     return (
       <td
-        onClick={this.handleClick.bind(this, columnKey, i, cellData)}
+        onClick={this.handleClick.bind(this, columnKey, i, cellData, row)}
         style={style.TBodyItems} key={i}
       >
         {cellData}

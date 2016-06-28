@@ -1,6 +1,6 @@
 {
   "name": "sprinkles-ui",
-  "version": "0.0.1beta45",
+  "version": "0.0.1beta46",
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
