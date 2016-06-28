@@ -3,7 +3,7 @@ import reactCSS from 'reactcss';
 import Text from './Text';
 import TextInput from './TextInput';
 import Button from './Button';
-import { TextColors, Colors } from '../shared/colors';
+import { TextColors, FormColors, Colors } from '../shared/colors';
 import Immutable, { Map, fromJS } from 'immutable';
 
 export default class KeyValueInput extends React.Component {
@@ -227,6 +227,7 @@ export default class KeyValueInput extends React.Component {
     const style = reactCSS({
       default: {
         KeyValuePair: {
+          color: FormColors.text,
           display: 'flex',
           marginBottom: 15,
         },

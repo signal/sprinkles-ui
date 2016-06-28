@@ -365,4 +365,82 @@ describe('Form', () => {
     const bTextInputNode = ReactDOM.findDOMNode(formComponent.inputRefs.get('b').inputRef);
     expect(bTextInputNode.disabled).toBe(true);
   });
+
+  it('Renders fields into one rows', () => {
+    const formComponent = TestUtils.renderIntoDocument(
+      <Form
+        fieldsPerRow={1}
+      >
+        <Field
+          fieldKey={'a'}
+        >
+          <TextInput initialValue={'init a'} />
+        </Field>
+        <Field
+          fieldKey={'b'}
+          enabled={false}
+        >
+          <TextInput initialValue={'init b'} />
+        </Field>
+      </Form>
+    );
+    const fieldComponent = formComponent.inputRefs.get('a');
+    const fieldNode = ReactDOM.findDOMNode(fieldComponent);
+    const fieldNodeParent = ReactDOM.findDOMNode(fieldComponent).parentNode;
+    expect(fieldNode.style.display).toBe('');
+    expect(fieldNodeParent.style.flexWrap).toBe('wrap');
+    expect(fieldNodeParent.style.display).toBe('flex');
+    expect(formComponent.inputRefs.get('a').props.style.width).toBe('100%');
+    expect(formComponent.inputRefs.get('a').props.style.margin).toBe('0 0 1rem 0');
+  });
+
+  it('Renders fields into two rows', () => {
+    const formComponent = TestUtils.renderIntoDocument(
+      <Form
+        fieldsPerRow={2}
+      >
+        <Field
+          fieldKey={'a'}
+        >
+          <TextInput initialValue={'init a'} />
+        </Field>
+        <Field
+          fieldKey={'b'}
+          enabled={false}
+        >
+          <TextInput initialValue={'init b'} />
+        </Field>
+      </Form>
+    );
+    const fieldComponent = formComponent.inputRefs.get('a');
+    const fieldNode = ReactDOM.findDOMNode(fieldComponent);
+    const fieldNodeParent = ReactDOM.findDOMNode(fieldComponent).parentNode;
+    expect(fieldNode.style.display).toBe('');
+    expect(fieldNodeParent.style.flexWrap).toBe('wrap');
+    expect(fieldNodeParent.style.display).toBe('flex');
+    expect(formComponent.inputRefs.get('a').props.style.width).toBe('calc(50% - 1rem)');
+    expect(formComponent.inputRefs.get('a').props.style.margin).toBe('0 1rem 1rem 0');
+  });
+
+  it('Renders field lables left', () => {
+    const formComponent = TestUtils.renderIntoDocument(
+      <Form
+        labelPosition={'left'}
+      >
+        <Field
+          fieldKey={'a'}
+        >
+          <TextInput initialValue={'init a'} />
+        </Field>
+        <Field
+          fieldKey={'b'}
+        >
+          <TextInput initialValue={'init b'} />
+        </Field>
+      </Form>
+    );
+    const fieldComponent = formComponent.inputRefs.get('a');
+    const fieldNode = ReactDOM.findDOMNode(fieldComponent);
+    expect(fieldNode.style.display).toBe('flex');
+  });
 });

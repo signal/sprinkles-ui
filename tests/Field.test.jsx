@@ -232,4 +232,36 @@ describe('Field', () => {
     const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
     expect(textInputNode.disabled).toBe(true);
   });
+
+  it('Does render a label positioned left', () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+      <Field
+        label={'Test'}
+        labelPosition={'left'}
+        fieldKey={'key'}
+      >
+        <TextInput />
+      </Field>
+    );
+    const labelRefParent = ReactDOM.findDOMNode(fieldComponent.labelRef).parentNode;
+    expect(labelRefParent.style.marginRight).toEqual('10px');
+    const textInputNodeParent = ReactDOM.findDOMNode(fieldComponent.inputRef).parentNode;
+    expect(textInputNodeParent.style.flex).toBe('1');
+  });
+
+  it('Does render a label positioned top', () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+      <Field
+        label={'Test'}
+        labelPosition={'top'}
+        fieldKey={'key'}
+      >
+        <TextInput />
+      </Field>
+    );
+    const labelRefParent = ReactDOM.findDOMNode(fieldComponent.labelRef).parentNode;
+    expect(labelRefParent.style.marginRight).toEqual('');
+    const textInputNodeParent = ReactDOM.findDOMNode(fieldComponent.inputRef).parentNode;
+    expect(textInputNodeParent.style.flex).toBe(undefined);
+  });
 });

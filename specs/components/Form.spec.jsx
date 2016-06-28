@@ -163,6 +163,10 @@ describe('Form', function () {
         </div>,
     } });
   });
+  it('Sets the fields per row to 2', () => this.props({ fieldsPerRow: 2 }));
+  it('Sets the fields per row to 1', () => this.props({ fieldsPerRow: 1 }));
+  it('Sets the label position to left', () => this.props({ labelPosition: 'left' }));
+  it('Sets the label position to top', () => this.props({ labelPosition: 'top' }));
 
   /**
    * Documentation (Markdown)

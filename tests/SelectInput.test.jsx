@@ -13,7 +13,7 @@ import color from 'color';
 import {
   Colors,
   BackgroundColors,
-  StructuralColors,
+  FormColors,
 } from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -33,7 +33,7 @@ describe('SelectInput', () => {
     );
     const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
     expect(selectInputNode.style.border)
-      .toBe(`1px solid ${StructuralColors.inputBorder.toLowerCase()}`);
+      .toBe(`1px solid ${FormColors.border.toLowerCase()}`);
     const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     expect(displayNode.textContent).toBe('--');
     expect(color(displayNode.style.background).hexString()).toBe(BackgroundColors.primary);

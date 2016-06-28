@@ -44,6 +44,8 @@ describe('Field', function () {
   it('Remove Required', () => this.props({ required: false }));
   it('Disables Field', () => this.props({ enabled: false }));
   it('Enables Field', () => this.props({ enabled: true }));
+  it('Label Display Left', () => this.props({ labelPosition: 'left' }));
+  it('Label Display Top', () => this.props({ labelPosition: 'top' }));
   /**
    * Documentation (Markdown)
    */

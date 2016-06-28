@@ -13,6 +13,8 @@ export default class Form extends React.Component {
       children: React.PropTypes.node,
     }),
     children: React.PropTypes.node,
+    fieldsPerRow: React.PropTypes.number,
+    labelPosition: React.PropTypes.oneOf(['left', 'top']),
     onChange: React.PropTypes.func,
     onSubmit: React.PropTypes.func,
     submitButtonText: React.PropTypes.string,
@@ -20,6 +22,8 @@ export default class Form extends React.Component {
   };
 
   static defaultProps = {
+    fieldsPerRow: 1,
+    labelPosition: 'top',
     onChange: () => {},
     onSubmit: () => {},
     submitButtonText: 'Submit',
@@ -110,6 +114,7 @@ export default class Form extends React.Component {
           status: inputValidation.get('valid') === false ? 'error' : undefined,
           error: inputValidation.get('validationError'),
           style: style.Field,
+          labelPosition: this.props.labelPosition,
           ref: (inputRef) => {
             if (inputRef) {
               this.inputRefs = this.inputRefs.set(child.props.fieldKey, inputRef);
@@ -137,15 +142,31 @@ export default class Form extends React.Component {
   render() {
     const style = reactCSS({
       default: {
+        FieldsWrapper: {
+          display: 'flex',
+          flexWrap: 'wrap',
+        },
         Field: {
           margin: '0 0 1rem 0',
+          width: `${100 / this.props.fieldsPerRow}%`,
         },
       },
+      multirow: {
+        Field: {
+          margin: '0 1rem 1rem 0',
+          width: `calc(${100 / this.props.fieldsPerRow}% - 1rem)`,
+        },
+      },
+    }, {
+      multirow: this.props.fieldsPerRow > 1,
     });
+
     return (
       <div>
         {this.renderAlert()}
-        {this.renderFields(style)}
+        <div style={style.FieldsWrapper}>
+          {this.renderFields(style)}
+        </div>
         <Button
           onClick={this.handleClick.bind(this)}
           ref={c => this.submitButtonRef = c}

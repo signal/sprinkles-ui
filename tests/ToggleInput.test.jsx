@@ -9,7 +9,7 @@ import color from 'color';
 import {
   BackgroundColors,
   Colors,
-  StructuralColors,
+  FormColors,
 } from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
@@ -30,7 +30,7 @@ describe('ToggleInput', () => {
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.border)
-      .toBe(`1px solid ${StructuralColors.inputBorder.toLowerCase()}`);
+      .toBe(`1px solid ${FormColors.border.toLowerCase()}`);
     expect(toggleInputNode.style.width)
       .toBe('42px');
     expect(toggleInputNode.style.height)
@@ -59,7 +59,7 @@ describe('ToggleInput', () => {
     expect(toggleInputNode.style.borderRadius)
       .toBe('13px');
     expect(toggleInputNode.style.border)
-      .toBe(`1px solid ${StructuralColors.inputBorder.toLowerCase()}`);
+      .toBe(`1px solid ${FormColors.border.toLowerCase()}`);
   });
 
   it('does render ToggleInput with initialValue=true', () => {

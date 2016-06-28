@@ -8,7 +8,7 @@ import VectorGraphic from './VectorGraphic';
 import {
   BackgroundColors,
   Colors,
-  StructuralColors,
+  FormColors,
   TextColors,
 } from '../shared/colors';
 
@@ -173,8 +173,9 @@ export default class SelectInput extends React.Component {
     const style = reactCSS({
       default: {
         SelectInput: {
-          border: `1px solid ${StructuralColors.inputBorder}`,
+          border: `1px solid ${FormColors.border}`,
           borderRadius: 3,
+          color: FormColors.text,
         },
         Display: {
           cursor: 'pointer',

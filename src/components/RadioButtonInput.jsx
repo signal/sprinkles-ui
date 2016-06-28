@@ -1,7 +1,7 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';
-import { Colors, TextColors } from '../shared/colors';
+import { Colors, FormColors, TextColors } from '../shared/colors';
 import color from 'color';
 
 export default class RadioButtonInput extends React.Component {
@@ -116,6 +116,7 @@ export default class RadioButtonInput extends React.Component {
     const style = reactCSS({
       default: {
         RadioItems: {
+          color: FormColors.text,
           cursor: 'pointer',
         },
         RadioItem: {

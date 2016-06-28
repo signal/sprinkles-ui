@@ -4,7 +4,7 @@ import color from 'color';
 import {
   Colors,
   BackgroundColors,
-  StructuralColors,
+  FormColors,
 } from '../shared/colors';
 
 export default class ToggleInput extends React.Component {
@@ -52,7 +52,7 @@ export default class ToggleInput extends React.Component {
     const style = reactCSS({
       default: {
         ToggleInput: {
-          border: `1px solid ${StructuralColors.inputBorder}`,
+          border: `1px solid ${FormColors.border}`,
           background: BackgroundColors.primary,
           width: 42,
           height: 26,

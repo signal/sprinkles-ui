@@ -27,6 +27,7 @@ export Version from './components/Version';
 export {
   Colors,
   ButtonColors,
+  FormColors,
   TextColors,
   BackgroundColors,
   StructuralColors,

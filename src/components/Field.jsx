@@ -1,7 +1,7 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';
-import { Colors, TextColors } from '../shared/colors';
+import { Colors, FormColors, TextColors } from '../shared/colors';
 
 
 export default class Field extends React.Component {
@@ -11,6 +11,7 @@ export default class Field extends React.Component {
     error: React.PropTypes.string,
     fieldKey: React.PropTypes.string.isRequired,
     label: React.PropTypes.string,
+    labelPosition: React.PropTypes.oneOf(['left', 'top']),
     onChange: React.PropTypes.func,
     required: React.PropTypes.bool,
     status: React.PropTypes.oneOf(['error', 'warning', 'success']),
@@ -20,6 +21,7 @@ export default class Field extends React.Component {
   static defaultProps = {
     enabled: true,
     fieldKey: 'defaultKey',
+    labelPosition: 'top',
     onChange: () => {},
     required: false,
     style: {},
@@ -123,7 +125,9 @@ export default class Field extends React.Component {
     const style = reactCSS({
       default: {
         Label: {
-          color: TextColors.primary,
+          color: FormColors.label,
+          fontWeight: 700,
+          marginBottom: 5,
         },
         Error: {
         },
@@ -137,16 +141,32 @@ export default class Field extends React.Component {
           color: TextColors.secondary,
         },
       },
+      labelPosition: {
+        Field: {
+          alignItems: 'center',
+          display: 'flex',
+        },
+        Label: {
+          marginRight: 10,
+        },
+        inputWrapper: {
+          flex: 1,
+        },
+      },
     }, {
       disabled: !this.props.enabled,
       haveLabel: !!this.props.label || this.props.required,
+      labelPosition: this.props.labelPosition === 'left',
     });
+    const fieldStyle = Object.assign({}, style.Field, this.props.style);
     return (
-      <div style={this.props.style}>
+      <div style={fieldStyle}>
         <div style={style.Label}>
           {this.renderLabel()}{this.renderRequired()}
         </div>
-        {this.renderInput()}
+        <div style={style.inputWrapper}>
+          {this.renderInput()}
+        </div>
         {this.renderError(style)}
       </div>
     );

@@ -30,7 +30,12 @@ export const BackgroundColors = {
   table: '#EFEFEF',
 };
 
+export const FormColors = {
+  border: '#CCCCCC',
+  text: '#4E4E4E',
+  label: '#4E4E4E',
+};
+
 export const StructuralColors = {
   divider: '#E7E7E7',
-  inputBorder: '#ccc',
 };
