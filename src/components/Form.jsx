@@ -153,6 +153,9 @@ export default class Form extends React.Component {
           margin: '0 0 1rem 0',
           width: `${100 / this.props.fieldsPerRow}%`,
         },
+        FormBase: {
+          width: '100%',
+        },
       },
       multirow: {
         Field: {
@@ -165,7 +168,7 @@ export default class Form extends React.Component {
     });
 
     return (
-      <div>
+      <div style={style.FormBase}>
         <div style={style.alertWrapper}>
           {this.renderAlert()}
         </div>
