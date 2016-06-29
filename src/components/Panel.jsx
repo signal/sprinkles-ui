@@ -9,14 +9,14 @@ export default class Panel extends React.Component {
     boxShadowStrength: React.PropTypes.number,
     children: React.PropTypes.node,
     color: React.PropTypes.string,
-    padding: React.PropTypes.string,
+    padding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     text: React.PropTypes.string,
   };
 
   static defaultProps = {
     backgroundColor: BackgroundColors.primary,
     color: TextColors.primary,
-    padding: '10px',
+    padding: 10,
   };
 
   static displayName = 'Panel';
