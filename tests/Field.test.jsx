@@ -244,7 +244,7 @@ describe('Field', () => {
       </Field>
     );
     const labelRefParent = ReactDOM.findDOMNode(fieldComponent.labelRef).parentNode;
-    expect(labelRefParent.style.marginRight).toEqual('10px');
+    expect(labelRefParent.style.width).toEqual('23%');
     const textInputNodeParent = ReactDOM.findDOMNode(fieldComponent.inputRef).parentNode;
     expect(textInputNodeParent.style.flex).toBe('1');
   });

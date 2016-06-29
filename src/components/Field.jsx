@@ -130,6 +130,7 @@ export default class Field extends React.Component {
           marginBottom: 5,
         },
         Error: {
+          marginTop: 5,
         },
       },
       haveLabel: {
@@ -142,15 +143,22 @@ export default class Field extends React.Component {
         },
       },
       labelPosition: {
+        Error: {
+          marginLeft: '25%',
+          width: '100%',
+        },
         Field: {
           alignItems: 'center',
           display: 'flex',
+          flexWrap: 'wrap',
         },
         Label: {
-          marginRight: 10,
+          paddingRight: '2%',
+          width: '23%',
         },
         inputWrapper: {
           flex: 1,
+          width: '75%',
         },
       },
     }, {

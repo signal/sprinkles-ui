@@ -142,6 +142,9 @@ export default class Form extends React.Component {
   render() {
     const style = reactCSS({
       default: {
+        alertWrapper: {
+          marginBottom: 10,
+        },
         FieldsWrapper: {
           display: 'flex',
           flexWrap: 'wrap',
@@ -163,7 +166,9 @@ export default class Form extends React.Component {
 
     return (
       <div>
-        {this.renderAlert()}
+        <div style={style.alertWrapper}>
+          {this.renderAlert()}
+        </div>
         <div style={style.FieldsWrapper}>
           {this.renderFields(style)}
         </div>
