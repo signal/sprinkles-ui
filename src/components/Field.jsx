@@ -14,6 +14,7 @@ export default class Field extends React.Component {
     labelPosition: React.PropTypes.oneOf(['left', 'top']),
     onChange: React.PropTypes.func,
     required: React.PropTypes.bool,
+    requriedAsteriskDisplay: React.PropTypes.bool,
     status: React.PropTypes.oneOf(['error', 'warning', 'success']),
     style: React.PropTypes.object,
   };
@@ -24,6 +25,7 @@ export default class Field extends React.Component {
     labelPosition: 'top',
     onChange: () => {},
     required: false,
+    requriedAsteriskDisplay: true,
     style: {},
   };
 
@@ -104,7 +106,7 @@ export default class Field extends React.Component {
   }
 
   renderRequired() {
-    if (this.props.required) {
+    if (this.props.required && this.props.requriedAsteriskDisplay) {
       return (
         <span>
           {' '}

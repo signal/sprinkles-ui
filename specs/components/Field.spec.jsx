@@ -40,7 +40,8 @@ describe('Field', function () {
   it('Clear Status', () => this.props({ status: undefined }));
   it('Set Error Message', () => this.props({ error: 'Field Error Message' }));
   it('Clear Error Message', () => this.props({ error: undefined }));
-  it('Set Required', () => this.props({ required: true }));
+  it('Set Required', () => this.props({ required: true, requriedAsteriskDisplay: true }));
+  it('Set Required, Asterisk Display Hidden', () => this.props({ required: true, requriedAsteriskDisplay: false }));
   it('Remove Required', () => this.props({ required: false }));
   it('Disables Field', () => this.props({ enabled: false }));
   it('Enables Field', () => this.props({ enabled: true }));

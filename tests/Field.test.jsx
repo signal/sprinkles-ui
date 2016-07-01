@@ -134,6 +134,18 @@ describe('Field', () => {
     expect(color(requiredNode.style.color).hexString()).toBe(Colors.danger);
   });
 
+  it('Does render a required Field width asterick hidden', () => {
+    const fieldComponent = TestUtils.renderIntoDocument(
+      <Field
+        fieldKey={'key'}
+        required={true}
+        requriedAsteriskDisplay={false}
+      />
+    );
+    const requiredNode = ReactDOM.findDOMNode(fieldComponent.requiredRef);
+    expect(requiredNode).toBe(null);
+  });
+
   it('Does validate a required Field with valid input as valid', () => {
     const fieldComponent = TestUtils.renderIntoDocument(
       <Field
