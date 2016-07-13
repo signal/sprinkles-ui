@@ -55,6 +55,7 @@ export default class Panel extends React.Component {
           backgroundColor: this.props.backgroundColor,
           color: this.props.color,
           padding: this.props.padding,
+          boxSizing: 'border-box',
         },
       },
       roundedCorners: {
