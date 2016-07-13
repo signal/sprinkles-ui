@@ -12,6 +12,7 @@ export default class Panel extends React.Component {
     height: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     padding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     text: React.PropTypes.string,
+    width: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
   };
 
   static defaultProps = {
@@ -71,10 +72,16 @@ export default class Panel extends React.Component {
           height: this.props.height,
         },
       },
+      width: {
+        Panel: {
+          width: this.props.width,
+        },
+      },
     }, {
       roundedCorners: !!this.props.borderRadius,
       dropShadow: !!this.props.boxShadowStrength,
       height: !!this.props.height,
+      width: !!this.props.width,
     });
     return (
       <div style={style.Panel}>{this.renderChildren()}</div>

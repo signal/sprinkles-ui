@@ -71,4 +71,14 @@ describe('Panel', () => {
     expect(panelNode.style.height)
       .toBe(`${height}px`);
   });
+
+  it('Does render a Panel with width', () => {
+    const width = 100;
+    const panelComponent = TestUtils.renderIntoDocument(
+      <Panel width={width} />
+    );
+    const panelNode = ReactDOM.findDOMNode(panelComponent);
+    expect(panelNode.style.width)
+      .toBe(`${width}px`);
+  });
 });
