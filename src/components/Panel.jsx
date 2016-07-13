@@ -9,6 +9,7 @@ export default class Panel extends React.Component {
     boxShadowStrength: React.PropTypes.number,
     children: React.PropTypes.node,
     color: React.PropTypes.string,
+    height: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     padding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     text: React.PropTypes.string,
   };
@@ -65,9 +66,15 @@ export default class Panel extends React.Component {
           boxShadow: `${this.constructBoxShadow(this.props.boxShadowStrength - 1)}`,
         },
       },
+      height: {
+        Panel: {
+          height: this.props.height,
+        },
+      },
     }, {
       roundedCorners: !!this.props.borderRadius,
       dropShadow: !!this.props.boxShadowStrength,
+      height: !!this.props.height,
     });
     return (
       <div style={style.Panel}>{this.renderChildren()}</div>

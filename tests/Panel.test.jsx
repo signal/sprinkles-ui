@@ -61,4 +61,14 @@ describe('Panel', () => {
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.children).not.toBeUndefined();
   });
+
+  it('Does render a Panel with height', () => {
+    const height = 100;
+    const panelComponent = TestUtils.renderIntoDocument(
+      <Panel height={height} />
+    );
+    const panelNode = ReactDOM.findDOMNode(panelComponent);
+    expect(panelNode.style.height)
+      .toBe(`${height}px`);
+  });
 });
