@@ -1,6 +1,6 @@
 {
   "name": "sprinkles-ui",
-  "version": "0.0.1beta54",
+  "version": "0.0.1beta55",
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "node ./node_modules/ui-harness/start --entry=./specs",
     "test": "npm run lint && jest",
     "test:watch": "node_modules/nodemon/bin/nodemon.js -w tests -w ./src -w ./specs -e js,jsx -x npm test",
-    "build": "node_modules/babel-cli/bin/babel.js ./src --ignore *.spec.js --out-dir ./lib",
+    "build": "rm -rf ./lib && node_modules/babel-cli/bin/babel.js ./src --ignore *.spec.js --out-dir ./lib",
     "build:watch": "node_modules/nodemon/bin/nodemon.js -w ./src -e js,jsx -x npm run build",
     "bundle": "node_modules/webpack/bin/webpack.js --progress --colors",
     "prepublish": "npm run build",
