@@ -122,4 +122,31 @@ describe('Table', () => {
     TestUtils.Simulate.click(firstTd);
     expect(mockHandleClick).toBeCalled();
   });
+  it('It does render a hover effect for a table row element with onClick event', () => {
+    const mockHandleClick = jest.fn();
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        onClick={mockHandleClick}
+        records={records}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const firstTr = tableNode.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0];
+    TestUtils.Simulate.mouseOver(firstTr);
+    expect(tableComponent.state.hoveredRow).toBe(0);
+    expect(tableComponent.state.isRowHovering).toBe(true);
+    expect(color(firstTr.style.background).hexString())
+      .toBe(color(BackgroundColors.hover).hexString());
+  });
+  it('It does not render a hover effect for a table row element without onClick event', () => {
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        records={records}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const firstTr = tableNode.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0];
+    TestUtils.Simulate.mouseOver(firstTr);
+    expect(firstTr.style.background).toBe('');
+  });
 });

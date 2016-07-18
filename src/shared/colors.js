@@ -22,6 +22,7 @@ export const TextColors = {
 
 export const BackgroundColors = {
   accent: '#B3E5FC',
+  hover: '#9FE7EF',
   primary: '#FEFEFE',
   primaryNav: '#2B333D',
   secondary: '#F8FAFB',

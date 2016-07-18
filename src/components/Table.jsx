@@ -18,6 +18,30 @@ export default class Table extends React.Component {
 
   displayName = 'Table';
 
+  constructor() {
+    super();
+    this.state = {
+      hoveredRow: null,
+      isRowHovering: false,
+    };
+  }
+
+  handleMouseOut() {
+    this.setState(
+      { isRowHovering: false,
+        hoveredRow: null,
+      }
+    );
+  }
+
+  handleMouseOver(rowIndex) {
+    this.setState(
+      { isRowHovering: true,
+        hoveredRow: rowIndex,
+      }
+    );
+  }
+
   filteredSubRecords(record) {
     const self = this;
     const filteredRecord = {};
@@ -67,10 +91,14 @@ export default class Table extends React.Component {
   }
 
   renderRow(style, row, i) {
+    const isSelectedRow = i === this.props.selectedRow ? style.selected : null;
+    const isHoveredRow = i === this.state.hoveredRow ? style.TableRow : isSelectedRow;
     return (
       <tr
         key={i}
-        style={i === this.props.selectedRow ? style.selected : null}
+        onMouseOut={this.handleMouseOut.bind(this, i)}
+        onMouseOver={this.handleMouseOver.bind(this, i)}
+        style={isHoveredRow}
       >
       {
         Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row))
@@ -110,6 +138,14 @@ export default class Table extends React.Component {
           padding: '20px',
         },
       },
+      hover: {
+        TableRow: {
+          background: BackgroundColors.hover,
+          cursor: 'Pointer',
+        },
+      },
+    }, {
+      hover: this.props.onClick ? this.state.isRowHovering : null,
     });
 
     return (
