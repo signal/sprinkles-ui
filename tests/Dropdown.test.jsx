@@ -14,20 +14,16 @@ const Dropdown = require('../src/components/Dropdown').default;
 
 
 describe('Dropdown', () => {
-  const generateFakeAnchorEl = () => ({
-    getBoundingClientRect() {
-      return {
-        top: 1,
-        bottom: 2,
-        left: 3,
-        right: 4,
-      };
-    },
-  });
+  function generateFakeAnchorEl() {
+    return (<div />);
+  }
+  const fakeAnchorEl = generateFakeAnchorEl();
 
   it('Does render a Dropdown', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
-      <Dropdown />
+      <Dropdown
+        triggerEl={fakeAnchorEl}
+      />
     );
     expect(dropdownComponent).toBeDefined();
   });
@@ -40,93 +36,84 @@ describe('Dropdown', () => {
       },
     ];
     const dropdownComponent = TestUtils.renderIntoDocument(
-      <Dropdown items={items} />
+      <Dropdown
+        items={items}
+        triggerEl={fakeAnchorEl}
+      />
     );
     expect(dropdownComponent.itemsRef.listItemRefs.count()).toBe(1);
   });
 
   it('Does render a closed dropdown', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
-      <Dropdown />
+      <Dropdown triggerEl={fakeAnchorEl} />
     );
-    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(dropdownNode.style.display).toBe('none');
+    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
+    expect(dropdownNode.style.visibility).toBe('hidden');
   });
 
   it('Does render an opened dropdown', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
-      <Dropdown open={true} />
+      <Dropdown
+        open={true}
+        triggerEl={fakeAnchorEl}
+      />
     );
-    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(dropdownNode.style.display).toBe('block');
+    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
+    expect(dropdownNode.style.visibility).toBe('visible');
   });
 
-  it('Does render an anchored Dropdown', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
-    const dropdownComponent = TestUtils.renderIntoDocument(
-      <Dropdown anchorEl={fakeAnchorEl} />
-    );
-    const dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(dropdownNode.style.top).toEqual('2px');
-    expect(dropdownNode.style.left).toEqual('3px');
-  });
-
-  it('Does set anchorOrigin h:left, v:bottom', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
+  it('Does set anchorOrigin bottom', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+        anchorOrigin={'bottom'}
+        triggerEl={fakeAnchorEl}
       />
     );
 
     // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(popoverNode.style.top).toEqual('2px');
-    expect(popoverNode.style.left).toEqual('3px');
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
+    expect(popoverNode.style.left).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual('translateX(-50%) translateY(0)');
   });
 
-  it('Does set anchorOrigin h:left, v:top', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
+  it('Does set anchorOrigin top', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+        triggerEl={fakeAnchorEl}
+        anchorOrigin={'top'}
       />
     );
     // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(popoverNode.style.top).toEqual('1px');
-    expect(popoverNode.style.left).toEqual('3px');
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
+    expect(popoverNode.style.bottom).toEqual('0px');
   });
 
-  it('Does set anchorOrigin h:right, v:bottom', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
+  it('Does set anchorOrigin right', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        triggerEl={fakeAnchorEl}
+        anchorOrigin={'right'}
       />
     );
     // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(popoverNode.style.top).toEqual('2px');
-    expect(popoverNode.style.left).toEqual('4px');
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
+    expect(popoverNode.style.top).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0)');
   });
 
-  it('Does set anchorOrigin h:right, v:top', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
+  it('Does set anchorOrigin left', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+        triggerEl={fakeAnchorEl}
+        anchorOrigin={'left'}
       />
     );
 
     // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef);
-    expect(popoverNode.style.top).toEqual('1px');
-    expect(popoverNode.style.left).toEqual('4px');
+    const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
+    expect(popoverNode.style.top).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(-100%)');
   });
 
   it('Does render a self closing popover', () => {
@@ -134,6 +121,7 @@ describe('Dropdown', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown
         onRequestClose={mockHandleRequestClose}
+        triggerEl={fakeAnchorEl}
         useLayerForClickAway={true}
       />
     );
@@ -144,7 +132,7 @@ describe('Dropdown', () => {
 
   it('Does not render a self closing popover by default', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
-      <Dropdown />
+      <Dropdown triggerEl={fakeAnchorEl} />
     );
     expect(dropdownComponent.popoverRef.closeLayerRef).not.toBeDefined();
   });
@@ -161,6 +149,7 @@ describe('Dropdown', () => {
       <Dropdown
         items={items}
         onClick={mockHandleClick}
+        triggerEl={fakeAnchorEl}
       />
     );
     const listItem = ReactDOM.findDOMNode(dropdownComponent.itemsRef.listItemRefs.get(0));

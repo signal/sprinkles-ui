@@ -10,13 +10,13 @@ import { Colors } from '../../src/shared/colors';
 // Wrapper to contain a Popover and an anchor element
 class PopoverWrapper extends React.Component {
   static propTypes = {
-    anchorEl: React.PropTypes.object,
-    anchorOrigin: React.PropTypes.object,
+    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
     children: React.PropTypes.node,
-    constrainWidth: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
+    contentWidth: React.PropTypes.number,
     open: React.PropTypes.bool,
+    onRequestOpen: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
+    triggerEl: React.PropTypes.node.isRequired,
     useLayerForClickAway: React.PropTypes.bool,
   };
 
@@ -26,43 +26,19 @@ class PopoverWrapper extends React.Component {
 
   displayName = 'PopoverWrapper';
 
-  constructor() {
-    super();
-
-    this.style = {
-      anchorDiv: {
-        padding: 10,
-        background: Colors.info,
-        color: '#FEFEFE',
-        cursor: 'pointer',
-      },
-    };
-  }
-
-  handleClick(e) {
-    this.props.onClick(e);
-  }
-
   render() {
     return (
-      <div>
-        <div
-          onClick={this.handleClick.bind(this)}
-          style={this.style.anchorDiv}
-        >
-          {'Click Me'}
-        </div>
-        <Popover
-          anchorEl={this.props.anchorEl}
-          anchorOrigin={this.props.anchorOrigin}
-          constrainWidth={this.props.constrainWidth}
-          open={this.props.open}
-          onRequestClose={this.props.onRequestClose}
-          useLayerForClickAway={this.props.useLayerForClickAway}
-        >
-          {this.props.children}
-        </Popover>
-      </div>
+      <Popover
+        anchorOrigin={this.props.anchorOrigin}
+        contentWidth={this.props.contentWidth}
+        open={this.props.open}
+        onRequestOpen={this.props.onRequestOpen}
+        onRequestClose={this.props.onRequestClose}
+        triggerEl={this.props.triggerEl}
+        useLayerForClickAway={this.props.useLayerForClickAway}
+      >
+        {this.props.children}
+      </Popover>
     );
   }
 }
@@ -73,9 +49,8 @@ describe('Popover', function () {
   `); // Markdown.
 
   before(() => {
-    const handleClick = (e) => {
+    const handleRequestOpen = () => {
       this.props({
-        anchorEl: e.currentTarget,
         open: true,
       });
     };
@@ -86,6 +61,15 @@ describe('Popover', function () {
       });
     };
 
+    const anchorDivStyle = {
+      boxSizing: 'border-box',
+      padding: 10,
+      background: Colors.info,
+      color: '#FEFEFE',
+      cursor: 'pointer',
+      display: 'inline-flex',
+    };
+
     const popoverStyle = {
       background: 'white',
       border: '1px solid grey',
@@ -93,49 +77,55 @@ describe('Popover', function () {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
       <PopoverWrapper
-        onClick={handleClick.bind(this)}
+        anchorOrigin={'bottom'}
+        contentWidth={200}
+        onRequestOpen={handleRequestOpen}
         onRequestClose={handleRequestClose}
+        triggerEl={(
+          <div style={anchorDivStyle}>
+            {'Click Me'}
+          </div>
+        )}
         useLayerForClickAway={true}
       >
-        <div style={popoverStyle}>{loremIpsum()}</div>
+        <div style={popoverStyle}>{loremIpsum({
+          count: 1,
+        })}
+        </div>
       </PopoverWrapper>
     );
   });
 
-  it('anchorOrigin h:left, v:bottom', () => this.props({
-    anchorOrigin: {
-      horizontal: 'left',
-      vertical: 'bottom',
-    },
+  it('open', () => this.props({
+    open: true,
   }));
 
-  it('anchorOrigin h:right, v:bottom', () => this.props({
-    anchorOrigin: {
-      horizontal: 'right',
-      vertical: 'bottom',
-    },
+  it('close', () => this.props({
+    open: false,
   }));
 
-  it('anchorOrigin h:left, v:top', () => this.props({
-    anchorOrigin: {
-      horizontal: 'left',
-      vertical: 'top',
-    },
+  it('anchorOrigin bottom', () => this.props({
+    anchorOrigin: 'bottom',
   }));
 
-  it('anchorOrigin h:right, v:top', () => this.props({
-    anchorOrigin: {
-      horizontal: 'right',
-      vertical: 'top',
-    },
+  it('anchorOrigin left', () => this.props({
+    anchorOrigin: 'left',
   }));
 
-  it('constrain width: true', () => this.props({
-    constrainWidth: true,
+  it('anchorOrigin right', () => this.props({
+    anchorOrigin: 'right',
   }));
 
-  it('constrain width: false', () => this.props({
-    constrainWidth: false,
+  it('anchorOrigin top', () => this.props({
+    anchorOrigin: 'top',
+  }));
+
+  it('set width', () => this.props({
+    contentWidth: 200,
+  }));
+
+  it('clear width', () => this.props({
+    contentWidth: undefined,
   }));
 
   /**
@@ -148,13 +138,14 @@ describe('Popover', function () {
 
   #### API
 
-  - **anchorEl** *React.PropTypes.object* (optional) element to anchor popover (not set for absolute center)
   - **anchorOrigin** *React.PropTypes.object* (optional) point on the anchorEl to anchor against
   - **children** *React.PropTypes.node* (optional) child components
   - **constrainWidth** *React.PropTypes.bool* (optional) when true keeps the width of the popover the same as the parent
-  - **open** *React.PropTypes.bool* (optional) popover open state
+  - **contentWidth** *React.PropTypes.number* (optional) specify a width of the popover, otherwise it will take the width of the triggerEl
+  - **open** *React.PropTypes.bool* (optional) set the popover to be open or closed
+  - **onRequestOpen** *React.PropTypes.func* (optional) callback called when popover is requesting to open
   - **onRequestClose** *React.PropTypes.func* (optional) callback called when popover is requesting to close
+  - **triggerEl** *React.PropTypes.node* React node used to trigger the popover
   - **useLayerForClickAway** *React.PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
-
   `);
 });

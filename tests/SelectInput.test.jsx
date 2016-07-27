@@ -31,8 +31,7 @@ describe('SelectInput', () => {
     const selectInputComponent = TestUtils.renderIntoDocument(
       <SelectInput />
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
-    expect(selectInputNode.style.border)
+    expect(selectInputComponent.SelectInputRef.style.border)
       .toBe(`1px solid ${FormColors.border.toLowerCase()}`);
     const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     expect(displayNode.textContent).toBe('--');
@@ -52,17 +51,33 @@ describe('SelectInput', () => {
     expect(selectInputComponent.itemsRef.listItemRefs.count()).toBe(1);
   });
 
-  it('Does toggle a popover when SelectInput is clicked and clicked away', () => {
+  it('Does trigger an on close event', () => {
+    const mockHandleCloseEvent = jest.fn();
     const selectInputComponent = TestUtils.renderIntoDocument(
-      <SelectInput />
+      <SelectInput
+        onRequestClose={mockHandleCloseEvent}
+        open={true}
+      />
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
-    TestUtils.Simulate.click(selectInputNode);
-    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef);
-    expect(selectInputPopoverNode.style.display).toBe('block');
     const closeLayerNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.closeLayerRef);
     TestUtils.Simulate.click(closeLayerNode);
-    expect(selectInputPopoverNode.style.display).toBe('none');
+    expect(mockHandleCloseEvent).toBeCalled();
+  });
+
+  it('Does render a closed popover', () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput open={false} />
+    );
+    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.contentRef);
+    expect(selectInputPopoverNode.style.visibility).toBe('hidden');
+  });
+
+  it('Does render an open popover', () => {
+    const selectInputComponent = TestUtils.renderIntoDocument(
+      <SelectInput open={true} />
+    );
+    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.contentRef);
+    expect(selectInputPopoverNode.style.visibility).toBe('visible');
   });
 
   it('Does allow an initial value to be set', () => {
@@ -171,8 +186,8 @@ describe('SelectInput', () => {
     );
     const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     TestUtils.Simulate.click(selectInputNode);
-    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef);
-    expect(selectInputPopoverNode.style.display).toBe('none');
+    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.contentRef);
+    expect(selectInputPopoverNode.style.visibility).toBe('hidden');
   });
 
   it('Does render with red shadow on error status', () => {
@@ -181,7 +196,7 @@ describe('SelectInput', () => {
         status={'error'}
       />
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
     expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
   });
 
@@ -191,7 +206,7 @@ describe('SelectInput', () => {
         status={'warning'}
       />
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
     expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
   });
 
@@ -201,7 +216,7 @@ describe('SelectInput', () => {
         status={'success'}
       />
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent);
+    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
     expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
   });
 

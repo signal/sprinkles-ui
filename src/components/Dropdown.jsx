@@ -6,11 +6,7 @@ import Popover from './Popover';
 
 export default class Dropdown extends React.Component {
   static propTypes = {
-    anchorEl: React.PropTypes.object,
-    anchorOrigin: React.PropTypes.shape({
-      horizontal: React.PropTypes.oneOf(['left', 'right']),
-      vertical: React.PropTypes.oneOf(['top', 'bottom']),
-    }),
+    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         key: React.PropTypes.string,
@@ -19,14 +15,19 @@ export default class Dropdown extends React.Component {
     ),
     open: React.PropTypes.bool,
     onClick: React.PropTypes.func,
+    onRequestOpen: React.PropTypes.func,
     onRequestClose: React.PropTypes.func,
+    triggerEl: React.PropTypes.node,
     useLayerForClickAway: React.PropTypes.bool,
   };
 
   static defaultProps = {
+    anchorOrigin: 'bottom',
     items: [],
     open: false,
     onClick: () => {},
+    onRequestClose: () => {},
+    onRequestOpen: () => {},
   };
 
   displayName = 'Dropdown';
@@ -38,12 +39,12 @@ export default class Dropdown extends React.Component {
   renderItems() {
     return (
       <Popover
-        anchorEl={this.props.anchorEl}
         anchorOrigin={this.props.anchorOrigin}
-        constrainWidth={true}
         open={this.props.open}
+        onRequestOpen={this.props.onRequestOpen}
         onRequestClose={this.props.onRequestClose}
         ref={c => this.popoverRef = c}
+        triggerEl={this.props.triggerEl}
         useLayerForClickAway={this.props.useLayerForClickAway}
       >
         <List

@@ -1,28 +1,26 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import ReactDOM from 'react-dom';
 import zindex from '../shared/zindex';
 
 export default class Popover extends React.Component {
   static propTypes = {
-    anchorEl: React.PropTypes.object,
-    anchorOrigin: React.PropTypes.shape({
-      horizontal: React.PropTypes.oneOf(['left', 'right']),
-      vertical: React.PropTypes.oneOf(['top', 'bottom']),
-    }),
+    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
     children: React.PropTypes.node,
-    constrainWidth: React.PropTypes.bool,
+    contentWidth: React.PropTypes.number,
     open: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
     onRequestClose: React.PropTypes.func,
+    onRequestOpen: React.PropTypes.func,
+    triggerEl: React.PropTypes.node.isRequired,
     useLayerForClickAway: React.PropTypes.bool,
   };
 
   static defaultProps = {
-    constrainWidth: false,
+    anchorOrigin: 'bottom',
     open: false,
-    anchorOrigin: {
-      horizontal: 'left',
-      vertical: 'bottom',
-    },
+    onRequestClose: () => {},
+    onRequestOpen: () => {},
   };
 
   displayName = 'Popover';
@@ -35,50 +33,42 @@ export default class Popover extends React.Component {
   }
 
   componentWillMount() {
-    this.updatePosition(this.props.anchorEl, this.props.anchorOrigin);
+    this.updatePosition(this.props.triggerEl, this.props.anchorOrigin);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.anchorEl && nextProps.anchorOrigin) {
-      this.updatePosition(nextProps.anchorEl, nextProps.anchorOrigin);
+    if (nextProps.triggerEl && nextProps.anchorOrigin) {
+      this.updatePosition(nextProps.triggerEl, nextProps.anchorOrigin);
     }
   }
 
-  getAnchorValue(anchor, key) {
-    let anchorValue;
-    switch (key) {
-      case 'top':
-        anchorValue = anchor.top;
-        break;
-      case 'bottom':
-        anchorValue = anchor.bottom;
-        break;
-      case 'left':
-        anchorValue = anchor.left;
-        break;
-      case 'right':
-        anchorValue = anchor.right;
-        break;
-      default:
-        break;
-    }
-    return anchorValue;
+  onRequestClose() {
+    this.props.onRequestClose();
   }
 
-  calculatePosition(anchor, anchorOrigin) {
+  onRequestOpen() {
+    this.props.onRequestOpen();
+  }
+
+  calculatePosition(triggerEl) {
     return {
-      top: this.getAnchorValue(anchor, anchorOrigin.vertical),
-      left: this.getAnchorValue(anchor, anchorOrigin.horizontal),
-      width: this.props.constrainWidth ? anchor.width : undefined,
+      height: triggerEl.height,
+      width: this.props.contentWidth ? this.props.contentWidth : '100%',
     };
   }
 
-  updatePosition(anchorEl, anchorOrigin) {
-    if (anchorEl) {
-      const anchor = anchorEl.getBoundingClientRect();
+  updatePosition(triggerEl) {
+    if (triggerEl) {
+      // temp. place content on the page so we can get the height
+      const div = document.createElement('div');
+      document.body.appendChild(div);
+      const component = ReactDOM.render(triggerEl, div);
+      const node = ReactDOM.findDOMNode(component);
+      const triggerElRect = node.getBoundingClientRect();
       this.setState({
-        position: this.calculatePosition(anchor, anchorOrigin),
+        position: this.calculatePosition(triggerElRect),
       });
+      div.remove();
     }
   }
 
@@ -87,7 +77,7 @@ export default class Popover extends React.Component {
       return (
         <div
           style={style.CloseLayer}
-          onClick={this.props.onRequestClose}
+          onClick={this.onRequestClose.bind(this)}
           ref={c => this.closeLayerRef = c}
         />
       );
@@ -98,38 +88,118 @@ export default class Popover extends React.Component {
   render() {
     const style = reactCSS({
       default: {
+        PopoverWrapper: {
+          boxSizing: 'border-box',
+          display: 'inline-flex',
+          flexFlow: 'column nowrap',
+          position: 'relative',
+        },
         Popover: {
+          boxSizing: 'border-box',
+          flexFlow: 'column nowrap',
+          position: 'absolute',
+          transition: 'all 0.1s ease 0ms',
+          width: this.state.position.width,
+          visibility: 'hidden',
           zIndex: zindex.Popover,
-          display: 'none',
-          position: 'fixed',
+        },
+        TriggerWrapper: {
+          flexFlow: 'column nowrap',
         },
         CloseLayer: {
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: zindex.PopoverClose,
+          visibility: 'hidden',
         },
       },
       open: {
+        CloseLayer: {
+          bottom: 0,
+          left: 0,
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          height: '100%',
+          width: '100%',
+          visibility: 'visible',
+          zIndex: zindex.PopoverClose,
+        },
         Popover: {
-          display: 'block',
+          opacity: 1,
+          visibility: 'visible',
         },
       },
       anchored: {
         Popover: this.state.position,
       },
+      bottom: {
+        PopoverWrapper: {
+          flexFlow: 'column nowrap',
+        },
+        Popover: {
+          left: '50%',
+          transform: 'translateX(-50%) translateY(0)',
+        },
+      },
+      left: {
+        PopoverWrapper: {
+          flexFlow: 'row-reverse nowrap',
+        },
+        Popover: {
+          top: '50%',
+          transform: 'translateY(-50%) translateX(-100%)',
+        },
+        TriggerWrapper: {
+          flexFlow: 'row-reverse nowrap',
+        },
+      },
+      right: {
+        PopoverWrapper: {
+          flexFlow: 'row nowrap',
+        },
+        Popover: {
+          top: '50%',
+          transform: 'translateY(-50%) translateX(0)',
+        },
+        TriggerWrapper: {
+          flexFlow: 'row nowrap',
+        },
+      },
+      top: {
+        PopoverWrapper: {
+          flexFlow: 'column-reverse nowrap',
+        },
+        Popover: {
+          bottom: 0,
+          left: '50%',
+          transform: `translateX(-50%) translateY(-${this.state.position.height}px)`,
+        },
+        TriggerWrapper: {
+          flexFlow: 'column-reverse nowrap',
+        },
+      },
     }, {
       open: this.props.open,
-      anchored: !!this.props.anchorEl,
+      bottom: this.props.anchorOrigin === 'bottom',
+      left: this.props.anchorOrigin === 'left',
+      right: this.props.anchorOrigin === 'right',
+      top: this.props.anchorOrigin === 'top',
     });
     return (
-      <div style={style.Popover}>
-        <div style={style.Popover}>
-          {this.props.children}
-        </div>
+      <div style={style.PopoverWrapper}>
         {this.renderCloseLayer(style)}
+        <div
+          onClick={this.props.disabled ? null : this.onRequestOpen.bind(this)}
+          style={style.TriggerWrapper}
+        >
+          {this.props.triggerEl}
+        </div>
+        <div
+          ref={c => this.contentRef = c}
+          style={style.Popover}
+        >
+          <span onClick={this.onRequestClose.bind(this)}>
+            {this.props.children}
+          </span>
+        </div>
       </div>
     );
   }

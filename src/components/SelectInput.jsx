@@ -23,13 +23,18 @@ export default class SelectInput extends React.Component {
       })
     ),
     onChange: React.PropTypes.func,
+    onRequestOpen: React.PropTypes.func,
+    onRequestClose: React.PropTypes.func,
+    open: React.PropTypes.bool,
     status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {
+    enabled: true,
     items: [],
     onChange: () => {},
-    enabled: true,
+    onRequestClose: () => {},
+    onRequestOpen: () => {},
   };
 
   displayName = 'SelectInput';
@@ -37,17 +42,8 @@ export default class SelectInput extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      anchorEl: undefined,
-      open: false,
       value: props.initialValue,
     };
-  }
-
-  handleClick(e) {
-    this.setState({
-      anchorEl: e.currentTarget,
-      open: true,
-    });
   }
 
   handleItemClick(item) {
@@ -58,9 +54,11 @@ export default class SelectInput extends React.Component {
   }
 
   handleRequestClose() {
-    this.setState({
-      open: false,
-    });
+    if (this.props.enabled) { this.props.onRequestClose(); }
+  }
+
+  handleRequestOpen() {
+    if (this.props.enabled) { this.props.onRequestOpen(); }
   }
 
   value() {
@@ -82,25 +80,6 @@ export default class SelectInput extends React.Component {
       return this.props.items.find((item) => item.value === this.state.value) || {};
     }
     return { label: '--' };
-  }
-
-  renderDropdown() {
-    return (
-      <Popover
-        anchorEl={this.state.anchorEl}
-        constrainWidth={true}
-        open={this.state.open}
-        useLayerForClickAway={true}
-        onRequestClose={this.handleRequestClose.bind(this)}
-        ref={c => this.popoverRef = c}
-      >
-        <List
-          ref={c => this.itemsRef = c}
-        >
-          {this.renderItems()}
-        </List>
-      </Popover>
-    );
   }
 
   renderItems() {
@@ -127,7 +106,6 @@ export default class SelectInput extends React.Component {
   renderDisplay(style) {
     return (
       <div
-        onClick={this.props.enabled ? this.handleClick.bind(this) : undefined}
         style={style.Display}
       >
         {this.renderDisplayText(style)}
@@ -169,6 +147,16 @@ export default class SelectInput extends React.Component {
     );
   }
 
+  renderTriggerEl(style) {
+    return (
+      <div
+        style={style.SelectInput}
+        ref={c => this.SelectInputRef = c}
+      >
+      {this.renderDisplay(style)}
+      </div>);
+  }
+
   render() {
     const style = reactCSS({
       default: {
@@ -176,6 +164,7 @@ export default class SelectInput extends React.Component {
           border: `1px solid ${FormColors.border}`,
           borderRadius: 3,
           color: FormColors.text,
+          minWidth: '200px',
         },
         Display: {
           cursor: 'pointer',
@@ -222,19 +211,28 @@ export default class SelectInput extends React.Component {
         },
       },
     }, {
-      open: this.state.open,
+      open: this.props.open,
       disabled: !this.props.enabled,
       success: this.props.status === 'success',
       warning: this.props.status === 'warning',
       error: this.props.status === 'error',
     });
     return (
-      <div
-        style={style.SelectInput}
+      <Popover
+        disabled={!this.props.enabled}
+        open={this.props.open}
+        onRequestClose={this.props.onRequestClose}
+        onRequestOpen={this.props.onRequestOpen}
+        ref={c => this.popoverRef = c}
+        triggerEl={this.renderTriggerEl(style)}
+        useLayerForClickAway={true}
       >
-        {this.renderDisplay(style)}
-        {this.renderDropdown()}
-      </div>
+        <List
+          ref={c => this.itemsRef = c}
+        >
+          {this.renderItems()}
+        </List>
+      </Popover>
     );
   }
 }

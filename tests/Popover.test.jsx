@@ -11,24 +11,19 @@ const Popover = require('../src/components/Popover').default;
 
 describe('Popover', () => {
   function generateFakeAnchorEl() {
-    return {
-      getBoundingClientRect() {
-        return {
-          top: 1,
-          bottom: 2,
-          left: 3,
-          right: 4,
-          width: 5,
-        };
-      },
-    };
+    return (<div />);
   }
+  const fakeAnchorEl = generateFakeAnchorEl();
 
   it('Does render a Popover', () => {
     const text = 'howdy';
     // Render a Popover
     const popoverComponent = TestUtils.renderIntoDocument(
-      <Popover open={true}>{text}</Popover>
+      <Popover
+        defaultOpen={true}
+        triggerEl={fakeAnchorEl}
+      >{text}
+      </Popover>
     );
     // grab the DOM node so we can inspect it
     const popoverNode = ReactDOM.findDOMNode(popoverComponent);
@@ -37,95 +32,73 @@ describe('Popover', () => {
   });
 
   it('Does render an open Popover', () => {
-    // Render a Popover
     const popoverComponent = TestUtils.renderIntoDocument(
-      <Popover open={true} />
+      <Popover
+        open={true}
+        triggerEl={fakeAnchorEl}
+      />
     );
-    // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    // Verify that it's rendered with the right text
-    expect(popoverNode.style.display).toEqual('block');
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.visibility).toEqual('visible');
   });
 
   it('Does render a closed Popover', () => {
-    // Render a Popover
     const popoverComponent = TestUtils.renderIntoDocument(
-      <Popover />
+      <Popover triggerEl={fakeAnchorEl} />
     );
-    // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    // Verify that it's rendered with the right text
-    expect(popoverNode.style.display).toEqual('none');
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.visibility).toEqual('hidden');
   });
 
-  it('Does render an anchored Popover', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
-    // Render a Popover
-    const popoverComponent = TestUtils.renderIntoDocument(
-      <Popover anchorEl={fakeAnchorEl} />
-    );
-    // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    expect(popoverNode.style.top).toEqual('2px');
-    expect(popoverNode.style.left).toEqual('3px');
-  });
-
-  it('Does set anchorOrigin h:left, v:bottom', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
+  it('Does set anchorOrigin left', () => {
     const popoverComponent = TestUtils.renderIntoDocument(
       <Popover
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+        anchorOrigin={'left'}
+        triggerEl={fakeAnchorEl}
       />
     );
 
-    // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    expect(popoverNode.style.top).toEqual('2px');
-    expect(popoverNode.style.left).toEqual('3px');
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.top).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(-100%)');
   });
 
-  it('Does set anchorOrigin h:left, v:top', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
+  it('Does set anchorOrigin right', () => {
     const popoverComponent = TestUtils.renderIntoDocument(
       <Popover
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
-      />
-    );
-    // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    expect(popoverNode.style.top).toEqual('1px');
-    expect(popoverNode.style.left).toEqual('3px');
-  });
-
-  it('Does set anchorOrigin h:right, v:bottom', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
-    const popoverComponent = TestUtils.renderIntoDocument(
-      <Popover
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      />
-    );
-    // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    expect(popoverNode.style.top).toEqual('2px');
-    expect(popoverNode.style.left).toEqual('4px');
-  });
-
-  it('Does set anchorOrigin h:right, v:top', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
-    const popoverComponent = TestUtils.renderIntoDocument(
-      <Popover
-        anchorEl={fakeAnchorEl}
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={'right'}
+        triggerEl={fakeAnchorEl}
       />
     );
 
-    // grab the DOM node so we can inspect it
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    expect(popoverNode.style.top).toEqual('1px');
-    expect(popoverNode.style.left).toEqual('4px');
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.top).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0)');
+  });
+
+  it('Does set anchorOrigin top', () => {
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        anchorOrigin={'top'}
+        triggerEl={fakeAnchorEl}
+      />
+    );
+
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.bottom).toEqual('0px');
+  });
+
+  it('Does set anchorOrigin bottom', () => {
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        anchorOrigin={'bottom'}
+        triggerEl={fakeAnchorEl}
+      />
+    );
+
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.left).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual('translateX(-50%) translateY(0)');
   });
 
   it('Does render a self closing popover', () => {
@@ -133,6 +106,7 @@ describe('Popover', () => {
     const popoverComponent = TestUtils.renderIntoDocument(
       <Popover
         onRequestClose={mockHandleRequestClose}
+        triggerEl={fakeAnchorEl}
         useLayerForClickAway={true}
       />
     );
@@ -143,20 +117,31 @@ describe('Popover', () => {
 
   it('Does not render a self closing popover by default', () => {
     const popoverComponent = TestUtils.renderIntoDocument(
-      <Popover />
+      <Popover triggerEl={fakeAnchorEl} />
     );
     expect(popoverComponent.closeLayerRef).not.toBeDefined();
   });
 
-  it('Does constrain the width to the anchorEl width', () => {
-    const fakeAnchorEl = generateFakeAnchorEl();
+  it('Does not constrain the width', () => {
     const popoverComponent = TestUtils.renderIntoDocument(
       <Popover
-        anchorEl={fakeAnchorEl}
         constrainWidth={true}
+        triggerEl={fakeAnchorEl}
       />
     );
-    const popoverNode = ReactDOM.findDOMNode(popoverComponent);
-    expect(popoverNode.style.width).toEqual('5px');
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.width).toEqual('100%');
+  });
+
+  it('Does constrain the width', () => {
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        constrainWidth={true}
+        contentWidth={200}
+        triggerEl={fakeAnchorEl}
+      />
+    );
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.width).toEqual('200px');
   });
 });
