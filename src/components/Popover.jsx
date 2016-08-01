@@ -61,6 +61,7 @@ export default class Popover extends React.Component {
     if (triggerEl) {
       // temp. place content on the page so we can get the height
       const div = document.createElement('div');
+      div.style.position = 'absolute';
       document.body.appendChild(div);
       const component = ReactDOM.render(triggerEl, div);
       const node = ReactDOM.findDOMNode(component);
@@ -93,6 +94,7 @@ export default class Popover extends React.Component {
           display: 'inline-flex',
           flexFlow: 'column nowrap',
           position: 'relative',
+          width: '100%',
         },
         Popover: {
           boxSizing: 'border-box',
