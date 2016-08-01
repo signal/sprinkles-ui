@@ -51,33 +51,12 @@ describe('SelectInput', () => {
     expect(selectInputComponent.itemsRef.listItemRefs.count()).toBe(1);
   });
 
-  it('Does trigger an on close event', () => {
-    const mockHandleCloseEvent = jest.fn();
-    const selectInputComponent = TestUtils.renderIntoDocument(
-      <SelectInput
-        onRequestClose={mockHandleCloseEvent}
-        open={true}
-      />
-    );
-    const closeLayerNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.closeLayerRef);
-    TestUtils.Simulate.click(closeLayerNode);
-    expect(mockHandleCloseEvent).toBeCalled();
-  });
-
   it('Does render a closed popover', () => {
     const selectInputComponent = TestUtils.renderIntoDocument(
       <SelectInput open={false} />
     );
     const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.contentRef);
     expect(selectInputPopoverNode.style.visibility).toBe('hidden');
-  });
-
-  it('Does render an open popover', () => {
-    const selectInputComponent = TestUtils.renderIntoDocument(
-      <SelectInput open={true} />
-    );
-    const selectInputPopoverNode = ReactDOM.findDOMNode(selectInputComponent.popoverRef.contentRef);
-    expect(selectInputPopoverNode.style.visibility).toBe('visible');
   });
 
   it('Does allow an initial value to be set', () => {

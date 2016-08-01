@@ -15,9 +15,6 @@ class SelectInputWrapper extends React.Component {
       })
     ),
     onChange: React.PropTypes.func,
-    onRequestOpen: React.PropTypes.func,
-    onRequestClose: React.PropTypes.func,
-    open: React.PropTypes.bool,
     status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
@@ -28,10 +25,7 @@ class SelectInputWrapper extends React.Component {
       <SelectInput
         enabled={this.props.enabled}
         items={this.props.items}
-        open={this.props.open}
         onChange={this.props.onChange}
-        onRequestOpen={this.props.onRequestOpen}
-        onRequestClose={this.props.onRequestClose}
       />
     );
   }
@@ -44,18 +38,6 @@ describe('SelectInput', function () {
 
   before(() => {
     const handleChange = (value) => console.log('change: ', value);
-
-    const handleRequestClose = () => {
-      this.props({
-        open: false,
-      });
-    };
-
-    const handleRequestOpen = () => {
-      this.props({
-        open: true,
-      });
-    };
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.load(
@@ -71,16 +53,12 @@ describe('SelectInput', function () {
           label: 'Thing 3',
         }]}
         onChange={handleChange}
-        onRequestClose={handleRequestClose}
-        onRequestOpen={handleRequestOpen}
       />
     ).width(200);
   });
 
   it('disabled', () => this.props({ enabled: false }));
   it('enabled', () => this.props({ enabled: true }));
-  it('open', () => this.props({ open: true }));
-  it('closed', () => this.props({ open: false }));
   it('Set Success Status', () => this.props({ status: 'success' }));
   it('Set Warning Status', () => this.props({ status: 'warning' }));
   it('Set Error Status', () => this.props({ status: 'error' }));

@@ -23,9 +23,6 @@ export default class SelectInput extends React.Component {
       })
     ),
     onChange: React.PropTypes.func,
-    onRequestOpen: React.PropTypes.func,
-    onRequestClose: React.PropTypes.func,
-    open: React.PropTypes.bool,
     status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
@@ -33,8 +30,6 @@ export default class SelectInput extends React.Component {
     enabled: true,
     items: [],
     onChange: () => {},
-    onRequestClose: () => {},
-    onRequestOpen: () => {},
   };
 
   displayName = 'SelectInput';
@@ -42,6 +37,7 @@ export default class SelectInput extends React.Component {
   constructor(props) {
     super();
     this.state = {
+      open: false,
       value: props.initialValue,
     };
   }
@@ -54,11 +50,19 @@ export default class SelectInput extends React.Component {
   }
 
   handleRequestClose() {
-    if (this.props.enabled) { this.props.onRequestClose(); }
+    if (this.props.enabled) {
+      this.setState({
+        open: false,
+      });
+    }
   }
 
   handleRequestOpen() {
-    if (this.props.enabled) { this.props.onRequestOpen(); }
+    if (this.props.enabled) {
+      this.setState({
+        open: true,
+      });
+    }
   }
 
   value() {
@@ -211,7 +215,7 @@ export default class SelectInput extends React.Component {
         },
       },
     }, {
-      open: this.props.open,
+      open: this.state.open,
       disabled: !this.props.enabled,
       success: this.props.status === 'success',
       warning: this.props.status === 'warning',
@@ -220,9 +224,9 @@ export default class SelectInput extends React.Component {
     return (
       <Popover
         disabled={!this.props.enabled}
-        open={this.props.open}
-        onRequestClose={this.props.onRequestClose}
-        onRequestOpen={this.props.onRequestOpen}
+        open={this.state.open}
+        onRequestClose={this.handleRequestClose.bind(this)}
+        onRequestOpen={this.handleRequestOpen.bind(this)}
         ref={c => this.popoverRef = c}
         triggerEl={this.renderTriggerEl(style)}
         useLayerForClickAway={true}
