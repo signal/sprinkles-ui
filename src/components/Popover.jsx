@@ -109,6 +109,7 @@ export default class Popover extends React.Component {
           flexFlow: 'column nowrap',
         },
         CloseLayer: {
+          position: 'absolute',
           visibility: 'hidden',
         },
       },
