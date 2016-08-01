@@ -109,7 +109,7 @@ export default class Popover extends React.Component {
           flexFlow: 'column nowrap',
         },
         CloseLayer: {
-          position: 'absolute',
+          position: 'fixed',
           visibility: 'hidden',
         },
       },
@@ -117,7 +117,6 @@ export default class Popover extends React.Component {
         CloseLayer: {
           bottom: 0,
           left: 0,
-          position: 'absolute',
           right: 0,
           top: 0,
           height: '100%',
@@ -199,7 +198,7 @@ export default class Popover extends React.Component {
           ref={c => this.contentRef = c}
           style={style.Popover}
         >
-          <span onClick={this.onRequestClose.bind(this)}>
+          <span>
             {this.props.children}
           </span>
         </div>

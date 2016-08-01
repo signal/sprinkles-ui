@@ -128,6 +128,14 @@ describe('Popover', function () {
     contentWidth: undefined,
   }));
 
+  it('set close layer', () => this.props({
+    useLayerForClickAway: true,
+  }));
+
+  it('clear close layer', () => this.props({
+    useLayerForClickAway: undefined,
+  }));
+
   /**
    * Documentation (Markdown)
    */
