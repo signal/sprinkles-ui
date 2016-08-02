@@ -20,7 +20,7 @@ describe('NavListItem', function () {
             cy={'6'}
             fill={'red'}
             r={'6'}
-          ></circle>
+          />
         }
         text={loremIpsum()}
       />

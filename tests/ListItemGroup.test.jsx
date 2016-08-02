@@ -1,13 +1,13 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import { StructuralColors } from '../src/shared/colors';
+
 jest.dontMock('../src/components/ListItemGroup');
 jest.dontMock('../src/components/Text');
 jest.dontMock('../src/components/ListItem');
 jest.dontMock('../src/components/TextListItem');
 jest.dontMock('../src/shared/colors');
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import { StructuralColors } from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
 const ListItemGroup = require('../src/components/ListItemGroup').default;

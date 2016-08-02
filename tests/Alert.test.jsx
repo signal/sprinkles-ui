@@ -1,12 +1,12 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Alert');
-jest.dontMock('../src/components/Text');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import { Colors } from '../src/shared/colors';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/Alert');
+jest.dontMock('../src/components/Text');
 
 // TODO: move this to es6 style import when its implemented in jest
 const Alert = require('../src/components/Alert').default;

@@ -1,7 +1,7 @@
+import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
 import { ButtonColors, TextColors } from '../shared/colors';
-import color from 'color';
 
 export default class Button extends React.Component {
   static propTypes = {

@@ -1,9 +1,9 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Popover');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/Popover');
 
 // TODO: move this to es6 style import when its implemented in jest
 const Popover = require('../src/components/Popover').default;

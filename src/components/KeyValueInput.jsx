@@ -1,10 +1,11 @@
+import Immutable, { Map, fromJS } from 'immutable';
 import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';
 import TextInput from './TextInput';
 import Button from './Button';
 import { TextColors, FormColors, Colors } from '../shared/colors';
-import Immutable, { Map, fromJS } from 'immutable';
+
 
 export default class KeyValueInput extends React.Component {
   static propTypes = {

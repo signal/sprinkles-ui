@@ -1,14 +1,15 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Table');
-
+import color from 'color';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { BackgroundColors } from '../src/shared/colors';
-import color from 'color';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/Table');
 
 // TODO: move this to es6 style import when its implemented in jest
 const Table = require('../src/components/Table').default;
+
 const headers = {
   name: 'Name',
   age: 'Age',

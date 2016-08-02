@@ -1,11 +1,11 @@
-jest.dontMock('../src/components/ButtonGroup');
-jest.dontMock('../src/components/Button');
-
+import color from 'color';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { ButtonColors } from '../src/shared/colors';
-import color from 'color';
+
+jest.dontMock('../src/components/ButtonGroup');
+jest.dontMock('../src/components/Button');
 
 const ButtonGroup = require('../src/components/ButtonGroup').default;
 const Button = require('../src/components/Button').default;

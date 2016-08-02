@@ -1,10 +1,10 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/TextInput');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { Colors } from '../src/shared/colors';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/TextInput');
 
 // TODO: move this to es6 style import when its implemented in jest
 const TextInput = require('../src/components/TextInput').default;

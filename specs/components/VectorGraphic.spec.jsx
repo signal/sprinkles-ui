@@ -25,7 +25,7 @@ describe('VectorGraphic', function () {
           cy={'5'}
           fill={'red'}
           r={'5'}
-        ></circle>,
+        />,
     });
   });
 
@@ -33,7 +33,7 @@ describe('VectorGraphic', function () {
     children:
       <g
         fill={'none'}
-        fill-rule={'evenodd'}
+        fillRule={'evenodd'}
         stroke={'none'}
         strokeWidth={'1'}
       >
@@ -43,7 +43,7 @@ describe('VectorGraphic', function () {
           width={'10'}
           x={'0'}
           y={'0'}
-        ></rect>
+        />
       </g>,
   }));
 
@@ -54,7 +54,7 @@ describe('VectorGraphic', function () {
         cy={'5'}
         fill={'red'}
         r={'5'}
-      ></circle>,
+      />,
   }));
 
 

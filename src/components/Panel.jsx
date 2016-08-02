@@ -1,6 +1,6 @@
-import { BackgroundColors, TextColors } from '../shared/colors';
 import React from 'react';
 import reactCSS from 'reactcss';
+import { BackgroundColors, TextColors } from '../shared/colors';
 
 export default class Panel extends React.Component {
   static propTypes = {

@@ -1,15 +1,14 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/KeyValueInput');
-jest.dontMock('../src/components/TextInput');
-jest.dontMock('../src/components/Text');
-jest.dontMock('../src/components/Button');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import { Colors, TextColors } from '../src/shared/colors';
 
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/KeyValueInput');
+jest.dontMock('../src/components/TextInput');
+jest.dontMock('../src/components/Text');
+jest.dontMock('../src/components/Button');
 
 // TODO: move this to es6 style import when its implemented in jest
 const KeyValueInput = require('../src/components/KeyValueInput').default;

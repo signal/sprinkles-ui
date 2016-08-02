@@ -1,8 +1,8 @@
+import { Map } from 'immutable';
 import React from 'react';
 import reactCSS from 'reactcss';
 import Button from './Button';
 import Alert from './Alert';
-import { Map } from 'immutable';
 
 export default class Form extends React.Component {
   static propTypes = {

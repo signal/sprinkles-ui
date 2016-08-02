@@ -1,8 +1,9 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import { Map } from 'immutable';
 import Text from './Text';
 import { TextColors } from '../shared/colors';
-import { Map } from 'immutable';
+
 
 export default class Breadcrumbs extends React.Component {
   static propTypes = {

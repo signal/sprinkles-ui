@@ -1,3 +1,8 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import Immutable from 'immutable';
+
 // don't mock our CUT or components it depends on
 jest.dontMock('../src/components/Form');
 jest.dontMock('../src/components/Button');
@@ -5,12 +10,6 @@ jest.dontMock('../src/components/Field');
 jest.dontMock('../src/components/TextInput');
 jest.dontMock('../src/components/Alert');
 jest.dontMock('../src/components/Text');
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-
-import Immutable from 'immutable';
 
 // TODO: move this to es6 style import when its implemented in jest
 const Form = require('../src/components/Form').default;
@@ -30,7 +29,7 @@ describe('Form', () => {
 
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     expect(submitButtonNode).not.toBeNull();
-    expect(submitButtonNode.attributes.hasOwnProperty('disabled')).toEqual(false);
+    expect({}.hasOwnProperty.call(submitButtonNode.attributes, 'disabled')).toEqual(false);
   });
 
   it('Does submit Form when all Fields are valid', () => {

@@ -1,3 +1,5 @@
+/* eslint react/no-render-return-value: "off" */
+
 import React from 'react';
 import reactCSS from 'reactcss';
 import ReactDOM from 'react-dom';

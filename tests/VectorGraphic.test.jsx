@@ -1,9 +1,9 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/VectorGraphic');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/VectorGraphic');
 
 // TODO: move this to es6 style import when its implemented in jest
 const VectorGraphic = require('../src/components/VectorGraphic').default;
@@ -22,7 +22,7 @@ describe('VectorGraphic', () => {
       <VectorGraphic>
         <g
           fill={'none'}
-          fill-rule={'evenodd'}
+          fillRule={'evenodd'}
           stroke={'none'}
           strokeWidth={'1'}
         >

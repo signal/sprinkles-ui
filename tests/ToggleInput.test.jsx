@@ -1,7 +1,3 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/ToggleInput');
-jest.dontMock('../src/shared/colors');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -11,6 +7,10 @@ import {
   Colors,
   FormColors,
 } from '../src/shared/colors';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/ToggleInput');
+jest.dontMock('../src/shared/colors');
 
 // TODO: move this to es6 style import when its implemented in jest
 const ToggleInput = require('../src/components/ToggleInput').default;

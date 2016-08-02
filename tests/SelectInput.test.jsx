@@ -1,11 +1,3 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/SelectInput');
-jest.dontMock('../src/components/TextListItem');
-jest.dontMock('../src/components/Text');
-jest.dontMock('../src/components/List');
-jest.dontMock('../src/components/ListItem');
-jest.dontMock('../src/components/Popover');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -15,6 +7,14 @@ import {
   BackgroundColors,
   FormColors,
 } from '../src/shared/colors';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/SelectInput');
+jest.dontMock('../src/components/TextListItem');
+jest.dontMock('../src/components/Text');
+jest.dontMock('../src/components/List');
+jest.dontMock('../src/components/ListItem');
+jest.dontMock('../src/components/Popover');
 
 // TODO: move this to es6 style import when its implemented in jest
 const SelectInput = require('../src/components/SelectInput').default;

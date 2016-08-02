@@ -59,7 +59,7 @@ export default class ButtonGroup extends React.Component {
           onClick: this.handleClick.bind(this, child.props.buttonKey),
           ref: (buttonRef) => {
             if (buttonRef) {
-              if (!!this.buttonRefs.get(child.props.buttonKey)) {
+              if (this.buttonRefs.get(child.props.buttonKey)) {
                 throw new Error(`buttonKey prop '${child.props.buttonKey}' is not unique`);
               }
               this.buttonRefs = this.buttonRefs.set(child.props.buttonKey, buttonRef);

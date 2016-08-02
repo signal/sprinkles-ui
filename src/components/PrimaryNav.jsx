@@ -1,3 +1,4 @@
+import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';
@@ -9,7 +10,6 @@ import {
   BackgroundColors,
   TextColors,
 } from '../shared/colors';
-import color from 'color';
 
 export default class PrimaryNav extends React.Component {
   static propTypes = {

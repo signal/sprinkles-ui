@@ -1,12 +1,13 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Button');
-jest.dontMock('../src/components/Text');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import { ButtonColors } from '../src/shared/colors';
 import color from 'color';
+import { ButtonColors } from '../src/shared/colors';
+
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/Button');
+jest.dontMock('../src/components/Text');
 
 // TODO: move this to es6 style import when its implemented in jest
 const Button = require('../src/components/Button').default;
@@ -29,7 +30,7 @@ describe('Button', () => {
       <Button working={true} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(true);
+    expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(true);
   });
 
   it('Does not disable Button when working is false', () => {
@@ -37,7 +38,7 @@ describe('Button', () => {
       <Button working={false} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(false);
+    expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(false);
   });
 
   it('Does not disable Button when enabled is true', () => {
@@ -45,7 +46,7 @@ describe('Button', () => {
       <Button enabled={true} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(false);
+    expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(false);
   });
 
   it('Does disable Button when enabled is false', () => {
@@ -53,7 +54,7 @@ describe('Button', () => {
       <Button enabled={false} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
-    expect(buttonNode.attributes.hasOwnProperty('disabled')).toEqual(true);
+    expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(true);
   });
 
   it('Does render a button of each type', () => {

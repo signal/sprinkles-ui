@@ -1,8 +1,8 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Version');
-
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/Version');
 
 // TODO: move this to es6 style import when its implemented in jest
 const Version = require('../src/components/Version').default;

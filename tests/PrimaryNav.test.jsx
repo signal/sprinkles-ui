@@ -1,3 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import color from 'color';
+import TestUtils from 'react-addons-test-utils';
+import { BackgroundColors } from '../src/shared/colors';
+
 // don't mock our CUT or components it depends on
 jest.dontMock('../src/components/PrimaryNav');
 jest.dontMock('../src/components/Text');
@@ -5,12 +11,6 @@ jest.dontMock('../src/shared/colors');
 jest.dontMock('../src/components/List');
 jest.dontMock('../src/components/ListItem');
 jest.dontMock('../src/components/TextListItem');
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import color from 'color';
-import TestUtils from 'react-addons-test-utils';
-import { BackgroundColors } from '../src/shared/colors';
 
 // TODO: move this to es6 style import when its implemented in jest
 const PrimaryNav = require('../src/components/PrimaryNav').default;
@@ -39,7 +39,7 @@ describe('Primary Navigation Bar', () => {
     const primaryNavComponent = TestUtils.renderIntoDocument(
       <PrimaryNav
         appIcon={
-          <div></div>
+          <div />
         }
       />
     );
@@ -60,7 +60,7 @@ describe('Primary Navigation Bar', () => {
     const navItems = [
       {
         height: 20,
-        icon: <div></div>,
+        icon: <div />,
         label: 'Item 1',
         key: 'item-1',
         width: 20,
@@ -93,7 +93,7 @@ describe('Primary Navigation Bar', () => {
     const mockHandleNavItemClick = jest.fn();
     const navItems = [
       {
-        icon: <div></div>,
+        icon: <div />,
         label: 'Item 1',
         key: 'item-1',
       },
@@ -115,7 +115,7 @@ describe('Primary Navigation Bar', () => {
   it('does set selectedNavItem', () => {
     const navItems = [
       {
-        icon: <div></div>,
+        icon: <div />,
         label: 'Item 1',
         key: 'item-1',
       },

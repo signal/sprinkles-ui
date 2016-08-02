@@ -8,8 +8,10 @@
     "extends": "airbnb",
     "rules": {
       "no-return-assign": 0,
+      "import/no-extraneous-dependencies": 0,
       "react/jsx-boolean-value": 0,
       "react/jsx-no-bind": 0,
+      "react/no-find-dom-node": 0,
       "react/prefer-stateless-function": 0
     },
     "globals": {

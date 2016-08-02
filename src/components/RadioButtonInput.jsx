@@ -1,8 +1,8 @@
+import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';
 import { Colors, FormColors, TextColors } from '../shared/colors';
-import color from 'color';
 
 export default class RadioButtonInput extends React.Component {
   static propTypes = {

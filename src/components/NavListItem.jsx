@@ -1,8 +1,8 @@
+import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';
 import VectorGraphic from './VectorGraphic';
-import color from 'color';
 import {
   Colors,
   BackgroundColors,

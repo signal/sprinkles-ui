@@ -1,10 +1,10 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Breadcrumbs');
-jest.dontMock('../src/components/Text');
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
+
+// don't mock our CUT or components it depends on
+jest.dontMock('../src/components/Breadcrumbs');
+jest.dontMock('../src/components/Text');
 
 // TODO: move this to es6 style import when its implemented in jest
 const Breadcrumbs = require('../src/components/Breadcrumbs').default;
