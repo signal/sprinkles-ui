@@ -88,6 +88,12 @@ export default class Popover extends React.Component {
     return null;
   }
 
+  renderTriggerElement() {
+    return React.cloneElement(this.props.triggerEl, {
+      ref: (c) => this.triggerElRef = c,
+    });
+  }
+
   render() {
     const style = reactCSS({
       default: {
@@ -194,7 +200,7 @@ export default class Popover extends React.Component {
           onClick={this.props.disabled ? null : this.onRequestOpen.bind(this)}
           style={style.TriggerWrapper}
         >
-          {this.props.triggerEl}
+          {this.renderTriggerElement()}
         </div>
         <div
           ref={c => this.contentRef = c}

@@ -144,4 +144,26 @@ describe('Popover', () => {
     const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
     expect(popoverNode.style.width).toEqual('200px');
   });
+
+  it('Does set Ref for triggerEl', () => {
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        open={true}
+        triggerEl={fakeAnchorEl}
+      />
+    );
+    expect(popoverComponent.triggerElRef).toBeDefined();
+  });
+
+  it('Does render a popover when trigger is clicked', () => {
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        open={true}
+        triggerEl={fakeAnchorEl}
+      />
+    );
+    const triggerDivNode = ReactDOM.findDOMNode(popoverComponent.triggerElRef);
+    TestUtils.Simulate.click(triggerDivNode);
+    expect(popoverComponent.props.open).toEqual(true);
+  });
 });
