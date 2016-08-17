@@ -78,12 +78,12 @@ export default class Table extends React.Component {
     );
   }
 
-  renderItems(style, columnKey, i, row) {
+  renderItems(style, columnKey, xCord, row, yCord) {
     const cellData = row[columnKey];
     return (
       <td
-        onClick={this.handleClick.bind(this, columnKey, i, cellData, row)}
-        style={style.TBodyItems} key={i}
+        onClick={this.handleClick.bind(this, columnKey, xCord, cellData, row, yCord)}
+        style={style.TBodyItems} key={xCord}
       >
         {cellData}
       </td>
@@ -101,7 +101,7 @@ export default class Table extends React.Component {
         style={isHoveredRow}
       >
       {
-        Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row))
+        Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i))
       }
       </tr>
     );

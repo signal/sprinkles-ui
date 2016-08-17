@@ -110,6 +110,7 @@ describe('Table', () => {
     expect(color(selectedTr.style.background).hexString())
       .toBe(color(BackgroundColors.selected).hexString());
   });
+  // TODO check that a click event passes the expected data
   it('It does trigger a click event for a clicked table body element', () => {
     const mockHandleClick = jest.fn();
     const tableComponent = TestUtils.renderIntoDocument(
