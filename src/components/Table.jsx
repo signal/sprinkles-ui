@@ -57,8 +57,8 @@ export default class Table extends React.Component {
     return this.props.records.map((record) => this.filteredSubRecords(record));
   }
 
-  handleClick(itemData, i, cellData, rowData) {
-    this.props.onClick(itemData, i, cellData, rowData);
+  handleClick(itemData, xCord, cellData, rowData, yCord) {
+    this.props.onClick(itemData, xCord, cellData, rowData, yCord);
   }
 
   renderHeaderItem(style, records) {

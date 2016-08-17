@@ -39,12 +39,13 @@ describe('Table', function () {
   `); // Markdown.
 
   this.loadTable = (props) => {
-    const handleClick = (column, i, cellData, rowData) => {
+    const handleClick = (column, xCord, cellData, rowData, yCord) => {
       console.log({
         Column: column,
-        Index: i,
+        xCord,
         'Cell Data': cellData,
         'Row Data': rowData,
+        yCord,
       });
     };
     this.unload();
