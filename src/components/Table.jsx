@@ -12,6 +12,7 @@ export default class Table extends React.Component {
     headers: React.PropTypes.object,
     records: React.PropTypes.array.isRequired,
     recordInclusion: React.PropTypes.array,
+    returnAllRecordsOnClick: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     selectedRow: React.PropTypes.number,
   }
@@ -58,7 +59,9 @@ export default class Table extends React.Component {
   }
 
   handleClick(itemData, xCord, cellData, rowData, yCord) {
-    this.props.onClick(itemData, xCord, cellData, rowData, yCord);
+    const returnedRowData = this.props.returnAllRecordsOnClick ?
+      this.props.records[yCord] : rowData;
+    this.props.onClick(itemData, xCord, cellData, returnedRowData, yCord);
   }
 
   renderHeaderItem(style, records) {

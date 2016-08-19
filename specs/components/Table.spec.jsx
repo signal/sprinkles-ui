@@ -125,6 +125,7 @@ describe('Table', function () {
   - **recordInclusion** *React.PropTypes.object* (optional) maps to key of record, used to limit what is displayed
   - **onClick** *React.PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
   - **selectedRow** *React.PropTypes.number* (optional) highlight a single row based on index
+  - **returnAllRecordsOnClick** *React.PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
 
   `);
 });

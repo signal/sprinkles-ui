@@ -15,8 +15,8 @@ const headers = {
   age: 'Age',
   color: 'Favorite Color',
 };
-const records = [{
-  name: 'Sue',
+const records = [
+{ name: 'Sue',
   age: 25,
   color: 'blue',
 },
@@ -28,11 +28,10 @@ const records = [{
   age: 39,
   color: 'red',
 },
-  {
-    name: 'Jose',
-    age: 19,
-    color: 'purple',
-  }];
+{ name: 'Jose',
+  age: 19,
+  color: 'purple',
+}];
 
 describe('Table', () => {
   it('Does render a Table', () => {
@@ -150,5 +149,36 @@ describe('Table', () => {
     const firstTr = tableNode.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0];
     TestUtils.Simulate.mouseOver(firstTr);
     expect(firstTr.style.background).toBe('');
+  });
+  it('It provides all records onClick when specified', () => {
+    const mockHandleClick = jest.fn();
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        onClick={mockHandleClick}
+        records={records}
+        recordInclusion={['name', 'age']}
+        returnAllRecordsOnClick={true}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const firstTr = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0].getElementsByTagName('td')[0];
+    TestUtils.Simulate.click(firstTr);
+    expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', records[0], 0);
+  });
+  it('It provides filtered records onClick', () => {
+    const mockHandleClick = jest.fn();
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        onClick={mockHandleClick}
+        records={records}
+        recordInclusion={['name', 'age']}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const firstTr = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0].getElementsByTagName('td')[0];
+    TestUtils.Simulate.click(firstTr);
+    expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', { name: 'Sue', age: 25 }, 0);
   });
 });
