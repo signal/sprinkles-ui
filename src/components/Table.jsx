@@ -124,18 +124,23 @@ export default class Table extends React.Component {
         },
         Table: {
           border: 'none',
+          color: TextColors.primary,
         },
         Thead: {
-          background: BackgroundColors.table,
+          background: BackgroundColors.tableHeader,
           borderBottom: `1px solid ${StructuralColors.divider}`,
         },
         TheadItems: {
-          color: TextColors.tableHead,
+          background: BackgroundColors.tableHeader,
+          border: 'none',
+          color: TextColors.tableHeader,
           padding: '20px',
           fontWeight: 'bold',
           textAlign: 'left',
         },
         TBodyItems: {
+          // reset any greedy styles
+          border: 'none',
           borderBottom: `1px solid ${StructuralColors.divider}`,
           color: TextColors.primary,
           padding: '20px',
