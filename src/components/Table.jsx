@@ -10,12 +10,18 @@ export default class Table extends React.Component {
 
   static propTypes = {
     headers: React.PropTypes.object,
+    filterRecords: React.PropTypes.array,
     records: React.PropTypes.array.isRequired,
     recordInclusion: React.PropTypes.array,
-    returnAllRecordsOnClick: React.PropTypes.bool,
+    noRecordsText: React.PropTypes.string,
     onClick: React.PropTypes.func,
+    returnAllRecordsOnClick: React.PropTypes.bool,
     selectedRow: React.PropTypes.number,
   }
+
+  static defaultProps = {
+    noRecordsText: 'No records found.',
+  };
 
   displayName = 'Table';
 
@@ -43,19 +49,39 @@ export default class Table extends React.Component {
     );
   }
 
-  filteredSubRecords(record) {
-    const self = this;
+  includeSubRecords(record, propObject) {
     const filteredRecord = {};
     Object.getOwnPropertyNames(record).forEach((val) => {
-      if (self.props.recordInclusion.indexOf(val) > -1) {
+      if (propObject.indexOf(val) > -1) {
         filteredRecord[val] = record[val];
       }
     });
     return filteredRecord;
   }
 
-  filteredRecords() {
-    return this.props.records.map((record) => this.filteredSubRecords(record));
+  filteredSubRecords(record, propObject) {
+    let filteredRecord = {};
+    Object.getOwnPropertyNames(record).forEach((val) => {
+      propObject.forEach((filterVal) => {
+        if (filterVal[val] === record[val]) {
+          filteredRecord = record;
+        }
+      });
+    });
+    return filteredRecord;
+  }
+
+  processRecords() {
+    let processedRecords = this.props.records;
+    if (this.props.recordInclusion) {
+      processedRecords = processedRecords.map((record) =>
+        this.includeSubRecords(record, this.props.recordInclusion));
+    }
+    if (this.props.filterRecords) {
+      processedRecords = processedRecords.map((record) =>
+        this.filteredSubRecords(record, this.props.filterRecords));
+    }
+    return processedRecords;
   }
 
   handleClick(itemData, xCord, cellData, rowData, yCord) {
@@ -74,9 +100,10 @@ export default class Table extends React.Component {
     );
   }
 
-  renderHeaderItems(style, records) {
+  renderHeaderItems(style, records, sourceRecords) {
+    const headerRecords = Object.keys(records[0]).length > 0 ? records : sourceRecords;
     return (<tr style={style.Thead}>
-      {this.renderHeaderItem(style, records)}
+      {this.renderHeaderItem(style, headerRecords)}
     </tr>
     );
   }
@@ -96,27 +123,41 @@ export default class Table extends React.Component {
   renderRow(style, row, i) {
     const isSelectedRow = i === this.props.selectedRow ? style.selected : null;
     const isHoveredRow = i === this.state.hoveredRow ? style.TableRow : isSelectedRow;
-    return (
+    const rowItem = Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i));
+    return rowItem.length > 0 ? (
       <tr
         key={i}
         onMouseOut={this.handleMouseOut.bind(this, i)}
         onMouseOver={this.handleMouseOver.bind(this, i)}
         style={isHoveredRow}
       >
-      {
-        Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i))
-      }
+      { rowItem }
+      </tr>
+    ) : null;
+  }
+
+  renderNoResults(style) {
+    return (
+      <tr>
+        <td
+          colSpan={Object.keys(this.props.records[0]).length}
+          style={style.TBodyItems}
+        >
+          {this.props.noRecordsText}
+        </td>
       </tr>
     );
   }
 
   renderRows(style, records) {
-    return records.map((item, i) => this.renderRow(style, item, i));
+    const rowResults = records.length ?
+      records.map((item, i) => this.renderRow(style, item, i)) : [];
+    return rowResults[0] ? rowResults : this.renderNoResults(style);
   }
 
   render() {
-    const recordProp = this.props.records;
-    const records = this.props.recordInclusion ? this.filteredRecords(recordProp) : recordProp;
+    const sourceRecords = this.props.records;
+    const records = this.processRecords(sourceRecords);
     const style = reactCSS({
       default: {
         selected: {
@@ -159,7 +200,7 @@ export default class Table extends React.Component {
     return (
       <table style={style.Table}>
         <thead>
-          {this.renderHeaderItems(style, records)}
+          {this.renderHeaderItems(style, records, sourceRecords)}
         </thead>
         <tbody>
           {this.renderRows(style, records)}

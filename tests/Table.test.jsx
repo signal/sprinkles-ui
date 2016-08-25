@@ -29,8 +29,12 @@ const records = [
   color: 'red',
 },
 { name: 'Jose',
-  age: 19,
+  age: 25,
   color: 'purple',
+},
+{ name: 'Peter',
+  age: 28,
+  color: 'blue',
 }];
 
 describe('Table', () => {
@@ -51,7 +55,36 @@ describe('Table', () => {
       />
     );
     const tableNode = ReactDOM.findDOMNode(tableComponent);
-    expect(tableNode.getElementsByTagName('thead')[0]).toBeDefined();
+    const tHead = tableNode.getElementsByTagName('thead')[0];
+    expect(tHead).toBeDefined();
+    const firstTableHeaderElement = tHead.getElementsByTagName('th')[0];
+    expect(firstTableHeaderElement.textContent)
+      .toBe('Name');
+    const secondTableHeaderElement = tHead.getElementsByTagName('th')[1];
+    expect(secondTableHeaderElement.textContent)
+      .toBe('Age');
+    const thirdTableHeaderElement = tHead.getElementsByTagName('th')[2];
+    expect(thirdTableHeaderElement.textContent)
+      .toBe('Favorite Color');
+  });
+  it('Renders a Table without headers specified', () => {
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        records={records}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const tHead = tableNode.getElementsByTagName('thead')[0];
+    expect(tHead).toBeDefined();
+    const firstTableHeaderElement = tHead.getElementsByTagName('th')[0];
+    expect(firstTableHeaderElement.textContent)
+      .toBe('name');
+    const secondTableHeaderElement = tHead.getElementsByTagName('th')[1];
+    expect(secondTableHeaderElement.textContent)
+      .toBe('age');
+    const thirdTableHeaderElement = tHead.getElementsByTagName('th')[2];
+    expect(thirdTableHeaderElement.textContent)
+      .toBe('color');
   });
   it('Does render a Table with a body', () => {
     const tableComponent = TestUtils.renderIntoDocument(
@@ -72,7 +105,7 @@ describe('Table', () => {
     );
     const tableNode = ReactDOM.findDOMNode(tableComponent);
     const tRowCells = tableNode.getElementsByTagName('tbody')[0].getElementsByTagName('td').length;
-    expect(tRowCells).toBe(12);
+    expect(tRowCells).toBe(15);
   });
   it('Renders a Table with limited data selected', () => {
     const tableComponent = TestUtils.renderIntoDocument(
@@ -84,18 +117,7 @@ describe('Table', () => {
     );
     const tableNode = ReactDOM.findDOMNode(tableComponent);
     const tRowCells = tableNode.getElementsByTagName('tbody')[0].getElementsByTagName('td').length;
-    expect(tRowCells).toBe(8);
-  });
-  it('Renders a Table without headers specified', () => {
-    const tableComponent = TestUtils.renderIntoDocument(
-      <Table
-        records={records}
-      />
-    );
-    const tableNode = ReactDOM.findDOMNode(tableComponent);
-    const tRowCells = tableNode.getElementsByTagName('tbody')[0].getElementsByTagName('td').length;
-    expect(tableNode.getElementsByTagName('thead')[0]).toBeDefined();
-    expect(tRowCells).toBe(12);
+    expect(tRowCells).toBe(10);
   });
   it('Renders a Table without with the first row selected', () => {
     const tableComponent = TestUtils.renderIntoDocument(
@@ -166,7 +188,7 @@ describe('Table', () => {
     TestUtils.Simulate.click(firstTr);
     expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', records[0], 0);
   });
-  it('It provides filtered records onClick', () => {
+  it('It provides only included records onClick', () => {
     const mockHandleClick = jest.fn();
     const tableComponent = TestUtils.renderIntoDocument(
       <Table
@@ -180,5 +202,73 @@ describe('Table', () => {
       .getElementsByTagName('tr')[0].getElementsByTagName('td')[0];
     TestUtils.Simulate.click(firstTr);
     expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', { name: 'Sue', age: 25 }, 0);
+  });
+  it('It renders a table with only filtered record types', () => {
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        headers={headers}
+        records={records}
+        filterRecords={[{ color: 'blue' }]}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const firstTableRow = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0];
+    const row1cell1 = firstTableRow.getElementsByTagName('td')[0];
+    expect(row1cell1.textContent)
+      .toBe('Sue');
+    const row1cell2 = firstTableRow.getElementsByTagName('td')[1];
+    expect(row1cell2.textContent)
+      .toBe('25');
+    const row1cell3 = firstTableRow.getElementsByTagName('td')[2];
+    expect(row1cell3.textContent)
+      .toBe('blue');
+    const secondTableRow = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[1];
+    const row2cell1 = secondTableRow.getElementsByTagName('td')[0];
+    expect(row2cell1.textContent)
+      .toBe('Peter');
+    const row2cell2 = secondTableRow.getElementsByTagName('td')[1];
+    expect(row2cell2.textContent)
+      .toBe('28');
+    const row2cell3 = secondTableRow.getElementsByTagName('td')[2];
+    expect(row2cell3.textContent)
+      .toBe('blue');
+    const thirdTableRow = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[2];
+    expect(thirdTableRow)
+      .toBeUndefined();
+  });
+  it('It renders a zero state when all data is filtered out', () => {
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        headers={headers}
+        records={records}
+        recordInclusion={['name', 'age']}
+        filterRecords={[{ age: 125 }]}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const firstTableRow = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0];
+    const row1cell1 = firstTableRow.getElementsByTagName('td')[0];
+    expect(row1cell1.textContent)
+      .toBe('No records found.');
+  });
+  it('It renders a table header when all data is filtered out', () => {
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        headers={headers}
+        records={records}
+        recordInclusion={['name', 'age']}
+        filterRecords={[{ age: 125 }]}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const tHead = tableNode.getElementsByTagName('thead')[0];
+    expect(tHead).toBeDefined();
+    const firstTableHeaderElement = tHead.getElementsByTagName('th')[0];
+    expect(firstTableHeaderElement.textContent)
+      .toBe('Name');
   });
 });
