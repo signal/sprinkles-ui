@@ -9,6 +9,10 @@ import {
 export default class Table extends React.Component {
 
   static propTypes = {
+    columns: React.PropTypes.shape({
+      order: React.PropTypes.array,
+      width: React.PropTypes.array,
+    }),
     headers: React.PropTypes.object,
     filterRecords: React.PropTypes.array,
     records: React.PropTypes.array.isRequired,
@@ -87,6 +91,7 @@ export default class Table extends React.Component {
   handleClick(itemData, xCord, cellData, rowData, yCord) {
     const returnedRowData = this.props.returnAllRecordsOnClick ?
       this.props.records[yCord] : rowData;
+    //  FIXME: We should pass an object instead of individual arguments
     this.props.onClick(itemData, xCord, cellData, returnedRowData, yCord);
   }
 
@@ -110,10 +115,14 @@ export default class Table extends React.Component {
 
   renderItems(style, columnKey, xCord, row, yCord) {
     const cellData = row[columnKey];
+    const cellWidth = (this.props.columns && this.props.columns.width)
+      ? this.props.columns.width[xCord] : 'auto';
+    const tdStyle = Object.assign({}, style.TBodyItems, { width: cellWidth });
     return (
       <td
+        key={xCord}
         onClick={this.handleClick.bind(this, columnKey, xCord, cellData, row, yCord)}
-        style={style.TBodyItems} key={xCord}
+        style={tdStyle}
       >
         {cellData}
       </td>

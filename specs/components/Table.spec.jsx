@@ -52,6 +52,7 @@ describe('Table', function () {
     this.unload();
     this.load(
       <Table
+        columns={props.columns}
         headers={props.headers}
         filterRecords={props.filterRecords}
         onClick={props.onClick ? handleClick : null}
@@ -141,13 +142,25 @@ describe('Table', function () {
         filterRecords: [{ bar: 'foo' }],
       });
   });
+  it('Sets column width', () => {
+    this.loadTable(
+      {
+        columns: {
+          width: ['60%', '10%', '30%'],
+        },
+        headers: this.headers,
+        records: this.records,
+      });
+  });
 
   /**
    * Documentation (Markdown)
    */
   this.footer(`
   ### Table
-
+  - **columns** *React.PropTypes.shape* (optional)
+    - **order** *React.PropTypes.array* (optional) reorganizes the columns by key in this order
+    - **width** *React.PropTypes.array* (optional) sets the width of individual columns the value specified here. If a column is obmitted 'auto' is used.
   - **headers** *React.PropTypes.object* (optional) maps to key of record. Use to provide custom header text otherwise the key is used
   - **records** *React.PropTypes.object* key/ value set of data used to populate the table
   - **recordInclusion** *React.PropTypes.object* (optional) maps to key of record, used to limit what is displayed
