@@ -10,6 +10,10 @@ export const ButtonColors = Object.assign({
   primary: '#0275D8',
 }, Colors);
 
+export const IconColors = {
+  primary: '#545454',
+};
+
 export const TextColors = {
   primary: '#212121',
   secondary: '#727272',

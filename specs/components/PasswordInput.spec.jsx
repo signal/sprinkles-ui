@@ -41,9 +41,6 @@ describe('PasswordInput', function () {
   it('Clear Status', () => this.props({ status: undefined }));
   it('Disable Input', () => this.props({ enabled: false }));
   it('Enable Input', () => this.props({ enabled: true }));
-  it('Disable Input', () => this.props({ enabled: false }));
-  it('Enable Input', () => this.props({ enabled: true }));
-
 
   /**
    * Documentation (Markdown)
