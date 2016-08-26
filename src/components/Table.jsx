@@ -13,12 +13,12 @@ export default class Table extends React.Component {
       order: React.PropTypes.array,
       width: React.PropTypes.array,
     }),
-    headers: React.PropTypes.object,
     filterRecords: React.PropTypes.array,
-    records: React.PropTypes.array.isRequired,
-    recordInclusion: React.PropTypes.array,
+    headers: React.PropTypes.object,
     noRecordsText: React.PropTypes.string,
     onClick: React.PropTypes.func,
+    records: React.PropTypes.array.isRequired,
+    recordInclusion: React.PropTypes.array,
     returnAllRecordsOnClick: React.PropTypes.bool,
     selectedRow: React.PropTypes.number,
   }
@@ -75,6 +75,14 @@ export default class Table extends React.Component {
     return filteredRecord;
   }
 
+  sortRecords(record) {
+    const newRecord = {};
+    this.props.columns.order.forEach((val) => {
+      newRecord[val] = record[val];
+    });
+    return newRecord;
+  }
+
   processRecords() {
     let processedRecords = this.props.records;
     if (this.props.recordInclusion) {
@@ -84,6 +92,10 @@ export default class Table extends React.Component {
     if (this.props.filterRecords) {
       processedRecords = processedRecords.map((record) =>
         this.filteredSubRecords(record, this.props.filterRecords));
+    }
+    if (this.props.columns && this.props.columns.order) {
+      processedRecords = processedRecords.map((record) =>
+        this.sortRecords(record));
     }
     return processedRecords;
   }
@@ -106,6 +118,7 @@ export default class Table extends React.Component {
   }
 
   renderHeaderItems(style, records, sourceRecords) {
+    // When all records are filtered out, still show header by using source record
     const headerRecords = Object.keys(records[0]).length > 0 ? records : sourceRecords;
     return (<tr style={style.Thead}>
       {this.renderHeaderItem(style, headerRecords)}

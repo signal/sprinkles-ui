@@ -152,6 +152,16 @@ describe('Table', function () {
         records: this.records,
       });
   });
+  it('Sorts columns in specified order', () => {
+    this.loadTable(
+      {
+        columns: {
+          order: ['name', 'color', 'age'],
+        },
+        headers: this.headers,
+        records: this.records,
+      });
+  });
 
   /**
    * Documentation (Markdown)

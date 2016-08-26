@@ -10,6 +10,17 @@ jest.dontMock('../src/components/Table');
 // TODO: move this to es6 style import when its implemented in jest
 const Table = require('../src/components/Table').default;
 
+const recordsAltOrdered = [
+  { name: 'Sue',
+    color: 'blue',
+    age: 25,
+  },
+  { name: 'Frank',
+    color: 'green',
+    age: 20,
+  },
+];
+
 const headers = {
   name: 'Name',
   age: 'Age',
@@ -293,5 +304,64 @@ describe('Table', () => {
     const row1cell3 = firstTableRow.getElementsByTagName('td')[2];
     expect(row1cell3.style.width)
       .toBe('30%');
+  });
+
+  it('renders a table with columns in the order specified by records', () => {
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        columns={{ order: ['age', 'color', 'name'] }}
+        headers={headers}
+        records={recordsAltOrdered}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const firstTableRow = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0];
+    const row1cell1 = firstTableRow.getElementsByTagName('td')[0];
+    expect(row1cell1.textContent)
+      .toBe('25');
+    const row1cell2 = firstTableRow.getElementsByTagName('td')[1];
+    expect(row1cell2.textContent)
+      .toBe('blue');
+    const row1cell3 = firstTableRow.getElementsByTagName('td')[2];
+    expect(row1cell3.textContent)
+      .toBe('Sue');
+    const secondTableRow = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[1];
+    const row2cell1 = secondTableRow.getElementsByTagName('td')[0];
+    expect(row2cell1.textContent)
+      .toBe('20');
+    const row2cell2 = secondTableRow.getElementsByTagName('td')[1];
+    expect(row2cell2.textContent)
+      .toBe('green');
+    const row2cell3 = secondTableRow.getElementsByTagName('td')[2];
+    expect(row2cell3.textContent)
+      .toBe('Frank');
+    const thirdTableRow = tableNode.getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[2];
+    expect(thirdTableRow)
+      .toBeUndefined();
+  });
+
+  it('renders a table header in the order specified', () => {
+    const tableComponent = TestUtils.renderIntoDocument(
+      <Table
+        columns={{ order: ['color', 'age', 'name'] }}
+        headers={headers}
+        records={records}
+      />
+    );
+    const tableNode = ReactDOM.findDOMNode(tableComponent);
+    const tHead = tableNode.getElementsByTagName('thead')[0];
+    expect(tHead).toBeDefined();
+    const firstTableHeaderElement = tHead.getElementsByTagName('th')[0];
+    expect(firstTableHeaderElement.textContent)
+      .toBe('Favorite Color');
+    const secondTableHeaderElement = tHead.getElementsByTagName('th')[1];
+    expect(secondTableHeaderElement.textContent)
+      .toBe('Age');
+    const thirdTableHeaderElement = tHead.getElementsByTagName('th')[2];
+    expect(thirdTableHeaderElement.textContent)
+      .toBe('Name');
   });
 });
