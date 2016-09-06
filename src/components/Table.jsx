@@ -64,15 +64,15 @@ export default class Table extends React.Component {
   }
 
   filteredSubRecords(record, propObject) {
-    let filteredRecord = {};
+    let result = false;
     Object.getOwnPropertyNames(record).forEach((val) => {
       propObject.forEach((filterVal) => {
         if (filterVal[val] === record[val]) {
-          filteredRecord = record;
+          result = true;
         }
       });
     });
-    return filteredRecord;
+    return result;
   }
 
   sortRecords(record) {
@@ -90,7 +90,7 @@ export default class Table extends React.Component {
         this.includeSubRecords(record, this.props.recordInclusion));
     }
     if (this.props.filterRecords) {
-      processedRecords = processedRecords.map((record) =>
+      processedRecords = processedRecords.filter((record) =>
         this.filteredSubRecords(record, this.props.filterRecords));
     }
     if (this.props.columns && this.props.columns.order) {
@@ -103,7 +103,7 @@ export default class Table extends React.Component {
   handleClick(itemData, xCord, cellData, rowData, yCord) {
     const returnedRowData = this.props.returnAllRecordsOnClick ?
       this.props.records[yCord] : rowData;
-    //  FIXME: We should pass an object instead of individual arguments
+    // FIXME: We should pass an object instead of individual arguments
     this.props.onClick(itemData, xCord, cellData, returnedRowData, yCord);
   }
 
@@ -119,7 +119,8 @@ export default class Table extends React.Component {
 
   renderHeaderItems(style, records, sourceRecords) {
     // When all records are filtered out, still show header by using source record
-    const headerRecords = Object.keys(records[0]).length > 0 ? records : sourceRecords;
+    const headerRecords = (records[0] && Object.keys(records[0]).length > 0)
+      ? records : sourceRecords;
     return (<tr style={style.Thead}>
       {this.renderHeaderItem(style, headerRecords)}
     </tr>
@@ -128,14 +129,10 @@ export default class Table extends React.Component {
 
   renderItems(style, columnKey, xCord, row, yCord) {
     const cellData = row[columnKey];
-    const cellWidth = (this.props.columns && this.props.columns.width)
-      ? this.props.columns.width[xCord] : 'auto';
-    const tdStyle = Object.assign({}, style.TBodyItems, { width: cellWidth });
     return (
       <td
-        key={xCord}
         onClick={this.handleClick.bind(this, columnKey, xCord, cellData, row, yCord)}
-        style={tdStyle}
+        style={style.TBodyItems} key={xCord}
       >
         {cellData}
       </td>

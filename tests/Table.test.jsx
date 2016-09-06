@@ -282,29 +282,6 @@ describe('Table', () => {
     expect(firstTableHeaderElement.textContent)
       .toBe('Name');
   });
-  it('It renders a table with column widths specified', () => {
-    const tableComponent = TestUtils.renderIntoDocument(
-      <Table
-        columns={{
-          width: ['60%', '10%', '30%'],
-        }}
-        headers={headers}
-        records={records}
-      />
-    );
-    const tableNode = ReactDOM.findDOMNode(tableComponent);
-    const firstTableRow = tableNode.getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[0];
-    const row1cell1 = firstTableRow.getElementsByTagName('td')[0];
-    expect(row1cell1.style.width)
-      .toBe('60%');
-    const row1cell2 = firstTableRow.getElementsByTagName('td')[1];
-    expect(row1cell2.style.width)
-      .toBe('10%');
-    const row1cell3 = firstTableRow.getElementsByTagName('td')[2];
-    expect(row1cell3.style.width)
-      .toBe('30%');
-  });
 
   it('renders a table with columns in the order specified by records', () => {
     const tableComponent = TestUtils.renderIntoDocument(
