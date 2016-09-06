@@ -129,10 +129,14 @@ export default class Table extends React.Component {
 
   renderItems(style, columnKey, xCord, row, yCord) {
     const cellData = row[columnKey];
+    const cellWidth = (this.props.columns && this.props.columns.width)
+      ? this.props.columns.width[xCord] : 'auto';
+    const tdStyle = Object.assign({}, style.TBodyItems, { width: cellWidth });
     return (
       <td
+        key={xCord}
         onClick={this.handleClick.bind(this, columnKey, xCord, cellData, row, yCord)}
-        style={style.TBodyItems} key={xCord}
+        style={tdStyle}
       >
         {cellData}
       </td>
