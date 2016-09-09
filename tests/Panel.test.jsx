@@ -2,12 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
-
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Panel');
-
-// TODO: move this to es6 style import when its implemented in jest
-const Panel = require('../src/components/Panel').default;
+import Panel from '../src/components/Panel';
 
 describe('Panel', () => {
   it('Does render a Panel with default props', () => {

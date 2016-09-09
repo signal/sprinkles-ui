@@ -3,12 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { ButtonColors } from '../src/shared/colors';
-
-jest.dontMock('../src/components/ButtonGroup');
-jest.dontMock('../src/components/Button');
-
-const ButtonGroup = require('../src/components/ButtonGroup').default;
-const Button = require('../src/components/Button').default;
+import ButtonGroup from '../src/components/ButtonGroup';
+import Button from '../src/components/Button';
 
 describe('ButtonGroup', () => {
   it('Does render an empty ButtonGroup', () => {

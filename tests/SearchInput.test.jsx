@@ -1,12 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-
-jest.dontMock('../src/components/SearchInput');
-jest.dontMock('../src/components/TextInput');
-
-// TODO: move this to es6 style import when its implemented in jest
-const SearchInput = require('../src/components/SearchInput').default;
+import SearchInput from '../src/components/SearchInput';
 
 describe('SearchInput', () => {
   let emptySearchInputComponent;
@@ -37,18 +32,7 @@ describe('SearchInput', () => {
 
     expect(searchInputNode.disabled).toBe(true);
   });
-  it('Does merges search settings with defaults', () => {
-    const mergedSearchSettings = {
-      keys: [
-        'title',
-        'author.firstName',
-      ],
-      distance: 100,
-      location: 0,
-      maxPatternLength: 32,
-      shouldSort: false,
-      threshold: 0.6,
-    };
+  it('Does merge search settings with defaults', () => {
     const searchSettings = {
       keys: [
         'title',
@@ -62,7 +46,7 @@ describe('SearchInput', () => {
       />
     );
 
-    expect(searchInputComponent.state.combinedSearchSettings).toEqual(mergedSearchSettings);
+    expect(searchInputComponent.state.combinedSearchSettings.keys).toEqual(searchSettings.keys);
   });
   it('Does trigger a change event on search', () => {
     const handleChange = jest.genMockFunction();
@@ -92,7 +76,7 @@ describe('SearchInput', () => {
 
     expect(handleChange).toBeCalledWith({
       value: 'zoo',
-      searchResults: undefined,
+      searchResults: [],
     });
   });
 

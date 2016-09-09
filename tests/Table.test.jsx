@@ -3,12 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { BackgroundColors } from '../src/shared/colors';
-
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Table');
-
-// TODO: move this to es6 style import when its implemented in jest
-const Table = require('../src/components/Table').default;
+import Table from '../src/components/Table';
 
 const recordsAltOrdered = [
   { name: 'Sue',

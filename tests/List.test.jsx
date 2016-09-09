@@ -2,18 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { StructuralColors } from '../src/shared/colors';
-
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/List');
-jest.dontMock('../src/components/ListItem');
-jest.dontMock('../src/components/TextListItem');
-jest.dontMock('../src/components/Text');
-jest.dontMock('../src/shared/colors');
-
-// TODO: move this to es6 style import when its implemented in jest
-const List = require('../src/components/List').default;
-const ListItem = require('../src/components/ListItem').default;
-const TextListItem = require('../src/components/TextListItem').default;
+import List from '../src/components/List';
+import ListItem from '../src/components/ListItem';
+import TextListItem from '../src/components/TextListItem';
 
 describe('List', () => {
   it('Does render a List', () => {

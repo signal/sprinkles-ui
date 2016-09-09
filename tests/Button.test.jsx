@@ -3,15 +3,8 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import { ButtonColors } from '../src/shared/colors';
-
-
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Button');
-jest.dontMock('../src/components/Text');
-
-// TODO: move this to es6 style import when its implemented in jest
-const Button = require('../src/components/Button').default;
-const Text = require('../src/components/Text').default;
+import Button from '../src/components/Button';
+import Text from '../src/components/Text';
 
 describe('Button', () => {
   it('Does render a Button with default text', () => {

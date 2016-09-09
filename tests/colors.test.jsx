@@ -1,7 +1,4 @@
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/shared/colors');
-
-const Colors = require('../src/shared/colors').Colors;
+import { Colors } from '../src/shared/colors';
 
 describe('Colors', () => {
   it('Does have expected color values', () => {

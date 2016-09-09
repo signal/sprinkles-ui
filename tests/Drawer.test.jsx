@@ -3,12 +3,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import { BackgroundColors } from '../src/shared/colors';
-
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Drawer');
-
-// TODO: move this to es6 style import when its implemented in jest
-const Drawer = require('../src/components/Drawer').default;
+import Drawer from '../src/components/Drawer';
 
 
 describe('Drawer', () => {

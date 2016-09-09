@@ -3,15 +3,8 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import { Colors } from '../src/shared/colors';
-
-// don't mock our CUT or components it depends on
-jest.dontMock('../src/components/Field');
-jest.dontMock('../src/components/TextInput');
-jest.dontMock('../src/components/Text');
-
-// TODO: move this to es6 style import when its implemented in jest
-const Field = require('../src/components/Field').default;
-const TextInput = require('../src/components/TextInput').default;
+import Field from '../src/components/Field';
+import TextInput from '../src/components/TextInput';
 
 
 describe('Field', () => {
@@ -218,7 +211,7 @@ describe('Field', () => {
 
   it('Does trigger onChange when the input changes', () => {
     const change = 'changed value';
-    let mockHandleChange = jest.genMockFunction();
+    const mockHandleChange = jest.genMockFunction();
     const fieldComponent = TestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
