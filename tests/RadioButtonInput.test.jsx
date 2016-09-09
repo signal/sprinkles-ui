@@ -5,27 +5,32 @@ import RadioButtonInput from '../src/components/RadioButtonInput';
 
 
 describe('RadioButtonInput', () => {
+  const items = [
+    {
+      name: 'Name',
+      value: 'Value',
+    },
+    {
+      name: 'Name2',
+      value: 'Value2',
+    },
+  ];
+
   it('Does render a RadioButtonInput', () => {
     // Render an RadioButtonInput
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
-      <RadioButtonInput />
+      <RadioButtonInput items={items} />
     );
     expect(radioButtonInputComponent).toBeDefined();
   });
 
   it('Does render RadioButtonInput Items', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-    ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput items={items} />
     );
     const radioInputs = TestUtils
       .scryRenderedDOMComponentsWithTag(radioButtonInputComponent, 'input');
-    expect(radioInputs.length).toBe(1);
+    expect(radioInputs.length).toBe(2);
     radioInputs.forEach((item, i) => {
       expect(item.name).toBe(items[i].name);
       expect(item.value).toBe(items[i].value);
@@ -38,16 +43,6 @@ describe('RadioButtonInput', () => {
   });
 
   it('Does render a RadioButton input with the first item selected by default', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-      {
-        name: 'Name2',
-        value: 'Value2',
-      },
-    ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput items={items} />
     );
@@ -63,16 +58,6 @@ describe('RadioButtonInput', () => {
   });
 
   it('Does change the value when the a Radio item is selected', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-      {
-        name: 'Name2',
-        value: 'Value2',
-      },
-    ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput items={items} />
     );
@@ -84,16 +69,6 @@ describe('RadioButtonInput', () => {
   });
 
   it('Does fire an onChange event when the value changes', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-      {
-        name: 'Name2',
-        value: 'Value2',
-      },
-    ];
     const mockHandleChange = jest.genMockFunction();
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput
@@ -108,16 +83,6 @@ describe('RadioButtonInput', () => {
   });
 
   it('Does set the initialValue of the RadioButtonInput', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-      {
-        name: 'Name2',
-        value: 'Value2',
-      },
-    ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput
         initialValue={'Value2'}
@@ -128,16 +93,6 @@ describe('RadioButtonInput', () => {
   });
 
   it('Does render a disabled RadioButtonInput', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-      {
-        name: 'Name2',
-        value: 'Value2',
-      },
-    ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput
         enabled={false}
@@ -153,7 +108,7 @@ describe('RadioButtonInput', () => {
 
   it('Does validate the RadioButtonInput', () => {
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
-      <RadioButtonInput />
+      <RadioButtonInput items={items} />
     );
     expect(radioButtonInputComponent.validate()).toEqual({
       valid: true,
@@ -163,16 +118,6 @@ describe('RadioButtonInput', () => {
   });
 
   it('Does validate the RadioButtonInput and detect changed input', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-      {
-        name: 'Name2',
-        value: 'Value2',
-      },
-    ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput items={items} />
     );
@@ -187,16 +132,6 @@ describe('RadioButtonInput', () => {
   });
 
   it('Does validate the RadioButtonInput and detect changed input with initialValue set', () => {
-    const items = [
-      {
-        name: 'Name',
-        value: 'Value',
-      },
-      {
-        name: 'Name2',
-        value: 'Value2',
-      },
-    ];
     const radioButtonInputComponent = TestUtils.renderIntoDocument(
       <RadioButtonInput
         initialValue={'Value2'}

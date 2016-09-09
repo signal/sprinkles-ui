@@ -17,11 +17,13 @@ describe('Table', function () {
     age: 25,
     color: 'blue',
   },
-	{ name: 'Frank',
+  {
+    name: 'Frank',
     age: 20,
     color: 'green',
   },
-	{ name: 'Larry',
+  {
+    name: 'Larry',
     age: 39,
     color: 'red',
   },

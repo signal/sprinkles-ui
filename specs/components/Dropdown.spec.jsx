@@ -1,5 +1,6 @@
 /* eslint func-names: "off" */
 /* eslint no-console: "off" */
+/* eslint react/no-unused-prop-types: "off" */
 
 import React from 'react';
 import Dropdown from '../../src/components/Dropdown';
@@ -7,7 +8,7 @@ import { Colors } from '../../src/shared/colors';
 
 class DropdownWrapper extends React.Component {
   static propTypes = {
-    anchorOrigin: React.PropTypes.object,
+    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         key: React.PropTypes.string,

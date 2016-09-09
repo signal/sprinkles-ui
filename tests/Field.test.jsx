@@ -95,8 +95,8 @@ describe('Field', () => {
     const errMessage = 'Some error occured';
     const fieldComponent = TestUtils.renderIntoDocument(
       <Field
-        error={errMessage}
         fieldKey={'key'}
+        error={errMessage}
       />
     );
     const errorNode = ReactDOM.findDOMNode(fieldComponent.errorRef);
@@ -228,8 +228,9 @@ describe('Field', () => {
   it('Does render a disabled Field', () => {
     const fieldComponent = TestUtils.renderIntoDocument(
       <Field
-        enabled={false}
         fieldKey={'key'}
+        enabled={false}
+
       >
         <TextInput />
       </Field>
@@ -241,9 +242,10 @@ describe('Field', () => {
   it('Does render a label positioned left', () => {
     const fieldComponent = TestUtils.renderIntoDocument(
       <Field
+        fieldKey={'key'}
         label={'Test'}
         labelPosition={'left'}
-        fieldKey={'key'}
+
       >
         <TextInput />
       </Field>
@@ -257,9 +259,10 @@ describe('Field', () => {
   it('Does render a label positioned top', () => {
     const fieldComponent = TestUtils.renderIntoDocument(
       <Field
+        fieldKey={'key'}
         label={'Test'}
         labelPosition={'top'}
-        fieldKey={'key'}
+
       >
         <TextInput />
       </Field>

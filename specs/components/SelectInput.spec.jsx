@@ -1,5 +1,6 @@
 /* eslint func-names: "off" */
 /* eslint no-console: "off" */
+/* eslint react/no-unused-prop-types: "off" */
 
 import React from 'react';
 import SelectInput from '../../src/components/SelectInput';

@@ -1,3 +1,6 @@
+/* eslint react/no-unused-prop-types: "off" */
+/* eslint class-methods-use-this: "off" */
+
 import React from 'react';
 
 export default class Version extends React.Component {
@@ -15,22 +18,6 @@ export default class Version extends React.Component {
     super();
     this.validateVersionSelectorRegex = RegExp(/^(?!=)[<>]??[=]??([\d.]+)$/);
     this.validateVersionRegex = RegExp(/^([\d.]+)$/);
-  }
-
-  validVersionSelector(version) {
-    const matches = this.validateVersionSelectorRegex.exec(version);
-    if (!matches) {
-      return false;
-    }
-    return matches[1].split('.').find((item) => item === '') === undefined;
-  }
-
-  validVersion(version) {
-    const matches = this.validateVersionRegex.exec(version);
-    if (!matches) {
-      return false;
-    }
-    return matches[1].split('.').find((item) => item === '') === undefined;
   }
 
   versionComparitor(versionA, versionB) {
@@ -54,6 +41,22 @@ export default class Version extends React.Component {
 
   matchingTag(props) {
     return !!props.tag && props.tag === props.tagSelector;
+  }
+
+  validVersionSelector(version) {
+    const matches = this.validateVersionSelectorRegex.exec(version);
+    if (!matches) {
+      return false;
+    }
+    return matches[1].split('.').find((item) => item === '') === undefined;
+  }
+
+  validVersion(version) {
+    const matches = this.validateVersionRegex.exec(version);
+    if (!matches) {
+      return false;
+    }
+    return matches[1].split('.').find((item) => item === '') === undefined;
   }
 
   matchingVersion(props) {

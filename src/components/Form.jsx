@@ -1,3 +1,5 @@
+/* eslint react/no-unused-prop-types: "off" */
+
 import { Map } from 'immutable';
 import React from 'react';
 import reactCSS from 'reactcss';

@@ -1,3 +1,5 @@
+/* eslint react/no-unused-prop-types: "off" */
+
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
@@ -10,6 +12,7 @@ import {
   BackgroundColors,
   TextColors,
 } from '../shared/colors';
+import { Resets } from '../shared/styles';
 
 export default class PrimaryNav extends React.Component {
   static propTypes = {
@@ -121,7 +124,7 @@ export default class PrimaryNav extends React.Component {
 
   renderExpandToggle(style) {
     return (
-      <div
+      <button
         onClick={this.props.onRequestExpandToggle}
         ref={c => this.expandToggleRef = c}
         style={style.ExpandToggleWrapper}
@@ -142,7 +145,7 @@ export default class PrimaryNav extends React.Component {
             />
           </VectorGraphic>
         </div>
-      </div>
+      </button>
     );
   }
 
@@ -190,6 +193,7 @@ export default class PrimaryNav extends React.Component {
       expanded: this.props.expanded,
       hovered: this.state.hovered,
     });
+    style.ExpandToggleWrapper = Object.assign({}, Resets.Button, style.ExpandToggleWrapper);
     return (
       <div style={style.PrimaryNav}>
         {this.renderBranding(style)}

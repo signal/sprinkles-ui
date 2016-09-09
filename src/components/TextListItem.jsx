@@ -1,3 +1,5 @@
+/* eslint jsx-a11y/no-static-element-interactions: "off" */
+
 import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';

@@ -4,6 +4,7 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import ReactDOM from 'react-dom';
 import zindex from '../shared/zindex';
+import { Resets } from '../shared/styles';
 
 export default class Popover extends React.Component {
   static propTypes = {
@@ -78,7 +79,7 @@ export default class Popover extends React.Component {
   renderCloseLayer(style) {
     if (this.props.useLayerForClickAway) {
       return (
-        <div
+        <button
           style={style.CloseLayer}
           onClick={this.onRequestClose.bind(this)}
           ref={c => this.closeLayerRef = c}
@@ -193,15 +194,17 @@ export default class Popover extends React.Component {
       right: this.props.anchorOrigin === 'right',
       top: this.props.anchorOrigin === 'top',
     });
+    style.TriggerWrapper = Object.assign({}, Resets.Button, style.TriggerWrapper);
+    style.CloseLayer = Object.assign({}, Resets.Button, style.CloseLayer);
     return (
       <div style={style.PopoverWrapper}>
         {this.renderCloseLayer(style)}
-        <div
+        <button
           onClick={this.props.disabled ? null : this.onRequestOpen.bind(this)}
           style={style.TriggerWrapper}
         >
           {this.renderTriggerElement()}
-        </div>
+        </button>
         <div
           ref={c => this.contentRef = c}
           style={style.Popover}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Resets } from '../shared/styles';
 
 export default class ListItem extends React.Component {
   static propTypes = {
@@ -45,13 +46,14 @@ export default class ListItem extends React.Component {
 
   render() {
     return (
-      <div
+      <button
         onClick={this.props.onClick}
         onMouseOut={this.handleMouseOut.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}
+        style={Resets.Button}
       >
         {this.renderChildren()}
-      </div>
+      </button>
     );
   }
 }

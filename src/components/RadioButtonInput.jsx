@@ -1,3 +1,6 @@
+/* eslint react/no-unused-prop-types: "off" */
+/* eslint jsx-a11y/no-static-element-interactions: "off" */
+
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
@@ -10,10 +13,10 @@ export default class RadioButtonInput extends React.Component {
     initialValue: React.PropTypes.string,
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
-        name: React.PropTypes.string,
-        value: React.PropTypes.string,
+        name: React.PropTypes.string.isRequired,
+        value: React.PropTypes.string.isRequired,
       })
-    ),
+    ).isRequired,
     onChange: React.PropTypes.func,
     status: React.PropTypes.oneOf(['error', 'warning', 'success']),
   };
@@ -29,22 +32,14 @@ export default class RadioButtonInput extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      value: this.initialValue(props),
+      value: props.initialValue || props.items[0].value,
     };
-  }
-
-  initialValue(props) {
-    let initialValue = props.initialValue;
-    if (!props.initialValue && props.items.length > 0) {
-      initialValue = props.items[0].value;
-    }
-    return initialValue;
   }
 
   validate() {
     return {
       valid: true,
-      isInitialValue: this.value() === this.initialValue(this.props),
+      isInitialValue: this.value() === (this.props.initialValue || this.props.items[0].value),
       validationError: '',
     };
   }

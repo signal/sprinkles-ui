@@ -1,8 +1,11 @@
+/* eslint react/no-unused-prop-types: "off" */
+
 import React from 'react';
 import reactCSS from 'reactcss';
 import { Map } from 'immutable';
 import Text from './Text';
 import { TextColors } from '../shared/colors';
+import { Resets } from '../shared/styles';
 
 
 export default class Breadcrumbs extends React.Component {
@@ -60,7 +63,7 @@ export default class Breadcrumbs extends React.Component {
       ) : undefined;
       const textDecoration = i === this.state.isHovered && !isLast ? 'underline' : undefined;
       return (
-        <span
+        <button
           key={i}
           onClick={!isLast ? this.handleClick.bind(this, item) : undefined}
           onMouseOver={this.handleMouseOver.bind(this, i)}
@@ -78,7 +81,7 @@ export default class Breadcrumbs extends React.Component {
             {item.display}
           </Text>
           <span>{divider}</span>
-        </span>
+        </button>
       );
     });
   }
@@ -94,6 +97,8 @@ export default class Breadcrumbs extends React.Component {
         },
       },
     });
+    style.Crumb = Object.assign({}, Resets.Button, style.Crumb);
+    style.ClickableCrumb = Object.assign({}, Resets.Button, style.ClickableCrumb);
     return (
       <div>
         {this.renderPath(style)}

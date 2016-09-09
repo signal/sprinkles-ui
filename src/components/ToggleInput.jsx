@@ -119,7 +119,7 @@ export default class ToggleInput extends React.Component {
       error: this.props.status === 'error',
     });
     return (
-      <div
+      <button
         onClick={this.props.enabled ? this.handleClick.bind(this) : undefined}
         style={style.ToggleInput}
       >
@@ -127,7 +127,7 @@ export default class ToggleInput extends React.Component {
           ref={(c) => this.switchRef = c}
           style={style.ToggleSwitch}
         />
-      </div>
+      </button>
     );
   }
 }

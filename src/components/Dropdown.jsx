@@ -1,3 +1,5 @@
+/* eslint react/no-unused-prop-types: "off" */
+
 import React from 'react';
 import List from './List';
 import ListItem from './ListItem';

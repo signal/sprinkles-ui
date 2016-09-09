@@ -1,3 +1,6 @@
+/* eslint jsx-a11y/no-static-element-interactions: "off" */
+/* eslint react/forbid-prop-types: "off" */
+
 import React from 'react';
 import reactCSS from 'reactcss';
 import {
@@ -53,20 +56,20 @@ export default class Table extends React.Component {
     );
   }
 
-  includeSubRecords(record, propObject) {
+  includeSubRecords(record) {
     const filteredRecord = {};
     Object.getOwnPropertyNames(record).forEach((val) => {
-      if (propObject.indexOf(val) > -1) {
+      if (this.props.recordInclusion.indexOf(val) > -1) {
         filteredRecord[val] = record[val];
       }
     });
     return filteredRecord;
   }
 
-  filteredSubRecords(record, propObject) {
+  filteredSubRecords(record) {
     let result = false;
     Object.getOwnPropertyNames(record).forEach((val) => {
-      propObject.forEach((filterVal) => {
+      this.props.filterRecords.forEach((filterVal) => {
         if (filterVal[val] === record[val]) {
           result = true;
         }
@@ -87,11 +90,11 @@ export default class Table extends React.Component {
     let processedRecords = this.props.records;
     if (this.props.recordInclusion) {
       processedRecords = processedRecords.map((record) =>
-        this.includeSubRecords(record, this.props.recordInclusion));
+        this.includeSubRecords(record));
     }
     if (this.props.filterRecords) {
       processedRecords = processedRecords.filter((record) =>
-        this.filteredSubRecords(record, this.props.filterRecords));
+        this.filteredSubRecords(record));
     }
     if (this.props.columns && this.props.columns.order) {
       processedRecords = processedRecords.map((record) =>

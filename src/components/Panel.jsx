@@ -32,7 +32,8 @@ export default class Panel extends React.Component {
     Blur2: [4, 10, 10, 18, 20],
   };
 
-  constructBoxShadow(bi) {
+  constructBoxShadow() {
+    const bi = this.props.boxShadowStrength - 1;
     const BS1 = `${Panel.bs.OffsetY1[bi]}px
     ${Panel.bs.Blur1[bi]}px
     rgba(0, 0, 0, ${Panel.bs.RGBA1[bi]})`;
@@ -65,7 +66,7 @@ export default class Panel extends React.Component {
       },
       dropShadow: {
         Panel: {
-          boxShadow: `${this.constructBoxShadow(this.props.boxShadowStrength - 1)}`,
+          boxShadow: `${this.constructBoxShadow()}`,
         },
       },
       height: {

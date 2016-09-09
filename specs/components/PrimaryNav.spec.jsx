@@ -20,7 +20,7 @@ describe('PrimaryNav', function () {
       console.log('item clicked:', item);
     };
     this.unload();
-    this.load(
+    this.component(
       <PrimaryNav
         appIcon={
           <VectorGraphic
