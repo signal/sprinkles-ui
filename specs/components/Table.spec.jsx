@@ -18,6 +18,11 @@ describe('Table', function () {
     color: 'blue',
   },
   {
+    name: 'Rachel',
+    age: 23,
+    color: 'blue',
+  },
+  {
     name: 'Frank',
     age: 20,
     color: 'green',
@@ -35,7 +40,7 @@ describe('Table', function () {
 ];
 
   this.recordInclusion = ['name', 'age'];
-  this.filterRecords = [{ color: 'blue' }];
+  this.filterRecords = [{ color: 'blue', age: 25 }];
 
   this.header(`
   ## Table
@@ -179,6 +184,6 @@ describe('Table', function () {
   - **onClick** *React.PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
   - **selectedRow** *React.PropTypes.number* (optional) highlight a single row based on index
   - **returnAllRecordsOnClick** *React.PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
-  - **filterRecords**  *React.PropTypes.object* key/ value set of data to filter the records against
+  - **filterRecords**  *React.PropTypes.object* key/ value set of data to filter the records against. If multiple values are supplied, it's considered an OR not an AND
   `);
 });
