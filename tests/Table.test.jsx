@@ -201,6 +201,19 @@ describe('Table', () => {
     expect(cell(1, 2).textContent).toBe('purple');
   });
 
+  it('It maintains the order when there are no records found', () => {
+    renderTable({
+      columns: { order: ['age', 'color', 'name'] },
+      headers,
+      records,
+      filterRecords: [{ age: 125 }],
+    });
+    expect(cell(0, 0).textContent).toBe('No records found.');
+    expect(headerElement(0).textContent).toBe('Age');
+    expect(headerElement(1).textContent).toBe('Favorite Color');
+    expect(headerElement(2).textContent).toBe('Name');
+  });
+
   it('It renders a zero state when no data meets filters', () => {
     renderTable({
       headers,

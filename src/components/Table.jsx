@@ -86,6 +86,24 @@ export default class Table extends React.Component {
     return newRecord;
   }
 
+  processHeaders() {
+    let headers = this.props.headers;
+    if (!headers) {
+      const firstRowCopy = Object.assign({}, this.props.records[0]);
+
+      Object.keys(firstRowCopy).forEach((key) => {
+        firstRowCopy[key] = key;
+      });
+
+      headers = firstRowCopy;
+    }
+
+    if (this.props.columns && this.props.columns.order) {
+      return this.sortRecords(headers);
+    }
+    return headers;
+  }
+
   processRecords() {
     let processedRecords = this.props.records;
     if (this.props.recordInclusion) {
@@ -110,22 +128,18 @@ export default class Table extends React.Component {
     this.props.onClick(itemData, xCord, cellData, returnedRowData, yCord);
   }
 
-  renderHeaderItem(style, records) {
-    const firstRecord = records[0];
-    return Object.keys(firstRecord).map((item, i) => (
+  renderHeaderItem(style, headers) {
+    return Object.keys(headers).map((header, i) => (
       <th style={style.TheadItems} key={i}>
-        {this.props.headers ? this.props.headers[item] : item}
+        {headers[header]}
       </th>
       )
     );
   }
 
-  renderHeaderItems(style, records, sourceRecords) {
-    // When all records are filtered out, still show header by using source record
-    const headerRecords = (records[0] && Object.keys(records[0]).length > 0)
-      ? records : sourceRecords;
+  renderHeaderItems(style, headers) {
     return (<tr style={style.Thead}>
-      {this.renderHeaderItem(style, headerRecords)}
+      {this.renderHeaderItem(style, headers)}
     </tr>
     );
   }
@@ -182,6 +196,7 @@ export default class Table extends React.Component {
   }
 
   render() {
+    const headers = this.processHeaders();
     const sourceRecords = this.props.records;
     const records = this.processRecords(sourceRecords);
     const style = reactCSS({
@@ -226,7 +241,7 @@ export default class Table extends React.Component {
     return (
       <table style={style.Table}>
         <thead>
-          {this.renderHeaderItems(style, records, sourceRecords)}
+          {this.renderHeaderItems(style, headers)}
         </thead>
         <tbody>
           {this.renderRows(style, records)}
