@@ -124,7 +124,7 @@ describe('Table', () => {
       .toBe(color(BackgroundColors.selected).hexString());
   });
 
-  it('It does render a hover effect for a table row element with onClick event', () => {
+  it('does render a hover effect for a table row element with onClick event', () => {
     renderTable({
       onClick: mockHandleClick,
       records,
@@ -137,7 +137,7 @@ describe('Table', () => {
       .toBe(color(BackgroundColors.hover).hexString());
   });
 
-  it('It does not render a hover effect for a table row element without onClick event', () => {
+  it('does not render a hover effect for a table row element without onClick event', () => {
     TestUtils.Simulate.mouseOver(row(0));
 
     expect(row(0).style.background).toBe('');
@@ -158,7 +158,7 @@ describe('Table', () => {
     expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', limitedData, 0);
   });
 
-  it('It provides all records onClick when specified', () => {
+  it('provides all records onClick when specified', () => {
     renderTable({
       onClick: mockHandleClick,
       records,
@@ -170,7 +170,7 @@ describe('Table', () => {
     expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', records[0], 0);
   });
 
-  it('It renders a table with one filtered record type', () => {
+  it('renders a table with one filtered record type', () => {
     renderTable({
       headers,
       records,
@@ -186,7 +186,7 @@ describe('Table', () => {
     expect(row(2)).toBeUndefined();
   });
 
-  it('It renders a table with multiple filtered record types', () => {
+  it('renders a table with multiple filtered record types', () => {
     renderTable({
       headers,
       records,
@@ -201,7 +201,7 @@ describe('Table', () => {
     expect(cell(1, 2).textContent).toBe('purple');
   });
 
-  it('It maintains the order when there are no records found', () => {
+  it('maintains the order when there are no records found', () => {
     renderTable({
       columns: { order: ['age', 'color', 'name'] },
       headers,
@@ -214,7 +214,7 @@ describe('Table', () => {
     expect(headerElement(2).textContent).toBe('Name');
   });
 
-  it('It renders a zero state when no data meets filters', () => {
+  it('renders a zero state when no data meets filters', () => {
     renderTable({
       headers,
       records,
@@ -223,7 +223,7 @@ describe('Table', () => {
     expect(cell(0, 0).textContent).toBe('No records found.');
   });
 
-  it('It renders a table header when all data is filtered out', () => {
+  it('renders a table header when all data is filtered out', () => {
     renderTable({
       headers,
       records,
@@ -233,7 +233,7 @@ describe('Table', () => {
     expect(tHead).toBeDefined();
     expect(headerElement(0).textContent).toBe('Name');
   });
-  it('It renders a table with column widths specified', () => {
+  it('renders a table with column widths specified', () => {
     renderTable({
       headers,
       records,
