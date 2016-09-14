@@ -128,7 +128,8 @@ export default class Table extends React.Component {
     this.props.onClick(itemData, xCord, cellData, returnedRowData, yCord);
   }
 
-  renderHeaderItem(style, headers) {
+  renderHeaderItem(style) {
+    const headers = this.processHeaders();
     return Object.keys(headers).map((header, i) => (
       <th style={style.TheadItems} key={i}>
         {headers[header]}
@@ -137,9 +138,9 @@ export default class Table extends React.Component {
     );
   }
 
-  renderHeaderItems(style, headers) {
+  renderHeaderItems(style) {
     return (<tr style={style.Thead}>
-      {this.renderHeaderItem(style, headers)}
+      {this.renderHeaderItem(style)}
     </tr>
     );
   }
@@ -196,7 +197,6 @@ export default class Table extends React.Component {
   }
 
   render() {
-    const headers = this.processHeaders();
     const sourceRecords = this.props.records;
     const records = this.processRecords(sourceRecords);
     const style = reactCSS({
@@ -241,7 +241,7 @@ export default class Table extends React.Component {
     return (
       <table style={style.Table}>
         <thead>
-          {this.renderHeaderItems(style, headers)}
+          {this.renderHeaderItems(style)}
         </thead>
         <tbody>
           {this.renderRows(style, records)}
