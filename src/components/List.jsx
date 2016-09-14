@@ -56,7 +56,10 @@ export default class List extends React.Component {
       border: this.props.showBorder,
     });
     return (
-      <div style={style.List}>
+      <div
+        ref={c => this.listWrapperRef = c}
+        style={style.List}
+      >
         {this.renderChildren()}
       </div>
     );

@@ -6,9 +6,15 @@ import Dropdown from '../src/components/Dropdown';
 
 describe('Dropdown', () => {
   function generateFakeAnchorEl() {
-    return (<div />);
+    return (<div style={{ width: '100px' }} />);
   }
   const fakeAnchorEl = generateFakeAnchorEl();
+  const items = [
+    {
+      key: 'key',
+      value: 'value',
+    },
+  ];
 
   it('Does render a Dropdown', () => {
     const dropdownComponent = TestUtils.renderIntoDocument(
@@ -20,12 +26,6 @@ describe('Dropdown', () => {
   });
 
   it('Does render a list of items', () => {
-    const items = [
-      {
-        key: 'key',
-        value: 'value',
-      },
-    ];
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown
         items={items}
@@ -62,10 +62,9 @@ describe('Dropdown', () => {
       />
     );
 
-    // grab the DOM node so we can inspect it
     const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
     expect(popoverNode.style.left).toEqual('50%');
-    expect(popoverNode.style.transform).toEqual('translateX(-50%) translateY(0)');
+    expect(popoverNode.style.transform).toEqual('translateX(-50%) translateY(0px)');
   });
 
   it('Does set anchorOrigin top', () => {
@@ -75,7 +74,7 @@ describe('Dropdown', () => {
         anchorOrigin={'top'}
       />
     );
-    // grab the DOM node so we can inspect it
+
     const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
     expect(popoverNode.style.bottom).toEqual('0px');
   });
@@ -87,10 +86,10 @@ describe('Dropdown', () => {
         anchorOrigin={'right'}
       />
     );
-    // grab the DOM node so we can inspect it
+
     const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
     expect(popoverNode.style.top).toEqual('50%');
-    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0)');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0px)');
   });
 
   it('Does set anchorOrigin left', () => {
@@ -101,10 +100,10 @@ describe('Dropdown', () => {
       />
     );
 
-    // grab the DOM node so we can inspect it
+
     const popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
     expect(popoverNode.style.top).toEqual('50%');
-    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(-100%)');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0)');
   });
 
   it('Does render a self closing popover', () => {
@@ -130,12 +129,6 @@ describe('Dropdown', () => {
 
   it('Does trigger a click event when an item is clicked', () => {
     const mockHandleClick = jest.fn();
-    const items = [
-      {
-        key: 'key',
-        value: 'value',
-      },
-    ];
     const dropdownComponent = TestUtils.renderIntoDocument(
       <Dropdown
         items={items}

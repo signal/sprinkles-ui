@@ -1,5 +1,4 @@
 /* eslint func-names: "off" */
-/* eslint max-len: "off" */
 
 import React from 'react';
 import Panel from '../../src/components/Panel';

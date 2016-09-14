@@ -1,4 +1,4 @@
-/* eslint max-len: "off" */
+
 
 import color from 'color';
 import Fuse from 'fuse.js';

@@ -1,5 +1,4 @@
 /* eslint func-names: "off" */
-/* eslint max-len: "off" */
 
 import React from 'react';
 import loremIpsum from 'lorem-ipsum';
@@ -75,10 +74,9 @@ describe('Popover', function () {
       border: '1px solid grey',
     };
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <PopoverWrapper
         anchorOrigin={'bottom'}
-        contentWidth={200}
         onRequestOpen={handleRequestOpen}
         onRequestClose={handleRequestClose}
         triggerEl={(
@@ -106,18 +104,22 @@ describe('Popover', function () {
 
   it('anchorOrigin bottom', () => this.props({
     anchorOrigin: 'bottom',
+    open: true,
   }));
 
   it('anchorOrigin left', () => this.props({
     anchorOrigin: 'left',
+    open: true,
   }));
 
   it('anchorOrigin right', () => this.props({
     anchorOrigin: 'right',
+    open: true,
   }));
 
   it('anchorOrigin top', () => this.props({
     anchorOrigin: 'top',
+    open: true,
   }));
 
   it('set width', () => this.props({

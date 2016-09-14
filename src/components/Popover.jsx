@@ -56,7 +56,7 @@ export default class Popover extends React.Component {
   calculatePosition(triggerEl) {
     return {
       height: triggerEl.height,
-      width: this.props.contentWidth ? this.props.contentWidth : '100%',
+      width: this.props.contentWidth ? this.props.contentWidth : triggerEl.width,
     };
   }
 
@@ -96,6 +96,10 @@ export default class Popover extends React.Component {
   }
 
   render() {
+    const width = this.state.position.width;
+    const leftStateWidth = width > 0 ? `-${width}px` : 0;
+    const leftSideOffset = this.props.contentWidth ? `-${(width / 2)}px` : leftStateWidth;
+    const rightSideOffset = this.props.contentWidth ? `${(width / 2)}px` : `${width}px`;
     const style = reactCSS({
       default: {
         PopoverWrapper: {
@@ -110,7 +114,7 @@ export default class Popover extends React.Component {
           flexFlow: 'column nowrap',
           position: 'absolute',
           transition: 'all 0.1s ease 0ms',
-          width: this.state.position.width,
+          width: this.props.contentWidth || '100%',
           visibility: 'hidden',
           zIndex: zindex.Popover,
         },
@@ -147,7 +151,7 @@ export default class Popover extends React.Component {
         },
         Popover: {
           left: '50%',
-          transform: 'translateX(-50%) translateY(0)',
+          transform: `translateX(-50%) translateY(${this.state.position.height}px)`,
         },
       },
       left: {
@@ -156,7 +160,7 @@ export default class Popover extends React.Component {
         },
         Popover: {
           top: '50%',
-          transform: 'translateY(-50%) translateX(-100%)',
+          transform: `translateY(-50%) translateX(${leftSideOffset})`,
         },
         TriggerWrapper: {
           flexFlow: 'row-reverse nowrap',
@@ -168,7 +172,7 @@ export default class Popover extends React.Component {
         },
         Popover: {
           top: '50%',
-          transform: 'translateY(-50%) translateX(0)',
+          transform: `translateY(-50%) translateX(${rightSideOffset})`,
         },
         TriggerWrapper: {
           flexFlow: 'row nowrap',

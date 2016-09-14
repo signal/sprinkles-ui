@@ -55,7 +55,22 @@ describe('Popover', () => {
 
     const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
     expect(popoverNode.style.top).toEqual('50%');
-    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(-100%)');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0)');
+  });
+
+  it('Does set anchorOrigin left width content width', () => {
+    const contentWidth = 250;
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        anchorOrigin={'left'}
+        triggerEl={fakeAnchorEl}
+        contentWidth={contentWidth}
+      />
+    );
+
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.top).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual(`translateY(-50%) translateX(-${contentWidth / 2}px)`);
   });
 
   it('Does set anchorOrigin right', () => {
@@ -68,7 +83,22 @@ describe('Popover', () => {
 
     const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
     expect(popoverNode.style.top).toEqual('50%');
-    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0)');
+    expect(popoverNode.style.transform).toEqual('translateY(-50%) translateX(0px)');
+  });
+
+  it('Does set anchorOrigin right content width', () => {
+    const contentWidth = 250;
+    const popoverComponent = TestUtils.renderIntoDocument(
+      <Popover
+        anchorOrigin={'right'}
+        triggerEl={fakeAnchorEl}
+        contentWidth={contentWidth}
+      />
+    );
+
+    const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
+    expect(popoverNode.style.top).toEqual('50%');
+    expect(popoverNode.style.transform).toEqual(`translateY(-50%) translateX(${contentWidth / 2}px)`);
   });
 
   it('Does set anchorOrigin top', () => {
@@ -93,7 +123,7 @@ describe('Popover', () => {
 
     const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
     expect(popoverNode.style.left).toEqual('50%');
-    expect(popoverNode.style.transform).toEqual('translateX(-50%) translateY(0)');
+    expect(popoverNode.style.transform).toEqual('translateX(-50%) translateY(0px)');
   });
 
   it('Does render a self closing popover', () => {

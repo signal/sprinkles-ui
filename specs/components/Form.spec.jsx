@@ -1,6 +1,5 @@
 /* eslint func-names: "off" */
 /* eslint no-console: "off" */
-/* eslint max-len: "off" */
 
 import React from 'react';
 import Form from '../../src/components/Form';

@@ -1,4 +1,5 @@
 import React from 'react';
+import reactCSS from 'reactcss';
 import { Resets } from '../shared/styles';
 
 export default class ListItem extends React.Component {
@@ -45,12 +46,20 @@ export default class ListItem extends React.Component {
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        ListItemButton: {
+          width: '100%',
+        },
+      },
+    });
+    style.ListItemButton = Object.assign({}, Resets.Button, style.ListItemButton);
     return (
       <button
         onClick={this.props.onClick}
         onMouseOut={this.handleMouseOut.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}
-        style={Resets.Button}
+        style={style.ListItemButton}
       >
         {this.renderChildren()}
       </button>
