@@ -1,4 +1,5 @@
 /* eslint react/no-render-return-value: "off" */
+/* eslint jsx-a11y/no-static-element-interactions: "off" */
 
 import React from 'react';
 import reactCSS from 'reactcss';
@@ -79,7 +80,7 @@ export default class Popover extends React.Component {
   renderCloseLayer(style) {
     if (this.props.useLayerForClickAway) {
       return (
-        <button
+        <div
           style={style.CloseLayer}
           onClick={this.onRequestClose.bind(this)}
           ref={c => this.closeLayerRef = c}
@@ -203,12 +204,12 @@ export default class Popover extends React.Component {
     return (
       <div style={style.PopoverWrapper}>
         {this.renderCloseLayer(style)}
-        <button
+        <div
           onClick={this.props.disabled ? null : this.onRequestOpen.bind(this)}
           style={style.TriggerWrapper}
         >
           {this.renderTriggerElement()}
-        </button>
+        </div>
         <div
           ref={c => this.contentRef = c}
           style={style.Popover}

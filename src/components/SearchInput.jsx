@@ -1,5 +1,3 @@
-
-
 import color from 'color';
 import Fuse from 'fuse.js';
 import React from 'react';
@@ -7,6 +5,7 @@ import reactCSS from 'reactcss';
 import TextInput from './TextInput';
 import VectorGraphic from './VectorGraphic';
 import { IconColors } from '../shared/colors';
+import { Resets } from '../shared/styles';
 
 export default class SearchInput extends TextInput {
   static propTypes = {
@@ -149,6 +148,7 @@ export default class SearchInput extends TextInput {
 
     // Override the inherited styles
     const mergedInputStyles = Object.assign({}, this.style().TextInput, style.TextInput);
+    style.CloseGraphicWrapper = Object.assign({}, Resets.Button, style.CloseGraphicWrapper);
 
     return (
       <div style={style.SearchInputWrapper}>
