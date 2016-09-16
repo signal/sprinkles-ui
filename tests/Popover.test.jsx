@@ -123,6 +123,7 @@ describe('Popover', () => {
 
     const popoverNode = ReactDOM.findDOMNode(popoverComponent.contentRef);
     expect(popoverNode.style.left).toEqual('50%');
+    expect(popoverNode.style.top).toEqual('0px');
     expect(popoverNode.style.transform).toEqual('translateX(-50%) translateY(0px)');
   });
 

@@ -152,6 +152,7 @@ export default class Popover extends React.Component {
         },
         Popover: {
           left: '50%',
+          top: 0,
           transform: `translateX(-50%) translateY(${this.state.position.height}px)`,
         },
       },
