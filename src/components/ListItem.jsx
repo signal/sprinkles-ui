@@ -8,10 +8,12 @@ export default class ListItem extends React.Component {
     listPosition: React.PropTypes.oneOf(['first', 'middle', 'last']),
     onClick: React.PropTypes.func,
     selected: React.PropTypes.bool,
+    textAlign: React.PropTypes.string,
   };
 
   static defaultProps = {
     selected: false,
+    textAlign: 'left',
   };
 
   displayName = 'ListItem';
@@ -49,6 +51,7 @@ export default class ListItem extends React.Component {
     const style = reactCSS({
       default: {
         ListItemButton: {
+          textAlign: this.props.textAlign,
           width: '100%',
         },
       },
@@ -60,6 +63,7 @@ export default class ListItem extends React.Component {
         onMouseOut={this.handleMouseOut.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}
         style={style.ListItemButton}
+        ref={c => this.listItemButtonRef = c}
       >
         {this.renderChildren()}
       </button>

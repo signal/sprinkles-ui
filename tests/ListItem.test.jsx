@@ -89,4 +89,14 @@ describe('ListItem', () => {
     const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
     expect(textListItemNode.style.borderBottom).toBe('');
   });
+
+  it('Does render a ListItem with left aligned text by default', () => {
+    const listItemComponent = TestUtils.renderIntoDocument(
+      <ListItem>
+        <TextListItem />
+      </ListItem>
+    );
+    const listItemButtonNode = ReactDOM.findDOMNode(listItemComponent.listItemButtonRef);
+    expect(listItemButtonNode.style.textAlign).toBe('left');
+  });
 });
