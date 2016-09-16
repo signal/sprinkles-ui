@@ -3,6 +3,7 @@ export const Resets = {
     background: 'none',
     backgroundColor: 'none',
     border: 'none',
+    margin: 0,
     padding: 0,
   },
 };
