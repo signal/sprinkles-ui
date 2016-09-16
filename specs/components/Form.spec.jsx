@@ -38,7 +38,7 @@ describe('Form', function () {
       }, 2000);
     };
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <Form
         onChange={handleChange}
         onSubmit={handleSubmit.bind(this)}

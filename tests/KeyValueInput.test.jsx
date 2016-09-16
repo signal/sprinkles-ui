@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
-import { Colors, TextColors } from '../src/shared/colors';
+import { NoticeColors, TextColors } from '../src/shared/colors';
 import KeyValueInput from '../src/components/KeyValueInput';
 
 
@@ -294,9 +294,9 @@ describe('KeyValueInput', () => {
       />
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
-    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
   });
 
   it('Does display error status', () => {
@@ -306,9 +306,9 @@ describe('KeyValueInput', () => {
       />
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
-    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
   });
 
   it('Does only display error status on invalid fields', () => {
@@ -323,7 +323,7 @@ describe('KeyValueInput', () => {
       />
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
-    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
     expect(keyInputNode.style.boxShadow).toBe('');
   });
@@ -368,7 +368,7 @@ describe('KeyValueInput', () => {
       />
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
     expect(valueInputNode.style.boxShadow).toBe('');
     const keyInputNode2 = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef1);
@@ -376,7 +376,7 @@ describe('KeyValueInput', () => {
     const valueInputNode2 = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef1);
     expect(valueInputNode2.style.boxShadow).toBe('');
     const keyInputNode3 = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef2);
-    expect(keyInputNode3.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(keyInputNode3.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
     const valueInputNode3 = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef2);
     expect(valueInputNode3.style.boxShadow).toBe('');
   });

@@ -15,7 +15,7 @@ describe('List', function () {
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <List onClick={() => console.log('List clicked')}>
         <ListItem>
           <TextListItem

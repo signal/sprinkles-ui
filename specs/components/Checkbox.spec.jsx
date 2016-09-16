@@ -14,7 +14,7 @@ describe('Checkbox', function () {
   };
 
   before(() => {
-    this.load(
+    this.component(
       <Checkbox
         onChange={handleChange}
       />

@@ -1,9 +1,9 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import { Map } from 'immutable';
-import { StructuralColors } from '../shared/colors';
+import Base from './Base';
 
-export default class List extends React.Component {
+export default class List extends Base {
   static propTypes = {
     children: React.PropTypes.node,
     showBorder: React.PropTypes.bool,
@@ -49,7 +49,7 @@ export default class List extends React.Component {
     const style = reactCSS({
       border: {
         List: {
-          border: `1px solid ${StructuralColors.divider}`,
+          border: `1px solid ${this.getColors().structuralColors.divider}`,
         },
       },
     }, {

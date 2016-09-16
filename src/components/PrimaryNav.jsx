@@ -3,18 +3,15 @@
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import Text from './Text';
 import List from './List';
 import ListItem from './ListItem';
 import NavListItem from './NavListItem';
 import VectorGraphic from './VectorGraphic';
-import {
-  BackgroundColors,
-  TextColors,
-} from '../shared/colors';
 import { Resets } from '../shared/styles';
 
-export default class PrimaryNav extends React.Component {
+export default class PrimaryNav extends Base {
   static propTypes = {
     appIcon: React.PropTypes.node,
     appName: React.PropTypes.string,
@@ -65,7 +62,7 @@ export default class PrimaryNav extends React.Component {
     this.props.onNavItemClick(item);
   }
 
-  renderBranding(style) {
+  renderBranding(clr, style) {
     return (
       <div style={style.Branding}>
         <div
@@ -79,7 +76,7 @@ export default class PrimaryNav extends React.Component {
           <Text
             fontSize={1.2}
             ref={c => this.appNameRef = c}
-            color={TextColors.light}
+            color={clr.textColors.light}
           >
             {this.props.appName}
           </Text>
@@ -122,7 +119,7 @@ export default class PrimaryNav extends React.Component {
     );
   }
 
-  renderExpandToggle(style) {
+  renderExpandToggle(clr, style) {
     return (
       <button
         onClick={this.props.onRequestExpandToggle}
@@ -137,7 +134,7 @@ export default class PrimaryNav extends React.Component {
           <VectorGraphic height={40} width={14}>
             <polyline
               fill={'none'}
-              stroke={TextColors.light}
+              stroke={clr.textColors.light}
               strokeWidth={'2'}
               strokeLinecap={'round'}
               strokeLinejoin={'round'}
@@ -150,10 +147,11 @@ export default class PrimaryNav extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         PrimaryNav: {
-          background: BackgroundColors.primaryNav,
+          background: clr.backgroundColors.primaryNav,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'stretch',
@@ -186,7 +184,7 @@ export default class PrimaryNav extends React.Component {
       },
       hovered: {
         ExpandToggleWrapper: {
-          background: color(BackgroundColors.primaryNav).darken(0.5).hexString(),
+          background: color(clr.backgroundColors.primaryNav).darken(0.5).hexString(),
         },
       },
     }, {
@@ -196,9 +194,9 @@ export default class PrimaryNav extends React.Component {
     style.ExpandToggleWrapper = Object.assign({}, Resets.Button, style.ExpandToggleWrapper);
     return (
       <div style={style.PrimaryNav}>
-        {this.renderBranding(style)}
+        {this.renderBranding(clr, style)}
         {this.renderNavItems(style)}
-        {this.renderExpandToggle(style)}
+        {this.renderExpandToggle(clr, style)}
       </div>
     );
   }

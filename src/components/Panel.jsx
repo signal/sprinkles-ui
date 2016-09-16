@@ -1,8 +1,8 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import { BackgroundColors, TextColors } from '../shared/colors';
+import Base from './Base';
 
-export default class Panel extends React.Component {
+export default class Panel extends Base {
   static propTypes = {
     backgroundColor: React.PropTypes.string,
     borderRadius: React.PropTypes.number,
@@ -16,8 +16,6 @@ export default class Panel extends React.Component {
   };
 
   static defaultProps = {
-    backgroundColor: BackgroundColors.primary,
-    color: TextColors.primary,
     padding: 10,
   };
 
@@ -50,11 +48,12 @@ export default class Panel extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         Panel: {
-          backgroundColor: this.props.backgroundColor,
-          color: this.props.color,
+          backgroundColor: this.props.backgroundColor || clr.backgroundColors.primary,
+          color: this.props.color || clr.textColors.primary,
           padding: this.props.padding,
           boxSizing: 'border-box',
         },

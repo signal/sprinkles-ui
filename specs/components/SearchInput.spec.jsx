@@ -67,7 +67,7 @@ describe('Search Input', function () {
       console.log('search results:', results);
     };
 
-    this.load(
+    this.component(
       <SearchInput
         include={['matches']}
         enabled={true}

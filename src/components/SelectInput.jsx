@@ -2,19 +2,14 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import TextListItem from './TextListItem';
 import List from './List';
 import ListItem from './ListItem';
 import Popover from './Popover';
 import VectorGraphic from './VectorGraphic';
-import {
-  BackgroundColors,
-  Colors,
-  FormColors,
-  TextColors,
-} from '../shared/colors';
 
-export default class SelectInput extends React.Component {
+export default class SelectInput extends Base {
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
@@ -109,13 +104,13 @@ export default class SelectInput extends React.Component {
     );
   }
 
-  renderDisplay(style) {
+  renderDisplay(clr, style) {
     return (
       <div
         style={style.Display}
       >
         {this.renderDisplayText(style)}
-        {this.renderDisplayIcon(style)}
+        {this.renderDisplayIcon(clr, style)}
       </div>
     );
   }
@@ -134,13 +129,13 @@ export default class SelectInput extends React.Component {
     );
   }
 
-  renderDisplayIcon(style) {
+  renderDisplayIcon(clr, style) {
     return (
       <div
         style={style.Icon}
       >
         <VectorGraphic>
-          <g stroke={this.props.enabled ? TextColors.primary : TextColors.secondary} >
+          <g stroke={this.props.enabled ? clr.textColors.primary : clr.textColors.secondary} >
             <path
               fill={'none'}
               d={'M1 2 L5 7 L9 2'}
@@ -153,23 +148,24 @@ export default class SelectInput extends React.Component {
     );
   }
 
-  renderTriggerEl(style) {
+  renderTriggerEl(clr, style) {
     return (
       <div
         style={style.SelectInput}
         ref={c => this.SelectInputRef = c}
       >
-        {this.renderDisplay(style)}
+        {this.renderDisplay(clr, style)}
       </div>);
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         SelectInput: {
-          border: `1px solid ${FormColors.border}`,
+          border: `1px solid ${clr.formColors.border}`,
           borderRadius: 3,
-          color: FormColors.text,
+          color: clr.formColors.text,
           minWidth: '200px',
         },
         Display: {
@@ -193,7 +189,7 @@ export default class SelectInput extends React.Component {
       },
       disabled: {
         SelectInput: {
-          background: BackgroundColors.secondary,
+          background: clr.backgroundColors.secondary,
         },
         Display: {
           cursor: 'not-allowed',
@@ -201,19 +197,19 @@ export default class SelectInput extends React.Component {
       },
       success: {
         SelectInput: {
-          boxShadow: `0 0 3px 1px ${Colors.success}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.success}`,
           border: '1px solid transparent',
         },
       },
       warning: {
         SelectInput: {
-          boxShadow: `0 0 3px 1px ${Colors.warning}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.warning}`,
           border: '1px solid transparent',
         },
       },
       error: {
         SelectInput: {
-          boxShadow: `0 0 3px 1px ${Colors.danger}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.danger}`,
           border: '1px solid transparent',
         },
       },
@@ -231,7 +227,7 @@ export default class SelectInput extends React.Component {
         onRequestClose={this.handleRequestClose.bind(this)}
         onRequestOpen={this.handleRequestOpen.bind(this)}
         ref={c => this.popoverRef = c}
-        triggerEl={this.renderTriggerEl(style)}
+        triggerEl={this.renderTriggerEl(clr, style)}
         useLayerForClickAway={true}
       >
         <List

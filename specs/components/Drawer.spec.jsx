@@ -13,7 +13,7 @@ describe('Drawer', function () {
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <Drawer open={true}>
         <div style={{ padding: 20 }}>
           <div style={{ marginBottom: 20 }}>

@@ -3,7 +3,7 @@
 import React from 'react';
 import loremIpsum from 'lorem-ipsum';
 import Popover from '../../src/components/Popover';
-import { Colors } from '../../src/shared/colors';
+import { NoticeColors } from '../../src/shared/colors';
 
 
 // Wrapper to contain a Popover and an anchor element
@@ -63,7 +63,7 @@ describe('Popover', function () {
     const anchorDivStyle = {
       boxSizing: 'border-box',
       padding: 10,
-      background: Colors.info,
+      background: NoticeColors.info,
       color: '#FEFEFE',
       cursor: 'pointer',
       display: 'inline-flex',

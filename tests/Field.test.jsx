@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
-import { Colors } from '../src/shared/colors';
+import { NoticeColors } from '../src/shared/colors';
 import Field from '../src/components/Field';
 import TextInput from '../src/components/TextInput';
 
@@ -47,8 +47,8 @@ describe('Field', () => {
     // grab the label and input DOM nodes so we can inspect them
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
     const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
-    expect(color(labelNode.style.color).hexString()).toBe(Colors.danger);
-    expect(inputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(color(labelNode.style.color).hexString()).toBe(NoticeColors.danger);
+    expect(inputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
   });
 
   it('Does render a Field with a warning status', () => {
@@ -68,8 +68,8 @@ describe('Field', () => {
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
     const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
 
-    expect(color(labelNode.style.color).hexString()).toBe(Colors.warning);
-    expect(inputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
+    expect(color(labelNode.style.color).hexString()).toBe(NoticeColors.warning);
+    expect(inputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.warning}`);
   });
 
   it('Does render a Field with a success status', () => {
@@ -87,8 +87,8 @@ describe('Field', () => {
     // grab the label and input DOM nodes so we can inspect them
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
     const inputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
-    expect(color(labelNode.style.color).hexString()).toBe(Colors.success);
-    expect(inputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+    expect(color(labelNode.style.color).hexString()).toBe(NoticeColors.success);
+    expect(inputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
   });
 
   it('Does render a Field with an error message', () => {
@@ -124,7 +124,7 @@ describe('Field', () => {
     );
     const requiredNode = ReactDOM.findDOMNode(fieldComponent.requiredRef);
     expect(requiredNode.textContent).toBe('*');
-    expect(color(requiredNode.style.color).hexString()).toBe(Colors.danger);
+    expect(color(requiredNode.style.color).hexString()).toBe(NoticeColors.danger);
   });
 
   it('Does render a required Field width asterick hidden', () => {

@@ -3,11 +3,10 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import Text from './Text';
-import { Colors, FormColors, TextColors } from '../shared/colors';
 
-
-export default class Field extends React.Component {
+export default class Field extends Base {
   static propTypes = {
     children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
@@ -62,18 +61,18 @@ export default class Field extends React.Component {
     );
   }
 
-  renderLabel() {
+  renderLabel(clr) {
     if (this.props.label) {
       let labelColor;
       switch (this.props.status) {
         case 'error':
-          labelColor = Colors.danger;
+          labelColor = clr.noticeColors.danger;
           break;
         case 'warning':
-          labelColor = Colors.warning;
+          labelColor = clr.noticeColors.warning;
           break;
         case 'success':
-          labelColor = Colors.success;
+          labelColor = clr.noticeColors.success;
           break;
         default:
           break;
@@ -91,12 +90,12 @@ export default class Field extends React.Component {
     return null;
   }
 
-  renderError(style) {
+  renderError(clr, style) {
     if (this.props.error) {
       return (
         <div style={style.Error}>
           <Text
-            color={Colors.danger}
+            color={clr.noticeColors.danger}
             fontSize={0.875}
             ref={c => this.errorRef = c}
           >
@@ -108,13 +107,13 @@ export default class Field extends React.Component {
     return null;
   }
 
-  renderRequired() {
+  renderRequired(clr) {
     if (this.props.required && this.props.requriedAsteriskDisplay) {
       return (
         <span>
           {' '}
           <Text
-            color={Colors.danger}
+            color={clr.noticeColors.danger}
             fontSize={0.875}
             ref={c => this.requiredRef = c}
           >
@@ -127,10 +126,11 @@ export default class Field extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         Label: {
-          color: FormColors.label,
+          color: clr.formColors.label,
           fontWeight: 700,
           marginBottom: 5,
         },
@@ -144,7 +144,7 @@ export default class Field extends React.Component {
       },
       disabled: {
         Label: {
-          color: TextColors.secondary,
+          color: clr.textColors.secondary,
         },
       },
       labelPosition: {
@@ -175,12 +175,12 @@ export default class Field extends React.Component {
     return (
       <div style={fieldStyle}>
         <div style={style.Label}>
-          {this.renderLabel()}{this.renderRequired()}
+          {this.renderLabel(clr)}{this.renderRequired(clr)}
         </div>
         <div style={style.inputWrapper}>
           {this.renderInput()}
         </div>
-        {this.renderError(style)}
+        {this.renderError(clr, style)}
       </div>
     );
   }

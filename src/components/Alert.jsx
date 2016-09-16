@@ -1,10 +1,10 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import color from 'color';
-import { Colors, TextColors } from '../shared/colors';
 import Text from './Text';
+import Base from './Base';
 
-export default class Alert extends React.Component {
+export default class Alert extends Base {
   static propTypes = {
     children: React.PropTypes.node,
     details: React.PropTypes.string,
@@ -14,11 +14,11 @@ export default class Alert extends React.Component {
 
   displayName = 'Alert';
 
-  renderTitle() {
+  renderTitle(clr) {
     if (this.props.title) {
       return (
         <Text
-          color={TextColors.light}
+          color={clr.textColors.light}
           fontSize={1}
           fontWeight={'bold'}
           ref={c => this.titleRef = c}
@@ -30,13 +30,13 @@ export default class Alert extends React.Component {
     return null;
   }
 
-  renderDetails() {
+  renderDetails(clr) {
     if (this.props.details) {
       return (
         <span>
           {' '}
           <Text
-            color={TextColors.light}
+            color={clr.textColors.light}
             fontSize={1}
             ref={c => this.detailsRef = c}
           >
@@ -60,6 +60,7 @@ export default class Alert extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         Alert: {
@@ -71,26 +72,26 @@ export default class Alert extends React.Component {
       },
       success: {
         Alert: {
-          backgroundColor: Colors.success,
-          border: `1px solid ${color(Colors.success).darken(0.1).hexString()}`,
+          backgroundColor: clr.noticeColors.success,
+          border: `1px solid ${color(clr.noticeColors.success).darken(0.1).hexString()}`,
         },
       },
       info: {
         Alert: {
-          backgroundColor: Colors.info,
-          border: `1px solid ${color(Colors.info).darken(0.1).hexString()}`,
+          backgroundColor: clr.noticeColors.info,
+          border: `1px solid ${color(clr.noticeColors.info).darken(0.1).hexString()}`,
         },
       },
       warning: {
         Alert: {
-          backgroundColor: Colors.warning,
-          border: `1px solid ${color(Colors.warning).darken(0.1).hexString()}`,
+          backgroundColor: clr.noticeColors.warning,
+          border: `1px solid ${color(clr.noticeColors.warning).darken(0.1).hexString()}`,
         },
       },
       danger: {
         Alert: {
-          backgroundColor: Colors.danger,
-          border: `1px solid ${color(Colors.danger).darken(0.1).hexString()}`,
+          backgroundColor: clr.noticeColors.danger,
+          border: `1px solid ${color(clr.noticeColors.danger).darken(0.1).hexString()}`,
         },
       },
     }, {
@@ -103,8 +104,8 @@ export default class Alert extends React.Component {
     return (
       <div style={style.Alert}>
         <div style={style.AlertItem}>
-          {this.renderTitle()}
-          {this.renderDetails()}
+          {this.renderTitle(clr)}
+          {this.renderDetails(clr)}
         </div>
         {this.renderChildren(style)}
       </div>

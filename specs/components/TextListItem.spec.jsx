@@ -12,7 +12,7 @@ describe('TextListItem', function () {
 
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <TextListItem
         text={loremIpsum()}
       />

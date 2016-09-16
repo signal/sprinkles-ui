@@ -1,13 +1,9 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import {
-  Colors,
-  TextColors,
-  FormColors,
-} from '../shared/colors';
+import Base from './Base';
 
 
-export default class TextInput extends React.Component {
+export default class TextInput extends Base {
   static propTypes = {
     autoComplete: React.PropTypes.bool,
     boundValue: React.PropTypes.string,
@@ -73,41 +69,42 @@ export default class TextInput extends React.Component {
   }
 
   style() {
+    const clr = this.getColors();
     return reactCSS({
       default: {
         TextInput: {
           fontSize: '0.875rem',
           padding: '0.5rem',
           width: '100%',
-          border: `1px solid ${FormColors.border}`,
+          border: `1px solid ${clr.formColors.border}`,
           borderRadius: 3,
           outline: 'none',
-          color: FormColors.text,
+          color: clr.formColors.text,
         },
       },
       focus: {
         TextInput: {
-          boxShadow: `0 0 3px 1px ${Colors.info}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.info}`,
         },
       },
       success: {
         TextInput: {
-          boxShadow: `0 0 3px 1px ${Colors.success}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.success}`,
         },
       },
       warning: {
         TextInput: {
-          boxShadow: `0 0 3px 1px ${Colors.warning}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.warning}`,
         },
       },
       error: {
         TextInput: {
-          boxShadow: `0 0 3px 1px ${Colors.danger}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.danger}`,
         },
       },
       disabled: {
         TextInput: {
-          color: TextColors.secondary,
+          color: clr.textColors.secondary,
           cursor: 'not-allowed',
         },
       },

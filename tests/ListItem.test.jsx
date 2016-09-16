@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
-import { Colors, StructuralColors } from '../src/shared/colors';
+import { NoticeColors, StructuralColors } from '../src/shared/colors';
 import ListItem from '../src/components/ListItem';
 import TextListItem from '../src/components/TextListItem';
 
@@ -49,7 +49,7 @@ describe('ListItem', () => {
       </ListItem>
     );
     const textListItemNode = ReactDOM.findDOMNode(listItemComponent.listItemRef);
-    expect(color(textListItemNode.style.background).hexString()).toBe(Colors.info);
+    expect(color(textListItemNode.style.background).hexString()).toBe(NoticeColors.info);
   });
 
   it('Does render first TextListItem', () => {

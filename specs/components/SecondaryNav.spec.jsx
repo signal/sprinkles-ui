@@ -17,7 +17,7 @@ describe('SecondaryNav', function () {
     const leftItems = ['Bread', '>', 'Crumbs'];
     const rightItems = ['User ▾'];
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <SecondaryNav
         leftItems={
           leftItems.map((item, i) =>

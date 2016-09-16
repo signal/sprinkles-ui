@@ -41,7 +41,7 @@ describe('SelectInput', function () {
     const handleChange = (value) => console.log('change: ', value);
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <SelectInputWrapper
         items={[{
           value: 'thing-1',

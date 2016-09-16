@@ -1,8 +1,8 @@
 import React from 'react';
 import reactCSS from 'reactcss';
-import { BackgroundColors } from '../shared/colors';
+import Base from './Base';
 
-export default class SecondaryNav extends React.Component {
+export default class SecondaryNav extends Base {
   static propTypes = {
     leftItems: React.PropTypes.node,
     rightItems: React.PropTypes.node,
@@ -39,15 +39,17 @@ export default class SecondaryNav extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         SecondaryNav: {
+          color: clr.textColors.light,
           display: 'flex',
           flexWrap: 'nowrap',
           height: '100%',
           alignItems: 'center',
           padding: '0 20px',
-          background: BackgroundColors.secondaryNav,
+          background: clr.backgroundColors.secondaryNav,
         },
         LeftItems: {
           flex: 1,

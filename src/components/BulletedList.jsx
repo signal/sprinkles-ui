@@ -2,10 +2,10 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import Text from './Text';
-import { TextColors } from '../shared/colors';
 
-export default class BulletedList extends React.Component {
+export default class BulletedList extends Base {
   static propTypes = {
     bulletStyle: React.PropTypes.oneOf([
       'disc',
@@ -40,13 +40,6 @@ export default class BulletedList extends React.Component {
     bulletStyle: 'disc',
   };
 
-  static defaultItemStyles = {
-    color: TextColors.primary,
-    fontSize: 1,
-    fontWeight: 'normal',
-    textDecoration: 'none',
-  }
-
   displayName = 'BulletedList';
 
 
@@ -54,8 +47,16 @@ export default class BulletedList extends React.Component {
     this.bulletedListItemRefs = [];
     this.textRefs = [];
 
+    const clr = this.getColors();
+    const defaultItemStyles = {
+      color: clr.textColors.primary,
+      fontSize: 1,
+      fontWeight: 'normal',
+      textDecoration: 'none',
+    };
+
     const styles = item.styles ?
-      Object.assign({}, BulletedList.defaultItemStyles, item.styles) : BulletedList.defaultItemStyles;
+      Object.assign({}, defaultItemStyles, item.styles) : defaultItemStyles;
 
     return (
       <li

@@ -4,7 +4,7 @@ import React from 'react';
 import Text from '../../src/components/Text';
 import {
   ButtonColors,
-  Colors,
+  NoticeColors,
   TextColors,
   BackgroundColors,
  } from '../../src/shared/colors';
@@ -38,7 +38,7 @@ describe('Colors', function () {
       </div>;
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <div>
         <div>
           <Text
@@ -49,16 +49,16 @@ describe('Colors', function () {
           </Text>
         </div>
         <div style={{ display: 'flex', marginTop: 10 }}>
-          {renderColor(Colors.success)}
-          {renderColor(Colors.info)}
-          {renderColor(Colors.warning)}
-          {renderColor(Colors.danger)}
+          {renderColor(NoticeColors.success)}
+          {renderColor(NoticeColors.info)}
+          {renderColor(NoticeColors.warning)}
+          {renderColor(NoticeColors.danger)}
         </div>
         <div style={{ display: 'flex', marginTop: 10 }}>
-          {renderLabel(`success: ${Colors.success}`)}
-          {renderLabel(`info: ${Colors.info}`)}
-          {renderLabel(`warning: ${Colors.warning}`)}
-          {renderLabel(`danger: ${Colors.danger}`)}
+          {renderLabel(`success: ${NoticeColors.success}`)}
+          {renderLabel(`info: ${NoticeColors.info}`)}
+          {renderLabel(`warning: ${NoticeColors.warning}`)}
+          {renderLabel(`danger: ${NoticeColors.danger}`)}
         </div>
         <div style={{ marginTop: 20 }}>
           <Text

@@ -24,7 +24,7 @@ describe('RadioButtonInput', function () {
       },
     ];
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <RadioButtonInput
         items={items}
         onChange={handleChange}

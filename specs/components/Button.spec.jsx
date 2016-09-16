@@ -16,7 +16,7 @@ describe('Button', function () {
       });
     };
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <Button
         enabled={true}
         onClick={handleClick.bind(this)}

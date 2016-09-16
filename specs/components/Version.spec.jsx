@@ -13,7 +13,7 @@ describe('Version', function () {
     const versionSelector = '<=0.10.1';
     const tagSelector = 'has burrito';
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <Version
         tag={'has burrito'}
         tagSelector={tagSelector}

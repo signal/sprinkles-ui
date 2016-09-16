@@ -18,7 +18,7 @@ describe('PasswordInput', function () {
       console.log('newValue', newValue);
     };
 
-    this.load(
+    this.component(
       <PasswordInput
         onChange={handleChange}
         placeholder={'password'}

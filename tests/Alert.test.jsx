@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
-import { Colors } from '../src/shared/colors';
+import { NoticeColors } from '../src/shared/colors';
 import Alert from '../src/components/Alert';
 
 function testColor(messageType) {
@@ -15,16 +15,16 @@ function testColor(messageType) {
   );
   switch (messageType) {
     case 'success':
-      colorToTest = Colors.success;
+      colorToTest = NoticeColors.success;
       break;
     case 'info':
-      colorToTest = Colors.info;
+      colorToTest = NoticeColors.info;
       break;
     case 'warning':
-      colorToTest = Colors.warning;
+      colorToTest = NoticeColors.warning;
       break;
     case 'danger':
-      colorToTest = Colors.danger;
+      colorToTest = NoticeColors.danger;
       break;
     default:
       break;

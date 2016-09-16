@@ -1,4 +1,4 @@
-export const Colors = {
+export const NoticeColors = {
   success: '#5CB85C',
   info: '#3FA9E2',
   warning: '#F0AD4E',
@@ -8,7 +8,7 @@ export const Colors = {
 export const ButtonColors = Object.assign({
   secondary: '#FFFFFF',
   primary: '#39A1CE',
-}, Colors);
+}, NoticeColors);
 
 export const IconColors = {
   primary: '#545454',

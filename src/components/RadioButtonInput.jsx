@@ -4,10 +4,10 @@
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import Text from './Text';
-import { Colors, FormColors, TextColors } from '../shared/colors';
 
-export default class RadioButtonInput extends React.Component {
+export default class RadioButtonInput extends Base {
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.string,
@@ -56,25 +56,25 @@ export default class RadioButtonInput extends React.Component {
     }
   }
 
-  renderItems(style) {
+  renderItems(clr, style) {
     this.radioInputRefs = [];
     let textColor;
     switch (this.props.status) {
       case 'error':
-        textColor = Colors.danger;
+        textColor = clr.noticeColors.danger;
         break;
       case 'warning':
-        textColor = Colors.warning;
+        textColor = clr.noticeColors.warning;
         break;
       case 'success':
-        textColor = Colors.success;
+        textColor = clr.noticeColors.success;
         break;
       default:
-        textColor = TextColors.primary;
+        textColor = clr.textColors.primary;
         break;
     }
     if (!this.props.enabled) {
-      const factor = textColor === TextColors.primary ? 0.9 : 0.2;
+      const factor = textColor === clr.textColors.primary ? 0.9 : 0.2;
       textColor = color(textColor).lighten(factor).hexString();
     }
     return this.props.items.map((item, i) => (
@@ -108,10 +108,11 @@ export default class RadioButtonInput extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         RadioItems: {
-          color: FormColors.text,
+          color: clr.formColors.text,
           cursor: 'pointer',
         },
         RadioItem: {
@@ -134,7 +135,7 @@ export default class RadioButtonInput extends React.Component {
     });
     return (
       <div style={style.RadioItems}>
-        {this.renderItems(style)}
+        {this.renderItems(clr, style)}
       </div>
     );
   }

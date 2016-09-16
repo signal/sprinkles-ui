@@ -18,7 +18,7 @@ describe('EmailInput', function () {
       console.log('newValue', newValue);
     };
 
-    this.load(
+    this.component(
       <EmailInput
         onChange={handleChange}
         placeholder={'email'}

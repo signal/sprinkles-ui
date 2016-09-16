@@ -11,7 +11,7 @@ describe('VectorGraphic', function () {
 
   this.loadSvg = (props) => {
     this.unload();
-    this.load(
+    this.component(
       <VectorGraphic>{props.children}</VectorGraphic>
     );
   };

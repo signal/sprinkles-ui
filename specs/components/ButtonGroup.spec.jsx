@@ -15,7 +15,7 @@ describe('ButtonGroup', function () {
       this.props({ selectedButton: item });
     };
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <ButtonGroup onClick={handleClick}>
         <Button buttonKey={'1'} text={'Button 1'} />
         <Button buttonKey={'2'} text={'Button 2'} />

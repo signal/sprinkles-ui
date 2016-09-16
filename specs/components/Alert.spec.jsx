@@ -12,7 +12,7 @@ describe('Alert', function () {
 
   this.loadAlert = (props) => {
     this.unload();
-    this.load(
+    this.component(
       <Alert
         details={props.details}
         title={props.title}

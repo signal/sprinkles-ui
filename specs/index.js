@@ -51,4 +51,5 @@ describe('Sprinkles UI', () => {
   require('./components/ButtonGroup.spec');
   require('./components/Panel.spec');
   require('./components/Table.spec');
+  require('./components/Theme.spec');
 });

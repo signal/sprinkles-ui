@@ -18,7 +18,7 @@ describe('TextInput', function () {
       console.log('newValue', newValue);
     };
 
-    this.load(
+    this.component(
       <TextInput
         initialValue={'Initial Value'}
         onChange={handleChange}

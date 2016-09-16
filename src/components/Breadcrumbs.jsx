@@ -3,12 +3,12 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import { Map } from 'immutable';
+import Base from './Base';
 import Text from './Text';
-import { TextColors } from '../shared/colors';
 import { Resets } from '../shared/styles';
 
 
-export default class Breadcrumbs extends React.Component {
+export default class Breadcrumbs extends Base {
   static propTypes = {
     path: React.PropTypes.arrayOf(
       React.PropTypes.shape({
@@ -49,13 +49,13 @@ export default class Breadcrumbs extends React.Component {
     this.props.onClick(itemData);
   }
 
-  renderPath(style) {
+  renderPath(clr, style) {
     this.pathRefs = new Map();
     return this.props.path.map((item, i) => {
       const isLast = i === this.props.path.length - 1;
       const divider = !isLast ? (
         <Text
-          color={TextColors.primary}
+          color={clr.textColors.primary}
           fontSize={1.5}
         >
           {' / '}
@@ -74,7 +74,7 @@ export default class Breadcrumbs extends React.Component {
           style={!isLast ? style.ClickableCrumb : style.Crumb}
         >
           <Text
-            color={TextColors.primary}
+            color={clr.textColors.primary}
             textDecoration={textDecoration}
             fontSize={1.5}
           >
@@ -87,6 +87,7 @@ export default class Breadcrumbs extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         Crumb: {
@@ -101,7 +102,7 @@ export default class Breadcrumbs extends React.Component {
     style.ClickableCrumb = Object.assign({}, Resets.Button, style.ClickableCrumb);
     return (
       <div>
-        {this.renderPath(style)}
+        {this.renderPath(clr, style)}
       </div>
     );
   }

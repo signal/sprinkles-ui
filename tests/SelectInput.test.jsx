@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import {
-  Colors,
+  NoticeColors,
   BackgroundColors,
   FormColors,
 } from '../src/shared/colors';
@@ -166,7 +166,7 @@ describe('SelectInput', () => {
       />
     );
     const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
-    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
   });
 
   it('Does render with an orange shadow on warning status', () => {
@@ -176,7 +176,7 @@ describe('SelectInput', () => {
       />
     );
     const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
-    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
+    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.warning}`);
   });
 
   it('Does render with a green shadow on success status', () => {
@@ -186,7 +186,7 @@ describe('SelectInput', () => {
       />
     );
     const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
-    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
   });
 
   it('Does return a valid state when a value has been selected', () => {

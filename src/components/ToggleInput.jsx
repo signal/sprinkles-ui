@@ -1,13 +1,9 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import color from 'color';
-import {
-  Colors,
-  BackgroundColors,
-  FormColors,
-} from '../shared/colors';
+import Base from './Base';
 
-export default class ToggleInput extends React.Component {
+export default class ToggleInput extends Base {
   static propTypes = {
     enabled: React.PropTypes.bool,
     initialValue: React.PropTypes.bool,
@@ -49,11 +45,12 @@ export default class ToggleInput extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         ToggleInput: {
-          border: `1px solid ${FormColors.border}`,
-          background: BackgroundColors.primary,
+          border: `1px solid ${clr.formColors.border}`,
+          background: clr.backgroundColors.primary,
           width: 42,
           height: 26,
           borderRadius: '13px',
@@ -62,7 +59,7 @@ export default class ToggleInput extends React.Component {
           transition: 'background 0.2s ease',
         },
         ToggleSwitch: {
-          background: BackgroundColors.primary,
+          background: clr.backgroundColors.primary,
           boxShadow: '0 1px 2px #888',
           width: 24,
           height: 24,
@@ -75,19 +72,19 @@ export default class ToggleInput extends React.Component {
       },
       disabled: {
         ToggleInput: {
-          background: BackgroundColors.secondary,
+          background: clr.backgroundColors.secondary,
           cursor: 'not-allowed',
         },
         ToggleSwitch: {
-          background: BackgroundColors.secondary,
+          background: clr.backgroundColors.secondary,
         },
       },
       activated: {
         ToggleInput: {
-          border: `1px solid ${this.props.enabled ? Colors.success :
-            color(Colors.success).lighten(0.4).hexString()}`,
-          background: this.props.enabled ? Colors.success :
-            color(Colors.success).lighten(0.4).hexString(),
+          border: `1px solid ${this.props.enabled ? clr.noticeColors.success :
+            color(clr.noticeColors.success).lighten(0.4).hexString()}`,
+          background: this.props.enabled ? clr.noticeColors.success :
+            color(clr.noticeColors.success).lighten(0.4).hexString(),
         },
         ToggleSwitch: {
           left: 18,
@@ -95,19 +92,19 @@ export default class ToggleInput extends React.Component {
       },
       success: {
         ToggleInput: {
-          boxShadow: `0 0 3px 1px ${Colors.success}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.success}`,
           border: '1px solid transparent',
         },
       },
       warning: {
         ToggleInput: {
-          boxShadow: `0 0 3px 1px ${Colors.warning}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.warning}`,
           border: '1px solid transparent',
         },
       },
       error: {
         ToggleInput: {
-          boxShadow: `0 0 3px 1px ${Colors.danger}`,
+          boxShadow: `0 0 3px 1px ${clr.noticeColors.danger}`,
           border: '1px solid transparent',
         },
       },

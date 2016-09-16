@@ -4,7 +4,6 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import TextInput from './TextInput';
 import VectorGraphic from './VectorGraphic';
-import { IconColors } from '../shared/colors';
 import { Resets } from '../shared/styles';
 import zindex from '../shared/zindex';
 
@@ -104,10 +103,11 @@ export default class SearchInput extends TextInput {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         CloseGraphicWrapper: {
-          fill: IconColors.primary,
+          fill: clr.iconColors.primary,
           height: 20,
           position: 'absolute',
           top: '5px',
@@ -115,7 +115,7 @@ export default class SearchInput extends TextInput {
           visibility: 'hidden',
         },
         searchIconWrapper: {
-          fill: IconColors.primary,
+          fill: clr.iconColors.primary,
           position: 'absolute',
           left: '5px',
           top: '5px',
@@ -133,7 +133,7 @@ export default class SearchInput extends TextInput {
       clearSearchHover: {
         CloseGraphicWrapper: {
           cursor: 'pointer',
-          fill: color(IconColors.primary).darken(0.5).hexString(),
+          fill: color(clr.iconColors.primary).darken(0.5).hexString(),
         },
       },
       searching: {

@@ -27,7 +27,7 @@ describe('Breadcrumbs', function () {
         url: '/lvl-1/lvl-2/lvl-3',
       },
     ];
-    this.load(
+    this.component(
       <Breadcrumbs
         onClick={handleClick}
         path={path}

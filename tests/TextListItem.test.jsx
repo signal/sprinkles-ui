@@ -4,7 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import {
   BackgroundColors,
-  Colors,
+  NoticeColors,
   TextColors,
   StructuralColors,
 } from '../src/shared/colors';
@@ -36,7 +36,7 @@ describe('TextListItem', () => {
       />
     );
     const textListItemNode = ReactDOM.findDOMNode(textListItemComponent);
-    expect(color(textListItemNode.style.backgroundColor).hexString()).toBe(Colors.info);
+    expect(color(textListItemNode.style.backgroundColor).hexString()).toBe(NoticeColors.info);
     expect(color(textListItemNode.style.color).hexString()).toBe(TextColors.light);
   });
 

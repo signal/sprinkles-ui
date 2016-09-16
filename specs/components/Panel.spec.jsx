@@ -10,7 +10,7 @@ describe('Panel', function () {
 
   this.loadPanel = (props) => {
     this.unload();
-    this.load(
+    this.component(
       <Panel
         backgroundColor={props.backgroundColor}
         borderRadius={props.borderRadius}

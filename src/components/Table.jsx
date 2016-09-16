@@ -4,14 +4,10 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
-import {
-  BackgroundColors,
-  StructuralColors,
-  TextColors,
-} from '../shared/colors';
+import Base from './Base';
 import Checkbox from './Checkbox';
 
-export default class Table extends React.Component {
+export default class Table extends Base {
 
   static propTypes = {
     columns: React.PropTypes.shape({
@@ -280,25 +276,26 @@ export default class Table extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const sourceRecords = this.props.records;
     const records = this.processRecords(sourceRecords);
     const style = reactCSS({
       default: {
         selected: {
-          background: BackgroundColors.selected,
+          background: clr.backgroundColors.selected,
         },
         Table: {
           border: 'none',
-          color: TextColors.primary,
+          color: clr.textColors.primary,
         },
         Thead: {
-          background: BackgroundColors.tableHeader,
-          borderBottom: `1px solid ${StructuralColors.divider}`,
+          background: clr.backgroundColors.tableHeader,
+          borderBottom: `1px solid ${clr.structuralColors.divider}`,
         },
         TheadItems: {
-          background: BackgroundColors.tableHeader,
+          background: clr.backgroundColors.tableHeader,
           border: 'none',
-          color: TextColors.tableHeader,
+          color: clr.textColors.tableHeader,
           padding: '20px',
           fontWeight: 'bold',
           textAlign: 'left',
@@ -306,14 +303,14 @@ export default class Table extends React.Component {
         TBodyItems: {
           // reset any greedy styles
           border: 'none',
-          borderBottom: `1px solid ${StructuralColors.divider}`,
-          color: TextColors.primary,
+          borderBottom: `1px solid ${clr.structuralColors.divider}`,
+          color: clr.textColors.primary,
           padding: '20px',
         },
       },
       hover: {
         TableRow: {
-          background: BackgroundColors.hover,
+          background: clr.backgroundColors.hover,
           cursor: 'Pointer',
         },
       },

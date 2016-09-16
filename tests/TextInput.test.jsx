@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import { Colors } from '../src/shared/colors';
+import { NoticeColors } from '../src/shared/colors';
 import TextInput from '../src/components/TextInput';
 
 describe('TextInput', () => {
@@ -67,7 +67,7 @@ describe('TextInput', () => {
       />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
   });
 
   it('Does render with an orange shadow on warning status', () => {
@@ -77,7 +77,7 @@ describe('TextInput', () => {
       />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
+    expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.warning}`);
   });
 
   it('Does render with a green shadow on success status', () => {
@@ -87,7 +87,7 @@ describe('TextInput', () => {
       />
     );
     const textInputNode = ReactDOM.findDOMNode(textInputComponent);
-    expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+    expect(textInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
   });
 
   it('Does return invalid state with empty TextInput', () => {

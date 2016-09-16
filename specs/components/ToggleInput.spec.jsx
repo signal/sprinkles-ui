@@ -13,7 +13,7 @@ describe('ToggleInput', function () {
   before(() => {
     const handleChange = (value) => console.log('Value: ', value);
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <ToggleInput
         onChange={handleChange}
       />

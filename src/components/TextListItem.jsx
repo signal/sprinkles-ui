@@ -2,15 +2,10 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import Text from './Text';
-import {
-  Colors,
-  BackgroundColors,
-  TextColors,
-  StructuralColors,
- } from '../shared/colors';
 
-export default class TextListItem extends React.Component {
+export default class TextListItem extends Base {
   static propTypes = {
     enabled: React.PropTypes.bool,
     hovered: React.PropTypes.bool,
@@ -27,42 +22,43 @@ export default class TextListItem extends React.Component {
   displayName = 'TextListItem';
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         Text: {
           padding: 10,
-          background: BackgroundColors.primary,
-          color: TextColors.primary,
+          background: clr.backgroundColors.primary,
+          color: clr.textColors.primary,
         },
       },
       selected: {
         Text: {
-          background: Colors.info,
-          color: TextColors.light,
+          background: clr.noticeColors.info,
+          color: clr.textColors.light,
         },
       },
       hovered: {
         Text: {
-          background: BackgroundColors.accent,
-          color: TextColors.accent,
+          background: clr.backgroundColors.accent,
+          color: clr.textColors.accent,
           cursor: 'pointer',
         },
       },
       first: {
         Text: {
-          borderBottom: `1px solid ${StructuralColors.divider}`,
+          borderBottom: `1px solid ${clr.structuralColors.divider}`,
         },
       },
       middle: {
         Text: {
-          borderBottom: `1px solid ${StructuralColors.divider}`,
+          borderBottom: `1px solid ${clr.structuralColors.divider}`,
         },
       },
       disabled: {
         Text: {
-          color: TextColors.secondary,
+          color: clr.textColors.secondary,
           cursor: 'not-allowed',
-          background: BackgroundColors.secondary,
+          background: clr.backgroundColors.secondary,
         },
       },
     }, {

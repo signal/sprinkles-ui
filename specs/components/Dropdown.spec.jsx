@@ -5,7 +5,7 @@
 
 import React from 'react';
 import Dropdown from '../../src/components/Dropdown';
-import { Colors } from '../../src/shared/colors';
+import { NoticeColors } from '../../src/shared/colors';
 
 class DropdownWrapper extends React.Component {
   static propTypes = {
@@ -65,12 +65,12 @@ describe('Dropdown', function () {
 
     const triggerDivStyle = {
       padding: 10,
-      background: Colors.info,
+      background: NoticeColors.info,
       color: '#FEFEFE',
       cursor: 'pointer',
     };
 
-    this.load(
+    this.component(
       <DropdownWrapper
         items={[
           {

@@ -11,7 +11,7 @@ describe('ListItemGroup', function () {
   `);
 
   before(() => {
-    this.load(
+    this.component(
       <ListItemGroup label={'Group'}>
         <ListItem>
           <TextListItem

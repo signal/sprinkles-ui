@@ -17,7 +17,7 @@ describe('Field', function () {
     };
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.load(
+    this.component(
       <Field
         label={'Field Label'}
         onChange={handleChange}

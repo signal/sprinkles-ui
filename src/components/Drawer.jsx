@@ -1,9 +1,9 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import zindex from '../shared/zindex';
-import { BackgroundColors } from '../shared/colors';
 
-export default class Drawer extends React.Component {
+export default class Drawer extends Base {
   static propTypes = {
     backgroundColor: React.PropTypes.string,
     children: React.PropTypes.node,
@@ -21,6 +21,7 @@ export default class Drawer extends React.Component {
   displayName = 'Drawer';
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         Drawer: {
@@ -30,7 +31,7 @@ export default class Drawer extends React.Component {
           top: 0,
           right: this.props.openFrom === 'right' ? this.props.width * -1 : undefined,
           left: this.props.openFrom === 'left' ? this.props.width * -1 : undefined,
-          background: BackgroundColors.primary,
+          background: clr.backgroundColors.primary,
           zIndex: zindex.Drawer,
           transition: 'all 0.3s ease',
         },

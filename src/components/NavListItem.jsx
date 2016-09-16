@@ -1,15 +1,11 @@
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
+import Base from './Base';
 import Text from './Text';
 import VectorGraphic from './VectorGraphic';
-import {
-  Colors,
-  BackgroundColors,
-  TextColors,
- } from '../shared/colors';
 
-export default class NavListItem extends React.Component {
+export default class NavListItem extends Base {
   static propTypes = {
     expanded: React.PropTypes.bool,
     height: React.PropTypes.number,
@@ -45,12 +41,13 @@ export default class NavListItem extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         NavListItem: {
           padding: 10,
-          background: BackgroundColors.primaryNavBar,
-          color: TextColors.primaryNav,
+          background: clr.backgroundColors.primaryNavBar,
+          color: clr.textColors.primaryNav,
           display: 'flex',
           alignItems: 'center',
         },
@@ -68,14 +65,14 @@ export default class NavListItem extends React.Component {
       },
       selected: {
         NavListItem: {
-          background: Colors.info,
-          color: TextColors.light,
+          background: clr.noticeColors.info,
+          color: clr.textColors.light,
         },
       },
       hovered: {
         NavListItem: {
-          background: color(BackgroundColors[this.props.type]).darken(0.5).hexString(),
-          color: TextColors.selectedNavItem,
+          background: color(clr.backgroundColors[this.props.type]).darken(0.5).hexString(),
+          color: clr.textColors.selectedNavItem,
           cursor: 'pointer',
         },
       },

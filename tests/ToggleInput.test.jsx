@@ -4,7 +4,7 @@ import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import {
   BackgroundColors,
-  Colors,
+  NoticeColors,
   FormColors,
 } from '../src/shared/colors';
 import ToggleInput from '../src/components/ToggleInput';
@@ -62,9 +62,9 @@ describe('ToggleInput', () => {
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(color(toggleInputNode.style.background).hexString())
-      .toBe(Colors.success);
+      .toBe(NoticeColors.success);
     expect(toggleInputNode.style.border)
-      .toBe(`1px solid ${Colors.success.toLowerCase()}`);
+      .toBe(`1px solid ${NoticeColors.success.toLowerCase()}`);
     const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
     expect(switchNode.style.left)
       .toBe('18px');
@@ -104,9 +104,9 @@ describe('ToggleInput', () => {
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(color(toggleInputNode.style.background).hexString())
-      .toBe(color(Colors.success).lighten(0.4).hexString());
+      .toBe(color(NoticeColors.success).lighten(0.4).hexString());
     expect(toggleInputNode.style.border)
-      .toBe(`1px solid ${color(Colors.success)
+      .toBe(`1px solid ${color(NoticeColors.success)
         .lighten(0.4)
         .hexString()
         .toLowerCase()}`);
@@ -134,7 +134,7 @@ describe('ToggleInput', () => {
       />
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
-    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.danger}`);
+    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
   });
 
   it('Does render with an orange shadow on warning status', () => {
@@ -144,7 +144,7 @@ describe('ToggleInput', () => {
       />
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
-    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.warning}`);
+    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.warning}`);
   });
 
   it('Does render with a green shadow on success status', () => {
@@ -154,7 +154,7 @@ describe('ToggleInput', () => {
       />
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
-    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${Colors.success}`);
+    expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
   });
 
   it('Does return a valid state when validated', () => {

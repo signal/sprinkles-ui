@@ -5,11 +5,11 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import Text from './Text';
 import TextInput from './TextInput';
+import Base from './Base';
 import Button from './Button';
-import { TextColors, FormColors, Colors } from '../shared/colors';
 
 
-export default class KeyValueInput extends React.Component {
+export default class KeyValueInput extends Base {
   static propTypes = {
     addButtonText: React.PropTypes.string,
     enabled: React.PropTypes.bool,
@@ -127,18 +127,18 @@ export default class KeyValueInput extends React.Component {
     }, () => this.props.onChange(this.value()));
   }
 
-  renderKeyValueLabels(style) {
+  renderKeyValueLabels(clr, style) {
     let textColor;
     switch (this.props.status) {
       case 'success':
-        textColor = Colors.success;
+        textColor = clr.noticeColors.success;
         break;
       case 'error':
-        textColor = Colors.danger;
+        textColor = clr.noticeColors.danger;
         break;
       default:
         textColor = this.props.enabled ?
-          TextColors.primary : TextColors.secondary;
+          clr.textColors.primary : clr.textColors.secondary;
         break;
     }
     return (
@@ -227,10 +227,11 @@ export default class KeyValueInput extends React.Component {
   }
 
   render() {
+    const clr = this.getColors();
     const style = reactCSS({
       default: {
         KeyValuePair: {
-          color: FormColors.text,
+          color: clr.formColors.text,
           display: 'flex',
           marginBottom: 15,
         },
@@ -247,7 +248,7 @@ export default class KeyValueInput extends React.Component {
     });
     return (
       <div>
-        {this.renderKeyValueLabels(style)}
+        {this.renderKeyValueLabels(clr, style)}
         {this.renderKeyValuePairs(style)}
         <Button
           enabled={this.props.enabled}

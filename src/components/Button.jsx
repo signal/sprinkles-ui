@@ -1,9 +1,11 @@
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
-import { ButtonColors, TextColors } from '../shared/colors';
+import Base from './Base';
 
-export default class Button extends React.Component {
+export default class Button extends Base {
+  displayName = 'Button';
+
   static propTypes = {
     children: React.PropTypes.node,
     enabled: React.PropTypes.bool,
@@ -72,35 +74,36 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const veryDarkened = color(ButtonColors[this.props.type])
+    const clr = this.getColors();
+    const veryDarkened = color(clr.buttonColors[this.props.type])
         .darken(0.3).hexString();
-    const darkened = color(ButtonColors[this.props.type])
+    const darkened = color(clr.buttonColors[this.props.type])
         .darken(0.1).hexString();
-    const lightened = color(ButtonColors[this.props.type])
+    const lightened = color(clr.buttonColors[this.props.type])
         .lighten(0.3).hexString();
     const workingColor = this.props.type === 'secondary' ? darkened : veryDarkened;
     const style = reactCSS({
       default: {
         Button: {
-          background: ButtonColors.secondary,
+          background: clr.buttonColors.secondary,
           borderTop: `1px solid ${veryDarkened}`,
           borderLeft: `1px solid ${veryDarkened}`,
           borderBottom: `1px solid ${veryDarkened}`,
           borderRight: `1px solid ${veryDarkened}`,
           borderRadius: '3px',
-          color: TextColors.primary,
+          color: clr.textColors.primary,
           padding: '5px 15px',
           outline: 'none',
         },
       },
       typeColor: {
         Button: {
-          background: ButtonColors[this.props.type],
-          borderTop: `1px solid ${ButtonColors[this.props.type]}`,
-          borderLeft: `1px solid ${ButtonColors[this.props.type]}`,
+          background: clr.buttonColors[this.props.type],
+          borderTop: `1px solid ${clr.buttonColors[this.props.type]}`,
+          borderLeft: `1px solid ${clr.buttonColors[this.props.type]}`,
           borderBottom: `1px solid ${veryDarkened}`,
-          borderRight: `1px solid ${ButtonColors[this.props.type]}`,
-          color: TextColors.light,
+          borderRight: `1px solid ${clr.buttonColors[this.props.type]}`,
+          color: clr.textColors.light,
         },
       },
       hovering: {
