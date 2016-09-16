@@ -1,5 +1,6 @@
 /* eslint jsx-a11y/no-static-element-interactions: "off" */
 /* eslint react/forbid-prop-types: "off" */
+/* eslint class-methods-use-this: "off" */
 
 import React from 'react';
 import reactCSS from 'reactcss';
@@ -8,6 +9,7 @@ import {
   StructuralColors,
   TextColors,
 } from '../shared/colors';
+import Checkbox from './Checkbox';
 
 export default class Table extends React.Component {
 
@@ -18,42 +20,59 @@ export default class Table extends React.Component {
     }),
     filterRecords: React.PropTypes.array,
     headers: React.PropTypes.object,
+    multiSelectable: React.PropTypes.bool,
     noRecordsText: React.PropTypes.string,
     onClick: React.PropTypes.func,
+    onChange: React.PropTypes.func,
     records: React.PropTypes.array.isRequired,
     recordInclusion: React.PropTypes.array,
     returnAllRecordsOnClick: React.PropTypes.bool,
-    selectedRow: React.PropTypes.number,
+    // TODO: Change to reflect that this is initial state only
+    selectedRows: React.PropTypes.arrayOf(React.PropTypes.number),
   }
 
   static defaultProps = {
     noRecordsText: 'No records found.',
+    multiSelectable: false,
+    onClick: () => {},
+    onChange: () => {},
   };
 
   displayName = 'Table';
 
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       hoveredRow: null,
       isRowHovering: false,
+      selectedRows: props.selectedRows || [],
     };
   }
 
   handleMouseOut() {
-    this.setState(
-      { isRowHovering: false,
-        hoveredRow: null,
-      }
-    );
+    if (this.props.onClick) {
+      this.setState(
+        { isRowHovering: false,
+          hoveredRow: null,
+        }
+      );
+    }
   }
 
   handleMouseOver(rowIndex) {
-    this.setState(
-      { isRowHovering: true,
-        hoveredRow: rowIndex,
-      }
-    );
+    if (this.props.onClick) {
+      this.setState(
+        { isRowHovering: true,
+          hoveredRow: rowIndex,
+        }
+      );
+    }
+  }
+
+  handleOnChange() {
+    this.props.onChange({
+      selectedRows: this.state.selectedRows,
+    });
   }
 
   includeSubRecords(record) {
@@ -138,20 +157,74 @@ export default class Table extends React.Component {
     this.props.onClick(itemData, xCord, cellData, returnedRowData, yCord);
   }
 
+  handleSelectAll() {
+    const allRows = [...Array(this.props.records.length).keys()];
+    this.handleOnChange();
+    this.setState({
+      selectedRows: this.state.selectedRows.length > 0 ? [] : allRows,
+    });
+  }
+
+  handleRowSelect(columnKey, xCord, cellData, row, yCord) {
+    const selectedRows = this.state.selectedRows;
+    this.handleOnChange();
+    if (selectedRows.indexOf(yCord) > -1) {
+      selectedRows.splice(selectedRows.indexOf(yCord), 1);
+    } else {
+      selectedRows.push(yCord);
+    }
+    this.setState({
+      selectedRows,
+    });
+  }
+
   renderHeaderItem(style) {
     const headers = this.processHeaders();
-    return Object.keys(headers).map((header, i) => (
-      <th style={style.TheadItems} key={i}>
+    const headerTitles = Object.keys(headers).map((header, i) => (
+      <th
+        key={i}
+        style={style.TheadItems}
+      >
         {headers[header]}
       </th>
       )
     );
+    const selectAllHeader = (
+      <th
+        key={0}
+        style={style.TheadItems}
+      >
+        <Checkbox
+          ref={c => this.checkBoxHeaderRef = c}
+          onChange={this.handleSelectAll.bind(this)}
+          checked={false}
+        />
+      </th>
+    );
+    return this.props.multiSelectable ? [selectAllHeader, headerTitles] : headerTitles;
   }
 
   renderHeaderItems(style) {
     return (<tr style={style.Thead}>
       {this.renderHeaderItem(style)}
     </tr>
+    );
+  }
+
+  renderCheckBox(tdStyle, columnKey, xCord, cellData, row, yCord) {
+    this.checkBoxRefs = [];
+    const shouldBeChecked = this.state.selectedRows.indexOf(yCord) > -1;
+    return (
+      <td
+        key={xCord}
+        onChange={this.handleRowSelect.bind(this, columnKey, xCord, cellData, row, yCord)}
+        style={tdStyle}
+      >
+        <Checkbox
+          checked={shouldBeChecked}
+          ref={(c) => this.checkBoxRefs.push(c)}
+        />
+      </td>
     );
   }
 
@@ -172,16 +245,20 @@ export default class Table extends React.Component {
   }
 
   renderRow(style, row, i) {
-    const isSelectedRow = i === this.props.selectedRow ? style.selected : null;
-    const isHoveredRow = i === this.state.hoveredRow ? style.TableRow : isSelectedRow;
+    const rowSelected = this.state.selectedRows.length > -1 && this.state.selectedRows.indexOf(i) > -1;
+    const isSelectedRow = rowSelected ? style.selected : undefined;
+    const rowStyle = (i === this.state.hoveredRow ? style.TableRow : isSelectedRow);
     const rowItem = Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i));
+    const multiSelectItem = this.renderCheckBox(style.TBodyItems, '', 0, '', row, i);
+
     return rowItem.length > 0 ? (
       <tr
         key={i}
         onMouseOut={this.handleMouseOut.bind(this, i)}
         onMouseOver={this.handleMouseOver.bind(this, i)}
-        style={isHoveredRow}
+        style={rowStyle}
       >
+        { this.props.multiSelectable ? multiSelectItem : undefined }
         { rowItem }
       </tr>
     ) : null;
@@ -245,7 +322,7 @@ export default class Table extends React.Component {
         },
       },
     }, {
-      hover: this.props.onClick ? this.state.isRowHovering : null,
+      hover: this.state.isRowHovering,
     });
 
     return (

@@ -2,6 +2,7 @@ export Alert from './components/Alert';
 export Breadcrumbs from './components/Breadcrumbs';
 export Button from './components/Button';
 export ButtonGroup from './components/ButtonGroup';
+export Checkbox from './components/Checkbox';
 export Drawer from './components/Drawer';
 export Dropdown from './components/Dropdown';
 export EmailInput from './components/EmailInput';

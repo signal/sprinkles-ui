@@ -53,11 +53,13 @@ const renderTable = (props) => {
       columns={props.columns}
       headers={props.headers}
       onClick={props.onClick}
+      onChange={props.onChange}
       filterRecords={props.filterRecords}
+      multiSelectable={props.multiSelectable}
       records={props.records}
       recordInclusion={props.recordInclusion}
       returnAllRecordsOnClick={props.returnAllRecordsOnClick}
-      selectedRow={props.selectedRow}
+      selectedRows={props.selectedRows}
     />
   );
   tableNode = ReactDOM.findDOMNode(tableComponent);
@@ -128,10 +130,10 @@ describe('Table', () => {
     expect(tRowCells).toBe(10);
   });
 
-  it('Renders a Table without with the first row selected', () => {
+  it('Renders a Table with the first row selected', () => {
     renderTable({
       records,
-      selectedRow: 0,
+      selectedRows: [0],
     });
     expect(color(row(0).style.background).hexString())
       .toBe(color(BackgroundColors.selected).hexString());
@@ -151,9 +153,13 @@ describe('Table', () => {
   });
 
   it('does not render a hover effect for a table row element without onClick event', () => {
-    TestUtils.Simulate.mouseOver(row(0));
+    renderTable({
+      onClick: null,
+      records,
+    });
+    TestUtils.Simulate.mouseOver(row(1));
 
-    expect(row(0).style.background).toBe('');
+    expect(row(1).style.background).toBe('');
   });
 
   it('Provides only included records for a clicked table body element', () => {
@@ -283,5 +289,91 @@ describe('Table', () => {
     expect(headerElement(0).textContent).toBe('Favorite Color');
     expect(headerElement(1).textContent).toBe('Age');
     expect(headerElement(2).textContent).toBe('Name');
+  });
+
+  it('renders a table with checkboxes when multiselect is enabled', () => {
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+    });
+    expect(cell(0, 0).getElementsByTagName('input').length).toBe(1);
+  });
+
+  it('highights an individual row when multiselect is selected', () => {
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+    });
+
+    const checkBoxNode = tableComponent.checkBoxRefs[3].inputRef;
+
+    TestUtils.Simulate.change(checkBoxNode);
+    expect(color(row(3).style.background).hexString())
+      .toBe(color(BackgroundColors.selected).hexString());
+  });
+
+  it('highights several rows when several multiselects are selected', () => {
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+    });
+
+    const checkBox1 = tableComponent.checkBoxRefs[1].inputRef;
+    const checkBox3 = tableComponent.checkBoxRefs[3].inputRef;
+
+    TestUtils.Simulate.change(checkBox1);
+    TestUtils.Simulate.change(checkBox3);
+    expect(color(row(1).style.background).hexString())
+      .toBe(color(BackgroundColors.selected).hexString());
+    expect(color(row(3).style.background).hexString())
+      .toBe(color(BackgroundColors.selected).hexString());
+  });
+
+  it('highights all rows when multiselect in header is selected', () => {
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+    });
+    const checkBoxHeaderNode = tableComponent.checkBoxHeaderRef.inputRef;
+
+    TestUtils.Simulate.change(checkBoxHeaderNode);
+    records.forEach((item, i) => {
+      expect(color(row(i).style.background).hexString())
+        .toBe(color(BackgroundColors.selected).hexString());
+    });
+  });
+
+  it('unhighights all selected rows when multiselect in header is selected', () => {
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+    });
+    const checkBoxHeaderNode = tableComponent.checkBoxHeaderRef.inputRef;
+
+    TestUtils.Simulate.change(checkBoxHeaderNode);
+    TestUtils.Simulate.change(checkBoxHeaderNode);
+    records.forEach((item, i) => {
+      expect((row(i).style.background))
+        .toBe('');
+    });
+  });
+
+  it('returns a change event when multiselect is preformed', () => {
+    const mockHandleChange = jest.fn();
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+      onChange: mockHandleChange,
+    });
+    const selectedRows = { selectedRows: [2] };
+    const checkBoxNode = tableComponent.checkBoxRefs[2].inputRef;
+    TestUtils.Simulate.change(checkBoxNode, { selectedRows });
+    expect(mockHandleChange).toBeCalledWith(selectedRows);
   });
 });

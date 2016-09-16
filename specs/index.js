@@ -11,6 +11,7 @@
 
 describe('Sprinkles UI', () => {
   describe('Form, Field and Inputs', () => {
+    require('./components/Checkbox.spec');
     require('./components/Field.spec');
     require('./components/Form.spec');
     require('./components/TextInput.spec');

@@ -57,17 +57,18 @@ describe('Table', function () {
       });
     };
     this.unload();
-    this.load(
+    this.component(
       <Table
         columns={props.columns}
         headers={props.headers}
         filterRecords={props.filterRecords}
-        onClick={props.onClick ? handleClick : null}
+        onClick={handleClick}
         records={
           props.records
         }
         recordInclusion={props.recordInclusion}
-        selectedRow={props.selectedRow}
+        selectedRows={props.selectedRows}
+        multiSelectable={props.multiSelectable}
       />
     );
   };
@@ -89,7 +90,16 @@ describe('Table', function () {
         headers: this.headers,
         records: this.records,
         recordInclusion: this.recordInclusion,
-        selectedRow: row,
+        selectedRows: [row],
+      });
+  });
+  it('Select multiple rows', () => {
+    this.loadTable(
+      {
+        headers: this.headers,
+        records: this.records,
+        recordInclusion: this.recordInclusion,
+        selectedRows: [2, 3],
       });
   });
   it('Exclude Age', () => {
@@ -170,6 +180,18 @@ describe('Table', function () {
       });
   });
 
+  it('Has multiselect turned on', () => {
+    this.loadTable(
+      {
+        columns: {
+          order: ['name', 'color', 'age'],
+        },
+        headers: this.headers,
+        records: this.records,
+        multiSelectable: true,
+      });
+  });
+
   /**
    * Documentation (Markdown)
    */
@@ -182,7 +204,7 @@ describe('Table', function () {
   - **records** *React.PropTypes.object* key/ value set of data used to populate the table
   - **recordInclusion** *React.PropTypes.object* (optional) maps to key of record, used to limit what is displayed
   - **onClick** *React.PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
-  - **selectedRow** *React.PropTypes.number* (optional) highlight a single row based on index
+  - **selectedRows** *React.PropTypes.arrayOf(React.PropTypes.number)* select rows based on index
   - **returnAllRecordsOnClick** *React.PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
   - **filterRecords**  *React.PropTypes.object* key/ value set of data to filter the records against. If multiple values are supplied, it's considered an OR not an AND
   `);
