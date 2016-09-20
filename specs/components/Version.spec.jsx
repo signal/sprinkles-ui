@@ -28,10 +28,10 @@ describe('Version', function () {
             {`My Tag Selector Is ${tagSelector}`}
           </div>
           <div>
-              {'I get rendered when the version is less than or equal to 0.10.1'}
+            {'I get rendered when the version is less than or equal to 0.10.1'}
           </div>
           <div>
-              {'I also get rendered when the tag=\'has burrito\''}
+            {'I also get rendered when the tag=\'has burrito\''}
           </div>
         </div>
       </Version>

@@ -77,11 +77,24 @@ describe('Table', () => {
     expect(tableComponent).toBeDefined();
   });
 
-  it('Does render a Table with headers', () => {
+  it('renders a Table with headers', () => {
     expect(tHead).toBeDefined();
     expect(headerElement(0).textContent).toBe('Name');
     expect(headerElement(1).textContent).toBe('Age');
     expect(headerElement(2).textContent).toBe('Favorite Color');
+  });
+
+  it('renders a Table with headers, excluding headers in recordInclusion', () => {
+    renderTable({
+      headers,
+      records,
+      recordInclusion: ['name', 'age'],
+    });
+
+    expect(tHead).toBeDefined();
+    expect(headerElement(0).textContent).toBe('Name');
+    expect(headerElement(1).textContent).toBe('Age');
+    expect(headerElement(2)).toBeUndefined();
   });
 
   it('Renders a Table without headers specified', () => {

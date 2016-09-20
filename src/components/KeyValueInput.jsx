@@ -219,7 +219,7 @@ export default class KeyValueInput extends React.Component {
             />
           </span>
           <span style={style.DeleteButton}>
-              {deleteButton}
+            {deleteButton}
           </span>
         </div>
       );

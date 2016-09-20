@@ -159,7 +159,7 @@ export default class SelectInput extends React.Component {
         style={style.SelectInput}
         ref={c => this.SelectInputRef = c}
       >
-      {this.renderDisplay(style)}
+        {this.renderDisplay(style)}
       </div>);
   }
 

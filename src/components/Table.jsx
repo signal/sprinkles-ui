@@ -101,6 +101,16 @@ export default class Table extends React.Component {
     if (this.props.columns && this.props.columns.order) {
       return this.sortRecords(headers);
     }
+
+    if (this.props.recordInclusion) {
+      const filteredHeaders = {};
+      this.props.recordInclusion.forEach((record) => {
+        filteredHeaders[record] = headers[record];
+      });
+
+      return filteredHeaders;
+    }
+
     return headers;
   }
 
@@ -172,7 +182,7 @@ export default class Table extends React.Component {
         onMouseOver={this.handleMouseOver.bind(this, i)}
         style={isHoveredRow}
       >
-      { rowItem }
+        { rowItem }
       </tr>
     ) : null;
   }

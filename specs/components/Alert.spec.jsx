@@ -103,7 +103,7 @@ describe('Alert', function () {
             color={'white'}
             fontSize={0.8}
           >
-              {'◼︎ At least 1 numeric character'}
+            {'◼︎ At least 1 numeric character'}
           </Text>
         </div>
       </div>,
