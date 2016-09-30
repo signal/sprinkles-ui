@@ -24,10 +24,9 @@ export default class Table extends React.Component {
     noRecordsText: React.PropTypes.string,
     onClick: React.PropTypes.func,
     onChange: React.PropTypes.func,
-    records: React.PropTypes.array.isRequired,
+    records: React.PropTypes.array,
     recordInclusion: React.PropTypes.array,
     returnAllRecordsOnClick: React.PropTypes.bool,
-    // TODO: Change to reflect that this is initial state only
     selectedRows: React.PropTypes.arrayOf(React.PropTypes.number),
   }
 
@@ -36,16 +35,17 @@ export default class Table extends React.Component {
     multiSelectable: false,
     onClick: () => {},
     onChange: () => {},
+    records: [],
+    selectedRows: [],
   };
 
   displayName = 'Table';
 
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       hoveredRow: null,
       isRowHovering: false,
-      selectedRows: props.selectedRows || [],
     };
   }
 
@@ -67,12 +67,6 @@ export default class Table extends React.Component {
         }
       );
     }
-  }
-
-  handleOnChange() {
-    this.props.onChange({
-      selectedRows: this.state.selectedRows,
-    });
   }
 
   includeSubRecords(record) {
@@ -159,22 +153,16 @@ export default class Table extends React.Component {
 
   handleSelectAll() {
     const allRows = [...Array(this.props.records.length).keys()];
-    this.handleOnChange();
-    this.setState({
-      selectedRows: this.state.selectedRows.length > 0 ? [] : allRows,
-    });
+    this.props.onChange(allRows);
   }
 
   handleRowSelect(columnKey, xCord, cellData, row, yCord) {
-    const selectedRows = this.state.selectedRows;
-    this.handleOnChange();
-    if (selectedRows.indexOf(yCord) > -1) {
-      selectedRows.splice(selectedRows.indexOf(yCord), 1);
-    } else {
-      selectedRows.push(yCord);
-    }
-    this.setState({
-      selectedRows,
+    this.props.onChange({
+      columnKey,
+      xCord,
+      cellData,
+      row,
+      yCord,
     });
   }
 
@@ -213,7 +201,7 @@ export default class Table extends React.Component {
 
   renderCheckBox(tdStyle, columnKey, xCord, cellData, row, yCord) {
     this.checkBoxRefs = [];
-    const shouldBeChecked = this.state.selectedRows.indexOf(yCord) > -1;
+    const shouldBeChecked = this.props.selectedRows.indexOf(yCord) > -1;
     return (
       <td
         key={xCord}
@@ -245,7 +233,7 @@ export default class Table extends React.Component {
   }
 
   renderRow(style, row, i) {
-    const rowSelected = this.state.selectedRows.length > -1 && this.state.selectedRows.indexOf(i) > -1;
+    const rowSelected = this.props.selectedRows.indexOf(i) > -1;
     const isSelectedRow = rowSelected ? style.selected : undefined;
     const rowStyle = (i === this.state.hoveredRow ? style.TableRow : isSelectedRow);
     const rowItem = Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i));
@@ -265,10 +253,17 @@ export default class Table extends React.Component {
   }
 
   renderNoResults(style) {
+    let colSpan = '';
+    if (this.props.headers) {
+      colSpan = this.props.headers;
+    } else if (this.props.records[0]) {
+      colSpan = this.props.records[0];
+    }
+
     return (
       <tr>
         <td
-          colSpan={Object.keys(this.props.records[0]).length}
+          colSpan={Object.keys(colSpan).length}
           style={style.TBodyItems}
         >
           {this.props.noRecordsText}
@@ -278,7 +273,7 @@ export default class Table extends React.Component {
   }
 
   renderRows(style, records) {
-    const rowResults = records.length ?
+    const rowResults = records.length > 0 ?
       records.map((item, i) => this.renderRow(style, item, i)) : [];
     return rowResults[0] ? rowResults : this.renderNoResults(style);
   }

@@ -79,6 +79,24 @@ describe('Table', () => {
     expect(tableComponent).toBeDefined();
   });
 
+  it('renders a Table with no records', () => {
+    renderTable({
+      headers,
+      records: [],
+    });
+
+    expect(cell(0, 0).textContent).toBe('No records found.');
+  });
+
+  it('renders a Table with no records and no headers', () => {
+    renderTable({
+      headers: undefined,
+      records: [],
+    });
+
+    expect(cell(0, 0).textContent).toBe('No records found.');
+  });
+
   it('renders a Table with headers', () => {
     expect(tHead).toBeDefined();
     expect(headerElement(0).textContent).toBe('Name');
@@ -300,69 +318,6 @@ describe('Table', () => {
     expect(cell(0, 0).getElementsByTagName('input').length).toBe(1);
   });
 
-  it('highights an individual row when multiselect is selected', () => {
-    renderTable({
-      headers,
-      records,
-      multiSelectable: true,
-    });
-
-    const checkBoxNode = tableComponent.checkBoxRefs[3].inputRef;
-
-    TestUtils.Simulate.change(checkBoxNode);
-    expect(color(row(3).style.background).hexString())
-      .toBe(color(BackgroundColors.selected).hexString());
-  });
-
-  it('highights several rows when several multiselects are selected', () => {
-    renderTable({
-      headers,
-      records,
-      multiSelectable: true,
-    });
-
-    const checkBox1 = tableComponent.checkBoxRefs[1].inputRef;
-    const checkBox3 = tableComponent.checkBoxRefs[3].inputRef;
-
-    TestUtils.Simulate.change(checkBox1);
-    TestUtils.Simulate.change(checkBox3);
-    expect(color(row(1).style.background).hexString())
-      .toBe(color(BackgroundColors.selected).hexString());
-    expect(color(row(3).style.background).hexString())
-      .toBe(color(BackgroundColors.selected).hexString());
-  });
-
-  it('highights all rows when multiselect in header is selected', () => {
-    renderTable({
-      headers,
-      records,
-      multiSelectable: true,
-    });
-    const checkBoxHeaderNode = tableComponent.checkBoxHeaderRef.inputRef;
-
-    TestUtils.Simulate.change(checkBoxHeaderNode);
-    records.forEach((item, i) => {
-      expect(color(row(i).style.background).hexString())
-        .toBe(color(BackgroundColors.selected).hexString());
-    });
-  });
-
-  it('unhighights all selected rows when multiselect in header is selected', () => {
-    renderTable({
-      headers,
-      records,
-      multiSelectable: true,
-    });
-    const checkBoxHeaderNode = tableComponent.checkBoxHeaderRef.inputRef;
-
-    TestUtils.Simulate.change(checkBoxHeaderNode);
-    TestUtils.Simulate.change(checkBoxHeaderNode);
-    records.forEach((item, i) => {
-      expect((row(i).style.background))
-        .toBe('');
-    });
-  });
-
   it('returns a change event when multiselect is preformed', () => {
     const mockHandleChange = jest.fn();
     renderTable({
@@ -374,6 +329,12 @@ describe('Table', () => {
     const selectedRows = { selectedRows: [2] };
     const checkBoxNode = tableComponent.checkBoxRefs[2].inputRef;
     TestUtils.Simulate.change(checkBoxNode, { selectedRows });
-    expect(mockHandleChange).toBeCalledWith(selectedRows);
+    expect(mockHandleChange).toBeCalledWith({
+      cellData: '',
+      columnKey: '',
+      row: records[2],
+      xCord: 0,
+      yCord: 2,
+    });
   });
 });

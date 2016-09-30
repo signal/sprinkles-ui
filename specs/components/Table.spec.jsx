@@ -83,6 +83,13 @@ describe('Table', function () {
     });
   });
 
+  it('Has no records', () => {
+    this.loadTable(
+      {
+        headers: this.headers,
+        records: [],
+      });
+  });
   it('Change selected row', () => {
     const row = Math.floor(Math.random() * 3);
     this.loadTable(
