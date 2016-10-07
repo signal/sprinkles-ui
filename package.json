@@ -15,7 +15,7 @@
   },
   "keywords": [],
   "author": "Signal Digital Inc. <sprinkles-ui@signal.co>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "color": "^0.11.3",
     "fuse.js": "^2.5.0",

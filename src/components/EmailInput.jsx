@@ -1,3 +1,4 @@
+/* eslint no-useless-escape: "off" */
 /* eslint max-len: "off" */
 /* eslint no-useless-escape: "off" */
 
