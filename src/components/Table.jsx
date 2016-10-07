@@ -205,8 +205,8 @@ export default class Table extends React.Component {
     return (
       <td
         key={xCord}
-        onChange={this.handleRowSelect.bind(this, columnKey, xCord, cellData, row, yCord)}
         style={tdStyle}
+        onClick={this.handleRowSelect.bind(this, columnKey, xCord, cellData, row, yCord)}
       >
         <Checkbox
           checked={shouldBeChecked}

@@ -12,15 +12,15 @@ describe('ListItemGroup', function () {
 
   before(() => {
     this.load(
-      <ListItemGroup label={"Group"}>
+      <ListItemGroup label={'Group'}>
         <ListItem>
           <TextListItem
-            text={"Cheese"}
+            text={'Cheese'}
           />
         </ListItem>
         <ListItem>
           <TextListItem
-            text={"Crackers"}
+            text={'Crackers'}
           />
         </ListItem>
       </ListItemGroup>

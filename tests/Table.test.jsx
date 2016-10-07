@@ -326,9 +326,8 @@ describe('Table', () => {
       multiSelectable: true,
       onChange: mockHandleChange,
     });
-    const selectedRows = { selectedRows: [2] };
     const checkBoxNode = tableComponent.checkBoxRefs[2].inputRef;
-    TestUtils.Simulate.change(checkBoxNode, { selectedRows });
+    TestUtils.Simulate.click(checkBoxNode);
     expect(mockHandleChange).toBeCalledWith({
       cellData: '',
       columnKey: '',
@@ -348,5 +347,24 @@ describe('Table', () => {
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
     TestUtils.Simulate.change(checkBoxNode);
     expect(mockHandleChange).toBeCalledWith([0, 1, 2, 3, 4]);
+  });
+
+  it('selects a row when clicking anywhere within the checkbox cell', () => {
+    const mockHandleChange = jest.fn();
+    renderTable({
+      records,
+      returnAllRecordsOnClick: true,
+      multiSelectable: true,
+      onChange: mockHandleChange,
+    });
+
+    TestUtils.Simulate.click(cell(0, 0));
+    expect(mockHandleChange).toBeCalledWith({
+      cellData: '',
+      columnKey: '',
+      row: records[0],
+      xCord: 0,
+      yCord: 0,
+    });
   });
 });
