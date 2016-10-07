@@ -337,4 +337,16 @@ describe('Table', () => {
       yCord: 2,
     });
   });
+  it('returns a change event when select all is triggered', () => {
+    const mockHandleChange = jest.fn();
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+      onChange: mockHandleChange,
+    });
+    const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
+    TestUtils.Simulate.change(checkBoxNode);
+    expect(mockHandleChange).toBeCalledWith([0, 1, 2, 3, 4]);
+  });
 });
