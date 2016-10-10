@@ -1,4 +1,5 @@
 import React from 'react';
+import reactCSS from 'reactcss';
 
 export default class Checkbox extends React.Component {
   static propTypes = {
@@ -44,7 +45,7 @@ export default class Checkbox extends React.Component {
     this.props.onBlur(e);
   };
 
-  renderCheckBox() {
+  renderCheckBox(style) {
     const props = {
       ref: c => this.inputRef = c,
       checked: this.props.checked,
@@ -56,13 +57,21 @@ export default class Checkbox extends React.Component {
       type: 'checkbox',
     };
     return (
-      <input {...props} />
+      <input style={style.Checkbox} {...props} />
     );
   }
 
   render() {
+    const style = reactCSS({
+      default: {
+        Checkbox: {
+          margin: 0,
+        },
+      },
+    });
+
     return (
-      this.renderCheckBox()
+      this.renderCheckBox(style)
     );
   }
 }
