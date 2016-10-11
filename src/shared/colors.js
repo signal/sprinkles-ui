@@ -6,8 +6,8 @@ export const Colors = {
 };
 
 export const ButtonColors = Object.assign({
-  secondary: '#FEFEFE',
-  primary: '#0275D8',
+  secondary: '#FFFFFF',
+  primary: '#39A1CE',
 }, Colors);
 
 export const IconColors = {
@@ -30,7 +30,7 @@ export const BackgroundColors = {
   primary: '#FEFEFE',
   primaryNav: '#2B333D',
   secondary: '#F8FAFB',
-  secondaryNav: '#FEFEFE',
+  secondaryNav: '#5A5A5A',
   selected: '#CFF5F9',
   tableHeader: '#EFEFEF',
 };

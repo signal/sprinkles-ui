@@ -47,7 +47,7 @@ export default class SecondaryNav extends React.Component {
           height: '100%',
           alignItems: 'center',
           padding: '0 20px',
-          background: BackgroundColors.primary,
+          background: BackgroundColors.secondaryNav,
         },
         LeftItems: {
           flex: 1,
