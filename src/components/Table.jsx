@@ -152,8 +152,9 @@ export default class Table extends React.Component {
   }
 
   handleSelectAll() {
-    const allRows = [...Array(this.props.records.length).keys()];
-    this.props.onChange(allRows);
+    const processedRecords = this.processRecords(this.props.selectedRows);
+    const selectedRows = [...Array(processedRecords.length).keys()];
+    this.props.onChange(selectedRows);
   }
 
   handleRowSelect(columnKey, xCord, cellData, row, yCord) {

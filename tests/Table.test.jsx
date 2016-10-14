@@ -15,22 +15,27 @@ const records = [
 { name: 'Sue',
   age: 25,
   color: 'blue',
+  status: 'Active',
 },
 { name: 'Frank',
   age: 20,
   color: 'green',
+  status: 'Inactive',
 },
 { name: 'Larry',
   age: 39,
   color: 'red',
+  status: 'Active',
 },
 { name: 'Jose',
   age: 20,
   color: 'purple',
+  status: 'Inactive',
 },
 { name: 'Peter',
   age: 28,
   color: 'blue',
+  status: 'Active',
 }];
 
 const defaultProps = {
@@ -44,6 +49,7 @@ let tBody;
 let tableComponent;
 let headerElement;
 let row;
+let rows;
 let cell;
 
 const mockHandleClick = jest.fn();
@@ -65,8 +71,9 @@ const renderTable = (props) => {
   tableNode = ReactDOM.findDOMNode(tableComponent);
   tHead = tableNode.getElementsByTagName('thead')[0];
   tBody = tableNode.getElementsByTagName('tbody')[0];
+  rows = () => tBody.getElementsByTagName('tr');
   headerElement = (index) => tHead.getElementsByTagName('th')[index];
-  row = (index) => tBody.getElementsByTagName('tr')[index];
+  row = (index) => rows()[index];
   cell = (x, y) => row(x).getElementsByTagName('td')[y];
 };
 
@@ -134,7 +141,7 @@ describe('Table', () => {
 
   it('Does render a Table with cells', () => {
     const tRowCells = tBody.getElementsByTagName('td').length;
-    expect(tRowCells).toBe(15);
+    expect(tRowCells).toBe(20);
   });
 
   it('Renders a Table with limited data selected', () => {
@@ -347,6 +354,23 @@ describe('Table', () => {
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
     TestUtils.Simulate.change(checkBoxNode);
     expect(mockHandleChange).toBeCalledWith([0, 1, 2, 3, 4]);
+  });
+
+  it('returns a change event when filtering segments and select all is triggered', () => {
+    const mockHandleChange = jest.fn();
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+      onChange: mockHandleChange,
+      filterRecords: [{ status: 'Inactive' }],
+    });
+    const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
+    TestUtils.Simulate.change(checkBoxNode);
+    expect(rows().length).toBe(2);
+    expect(cell(0, 1).textContent).toBe('Frank');
+    expect(cell(1, 1).textContent).toBe('Jose');
+    expect(mockHandleChange).toBeCalledWith([0, 1]);
   });
 
   it('selects a row when clicking anywhere within the checkbox cell', () => {
