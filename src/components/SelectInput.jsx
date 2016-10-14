@@ -182,6 +182,7 @@ export default class SelectInput extends React.Component {
         },
         Icon: {
           margin: '0 15px',
+          maxWidth: '20px',
           transition: 'transform 0.2s ease',
         },
       },
