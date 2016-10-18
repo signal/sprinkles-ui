@@ -33,3 +33,6 @@ export {
   BackgroundColors,
   StructuralColors,
 } from './shared/colors';
+export {
+  Resets,
+} from './shared/styles';

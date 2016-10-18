@@ -33,6 +33,8 @@ import {
   Colors,
   StructuralColors,
   TextColors,
+  // styles
+  Resets,
 } from './Sprinkles';
 
 
@@ -70,6 +72,8 @@ window.Sprinkles = {
   Colors,
   StructuralColors,
   TextColors,
+  // Styles
+  Resets,
 };
 window.React = React;
 window.ReactDOM = ReactDOM;
