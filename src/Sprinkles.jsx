@@ -18,6 +18,7 @@ export Popover from './components/Popover';
 export PrimaryNav from './components/PrimaryNav';
 export RadioButtonInput from './components/RadioButtonInput';
 export SecondaryNav from './components/SecondaryNav';
+export SearchInput from './components/SearchInput';
 export SelectInput from './components/SelectInput';
 export Table from './components/Table';
 export Text from './components/Text';
