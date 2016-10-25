@@ -6,6 +6,7 @@ describe('zindex', () => {
       Drawer: 1300,
       PopoverClose: 2010,
       Popover: 2100,
+      SearchIcon: 100,
     });
   });
 });

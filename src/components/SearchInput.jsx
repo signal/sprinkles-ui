@@ -6,6 +6,7 @@ import TextInput from './TextInput';
 import VectorGraphic from './VectorGraphic';
 import { IconColors } from '../shared/colors';
 import { Resets } from '../shared/styles';
+import zindex from '../shared/zindex';
 
 export default class SearchInput extends TextInput {
   static propTypes = {
@@ -46,7 +47,7 @@ export default class SearchInput extends TextInput {
       location: 0,
       maxPatternLength: 32,
       shouldSort: false,
-      threshold: 0.6,
+      threshold: 0.45,
     };
 
     this.state = {
@@ -118,6 +119,7 @@ export default class SearchInput extends TextInput {
           position: 'absolute',
           left: '5px',
           top: '5px',
+          zIndex: zindex.SearchIcon,
         },
         SearchInputWrapper: {
           position: 'relative',
