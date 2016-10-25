@@ -12,7 +12,6 @@ export default class SearchInput extends TextInput {
     autoComplete: React.PropTypes.bool,
     boundValue: React.PropTypes.string,
     enabled: React.PropTypes.bool,
-    initialValue: React.PropTypes.string,
     multiline: React.PropTypes.bool,
     onChange: React.PropTypes.func,
     placeholder: React.PropTypes.string,
@@ -35,7 +34,6 @@ export default class SearchInput extends TextInput {
   };
 
   static defaultProps = {
-    initialValue: '',
     placeholder: 'Enter Search Term(s)',
   };
 
@@ -55,7 +53,7 @@ export default class SearchInput extends TextInput {
       combinedSearchSettings: Object.assign({}, props.searchSettings, this.defaultSearchSettings),
       isFocused: false,
       searchResults: [],
-      value: props.initialValue,
+      value: undefined,
     };
     this.setupFuse(props);
   }
@@ -158,7 +156,7 @@ export default class SearchInput extends TextInput {
           onFocus={this.handleFocus.bind(this)}
           placeholder={this.props.placeholder}
           style={mergedInputStyles}
-          value={this.state.value}
+          value={undefined}
           onChange={this.handleChange.bind(this)}
           ref={(comp) => this.inputRef = comp}
           type={'search'}

@@ -1,6 +1,6 @@
 {
   "name": "sprinkles-ui",
-  "version": "0.0.1beta87",
+  "version": "0.0.1beta88",
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
@@ -43,7 +43,7 @@
     "lorem-ipsum": "^1.0.3",
     "nodemon": "^1.10.2",
     "react-addons-test-utils": "^15.3.1",
-    "ui-harness": "3.18.1",
+    "ui-harness": "3.19.0",
     "webpack": "^1.13.2"
   },
   "files": [
