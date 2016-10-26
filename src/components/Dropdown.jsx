@@ -9,6 +9,7 @@ import Popover from './Popover';
 export default class Dropdown extends React.Component {
   static propTypes = {
     anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    disabled: React.PropTypes.bool,
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
         key: React.PropTypes.string,
@@ -25,6 +26,7 @@ export default class Dropdown extends React.Component {
 
   static defaultProps = {
     anchorOrigin: 'bottom',
+    disabled: false,
     items: [],
     open: false,
     onClick: () => {},
@@ -42,6 +44,7 @@ export default class Dropdown extends React.Component {
     return (
       <Popover
         anchorOrigin={this.props.anchorOrigin}
+        disabled={this.props.disabled}
         open={this.props.open}
         onRequestOpen={this.props.onRequestOpen}
         onRequestClose={this.props.onRequestClose}
