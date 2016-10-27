@@ -67,7 +67,7 @@ export default class Dropdown extends React.Component {
         key={i}
         onClick={this.handleClick.bind(this, item)}
       >
-        <TextListItem text={item.value} />
+        <TextListItem text={item.label} />
       </ListItem>
     );
   }
