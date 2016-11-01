@@ -1,6 +1,6 @@
 {
   "name": "sprinkles-ui",
-  "version": "0.0.1beta92",
+  "version": "0.0.1beta93",
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "color": "^0.11.3",
+    "fuse.js": "^2.5.0",
     "immutable": "^3.8.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
@@ -38,7 +39,6 @@
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.2.1",
     "eslint-plugin-react": "^6.2.0",
-    "fuse.js": "^2.5.0",
     "jest-cli": "^15.1.1",
     "lorem-ipsum": "^1.0.3",
     "nodemon": "^1.10.2",
