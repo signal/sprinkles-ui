@@ -47,7 +47,7 @@ export default class SearchInput extends TextInput {
       location: 0,
       maxPatternLength: 32,
       shouldSort: false,
-      threshold: 0.45,
+      threshold: 0.3,
     };
 
     this.state = {
