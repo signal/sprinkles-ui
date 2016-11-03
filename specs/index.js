@@ -24,6 +24,7 @@ describe('Sprinkles UI', () => {
     require('./components/SearchInput.spec');
   });
   describe('List and List Item', () => {
+    require('./components/BulletedList.spec');
     require('./components/List.spec');
     require('./components/ListItemGroup.spec');
     require('./components/ListItem.spec');

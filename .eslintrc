@@ -8,6 +8,7 @@
     "extends": "airbnb",
     "rules": {
       "arrow-parens": 0, //TODO: Look into fixing this
+      "class-methods-use-this": 0,
       "no-return-assign": 0,
       "import/no-extraneous-dependencies": 0,
       "react/jsx-boolean-value": 0,

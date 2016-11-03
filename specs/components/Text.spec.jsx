@@ -64,7 +64,7 @@ describe('Text', function () {
   - **color** *React.PropTypes.string* (optional) text color
   - **fontSize** *React.PropTypes.string* (optional) text size
   - **fontWeight** *React.PropTypes.string* (optional) text weight
-  - **textDecoration** *React.PropTypes.oneOf(['underline', 'overline', 'line-through'])* (optional) add text decoration
+  - **textDecoration** *React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none'])* (optional) add text decoration
 
   `);
 });

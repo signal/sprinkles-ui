@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {
   Alert,
   Breadcrumbs,
+  BulletedList,
   Button,
   ButtonGroup,
   Checkbox,
@@ -43,6 +44,7 @@ import {
 window.Sprinkles = {
   Alert,
   Breadcrumbs,
+  BulletedList,
   Button,
   ButtonGroup,
   Checkbox,

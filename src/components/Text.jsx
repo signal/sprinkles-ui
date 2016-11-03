@@ -7,7 +7,7 @@ export default class Text extends React.Component {
     color: React.PropTypes.string,
     fontSize: React.PropTypes.number,
     fontWeight: React.PropTypes.string,
-    textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through']),
+    textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
   };
 
   displayName = 'Text';

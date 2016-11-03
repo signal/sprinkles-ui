@@ -1,5 +1,6 @@
 export Alert from './components/Alert';
 export Breadcrumbs from './components/Breadcrumbs';
+export BulletedList from './components/BulletedList';
 export Button from './components/Button';
 export ButtonGroup from './components/ButtonGroup';
 export Checkbox from './components/Checkbox';
