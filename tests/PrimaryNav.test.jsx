@@ -120,4 +120,23 @@ describe('Primary Navigation Bar', () => {
     expect(primaryNavComponent.listItemRef.listItemRefs.get(0).props.selected)
       .toBe(true);
   });
+
+  it('does set render a react-router link', () => {
+    const navItems = [
+      {
+        icon: <div />,
+        label: 'Item 1',
+        key: 'item-1',
+        urlPath: '/path',
+      },
+    ];
+    const primaryNavComponent = TestUtils.renderIntoDocument(
+      <PrimaryNav
+        navItems={navItems}
+      />
+    );
+
+    expect(ReactDOM.findDOMNode(primaryNavComponent.listItemRef.listItemRefs.get(0).listItemRef.linkRef))
+      .not.toBeNull();
+  });
 });

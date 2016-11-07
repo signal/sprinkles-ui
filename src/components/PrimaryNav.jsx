@@ -22,8 +22,9 @@ export default class PrimaryNav extends Base {
         icon: React.PropTypes.node,
         label: React.PropTypes.string,
         key: React.PropTypes.string,
+        urlPath: React.PropTypes.string,
         width: React.PropTypes.number,
-      })
+      }).isRequired
     ),
     onNavItemClick: React.PropTypes.func,
     onRequestExpandToggle: React.PropTypes.func,
@@ -113,6 +114,7 @@ export default class PrimaryNav extends Base {
           icon={item.icon}
           key={i}
           text={item.label}
+          urlPath={item.urlPath}
           width={item.width}
         />
       </ListItem>

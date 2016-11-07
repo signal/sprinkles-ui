@@ -1,4 +1,5 @@
 import color from 'color';
+import { Link } from 'react-router';
 import React from 'react';
 import reactCSS from 'reactcss';
 import Base from './Base';
@@ -15,6 +16,7 @@ export default class NavListItem extends Base {
     text: React.PropTypes.string,
     width: React.PropTypes.number,
     type: React.PropTypes.string,
+    urlPath: React.PropTypes.string,
   };
 
   static defaultProps = {
@@ -24,6 +26,31 @@ export default class NavListItem extends Base {
   };
 
   displayName = 'NavListItem';
+
+  renderIcon(style) {
+    return (<div style={style.Icon}>
+      <VectorGraphic
+        height={this.props.height}
+        width={this.props.width}
+      >
+        {this.props.icon}
+      </VectorGraphic>
+    </div>);
+  }
+
+  renderWithRouter(style) {
+    if (this.props.expanded) {
+      return (
+        <div style={style.TextWrapper}>
+          <Link
+            to={this.props.urlPath}
+            ref={c => this.linkRef = c}
+          >{this.props.text}</Link>
+        </div>
+      );
+    }
+    return null;
+  }
 
   renderText(style) {
     if (this.props.text && this.props.expanded) {
@@ -38,6 +65,10 @@ export default class NavListItem extends Base {
       );
     }
     return null;
+  }
+
+  renderItem(style) {
+    return this.renderText(style);
   }
 
   render() {
@@ -82,15 +113,8 @@ export default class NavListItem extends Base {
     });
     return (
       <div style={style.NavListItem}>
-        <div style={style.Icon}>
-          <VectorGraphic
-            height={this.props.height}
-            width={this.props.width}
-          >
-            {this.props.icon}
-          </VectorGraphic>
-        </div>
-        {this.renderText(style)}
+        {this.renderIcon(style)}
+        {this.props.urlPath ? this.renderWithRouter(style) : this.renderItem(style)}
       </div>
     );
   }

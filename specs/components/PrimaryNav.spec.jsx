@@ -11,9 +11,43 @@ describe('PrimaryNav', function () {
   `); // Markdown.
 
   this.loadPrimaryNav = (props = { expanded: true }) => {
+    const defaultNavItems =
+      [
+        {
+          icon: <VectorGraphic
+            height={16}
+            width={16}
+          >
+            <circle
+              cx={'8'}
+              cy={'8'}
+              fill={'white'}
+              r={'14'}
+            />
+          </VectorGraphic>,
+          label: 'Item 2',
+          key: 'item-2',
+        },
+        {
+          icon: <VectorGraphic
+            height={16}
+            width={16}
+          >
+            <circle
+              cx={'8'}
+              cy={'8'}
+              fill={'white'}
+              r={'14'}
+            />
+          </VectorGraphic>,
+          label: 'Item 1',
+          key: 'item-1',
+        },
+      ];
     const handleRequestExpandToggle = () => {
       const curProps = props;
       curProps.expanded = !curProps.expanded;
+      curProps.navItems = defaultNavItems;
       this.loadPrimaryNav(curProps);
     };
     const handleNavItemClick = (item) => {
@@ -30,46 +64,14 @@ describe('PrimaryNav', function () {
             <circle
               cx={'30'}
               cy={'30'}
-              fill={'red'}
+              fill={'white'}
               r={'26'}
             />
           </VectorGraphic>
         }
         appName={'My Cool App'}
-        navItems={
-          [
-            {
-              icon: <VectorGraphic
-                height={16}
-                width={16}
-              >
-                <circle
-                  cx={'8'}
-                  cy={'8'}
-                  fill={'red'}
-                  r={'14'}
-                />
-              </VectorGraphic>,
-              label: 'Item 1',
-              key: 'item-1',
-            },
-            {
-              icon: <VectorGraphic
-                height={16}
-                width={16}
-              >
-                <circle
-                  cx={'8'}
-                  cy={'8'}
-                  fill={'red'}
-                  r={'14'}
-                />
-              </VectorGraphic>,
-              label: 'Item 2',
-              key: 'item-2',
-            },
-          ]
-        }
+        children={props.children}
+        navItems={props.navItems || defaultNavItems}
         showSectionBorders={props.showSectionBorders}
         expanded={props.expanded}
         onRequestExpandToggle={handleRequestExpandToggle}
@@ -89,4 +91,43 @@ describe('PrimaryNav', function () {
   it('Hides sectional borders', () => this.loadPrimaryNav({ showSectionBorders: false }));
   it('Selects the first nav item', () => this.loadPrimaryNav({ selectedNavItem: 'item-1' }));
   it('Selects nothing', () => this.loadPrimaryNav({ selectedNavItem: undefined }));
+  it('Renders using react-router', () => this.loadPrimaryNav({
+    expanded: true,
+    navItems: [
+      {
+        children: <div>Item 1</div>,
+        icon: <VectorGraphic
+          height={16}
+          width={16}
+        >
+          <circle
+            cx={'8'}
+            cy={'8'}
+            fill={'white'}
+            r={'14'}
+          />
+        </VectorGraphic>,
+        label: 'Item 3',
+        key: 'item-3',
+        urlPath: '/item3',
+      },
+      {
+        children: <div>Item 2</div>,
+        icon: <VectorGraphic
+          height={16}
+          width={16}
+        >
+          <circle
+            cx={'8'}
+            cy={'8'}
+            fill={'white'}
+            r={'14'}
+          />
+        </VectorGraphic>,
+        label: 'Item 4',
+        key: 'item-4',
+        urlPath: '/item4',
+      },
+    ],
+  }));
 });
