@@ -37,7 +37,7 @@ describe('Table', function () {
     age: 19,
     color: 'purple',
   },
-];
+  ];
 
   this.recordInclusion = ['name', 'age'];
   this.filterRecords = [{ color: 'blue', age: 25 }];

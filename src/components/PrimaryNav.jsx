@@ -20,8 +20,14 @@ export default class PrimaryNav extends Base {
       React.PropTypes.shape({
         height: React.PropTypes.number,
         icon: React.PropTypes.node,
-        label: React.PropTypes.string,
         key: React.PropTypes.string,
+        label: React.PropTypes.string,
+        linkStyle: React.PropTypes.shape({
+          color: React.PropTypes.string,
+          fontSize: React.PropTypes.number,
+          fontWeight: React.PropTypes.string,
+          textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
+        }),
         urlPath: React.PropTypes.string,
         width: React.PropTypes.number,
       }).isRequired
@@ -113,6 +119,7 @@ export default class PrimaryNav extends Base {
           height={item.height}
           icon={item.icon}
           key={i}
+          linkStyle={item.linkStyle}
           text={item.label}
           urlPath={item.urlPath}
           width={item.width}

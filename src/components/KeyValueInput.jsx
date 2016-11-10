@@ -92,7 +92,7 @@ export default class KeyValueInput extends Base {
     if (!valid) {
       if (duplicateKeys.size > 0) {
         const duplicateString = [...duplicateKeys].join(',');
-        validationError = `All keys must be unique, found duplicate \'${duplicateString}\'`;
+        validationError = `All keys must be unique, found duplicate '${duplicateString}'`;
       } else {
         validationError = 'All Fields Must Not Be Empty';
       }

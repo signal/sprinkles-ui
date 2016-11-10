@@ -60,11 +60,11 @@ describe('Version', function () {
   - **tagSelector** *React.PropTypes.string* (optional) when tag === tagSelector then the component is shown
   - **version** *React.PropTypes.string* (optional) the version to test against the versionSelector prop
   - **versionSelector** *React.PropTypes.string* (optional) version selector with basic DSL to define show/hide conditions
-    - versionSelector: \'0.11.0\' the children will be shown with an exact version match
-    - versionSelector: \'>0.11.0\' the children will be shown when the version is greater than the versionSelector
-    - versionSelector: \'<0.11.0\' the children will be shown when the version is less than the versionSelector
-    - versionSelector: \'>=0.11.0\' the children will be shown when the version is greater than or equal to the versionSelector
-    - versionSelector: \'<=0.11.0\' the children will be shown when the version is less than or equal to the versionSelector
+    - versionSelector: '0.11.0' the children will be shown with an exact version match
+    - versionSelector: '>0.11.0' the children will be shown when the version is greater than the versionSelector
+    - versionSelector: '<0.11.0' the children will be shown when the version is less than the versionSelector
+    - versionSelector: '>=0.11.0' the children will be shown when the version is greater than or equal to the versionSelector
+    - versionSelector: '<=0.11.0' the children will be shown when the version is less than or equal to the versionSelector
 
   `);
 });

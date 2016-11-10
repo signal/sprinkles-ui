@@ -60,7 +60,7 @@ describe('Bulleted List', () => {
             fontWeight: 'bold',
             textDecoration: 'underline',
           },
-         },
+        },
         { text: 'Yellow',
           styles: {
             color: 'yellow',

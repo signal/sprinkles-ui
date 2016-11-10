@@ -8,6 +8,12 @@ import VectorGraphic from './VectorGraphic';
 
 export default class NavListItem extends Base {
   static propTypes = {
+    linkStyle: React.PropTypes.shape({
+      color: React.PropTypes.string,
+      fontSize: React.PropTypes.number,
+      fontWeight: React.PropTypes.string,
+      textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
+    }),
     expanded: React.PropTypes.bool,
     height: React.PropTypes.number,
     hovered: React.PropTypes.bool,
@@ -21,6 +27,12 @@ export default class NavListItem extends Base {
 
   static defaultProps = {
     expanded: true,
+    linkStyle: {
+      color: '#CCCCCC',
+      fontSize: 1,
+      fontWeight: 'normal',
+      textDecoration: 'none',
+    },
     height: 20,
     width: 20,
   };
@@ -45,7 +57,16 @@ export default class NavListItem extends Base {
           <Link
             to={this.props.urlPath}
             ref={c => this.linkRef = c}
-          >{this.props.text}</Link>
+          >
+            <Text
+              color={this.props.linkStyle.color}
+              fontSize={this.props.linkStyle.fontSize}
+              fontWeight={this.props.linkStyle.fontWeight}
+              textDecoration={this.props.linkStyle.textDecoration}
+            >
+              {this.props.text}
+            </Text>
+          </Link>
         </div>
       );
     }
@@ -57,7 +78,10 @@ export default class NavListItem extends Base {
       return (
         <div style={style.TextWrapper}>
           <Text
-            fontSize={1}
+            color={this.props.linkStyle.color}
+            fontSize={this.props.linkStyle.fontSize}
+            fontWeight={this.props.linkStyle.fontWeight}
+            textDecoration={this.props.linkStyle.textDecoration}
           >
             {this.props.text}
           </Text>

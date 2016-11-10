@@ -108,6 +108,9 @@ describe('PrimaryNav', function () {
           />
         </VectorGraphic>,
         label: 'Item 3',
+        linkStyle: {
+          color: 'red',
+        },
         key: 'item-3',
         urlPath: '/item3',
       },

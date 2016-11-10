@@ -1,4 +1,5 @@
 /* eslint max-len: "off" */
+/* eslint no-useless-escape: "off" */
 
 import TextInput from './TextInput';
 
