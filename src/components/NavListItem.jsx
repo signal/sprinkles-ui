@@ -57,6 +57,7 @@ export default class NavListItem extends Base {
           <Link
             to={this.props.urlPath}
             ref={c => this.linkRef = c}
+            style={style.RouterLink}
           >
             <Text
               color={this.props.linkStyle.color}
@@ -105,6 +106,9 @@ export default class NavListItem extends Base {
           color: clr.textColors.primaryNav,
           display: 'flex',
           alignItems: 'center',
+        },
+        RouterLink: {
+          textDecoration: 'none',
         },
         TextWrapper: {
           flex: 5,
