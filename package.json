@@ -44,6 +44,7 @@
     "lorem-ipsum": "^1.0.3",
     "nodemon": "^1.10.2",
     "react-addons-test-utils": "^15.3.1",
+    "standard-version": "^3.0.0",
     "ui-harness": "3.19.0",
     "webpack": "^1.13.2"
   },
@@ -82,7 +83,18 @@
       "rebase": "validate-commit-msg"
     },
     "validate-commit-msg": {
-      "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert", "build"],
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert",
+        "build"
+      ],
       "warnOnFail": false,
       "maxSubjectLength": 100,
       "subjectPattern": ".+",
