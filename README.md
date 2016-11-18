@@ -2,6 +2,8 @@
 
 A portable, customizable set of UI components
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 **Table Of Contents**
 
 - [Quickstart](#quickstart)
@@ -87,6 +89,3 @@ Within CSS rules, please make sure all the selectors are in alphabetical order. 
 ## Useful Resources
 
 http://ricostacruz.com/cheatsheets/react.html
-
-
-

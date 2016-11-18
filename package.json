@@ -11,13 +11,10 @@
     "build": "rm -rf ./lib && node_modules/babel-cli/bin/babel.js ./src --ignore *.spec.js --out-dir ./lib",
     "build:watch": "node_modules/nodemon/bin/nodemon.js -w ./src -e js,jsx -x npm run build",
     "bundle": "node_modules/webpack/bin/webpack.js --progress --colors",
-    "prepublish": "npm run build",
-    "postinstall": "if [ -d .git/hooks/ ]; then npm run -s install:precommithook; fi",
-    "install:precommithook": "if [ ! -f .git/hooks/pre-commit ]; then echo 'cd ../sprinkles-ui && npm run git:precommit' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit; fi",
-    "git:precommit": "npm test"
+    "prepublish": "npm run build"
   },
   "keywords": [],
-  "author": "Harrison Harnisch <hharnisch@signal.co>",
+  "author": "Signal Digital Inc. <sprinkles-ui@signal.co>",
   "license": "MIT",
   "dependencies": {
     "color": "^0.11.3",
@@ -35,11 +32,14 @@
     "babel-jest": "^15.0.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
+    "commitizen": "^2.8.6",
+    "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.4.0",
     "eslint-config-airbnb": "^11.0.0",
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.2.1",
     "eslint-plugin-react": "^6.2.0",
+    "ghooks": "^1.3.2",
     "jest-cli": "^15.1.1",
     "lorem-ipsum": "^1.0.3",
     "nodemon": "^1.10.2",
@@ -70,5 +70,24 @@
   },
   "engines": {
     "node": ">=5.5.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg",
+      "pre-push": "npm run test",
+      "pre-commit": "npm run lint",
+      "rebase": "validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "types": ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert", "build"],
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "subjectPattern": ".+",
+      "subjectPatternErrorMsg": "subject does not match subject pattern!",
+      "helpMessage": "We use Commitizen to keep our commit messages uniform. Please checkout out CONTRIBUTING.md to learn more."
+    }
   }
 }
