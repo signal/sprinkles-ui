@@ -8,7 +8,7 @@ Our project follows a defined mission. All contributions must follow our [code o
 
 ## Core Engineers
 
-Core Engineers are responsible for steering the project, they are here to ensure code quality and that changes align with our project mission. A core member approval is needed for any pull request to be accepted. Core members are selected for their experience and are limited to a handful of participants. Only core can create new releases.
+Core Engineers are responsible for steering the project, they are here to ensure code quality and that changes align with our project mission. A core member approval is needed for any pull request to be accepted. Core members are selected for their experience and are limited to a handful of participants. Only core can create new versions.
 
 [View our entire team](./TEAM.md)
 
