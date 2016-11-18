@@ -1,6 +1,6 @@
 # Mission
 
-Creation of a UI component library in React that is easy to use and can be used to jumpstart the creation of a website or web application.
+Creation of a UI component library in React.js that is easy to use and can be used to jumpstart the creation of a website or web application.
 
 ## Philosophies
 
