@@ -11,7 +11,8 @@
     "build": "rm -rf ./lib && node_modules/babel-cli/bin/babel.js ./src --ignore *.spec.js --out-dir ./lib",
     "build:watch": "node_modules/nodemon/bin/nodemon.js -w ./src -e js,jsx -x npm run build",
     "bundle": "node_modules/webpack/bin/webpack.js --progress --colors",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "sv": "standard-version"
   },
   "keywords": [],
   "author": "Signal Digital Inc. <sprinkles-ui@signal.co>",
