@@ -32,7 +32,9 @@ import {
   // colors
   ButtonColors,
   BackgroundColors,
-  Colors,
+  FormColors,
+  IconColors,
+  NoticeColors,
   StructuralColors,
   TextColors,
   // styles
@@ -73,7 +75,9 @@ window.Sprinkles = {
   // colors
   ButtonColors,
   BackgroundColors,
-  Colors,
+  FormColors,
+  IconColors,
+  NoticeColors,
   StructuralColors,
   TextColors,
   // Styles

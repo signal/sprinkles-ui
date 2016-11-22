@@ -28,9 +28,10 @@ export TextListItem from './components/TextListItem';
 export VectorGraphic from './components/VectorGraphic';
 export Version from './components/Version';
 export {
-  Colors,
+  NoticeColors,
   ButtonColors,
   FormColors,
+  IconColors,
   TextColors,
   BackgroundColors,
   StructuralColors,
