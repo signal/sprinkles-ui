@@ -133,4 +133,29 @@ describe('PrimaryNav', function () {
       },
     ],
   }));
+
+  /**
+   * Documentation (Markdown)
+   */
+  this.footer(`
+  ### PrimaryNav
+  - **appIcon** *React.PropTypes.node* (optional) Component used for branding purposes
+  - **appName** *React.PropTypes.string* (optional) Text based label for your branding
+  - **expanded** *React.PropTypes.bool* used to open or close the panel, defaults to true
+  - **navItems** *React.PropTypes.arrayOf(React.PropTypes.shape)* array of objects used to populate the navigation
+    - **height** *React.PropTypes.number* height of navigation item
+    - **icon** *React.PropTypes.number* component used as an icon for the navigation item
+    - **label** *React.PropTypes.string* label for the navigation item
+    - **linkStyle** *React.PropTypes.shape* styling the text of the navigation item
+      - **color** *React.PropTypes.number* color of the text
+      - **fontSize** *React.PropTypes.number* specify size
+      - **fontWeight** *React.PropTypes.number* defaults to 'normal'
+      - **textDecoration** *React.PropTypes.oneOf* modify text treatment, options: 'underline', 'overline', 'line-through', 'none'
+    - **urlPath** *React.PropTypes.number* url to navigate to, triggers use of React Router
+    - **width** *React.PropTypes.number* width of navigation item
+  - **onNavItemClick** *React.PropTypes.function* gets fired on click
+  - **onRequestExpandToggle** *React.PropTypes.function* gets fired when the panel open/close button is clicked
+  - **selectedNavItem** *React.PropTypes.string* specify which navigation item is selected, maps to navigationItem key
+  - **showSectionBorders** *React.PropTypes.bool* specify is borders inbetween elements should be visible
+  `);
 });

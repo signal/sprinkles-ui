@@ -45,7 +45,9 @@ describe('Breadcrumbs', function () {
 
   #### API
 
-  - coming soon
-
+  - **path** *React.PropTypes.arrayOf(React.propTypes.shape)* (optional)
+    - **display** *React.PropTypes.string* (optional) Name for your link
+    - **url** *React.PropTypes.string* (optional) Url to direct the link to
+    - **onClick** *React.PropTypes.function* (optional) Event handler for when a link is clicked
   `);
 });

@@ -59,7 +59,10 @@ describe('Drawer', function () {
 
   #### API
 
-  - coming soon
-
+  - **backgroundColor** *React.PropTypes.string* (optional) provide a backgroundColor, defaults to primary backgroundColor
+  - **children** *React.PropTypes.node* (optional) Components to populate your Drawer with
+  - **open** *React.PropTypes.bool* (optional) Specify if the Drawer should be open at first, defaults to closed
+  - **openFrom** *React.PropTypes.oneOf* (optional) Which direction should the drawer open, defaults to right. Options: 'left' or 'right'
+  - **width** *React.PropTypes.number* (optional) Specify a width, defaults to 300
   `);
 });

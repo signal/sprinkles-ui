@@ -52,7 +52,19 @@ describe('NavListItem', function () {
 
   #### API
 
-  - coming soon
-
+  - **linkStyle** *React.PropTypes.shape* (optional)
+    - **color** *React.PropTypes.string* (optional) specify a color for the links, defaults to '#CCCCCC'
+    - **fontSize** *React.PropTypes.number* (optional) sets the font size for the links, defaults to 1
+    - **fontWeight** *React.PropTypes.string* (optional) defaults to 'normal'
+    - **textDecoration** *React.PropTypes.oneOf* (optional) stylize the text, options include 'underline', 'overline', 'line-through', 'none'
+  - **expanded** *React.PropTypes.bool* (optional) sets if the text should be shown in addition to the icon. Defaults to true
+  - **height** *React.PropTypes.number* (optional) defaults to 20
+  - **hovered** *React.PropTypes.bool* (optional) for use with a parent component to trigger hover effects
+  - **icon** *React.PropTypes.node* (optional) pass in a graphic for use next to the text
+  - **selected** *React.PropTypes.bool* (optional) trigger selected styles for the link
+  - **text** *React.PropTypes.string* (optional) text used for the link
+  - **width** *React.PropTypes.number* (optional) defaults to 20
+  - **type** *React.PropTypes.oneOf* (optional) Background color on hover, options available in the BackgroundColors class within shared/colors.js
+  - **urlPath** *React.PropTypes.string* (optional) Triggers use of React Router, url to point to for the link
   `);
 });

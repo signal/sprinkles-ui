@@ -37,8 +37,10 @@ describe('ToggleInput', function () {
 
   #### API
 
-  - comming soon
-
+  - **enabled** *React.PropTypes.bool* (optional) sets the ability for a user to interact, defaults to true
+  - **initialValue** *React.PropTypes.string* (optional) set the toggle upon load
+  - **onChange** *React.PropTypes.function* (optional) gets called whenever a user changes the toggle
+  - **status** *React.PropTypes.oneOf* (optional) used by the form to set status, options: 'error', 'warning', 'success'
 
   `);
 });

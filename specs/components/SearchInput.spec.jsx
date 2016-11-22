@@ -104,17 +104,17 @@ describe('Search Input', function () {
      * Documentation (Markdown)
      */
   this.footer(`
-    ### Text
+  ### Text
 
-    A SearchInput Element
+  A SearchInput Element
 
-    #### API
+  #### API
 
-    - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
-    - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
-    - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
-    - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
-    - **status** *React.PropTypes.oneOf* (optional) set status of the input (overrides focus). Acceptable values are 'error', 'warning' and 'success'
+  - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
+  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
+  - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
+  - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
+  - **status** *React.PropTypes.oneOf* (optional) set status of the input (overrides focus). Acceptable values are 'error', 'warning' and 'success'
 
     `);
 });

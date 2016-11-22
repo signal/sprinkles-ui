@@ -21,7 +21,16 @@ export default class NavListItem extends Base {
     selected: React.PropTypes.bool,
     text: React.PropTypes.string,
     width: React.PropTypes.number,
-    type: React.PropTypes.string,
+    type: React.PropTypes.oneOf([
+      'accent',
+      'hover',
+      'primary',
+      'primaryNav',
+      'secondary',
+      'secondaryNav',
+      'selected',
+      'tableHeader',
+    ]),
     urlPath: React.PropTypes.string,
   };
 

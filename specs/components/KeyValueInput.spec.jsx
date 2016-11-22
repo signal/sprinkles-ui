@@ -52,7 +52,15 @@ describe('KeyValueInput', function () {
 
   #### API
 
-  - coming soon
-
+  - **addButtonText** *React.PropTypes.string* (optional) Text used for button to add a pair, defaults to 'Add'
+  - **enabled** *React.PropTypes.bool* (optional) Sets the ability to interact with the field, defaults to true
+  - **initialValue** *React.PropTypes.arrayOf(React.PropTypes.shapeOf)* (optional)
+    - **key** *React.PropTypes.string* (optional) key for the field, defautls to ''
+    - **value** *React.PropTypes.string* (optional) value for the field, defaults to ''
+  - **keyLabel** *React.PropTypes.string* (optional) label for the key field, defaults to 'Key'
+  - **onChange** *React.PropTypes.function* (optional) called when any change occurs, addition, deletion, or field change
+  - **uniqueKeys** *React.PropTypes.shape* (optional) validation that all fields must be unique, defaults to false
+  - **valueLabel** *React.PropTypes.shape* (optional) label for the value field, defaults to 'Value'
+  - **status** *React.PropTypes.shape* (optional) set an initial validation of the input, 'success' or 'error'
   `);
 });

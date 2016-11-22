@@ -37,7 +37,8 @@ describe('ListItemGroup', function () {
 
   #### API
 
-  - coming soon
+  - **children** *React.PropTypes.node* (optional) child components
+  - **label** *React.PropTypes.string* (optional) text description for this group of items, defaults to 'Group'
 
   `);
 });

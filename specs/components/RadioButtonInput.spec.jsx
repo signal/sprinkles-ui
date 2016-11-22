@@ -48,7 +48,7 @@ describe('RadioButtonInput', function () {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Text
+  ### RadioButtonInput
 
   A RadioButtonInput Element
 

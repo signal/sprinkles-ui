@@ -45,7 +45,12 @@ describe('ButtonGroup', function () {
 
   #### API
 
-  - coming soon
+  - **children** *React.PropTypes.node* (optional) Provide button components to be used within the group
+  - **onClick** *React.PropTypes.function* (optional) Used to take action when any button in the group is clicked
+  - **selectedButton** *React.PropTypes.string* (optional) Map to a button's key to set an initially active button
+  - **columns** *React.PropTypes.shape* (optional)
+  - **columns** *React.PropTypes.oneOf* Sets the style of all buttons. If not specified first is primary and second is secondary.
+  Options include: 'secondary', 'primary', 'success', 'info', 'warning', 'danger'
 
   `);
 });

@@ -50,7 +50,7 @@ describe('TextInput', function () {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Text
+  ### TextInput
 
   A TextInput Element
 

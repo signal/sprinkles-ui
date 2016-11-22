@@ -49,11 +49,12 @@ describe('SecondaryNav', function () {
   this.footer(`
   ### SecondaryNav
 
-  Top Navigation Bar
+  Top Navigation Bar, loose organization for navigation/header items.
 
   #### API
 
-  - coming soon
+  - **leftItems** *React.PropTypes.node* (optional) Components you want visible on the left
+  - **rightItems** *React.PropTypes.node* (optional) Components you want visible on the right
 
   `);
 });

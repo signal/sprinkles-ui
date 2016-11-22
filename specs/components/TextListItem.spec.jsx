@@ -40,7 +40,12 @@ describe('TextListItem', function () {
 
   #### API
 
-  - coming soon
+  - **enabled** *React.PropTypes.bool* (optional) sets ability for a user to interact, by default this is true
+  - **hovered** *React.PropTypes.bool* (optional) used with a parent component to set hover styles
+  - **listPosition** *React.PropTypes.oneOf* (optional) used for styling, options: 'first', 'middle', 'last'
+  - **onClick** *React.PropTypes.function* (optional) called whenever a user clicks an item
+  - **selected** *React.PropTypes.bool* (optional) used by a parent component for styling, informs a user which is active
+  - **text** *React.PropTypes.string* (optional) description of the item
 
   `);
 });

@@ -45,7 +45,7 @@ describe('PasswordInput', function () {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Text
+  ### PasswordInput
 
   A PasswordInput Element
 

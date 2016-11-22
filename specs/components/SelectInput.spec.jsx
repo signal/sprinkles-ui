@@ -71,9 +71,16 @@ describe('SelectInput', function () {
   this.footer(`
   ### SelectInput
 
-  A SelectInput Element
+  A SelectInput Element, this element is inteded to be used for a form. If you're looking for more flexibiity and desire a menu,
+  take a look a the DropDown component.
 
   #### API
-  - coming soon
+  - **enabled** *React.PropTypes.bool* (optional) disable the prop, by default this is true
+  - **initialValue** *React.PropTypes.string* (optional) set the initial value of the field
+  - **items** *React.PropTypes.arrayOf(React.PropTypes.shape)* (optional) an array of objects used to construct the dropdown
+    - **value** *React.PropTypes.string* (optional) value of an item passed through your form
+    - **label** *React.PropTypes.string* (optional) label visible to the user
+  - **onChange** *React.PropTypes.function* (optional) called whenever the form chnages by the user
+  - **status** *React.PropTypes.oneOf* (optional) state used by form to style input, options: 'error', 'warning', 'success'
   `);
 });

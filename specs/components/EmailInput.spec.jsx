@@ -47,7 +47,7 @@ describe('EmailInput', function () {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Text
+  ### EmailInput
 
   A EmailInput Element
 
