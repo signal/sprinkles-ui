@@ -1,6 +1,6 @@
 # Team
 
-## Core Engineers
+## Core Members
 
 * Ryan Balla
 * Kevin Marren
