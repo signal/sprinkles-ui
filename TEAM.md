@@ -2,8 +2,8 @@
 
 ## Core Engineers
 
-* Ryan Balla - rballa@signal.co
-* Kevin Marren - kmarren@signal.co
+* Ryan Balla
+* Kevin Marren
 
 ## Team Members
 
@@ -14,4 +14,4 @@
 Open issues and create pull requests. [See contributing](./CONTRIBUTING.md)
 
 ### Special Thanks
-* Harrison Harnisch - hharnisc@gmail.com
+* Harrison Harnisch
