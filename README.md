@@ -48,7 +48,7 @@ $ nvm use 5.9.0
 Clone Sprinkles UI
 
 ```sh
-$ git clone git@gitlab01dv2.thebrighttag.com:dev/sprinkles-ui.git
+$ git clone git@github.com:signal/sprinkles-ui.git
 ```
 
 Change Directory To Sprinkles UI
