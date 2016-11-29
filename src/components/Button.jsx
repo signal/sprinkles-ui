@@ -1,6 +1,7 @@
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
+import stylePropType from 'react-style-proptype';
 import Base from './Base';
 
 export default class Button extends Base {
@@ -21,6 +22,7 @@ export default class Button extends Base {
       'danger',
     ]),
     working: React.PropTypes.bool,
+    style: stylePropType,
   };
 
   static defaultProps = {
@@ -160,13 +162,14 @@ export default class Button extends Base {
       groupPositionCenter: this.props.groupPosition === 'center',
       groupPositionRight: this.props.groupPosition === 'right',
     });
+    const buttonStyle = Object.assign({}, style.Button, this.props.style);
     return (
       <button
         disabled={this.props.working || !this.props.enabled}
         onClick={this.props.onClick}
         onMouseOut={this.handleMouseOut.bind(this)}
         onMouseOver={this.handleMouseOver.bind(this)}
-        style={style.Button}
+        style={buttonStyle}
       >
         {this.renderChildren()}
       </button>
