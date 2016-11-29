@@ -39,6 +39,8 @@ describe('Button', function () {
   it('Group Position: Left', () => this.props({ groupPosition: 'left' }));
   it('Group Position: Center', () => this.props({ groupPosition: 'center' }));
   it('Group Position: Right', () => this.props({ groupPosition: 'right' }));
+  it('Sets Styles', () => this.props({ style: { background: 'pink' } }));
+  it('Resets Styles', () => this.props({ style: {} }));
 
   /**
    * Documentation (Markdown)
