@@ -3,6 +3,7 @@
 A portable, customizable set of UI components
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Join the chat at https://gitter.im/sprinkles-ui/lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sprinkles-ui/lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **Table Of Contents**
 
