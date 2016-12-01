@@ -148,19 +148,13 @@ export default class Table extends Base {
   }
 
   handleSelectAll() {
-    const processedRecords = this.processRecords(this.props.selectedRows);
-    const selectedRows = [...Array(processedRecords.length).keys()];
-    this.props.onChange(selectedRows);
+    this.props.onChange(this.processRecords());
   }
 
-  handleRowSelect(columnKey, xCord, cellData, row, yCord) {
-    this.props.onChange({
-      columnKey,
-      xCord,
-      cellData,
-      row,
-      yCord,
-    });
+  handleRowSelect(row, yCord) {
+    const rows = [];
+    rows[yCord] = row;
+    this.props.onChange(rows);
   }
 
   renderHeaderItem(style) {
@@ -177,6 +171,7 @@ export default class Table extends Base {
     const selectAllHeader = (
       <th
         key={0}
+        onClick={this.handleSelectAll.bind(this)}
         style={style.TheadItems}
       >
         <Checkbox
@@ -203,7 +198,7 @@ export default class Table extends Base {
       <td
         key={xCord}
         style={tdStyle}
-        onClick={this.handleRowSelect.bind(this, columnKey, xCord, cellData, row, yCord)}
+        onClick={this.handleRowSelect.bind(this, row, yCord)}
       >
         <Checkbox
           checked={shouldBeChecked}
@@ -277,8 +272,7 @@ export default class Table extends Base {
 
   render() {
     const clr = this.getColors();
-    const sourceRecords = this.props.records;
-    const records = this.processRecords(sourceRecords);
+    const records = this.processRecords();
     const style = reactCSS({
       default: {
         selected: {
