@@ -148,19 +148,13 @@ export default class Table extends Base {
   }
 
   handleSelectAll() {
-    const processedRecords = this.processRecords(this.props.selectedRows);
-    const selectedRows = [...Array(processedRecords.length).keys()];
-    this.props.onChange(selectedRows);
+    this.props.onChange(this.processRecords());
   }
 
-  handleRowSelect(columnKey, xCord, cellData, row, yCord) {
-    this.props.onChange({
-      columnKey,
-      xCord,
-      cellData,
-      row,
-      yCord,
-    });
+  handleRowSelect(row, yCord) {
+    const rows = [];
+    rows[yCord] = row;
+    this.props.onChange(rows);
   }
 
   renderHeaderItem(style) {
@@ -177,6 +171,7 @@ export default class Table extends Base {
     const selectAllHeader = (
       <th
         key={0}
+        onClick={this.handleSelectAll.bind(this)}
         style={style.TheadItems}
       >
         <Checkbox
@@ -196,14 +191,14 @@ export default class Table extends Base {
     );
   }
 
-  renderCheckBox(tdStyle, columnKey, xCord, cellData, row, yCord) {
+  renderCheckBox(tdStyle, xCord, row, yCord) {
     this.checkBoxRefs = [];
     const shouldBeChecked = this.props.selectedRows.indexOf(yCord) > -1;
     return (
       <td
         key={xCord}
         style={tdStyle}
-        onClick={this.handleRowSelect.bind(this, columnKey, xCord, cellData, row, yCord)}
+        onClick={this.handleRowSelect.bind(this, row, yCord)}
       >
         <Checkbox
           checked={shouldBeChecked}
@@ -234,7 +229,7 @@ export default class Table extends Base {
     const isSelectedRow = rowSelected ? style.selected : undefined;
     const rowStyle = (i === this.state.hoveredRow ? style.TableRow : isSelectedRow);
     const rowItem = Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i));
-    const multiSelectItem = this.renderCheckBox(style.TBodyItems, '', 0, '', row, i);
+    const multiSelectItem = this.renderCheckBox(style.TBodyItems, 0, row, i);
 
     return rowItem.length > 0 ? (
       <tr
@@ -277,8 +272,7 @@ export default class Table extends Base {
 
   render() {
     const clr = this.getColors();
-    const sourceRecords = this.props.records;
-    const records = this.processRecords(sourceRecords);
+    const records = this.processRecords();
     const style = reactCSS({
       default: {
         selected: {

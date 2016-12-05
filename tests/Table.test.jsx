@@ -334,14 +334,10 @@ describe('Table', () => {
       onChange: mockHandleChange,
     });
     const checkBoxNode = tableComponent.checkBoxRefs[2].inputRef;
+    const result = [];
+    result[2] = records[2];
     TestUtils.Simulate.click(checkBoxNode);
-    expect(mockHandleChange).toBeCalledWith({
-      cellData: '',
-      columnKey: '',
-      row: records[2],
-      xCord: 0,
-      yCord: 2,
-    });
+    expect(mockHandleChange).toBeCalledWith(result);
   });
   it('returns a change event when select all is triggered', () => {
     const mockHandleChange = jest.fn();
@@ -353,7 +349,20 @@ describe('Table', () => {
     });
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
     TestUtils.Simulate.change(checkBoxNode);
-    expect(mockHandleChange).toBeCalledWith([0, 1, 2, 3, 4]);
+    expect(mockHandleChange).toBeCalledWith(records);
+  });
+
+  it('returns a change event when clicking anywhere within the select all checkbox th cell', () => {
+    const mockHandleChange = jest.fn();
+    renderTable({
+      headers,
+      records,
+      multiSelectable: true,
+      onChange: mockHandleChange,
+    });
+    const selectAllTHNode = headerElement(0);
+    TestUtils.Simulate.click(selectAllTHNode);
+    expect(mockHandleChange).toBeCalledWith(records);
   });
 
   it('returns a change event when filtering segments and select all is triggered', () => {
@@ -370,7 +379,7 @@ describe('Table', () => {
     expect(rows().length).toBe(2);
     expect(cell(0, 1).textContent).toBe('Frank');
     expect(cell(1, 1).textContent).toBe('Jose');
-    expect(mockHandleChange).toBeCalledWith([0, 1]);
+    expect(mockHandleChange).toBeCalledWith([records[1], records[3]]);
   });
 
   it('selects a row when clicking anywhere within the checkbox cell', () => {
@@ -381,14 +390,10 @@ describe('Table', () => {
       multiSelectable: true,
       onChange: mockHandleChange,
     });
+    const result = [];
+    result[0] = records[0];
 
     TestUtils.Simulate.click(cell(0, 0));
-    expect(mockHandleChange).toBeCalledWith({
-      cellData: '',
-      columnKey: '',
-      row: records[0],
-      xCord: 0,
-      yCord: 0,
-    });
+    expect(mockHandleChange).toBeCalledWith(result);
   });
 });
