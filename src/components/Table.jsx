@@ -191,7 +191,7 @@ export default class Table extends Base {
     );
   }
 
-  renderCheckBox(tdStyle, columnKey, xCord, cellData, row, yCord) {
+  renderCheckBox(tdStyle, xCord, row, yCord) {
     this.checkBoxRefs = [];
     const shouldBeChecked = this.props.selectedRows.indexOf(yCord) > -1;
     return (
@@ -229,7 +229,7 @@ export default class Table extends Base {
     const isSelectedRow = rowSelected ? style.selected : undefined;
     const rowStyle = (i === this.state.hoveredRow ? style.TableRow : isSelectedRow);
     const rowItem = Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i));
-    const multiSelectItem = this.renderCheckBox(style.TBodyItems, '', 0, '', row, i);
+    const multiSelectItem = this.renderCheckBox(style.TBodyItems, 0, row, i);
 
     return rowItem.length > 0 ? (
       <tr
