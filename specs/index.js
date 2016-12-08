@@ -10,6 +10,10 @@
 
 
 describe('Sprinkles UI', () => {
+  describe('Buttons', () => {
+    require('./components/Button.spec');
+    require('./components/ButtonGroup.spec');
+  });
   describe('Form, Field and Inputs', () => {
     require('./components/Checkbox.spec');
     require('./components/Field.spec');
@@ -36,20 +40,16 @@ describe('Sprinkles UI', () => {
     require('./components/SecondaryNav.spec');
     require('./components/PrimaryNav.spec');
   });
-  describe('Buttons', () => {
-    require('./components/Button.spec');
-    require('./components/ButtonGroup.spec');
-  });
   require('./components/Alert.spec');
-  require('./components/Text.spec');
-  require('./components/Popover.spec');
+  require('./components/ButtonGroup.spec');
+  require('./components/colors.spec');
+  require('./components/Drawer.spec');
   require('./components/Dropdown.spec');
+  require('./components/Panel.spec');
+  require('./components/Popover.spec');
+  require('./components/Table.spec');
+  require('./components/Text.spec');
+  require('./components/Theme.spec');
   require('./components/VectorGraphic.spec');
   require('./components/Version.spec');
-  require('./components/Drawer.spec');
-  require('./components/colors.spec');
-  require('./components/ButtonGroup.spec');
-  require('./components/Panel.spec');
-  require('./components/Table.spec');
-  require('./components/Theme.spec');
 });
