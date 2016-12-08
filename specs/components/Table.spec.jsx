@@ -167,6 +167,15 @@ describe('Table', function () {
         filterRecords: [{ bar: 'foo' }],
       });
   });
+  it('All records to filtered out with multiselect', () => {
+    this.loadTable(
+      {
+        headers: this.headers,
+        records: this.records,
+        filterRecords: [{ bar: 'foo' }],
+        multiSelectable: true,
+      });
+  });
   it('Sets column width', () => {
     this.loadTable(
       {

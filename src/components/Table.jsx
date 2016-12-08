@@ -244,11 +244,17 @@ export default class Table extends Base {
   }
 
   renderNoResults(style) {
-    let colSpan = '';
+    let colSpan = {};
     if (this.props.headers) {
       colSpan = this.props.headers;
     } else if (this.props.records[0]) {
       colSpan = this.props.records[0];
+    }
+
+    /* Normally mapped to headers or records,
+    we need to add a dummy element to accont for the checkbox column for multiselect */
+    if (this.props.multiSelectable) {
+      colSpan.multiSelectFiller = '';
     }
 
     return (
