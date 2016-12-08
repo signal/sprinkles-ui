@@ -252,7 +252,7 @@ export default class Table extends Base {
     }
 
     /* Normally mapped to headers or records,
-    we need to add a dummy element to accont for the checkbox column for multiselect */
+    we need to add a dummy element to account for the checkbox column for multiselect */
     if (this.props.multiSelectable) {
       colSpan.multiSelectFiller = '';
     }
