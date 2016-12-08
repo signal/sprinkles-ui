@@ -176,7 +176,6 @@ export default class Table extends Base {
       >
         <Checkbox
           ref={c => this.checkBoxHeaderRef = c}
-          onChange={this.handleSelectAll.bind(this)}
           checked={false}
         />
       </th>

@@ -69,6 +69,7 @@ describe('Table', function () {
         recordInclusion={props.recordInclusion}
         selectedRows={props.selectedRows}
         multiSelectable={props.multiSelectable}
+        onChange={props.onChange}
       />
     );
   };
@@ -196,6 +197,7 @@ describe('Table', function () {
         headers: this.headers,
         records: this.records,
         multiSelectable: true,
+        onChange: () => { console.log('Table changed'); },
       });
   });
 

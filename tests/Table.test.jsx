@@ -348,7 +348,7 @@ describe('Table', () => {
       onChange: mockHandleChange,
     });
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
-    TestUtils.Simulate.change(checkBoxNode);
+    TestUtils.Simulate.click(checkBoxNode);
     expect(mockHandleChange).toBeCalledWith(records);
   });
 
@@ -375,7 +375,7 @@ describe('Table', () => {
       filterRecords: [{ status: 'Inactive' }],
     });
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
-    TestUtils.Simulate.change(checkBoxNode);
+    TestUtils.Simulate.click(checkBoxNode);
     expect(rows().length).toBe(2);
     expect(cell(0, 1).textContent).toBe('Frank');
     expect(cell(1, 1).textContent).toBe('Jose');
