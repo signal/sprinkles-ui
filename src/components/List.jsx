@@ -6,11 +6,14 @@ import Base from './Base';
 export default class List extends Base {
   static propTypes = {
     children: React.PropTypes.node,
+    itemPadding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     showBorder: React.PropTypes.bool,
+    showDividers: React.PropTypes.bool,
   };
 
   static defaultProps = {
     showBorder: true,
+    showDividers: true,
   };
 
   displayName = 'List';
@@ -20,7 +23,9 @@ export default class List extends Base {
     return React.Children.map(this.props.children, (child, i) => {
       if (child) {
         const lenChildren = this.props.children.length;
+        const itemPadding = this.props.itemPadding;
         let listPosition;
+        const showDividers = this.props.showDividers;
         if (lenChildren > 0) {
           switch (i) {
             case 0:
@@ -35,7 +40,9 @@ export default class List extends Base {
           }
         }
         return React.cloneElement(child, {
+          itemPadding,
           listPosition,
+          showDividers,
           ref: c => {
             this.listItemRefs = this.listItemRefs.set(i, c);
           },

@@ -5,9 +5,11 @@ import { Resets } from '../shared/styles';
 export default class ListItem extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
+    itemPadding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     listPosition: React.PropTypes.oneOf(['first', 'middle', 'last']),
     onClick: React.PropTypes.func,
     selected: React.PropTypes.bool,
+    showDividers: React.PropTypes.bool,
     textAlign: React.PropTypes.string,
   };
 
@@ -38,9 +40,11 @@ export default class ListItem extends React.Component {
       if (child) {
         return React.cloneElement(child, {
           hovered: this.state.isHovering,
+          itemPadding: this.props.itemPadding,
           listPosition: this.props.listPosition,
           ref: c => this.listItemRef = c,
           selected: this.props.selected,
+          showDividers: this.props.showDividers,
         });
       }
       return undefined;

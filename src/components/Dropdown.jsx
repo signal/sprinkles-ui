@@ -1,14 +1,16 @@
 /* eslint react/no-unused-prop-types: "off" */
 
 import React from 'react';
+import Base from './Base';
 import List from './List';
 import ListItem from './ListItem';
 import TextListItem from './TextListItem';
 import Popover from './Popover';
 
-export default class Dropdown extends React.Component {
+export default class Dropdown extends Base {
   static propTypes = {
     anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    children: React.PropTypes.node,
     disabled: React.PropTypes.bool,
     items: React.PropTypes.arrayOf(
       React.PropTypes.shape({
@@ -40,7 +42,7 @@ export default class Dropdown extends React.Component {
     this.props.onClick(item);
   }
 
-  renderItems() {
+  renderItems(children) {
     return (
       <Popover
         anchorOrigin={this.props.anchorOrigin}
@@ -52,11 +54,7 @@ export default class Dropdown extends React.Component {
         triggerEl={this.props.triggerEl}
         useLayerForClickAway={this.props.useLayerForClickAway}
       >
-        <List
-          ref={c => this.itemsRef = c}
-        >
-          {this.renderItem()}
-        </List>
+        { children }
       </Popover>
     );
   }
@@ -76,9 +74,15 @@ export default class Dropdown extends React.Component {
   }
 
   render() {
+    const dropdownContent = this.props.children || (<List
+      ref={c => this.itemsRef = c}
+    >
+      {this.renderItem()}
+    </List>);
+
     return (
       <div>
-        {this.renderItems()}
+        {this.renderItems(dropdownContent)}
       </div>
     );
   }
