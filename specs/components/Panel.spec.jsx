@@ -13,6 +13,7 @@ describe('Panel', function () {
     this.component(
       <Panel
         backgroundColor={props.backgroundColor}
+        borderColor={props.borderColor}
         borderRadius={props.borderRadius}
         boxShadowStrength={props.boxShadowStrength}
         color={props.color}
@@ -89,6 +90,11 @@ describe('Panel', function () {
   it('Show with Text', () => this.loadPanel({
     children: undefined,
     text: 'Testy Testing',
+  }));
+  it('Show with border', () => this.loadPanel({
+    borderColor: 'green',
+    children: undefined,
+    text: 'Hiya',
   }));
   /**
    * Documentation (Markdown)

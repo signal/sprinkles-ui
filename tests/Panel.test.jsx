@@ -76,4 +76,12 @@ describe('Panel', () => {
     expect(panelNode.style.width)
       .toBe(`${width}px`);
   });
+
+  it('Does render a Panel with a border', () => {
+    const panelComponent = TestUtils.renderIntoDocument(
+      <Panel borderColor={'purple'} />
+    );
+    const panelNode = ReactDOM.findDOMNode(panelComponent);
+    expect(panelNode.style.border).toBe('1px solid purple');
+  });
 });

@@ -5,6 +5,8 @@ import Base from './Base';
 export default class Panel extends Base {
   static propTypes = {
     backgroundColor: React.PropTypes.string,
+    borderColor: React.PropTypes.string,
+    borderSize: React.PropTypes.number,
     borderRadius: React.PropTypes.number,
     boxShadowStrength: React.PropTypes.number,
     children: React.PropTypes.node,
@@ -16,6 +18,7 @@ export default class Panel extends Base {
   };
 
   static defaultProps = {
+    borderSize: 1,
     padding: 10,
   };
 
@@ -58,6 +61,11 @@ export default class Panel extends Base {
           boxSizing: 'border-box',
         },
       },
+      border: {
+        Panel: {
+          border: `${this.props.borderSize}px solid ${this.props.borderColor}`,
+        },
+      },
       roundedCorners: {
         Panel: {
           borderRadius: `${this.props.borderRadius}px`,
@@ -79,8 +87,9 @@ export default class Panel extends Base {
         },
       },
     }, {
-      roundedCorners: !!this.props.borderRadius,
+      border: !!this.props.borderColor,
       dropShadow: !!this.props.boxShadowStrength,
+      roundedCorners: !!this.props.borderRadius,
       height: !!this.props.height,
       width: !!this.props.width,
     });
