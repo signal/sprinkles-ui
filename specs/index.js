@@ -12,6 +12,7 @@
 describe('Sprinkles UI', () => {
   describe('Buttons', () => {
     require('./components/Button.spec');
+    require('./components/ButtonDropdown.spec');
     require('./components/ButtonGroup.spec');
   });
   describe('Form, Field and Inputs', () => {
