@@ -244,23 +244,16 @@ export default class Table extends Base {
   }
 
   renderNoResults(style) {
-    let colSpan = {};
-    if (this.props.headers) {
-      colSpan = this.props.headers;
-    } else if (this.props.records[0]) {
-      colSpan = this.props.records[0];
-    }
-
-    /* Normally mapped to headers or records,
-    we need to add a dummy element to account for the checkbox column for multiselect */
+    let colSpan = Object.keys(this.processHeaders()).length;
+    /* We need to add an element to account for the checkbox column for multiselect */
     if (this.props.multiSelectable) {
-      colSpan.multiSelectFiller = '';
+      colSpan += 1;
     }
 
     return (
       <tr>
         <td
-          colSpan={Object.keys(colSpan).length}
+          colSpan={colSpan > 0 ? colSpan : 1}
           style={style.TBodyItems}
         >
           {this.props.noRecordsText}
