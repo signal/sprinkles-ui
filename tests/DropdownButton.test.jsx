@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import color from 'color';
 import { ButtonColors } from '../src/shared/colors';
-import ButtonDropdown from '../src/components/ButtonDropdown';
+import DropdownButton from '../src/components/DropdownButton';
 import Text from '../src/components/Text';
 
 describe('ButtonDropdown', () => {
@@ -11,7 +11,7 @@ describe('ButtonDropdown', () => {
 
   beforeEach(() => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown />
+      <DropdownButton />
     );
   });
 
@@ -30,7 +30,7 @@ describe('ButtonDropdown', () => {
 
   it('Does disable Button when working is true', () => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown working={true} />
+      <DropdownButton working={true} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(true);
@@ -38,7 +38,7 @@ describe('ButtonDropdown', () => {
 
   it('Does not disable Button when working is false', () => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown working={false} />
+      <DropdownButton working={false} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(false);
@@ -46,7 +46,7 @@ describe('ButtonDropdown', () => {
 
   it('Does not disable Button when enabled is true', () => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown enabled={true} />
+      <DropdownButton enabled={true} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(false);
@@ -54,7 +54,7 @@ describe('ButtonDropdown', () => {
 
   it('Does disable Button when enabled is false', () => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown enabled={false} />
+      <DropdownButton enabled={false} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect({}.hasOwnProperty.call(buttonNode.attributes, 'disabled')).toEqual(true);
@@ -63,7 +63,7 @@ describe('ButtonDropdown', () => {
   it('Does render a button of each type', () => {
     ['secondary', 'primary', 'danger', 'warning', 'success', 'info'].forEach((type) => {
       buttonComponent = TestUtils.renderIntoDocument(
-        <ButtonDropdown type={type} />
+        <DropdownButton type={type} />
       );
       const buttonNode = ReactDOM.findDOMNode(buttonComponent);
       expect(color(buttonNode.style.background).hexString()).toBe(ButtonColors[type]);
@@ -75,7 +75,7 @@ describe('ButtonDropdown', () => {
   it('Does render a disabled button of each type', () => {
     ['secondary', 'primary', 'danger', 'warning', 'success', 'info'].forEach((type) => {
       buttonComponent = TestUtils.renderIntoDocument(
-        <ButtonDropdown
+        <DropdownButton
           enabled={false}
           type={type}
         />
@@ -97,9 +97,9 @@ describe('ButtonDropdown', () => {
   it('Does render a button with a child element', () => {
     const childText = 'Howdy';
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown>
+      <DropdownButton>
         <Text>{childText}</Text>
-      </ButtonDropdown>
+      </DropdownButton>
     );
     const buttonTextNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonTextNode.textContent).toBe(childText);
@@ -107,7 +107,7 @@ describe('ButtonDropdown', () => {
 
   it('Does render a left position button', () => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown groupPosition={'left'} />
+      <DropdownButton groupPosition={'left'} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.style.borderRadius).toBe('3px 0 0 3px');
@@ -115,7 +115,7 @@ describe('ButtonDropdown', () => {
 
   it('Does render a center position button', () => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown groupPosition={'center'} />
+      <DropdownButton groupPosition={'center'} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.style.borderRadius).toBe('0');
@@ -124,7 +124,7 @@ describe('ButtonDropdown', () => {
 
   it('Does render a right position button', () => {
     buttonComponent = TestUtils.renderIntoDocument(
-      <ButtonDropdown groupPosition={'right'} />
+      <DropdownButton groupPosition={'right'} />
     );
     const buttonNode = ReactDOM.findDOMNode(buttonComponent);
     expect(buttonNode.style.borderRadius).toBe('0 3px 3px 0');

@@ -2,11 +2,11 @@
 
 import React from 'react';
 import loremIpsum from 'lorem-ipsum';
-import ButtonDropdown from '../../src/components/ButtonDropdown';
+import DropdownButton from '../../src/components/DropdownButton';
 
-describe('ButtonDropdown', function () {
+describe('DropdownButton', function () {
   this.header(`
-  ## ButtonDropdown
+  ## DropdownButton
   `); // Markdown.
 
   before(() => {
@@ -17,7 +17,7 @@ describe('ButtonDropdown', function () {
     };
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.component(
-      <ButtonDropdown
+      <DropdownButton
         enabled={true}
         onClick={handleClick.bind(this)}
         text={'Foo'}
@@ -50,7 +50,7 @@ describe('ButtonDropdown', function () {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Button
+  ### DropdownButton
 
   Extends Button to provide a clickable element suitable for a dropdown.
 

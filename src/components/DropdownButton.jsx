@@ -2,8 +2,8 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import Button from './Button';
 
-export default class ButtonDropdown extends Button {
-  displayName = 'ButtonDropdown';
+export default class DropdownButton extends Button {
+  displayName = 'DropdownButton';
 
   static propTypes = {
     arrowSize: React.PropTypes.number,
