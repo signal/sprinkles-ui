@@ -396,4 +396,31 @@ describe('Table', () => {
     TestUtils.Simulate.click(cell(0, 0));
     expect(mockHandleChange).toBeCalledWith(result);
   });
+
+  it('generates colSpan for no results', () => {
+    renderTable({
+      headers,
+      records,
+      filterRecords: [{ age: 125 }],
+    });
+    expect(cell(0, 0).colSpan).toEqual('3');
+  });
+
+  it('generates colSpan for no results and multiselect', () => {
+    renderTable({
+      headers,
+      records,
+      filterRecords: [{ age: 125 }],
+      multiSelectable: true,
+    });
+    expect(cell(0, 0).colSpan).toEqual('4');
+  });
+  /* Colspan cannot be 0, so it's important it's always at least 1 for the zerostate */
+  it('generates colSpan for no records and no headers', () => {
+    renderTable({
+      headers: {},
+      records: [],
+    });
+    expect(cell(0, 0).colSpan).toEqual('1');
+  });
 });
