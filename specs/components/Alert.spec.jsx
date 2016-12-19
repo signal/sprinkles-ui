@@ -67,20 +67,21 @@ describe('Alert', function () {
     type: 'danger',
   }));
   it('Danger message with title', () => this.loadAlert({
-    children:
+    children: (
       <Text
         color={'white'}
         fontSize={1.5}
       >
         {'You dun broke it'}
-      </Text>,
+      </Text>
+    ),
     title: 'Warning!',
     type: 'danger',
   }));
   it('Danger message with child nodes', () => this.loadAlert({
     title: 'Please reset your password using the following criteria:',
     type: 'danger',
-    children:
+    children: (
       <div>
         <div
           style={{
@@ -106,7 +107,8 @@ describe('Alert', function () {
             {'◼︎ At least 1 numeric character'}
           </Text>
         </div>
-      </div>,
+      </div>
+    ),
   }));
 
   /**

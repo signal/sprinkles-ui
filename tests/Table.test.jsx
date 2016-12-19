@@ -423,4 +423,23 @@ describe('Table', () => {
     });
     expect(cell(0, 0).colSpan).toEqual('1');
   });
+
+  it('Renders a React node as part of the records data', () => {
+    const recordsWithNode = [
+      { site: <a href={'http://google.com'}>Google</a>,
+        type: 'Search Engine',
+        hq: 'Mountain View',
+      },
+      {
+        site: <a href={'http://excite.com'}>Excite</a>,
+        type: <b>Search Engine</b>,
+        hq: 'Dublin',
+      },
+    ];
+    renderTable({
+      records: recordsWithNode,
+    });
+    expect(rows().length).toBe(2);
+    expect(cell(0, 0).getElementsByTagName('a').length).toBe(1);
+  });
 });

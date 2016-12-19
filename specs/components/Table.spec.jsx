@@ -210,6 +210,23 @@ describe('Table', function () {
       });
   });
 
+  it('Use React node for content', () => {
+    this.loadTable(
+      {
+        columns: {
+          order: ['name', 'color', 'age'],
+        },
+        headers: this.headers,
+        records: [{
+          name: <a href={'http://ryanballa.com'}>Ryan Balla</a>,
+          color: 'Blue',
+          age: 100,
+        }],
+        multiSelectable: true,
+        onChange: () => { console.log('Table changed'); },
+      });
+  });
+
   /**
    * Documentation (Markdown)
    */
