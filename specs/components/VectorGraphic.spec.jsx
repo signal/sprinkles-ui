@@ -19,8 +19,8 @@ describe('VectorGraphic', function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.loadSvg({
-      children:
-        (<circle
+      children: (
+        <circle
           cx={'5'}
           cy={'5'}
           fill={'red'}
@@ -30,8 +30,8 @@ describe('VectorGraphic', function () {
   });
 
   it('Black Square', () => this.loadSvg({
-    children:
-      (<g
+    children: (
+      <g
         fill={'none'}
         fillRule={'evenodd'}
         stroke={'none'}
@@ -48,13 +48,14 @@ describe('VectorGraphic', function () {
   }));
 
   it('Red Circle', () => this.loadSvg({
-    children:
-      (<circle
+    children: (
+      <circle
         cx={'5'}
         cy={'5'}
         fill={'red'}
         r={'5'}
-      />),
+      />
+    ),
   }));
 
 

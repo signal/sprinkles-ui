@@ -38,7 +38,8 @@ describe('ListItemGroup', () => {
           <TextListItem
             text={text}
           />
-        </ListItem>),
+        </ListItem>
+      ),
     });
     const textListItemNode = ReactDOM.findDOMNode(ligComponent.listItemRefs.get(0).listItemRef);
     expect(textListItemNode.textContent).toBe(text);

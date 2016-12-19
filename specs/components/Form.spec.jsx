@@ -90,8 +90,8 @@ describe('Form', function () {
   it('Set Alert', () => this.props({ alert: {
     type: 'danger',
     title: 'Please reset your password using the following criteria:',
-    children:
-      (<div>
+    children: (
+      <div>
         <div
           style={{
             padding: '10px 0 5px 0',
@@ -116,7 +116,8 @@ describe('Form', function () {
             {'◼︎ At least 1 numeric character'}
           </Text>
         </div>
-      </div>),
+      </div>
+    ),
   } }));
   it('Clear Alert', () => this.props({ alert: undefined }));
   it('Button Text: My Button', () => this.props({ submitButtonText: 'My Button' }));
@@ -133,8 +134,8 @@ describe('Form', function () {
     this.props({ alert: {
       type: 'danger',
       title: 'Please reset your password using the following criteria:',
-      children:
-        (<div>
+      children: (
+        <div>
           <div
             style={{
               padding: '10px 0 5px 0',
@@ -159,7 +160,8 @@ describe('Form', function () {
               {'◼︎ At least 1 numeric character'}
             </Text>
           </div>
-        </div>),
+        </div>
+      ),
     } });
   });
   it('Sets the fields per row to 2', () => this.props({ fieldsPerRow: 2 }));

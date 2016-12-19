@@ -67,13 +67,14 @@ describe('Alert', function () {
     type: 'danger',
   }));
   it('Danger message with title', () => this.loadAlert({
-    children:
-      (<Text
+    children: (
+      <Text
         color={'white'}
         fontSize={1.5}
       >
         {'You dun broke it'}
-      </Text>),
+      </Text>
+    ),
     title: 'Warning!',
     type: 'danger',
   }));
@@ -106,7 +107,8 @@ describe('Alert', function () {
             {'◼︎ At least 1 numeric character'}
           </Text>
         </div>
-      </div>),
+      </div>
+    ),
   }));
 
   /**

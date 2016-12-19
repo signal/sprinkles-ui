@@ -167,6 +167,15 @@ describe('Table', function () {
         filterRecords: [{ bar: 'foo' }],
       });
   });
+  it('All records to filtered out with multiselect', () => {
+    this.loadTable(
+      {
+        headers: this.headers,
+        records: this.records,
+        filterRecords: [{ bar: 'foo' }],
+        multiSelectable: true,
+      });
+  });
   it('Sets column width', () => {
     this.loadTable(
       {
@@ -196,6 +205,23 @@ describe('Table', function () {
         },
         headers: this.headers,
         records: this.records,
+        multiSelectable: true,
+        onChange: () => { console.log('Table changed'); },
+      });
+  });
+
+  it('Use React node for content', () => {
+    this.loadTable(
+      {
+        columns: {
+          order: ['name', 'color', 'age'],
+        },
+        headers: this.headers,
+        records: [{
+          name: <a href={'http://ryanballa.com'}>Ryan Balla</a>,
+          color: 'Blue',
+          age: 100,
+        }],
         multiSelectable: true,
         onChange: () => { console.log('Table changed'); },
       });
