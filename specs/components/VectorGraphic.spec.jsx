@@ -44,7 +44,8 @@ describe('VectorGraphic', function () {
           x={'0'}
           y={'0'}
         />
-      </g>),
+      </g>
+    ),
   }));
 
   it('Red Circle', () => this.loadSvg({
