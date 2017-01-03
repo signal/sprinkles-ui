@@ -442,4 +442,17 @@ describe('Table', () => {
     expect(rows().length).toBe(2);
     expect(cell(0, 0).getElementsByTagName('a').length).toBe(1);
   });
+
+  it('Sorts records by header ', () => {
+    renderTable({
+      headers,
+      records,
+      sortRecords: ['name'],
+    });
+    expect(cell(0, 0).textContent).toBe('Frank');
+    expect(cell(1, 0).textContent).toBe('Jose');
+    expect(cell(2, 0).textContent).toBe('Larry');
+    expect(cell(3, 0).textContent).toBe('Peter');
+    expect(cell(4, 0).textContent).toBe('Sue');
+  });
 });
