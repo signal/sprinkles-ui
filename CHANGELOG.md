@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/signal/sprinkles-ui/compare/v1.1.2...v1.2.0) (2017-01-03)
+
+
+### Bug Fixes
+
+* **component-SeachInput:** Can expand to full width, width issue with search icon. ([3b8e252](https://github.com/signal/sprinkles-ui/commit/3b8e252))
+* **component-Table:** Border is off for zero state with filter ([#6](https://github.com/signal/sprinkles-ui/issues/6)) ([47a2e33](https://github.com/signal/sprinkles-ui/commit/47a2e33))
+
+
+### Features
+
+* **component-Panel:** Adding border to panel ([ca96130](https://github.com/signal/sprinkles-ui/commit/ca96130))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/signal/sprinkles-ui/compare/v1.1.1...v1.1.2) (2016-12-08)
 
