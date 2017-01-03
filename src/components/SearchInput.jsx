@@ -120,9 +120,11 @@ export default class SearchInput extends TextInput {
           left: '5px',
           top: '5px',
           zIndex: zindex.SearchIcon,
+          width: 24,
         },
         SearchInputWrapper: {
           position: 'relative',
+          width: '100%',
         },
         TextInput: {
           boxSizing: 'border-box',
