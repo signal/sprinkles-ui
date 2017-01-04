@@ -18,6 +18,14 @@ export default class Table extends Base {
     headers: React.PropTypes.object,
     multiSelectable: React.PropTypes.bool,
     noRecordsText: React.PropTypes.string,
+    orderBy: React.PropTypes.shape({
+      column: React.PropTypes.string,
+      direction: React.PropTypes.oneOf(['asc', 'desc']),
+      /* Strings and numbers are supported by default and do not need explicit format config.
+        Use date for any dates, must be pure date (Yes: 10/20/1994 No: Updated: 10/20/1994)
+      */
+      formatter: React.PropTypes.oneOf(['date']),
+    }),
     onClick: React.PropTypes.func,
     onChange: React.PropTypes.func,
     records: React.PropTypes.array,
@@ -123,6 +131,24 @@ export default class Table extends Base {
     return headers;
   }
 
+  sortColumnRecords(mappedRecords) {
+    const ops = {
+      asc: (a, b) =>
+         +(a > b) || +(a === b) - 1,
+      desc: (a, b) =>
+         +(a < b) || +(a === b) - 1,
+    };
+
+    return mappedRecords.sort((a, b) => {
+      switch (this.props.orderBy.formatter) {
+        case 'date':
+          return ops[this.props.orderBy.direction](new Date(a.value), new Date(b.value));
+        default:
+          return ops[this.props.orderBy.direction](a.value, b.value);
+      }
+    });
+  }
+
   processRecords() {
     let processedRecords = this.props.records;
     if (this.props.recordInclusion) {
@@ -136,6 +162,16 @@ export default class Table extends Base {
     if (this.props.columns && this.props.columns.order) {
       processedRecords = processedRecords.map((record) =>
         this.sortRecords(record));
+    }
+    if (this.props.orderBy) {
+      const mappedColValues = processedRecords.map((record, i) => (
+        { index: i, value: record[this.props.orderBy.column] }
+      ));
+      const sortedColumnValues = this.sortColumnRecords(mappedColValues);
+      const orderdRecords = sortedColumnValues.map((el) =>
+        processedRecords[el.index]
+      );
+      processedRecords = orderdRecords;
     }
     return processedRecords;
   }
