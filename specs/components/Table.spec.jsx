@@ -63,6 +63,7 @@ describe('Table', function () {
         headers={props.headers}
         filterRecords={props.filterRecords}
         onClick={handleClick}
+        orderBy={props.orderBy}
         records={
           props.records
         }
@@ -227,6 +228,30 @@ describe('Table', function () {
       });
   });
 
+  it('Order by name', () => {
+    this.loadTable(
+      {
+        headers: this.headers,
+        records: this.records,
+        orderBy: {
+          column: 'name',
+          direction: 'asc',
+        },
+      });
+  });
+
+  it('Order by age', () => {
+    this.loadTable(
+      {
+        headers: this.headers,
+        records: this.records,
+        orderBy: {
+          column: 'age',
+          direction: 'asc',
+        },
+      });
+  });
+
   /**
    * Documentation (Markdown)
    */
@@ -239,6 +264,10 @@ describe('Table', function () {
   - **records** *React.PropTypes.object* key/ value set of data used to populate the table
   - **recordInclusion** *React.PropTypes.object* (optional) maps to key of record, used to limit what is displayed
   - **onClick** *React.PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
+  - **orderBy** *React.PropTypes.shape* (optional)
+    - **column** *React.PropTypes.string (optional) column of data to order by
+    - **direction** *React.PropTypes.oneOf (optional) 'asc' or 'desc'
+    - **formatter** *React.PropTypes.oneOf (optional) 'date' specify a way to format column data for sorting
   - **selectedRows** *React.PropTypes.arrayOf(React.PropTypes.number)* select rows based on index
   - **returnAllRecordsOnClick** *React.PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
   - **filterRecords**  *React.PropTypes.object* key/ value set of data to filter the records against. If multiple values are supplied, it's considered an OR not an AND
