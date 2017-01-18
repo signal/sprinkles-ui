@@ -33,10 +33,26 @@ const records = [
     status: 'Inactive',
   },
   { name: 'Peter',
-    age: 28,
+    age: 100,
     color: 'blue',
     status: 'Active',
   }];
+
+const mixedNumericRecords = records.slice();
+mixedNumericRecords.push(
+  {
+    name: '58 Demar',
+    age: 38,
+    color: 'blue',
+    status: 'Active',
+  },
+  {
+    name: '18 Zoe',
+    age: 88,
+    color: 'blue',
+    status: 'Active',
+  },
+);
 
 const defaultProps = {
   headers,
@@ -58,6 +74,7 @@ const renderTable = (props) => {
     <Table
       columns={props.columns}
       headers={props.headers}
+      orderBy={props.orderBy}
       onClick={props.onClick}
       onChange={props.onChange}
       filterRecords={props.filterRecords}
@@ -225,7 +242,7 @@ describe('Table', () => {
     expect(cell(0, 1).textContent).toBe('25');
     expect(cell(0, 2).textContent).toBe('blue');
     expect(cell(1, 0).textContent).toBe('Peter');
-    expect(cell(1, 1).textContent).toBe('28');
+    expect(cell(1, 1).textContent).toBe('100');
     expect(cell(1, 2).textContent).toBe('blue');
     expect(row(2)).toBeUndefined();
   });
@@ -441,5 +458,92 @@ describe('Table', () => {
     });
     expect(rows().length).toBe(2);
     expect(cell(0, 0).getElementsByTagName('a').length).toBe(1);
+  });
+
+  it('Sorts mixed numeric records ascending', () => {
+    renderTable({
+      headers,
+      records: mixedNumericRecords,
+      orderBy: {
+        column: 'name',
+        direction: 'asc',
+      },
+    });
+    expect(cell(0, 0).textContent).toBe('18 Zoe');
+    expect(cell(1, 0).textContent).toBe('58 Demar');
+    expect(cell(2, 0).textContent).toBe('Frank');
+    expect(cell(3, 0).textContent).toBe('Jose');
+    expect(cell(4, 0).textContent).toBe('Larry');
+    expect(cell(5, 0).textContent).toBe('Peter');
+    expect(cell(6, 0).textContent).toBe('Sue');
+  });
+
+  it('Sorts mixed numeric records descending', () => {
+    renderTable({
+      headers,
+      records: mixedNumericRecords,
+      orderBy: {
+        column: 'name',
+        direction: 'desc',
+      },
+    });
+    expect(cell(0, 0).textContent).toBe('Sue');
+    expect(cell(1, 0).textContent).toBe('Peter');
+    expect(cell(2, 0).textContent).toBe('Larry');
+    expect(cell(3, 0).textContent).toBe('Jose');
+    expect(cell(4, 0).textContent).toBe('Frank');
+    expect(cell(5, 0).textContent).toBe('58 Demar');
+    expect(cell(6, 0).textContent).toBe('18 Zoe');
+  });
+
+  it('Sorts numeric records ascending', () => {
+    renderTable({
+      headers,
+      records,
+      orderBy: {
+        column: 'age',
+        direction: 'asc',
+      },
+    });
+    expect(cell(0, 1).textContent).toBe('20');
+    expect(cell(1, 1).textContent).toBe('20');
+    expect(cell(2, 1).textContent).toBe('25');
+    expect(cell(3, 1).textContent).toBe('39');
+    expect(cell(4, 1).textContent).toBe('100');
+  });
+
+  it('Sorts numeric records descending', () => {
+    renderTable({
+      headers,
+      records,
+      orderBy: {
+        column: 'age',
+        direction: 'desc',
+      },
+    });
+    expect(cell(0, 1).textContent).toBe('100');
+    expect(cell(1, 1).textContent).toBe('39');
+    expect(cell(2, 1).textContent).toBe('25');
+    expect(cell(3, 1).textContent).toBe('20');
+    expect(cell(4, 1).textContent).toBe('20');
+  });
+
+  it('Sorts date records ascending', () => {
+    renderTable({
+      headers,
+      records: [
+        { date: '2016/10/18 17:09' },
+        { date: '2015/12/05 15:06' },
+        { date: '2016/02/18 17:09' },
+      ],
+      orderBy: {
+        column: 'date',
+        direction: 'asc',
+        format: 'date',
+      },
+    });
+    expect(cell(0, 0).textContent).toBe('2015/12/05 15:06');
+    expect(cell(1, 0).textContent).toBe('2016/02/18 17:09');
+    expect(cell(2, 0).textContent).toBe('2016/10/18 17:09');
   });
 });
