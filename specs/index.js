@@ -43,11 +43,11 @@ describe('Sprinkles UI', () => {
   require('./components/Alert.spec');
   require('./components/ButtonGroup.spec');
   require('./components/colors.spec');
+  require('./components/DataTable.spec');
   require('./components/Drawer.spec');
   require('./components/Dropdown.spec');
   require('./components/Panel.spec');
   require('./components/Popover.spec');
-  require('./components/Table.spec');
   require('./components/Text.spec');
   require('./components/Theme.spec');
   require('./components/VectorGraphic.spec');

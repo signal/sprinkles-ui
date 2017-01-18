@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { BackgroundColors } from '../src/shared/colors';
-import Table from '../src/components/Table';
+import DataTable from '../src/components/DataTable';
 
 const headers = {
   name: 'Name',
@@ -71,7 +71,7 @@ let cell;
 const mockHandleClick = jest.fn();
 const renderTable = (props) => {
   tableComponent = TestUtils.renderIntoDocument(
-    <Table
+    <DataTable
       columns={props.columns}
       headers={props.headers}
       orderBy={props.orderBy}
@@ -188,8 +188,6 @@ describe('Table', () => {
     });
     TestUtils.Simulate.mouseOver(row(0));
 
-    expect(tableComponent.state.hoveredRow).toBe(0);
-    expect(tableComponent.state.isRowHovering).toBe(true);
     expect(color(row(0).style.background).hexString())
       .toBe(color(BackgroundColors.hover).hexString());
   });
@@ -216,7 +214,16 @@ describe('Table', () => {
     });
     TestUtils.Simulate.click(cell(0, 0));
 
-    expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', limitedData, 0);
+    expect(mockHandleClick).toBeCalledWith(
+      cell(0, 0),
+      {
+        cellData: 'Sue',
+        columnKey: 'name',
+        row: limitedData,
+        xCord: 0,
+        yCord: 0,
+      }
+    );
   });
 
   it('provides all records onClick when specified', () => {
@@ -228,7 +235,15 @@ describe('Table', () => {
     });
     TestUtils.Simulate.click(cell(0, 0));
 
-    expect(mockHandleClick).toBeCalledWith('name', 0, 'Sue', records[0], 0);
+    expect(mockHandleClick).toBeCalledWith(
+      cell(0, 0),
+      {
+        cellData: 'Sue',
+        columnKey: 'name',
+        row: records[0],
+        xCord: 0,
+        yCord: 0,
+      });
   });
 
   it('renders a table with one filtered record type', () => {

@@ -3,10 +3,10 @@
 /* eslint no-console: "off" */
 
 import React from 'react';
-import Table from '../../src/components/Table';
+import DataTable from '../../src/components/DataTable';
 
 
-describe('Table', function () {
+describe('DataTable', function () {
   this.headers = {
     name: 'Name',
     age: 'Age',
@@ -43,7 +43,7 @@ describe('Table', function () {
   this.filterRecords = [{ color: 'blue', age: 25 }];
 
   this.header(`
-  ## Table
+  ## DataTable
   `); // Markdown.
 
   this.loadTable = (props) => {
@@ -58,7 +58,7 @@ describe('Table', function () {
     };
     this.unload();
     this.component(
-      <Table
+      <DataTable
         columns={props.columns}
         headers={props.headers}
         filterRecords={props.filterRecords}
@@ -256,7 +256,7 @@ describe('Table', function () {
    * Documentation (Markdown)
    */
   this.footer(`
-  ### Table
+  ### DataTable
   - **columns** *React.PropTypes.shape* (optional)
     - **order** *React.PropTypes.array* (optional) reorganizes the columns by key in this order
     - **width** *React.PropTypes.array* (optional) sets the width of individual columns the value specified here. If a column is obmitted 'auto' is used.
