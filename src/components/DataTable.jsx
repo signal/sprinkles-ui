@@ -6,8 +6,10 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import Base from './Base';
 import Checkbox from './Checkbox';
+import TableCell from './TableCell';
+import TableRow from './TableRow';
 
-export default class Table extends Base {
+export default class DataTable extends Base {
 
   static propTypes = {
     columns: React.PropTypes.shape({
@@ -43,7 +45,7 @@ export default class Table extends Base {
     selectedRows: [],
   };
 
-  displayName = 'Table';
+  displayName = 'DataTable';
 
   constructor() {
     super();
@@ -51,26 +53,6 @@ export default class Table extends Base {
       hoveredRow: null,
       isRowHovering: false,
     };
-  }
-
-  handleMouseOut() {
-    if (this.props.onClick) {
-      this.setState(
-        { isRowHovering: false,
-          hoveredRow: null,
-        }
-      );
-    }
-  }
-
-  handleMouseOver(rowIndex) {
-    if (this.props.onClick) {
-      this.setState(
-        { isRowHovering: true,
-          hoveredRow: rowIndex,
-        }
-      );
-    }
   }
 
   includeSubRecords(record) {
@@ -176,11 +158,11 @@ export default class Table extends Base {
     return processedRecords;
   }
 
-  handleClick(itemData, xCord, cellData, rowData, yCord) {
-    const returnedRowData = this.props.returnAllRecordsOnClick ?
-      this.props.records[yCord] : rowData;
-    // FIXME: We should pass an object instead of individual arguments
-    this.props.onClick(itemData, xCord, cellData, returnedRowData, yCord);
+  handleClick(data, e) {
+    const returnedData = Object.assign({}, data);
+    returnedData.row = this.props.returnAllRecordsOnClick ?
+      this.props.records[data.yCord] : data.row;
+    this.props.onClick(e.target, returnedData);
   }
 
   handleSelectAll() {
@@ -220,66 +202,73 @@ export default class Table extends Base {
   }
 
   renderHeaderItems(style) {
-    return (<tr style={style.Thead}>
-      {this.renderHeaderItem(style)}
-    </tr>
+    return (
+      <TableRow
+        rowIndex={0}
+        style={style.Thead}
+      >
+        {this.renderHeaderItem(style)}
+      </TableRow>
     );
   }
 
-  renderCheckBox(tdStyle, xCord, row, yCord) {
+  renderCheckBox(xCord, row, yCord) {
     this.checkBoxRefs = [];
     const shouldBeChecked = this.props.selectedRows.indexOf(yCord) > -1;
     return (
-      <td
+      <TableCell
         key={xCord}
-        style={tdStyle}
         onClick={this.handleRowSelect.bind(this, row, yCord)}
       >
         <Checkbox
           checked={shouldBeChecked}
           ref={(c) => this.checkBoxRefs.push(c)}
         />
-      </td>
+      </TableCell>
     );
   }
 
-  renderItems(style, columnKey, xCord, row, yCord) {
+  renderItems(columnKey, xCord, row, yCord) {
     const cellData = row[columnKey];
     const cellWidth = (this.props.columns && this.props.columns.width)
       ? this.props.columns.width[xCord] : 'auto';
-    const tdStyle = Object.assign({}, style.TBodyItems, { width: cellWidth });
     return (
-      <td
-        key={xCord}
-        onClick={this.handleClick.bind(this, columnKey, xCord, cellData, row, yCord)}
-        style={tdStyle}
+      <TableCell
+        key={`${xCord}-${yCord}`}
+        onClick={this.handleClick.bind(this,
+          {
+            columnKey,
+            xCord,
+            cellData,
+            row,
+            yCord,
+          }
+         )
+       }
+        width={cellWidth}
       >
-        {cellData}
-      </td>
+        {row[columnKey]}
+      </TableCell>
     );
   }
 
   renderRow(style, row, i) {
-    const rowSelected = this.props.selectedRows.indexOf(i) > -1;
-    const isSelectedRow = rowSelected ? style.selected : undefined;
-    const rowStyle = (i === this.state.hoveredRow ? style.TableRow : isSelectedRow);
-    const rowItem = Object.keys(row).map((item, ri) => this.renderItems(style, item, ri, row, i));
-    const multiSelectItem = this.renderCheckBox(style.TBodyItems, 0, row, i);
-
-    return rowItem.length > 0 ? (
-      <tr
-        key={i}
-        onMouseOut={this.handleMouseOut.bind(this, i)}
-        onMouseOver={this.handleMouseOver.bind(this, i)}
-        style={rowStyle}
+    const rowItems = Object.keys(row).map((item, ri) => this.renderItems(item, ri, row, i));
+    const multiSelectItem = this.renderCheckBox(0, row, i);
+    return rowItems.length > 0 ? (
+      <TableRow
+        key={`row-${i}`}
+        isHoverable={typeof (this.props.onClick) === 'function'}
+        isSelected={this.props.selectedRows.indexOf(i) > -1}
+        rowIndex={i}
       >
         { this.props.multiSelectable ? multiSelectItem : undefined }
-        { rowItem }
-      </tr>
+        { rowItems }
+      </TableRow>
     ) : null;
   }
 
-  renderNoResults(style) {
+  renderNoResults() {
     let colSpan = Object.keys(this.processHeaders()).length;
     /* We need to add an element to account for the checkbox column for multiselect */
     if (this.props.multiSelectable) {
@@ -287,21 +276,22 @@ export default class Table extends Base {
     }
 
     return (
-      <tr>
-        <td
+      <TableRow
+        rowIndex={0}
+      >
+        <TableCell
           colSpan={colSpan > 0 ? colSpan : 1}
-          style={style.TBodyItems}
         >
           {this.props.noRecordsText}
-        </td>
-      </tr>
+        </TableCell>
+      </TableRow>
     );
   }
 
   renderRows(style, records) {
     const rowResults = records.length > 0 ?
       records.map((item, i) => this.renderRow(style, item, i)) : [];
-    return rowResults[0] ? rowResults : this.renderNoResults(style);
+    return rowResults[0] ? rowResults : this.renderNoResults();
   }
 
   render() {
