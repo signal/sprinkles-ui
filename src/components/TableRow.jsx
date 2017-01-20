@@ -18,16 +18,16 @@ export default class TableRow extends Base {
   constructor() {
     super();
     this.state = {
-      hoveredRow: null,
-      isRowHovering: false,
+      hoveredRowIndex: null,
+      isUserCurrentlyHovering: false,
     };
   }
 
   handleMouseOut() {
     if (this.props.isHoverable) {
       this.setState(
-        { isRowHovering: false,
-          hoveredRow: null,
+        { isUserCurrentlyHovering: false,
+          hoveredRowIndex: null,
         }
       );
     }
@@ -36,8 +36,8 @@ export default class TableRow extends Base {
   handleMouseOver(rowIndex) {
     if (this.props.isHoverable) {
       this.setState(
-        { isRowHovering: true,
-          hoveredRow: rowIndex,
+        { isUserCurrentlyHovering: true,
+          hoveredRowIndex: rowIndex,
         }
       );
     }
@@ -58,7 +58,7 @@ export default class TableRow extends Base {
         },
       },
     }, {
-      hover: this.state.isRowHovering,
+      hover: this.state.isUserCurrentlyHovering,
     });
     const rowStyle = this.props.isSelected ? style.selected : style.TableRow;
     return (
