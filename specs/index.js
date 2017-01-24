@@ -46,6 +46,7 @@ describe('Sprinkles UI', () => {
   require('./components/DataTable.spec');
   require('./components/Drawer.spec');
   require('./components/Dropdown.spec');
+  require('./components/Menu.spec');
   require('./components/Panel.spec');
   require('./components/Popover.spec');
   require('./components/Text.spec');
