@@ -9,7 +9,7 @@ export default class Menu extends Base {
 
   static propTypes = {
     children: React.PropTypes.node,
-    triggerEl: React.PropTypes.node,
+    triggerEl: React.PropTypes.node.isRequired,
   };
 
   static defaultProps = {

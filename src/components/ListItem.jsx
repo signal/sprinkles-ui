@@ -15,6 +15,7 @@ export default class ListItem extends React.Component {
 
   static defaultProps = {
     selected: false,
+    showDividers: true,
     textAlign: 'left',
   };
 

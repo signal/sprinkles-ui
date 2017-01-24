@@ -19,6 +19,7 @@ export default class TextListItem extends Base {
 
   static defaultProps = {
     enabled: true,
+    showDividers: true,
   };
 
   displayName = 'TextListItem';

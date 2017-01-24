@@ -12,51 +12,37 @@ describe('Menu', function () {
   `); // Markdown.
 
   before(() => {
-    const handleClick = (item) => {
-      console.log(item);
-    };
-    const handleRequestOpen = () => {
-      this.props({
-        open: true,
-      });
-    };
-    const handleRequestClose = () => this.props({ open: false });
     this.component(
       <Menu
         triggerEl={<div>Click Me</div>}
-        onClick={handleClick}
-        onRequestOpen={handleRequestOpen}
-        onRequestClose={handleRequestClose}
-        useLayerForClickAway={true}
-        children={
+      >
+        <div>
           <div>
-            <div>
-              <ListItem>
-                <TextListItem
-                  text={'Back'}
-                />
-              </ListItem>
-              <ListItem>
-                <TextListItem
-                  text={'Forward'}
-                />
-              </ListItem>
-              <ListItem>
-                <TextListItem
-                  text={'Reload'}
-                />
-              </ListItem>
-            </div>
-            <div>
-              <ListItem>
-                <TextListItem
-                  text={'Save As...'}
-                />
-              </ListItem>
-            </div>
+            <ListItem>
+              <TextListItem
+                text={'Back'}
+              />
+            </ListItem>
+            <ListItem>
+              <TextListItem
+                text={'Forward'}
+              />
+            </ListItem>
+            <ListItem>
+              <TextListItem
+                text={'Reload'}
+              />
+            </ListItem>
           </div>
-        }
-      />
+          <div>
+            <ListItem>
+              <TextListItem
+                text={'Save As...'}
+              />
+            </ListItem>
+          </div>
+        </div>
+      </Menu>
     ).width('100%');
   });
 
@@ -66,9 +52,13 @@ describe('Menu', function () {
   this.footer(`
   ### Field
 
-  A Menu Element
+  A Menu Element, wraps the Dropdown component and provides a little extra styling
+  to give the appearance of a menu but no additional functionality.
 
   #### API
+
+  - **children** *React.PropTypes.node* (optional) pass in your links to fill up your menu
+  - **triggerEl** *React.PropTypes.node* use to trigger the menu to open and close
 
   `);
 });

@@ -25,7 +25,8 @@ describe('VectorGraphic', function () {
           cy={'5'}
           fill={'red'}
           r={'5'}
-        />),
+        />
+    ),
     });
   });
 
