@@ -13,6 +13,7 @@ export Form from './components/Form';
 export KeyValueInput from './components/KeyValueInput';
 export List from './components/List';
 export ListItem from './components/ListItem';
+export Menu from './components/Menu';
 export NavListItem from './components/NavListItem';
 export Panel from './components/Panel';
 export PasswordInput from './components/PasswordInput';
