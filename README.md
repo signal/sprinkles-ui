@@ -14,6 +14,7 @@ A portable, customizable set of UI components
 - [Continuous Integration](#continuous-integration)
 - [Testing](#testing)
 - [Style Guide](#style-guide)
+- [Atom Config](#atom-config)
 - [Additional Resources](#additional-resources)
 
 ## What is Sprinkles
@@ -103,6 +104,16 @@ $ docker run -it signalco/sprinkles-ui:latest npm test
 **CSS**
 
 Within CSS rules, please make sure all the selectors are in alphabetical order. There's one exception, for 'height' and 'width', place these at the end and put 'height' before 'width'.
+
+## Atom config
+
+We suggest using Atom for its useful code style integrations that make working with our linters easy. Here are a list of suggested packages.
+
+* [atom-beautify](https://atom.io/packages/atom-beautify)
+* [es6-javascript](https://atom.io/packages/es6-javascript)
+* [linter](https://atom.io/packages/linter)
+* [linter-eslint](https://atom.io/packages/linter-eslint)
+* [react](https://atom.io/packages/react)
 
 ## Additional Resources
 
