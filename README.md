@@ -4,6 +4,7 @@ A portable, customizable set of UI components
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Join the chat at https://gitter.im/sprinkles-ui/lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sprinkles-ui/lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/signal/sprinkles-ui.svg?branch=master)](https://travis-ci.org/signal/sprinkles-ui)
 
 **Table Of Contents**
 
@@ -75,7 +76,7 @@ Go to http://localhost:3030
 
 ## Continuous Integration
 
-All tests are run inside of docker containers on Jenkins to ensure a consistent testing environment. They run on every push to the repo.
+All tests are run locally when you push remote. A Travis CI build will then be kicked off. Please make sure it passes, no PRs will be accepted without a passing Travis CI build.
 
 ## Testing
 
