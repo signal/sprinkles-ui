@@ -16,7 +16,6 @@ const records = [
     age: 25,
     color: 'blue',
     status: 'Active',
-    href: '/sue',
   },
   { name: 'Frank',
     age: 20,
@@ -27,6 +26,7 @@ const records = [
     age: 39,
     color: 'red',
     status: 'Active',
+    href: '/larry',
   },
   { name: 'Jose',
     age: 20,
@@ -229,22 +229,22 @@ describe('Table', () => {
 
   it('Provides href when clicking on a filtered segment row', () => {
     const limitedData = {
-      age: 25,
-      name: 'Sue',
-      href: '/sue',
+      age: 39,
+      name: 'Larry',
+      href: '/larry',
     };
     renderTable({
       onClick: mockHandleClick,
       records,
       recordInclusion: ['name', 'age', 'href'],
-      filterRecords: [{ name: 'Sue' }],
+      filterRecords: [{ name: 'Larry' }],
     });
     TestUtils.Simulate.click(cell(0, 0));
 
     expect(mockHandleClick).toBeCalledWith(
       cell(0, 0),
       {
-        cellData: 'Sue',
+        cellData: 'Larry',
         columnKey: 'name',
         row: limitedData,
         xCord: 0,
