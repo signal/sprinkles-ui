@@ -16,6 +16,7 @@ const records = [
     age: 25,
     color: 'blue',
     status: 'Active',
+    href: '/sue',
   },
   { name: 'Frank',
     age: 20,
@@ -158,7 +159,7 @@ describe('Table', () => {
 
   it('Does render a Table with cells', () => {
     const tRowCells = tBody.getElementsByTagName('td').length;
-    expect(tRowCells).toBe(20);
+    expect(tRowCells).toBe(21);
   });
 
   it('Renders a Table with limited data selected', () => {
@@ -211,6 +212,32 @@ describe('Table', () => {
       onClick: mockHandleClick,
       records,
       recordInclusion: ['name', 'age'],
+    });
+    TestUtils.Simulate.click(cell(0, 0));
+
+    expect(mockHandleClick).toBeCalledWith(
+      cell(0, 0),
+      {
+        cellData: 'Sue',
+        columnKey: 'name',
+        row: limitedData,
+        xCord: 0,
+        yCord: 0,
+      }
+    );
+  });
+
+  it('Provides href when clicking on a filtered segment row', () => {
+    const limitedData = {
+      age: 25,
+      name: 'Sue',
+      href: '/sue',
+    };
+    renderTable({
+      onClick: mockHandleClick,
+      records,
+      recordInclusion: ['name', 'age', 'href'],
+      filterRecords: [{ name: 'Sue' }],
     });
     TestUtils.Simulate.click(cell(0, 0));
 
