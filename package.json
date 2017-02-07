@@ -79,11 +79,13 @@
       "path": "./node_modules/cz-conventional-changelog"
     },
     "ghooks": {
-      "commit-msg": "validate-commit-msg",
-      "pre-push": "npm run test",
+      "applypatch-msg": "validate-commit-msg",
+      "pre-applypatch": "validate-commit-msg",
+      "pre-rebase": "validate-commit-msg",
+      "pre-push": "validate-commit-msg && npm run test",
       "pre-commit": "npm run lint",
       "rebase": "validate-commit-msg"
-    },
+		},
     "validate-commit-msg": {
       "types": [
         "feat",
