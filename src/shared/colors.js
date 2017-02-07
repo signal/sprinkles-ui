@@ -36,9 +36,12 @@ export const BackgroundColors = {
 };
 
 export const FormColors = {
+  background: '#FAFAFA',
   border: '#CCCCCC',
-  text: '#4E4E4E',
-  label: '#4E4E4E',
+  borderSelected: '#999999',
+  label: '#555555',
+  requiredNotation: '#f04124',
+  text: '#313b46',
 };
 
 export const StructuralColors = {
