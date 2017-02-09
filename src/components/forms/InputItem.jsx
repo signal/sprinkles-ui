@@ -1,7 +1,5 @@
 import React from 'react';
-import jss from 'jss';
-import preset from 'jss-preset-default';
-import jssCompose from 'jss-compose';
+import { StyleSheet, css } from 'aphrodisiac';
 import Base from './../Base';
 
 export default class InputItem extends Base {
@@ -27,18 +25,14 @@ export default class InputItem extends Base {
     },
   };
 
-  renderRequiredNotation(classes) {
+  renderRequiredNotation(styles) {
     return (
-      <span className={classes.requiredNotation}>*</span>
+      <span className={css(styles.requiredNotation)}>*</span>
     );
   }
-
-  generateStyles() {
-    jss.setup(preset());
-    jss.use(jssCompose());
-
+  render() {
     const clr = this.getColors();
-    const styles = {
+    const styles = StyleSheet.create({
       label: {
         display: 'block',
         color: clr.formColors.label,
@@ -51,31 +45,27 @@ export default class InputItem extends Base {
         color: clr.formColors.requiredNotation,
         paddingLeft: '5px',
       },
-      error: {
+      errorMessage: {
         color: clr.formColors.requiredNotation,
       },
-      errorLabel: {
-        composes: ['$label', '$error'],
-      },
-    };
+    });
+    const labelStyles = css(
+      styles.label,
+      this.props.meta.error && styles.errorMessage,
+    );
 
-    return jss.createStyleSheet(styles).attach();
-  }
-
-  render() {
-    const { classes } = this.generateStyles();
     const showError = this.props.meta.touched && this.props.meta.error;
 
     return (
       <div>
         <label
-          className={showError ? classes.errorLabel : classes.label}
+          className={labelStyles}
           htmlFor={this.props.fieldName}
         >
-          {this.props.label}{this.props.required && this.renderRequiredNotation(classes)}
+          {this.props.label}{this.props.required && this.renderRequiredNotation(styles)}
         </label>
         {React.cloneElement(this.props.children, { ...this.props })}
-        {showError && <span className={classes.errorLabel}>
+        {showError && <span className={css(styles.errorMessage)}>
           {this.props.errorMessage}</span>}
       </div>
     );

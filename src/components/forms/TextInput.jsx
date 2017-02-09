@@ -1,15 +1,13 @@
 /* eslint react/forbid-prop-types: "off" */
 
 import React from 'react';
-import jss from 'jss';
-import preset from 'jss-preset-default';
-import jssCompose from 'jss-compose';
+import { StyleSheet, css } from 'aphrodisiac';
 import Base from './../Base';
 
 export default class TextInput extends Base {
 
   static propTypes = {
-    disabled: React.PropTypes.bool,
+    enabled: React.PropTypes.bool,
     fieldId: React.PropTypes.string.isRequired,
     field: React.PropTypes.object,
   };
@@ -22,15 +20,12 @@ export default class TextInput extends Base {
     },
   };
 
-  generateStyles() {
-    jss.setup(preset());
-    jss.use(jssCompose());
 
+  render() {
     const clr = this.getColors();
-    const focusBorderColor =
-      this.props.meta.error ? clr.formColors.requiredNotation : clr.formColors.borderSelected;
-
-    const styles = {
+    const focusBorderColor = this.props.meta.error ?
+      clr.formColors.requiredNotation : clr.formColors.borderSelected;
+    const styles = StyleSheet.create({
       input: {
         border: `1px solid ${clr.formColors.border}`,
         borderRadius: '3px',
@@ -48,25 +43,20 @@ export default class TextInput extends Base {
       error: {
         borderColor: clr.formColors.requiredNotation,
       },
-      errorInput: {
-        composes: ['$input', '$error'],
-      },
-    };
+    });
 
-    return jss.createStyleSheet(styles).attach();
-  }
-
-  render() {
-    const { classes } = this.generateStyles();
+    const inputStyles = css(
+      styles.input,
+      this.props.meta.error && styles.error,
+    );
     return (
       <input
+        className={inputStyles}
         disabled={this.props.enabled ? undefined : 'disabled'}
-        className={this.props.meta.error ? classes.errorInput : classes.input}
         {...this.props.field}
         id={this.props.fieldId}
         type="text"
       />
     );
   }
-
 }
