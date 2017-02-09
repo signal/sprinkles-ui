@@ -26,7 +26,7 @@ describe('InputItem', function () {
 
   it('Disable', () => this.props({ enabled: false }));
   it('Enable', () => this.props({ enabled: true }));
-  it('Show Error', () => this.props({ meta: { error: { type: 'foo' } } }));
+  it('Show Error', () => this.props({ meta: { error: { type: 'foo' }, touched: true } }));
   it('Remove Error', () => this.props({ meta: { error: null } }));
 
   /**

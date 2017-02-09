@@ -40,7 +40,7 @@ export const FormColors = {
   border: '#CCCCCC',
   borderSelected: '#999999',
   label: '#555555',
-  requiredNotation: '#f04124',
+  requiredNotation: '#F04124',
   text: '#313b46',
 };
 
