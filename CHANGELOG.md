@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/signal/sprinkles-ui/compare/v1.4.2...v1.5.0) (2017-03-24)
+
+
+### Features
+
+* **component-table:** Adding sort column arrow and style ([6718217](https://github.com/signal/sprinkles-ui/commit/6718217))
+
+
+
 <a name="1.4.2"></a>
 ## [1.4.2](https://github.com/signal/sprinkles-ui/compare/v1.4.1...v1.4.2) (2017-01-30)
 

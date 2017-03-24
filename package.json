@@ -1,6 +1,6 @@
 {
   "name": "sprinkles-ui",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
@@ -85,7 +85,7 @@
       "pre-push": "validate-commit-msg && npm run test",
       "pre-commit": "npm run lint",
       "rebase": "validate-commit-msg"
-		},
+    },
     "validate-commit-msg": {
       "types": [
         "feat",
