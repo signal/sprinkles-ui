@@ -235,7 +235,7 @@ describe('DataTable', function () {
         records: this.records,
         orderBy: {
           column: 'name',
-          direction: 'asc',
+          direction: 'desc',
         },
       });
   });

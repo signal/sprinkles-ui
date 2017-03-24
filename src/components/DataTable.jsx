@@ -4,6 +4,7 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import color from 'color';
 import Base from './Base';
 import Checkbox from './Checkbox';
 import TableCell from './TableCell';
@@ -29,10 +30,12 @@ export default class DataTable extends Base {
       formatter: React.PropTypes.oneOf(['date']),
     }),
     onClick: React.PropTypes.func,
+    onHeaderClick: React.PropTypes.func,
     onChange: React.PropTypes.func,
     records: React.PropTypes.array,
     recordInclusion: React.PropTypes.array,
     returnAllRecordsOnClick: React.PropTypes.bool,
+    selectedColumn: React.PropTypes.string,
     selectedRows: React.PropTypes.arrayOf(React.PropTypes.number),
   }
 
@@ -41,6 +44,7 @@ export default class DataTable extends Base {
     multiSelectable: false,
     onClick: () => {},
     onChange: () => {},
+    onHeaderClick: () => {},
     records: [],
     selectedRows: [],
   };
@@ -177,14 +181,19 @@ export default class DataTable extends Base {
 
   renderHeaderItem(style) {
     const headers = this.processHeaders();
-    const headerTitles = Object.keys(headers).map((header, i) => (
-      <th
+    const headerTitles = Object.keys(headers).map((header, i) => {
+      const arrowStyle = this.props.orderBy && this.props.orderBy.direction === 'asc'
+        ? style.TheadArrowUp : style.TheadArrowDown;
+      const isFilteredHeader = this.props.orderBy && this.props.orderBy.column === header;
+      return (<th
         key={i}
-        style={style.TheadItems}
+        onClick={this.props.onHeaderClick.bind(this, header)}
+        style={(isFilteredHeader ? style.TheadSelected : style.TheadItems)}
       >
+        {isFilteredHeader && <span style={arrowStyle} />}
         {headers[header]}
-      </th>
-      )
+      </th>);
+    }
     );
     const selectAllHeader = (
       <th
@@ -309,6 +318,35 @@ export default class DataTable extends Base {
         Thead: {
           background: clr.backgroundColors.tableHeader,
           borderBottom: `1px solid ${clr.structuralColors.divider}`,
+        },
+        TheadSelected: {
+          background: color(clr.backgroundColors.tableHeader).darken(0.1).hexString(),
+          borderBottom: `1px solid ${clr.structuralColors.divider}`,
+          paddingRight: 10,
+        },
+        TheadArrowDown: {
+          borderLeft: '4px solid transparent',
+          borderRight: '4px solid transparent',
+          borderTop: '4px dashed',
+          color: clr.textColors.tableHeader,
+          display: 'inline-block',
+          marginLeft: 10,
+          marginRight: 10,
+          verticalAlign: 'middle',
+          height: 0,
+          width: 0,
+        },
+        TheadArrowUp: {
+          borderBottom: '4px dashed',
+          borderLeft: '4px solid transparent',
+          borderRight: '4px solid transparent',
+          color: clr.textColors.tableHeader,
+          display: 'inline-block',
+          marginLeft: 10,
+          marginRight: 10,
+          verticalAlign: 'middle',
+          height: 0,
+          width: 0,
         },
         TheadItems: {
           background: clr.backgroundColors.tableHeader,
