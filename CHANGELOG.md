@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/signal/sprinkles-ui/compare/v1.5.0...v1.6.0) (2017-04-04)
+
+
+### Features
+
+* **Component-Panel:** Adding margin ([6dbc8c1](https://github.com/signal/sprinkles-ui/commit/6dbc8c1))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/signal/sprinkles-ui/compare/v1.4.2...v1.5.0) (2017-03-24)
 
