@@ -12,6 +12,7 @@ export default class Panel extends Base {
     children: React.PropTypes.node,
     color: React.PropTypes.string,
     height: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+    margin: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     padding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
     text: React.PropTypes.string,
     width: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
@@ -19,6 +20,7 @@ export default class Panel extends Base {
 
   static defaultProps = {
     borderSize: 1,
+    margin: 0,
     padding: 10,
   };
 
@@ -58,6 +60,7 @@ export default class Panel extends Base {
           backgroundColor: this.props.backgroundColor || clr.backgroundColors.primary,
           color: this.props.color || clr.textColors.primary,
           padding: this.props.padding,
+          margin: this.props.margin,
           boxSizing: 'border-box',
         },
       },
