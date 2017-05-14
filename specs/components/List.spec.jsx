@@ -32,7 +32,7 @@ describe('List', function () {
             text={loremIpsum()}
           />
         </ListItem>
-      </List>
+      </List>,
     );
   });
 
@@ -46,8 +46,8 @@ describe('List', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* (optional) child components
-  - **showBorder** *React.PropTypes.bool* (optional) show a border between elements, defaults to true
+  - **children** *PropTypes.node* (optional) child components
+  - **showBorder** *PropTypes.bool* (optional) show a border between elements, defaults to true
 
   `);
 });

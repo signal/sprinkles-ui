@@ -1,19 +1,19 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import Version from '../src/components/Version';
 
 
 describe('Version', () => {
   it('Does render a Version component', () => {
-    const versionComponent = TestUtils.renderIntoDocument(
-      <Version />
+    const versionComponent = ReactTestUtils.renderIntoDocument(
+      <Version />,
     );
     expect(versionComponent).toBeDefined();
   });
 
   it('Does return true with exact tag match', () => {
-    const versionComponent = TestUtils.renderIntoDocument(
-      <Version />
+    const versionComponent = ReactTestUtils.renderIntoDocument(
+      <Version />,
     );
     expect(versionComponent.matchingTag({
       tag: 'a',
@@ -23,8 +23,8 @@ describe('Version', () => {
 
   describe('Version/matchingTag', () => {
     it('Does return false when the tags do not match', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingTag({
         tag: 'a',
@@ -33,8 +33,8 @@ describe('Version', () => {
     });
 
     it('Does return false when no tag is present', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingTag({
         tagVersion: 'b',
@@ -42,8 +42,8 @@ describe('Version', () => {
     });
 
     it('Does return false when no tagVersion is present', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingTag({
         tag: 'a',
@@ -51,8 +51,8 @@ describe('Version', () => {
     });
 
     it('Does return false when both matchingTag and matchingVersion are false', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       versionComponent.matchingTag = jest.genMockFunction().mockReturnValue(false);
       versionComponent.matchingVersion = jest.genMockFunction().mockReturnValue(false);
@@ -62,15 +62,15 @@ describe('Version', () => {
 
   describe('Verison/validVersion', () => {
     it('Does return true if valid version', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.validVersion('0.0.1')).toBe(true);
       expect(versionComponent.validVersion('1')).toBe(true);
     });
     it('Does return false if invalid version', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.validVersion('a')).toBe(false);
       expect(versionComponent.validVersion('')).toBe(false);
@@ -94,8 +94,8 @@ describe('Version', () => {
 
   describe('Version/validVersionSelector', () => {
     it('Does return true if valid version', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.validVersionSelector('0.0.1')).toBe(true);
       expect(versionComponent.validVersionSelector('>0.0.1')).toBe(true);
@@ -106,8 +106,8 @@ describe('Version', () => {
       expect(versionComponent.validVersionSelector('1')).toBe(true);
     });
     it('Does return false if invalid version', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.validVersionSelector('a')).toBe(false);
       expect(versionComponent.validVersionSelector('')).toBe(false);
@@ -126,8 +126,8 @@ describe('Version', () => {
 
   describe('Version/versionComparitor', () => {
     it('Does return 0 if version A and B are the same', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       let vA = '1';
       let vB = '1';
@@ -149,8 +149,8 @@ describe('Version', () => {
       expect(versionComponent.versionComparitor(vA, vB)).toBe(0);
     });
     it('Does return -1 if version A is less than version B', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       let vA = '1';
       let vB = '2';
@@ -169,8 +169,8 @@ describe('Version', () => {
       expect(versionComponent.versionComparitor(vA, vB)).toBe(-1);
     });
     it('Does return -1 if version A is less than version B', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       let vA = '2';
       let vB = '1';
@@ -192,8 +192,8 @@ describe('Version', () => {
 
   describe('Version/matchingVersion', () => {
     it('Does return true when version and versionSelector are exact match', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.1',
@@ -201,8 +201,8 @@ describe('Version', () => {
       })).toBe(true);
     });
     it('Does return true when version is greater than versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.1',
@@ -210,8 +210,8 @@ describe('Version', () => {
       })).toBe(true);
     });
     it('Does return true when version is greater than versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.3',
@@ -219,8 +219,8 @@ describe('Version', () => {
       })).toBe(true);
     });
     it('Does return true when version is less than or equal to versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.2',
@@ -228,8 +228,8 @@ describe('Version', () => {
       })).toBe(true);
     });
     it('Does return true when version is greater than or equal to versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.2',
@@ -237,8 +237,8 @@ describe('Version', () => {
       })).toBe(true);
     });
     it('Does return false when version is less than versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.1',
@@ -246,8 +246,8 @@ describe('Version', () => {
       })).toBe(false);
     });
     it('Does return false when version is greater than versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.3',
@@ -255,8 +255,8 @@ describe('Version', () => {
       })).toBe(false);
     });
     it('Does return false when version is less than or greater to versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.1',
@@ -264,8 +264,8 @@ describe('Version', () => {
       })).toBe(false);
     });
     it('Does return false when version is greater than or equal to versionSelector', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       expect(versionComponent.matchingVersion({
         version: '0.0.3',
@@ -276,8 +276,8 @@ describe('Version', () => {
 
   describe('Version/showVersion', () => {
     it('Does return true when both matchingTag=true and matchingVersion=false', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       versionComponent.matchingTag = jest.genMockFunction().mockReturnValue(true);
       versionComponent.matchingVersion = jest.genMockFunction().mockReturnValue(false);
@@ -285,8 +285,8 @@ describe('Version', () => {
     });
 
     it('Does return true when both matchingTag=true and matchingVersion=false', () => {
-      const versionComponent = TestUtils.renderIntoDocument(
-        <Version />
+      const versionComponent = ReactTestUtils.renderIntoDocument(
+        <Version />,
       );
       versionComponent.matchingTag = jest.genMockFunction().mockReturnValue(false);
       versionComponent.matchingVersion = jest.genMockFunction().mockReturnValue(true);

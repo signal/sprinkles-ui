@@ -20,7 +20,7 @@ describe('Theme', function () {
           text={'Make me Pretty'}
           type={props.type}
         />
-      </Theme>
+      </Theme>,
     );
   };
 
@@ -65,14 +65,14 @@ describe('Theme', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* Children which are to receive the new styles
-  - **color** *React.PropTypes.shape* (optional)
-    - **backgroundColors** *React.PropTypes.object* (optional)
-    - **buttonColors** *React.PropTypes.object* (optional)
-    - **colors** *React.PropTypes.object* (optional) general colors used by other color props
-    - **formColors** *React.PropTypes.object* (optional)
-    - **iconColors** *React.PropTypes.object* (optional)
-    - **structuralColors** *React.PropTypes.object* (optional)
-    - **textColors** *React.PropTypes.object* (optional)
+  - **children** *PropTypes.node* Children which are to receive the new styles
+  - **color** *PropTypes.shape* (optional)
+    - **backgroundColors** *PropTypes.object* (optional)
+    - **buttonColors** *PropTypes.object* (optional)
+    - **colors** *PropTypes.object* (optional) general colors used by other color props
+    - **formColors** *PropTypes.object* (optional)
+    - **iconColors** *PropTypes.object* (optional)
+    - **structuralColors** *PropTypes.object* (optional)
+    - **textColors** *PropTypes.object* (optional)
   `);
 });

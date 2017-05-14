@@ -1,21 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import color from 'color';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import { BackgroundColors } from '../src/shared/colors';
 import PrimaryNav from '../src/components/PrimaryNav';
 
 describe('Primary Navigation Bar', () => {
   it('does render a Bar', () => {
-    const primaryNavComponent = TestUtils.renderIntoDocument(
-      <PrimaryNav />
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
+      <PrimaryNav />,
     );
     expect(primaryNavComponent).toBeDefined();
   });
 
   it('does render a PrimaryNav with expected style', () => {
-    const primaryNavComponent = TestUtils.renderIntoDocument(
-      <PrimaryNav />
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
+      <PrimaryNav />,
     );
     const primaryNavNode = ReactDOM.findDOMNode(primaryNavComponent);
     expect(color(primaryNavNode.style.background).hexString()).toBe(BackgroundColors.primaryNav);
@@ -26,20 +26,20 @@ describe('Primary Navigation Bar', () => {
   });
 
   it('does render a PrimaryNav app icon', () => {
-    const primaryNavComponent = TestUtils.renderIntoDocument(
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
       <PrimaryNav
         appIcon={
           <div />
         }
-      />
+      />,
     );
     expect(primaryNavComponent.appIconRef).toBeDefined();
   });
 
   it('does render a PrimaryNav app name', () => {
     const appName = 'My Cool App';
-    const primaryNavComponent = TestUtils.renderIntoDocument(
-      <PrimaryNav appName={appName} />
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
+      <PrimaryNav appName={appName} />,
     );
     const appNameNode = ReactDOM.findDOMNode(primaryNavComponent.appNameRef);
     expect(appNameNode.textContent).toBe(appName);
@@ -56,26 +56,26 @@ describe('Primary Navigation Bar', () => {
         width: 20,
       },
     ];
-    const primaryNavComponent = TestUtils.renderIntoDocument(
-      <PrimaryNav navItems={navItems} />
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
+      <PrimaryNav navItems={navItems} />,
     );
     expect(primaryNavComponent.listItemRef.listItemRefs.count()).toBe(1);
   });
 
   it('does render PrimaryNav expandToggle', () => {
-    const primaryNavComponent = TestUtils.renderIntoDocument(
-      <PrimaryNav />
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
+      <PrimaryNav />,
     );
     expect(primaryNavComponent.expandToggleRef).toBeDefined();
   });
 
   it('does trigger onRequestExpandToggle callback when expandToggle clicked', () => {
     const mockHandleRequestExpandToggle = jest.fn();
-    const primaryNavComponent = TestUtils.renderIntoDocument(
-      <PrimaryNav onRequestExpandToggle={mockHandleRequestExpandToggle} />
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
+      <PrimaryNav onRequestExpandToggle={mockHandleRequestExpandToggle} />,
     );
     const expandNode = ReactDOM.findDOMNode(primaryNavComponent.expandToggleRef);
-    TestUtils.Simulate.click(expandNode);
+    ReactTestUtils.Simulate.click(expandNode);
     expect(mockHandleRequestExpandToggle).toBeCalled();
   });
 
@@ -88,17 +88,17 @@ describe('Primary Navigation Bar', () => {
         key: 'item-1',
       },
     ];
-    const primaryNavComponent = TestUtils.renderIntoDocument(
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
       <PrimaryNav
         navItems={navItems}
         onNavItemClick={mockHandleNavItemClick}
-      />
+      />,
     );
     expect(primaryNavComponent.listItemRef.listItemRefs.count()).toBe(1);
     const listItem = ReactDOM.findDOMNode(
-      primaryNavComponent.listItemRef.listItemRefs.get(0)
+      primaryNavComponent.listItemRef.listItemRefs.get(0),
     );
-    TestUtils.Simulate.click(listItem);
+    ReactTestUtils.Simulate.click(listItem);
     expect(mockHandleNavItemClick).toBeCalledWith(navItems[0].key);
   });
 
@@ -111,11 +111,11 @@ describe('Primary Navigation Bar', () => {
       },
     ];
     const selectedNavItem = 'item-1';
-    const primaryNavComponent = TestUtils.renderIntoDocument(
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
       <PrimaryNav
         navItems={navItems}
         selectedNavItem={selectedNavItem}
-      />
+      />,
     );
     expect(primaryNavComponent.listItemRef.listItemRefs.get(0).props.selected)
       .toBe(true);
@@ -130,10 +130,10 @@ describe('Primary Navigation Bar', () => {
         urlPath: '/path',
       },
     ];
-    const primaryNavComponent = TestUtils.renderIntoDocument(
+    const primaryNavComponent = ReactTestUtils.renderIntoDocument(
       <PrimaryNav
         navItems={navItems}
-      />
+      />,
     );
 
     expect(ReactDOM.findDOMNode(primaryNavComponent.listItemRef.listItemRefs.get(0).listItemRef.linkRef))

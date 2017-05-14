@@ -4,25 +4,26 @@
 /* eslint max-len: "off" */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dropdown from '../../src/components/Dropdown';
 import { NoticeColors } from '../../src/shared/colors';
 
 class DropdownWrapper extends React.Component {
   static propTypes = {
-    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    disabled: React.PropTypes.bool,
-    items: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        key: React.PropTypes.string,
-        value: React.PropTypes.string,
-      })
+    anchorOrigin: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    disabled: PropTypes.bool,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string,
+        value: PropTypes.string,
+      }),
     ),
-    open: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    onRequestOpen: React.PropTypes.func,
-    onRequestClose: React.PropTypes.func,
-    triggerEl: React.PropTypes.node,
-    useLayerForClickAway: React.PropTypes.bool,
+    open: PropTypes.bool,
+    onClick: PropTypes.func,
+    onRequestOpen: PropTypes.func,
+    onRequestClose: PropTypes.func,
+    triggerEl: PropTypes.node,
+    useLayerForClickAway: PropTypes.bool,
   };
 
   displayName = 'DropdownWrapper';
@@ -93,7 +94,7 @@ describe('Dropdown', function () {
             {'Dropdown'}
           </div>)}
         useLayerForClickAway={true}
-      />
+      />,
     );
   });
 
@@ -127,17 +128,17 @@ describe('Dropdown', function () {
 
   #### API
 
-  - **anchorOrigin** *React.PropTypes.object* (optional) point on the anchorEl to anchor against
-  - **disabled** *React.PropTypes.bool* (optional) disable the dropdown from opening. Note: you must provide your own disabled style if so desired for the trigger element
-  - **items** *React.PropTypes.arrayOf(React.PropTypes.shape)* (optional)
-    - **key** *React.PropTypes.string* (optional) Text visible for this row in the dropdown
-    - **value** *React.PropTypes.string* (optional) Value that gets returned on click
-  - **open** *React.PropTypes.bool* (optional) set the dropdown to be open or closed
-  - **onClick** *React.PropTypes.func* (optional) callback called when a dropdown item is clicked
-  - **onRequestClose** *React.PropTypes.func* (optional) callback called when dropdown is requesting to close
-  - **onRequestOpen** *React.PropTypes.func* (optional) callback called when dropdown is requesting to open
-  - **triggerEl** *React.PropTypes.node* React node used to trigger the dropdown
-  - **useLayerForClickAway** *React.PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
+  - **anchorOrigin** *PropTypes.object* (optional) point on the anchorEl to anchor against
+  - **disabled** *PropTypes.bool* (optional) disable the dropdown from opening. Note: you must provide your own disabled style if so desired for the trigger element
+  - **items** *PropTypes.arrayOf(PropTypes.shape)* (optional)
+    - **key** *PropTypes.string* (optional) Text visible for this row in the dropdown
+    - **value** *PropTypes.string* (optional) Value that gets returned on click
+  - **open** *PropTypes.bool* (optional) set the dropdown to be open or closed
+  - **onClick** *PropTypes.func* (optional) callback called when a dropdown item is clicked
+  - **onRequestClose** *PropTypes.func* (optional) callback called when dropdown is requesting to close
+  - **onRequestOpen** *PropTypes.func* (optional) callback called when dropdown is requesting to open
+  - **triggerEl** *PropTypes.node* React node used to trigger the dropdown
+  - **useLayerForClickAway** *PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
 
   `);
 });

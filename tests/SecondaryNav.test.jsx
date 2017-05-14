@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import SecondaryNav from '../src/components/SecondaryNav';
 
 describe('List', () => {
   it('does render a NavBar', () => {
-    const secNavComponent = TestUtils.renderIntoDocument(
-      <SecondaryNav />
+    const secNavComponent = ReactTestUtils.renderIntoDocument(
+      <SecondaryNav />,
     );
     expect(secNavComponent).toBeDefined();
   });
 
   it('does render secondary navbar with expected style', () => {
-    const secNavComponent = TestUtils.renderIntoDocument(
-      <SecondaryNav />
+    const secNavComponent = ReactTestUtils.renderIntoDocument(
+      <SecondaryNav />,
     );
     const secondaryNavNode = ReactDOM.findDOMNode(secNavComponent);
     expect(secondaryNavNode.style.display).toBe('flex');
@@ -25,8 +25,8 @@ describe('List', () => {
 
   it('does render left children', () => {
     const text = 'left text';
-    const secNavComponent = TestUtils.renderIntoDocument(
-      <SecondaryNav leftItems={<div>{text}</div>} />
+    const secNavComponent = ReactTestUtils.renderIntoDocument(
+      <SecondaryNav leftItems={<div>{text}</div>} />,
     );
     const leftItemsNode = ReactDOM.findDOMNode(secNavComponent.leftItemsRef);
     expect(leftItemsNode.textContent).toBe(text);
@@ -36,8 +36,8 @@ describe('List', () => {
 
   it('does render right children', () => {
     const text = 'right text';
-    const secNavComponent = TestUtils.renderIntoDocument(
-      <SecondaryNav rightItems={<div>{text}</div>} />
+    const secNavComponent = ReactTestUtils.renderIntoDocument(
+      <SecondaryNav rightItems={<div>{text}</div>} />,
     );
     const rightItemsNode = ReactDOM.findDOMNode(secNavComponent.rightItemsRef);
     expect(rightItemsNode.textContent).toBe(text);

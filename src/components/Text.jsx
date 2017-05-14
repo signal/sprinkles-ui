@@ -1,13 +1,14 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 
 export default class Text extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    color: React.PropTypes.string,
-    fontSize: React.PropTypes.number,
-    fontWeight: React.PropTypes.string,
-    textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
+    children: PropTypes.node,
+    color: PropTypes.string,
+    fontSize: PropTypes.number,
+    fontWeight: PropTypes.string,
+    textDecoration: PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
   };
 
   displayName = 'Text';

@@ -17,7 +17,7 @@ describe('Checkbox', function () {
     this.component(
       <Checkbox
         onChange={handleChange}
-      />
+      />,
     );
   });
 
@@ -33,12 +33,12 @@ describe('Checkbox', function () {
 
   A checkbox to select an item
 
-  - **checked** *React.PropTypes.bool* (optional) sets default checked value
-  - **enabled** *React.PropTypes.bool* (optional) disables checkbox
-  - **onBlur** *React.PropTypes.func* (optional) triggers event when checkbox loses focus
-  - **onChange** *React.PropTypes.func* callback called when the value of the input changes
-  - **onClick** *React.PropTypes.func* click hander function
-  - **onFocus** *React.PropTypes.func* (optional) triggers event when checkbox gains focus
+  - **checked** *PropTypes.bool* (optional) sets default checked value
+  - **enabled** *PropTypes.bool* (optional) disables checkbox
+  - **onBlur** *PropTypes.func* (optional) triggers event when checkbox loses focus
+  - **onChange** *PropTypes.func* callback called when the value of the input changes
+  - **onClick** *PropTypes.func* click hander function
+  - **onFocus** *PropTypes.func* (optional) triggers event when checkbox gains focus
 
   #### API
   `);

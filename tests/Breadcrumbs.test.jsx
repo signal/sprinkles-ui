@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import Breadcrumbs from '../src/components/Breadcrumbs';
 
 describe('Breadcrumbs', () => {
   it('Does render a Breadcrumbs Component', () => {
-    const breadcrumbsComponent = TestUtils.renderIntoDocument(
-      <Breadcrumbs />
+    const breadcrumbsComponent = ReactTestUtils.renderIntoDocument(
+      <Breadcrumbs />,
     );
     expect(breadcrumbsComponent).toBeDefined();
   });
@@ -26,8 +26,8 @@ describe('Breadcrumbs', () => {
         url: '/lvl-1/lvl-2/lvl-3',
       },
     ];
-    const breadcrumbsComponent = TestUtils.renderIntoDocument(
-      <Breadcrumbs path={path} />
+    const breadcrumbsComponent = ReactTestUtils.renderIntoDocument(
+      <Breadcrumbs path={path} />,
     );
     const breadcrumbsNode = ReactDOM.findDOMNode(breadcrumbsComponent);
     expect(breadcrumbsNode.textContent).toBe('Level 1 / Level 2 / Level 3');
@@ -49,14 +49,14 @@ describe('Breadcrumbs', () => {
         url: '/lvl-1/lvl-2/lvl-3',
       },
     ];
-    const breadcrumbsComponent = TestUtils.renderIntoDocument(
+    const breadcrumbsComponent = ReactTestUtils.renderIntoDocument(
       <Breadcrumbs
         onClick={mockHandleClick}
         path={path}
-      />
+      />,
     );
     const lvl1Node = ReactDOM.findDOMNode(breadcrumbsComponent.pathRefs.get(0));
-    TestUtils.Simulate.click(lvl1Node);
+    ReactTestUtils.Simulate.click(lvl1Node);
     expect(mockHandleClick).toBeCalledWith(path[0]);
   });
 
@@ -75,15 +75,15 @@ describe('Breadcrumbs', () => {
         url: '/lvl-1/lvl-2/lvl-3',
       },
     ];
-    const breadcrumbsComponent = TestUtils.renderIntoDocument(
+    const breadcrumbsComponent = ReactTestUtils.renderIntoDocument(
       <Breadcrumbs
         path={path}
-      />
+      />,
     );
     const lvl1Node = ReactDOM.findDOMNode(breadcrumbsComponent.pathRefs.get(0));
-    TestUtils.Simulate.mouseOver(lvl1Node);
+    ReactTestUtils.Simulate.mouseOver(lvl1Node);
     expect(lvl1Node.children[0].style.textDecoration).toBe('underline');
-    TestUtils.Simulate.mouseOut(lvl1Node);
+    ReactTestUtils.Simulate.mouseOut(lvl1Node);
     expect(lvl1Node.style.textDecoration).toBe('');
   });
 
@@ -103,14 +103,14 @@ describe('Breadcrumbs', () => {
         url: '/lvl-1/lvl-2/lvl-3',
       },
     ];
-    const breadcrumbsComponent = TestUtils.renderIntoDocument(
+    const breadcrumbsComponent = ReactTestUtils.renderIntoDocument(
       <Breadcrumbs
         onClick={mockHandleClick}
         path={path}
-      />
+      />,
     );
     const leafNode = ReactDOM.findDOMNode(breadcrumbsComponent.pathRefs.get(2));
-    TestUtils.Simulate.click(leafNode);
+    ReactTestUtils.Simulate.click(leafNode);
     expect(mockHandleClick).not.toBeCalled();
   });
 });

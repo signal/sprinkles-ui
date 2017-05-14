@@ -3,22 +3,23 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Text from './Text';
 
 export default class Field extends Base {
   static propTypes = {
-    children: React.PropTypes.node,
-    enabled: React.PropTypes.bool,
-    error: React.PropTypes.string,
-    fieldKey: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string,
-    labelPosition: React.PropTypes.oneOf(['left', 'top']),
-    onChange: React.PropTypes.func,
-    required: React.PropTypes.bool,
-    requriedAsteriskDisplay: React.PropTypes.bool,
-    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
-    style: React.PropTypes.object,
+    children: PropTypes.node,
+    enabled: PropTypes.bool,
+    error: PropTypes.string,
+    fieldKey: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    labelPosition: PropTypes.oneOf(['left', 'top']),
+    onChange: PropTypes.func,
+    required: PropTypes.bool,
+    requriedAsteriskDisplay: PropTypes.bool,
+    status: PropTypes.oneOf(['error', 'warning', 'success']),
+    style: PropTypes.object,
   };
 
   static defaultProps = {
@@ -57,7 +58,7 @@ export default class Field extends Base {
         onChange: this.handleChange.bind(this),
         ref: childRef => this.inputRef = childRef,
         status: this.props.status,
-      })
+      }),
     );
   }
 

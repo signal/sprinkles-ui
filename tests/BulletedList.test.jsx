@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import BulletedList from '../src/components/BulletedList';
 
 describe('Bulleted List', () => {
@@ -10,10 +10,10 @@ describe('Bulleted List', () => {
   let listItemTextNode;
 
   const renderBulletedList = (props) => {
-    bulletedListComponent = TestUtils.renderIntoDocument(
+    bulletedListComponent = ReactTestUtils.renderIntoDocument(
       <BulletedList
         {...props}
-      />
+      />,
     );
     bulletedListNode = ReactDOM.findDOMNode(bulletedListComponent);
     li = (index) => bulletedListNode.getElementsByTagName('li')[index];

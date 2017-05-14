@@ -36,7 +36,7 @@ describe('Bulleted List', function () {
     this.component(
       <BulletedList
         listItems={listItems}
-      />
+      />,
     );
   });
 
@@ -50,7 +50,7 @@ describe('Bulleted List', function () {
 
   #### API
 
-  - **bulletStyle** *React.PropTypes.oneOf* (optional) All the possible styles as supported by the 'list-style' CSS property
+  - **bulletStyle** *PropTypes.oneOf* (optional) All the possible styles as supported by the 'list-style' CSS property
     * 'disc',
     * 'circle',
     * 'square',
@@ -66,13 +66,13 @@ describe('Bulleted List', function () {
     * 'lower-alpha',
     * 'upper-alpha',
     * 'none',
-  - **listItems** *React.PropTypes.shape* (optional)
-    - **children** *React.PropTypes.node* (optional) Suppy an HTML or React node (ex. an anchor tag)
-    - **text** *React.PropTypes.sting* (optional)
-    - **styles** *React.PropTypes.shape* (optional) styles text, overrides defaults
-      - **color** *React.PropTypes.string* (optional) text color
-      - **fontSize** *React.PropTypes.number* (optional) text size
-      - **fontWeight** *React.PropTypes.string* (optional) text weight
-      - **textDecoration** *React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none'])* (optional) add text decoration
+  - **listItems** *PropTypes.shape* (optional)
+    - **children** *PropTypes.node* (optional) Suppy an HTML or React node (ex. an anchor tag)
+    - **text** *PropTypes.sting* (optional)
+    - **styles** *PropTypes.shape* (optional) styles text, overrides defaults
+      - **color** *PropTypes.string* (optional) text color
+      - **fontSize** *PropTypes.number* (optional) text size
+      - **fontWeight** *PropTypes.string* (optional) text weight
+      - **textDecoration** *PropTypes.oneOf(['underline', 'overline', 'line-through', 'none'])* (optional) add text decoration
   `);
 });

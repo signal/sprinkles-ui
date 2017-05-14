@@ -71,7 +71,7 @@ describe('DataTable', function () {
         selectedRows={props.selectedRows}
         multiSelectable={props.multiSelectable}
         onChange={props.onChange}
-      />
+      />,
     );
   };
 
@@ -257,19 +257,19 @@ describe('DataTable', function () {
    */
   this.footer(`
   ### DataTable
-  - **columns** *React.PropTypes.shape* (optional)
-    - **order** *React.PropTypes.array* (optional) reorganizes the columns by key in this order
-    - **width** *React.PropTypes.array* (optional) sets the width of individual columns the value specified here. If a column is obmitted 'auto' is used.
-  - **headers** *React.PropTypes.object* (optional) maps to key of record. Use to provide custom header text otherwise the key is used
-  - **records** *React.PropTypes.object* key/ value set of data used to populate the table
-  - **recordInclusion** *React.PropTypes.object* (optional) maps to key of record, used to limit what is displayed
-  - **onClick** *React.PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
-  - **orderBy** *React.PropTypes.shape* (optional)
-    - **column** *React.PropTypes.string (optional) column of data to order by
-    - **direction** *React.PropTypes.oneOf (optional) 'asc' or 'desc'
-    - **formatter** *React.PropTypes.oneOf (optional) 'date' specify a way to format column data for sorting
-  - **selectedRows** *React.PropTypes.arrayOf(React.PropTypes.number)* select rows based on index
-  - **returnAllRecordsOnClick** *React.PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
-  - **filterRecords**  *React.PropTypes.object* key/ value set of data to filter the records against. If multiple values are supplied, it's considered an OR not an AND
+  - **columns** *PropTypes.shape* (optional)
+    - **order** *PropTypes.array* (optional) reorganizes the columns by key in this order
+    - **width** *PropTypes.array* (optional) sets the width of individual columns the value specified here. If a column is obmitted 'auto' is used.
+  - **headers** *PropTypes.object* (optional) maps to key of record. Use to provide custom header text otherwise the key is used
+  - **records** *PropTypes.object* key/ value set of data used to populate the table
+  - **recordInclusion** *PropTypes.object* (optional) maps to key of record, used to limit what is displayed
+  - **onClick** *PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
+  - **orderBy** *PropTypes.shape* (optional)
+    - **column** *PropTypes.string (optional) column of data to order by
+    - **direction** *PropTypes.oneOf (optional) 'asc' or 'desc'
+    - **formatter** *PropTypes.oneOf (optional) 'date' specify a way to format column data for sorting
+  - **selectedRows** *PropTypes.arrayOf(PropTypes.number)* select rows based on index
+  - **returnAllRecordsOnClick** *PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
+  - **filterRecords**  *PropTypes.object* key/ value set of data to filter the records against. If multiple values are supplied, it's considered an OR not an AND
   `);
 });

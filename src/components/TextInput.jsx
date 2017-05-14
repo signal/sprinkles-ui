@@ -1,18 +1,19 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 
 
 export default class TextInput extends Base {
   static propTypes = {
-    autoComplete: React.PropTypes.bool,
-    boundValue: React.PropTypes.string,
-    enabled: React.PropTypes.bool,
-    initialValue: React.PropTypes.string,
-    multiline: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
-    placeholder: React.PropTypes.string,
-    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
+    autoComplete: PropTypes.bool,
+    boundValue: PropTypes.string,
+    enabled: PropTypes.bool,
+    initialValue: PropTypes.string,
+    multiline: PropTypes.bool,
+    onChange: PropTypes.func,
+    placeholder: PropTypes.string,
+    status: PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {

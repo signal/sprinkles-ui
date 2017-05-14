@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import color from 'color';
 import {
   BackgroundColors,
@@ -12,15 +12,15 @@ import ToggleInput from '../src/components/ToggleInput';
 
 describe('ToggleInput', () => {
   it('does render a ToggleInput', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
-      <ToggleInput />
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
+      <ToggleInput />,
     );
     expect(toggleInputComponent).toBeDefined();
   });
 
   it('does render a ToggleInput with expected style', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
-      <ToggleInput />
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
+      <ToggleInput />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.border)
@@ -57,8 +57,8 @@ describe('ToggleInput', () => {
   });
 
   it('does render ToggleInput with initialValue=true', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
-      <ToggleInput initialValue={true} />
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
+      <ToggleInput initialValue={true} />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(color(toggleInputNode.style.background).hexString())
@@ -71,17 +71,17 @@ describe('ToggleInput', () => {
   });
 
   it('does toggle the value with the ToggleInput is clicked', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
-      <ToggleInput />
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
+      <ToggleInput />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
-    TestUtils.Simulate.click(toggleInputNode);
+    ReactTestUtils.Simulate.click(toggleInputNode);
     expect(toggleInputComponent.state.value).toBe(true);
   });
 
   it('does render a disabled ToggleInput', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
-      <ToggleInput enabled={false} />
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
+      <ToggleInput enabled={false} />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(color(toggleInputNode.style.background).hexString())
@@ -91,16 +91,16 @@ describe('ToggleInput', () => {
     const switchNode = ReactDOM.findDOMNode(toggleInputComponent.switchRef);
     expect(color(switchNode.style.background).hexString())
       .toBe(BackgroundColors.secondary);
-    TestUtils.Simulate.click(toggleInputNode);
+    ReactTestUtils.Simulate.click(toggleInputNode);
     expect(toggleInputComponent.state.value).toBe(false);
   });
 
   it('does disable a ToggleInput who\'s value=true', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
       <ToggleInput
         enabled={false}
         initialValue={true}
-      />
+      />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(color(toggleInputNode.style.background).hexString())
@@ -117,49 +117,49 @@ describe('ToggleInput', () => {
 
   it('does trigger an onChange event when the value changes', () => {
     const mockHandleChange = jest.fn();
-    const toggleInputComponent = TestUtils.renderIntoDocument(
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
       <ToggleInput
         onChange={mockHandleChange}
-      />
+      />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
-    TestUtils.Simulate.click(toggleInputNode);
+    ReactTestUtils.Simulate.click(toggleInputNode);
     expect(mockHandleChange).toBeCalledWith(true);
   });
 
   it('Does render with red shadow on error status', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
       <ToggleInput
         status={'error'}
-      />
+      />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
   });
 
   it('Does render with an orange shadow on warning status', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
       <ToggleInput
         status={'warning'}
-      />
+      />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.warning}`);
   });
 
   it('Does render with a green shadow on success status', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
       <ToggleInput
         status={'success'}
-      />
+      />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
     expect(toggleInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
   });
 
   it('Does return a valid state when validated', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
-      <ToggleInput />
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
+      <ToggleInput />,
     );
     expect(toggleInputComponent.validate()).toEqual({
       valid: true,
@@ -169,11 +169,11 @@ describe('ToggleInput', () => {
   });
 
   it('Does return isInitialValue=false when value changes', () => {
-    const toggleInputComponent = TestUtils.renderIntoDocument(
-      <ToggleInput />
+    const toggleInputComponent = ReactTestUtils.renderIntoDocument(
+      <ToggleInput />,
     );
     const toggleInputNode = ReactDOM.findDOMNode(toggleInputComponent);
-    TestUtils.Simulate.click(toggleInputNode);
+    ReactTestUtils.Simulate.click(toggleInputNode);
     expect(toggleInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,

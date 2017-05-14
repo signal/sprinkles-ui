@@ -23,7 +23,7 @@ describe('ListItemGroup', function () {
             text={'Crackers'}
           />
         </ListItem>
-      </ListItemGroup>
+      </ListItemGroup>,
     );
   });
 
@@ -37,8 +37,8 @@ describe('ListItemGroup', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* (optional) child components
-  - **label** *React.PropTypes.string* (optional) text description for this group of items, defaults to 'Group'
+  - **children** *PropTypes.node* (optional) child components
+  - **label** *PropTypes.string* (optional) text description for this group of items, defaults to 'Group'
 
   `);
 });

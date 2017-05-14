@@ -22,7 +22,7 @@ describe('PasswordInput', function () {
       <PasswordInput
         onChange={handleChange}
         placeholder={'password'}
-      />
+      />,
     ).width('100%');
   });
 
@@ -51,12 +51,12 @@ describe('PasswordInput', function () {
 
   #### API
 
-  - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
-  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
-  - **initialValue** *React.PropTypes.string* (optional) initial value of the input
-  - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
-  - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
-  - **status** *React.PropTypes.oneOf* (optional) set status of the input (overrides focus). Acceptable values are 'error', 'warning' and 'success'
+  - **autoComplete** *PropTypes.bool* (optional) toggle input autoComplete from browser
+  - **enabled** *PropTypes.bool* (optional) enable/disable user input
+  - **initialValue** *PropTypes.string* (optional) initial value of the input
+  - **onChange** *PropTypes.func* (optional) callback called when the value of the text box changes
+  - **placeholder** *PropTypes.string* (optional) placeholder when text is empty
+  - **status** *PropTypes.oneOf* (optional) set status of the input (overrides focus). Acceptable values are 'error', 'warning' and 'success'
 
   `);
 });

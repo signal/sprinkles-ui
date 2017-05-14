@@ -83,7 +83,7 @@ describe('Form', function () {
         >
           <ToggleInput />
         </Field>
-      </Form>
+      </Form>,
     ).width('100%');
   });
 
@@ -179,14 +179,14 @@ describe('Form', function () {
 
   #### API
 
-  - **alert** *React.PropTypes.shape* (optional)
-    - **children** *React.PropTypes.node* (optional) child elements, appended after alert title and details
-    - **details** *React.PropTypes.string* (optional) alert details text
-    - **title** *React.PropTypes.string* (optional) alert title text (bold)
-    - **type** *React.PropTypes.oneOf* Alert type one of: ['success', 'info', 'warning', 'danger']
-  - **onSubmit** *React.PropTypes.func* (optional) called when Form has been submitted
-  - **submitButtonText** *React.PropTypes.string* (optional) set form submit button text
-  - **working** *React.PropTypes.bool* (optional) disables user input and shows working state on submit button when set to true
+  - **alert** *PropTypes.shape* (optional)
+    - **children** *PropTypes.node* (optional) child elements, appended after alert title and details
+    - **details** *PropTypes.string* (optional) alert details text
+    - **title** *PropTypes.string* (optional) alert title text (bold)
+    - **type** *PropTypes.oneOf* Alert type one of: ['success', 'info', 'warning', 'danger']
+  - **onSubmit** *PropTypes.func* (optional) called when Form has been submitted
+  - **submitButtonText** *PropTypes.string* (optional) set form submit button text
+  - **working** *PropTypes.bool* (optional) disables user input and shows working state on submit button when set to true
   - **invalidFields** *class function* invalidate Form fields with a fieldKey with a given message
     - **arguments** a collection where each item has the following keys
       - **fieldKey** *string* they field to apply the error

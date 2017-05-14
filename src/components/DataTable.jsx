@@ -5,6 +5,7 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import color from 'color';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Checkbox from './Checkbox';
 import TableCell from './TableCell';
@@ -13,30 +14,30 @@ import TableRow from './TableRow';
 export default class DataTable extends Base {
 
   static propTypes = {
-    columns: React.PropTypes.shape({
-      order: React.PropTypes.array,
-      width: React.PropTypes.array,
+    columns: PropTypes.shape({
+      order: PropTypes.array,
+      width: PropTypes.array,
     }),
-    filterRecords: React.PropTypes.array,
-    headers: React.PropTypes.object,
-    multiSelectable: React.PropTypes.bool,
-    noRecordsText: React.PropTypes.string,
-    orderBy: React.PropTypes.shape({
-      column: React.PropTypes.string,
-      direction: React.PropTypes.oneOf(['asc', 'desc']),
+    filterRecords: PropTypes.array,
+    headers: PropTypes.object,
+    multiSelectable: PropTypes.bool,
+    noRecordsText: PropTypes.string,
+    orderBy: PropTypes.shape({
+      column: PropTypes.string,
+      direction: PropTypes.oneOf(['asc', 'desc']),
       /* Strings and numbers are supported by default and do not need explicit format config.
         Use date for any dates, must be pure date (Yes: 10/20/1994 No: Updated: 10/20/1994)
       */
-      formatter: React.PropTypes.oneOf(['date']),
+      formatter: PropTypes.oneOf(['date']),
     }),
-    onClick: React.PropTypes.func,
-    onHeaderClick: React.PropTypes.func,
-    onChange: React.PropTypes.func,
-    records: React.PropTypes.array,
-    recordInclusion: React.PropTypes.array,
-    returnAllRecordsOnClick: React.PropTypes.bool,
-    selectedColumn: React.PropTypes.string,
-    selectedRows: React.PropTypes.arrayOf(React.PropTypes.number),
+    onClick: PropTypes.func,
+    onHeaderClick: PropTypes.func,
+    onChange: PropTypes.func,
+    records: PropTypes.array,
+    recordInclusion: PropTypes.array,
+    returnAllRecordsOnClick: PropTypes.bool,
+    selectedColumn: PropTypes.string,
+    selectedRows: PropTypes.arrayOf(PropTypes.number),
   }
 
   static defaultProps = {
@@ -155,7 +156,7 @@ export default class DataTable extends Base {
       ));
       const sortedColumnValues = this.sortColumnRecords(mappedColValues);
       const orderdRecords = sortedColumnValues.map((el) =>
-        processedRecords[el.index]
+        processedRecords[el.index],
       );
       processedRecords = orderdRecords;
     }
@@ -193,7 +194,7 @@ export default class DataTable extends Base {
         {isFilteredHeader && <span style={arrowStyle} />}
         {headers[header]}
       </th>);
-    }
+    },
     );
     const selectAllHeader = (
       <th
@@ -251,7 +252,7 @@ export default class DataTable extends Base {
             cellData,
             row,
             yCord,
-          }
+          },
          )
        }
         width={cellWidth}

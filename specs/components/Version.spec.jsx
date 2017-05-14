@@ -34,7 +34,7 @@ describe('Version', function () {
             {'I also get rendered when the tag=\'has burrito\''}
           </div>
         </div>
-      </Version>
+      </Version>,
     ).width('100%');
   });
 
@@ -55,11 +55,11 @@ describe('Version', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* (optional) the children to show/or hide
-  - **tag** *React.PropTypes.string* (optional) the tag to test against the tagSelector prop
-  - **tagSelector** *React.PropTypes.string* (optional) when tag === tagSelector then the component is shown
-  - **version** *React.PropTypes.string* (optional) the version to test against the versionSelector prop
-  - **versionSelector** *React.PropTypes.string* (optional) version selector with basic DSL to define show/hide conditions
+  - **children** *PropTypes.node* (optional) the children to show/or hide
+  - **tag** *PropTypes.string* (optional) the tag to test against the tagSelector prop
+  - **tagSelector** *PropTypes.string* (optional) when tag === tagSelector then the component is shown
+  - **version** *PropTypes.string* (optional) the version to test against the versionSelector prop
+  - **versionSelector** *PropTypes.string* (optional) version selector with basic DSL to define show/hide conditions
     - versionSelector: '0.11.0' the children will be shown with an exact version match
     - versionSelector: '>0.11.0' the children will be shown when the version is greater than the versionSelector
     - versionSelector: '<0.11.0' the children will be shown when the version is less than the versionSelector

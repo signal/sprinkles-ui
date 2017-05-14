@@ -2,15 +2,16 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 
 export default class TableCell extends Base {
 
   static propTypes = {
-    colSpan: React.PropTypes.number,
-    children: React.PropTypes.node,
-    onClick: React.PropTypes.func,
-    width: React.PropTypes.string,
+    colSpan: PropTypes.number,
+    children: PropTypes.node,
+    onClick: PropTypes.func,
+    width: PropTypes.string,
   }
 
   static defaultProps = {

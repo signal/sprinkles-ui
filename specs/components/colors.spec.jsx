@@ -114,7 +114,7 @@ describe('Colors', function () {
           {renderLabel(`secondary: ${BackgroundColors.secondary}`)}
           {renderLabel(`accent: ${BackgroundColors.accent}`)}
         </div>
-      </div>
+      </div>,
     );
   });
 });

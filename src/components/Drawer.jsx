@@ -1,15 +1,16 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import zindex from '../shared/zindex';
 
 export default class Drawer extends Base {
   static propTypes = {
-    backgroundColor: React.PropTypes.string,
-    children: React.PropTypes.node,
-    open: React.PropTypes.bool,
-    openFrom: React.PropTypes.oneOf(['left', 'right']),
-    width: React.PropTypes.number,
+    backgroundColor: PropTypes.string,
+    children: PropTypes.node,
+    open: PropTypes.bool,
+    openFrom: PropTypes.oneOf(['left', 'right']),
+    width: PropTypes.number,
   };
 
   static defaultProps = {

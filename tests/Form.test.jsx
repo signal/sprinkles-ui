@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import Immutable from 'immutable';
 import Form from '../src/components/Form';
 import Field from '../src/components/Field';
@@ -10,8 +10,8 @@ import TextInput from '../src/components/TextInput';
 describe('Form', () => {
   it('Does render a Form', () => {
     // Render a Form
-    const formComponent = TestUtils.renderIntoDocument(
-      <Form />
+    const formComponent = ReactTestUtils.renderIntoDocument(
+      <Form />,
     );
 
     const formNode = ReactDOM.findDOMNode(formComponent);
@@ -24,22 +24,22 @@ describe('Form', () => {
 
   it('Does submit Form when all Fields are valid', () => {
     const mockHandleSubmit = jest.fn();
-    const formComponent = TestUtils.renderIntoDocument(
-      <Form onSubmit={mockHandleSubmit} />
+    const formComponent = ReactTestUtils.renderIntoDocument(
+      <Form onSubmit={mockHandleSubmit} />,
     );
 
     formComponent.validate = jest.genMockFunction().mockReturnValue(true);
 
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
-    TestUtils.Simulate.click(submitButtonNode);
+    ReactTestUtils.Simulate.click(submitButtonNode);
     expect(mockHandleSubmit).toBeCalled();
     expect(formComponent.validate).toBeCalled();
   });
 
   it('Does not submit Form when at least one Field is not valid ', () => {
     const mockHandleSubmit = jest.fn();
-    const formComponent = TestUtils.renderIntoDocument(
-      <Form onSubmit={mockHandleSubmit} />
+    const formComponent = ReactTestUtils.renderIntoDocument(
+      <Form onSubmit={mockHandleSubmit} />,
     );
 
     formComponent.validate = jest.genMockFunction();
@@ -48,14 +48,14 @@ describe('Form', () => {
     formComponent.state.isValid = false;
 
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
-    TestUtils.Simulate.click(submitButtonNode);
+    ReactTestUtils.Simulate.click(submitButtonNode);
     expect(mockHandleSubmit).not.toBeCalled();
     expect(formComponent.validate).toBeCalled();
   });
 
   it('Does set a valid state inputs are valid', () => {
-    const formComponent = TestUtils.renderIntoDocument(
-      <Form />
+    const formComponent = ReactTestUtils.renderIntoDocument(
+      <Form />,
     );
     const fakeInput = {
       props: {
@@ -84,8 +84,8 @@ describe('Form', () => {
 
   it('Does set an invalid state when inputs are invalid', () => {
     const validationError = 'some validation error';
-    const formComponent = TestUtils.renderIntoDocument(
-      <Form />
+    const formComponent = ReactTestUtils.renderIntoDocument(
+      <Form />,
     );
     const fakeInput = {
       props: {
@@ -114,8 +114,8 @@ describe('Form', () => {
 
   it('Does not set form invalid when Field is not required ', () => {
     const validationError = 'some validation error';
-    const formComponent = TestUtils.renderIntoDocument(
-      <Form />
+    const formComponent = ReactTestUtils.renderIntoDocument(
+      <Form />,
     );
     const fakeInput = {
       props: {
@@ -144,8 +144,8 @@ describe('Form', () => {
 
   it('Does update Form state in Field change handler', () => {
     // const fieldId = 0;
-    const formComponent = TestUtils.renderIntoDocument(
-      <Form />
+    const formComponent = ReactTestUtils.renderIntoDocument(
+      <Form />,
     );
     const inputValidations = Immutable.fromJS({
       key: {
@@ -170,7 +170,7 @@ describe('Form', () => {
   });
 
   it('Does clear error state from Field when it changes', () => {
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form>
         <Field
           fieldKey={'key'}
@@ -178,29 +178,29 @@ describe('Form', () => {
         >
           <TextInput />
         </Field>
-      </Form>
+      </Form>,
     );
     formComponent.validate();
     const fieldComponent = formComponent.inputRefs.get('key');
     expect(fieldComponent.props.status).toBe('error');
     expect(fieldComponent.props.error).toBe('Field Must Not Be Empty');
     const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
-    TestUtils.Simulate.change(textInputNode, { target: { value: '' } });
+    ReactTestUtils.Simulate.change(textInputNode, { target: { value: '' } });
     expect(fieldComponent.props.status).toBe(undefined);
     expect(fieldComponent.props.error).toBe('');
   });
 
   it('Does return Field data when submit button is clicked', () => {
     const mockHandleSubmit = jest.genMockFunction();
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form onSubmit={mockHandleSubmit}>
         <Field fieldKey={'text'}>
           <TextInput initialValue={'yes'} />
         </Field>
-      </Form>
+      </Form>,
     );
     const submitButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
-    TestUtils.Simulate.click(submitButtonNode);
+    ReactTestUtils.Simulate.click(submitButtonNode);
     expect(mockHandleSubmit).toBeCalledWith({
       text: 'yes',
     });
@@ -209,10 +209,10 @@ describe('Form', () => {
   it('Does update submit button text', () => {
     const formButtonText = 'A Really Cool Button';
     // Render a Form
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form
         submitButtonText={formButtonText}
-      />
+      />,
     );
     const formButtonNode = ReactDOM.findDOMNode(formComponent.submitButtonRef);
     expect(formButtonNode.textContent).toBe(formButtonText);
@@ -222,7 +222,7 @@ describe('Form', () => {
     const title = 'Danger';
     const details = '👹👹👹';
     const type = 'danger';
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form
         alert={{
           type,
@@ -230,7 +230,7 @@ describe('Form', () => {
           details,
           children: <div>{'Hello'}</div>,
         }}
-      />
+      />,
     );
     expect(formComponent.alertRef.props.type).toBe(type);
     expect(formComponent.alertRef.props.title).toBe(title);
@@ -239,12 +239,12 @@ describe('Form', () => {
   });
 
   it('Does show a Form in working state', () => {
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form working={true}>
         <Field>
           <TextInput />
         </Field>
-      </Form>
+      </Form>,
     );
     formComponent.inputRefs.forEach((input) => {
       expect(input.inputRef.props.enabled).toBe(false);
@@ -255,10 +255,10 @@ describe('Form', () => {
   it('Does set error on Field with fieldKey', () => {
     const validationError = 'Something on the server broke';
     const fieldKey = 'myField';
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form>
         <Field fieldKey={fieldKey} />
-      </Form>
+      </Form>,
     );
     formComponent.setState = jest.genMockFunction();
     formComponent.invalidateFields([{ fieldKey, validationError }]);
@@ -273,10 +273,10 @@ describe('Form', () => {
   it('Does not set error when fieldKey does not exist', () => {
     const validationError = 'Something on the server broke';
     const fieldKey = 'myField';
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form>
         <Field fieldKey={fieldKey} />
-      </Form>
+      </Form>,
     );
     formComponent.setState = jest.genMockFunction();
     formComponent.invalidateFields([
@@ -291,7 +291,7 @@ describe('Form', () => {
   it('Does trigger onChange event when any form field changes', () => {
     const mockHandleChange = jest.genMockFunction();
     const changedText = 'changed a';
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form onChange={mockHandleChange}>
         <Field
           fieldKey={'a'}
@@ -303,10 +303,10 @@ describe('Form', () => {
         >
           <TextInput initialValue={'init b'} />
         </Field>
-      </Form>
+      </Form>,
     );
     const textInputNode = ReactDOM.findDOMNode(formComponent.inputRefs.get('a').inputRef);
-    TestUtils.Simulate.change(textInputNode, { target: { value: changedText } });
+    ReactTestUtils.Simulate.change(textInputNode, { target: { value: changedText } });
     expect(mockHandleChange).toBeCalledWith({
       a: changedText,
       b: 'init b',
@@ -314,7 +314,7 @@ describe('Form', () => {
   });
 
   it('Does skip rendering empty fields', () => {
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form>
         <Field
           fieldKey={'a'}
@@ -327,7 +327,7 @@ describe('Form', () => {
         >
           <TextInput initialValue={'init b'} />
         </Field>
-      </Form>
+      </Form>,
     );
     expect(formComponent.value()).toEqual({
       a: 'init a',
@@ -336,7 +336,7 @@ describe('Form', () => {
   });
 
   it('Does allow disabling one field', () => {
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form>
         <Field
           fieldKey={'a'}
@@ -349,14 +349,14 @@ describe('Form', () => {
         >
           <TextInput initialValue={'init b'} />
         </Field>
-      </Form>
+      </Form>,
     );
     const bTextInputNode = ReactDOM.findDOMNode(formComponent.inputRefs.get('b').inputRef);
     expect(bTextInputNode.disabled).toBe(true);
   });
 
   it('Renders fields into one rows', () => {
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form
         fieldsPerRow={1}
       >
@@ -371,7 +371,7 @@ describe('Form', () => {
         >
           <TextInput initialValue={'init b'} />
         </Field>
-      </Form>
+      </Form>,
     );
     const fieldComponent = formComponent.inputRefs.get('a');
     const fieldNode = ReactDOM.findDOMNode(fieldComponent);
@@ -384,7 +384,7 @@ describe('Form', () => {
   });
 
   it('Renders fields into two rows', () => {
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form
         fieldsPerRow={2}
       >
@@ -399,7 +399,7 @@ describe('Form', () => {
         >
           <TextInput initialValue={'init b'} />
         </Field>
-      </Form>
+      </Form>,
     );
     const fieldComponent = formComponent.inputRefs.get('a');
     const fieldNode = ReactDOM.findDOMNode(fieldComponent);
@@ -412,7 +412,7 @@ describe('Form', () => {
   });
 
   it('Renders field lables left', () => {
-    const formComponent = TestUtils.renderIntoDocument(
+    const formComponent = ReactTestUtils.renderIntoDocument(
       <Form
         labelPosition={'left'}
       >
@@ -426,7 +426,7 @@ describe('Form', () => {
         >
           <TextInput initialValue={'init b'} />
         </Field>
-      </Form>
+      </Form>,
     );
     const fieldComponent = formComponent.inputRefs.get('a');
     const fieldNode = ReactDOM.findDOMNode(fieldComponent);

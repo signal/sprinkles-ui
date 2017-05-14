@@ -1,14 +1,15 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import color from 'color';
 import Base from './Base';
 
 export default class ToggleInput extends Base {
   static propTypes = {
-    enabled: React.PropTypes.bool,
-    initialValue: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
-    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
+    enabled: PropTypes.bool,
+    initialValue: PropTypes.bool,
+    onChange: PropTypes.func,
+    status: PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {

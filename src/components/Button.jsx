@@ -2,18 +2,19 @@ import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
 import stylePropType from 'react-style-proptype';
+import PropTypes from 'prop-types';
 import Base from './Base';
 
 export default class Button extends Base {
   displayName = 'Button';
 
   static propTypes = {
-    children: React.PropTypes.node,
-    enabled: React.PropTypes.bool,
-    groupPosition: React.PropTypes.oneOf(['left', 'center', 'right']),
-    onClick: React.PropTypes.func,
-    text: React.PropTypes.string,
-    type: React.PropTypes.oneOf([
+    children: PropTypes.node,
+    enabled: PropTypes.bool,
+    groupPosition: PropTypes.oneOf(['left', 'center', 'right']),
+    onClick: PropTypes.func,
+    text: PropTypes.string,
+    type: PropTypes.oneOf([
       'secondary',
       'primary',
       'success',
@@ -21,7 +22,7 @@ export default class Button extends Base {
       'warning',
       'danger',
     ]),
-    working: React.PropTypes.bool,
+    working: PropTypes.bool,
     style: stylePropType,
   };
 

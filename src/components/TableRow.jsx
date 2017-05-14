@@ -1,15 +1,16 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import stylePropType from 'react-style-proptype';
 import Base from './Base';
 
 export default class TableRow extends Base {
 
-  static propTypes = {
-    children: React.PropTypes.node,
-    isHoverable: React.PropTypes.bool,
-    isSelected: React.PropTypes.bool,
-    rowIndex: React.PropTypes.number.isRequired,
+  static PropTypes = {
+    children: PropTypes.node,
+    isHoverable: PropTypes.bool,
+    isSelected: PropTypes.bool,
+    rowIndex: PropTypes.number.isRequired,
     style: stylePropType,
   }
 
@@ -28,7 +29,7 @@ export default class TableRow extends Base {
       this.setState(
         { isUserCurrentlyHovering: false,
           hoveredRowIndex: null,
-        }
+        },
       );
     }
   }
@@ -38,7 +39,7 @@ export default class TableRow extends Base {
       this.setState(
         { isUserCurrentlyHovering: true,
           hoveredRowIndex: rowIndex,
-        }
+        },
       );
     }
   }

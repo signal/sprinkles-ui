@@ -1,12 +1,13 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 import Text from './Text';
 
 export default class ListItemGroup extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    label: React.PropTypes.string,
+    children: PropTypes.node,
+    label: PropTypes.string,
   }
 
   static defaultProps = {

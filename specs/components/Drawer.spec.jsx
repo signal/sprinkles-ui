@@ -33,7 +33,7 @@ describe('Drawer', function () {
             </Text>
           </div>
         </div>
-      </Drawer>
+      </Drawer>,
     );
   });
 
@@ -59,10 +59,10 @@ describe('Drawer', function () {
 
   #### API
 
-  - **backgroundColor** *React.PropTypes.string* (optional) provide a backgroundColor, defaults to primary backgroundColor
-  - **children** *React.PropTypes.node* (optional) Components to populate your Drawer with
-  - **open** *React.PropTypes.bool* (optional) Specify if the Drawer should be open at first, defaults to closed
-  - **openFrom** *React.PropTypes.oneOf* (optional) Which direction should the drawer open, defaults to right. Options: 'left' or 'right'
-  - **width** *React.PropTypes.number* (optional) Specify a width, defaults to 300
+  - **backgroundColor** *PropTypes.string* (optional) provide a backgroundColor, defaults to primary backgroundColor
+  - **children** *PropTypes.node* (optional) Components to populate your Drawer with
+  - **open** *PropTypes.bool* (optional) Specify if the Drawer should be open at first, defaults to closed
+  - **openFrom** *PropTypes.oneOf* (optional) Which direction should the drawer open, defaults to right. Options: 'left' or 'right'
+  - **width** *PropTypes.number* (optional) Specify a width, defaults to 300
   `);
 });

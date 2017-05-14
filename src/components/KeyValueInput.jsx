@@ -3,6 +3,7 @@
 import Immutable, { Map, fromJS } from 'immutable';
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Text from './Text';
 import TextInput from './TextInput';
 import Base from './Base';
@@ -11,19 +12,19 @@ import Button from './Button';
 
 export default class KeyValueInput extends Base {
   static propTypes = {
-    addButtonText: React.PropTypes.string,
-    enabled: React.PropTypes.bool,
-    initialValue: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        key: React.PropTypes.string,
-        value: React.PropTypes.string,
-      })
+    addButtonText: PropTypes.string,
+    enabled: PropTypes.bool,
+    initialValue: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string,
+        value: PropTypes.string,
+      }),
     ),
-    keyLabel: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    uniqueKeys: React.PropTypes.bool,
-    valueLabel: React.PropTypes.string,
-    status: React.PropTypes.oneOf(['success', 'error']),
+    keyLabel: PropTypes.string,
+    onChange: PropTypes.func,
+    uniqueKeys: PropTypes.bool,
+    valueLabel: PropTypes.string,
+    status: PropTypes.oneOf(['success', 'error']),
   };
 
   static defaultProps = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import { StructuralColors } from '../src/shared/colors';
 import ListItemGroup from '../src/components/ListItemGroup';
 import TextListItem from '../src/components/TextListItem';
@@ -8,8 +8,8 @@ import ListItem from '../src/components/ListItem';
 
 describe('ListItemGroup', () => {
   const renderComponent = (props) => (
-    TestUtils.renderIntoDocument(
-      <ListItemGroup {...props} />
+    ReactTestUtils.renderIntoDocument(
+      <ListItemGroup {...props} />,
     )
   );
   it('does exist', () => {
@@ -46,19 +46,19 @@ describe('ListItemGroup', () => {
   });
 
   it('Does render single list item with expected styles', () => {
-    const ligComponent = TestUtils.renderIntoDocument(
+    const ligComponent = ReactTestUtils.renderIntoDocument(
       <ListItemGroup>
         <ListItem>
           <TextListItem />
         </ListItem>
-      </ListItemGroup>
+      </ListItemGroup>,
     );
     const textListItemNode = ReactDOM.findDOMNode(ligComponent.listItemRefs.get(0).listItemRef);
     expect(textListItemNode.style.borderBottom).toBe('');
   });
 
   it('Does render 2 item list item with expected styles', () => {
-    const ligComponent = TestUtils.renderIntoDocument(
+    const ligComponent = ReactTestUtils.renderIntoDocument(
       <ListItemGroup>
         <ListItem>
           <TextListItem />
@@ -66,7 +66,7 @@ describe('ListItemGroup', () => {
         <ListItem>
           <TextListItem />
         </ListItem>
-      </ListItemGroup>
+      </ListItemGroup>,
     );
     const firstTextListItemNode = ReactDOM
       .findDOMNode(ligComponent.listItemRefs.get(0).listItemRef);
@@ -78,7 +78,7 @@ describe('ListItemGroup', () => {
   });
 
   it('Does render 3 item list item with expected styles', () => {
-    const ligComponent = TestUtils.renderIntoDocument(
+    const ligComponent = ReactTestUtils.renderIntoDocument(
       <ListItemGroup>
         <ListItem>
           <TextListItem />
@@ -89,7 +89,7 @@ describe('ListItemGroup', () => {
         <ListItem>
           <TextListItem />
         </ListItem>
-      </ListItemGroup>
+      </ListItemGroup>,
     );
     const firstTextListItemNode = ReactDOM
       .findDOMNode(ligComponent.listItemRefs.get(0).listItemRef);

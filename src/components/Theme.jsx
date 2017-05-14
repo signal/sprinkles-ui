@@ -2,6 +2,7 @@
 /* eslint react/no-unused-prop-types: "off" */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   BackgroundColors,
   ButtonColors,
@@ -14,20 +15,20 @@ import {
 
 export default class Theme extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node.isRequired,
-    color: React.PropTypes.shape({
-      backgroundColors: React.PropTypes.object,
-      buttonColors: React.PropTypes.object,
-      formColors: React.PropTypes.object,
-      iconColors: React.PropTypes.object,
-      noticeColors: React.PropTypes.object,
-      structuralColors: React.PropTypes.object,
-      textColors: React.PropTypes.object,
+    children: PropTypes.node.isRequired,
+    color: PropTypes.shape({
+      backgroundColors: PropTypes.object,
+      buttonColors: PropTypes.object,
+      formColors: PropTypes.object,
+      iconColors: PropTypes.object,
+      noticeColors: PropTypes.object,
+      structuralColors: PropTypes.object,
+      textColors: PropTypes.object,
     }),
   }
 
   static childContextTypes = {
-    color: React.PropTypes.object,
+    color: PropTypes.object,
   };
 
   displayName = 'Theme';

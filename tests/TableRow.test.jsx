@@ -1,7 +1,7 @@
 import color from 'color';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import { BackgroundColors } from '../src/shared/colors';
 import TableRow from '../src/components/TableRow';
 
@@ -11,7 +11,7 @@ let tableRowNode;
 
 const renderRow = (props) => {
   const theProps = props || { rowIndex: 0 };
-  tableRowComponent = TestUtils.renderIntoDocument(
+  tableRowComponent = ReactTestUtils.renderIntoDocument(
     <table>
       <tbody>
         <TableRow
@@ -23,7 +23,7 @@ const renderRow = (props) => {
           {theProps.children}
         </TableRow>
       </tbody>
-    </table>
+    </table>,
   );
   tableNode = ReactDOM.findDOMNode(tableRowComponent);
   tableRowNode = tableNode.getElementsByTagName('tr')[0];
@@ -42,7 +42,7 @@ describe('TableRow', () => {
       isHoverable: true,
       rowIndex: 0,
     });
-    TestUtils.Simulate.mouseOver(tableRowNode);
+    ReactTestUtils.Simulate.mouseOver(tableRowNode);
     expect(color(tableRowNode.style.background).hexString())
       .toBe(color(BackgroundColors.hover).hexString());
   });
@@ -51,12 +51,12 @@ describe('TableRow', () => {
       isSelected: true,
       rowIndex: 0,
     });
-    TestUtils.Simulate.mouseOver(tableRowNode);
+    ReactTestUtils.Simulate.mouseOver(tableRowNode);
     expect(color(tableRowNode.style.background).hexString())
       .toBe(color(BackgroundColors.selected).hexString());
   });
   it('does not render a hover or active effect for a table row element without these props', () => {
-    TestUtils.Simulate.mouseOver(tableRowNode);
+    ReactTestUtils.Simulate.mouseOver(tableRowNode);
     expect(tableRowNode.style.background).toBe('');
   });
   it('does render children', () => {

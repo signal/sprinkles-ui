@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import color from 'color';
 import { NoticeColors } from '../src/shared/colors';
 import Field from '../src/components/Field';
@@ -10,8 +10,8 @@ import TextInput from '../src/components/TextInput';
 describe('Field', () => {
   it('Does render a Field with an input', () => {
     // Render an Field
-    const fieldComponent = TestUtils.renderIntoDocument(
-      <Field fieldKey={'key'} />
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
+      <Field fieldKey={'key'} />,
     );
     // grab the DOM node so we can inspect it
     const fieldNode = ReactDOM.findDOMNode(fieldComponent);
@@ -21,11 +21,11 @@ describe('Field', () => {
   it('Does render a Field with a label', () => {
     const text = 'howdy';
     // Render an Field
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         label={text}
-      />
+      />,
     );
     // grab the DOM node so we can inspect it
     const labelRef = ReactDOM.findDOMNode(fieldComponent.labelRef);
@@ -35,14 +35,14 @@ describe('Field', () => {
   it('Does render a Field with an error status', () => {
     const text = 'howdy';
     // Render an Field
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         label={text}
         status={'error'}
       >
         <TextInput />
-      </Field>
+      </Field>,
     );
     // grab the label and input DOM nodes so we can inspect them
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
@@ -54,14 +54,14 @@ describe('Field', () => {
   it('Does render a Field with a warning status', () => {
     const text = 'howdy';
     // Render an Field
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         label={text}
         status={'warning'}
       >
         <TextInput />
-      </Field>
+      </Field>,
     );
 
     // grab the label and input DOM nodes so we can inspect them
@@ -75,14 +75,14 @@ describe('Field', () => {
   it('Does render a Field with a success status', () => {
     const text = 'howdy';
     // Render an Field
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         label={text}
         status={'success'}
       >
         <TextInput />
-      </Field>
+      </Field>,
     );
     // grab the label and input DOM nodes so we can inspect them
     const labelNode = ReactDOM.findDOMNode(fieldComponent.labelRef);
@@ -93,19 +93,19 @@ describe('Field', () => {
 
   it('Does render a Field with an error message', () => {
     const errMessage = 'Some error occured';
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         error={errMessage}
-      />
+      />,
     );
     const errorNode = ReactDOM.findDOMNode(fieldComponent.errorRef);
     expect(errorNode.textContent).toBe(errMessage);
   });
 
   it('Does validate a Field with input missing isValid function', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
-      <Field fieldKey={'key'} />
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
+      <Field fieldKey={'key'} />,
     );
     expect(fieldComponent.validate()).toEqual({
       valid: true,
@@ -116,11 +116,11 @@ describe('Field', () => {
   });
 
   it('Does render a required Field', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         required={true}
-      />
+      />,
     );
     const requiredNode = ReactDOM.findDOMNode(fieldComponent.requiredRef);
     expect(requiredNode.textContent).toBe('*');
@@ -128,25 +128,25 @@ describe('Field', () => {
   });
 
   it('Does render a required Field width asterick hidden', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         required={true}
         requriedAsteriskDisplay={false}
-      />
+      />,
     );
     const requiredNode = ReactDOM.findDOMNode(fieldComponent.requiredRef);
     expect(requiredNode).toBe(null);
   });
 
   it('Does validate a required Field with valid input as valid', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         required={true}
       >
         <TextInput initialValue={'a'} />
-      </Field>
+      </Field>,
     );
 
     expect(fieldComponent.validate()).toEqual({
@@ -158,13 +158,13 @@ describe('Field', () => {
   });
 
   it('Does validate a required Field with invalid input as invalid', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         required={true}
       >
         <TextInput initialValue={''} />
-      </Field>
+      </Field>,
     );
 
     expect(fieldComponent.validate()).toEqual({
@@ -176,13 +176,13 @@ describe('Field', () => {
   });
 
   it('Does validate an optional Field with valid input as valid', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         required={false}
       >
         <TextInput initialValue={'a'} />
-      </Field>
+      </Field>,
     );
     expect(fieldComponent.validate()).toEqual({
       valid: true,
@@ -193,13 +193,13 @@ describe('Field', () => {
   });
 
   it('Does validate an optional Field with invalid input as valid', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         required={false}
       >
         <TextInput initialValue={''} />
-      </Field>
+      </Field>,
     );
     expect(fieldComponent.validate()).toEqual({
       valid: false,
@@ -212,35 +212,35 @@ describe('Field', () => {
   it('Does trigger onChange when the input changes', () => {
     const change = 'changed value';
     const mockHandleChange = jest.genMockFunction();
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         onChange={mockHandleChange}
       >
         <TextInput />
-      </Field>
+      </Field>,
     );
     const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
-    TestUtils.Simulate.change(textInputNode, { target: { value: change } });
+    ReactTestUtils.Simulate.change(textInputNode, { target: { value: change } });
     expect(mockHandleChange).toBeCalledWith(change, fieldComponent);
   });
 
   it('Does render a disabled Field', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         enabled={false}
 
       >
         <TextInput />
-      </Field>
+      </Field>,
     );
     const textInputNode = ReactDOM.findDOMNode(fieldComponent.inputRef);
     expect(textInputNode.disabled).toBe(true);
   });
 
   it('Does render a label positioned left', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         label={'Test'}
@@ -248,7 +248,7 @@ describe('Field', () => {
 
       >
         <TextInput />
-      </Field>
+      </Field>,
     );
     const labelRefParent = ReactDOM.findDOMNode(fieldComponent.labelRef).parentNode;
     expect(labelRefParent.style.width).toEqual('23%');
@@ -257,7 +257,7 @@ describe('Field', () => {
   });
 
   it('Does render a label positioned top', () => {
-    const fieldComponent = TestUtils.renderIntoDocument(
+    const fieldComponent = ReactTestUtils.renderIntoDocument(
       <Field
         fieldKey={'key'}
         label={'Test'}
@@ -265,7 +265,7 @@ describe('Field', () => {
 
       >
         <TextInput />
-      </Field>
+      </Field>,
     );
     const labelRefParent = ReactDOM.findDOMNode(fieldComponent.labelRef).parentNode;
     expect(labelRefParent.style.marginRight).toEqual('');

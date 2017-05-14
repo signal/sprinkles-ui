@@ -1,21 +1,22 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 
 export default class Panel extends Base {
   static propTypes = {
-    backgroundColor: React.PropTypes.string,
-    borderColor: React.PropTypes.string,
-    borderSize: React.PropTypes.number,
-    borderRadius: React.PropTypes.number,
-    boxShadowStrength: React.PropTypes.number,
-    children: React.PropTypes.node,
-    color: React.PropTypes.string,
-    height: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    margin: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    padding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    text: React.PropTypes.string,
-    width: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
+    backgroundColor: PropTypes.string,
+    borderColor: PropTypes.string,
+    borderSize: PropTypes.number,
+    borderRadius: PropTypes.number,
+    boxShadowStrength: PropTypes.number,
+    children: PropTypes.node,
+    color: PropTypes.string,
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    text: PropTypes.string,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static defaultProps = {

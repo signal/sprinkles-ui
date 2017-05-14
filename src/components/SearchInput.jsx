@@ -2,6 +2,7 @@ import color from 'color';
 import Fuse from 'fuse.js';
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import TextInput from './TextInput';
 import VectorGraphic from './VectorGraphic';
 import { Resets } from '../shared/styles';
@@ -9,27 +10,27 @@ import zindex from '../shared/zindex';
 
 export default class SearchInput extends TextInput {
   static propTypes = {
-    autoComplete: React.PropTypes.bool,
-    boundValue: React.PropTypes.string,
-    enabled: React.PropTypes.bool,
-    multiline: React.PropTypes.bool,
-    onChange: React.PropTypes.func,
-    placeholder: React.PropTypes.string,
-    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
-    searchableRecords: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    searchSettings: React.PropTypes.shape({
-      caseSensitive: React.PropTypes.bool,
-      distance: React.PropTypes.number,
-      id: React.PropTypes.string,
+    autoComplete: PropTypes.bool,
+    boundValue: PropTypes.string,
+    enabled: PropTypes.bool,
+    multiline: PropTypes.bool,
+    onChange: PropTypes.func,
+    placeholder: PropTypes.string,
+    status: PropTypes.oneOf(['error', 'warning', 'success']),
+    searchableRecords: PropTypes.arrayOf(PropTypes.object).isRequired,
+    searchSettings: PropTypes.shape({
+      caseSensitive: PropTypes.bool,
+      distance: PropTypes.number,
+      id: PropTypes.string,
       // TODO: Consider validating the types of strings
-      include: React.PropTypes.arrayOf(React.PropTypes.string),
-      keys: React.PropTypes.array,
-      location: React.PropTypes.number,
-      matchAllTokens: React.PropTypes.bool,
-      maxPatternLength: React.PropTypes.number,
-      shouldSort: React.PropTypes.bool,
-      tokenize: React.PropTypes.bool,
-      threshold: React.PropTypes.number,
+      include: PropTypes.arrayOf(PropTypes.string),
+      keys: PropTypes.array,
+      location: PropTypes.number,
+      matchAllTokens: PropTypes.bool,
+      maxPatternLength: PropTypes.number,
+      shouldSort: PropTypes.bool,
+      tokenize: PropTypes.bool,
+      threshold: PropTypes.number,
     }),
   };
 

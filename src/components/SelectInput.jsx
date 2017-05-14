@@ -2,6 +2,7 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import TextListItem from './TextListItem';
 import List from './List';
@@ -11,16 +12,16 @@ import VectorGraphic from './VectorGraphic';
 
 export default class SelectInput extends Base {
   static propTypes = {
-    enabled: React.PropTypes.bool,
-    initialValue: React.PropTypes.string,
-    items: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        value: React.PropTypes.string,
-        label: React.PropTypes.string,
-      })
+    enabled: PropTypes.bool,
+    initialValue: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string,
+        label: PropTypes.string,
+      }),
     ),
-    onChange: React.PropTypes.func,
-    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
+    onChange: PropTypes.func,
+    status: PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {

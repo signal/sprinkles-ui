@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Dropdown from './Dropdown';
 import Panel from './Panel';
@@ -8,8 +9,8 @@ import ListDivider from './ListDivider';
 export default class Menu extends Base {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    triggerEl: React.PropTypes.node.isRequired,
+    children: PropTypes.node,
+    triggerEl: PropTypes.node.isRequired,
   };
 
   static defaultProps = {
@@ -51,8 +52,8 @@ export default class Menu extends Base {
             {this.renderListGroupItems(child.props.children)}
           </List>
           { i < (topContainerDiv.props.children.length - 1) ? <ListDivider /> : '' }
-        </div>
-      )
+        </div>,
+      ),
     );
   }
 

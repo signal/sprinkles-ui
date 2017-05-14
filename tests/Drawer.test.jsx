@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import color from 'color';
 import { BackgroundColors } from '../src/shared/colors';
 import Drawer from '../src/components/Drawer';
@@ -8,15 +8,15 @@ import Drawer from '../src/components/Drawer';
 
 describe('Drawer', () => {
   it('Does render a Drawer component', () => {
-    const drawerComponent = TestUtils.renderIntoDocument(
-      <Drawer />
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
+      <Drawer />,
     );
     expect(drawerComponent).toBeDefined();
   });
 
   it('Does render a Drawer with default style', () => {
-    const drawerComponent = TestUtils.renderIntoDocument(
-      <Drawer />
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
+      <Drawer />,
     );
     const drawerNode = ReactDOM.findDOMNode(drawerComponent);
     expect(drawerNode.style.width).toBe('300px');
@@ -29,18 +29,18 @@ describe('Drawer', () => {
   });
 
   it('Does render children in the Drawer', () => {
-    const drawerComponent = TestUtils.renderIntoDocument(
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
       <Drawer>
         <div>{'hi'}</div>
-      </Drawer>
+      </Drawer>,
     );
     const drawerNode = ReactDOM.findDOMNode(drawerComponent);
     expect(drawerNode.children).not.toEqual({});
   });
 
   it('Does render an open drawer', () => {
-    const drawerComponent = TestUtils.renderIntoDocument(
-      <Drawer open={true} />
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
+      <Drawer open={true} />,
     );
     const drawerNode = ReactDOM.findDOMNode(drawerComponent);
     expect(drawerNode.style.right).toBe('0px');
@@ -48,16 +48,16 @@ describe('Drawer', () => {
 
   it('Does render a custom backgound color', () => {
     const customColor = '#DDDDDD';
-    const drawerComponent = TestUtils.renderIntoDocument(
-      <Drawer backgroundColor={customColor} />
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
+      <Drawer backgroundColor={customColor} />,
     );
     const drawerNode = ReactDOM.findDOMNode(drawerComponent);
     expect(color(drawerNode.style.background).hexString()).toBe(customColor);
   });
 
   it('Does render a custom width', () => {
-    const drawerComponent = TestUtils.renderIntoDocument(
-      <Drawer width={500} />
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
+      <Drawer width={500} />,
     );
     const drawerNode = ReactDOM.findDOMNode(drawerComponent);
     expect(drawerNode.style.width).toBe('500px');
@@ -65,8 +65,8 @@ describe('Drawer', () => {
   });
 
   it('Does render a drawer on the left', () => {
-    const drawerComponent = TestUtils.renderIntoDocument(
-      <Drawer openFrom={'left'} />
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
+      <Drawer openFrom={'left'} />,
     );
     const drawerNode = ReactDOM.findDOMNode(drawerComponent);
     expect(drawerNode.style.left).toBe('-300px');
@@ -74,11 +74,11 @@ describe('Drawer', () => {
   });
 
   it('Does open a Drawer on the left', () => {
-    const drawerComponent = TestUtils.renderIntoDocument(
+    const drawerComponent = ReactTestUtils.renderIntoDocument(
       <Drawer
         open={true}
         openFrom={'left'}
-      />
+      />,
     );
     const drawerNode = ReactDOM.findDOMNode(drawerComponent);
     expect(drawerNode.style.left).toBe('0px');

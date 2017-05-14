@@ -16,7 +16,7 @@ describe('ToggleInput', function () {
     this.component(
       <ToggleInput
         onChange={handleChange}
-      />
+      />,
     );
   });
 
@@ -37,10 +37,10 @@ describe('ToggleInput', function () {
 
   #### API
 
-  - **enabled** *React.PropTypes.bool* (optional) sets the ability for a user to interact, defaults to true
-  - **initialValue** *React.PropTypes.string* (optional) set the toggle upon load
-  - **onChange** *React.PropTypes.function* (optional) gets called whenever a user changes the toggle
-  - **status** *React.PropTypes.oneOf* (optional) used by the form to set status, options: 'error', 'warning', 'success'
+  - **enabled** *PropTypes.bool* (optional) sets the ability for a user to interact, defaults to true
+  - **initialValue** *PropTypes.string* (optional) set the toggle upon load
+  - **onChange** *PropTypes.function* (optional) gets called whenever a user changes the toggle
+  - **status** *PropTypes.oneOf* (optional) used by the form to set status, options: 'error', 'warning', 'success'
 
   `);
 });

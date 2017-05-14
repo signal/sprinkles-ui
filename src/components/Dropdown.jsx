@@ -1,6 +1,7 @@
 /* eslint react/no-unused-prop-types: "off" */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import List from './List';
 import ListItem from './ListItem';
@@ -9,21 +10,21 @@ import Popover from './Popover';
 
 export default class Dropdown extends Base {
   static propTypes = {
-    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    children: React.PropTypes.node,
-    disabled: React.PropTypes.bool,
-    items: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        key: React.PropTypes.string,
-        value: React.PropTypes.string,
-      })
+    anchorOrigin: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    children: PropTypes.node,
+    disabled: PropTypes.bool,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string,
+        value: PropTypes.string,
+      }),
     ),
-    open: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    onRequestOpen: React.PropTypes.func,
-    onRequestClose: React.PropTypes.func,
-    triggerEl: React.PropTypes.node,
-    useLayerForClickAway: React.PropTypes.bool,
+    open: PropTypes.bool,
+    onClick: PropTypes.func,
+    onRequestOpen: PropTypes.func,
+    onRequestClose: PropTypes.func,
+    triggerEl: PropTypes.node,
+    useLayerForClickAway: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -69,7 +70,7 @@ export default class Dropdown extends Base {
         onClick={this.handleClick.bind(this, item)}
       >
         <TextListItem text={item.label ? item.label : item.value} />
-      </ListItem>
+      </ListItem>,
     );
   }
 

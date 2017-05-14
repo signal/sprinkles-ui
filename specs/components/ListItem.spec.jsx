@@ -19,7 +19,7 @@ describe('ListItem', function () {
         <TextListItem
           text={loremIpsum()}
         />
-      </ListItem>
+      </ListItem>,
     );
   });
 
@@ -36,10 +36,10 @@ describe('ListItem', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* (optional) child components
+  - **children** *PropTypes.node* (optional) child components
   // TODO: document what props are passed to children (or look at TextListItem as an example)
-  - **onClick** *React.PropTypes.func* (optional) click hander function
-  - **selected** *React.PropTypes.bool* (optional) selection state
+  - **onClick** *PropTypes.func* (optional) click hander function
+  - **selected** *PropTypes.bool* (optional) selection state
 
   `);
 });

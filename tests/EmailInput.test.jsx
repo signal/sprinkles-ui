@@ -1,21 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import EmailInput from '../src/components/EmailInput';
 
 describe('EmailInput', () => {
   it('Does render a EmailInput', () => {
     const email = 'test@signal.co';
-    const emailInputComponent = TestUtils.renderIntoDocument(
-      <EmailInput initialValue={email} />
+    const emailInputComponent = ReactTestUtils.renderIntoDocument(
+      <EmailInput initialValue={email} />,
     );
     expect(emailInputComponent.inputRef.value)
       .toBe(email);
   });
 
   it('Does validate valid email addresses', () => {
-    const emailInputComponent = TestUtils.renderIntoDocument(
-      <EmailInput initialValue={'test@signal.co'} />
+    const emailInputComponent = ReactTestUtils.renderIntoDocument(
+      <EmailInput initialValue={'test@signal.co'} />,
     );
     const emailInputNode = ReactDOM.findDOMNode(emailInputComponent);
     expect(emailInputComponent.validate()).toEqual({
@@ -25,7 +25,7 @@ describe('EmailInput', () => {
     });
     // test a different username
     let changedText = 'another@signal.co';
-    TestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
+    ReactTestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
     expect(emailInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,
@@ -33,7 +33,7 @@ describe('EmailInput', () => {
     });
     // test a different domain
     changedText = 'test@test.com';
-    TestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
+    ReactTestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
     expect(emailInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,
@@ -41,7 +41,7 @@ describe('EmailInput', () => {
     });
     // test an email alias
     changedText = 'test+spam@test.com';
-    TestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
+    ReactTestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
     expect(emailInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,
@@ -51,8 +51,8 @@ describe('EmailInput', () => {
 
   it('Does validate invalid email address', () => {
     // test a simple string
-    const emailInputComponent = TestUtils.renderIntoDocument(
-      <EmailInput initialValue={'test'} />
+    const emailInputComponent = ReactTestUtils.renderIntoDocument(
+      <EmailInput initialValue={'test'} />,
     );
     const emailInputNode = ReactDOM.findDOMNode(emailInputComponent);
     expect(emailInputComponent.validate()).toEqual({
@@ -62,7 +62,7 @@ describe('EmailInput', () => {
     });
     // test an email missing domain
     let changedText = 'test@';
-    TestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
+    ReactTestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
     expect(emailInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: false,
@@ -70,7 +70,7 @@ describe('EmailInput', () => {
     });
     // test an email missing a user
     changedText = '@signal.co';
-    TestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
+    ReactTestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
     expect(emailInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: false,
@@ -78,7 +78,7 @@ describe('EmailInput', () => {
     });
     // test an email address missing .X
     changedText = 'test@signal';
-    TestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
+    ReactTestUtils.Simulate.change(emailInputNode, { target: { value: changedText } });
     expect(emailInputComponent.validate()).toEqual({
       valid: false,
       isInitialValue: false,

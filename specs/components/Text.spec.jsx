@@ -13,7 +13,7 @@ describe('Text', function () {
   before(() => {
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.component(
-      <Text>{loremIpsum()}</Text>
+      <Text>{loremIpsum()}</Text>,
     );
   });
 
@@ -60,11 +60,11 @@ describe('Text', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* (optional) child components or text nodes
-  - **color** *React.PropTypes.string* (optional) text color
-  - **fontSize** *React.PropTypes.string* (optional) text size
-  - **fontWeight** *React.PropTypes.string* (optional) text weight
-  - **textDecoration** *React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none'])* (optional) add text decoration
+  - **children** *PropTypes.node* (optional) child components or text nodes
+  - **color** *PropTypes.string* (optional) text color
+  - **fontSize** *PropTypes.string* (optional) text size
+  - **fontWeight** *PropTypes.string* (optional) text weight
+  - **textDecoration** *PropTypes.oneOf(['underline', 'overline', 'line-through', 'none'])* (optional) add text decoration
 
   `);
 });

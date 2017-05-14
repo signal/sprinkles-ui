@@ -19,7 +19,7 @@ describe('Alert', function () {
         type={props.type}
       >
         {props.children}
-      </Alert>
+      </Alert>,
     ).width('100%');
   };
 
@@ -120,9 +120,9 @@ describe('Alert', function () {
   A component that provides contextural feedback messages for typical user actions.
 
   #### API
-  - **details** *React.PropTypes.oneOfType* string description or array of descriptions
-  - **title** *React.PropTypes.string* (optional) Bold qualifier of message
-  - **type** *React.PropTypes.oneOf* Sets the color of the alert message, one option must be specified: 'success', 'info', 'warning', 'danger'
+  - **details** *PropTypes.oneOfType* string description or array of descriptions
+  - **title** *PropTypes.string* (optional) Bold qualifier of message
+  - **type** *PropTypes.oneOf* Sets the color of the alert message, one option must be specified: 'success', 'info', 'warning', 'danger'
 
   `);
 });

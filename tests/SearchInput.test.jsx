@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import SearchInput from '../src/components/SearchInput';
 
 describe('SearchInput', () => {
@@ -22,10 +22,10 @@ describe('SearchInput', () => {
   };
 
   beforeEach(() => {
-    emptySearchInputComponent = TestUtils.renderIntoDocument(
+    emptySearchInputComponent = ReactTestUtils.renderIntoDocument(
       <SearchInput
         searchableRecords={[]}
-      />
+      />,
     );
     emptySearchInputNode = ReactDOM.findDOMNode(emptySearchInputComponent.inputRef);
   });
@@ -36,37 +36,37 @@ describe('SearchInput', () => {
   });
 
   it('Does render a disabled search input', () => {
-    const searchInputComponent = TestUtils.renderIntoDocument(
+    const searchInputComponent = ReactTestUtils.renderIntoDocument(
       <SearchInput
         enabled={false}
         searchableRecords={[]}
-      />
+      />,
     );
     const searchInputNode = ReactDOM.findDOMNode(searchInputComponent.inputRef);
 
     expect(searchInputNode.disabled).toBe(true);
   });
   it('Does merge search settings with defaults', () => {
-    const searchInputComponent = TestUtils.renderIntoDocument(
+    const searchInputComponent = ReactTestUtils.renderIntoDocument(
       <SearchInput
         searchableRecords={[]}
         searchSettings={searchSettings}
-      />
+      />,
     );
 
     expect(searchInputComponent.state.combinedSearchSettings.keys).toEqual(searchSettings.keys);
   });
   it('Does trigger a change event on search', () => {
-    const searchInputComponent = TestUtils.renderIntoDocument(
+    const searchInputComponent = ReactTestUtils.renderIntoDocument(
       <SearchInput
         onChange={handleChange}
         searchableRecords={record}
         searchSettings={searchSettings}
-      />
+      />,
     );
     const searchInputNode = ReactDOM.findDOMNode(searchInputComponent.inputRef);
     searchInputNode.value = 'zoo';
-    TestUtils.Simulate.change(searchInputNode);
+    ReactTestUtils.Simulate.change(searchInputNode);
 
     expect(handleChange).toBeCalledWith({
       value: 'zoo',
@@ -75,16 +75,16 @@ describe('SearchInput', () => {
   });
 
   it('Returns search results', () => {
-    const searchInputComponent = TestUtils.renderIntoDocument(
+    const searchInputComponent = ReactTestUtils.renderIntoDocument(
       <SearchInput
         onChange={handleChange}
         searchableRecords={record}
         searchSettings={searchSettings}
-      />
+      />,
     );
     const searchInputNode = ReactDOM.findDOMNode(searchInputComponent.inputRef);
     searchInputNode.value = 'Old';
-    TestUtils.Simulate.change(searchInputNode);
+    ReactTestUtils.Simulate.change(searchInputNode);
 
     expect(searchInputComponent.state.searchResults).toEqual(record);
   });
@@ -103,7 +103,7 @@ describe('SearchInput', () => {
       value: 'foo',
     });
     const clearSearchNode = ReactDOM.findDOMNode(emptySearchInputComponent.clearSearchRef);
-    TestUtils.Simulate.click(clearSearchNode);
+    ReactTestUtils.Simulate.click(clearSearchNode);
 
     expect(emptySearchInputComponent.state.value).toEqual('');
     expect(emptySearchInputComponent.state.isFocused).toEqual(false);
@@ -111,20 +111,20 @@ describe('SearchInput', () => {
   });
 
   it('Does clear search results on clear state', () => {
-    const searchInputComponent = TestUtils.renderIntoDocument(
+    const searchInputComponent = ReactTestUtils.renderIntoDocument(
       <SearchInput
         onChange={handleChange}
         searchableRecords={record}
         searchSettings={searchSettings}
-      />
+      />,
     );
 
     const searchInputNode = ReactDOM.findDOMNode(searchInputComponent.inputRef);
     searchInputNode.value = 'Old';
-    TestUtils.Simulate.change(searchInputNode);
+    ReactTestUtils.Simulate.change(searchInputNode);
 
     const clearSearchNode = ReactDOM.findDOMNode(searchInputComponent.clearSearchRef);
-    TestUtils.Simulate.click(clearSearchNode);
+    ReactTestUtils.Simulate.click(clearSearchNode);
 
     expect(searchInputComponent.state.searchResults).toEqual([]);
   });

@@ -2,14 +2,15 @@
 /* eslint class-methods-use-this: "off" */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Version extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    tag: React.PropTypes.string,
-    tagSelector: React.PropTypes.string,
-    version: React.PropTypes.string,
-    versionSelector: React.PropTypes.string,
+    children: PropTypes.node,
+    tag: PropTypes.string,
+    tagSelector: PropTypes.string,
+    version: PropTypes.string,
+    versionSelector: PropTypes.string,
   };
 
   displayName = 'Version';

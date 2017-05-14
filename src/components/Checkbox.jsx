@@ -1,14 +1,15 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 
 export default class Checkbox extends React.Component {
   static propTypes = {
-    checked: React.PropTypes.bool,
-    enabled: React.PropTypes.bool,
-    onFocus: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    onChange: React.PropTypes.func,
-    onClick: React.PropTypes.func,
+    checked: PropTypes.bool,
+    enabled: PropTypes.bool,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {

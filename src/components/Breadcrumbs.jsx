@@ -3,6 +3,7 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import { Map } from 'immutable';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Text from './Text';
 import { Resets } from '../shared/styles';
@@ -10,13 +11,13 @@ import { Resets } from '../shared/styles';
 
 export default class Breadcrumbs extends Base {
   static propTypes = {
-    path: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        display: React.PropTypes.string,
-        url: React.PropTypes.string,
+    path: PropTypes.arrayOf(
+      PropTypes.shape({
+        display: PropTypes.string,
+        url: PropTypes.string,
       }),
     ),
-    onClick: React.PropTypes.func,
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {

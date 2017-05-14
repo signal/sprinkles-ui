@@ -42,7 +42,7 @@ describe('Menu', function () {
             </ListItem>
           </div>
         </div>
-      </Menu>
+      </Menu>,
     ).width('100%');
   });
 
@@ -57,8 +57,8 @@ describe('Menu', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* (optional) pass in your links to fill up your menu
-  - **triggerEl** *React.PropTypes.node* use to trigger the menu to open and close
+  - **children** *PropTypes.node* (optional) pass in your links to fill up your menu
+  - **triggerEl** *PropTypes.node* use to trigger the menu to open and close
 
   `);
 });

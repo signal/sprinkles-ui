@@ -1,12 +1,13 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 
 export default class ListDivider extends Base {
 
   static propTypes = {
-    color: React.PropTypes.string,
-    margin: React.PropTypes.number,
+    color: PropTypes.string,
+    margin: PropTypes.number,
   }
 
   static defaultProps = {

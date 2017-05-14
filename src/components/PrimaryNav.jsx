@@ -3,6 +3,7 @@
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Text from './Text';
 import List from './List';
@@ -13,29 +14,29 @@ import { Resets } from '../shared/styles';
 
 export default class PrimaryNav extends Base {
   static propTypes = {
-    appIcon: React.PropTypes.node,
-    appName: React.PropTypes.string,
-    expanded: React.PropTypes.bool,
-    navItems: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        height: React.PropTypes.number,
-        icon: React.PropTypes.node,
-        key: React.PropTypes.string,
-        label: React.PropTypes.string,
-        linkStyle: React.PropTypes.shape({
-          color: React.PropTypes.string,
-          fontSize: React.PropTypes.number,
-          fontWeight: React.PropTypes.string,
-          textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
+    appIcon: PropTypes.node,
+    appName: PropTypes.string,
+    expanded: PropTypes.bool,
+    navItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        height: PropTypes.number,
+        icon: PropTypes.node,
+        key: PropTypes.string,
+        label: PropTypes.string,
+        linkStyle: PropTypes.shape({
+          color: PropTypes.string,
+          fontSize: PropTypes.number,
+          fontWeight: PropTypes.string,
+          textDecoration: PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
         }),
-        urlPath: React.PropTypes.string,
-        width: React.PropTypes.number,
-      }).isRequired
+        urlPath: PropTypes.string,
+        width: PropTypes.number,
+      }).isRequired,
     ),
-    onNavItemClick: React.PropTypes.func,
-    onRequestExpandToggle: React.PropTypes.func,
-    selectedNavItem: React.PropTypes.string,
-    showSectionBorders: React.PropTypes.bool,
+    onNavItemClick: PropTypes.func,
+    onRequestExpandToggle: PropTypes.func,
+    selectedNavItem: PropTypes.string,
+    showSectionBorders: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -124,7 +125,7 @@ export default class PrimaryNav extends Base {
           urlPath={item.urlPath}
           width={item.width}
         />
-      </ListItem>
+      </ListItem>,
     );
   }
 

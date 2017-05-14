@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import VectorGraphic from '../src/components/VectorGraphic';
 
 describe('VectorGraphic', () => {
   it('Does render an VectorGraphic element', () => {
-    const svgComponent = TestUtils.renderIntoDocument(
-      <VectorGraphic />
+    const svgComponent = ReactTestUtils.renderIntoDocument(
+      <VectorGraphic />,
     );
     const svgNode = ReactDOM.findDOMNode(svgComponent);
     expect(svgNode.nodeName).toEqual('svg');
   });
 
   it('Does render an SVG element with children', () => {
-    const svgComponent = TestUtils.renderIntoDocument(
+    const svgComponent = ReactTestUtils.renderIntoDocument(
       <VectorGraphic>
         <g
           fill={'none'}
@@ -29,7 +29,7 @@ describe('VectorGraphic', () => {
             y={'0'}
           />
         </g>
-      </VectorGraphic>
+      </VectorGraphic>,
     );
     const svgNode = ReactDOM.findDOMNode(svgComponent);
     expect(svgNode.children).not.toEqual({});

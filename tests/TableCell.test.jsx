@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import TableCell from '../src/components/TableCell';
 
 let tableCellComponent;
@@ -9,19 +9,19 @@ let tableCellNode;
 
 const renderCell = (props) => {
   const theProps = props || { rowIndex: 0 };
-  tableCellComponent = TestUtils.renderIntoDocument(
+  tableCellComponent = ReactTestUtils.renderIntoDocument(
     <table>
       <tbody>
         <tr>
           <TableCell
             colSpan={theProps.colSpan}
-            children={theProps.children}
             onClick={theProps.onClick}
             width={theProps.width}
-          />
+          >{theProps.children}
+          </TableCell>
         </tr>
       </tbody>
-    </table>
+    </table>,
   );
   tableNode = ReactDOM.findDOMNode(tableCellComponent);
   tableCellNode = tableNode.getElementsByTagName('td')[0];
@@ -51,7 +51,7 @@ describe('TableCell', () => {
     renderCell({
       onClick: mockHandleClick,
     });
-    TestUtils.Simulate.click(tableCellNode);
+    ReactTestUtils.Simulate.click(tableCellNode);
     expect(mockHandleClick).toBeCalled();
   });
   it('sets a width', () => {

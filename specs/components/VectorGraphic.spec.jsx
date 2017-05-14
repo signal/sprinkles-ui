@@ -12,7 +12,7 @@ describe('VectorGraphic', function () {
   this.loadSvg = (props) => {
     this.unload();
     this.component(
-      <VectorGraphic>{props.children}</VectorGraphic>
+      <VectorGraphic>{props.children}</VectorGraphic>,
     );
   };
 
@@ -71,9 +71,9 @@ describe('VectorGraphic', function () {
 
   #### API
 
-  - **chilren** *React.PropTypes.number* (optional) the SVG data to render
-  - **height** *React.PropTypes.number* (optional) the SVG canvas height
-  - **width** *React.PropTypes.number* (optional) the SVG canvas width
+  - **chilren** *PropTypes.number* (optional) the SVG data to render
+  - **height** *PropTypes.number* (optional) the SVG canvas height
+  - **width** *PropTypes.number* (optional) the SVG canvas width
 
   `);
 });

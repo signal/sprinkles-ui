@@ -21,7 +21,7 @@ describe('Panel', function () {
         text={props.text}
       >
         {props.children}
-      </Panel>
+      </Panel>,
     ).width('100%');
   };
 
@@ -106,12 +106,12 @@ describe('Panel', function () {
 
   #### API
 
-  - **backgroundColor** *React.PropTypes.string* (optional) overides default background color of white
-  - **borderRadius** *React.PropTypes.number* Sets a borderRadius to the specified strength
-  - **boxShadowStrength** *React.PropTypes.number* Sets a boxShadow to the specified strength
-  - **children** *React.PropTypes.node* (optional) overides text, render children of any kind inside the panel
-  - **color** *React.PropTypes.string* (optional) overides default text color of black
-  - **padding** *React.PropTypes.string* (optiona) overides default padding, expressed as '10px 10px 10px 10px'
-  - **text** *React.PropTypes.string* (optional) sets text to be displayed
+  - **backgroundColor** *PropTypes.string* (optional) overides default background color of white
+  - **borderRadius** *PropTypes.number* Sets a borderRadius to the specified strength
+  - **boxShadowStrength** *PropTypes.number* Sets a boxShadow to the specified strength
+  - **children** *PropTypes.node* (optional) overides text, render children of any kind inside the panel
+  - **color** *PropTypes.string* (optional) overides default text color of black
+  - **padding** *PropTypes.string* (optiona) overides default padding, expressed as '10px 10px 10px 10px'
+  - **text** *PropTypes.string* (optional) sets text to be displayed
   `);
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import Dropdown from '../src/components/Dropdown';
 
 let anchorElNode;
@@ -23,11 +23,11 @@ const defaultProps = {
   triggerEl: fakeAnchorEl,
 };
 const renderDropDown = (props) => {
-  dropdownComponent = TestUtils.renderIntoDocument(
+  dropdownComponent = ReactTestUtils.renderIntoDocument(
     <Dropdown
       {...defaultProps}
       {...props}
-    />
+    />,
   );
   dropdownNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
   popoverNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.contentRef);
@@ -101,7 +101,7 @@ describe('Dropdown', () => {
       useLayerForClickAway: true,
     });
     const closeLayerNode = ReactDOM.findDOMNode(dropdownComponent.popoverRef.closeLayerRef);
-    TestUtils.Simulate.click(closeLayerNode);
+    ReactTestUtils.Simulate.click(closeLayerNode);
     expect(mockHandleRequestClose).toBeCalled();
   });
 
@@ -115,7 +115,7 @@ describe('Dropdown', () => {
       onClick: mockHandleClick,
     });
     const listItem = ReactDOM.findDOMNode(dropdownComponent.itemsRef.listItemRefs.get(0));
-    TestUtils.Simulate.click(listItem);
+    ReactTestUtils.Simulate.click(listItem);
     expect(mockHandleClick).toBeCalledWith(items[0]);
   });
 
@@ -125,7 +125,7 @@ describe('Dropdown', () => {
       onRequestOpen: mockOnRequestOpen,
     });
 
-    TestUtils.Simulate.click(anchorElNode);
+    ReactTestUtils.Simulate.click(anchorElNode);
     expect(mockOnRequestOpen).toBeCalled();
   });
 
@@ -137,7 +137,7 @@ describe('Dropdown', () => {
       triggerEl: fakeAnchorEl,
     });
 
-    TestUtils.Simulate.click(anchorElNode);
+    ReactTestUtils.Simulate.click(anchorElNode);
     expect(mockOnRequestOpen).not.toBeCalled();
   });
 });

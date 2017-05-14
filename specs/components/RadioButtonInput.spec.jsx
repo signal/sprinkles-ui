@@ -28,7 +28,7 @@ describe('RadioButtonInput', function () {
       <RadioButtonInput
         items={items}
         onChange={handleChange}
-      />
+      />,
     );
   });
 
@@ -53,9 +53,9 @@ describe('RadioButtonInput', function () {
   A RadioButtonInput Element
 
   #### API
-  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
-  - **initialValue** *React.PropTypes.string* (optional) initial value of the radio button group
-  - **onChange** *React.PropTypes.func* (optional) callback called when the value of the radio button group changes
-  - **status** *React.PropTypes.oneOf* (optional) set status of the RadioButtonInput. Acceptable value are 'error', 'warning' and 'success'
+  - **enabled** *PropTypes.bool* (optional) enable/disable user input
+  - **initialValue** *PropTypes.string* (optional) initial value of the radio button group
+  - **onChange** *PropTypes.func* (optional) callback called when the value of the radio button group changes
+  - **status** *PropTypes.oneOf* (optional) set status of the RadioButtonInput. Acceptable value are 'error', 'warning' and 'success'
   `);
 });

@@ -1,6 +1,7 @@
 import color from 'color';
 import { Link } from 'react-router';
 import React from 'react';
+import PropTypes from 'prop-types';
 import reactCSS from 'reactcss';
 import Base from './Base';
 import Text from './Text';
@@ -8,20 +9,20 @@ import VectorGraphic from './VectorGraphic';
 
 export default class NavListItem extends Base {
   static propTypes = {
-    linkStyle: React.PropTypes.shape({
-      color: React.PropTypes.string,
-      fontSize: React.PropTypes.number,
-      fontWeight: React.PropTypes.string,
-      textDecoration: React.PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
+    linkStyle: PropTypes.shape({
+      color: PropTypes.string,
+      fontSize: PropTypes.number,
+      fontWeight: PropTypes.string,
+      textDecoration: PropTypes.oneOf(['underline', 'overline', 'line-through', 'none']),
     }),
-    expanded: React.PropTypes.bool,
-    height: React.PropTypes.number,
-    hovered: React.PropTypes.bool,
-    icon: React.PropTypes.node,
-    selected: React.PropTypes.bool,
-    text: React.PropTypes.string,
-    width: React.PropTypes.number,
-    type: React.PropTypes.oneOf([
+    expanded: PropTypes.bool,
+    height: PropTypes.number,
+    hovered: PropTypes.bool,
+    icon: PropTypes.node,
+    selected: PropTypes.bool,
+    text: PropTypes.string,
+    width: PropTypes.number,
+    type: PropTypes.oneOf([
       'accent',
       'hover',
       'primary',
@@ -31,7 +32,7 @@ export default class NavListItem extends Base {
       'selected',
       'tableHeader',
     ]),
-    urlPath: React.PropTypes.string,
+    urlPath: PropTypes.string,
   };
 
   static defaultProps = {

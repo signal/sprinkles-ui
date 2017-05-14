@@ -26,7 +26,7 @@ describe('Field', function () {
           initialValue={'Initial Value'}
           placeholder={'placeholder'}
         />
-      </Field>
+      </Field>,
     ).width('100%');
   });
 
@@ -57,13 +57,13 @@ describe('Field', function () {
 
   #### API
 
-  - **children** *React.PropTypes.node* current supported nodes: TextInput *(TODO: add more Documentation on how props passed down to children)*
-  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
-  - **error** *React.PropTypes.string* (optional) an error message that is displayed with the Field
-  - **label** *React.PropTypes.string* (optional) a label to distingush the field
-  - **onChange** *React.PropTypes.func* (optional) called when the input changes
-  - **required** *React.PropTypes.bool* (optional) field is required (or not) to be in a valid state before it can be submitted
-  - **status** *React.PropTypes.oneOf* (optional) set status of the Field. Acceptable value are 'error', 'warning' and 'success'
+  - **children** *PropTypes.node* current supported nodes: TextInput *(TODO: add more Documentation on how props passed down to children)*
+  - **enabled** *PropTypes.bool* (optional) enable/disable user input
+  - **error** *PropTypes.string* (optional) an error message that is displayed with the Field
+  - **label** *PropTypes.string* (optional) a label to distingush the field
+  - **onChange** *PropTypes.func* (optional) called when the input changes
+  - **required** *PropTypes.bool* (optional) field is required (or not) to be in a valid state before it can be submitted
+  - **status** *PropTypes.oneOf* (optional) set status of the Field. Acceptable value are 'error', 'warning' and 'success'
 
   `);
 });

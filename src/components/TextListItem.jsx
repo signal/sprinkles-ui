@@ -2,19 +2,20 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Text from './Text';
 
 export default class TextListItem extends Base {
   static propTypes = {
-    enabled: React.PropTypes.bool,
-    hovered: React.PropTypes.bool,
-    itemPadding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    listPosition: React.PropTypes.oneOf(['first', 'middle', 'last']),
-    onClick: React.PropTypes.func,
-    selected: React.PropTypes.bool,
-    showDividers: React.PropTypes.bool,
-    text: React.PropTypes.string,
+    enabled: PropTypes.bool,
+    hovered: PropTypes.bool,
+    itemPadding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    listPosition: PropTypes.oneOf(['first', 'middle', 'last']),
+    onClick: PropTypes.func,
+    selected: PropTypes.bool,
+    showDividers: PropTypes.bool,
+    text: PropTypes.string,
   }
 
   static defaultProps = {

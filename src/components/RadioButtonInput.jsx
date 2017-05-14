@@ -4,21 +4,22 @@
 import color from 'color';
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Text from './Text';
 
 export default class RadioButtonInput extends Base {
   static propTypes = {
-    enabled: React.PropTypes.bool,
-    initialValue: React.PropTypes.string,
-    items: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        name: React.PropTypes.string.isRequired,
-        value: React.PropTypes.string.isRequired,
-      })
+    enabled: PropTypes.bool,
+    initialValue: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+      }),
     ).isRequired,
-    onChange: React.PropTypes.func,
-    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
+    onChange: PropTypes.func,
+    status: PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   static defaultProps = {
@@ -103,7 +104,7 @@ export default class RadioButtonInput extends Base {
           </Text>
         </span>
       </div>
-      )
+    ),
     );
   }
 

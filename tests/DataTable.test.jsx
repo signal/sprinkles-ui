@@ -1,7 +1,7 @@
 import color from 'color';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import { BackgroundColors } from '../src/shared/colors';
 import DataTable from '../src/components/DataTable';
 
@@ -71,7 +71,7 @@ let cell;
 
 const mockHandleClick = jest.fn();
 const renderTable = (props) => {
-  tableComponent = TestUtils.renderIntoDocument(
+  tableComponent = ReactTestUtils.renderIntoDocument(
     <DataTable
       columns={props.columns}
       headers={props.headers}
@@ -84,7 +84,7 @@ const renderTable = (props) => {
       recordInclusion={props.recordInclusion}
       returnAllRecordsOnClick={props.returnAllRecordsOnClick}
       selectedRows={props.selectedRows}
-    />
+    />,
   );
   tableNode = ReactDOM.findDOMNode(tableComponent);
   tHead = tableNode.getElementsByTagName('thead')[0];
@@ -187,7 +187,7 @@ describe('Table', () => {
       onClick: mockHandleClick,
       records,
     });
-    TestUtils.Simulate.mouseOver(row(0));
+    ReactTestUtils.Simulate.mouseOver(row(0));
 
     expect(color(row(0).style.background).hexString())
       .toBe(color(BackgroundColors.hover).hexString());
@@ -198,7 +198,7 @@ describe('Table', () => {
       onClick: null,
       records,
     });
-    TestUtils.Simulate.mouseOver(row(1));
+    ReactTestUtils.Simulate.mouseOver(row(1));
 
     expect(row(1).style.background).toBe('');
   });
@@ -213,7 +213,7 @@ describe('Table', () => {
       records,
       recordInclusion: ['name', 'age'],
     });
-    TestUtils.Simulate.click(cell(0, 0));
+    ReactTestUtils.Simulate.click(cell(0, 0));
 
     expect(mockHandleClick).toBeCalledWith(
       cell(0, 0),
@@ -223,7 +223,7 @@ describe('Table', () => {
         row: limitedData,
         xCord: 0,
         yCord: 0,
-      }
+      },
     );
   });
 
@@ -239,7 +239,7 @@ describe('Table', () => {
       recordInclusion: ['name', 'age', 'href'],
       filterRecords: [{ name: 'Larry' }],
     });
-    TestUtils.Simulate.click(cell(0, 0));
+    ReactTestUtils.Simulate.click(cell(0, 0));
 
     expect(mockHandleClick).toBeCalledWith(
       cell(0, 0),
@@ -249,7 +249,7 @@ describe('Table', () => {
         row: limitedData,
         xCord: 0,
         yCord: 0,
-      }
+      },
     );
   });
 
@@ -260,7 +260,7 @@ describe('Table', () => {
       recordInclusion: ['name', 'age'],
       returnAllRecordsOnClick: true,
     });
-    TestUtils.Simulate.click(cell(0, 0));
+    ReactTestUtils.Simulate.click(cell(0, 0));
 
     expect(mockHandleClick).toBeCalledWith(
       cell(0, 0),
@@ -395,7 +395,7 @@ describe('Table', () => {
     const checkBoxNode = tableComponent.checkBoxRefs[2].inputRef;
     const result = [];
     result[2] = records[2];
-    TestUtils.Simulate.click(checkBoxNode);
+    ReactTestUtils.Simulate.click(checkBoxNode);
     expect(mockHandleChange).toBeCalledWith(result);
   });
   it('returns a change event when select all is triggered', () => {
@@ -407,7 +407,7 @@ describe('Table', () => {
       onChange: mockHandleChange,
     });
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
-    TestUtils.Simulate.click(checkBoxNode);
+    ReactTestUtils.Simulate.click(checkBoxNode);
     expect(mockHandleChange).toBeCalledWith(records);
   });
 
@@ -420,7 +420,7 @@ describe('Table', () => {
       onChange: mockHandleChange,
     });
     const selectAllTHNode = headerElement(0);
-    TestUtils.Simulate.click(selectAllTHNode);
+    ReactTestUtils.Simulate.click(selectAllTHNode);
     expect(mockHandleChange).toBeCalledWith(records);
   });
 
@@ -434,7 +434,7 @@ describe('Table', () => {
       filterRecords: [{ status: 'Inactive' }],
     });
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
-    TestUtils.Simulate.click(checkBoxNode);
+    ReactTestUtils.Simulate.click(checkBoxNode);
     expect(rows().length).toBe(2);
     expect(cell(0, 1).textContent).toBe('Frank');
     expect(cell(1, 1).textContent).toBe('Jose');
@@ -452,7 +452,7 @@ describe('Table', () => {
     const result = [];
     result[0] = records[0];
 
-    TestUtils.Simulate.click(cell(0, 0));
+    ReactTestUtils.Simulate.click(cell(0, 0));
     expect(mockHandleChange).toBeCalledWith(result);
   });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import { StructuralColors } from '../src/shared/colors';
 import List from '../src/components/List';
 import ListItem from '../src/components/ListItem';
@@ -8,41 +8,41 @@ import TextListItem from '../src/components/TextListItem';
 
 describe('List', () => {
   it('Does render a List', () => {
-    const listComponent = TestUtils.renderIntoDocument(
-      <List />
+    const listComponent = ReactTestUtils.renderIntoDocument(
+      <List />,
     );
     expect(listComponent).toBeDefined();
   });
 
   it('Does render list children', () => {
     const text = 'howdy';
-    const listComponent = TestUtils.renderIntoDocument(
+    const listComponent = ReactTestUtils.renderIntoDocument(
       <List>
         <ListItem>
           <TextListItem
             text={text}
           />
         </ListItem>
-      </List>
+      </List>,
     );
     const textListItemNode = ReactDOM.findDOMNode(listComponent.listItemRefs.get(0).listItemRef);
     expect(textListItemNode.textContent).toBe(text);
   });
 
   it('Does render single list item with expected styles', () => {
-    const listComponent = TestUtils.renderIntoDocument(
+    const listComponent = ReactTestUtils.renderIntoDocument(
       <List>
         <ListItem>
           <TextListItem />
         </ListItem>
-      </List>
+      </List>,
     );
     const textListItemNode = ReactDOM.findDOMNode(listComponent.listItemRefs.get(0).listItemRef);
     expect(textListItemNode.style.borderBottom).toBe('');
   });
 
   it('Does render 2 item list item with expected styles', () => {
-    const listComponent = TestUtils.renderIntoDocument(
+    const listComponent = ReactTestUtils.renderIntoDocument(
       <List>
         <ListItem>
           <TextListItem />
@@ -50,7 +50,7 @@ describe('List', () => {
         <ListItem>
           <TextListItem />
         </ListItem>
-      </List>
+      </List>,
     );
     const firstTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(0).listItemRef);
@@ -62,7 +62,7 @@ describe('List', () => {
   });
 
   it('Does render 3 item list item with expected styles', () => {
-    const listComponent = TestUtils.renderIntoDocument(
+    const listComponent = ReactTestUtils.renderIntoDocument(
       <List>
         <ListItem>
           <TextListItem />
@@ -73,7 +73,7 @@ describe('List', () => {
         <ListItem>
           <TextListItem />
         </ListItem>
-      </List>
+      </List>,
     );
     const firstTextListItemNode = ReactDOM
       .findDOMNode(listComponent.listItemRefs.get(0).listItemRef);

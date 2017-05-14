@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import Text from '../src/components/Text';
 
 
@@ -8,8 +8,8 @@ describe('Text', () => {
   it('Does render a Text', () => {
     const text = 'howdy';
     // Render a Text with no style
-    const textComponent = TestUtils.renderIntoDocument(
-      <Text>{text}</Text>
+    const textComponent = ReactTestUtils.renderIntoDocument(
+      <Text>{text}</Text>,
     );
     // grab the DOM node so we can inspect it
     const textNode = ReactDOM.findDOMNode(textComponent);
@@ -19,8 +19,8 @@ describe('Text', () => {
 
   it('Does Render Bold Text', () => {
     const text = 'howdy';
-    const textComponent = TestUtils.renderIntoDocument(
-      <Text fontWeight={'bold'}>{text}</Text>
+    const textComponent = ReactTestUtils.renderIntoDocument(
+      <Text fontWeight={'bold'}>{text}</Text>,
     );
     const textNode = ReactDOM.findDOMNode(textComponent);
     expect(textNode.style.fontWeight).toEqual('bold');
@@ -29,8 +29,8 @@ describe('Text', () => {
   it('Does render underlined text', () => {
     const text = 'howdy';
     const decoration = 'underline';
-    const textComponent = TestUtils.renderIntoDocument(
-      <Text textDecoration={decoration}>{text}</Text>
+    const textComponent = ReactTestUtils.renderIntoDocument(
+      <Text textDecoration={decoration}>{text}</Text>,
     );
     const textNode = ReactDOM.findDOMNode(textComponent);
     expect(textNode.style.textDecoration).toEqual(decoration);
@@ -39,8 +39,8 @@ describe('Text', () => {
   it('Does render overlined text', () => {
     const text = 'howdy';
     const decoration = 'overline';
-    const textComponent = TestUtils.renderIntoDocument(
-      <Text textDecoration={decoration}>{text}</Text>
+    const textComponent = ReactTestUtils.renderIntoDocument(
+      <Text textDecoration={decoration}>{text}</Text>,
     );
     const textNode = ReactDOM.findDOMNode(textComponent);
     expect(textNode.style.textDecoration).toEqual(decoration);
@@ -49,8 +49,8 @@ describe('Text', () => {
   it('Does render line-through text', () => {
     const text = 'howdy';
     const decoration = 'line-through';
-    const textComponent = TestUtils.renderIntoDocument(
-      <Text textDecoration={decoration}>{text}</Text>
+    const textComponent = ReactTestUtils.renderIntoDocument(
+      <Text textDecoration={decoration}>{text}</Text>,
     );
     const textNode = ReactDOM.findDOMNode(textComponent);
     expect(textNode.style.textDecoration).toEqual(decoration);

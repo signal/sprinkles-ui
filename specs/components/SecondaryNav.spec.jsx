@@ -26,7 +26,7 @@ describe('SecondaryNav', function () {
               style={itemStyle}
             >
               {item}
-            </div>
+            </div>,
           )
         }
         rightItems={
@@ -36,10 +36,10 @@ describe('SecondaryNav', function () {
               style={itemStyle}
             >
               {item}
-            </div>
+            </div>,
           )
         }
-      />
+      />,
     ).width('100%').height(60);
   });
 
@@ -53,8 +53,8 @@ describe('SecondaryNav', function () {
 
   #### API
 
-  - **leftItems** *React.PropTypes.node* (optional) Components you want visible on the left
-  - **rightItems** *React.PropTypes.node* (optional) Components you want visible on the right
+  - **leftItems** *PropTypes.node* (optional) Components you want visible on the left
+  - **rightItems** *PropTypes.node* (optional) Components you want visible on the right
 
   `);
 });

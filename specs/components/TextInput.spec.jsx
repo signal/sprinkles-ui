@@ -23,7 +23,7 @@ describe('TextInput', function () {
         initialValue={'Initial Value'}
         onChange={handleChange}
         placeholder={'placeholder'}
-      />
+      />,
     ).width('100%');
   });
 
@@ -56,14 +56,14 @@ describe('TextInput', function () {
 
   #### API
 
-  - **autoComplete** *React.PropTypes.bool* (optional) toggle input autoComplete from browser
-  - **boundValue** *React.PropTypes.string* (optional) bound value of the text box, value is managed outside of the component
-  - **enabled** *React.PropTypes.bool* (optional) enable/disable user input
-  - **initialValue** *React.PropTypes.string* (optional) initial value of the text box
-  - **multiline** *React.PropTypes.bool* (optional) text input is a multiline textarea
-  - **onChange** *React.PropTypes.func* (optional) callback called when the value of the text box changes
-  - **placeholder** *React.PropTypes.string* (optional) placeholder when text is empty
-  - **status** *React.PropTypes.oneOf* (optional) set status of text box (overrides focus). Acceptable values are 'error', 'warning' and 'success'
+  - **autoComplete** *PropTypes.bool* (optional) toggle input autoComplete from browser
+  - **boundValue** *PropTypes.string* (optional) bound value of the text box, value is managed outside of the component
+  - **enabled** *PropTypes.bool* (optional) enable/disable user input
+  - **initialValue** *PropTypes.string* (optional) initial value of the text box
+  - **multiline** *PropTypes.bool* (optional) text input is a multiline textarea
+  - **onChange** *PropTypes.func* (optional) callback called when the value of the text box changes
+  - **placeholder** *PropTypes.string* (optional) placeholder when text is empty
+  - **status** *PropTypes.oneOf* (optional) set status of text box (overrides focus). Acceptable values are 'error', 'warning' and 'success'
 
   `);
 });

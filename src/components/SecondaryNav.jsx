@@ -1,11 +1,12 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 
 export default class SecondaryNav extends Base {
   static propTypes = {
-    leftItems: React.PropTypes.node,
-    rightItems: React.PropTypes.node,
+    leftItems: PropTypes.node,
+    rightItems: PropTypes.node,
   };
 
   displayName = 'SecondaryNav';

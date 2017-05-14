@@ -1,16 +1,17 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import { Resets } from '../shared/styles';
 
 export default class ListItem extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    itemPadding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    listPosition: React.PropTypes.oneOf(['first', 'middle', 'last']),
-    onClick: React.PropTypes.func,
-    selected: React.PropTypes.bool,
-    showDividers: React.PropTypes.bool,
-    textAlign: React.PropTypes.string,
+    children: PropTypes.node,
+    itemPadding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    listPosition: PropTypes.oneOf(['first', 'middle', 'last']),
+    onClick: PropTypes.func,
+    selected: PropTypes.bool,
+    showDividers: PropTypes.bool,
+    textAlign: PropTypes.string,
   };
 
   static defaultProps = {
@@ -56,7 +57,7 @@ export default class ListItem extends React.Component {
     const style = reactCSS({
       default: {
         ListItemButton: {
-          textAlign: this.props.textAlign,
+          textAlign: `${this.props.textAlign}`,
           width: '100%',
         },
       },

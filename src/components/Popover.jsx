@@ -4,20 +4,21 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import zindex from '../shared/zindex';
 import { Resets } from '../shared/styles';
 
 export default class Popover extends React.Component {
   static propTypes = {
-    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    children: React.PropTypes.node,
-    contentWidth: React.PropTypes.number,
-    open: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    onRequestClose: React.PropTypes.func,
-    onRequestOpen: React.PropTypes.func,
-    triggerEl: React.PropTypes.node.isRequired,
-    useLayerForClickAway: React.PropTypes.bool,
+    anchorOrigin: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    children: PropTypes.node,
+    contentWidth: PropTypes.number,
+    open: PropTypes.bool,
+    disabled: PropTypes.bool,
+    onRequestClose: PropTypes.func,
+    onRequestOpen: PropTypes.func,
+    triggerEl: PropTypes.node.isRequired,
+    useLayerForClickAway: PropTypes.bool,
   };
 
   static defaultProps = {

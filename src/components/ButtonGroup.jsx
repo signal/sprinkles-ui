@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 
 export default class ButtonGroup extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    onClick: React.PropTypes.func,
-    selectedButton: React.PropTypes.string,
-    type: React.PropTypes.oneOf([
+    children: PropTypes.node.isRequired,
+    onClick: PropTypes.func,
+    selectedButton: PropTypes.string,
+    type: PropTypes.oneOf([
       'secondary',
       'primary',
       'success',
@@ -18,6 +19,8 @@ export default class ButtonGroup extends React.Component {
 
   static defaultProps = {
     onClick: () => {},
+    selectedButton: null,
+    type: 'primary',
   };
 
   displayName = 'ButtonGroup';

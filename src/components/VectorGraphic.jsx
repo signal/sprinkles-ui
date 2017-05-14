@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class VectorGraphic extends React.Component {
   static propTypes = {
-    children: React.PropTypes.node,
-    height: React.PropTypes.number,
-    width: React.PropTypes.number,
+    children: PropTypes.node,
+    height: PropTypes.number,
+    width: PropTypes.number,
   };
 
   static defaultProps = {

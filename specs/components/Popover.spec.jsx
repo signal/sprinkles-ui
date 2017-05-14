@@ -1,6 +1,7 @@
 /* eslint func-names: "off" */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import loremIpsum from 'lorem-ipsum';
 import Popover from '../../src/components/Popover';
 import { NoticeColors } from '../../src/shared/colors';
@@ -9,14 +10,14 @@ import { NoticeColors } from '../../src/shared/colors';
 // Wrapper to contain a Popover and an anchor element
 class PopoverWrapper extends React.Component {
   static propTypes = {
-    anchorOrigin: React.PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    children: React.PropTypes.node,
-    contentWidth: React.PropTypes.number,
-    open: React.PropTypes.bool,
-    onRequestOpen: React.PropTypes.func,
-    onRequestClose: React.PropTypes.func,
-    triggerEl: React.PropTypes.node.isRequired,
-    useLayerForClickAway: React.PropTypes.bool,
+    anchorOrigin: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    children: PropTypes.node,
+    contentWidth: PropTypes.number,
+    open: PropTypes.bool,
+    onRequestOpen: PropTypes.func,
+    onRequestClose: PropTypes.func,
+    triggerEl: PropTypes.node.isRequired,
+    useLayerForClickAway: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -90,7 +91,7 @@ describe('Popover', function () {
           count: 1,
         })}
         </div>
-      </PopoverWrapper>
+      </PopoverWrapper>,
     );
   });
 
@@ -148,14 +149,14 @@ describe('Popover', function () {
 
   #### API
 
-  - **anchorOrigin** *React.PropTypes.object* (optional) point on the anchorEl to anchor against
-  - **children** *React.PropTypes.node* (optional) child components
-  - **constrainWidth** *React.PropTypes.bool* (optional) when true keeps the width of the popover the same as the parent
-  - **contentWidth** *React.PropTypes.number* (optional) specify a width of the popover, otherwise it will take the width of the triggerEl
-  - **open** *React.PropTypes.bool* (optional) set the popover to be open or closed
-  - **onRequestOpen** *React.PropTypes.func* (optional) callback called when popover is requesting to open
-  - **onRequestClose** *React.PropTypes.func* (optional) callback called when popover is requesting to close
-  - **triggerEl** *React.PropTypes.node* React node used to trigger the popover
-  - **useLayerForClickAway** *React.PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
+  - **anchorOrigin** *PropTypes.object* (optional) point on the anchorEl to anchor against
+  - **children** *PropTypes.node* (optional) child components
+  - **constrainWidth** *PropTypes.bool* (optional) when true keeps the width of the popover the same as the parent
+  - **contentWidth** *PropTypes.number* (optional) specify a width of the popover, otherwise it will take the width of the triggerEl
+  - **open** *PropTypes.bool* (optional) set the popover to be open or closed
+  - **onRequestOpen** *PropTypes.func* (optional) callback called when popover is requesting to open
+  - **onRequestClose** *PropTypes.func* (optional) callback called when popover is requesting to close
+  - **triggerEl** *PropTypes.node* React node used to trigger the popover
+  - **useLayerForClickAway** *PropTypes.bool* (optional) an invisible layer that takes up the whole screen, triggers onRequestClose when clicked
   `);
 });

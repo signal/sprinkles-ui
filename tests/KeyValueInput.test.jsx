@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import color from 'color';
 import { NoticeColors, TextColors } from '../src/shared/colors';
 import KeyValueInput from '../src/components/KeyValueInput';
@@ -9,15 +9,15 @@ import KeyValueInput from '../src/components/KeyValueInput';
 describe('KeyValueInput', () => {
   it('Does render a KeyValueInput', () => {
     // Render a KeyValueInput with no style
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput />,
     );
     expect(keyValueInputComponent).toBeDefined();
   });
 
   it('Does render an empty KeyValueInput', () => {
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput />,
     );
     expect(keyValueInputComponent.state.value.toJS()).toEqual([{
       key: '',
@@ -33,11 +33,11 @@ describe('KeyValueInput', () => {
 
   it('Does update key when key input changes', () => {
     const newKey = 'new key';
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput />,
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    TestUtils.Simulate.change(keyInputNode, { target: { value: newKey } });
+    ReactTestUtils.Simulate.change(keyInputNode, { target: { value: newKey } });
     expect(keyValueInputComponent.state.value.toJS()).toEqual([{
       key: newKey,
       value: '',
@@ -46,11 +46,11 @@ describe('KeyValueInput', () => {
 
   it('Does update value when value input changes', () => {
     const newValue = 'new value';
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput />,
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
-    TestUtils.Simulate.change(valueInputNode, { target: { value: newValue } });
+    ReactTestUtils.Simulate.change(valueInputNode, { target: { value: newValue } });
     expect(keyValueInputComponent.state.value.toJS()).toEqual([{
       key: '',
       value: newValue,
@@ -58,11 +58,11 @@ describe('KeyValueInput', () => {
   });
 
   it('Does add new key value pair when add button is clicked', () => {
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput />,
     );
     const addButtonNode = ReactDOM.findDOMNode(keyValueInputComponent.addButtonRef);
-    TestUtils.Simulate.click(addButtonNode);
+    ReactTestUtils.Simulate.click(addButtonNode);
     expect(keyValueInputComponent.state.value.toJS()).toEqual([
       {
         key: '',
@@ -82,8 +82,8 @@ describe('KeyValueInput', () => {
       key: 'key 2',
       value: 'value 2',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput initialValue={initialValue} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput initialValue={initialValue} />,
     );
     expect(keyValueInputComponent.state.value.toJS()).toEqual(initialValue);
   });
@@ -99,11 +99,11 @@ describe('KeyValueInput', () => {
       key: 'key 3',
       value: 'value 3',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput initialValue={initialValue} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput initialValue={initialValue} />,
     );
     const deleteButtonNode = ReactDOM.findDOMNode(keyValueInputComponent.deleteButtonRef1);
-    TestUtils.Simulate.click(deleteButtonNode);
+    ReactTestUtils.Simulate.click(deleteButtonNode);
     expect(keyValueInputComponent.state.value.toJS()).toEqual([
       {
         key: 'key 1',
@@ -117,8 +117,8 @@ describe('KeyValueInput', () => {
 
   it('Does allow key label customization', () => {
     const myKeyLabel = 'My Key Label';
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput keyLabel={myKeyLabel} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput keyLabel={myKeyLabel} />,
     );
     const keyLabelNode = ReactDOM.findDOMNode(keyValueInputComponent.keyLabelRef);
     expect(keyLabelNode.textContent).toBe(myKeyLabel);
@@ -126,8 +126,8 @@ describe('KeyValueInput', () => {
 
   it('Does allow value label customization', () => {
     const myValueLabel = 'My Value Label';
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput valueLabel={myValueLabel} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput valueLabel={myValueLabel} />,
     );
     const valueLabelNode = ReactDOM.findDOMNode(keyValueInputComponent.valueLabelRef);
     expect(valueLabelNode.textContent).toBe(myValueLabel);
@@ -135,8 +135,8 @@ describe('KeyValueInput', () => {
 
   it('Does allow add button text customization', () => {
     const myAddButtonText = 'A Really Cool Button';
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput addButtonText={myAddButtonText} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput addButtonText={myAddButtonText} />,
     );
     const addButtonNode = ReactDOM.findDOMNode(keyValueInputComponent.addButtonRef);
     expect(addButtonNode.textContent).toBe(myAddButtonText);
@@ -150,11 +150,11 @@ describe('KeyValueInput', () => {
       key: 'key 2',
       value: 'value 2',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         enabled={false}
         initialValue={initialValue}
-      />
+      />,
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
     expect(keyInputNode.disabled).toBe(true);
@@ -175,11 +175,11 @@ describe('KeyValueInput', () => {
   it('Does trigger an onChange event when a text input changes', () => {
     const newKey = 'new key';
     const mockHandleChange = jest.genMockFunction();
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput onChange={mockHandleChange} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput onChange={mockHandleChange} />,
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    TestUtils.Simulate.change(keyInputNode, { target: { value: newKey } });
+    ReactTestUtils.Simulate.change(keyInputNode, { target: { value: newKey } });
     expect(mockHandleChange).toBeCalledWith([
       {
         key: newKey,
@@ -200,14 +200,14 @@ describe('KeyValueInput', () => {
       key: 'key 3',
       value: 'value 3',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         initialValue={initialValue}
         onChange={mockHandleChange}
-      />
+      />,
     );
     const deleteButtonNode = ReactDOM.findDOMNode(keyValueInputComponent.deleteButtonRef1);
-    TestUtils.Simulate.click(deleteButtonNode);
+    ReactTestUtils.Simulate.click(deleteButtonNode);
     expect(mockHandleChange).toBeCalledWith([
       {
         key: 'key 1',
@@ -225,14 +225,14 @@ describe('KeyValueInput', () => {
       key: 'key 1',
       value: 'value 1',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         initialValue={initialValue}
         onChange={mockHandleChange}
-      />
+      />,
     );
     const addButtonNode = ReactDOM.findDOMNode(keyValueInputComponent.addButtonRef);
-    TestUtils.Simulate.click(addButtonNode);
+    ReactTestUtils.Simulate.click(addButtonNode);
     expect(mockHandleChange).toBeCalledWith([
       {
         key: 'key 1',
@@ -249,8 +249,8 @@ describe('KeyValueInput', () => {
       key: 'key 1',
       value: 'value 1',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput initialValue={initialValue} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput initialValue={initialValue} />,
     );
     expect(keyValueInputComponent.validate()).toEqual({
       valid: true,
@@ -264,11 +264,11 @@ describe('KeyValueInput', () => {
       key: 'key 1',
       value: 'value 1',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput initialValue={initialValue} />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput initialValue={initialValue} />,
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
-    TestUtils.Simulate.change(keyInputNode, { target: { value: 'another key' } });
+    ReactTestUtils.Simulate.change(keyInputNode, { target: { value: 'another key' } });
     expect(keyValueInputComponent.validate()).toEqual({
       valid: true,
       isInitialValue: false,
@@ -277,8 +277,8 @@ describe('KeyValueInput', () => {
   });
 
   it('Does validate as invalid if a value is empty', () => {
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
-      <KeyValueInput />
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
+      <KeyValueInput />,
     );
     expect(keyValueInputComponent.validate()).toEqual({
       valid: false,
@@ -288,10 +288,10 @@ describe('KeyValueInput', () => {
   });
 
   it('Does display success status', () => {
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         status={'success'}
-      />
+      />,
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
     expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
@@ -300,10 +300,10 @@ describe('KeyValueInput', () => {
   });
 
   it('Does display error status', () => {
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         status={'error'}
-      />
+      />,
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
     expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
@@ -316,11 +316,11 @@ describe('KeyValueInput', () => {
       key: 'key 1',
       value: '',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         initialValue={initialValue}
         status={'error'}
-      />
+      />,
     );
     const valueInputNode = ReactDOM.findDOMNode(keyValueInputComponent.valueInputRef0);
     expect(valueInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
@@ -336,11 +336,11 @@ describe('KeyValueInput', () => {
       key: 'key 1',
       value: 'value 1',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         initialValue={initialValue}
         uniqueKeys={true}
-      />
+      />,
     );
     expect(keyValueInputComponent.validate()).toEqual({
       valid: false,
@@ -360,12 +360,12 @@ describe('KeyValueInput', () => {
       key: 'key 1',
       value: 'value 1',
     }];
-    const keyValueInputComponent = TestUtils.renderIntoDocument(
+    const keyValueInputComponent = ReactTestUtils.renderIntoDocument(
       <KeyValueInput
         initialValue={initialValue}
         uniqueKeys={true}
         status={'error'}
-      />
+      />,
     );
     const keyInputNode = ReactDOM.findDOMNode(keyValueInputComponent.keyInputRef0);
     expect(keyInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);

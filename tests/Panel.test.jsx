@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import color from 'color';
 import Panel from '../src/components/Panel';
 
 describe('Panel', () => {
   it('Does render a Panel with default props', () => {
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(color(panelNode.style.backgroundColor).hexString()).toBe('#FEFEFE');
@@ -18,40 +18,40 @@ describe('Panel', () => {
   });
 
   it('Does render a Panel with rounded corners', () => {
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel borderRadius={2} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel borderRadius={2} />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.borderRadius).toBe('2px');
   });
 
   it('Does render a Panel with box shadows', () => {
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel boxShadowStrength={2} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel boxShadowStrength={2} />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.boxShadow).not.toBeUndefined();
   });
 
   it('Does render a Panel with text color', () => {
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel color={'#999999'} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel color={'#999999'} />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(color(panelNode.style.color).hexString()).toBe('#999999');
   });
 
   it('Does render a Panel with custom padding', () => {
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel padding={'10px 5px 20px 3px'} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel padding={'10px 5px 20px 3px'} />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.padding).toBe('10px 5px 20px 3px');
   });
 
   it('Does render a Panel with children', () => {
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel children={<div>{'Hello'}</div>} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel><div>{'Hello'}</div></Panel>,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.children).not.toBeUndefined();
@@ -59,8 +59,8 @@ describe('Panel', () => {
 
   it('Does render a Panel with height', () => {
     const height = 100;
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel height={height} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel height={height} />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.height)
@@ -69,8 +69,8 @@ describe('Panel', () => {
 
   it('Does render a Panel with width', () => {
     const width = 100;
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel width={width} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel width={width} />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.width)
@@ -78,8 +78,8 @@ describe('Panel', () => {
   });
 
   it('Does render a Panel with a border', () => {
-    const panelComponent = TestUtils.renderIntoDocument(
-      <Panel borderColor={'purple'} />
+    const panelComponent = ReactTestUtils.renderIntoDocument(
+      <Panel borderColor={'purple'} />,
     );
     const panelNode = ReactDOM.findDOMNode(panelComponent);
     expect(panelNode.style.border).toBe('1px solid purple');

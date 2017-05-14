@@ -2,12 +2,13 @@
 
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Base from './Base';
 import Text from './Text';
 
 export default class BulletedList extends Base {
   static propTypes = {
-    bulletStyle: React.PropTypes.oneOf([
+    bulletStyle: PropTypes.oneOf([
       'disc',
       'circle',
       'square',
@@ -24,14 +25,14 @@ export default class BulletedList extends Base {
       'upper-alpha',
       'none',
     ]),
-    listItems: React.PropTypes.arrayOf(React.PropTypes.shape({
-      children: React.PropTypes.node,
-      text: React.PropTypes.string,
-      styles: React.PropTypes.shape({
-        color: React.PropTypes.string,
-        fontSize: React.PropTypes.number,
-        fontWeight: React.PropTypes.string,
-        textDecoration: React.PropTypes.string,
+    listItems: PropTypes.arrayOf(PropTypes.shape({
+      children: PropTypes.node,
+      text: PropTypes.string,
+      styles: PropTypes.shape({
+        color: PropTypes.string,
+        fontSize: PropTypes.number,
+        fontWeight: PropTypes.string,
+        textDecoration: PropTypes.string,
       }),
     })),
   }
@@ -85,7 +86,7 @@ export default class BulletedList extends Base {
     return (
       <ul style={style.BulletedList}>
         {this.props.listItems.map((listItem, i) =>
-          this.renderItem(listItem, i)
+          this.renderItem(listItem, i),
         )}
       </ul>
     );

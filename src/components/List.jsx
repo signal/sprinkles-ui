@@ -1,14 +1,15 @@
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import { Map } from 'immutable';
 import Base from './Base';
 
 export default class List extends Base {
   static propTypes = {
-    children: React.PropTypes.node,
-    itemPadding: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
-    showBorder: React.PropTypes.bool,
-    showDividers: React.PropTypes.bool,
+    children: PropTypes.node,
+    itemPadding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    showBorder: PropTypes.bool,
+    showDividers: PropTypes.bool,
   };
 
   static defaultProps = {

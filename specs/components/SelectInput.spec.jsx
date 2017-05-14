@@ -3,20 +3,21 @@
 /* eslint react/no-unused-prop-types: "off" */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import SelectInput from '../../src/components/SelectInput';
 
 class SelectInputWrapper extends React.Component {
   static propTypes = {
-    enabled: React.PropTypes.bool,
-    initialValue: React.PropTypes.string,
-    items: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        value: React.PropTypes.string,
-        label: React.PropTypes.string,
-      })
+    enabled: PropTypes.bool,
+    initialValue: PropTypes.string,
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.string,
+        label: PropTypes.string,
+      }),
     ),
-    onChange: React.PropTypes.func,
-    status: React.PropTypes.oneOf(['error', 'warning', 'success']),
+    onChange: PropTypes.func,
+    status: PropTypes.oneOf(['error', 'warning', 'success']),
   };
 
   displayName = 'SelectInputWrapper';
@@ -54,7 +55,7 @@ describe('SelectInput', function () {
           label: 'Thing 3',
         }]}
         onChange={handleChange}
-      />
+      />,
     ).width(200);
   });
 
@@ -75,12 +76,12 @@ describe('SelectInput', function () {
   take a look a the DropDown component.
 
   #### API
-  - **enabled** *React.PropTypes.bool* (optional) disable the prop, by default this is true
-  - **initialValue** *React.PropTypes.string* (optional) set the initial value of the field
-  - **items** *React.PropTypes.arrayOf(React.PropTypes.shape)* (optional) an array of objects used to construct the dropdown
-    - **value** *React.PropTypes.string* (optional) value of an item passed through your form
-    - **label** *React.PropTypes.string* (optional) label visible to the user
-  - **onChange** *React.PropTypes.function* (optional) called whenever the form chnages by the user
-  - **status** *React.PropTypes.oneOf* (optional) state used by form to style input, options: 'error', 'warning', 'success'
+  - **enabled** *PropTypes.bool* (optional) disable the prop, by default this is true
+  - **initialValue** *PropTypes.string* (optional) set the initial value of the field
+  - **items** *PropTypes.arrayOf(PropTypes.shape)* (optional) an array of objects used to construct the dropdown
+    - **value** *PropTypes.string* (optional) value of an item passed through your form
+    - **label** *PropTypes.string* (optional) label visible to the user
+  - **onChange** *PropTypes.function* (optional) called whenever the form chnages by the user
+  - **status** *PropTypes.oneOf* (optional) state used by form to style input, options: 'error', 'warning', 'success'
   `);
 });

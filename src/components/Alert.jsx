@@ -1,15 +1,16 @@
 import React from 'react';
 import reactCSS from 'reactcss';
 import color from 'color';
+import PropTypes from 'prop-types';
 import Text from './Text';
 import Base from './Base';
 
 export default class Alert extends Base {
   static propTypes = {
-    children: React.PropTypes.node,
-    details: React.PropTypes.string,
-    title: React.PropTypes.string,
-    type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']).isRequired,
+    children: PropTypes.node,
+    details: PropTypes.string,
+    title: PropTypes.string,
+    type: PropTypes.oneOf(['success', 'info', 'warning', 'danger']).isRequired,
   };
 
   displayName = 'Alert';

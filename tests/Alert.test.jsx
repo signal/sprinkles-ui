@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import color from 'color';
 import { NoticeColors } from '../src/shared/colors';
 import Alert from '../src/components/Alert';
 
 function testColor(messageType) {
   let colorToTest;
-  const alertComponent = TestUtils.renderIntoDocument(
+  const alertComponent = ReactTestUtils.renderIntoDocument(
     <Alert
       details={'Some description'}
       type={messageType}
-    />
+    />,
   );
   switch (messageType) {
     case 'success':
@@ -36,11 +36,11 @@ function testColor(messageType) {
 fdescribe('Alert Message', () => {
   it('Does render an info Alert Message with description', () => {
     const description = 'An info message';
-    const alertComponent = TestUtils.renderIntoDocument(
+    const alertComponent = ReactTestUtils.renderIntoDocument(
       <Alert
         details={description}
         type={'info'}
-      />
+      />,
     );
     const detailsNode = ReactDOM.findDOMNode(alertComponent.detailsRef);
     expect(detailsNode.textContent).toBe(description);
@@ -49,12 +49,12 @@ fdescribe('Alert Message', () => {
   it('Does render an info Alert Message with description and title', () => {
     const description = 'An info message';
     const title = 'Info title';
-    const alertComponent = TestUtils.renderIntoDocument(
+    const alertComponent = ReactTestUtils.renderIntoDocument(
       <Alert
         details={description}
         title={title}
         type={'info'}
-      />
+      />,
     );
     const titleNode = ReactDOM.findDOMNode(alertComponent.titleRef);
     const detailsNode = ReactDOM.findDOMNode(alertComponent.detailsRef);

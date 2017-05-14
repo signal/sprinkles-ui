@@ -3,24 +3,25 @@
 import { Map } from 'immutable';
 import React from 'react';
 import reactCSS from 'reactcss';
+import PropTypes from 'prop-types';
 import Button from './Button';
 import Alert from './Alert';
 
 export default class Form extends React.Component {
   static propTypes = {
-    alert: React.PropTypes.shape({
-      type: React.PropTypes.oneOf(['success', 'info', 'warning', 'danger']).required,
-      title: React.PropTypes.string.required,
-      details: React.PropTypes.string.required,
-      children: React.PropTypes.node,
+    alert: PropTypes.shape({
+      type: PropTypes.oneOf(['success', 'info', 'warning', 'danger']).required,
+      title: PropTypes.string.required,
+      details: PropTypes.string.required,
+      children: PropTypes.node,
     }),
-    children: React.PropTypes.node,
-    fieldsPerRow: React.PropTypes.number,
-    labelPosition: React.PropTypes.oneOf(['left', 'top']),
-    onChange: React.PropTypes.func,
-    onSubmit: React.PropTypes.func,
-    submitButtonText: React.PropTypes.string,
-    working: React.PropTypes.bool,
+    children: PropTypes.node,
+    fieldsPerRow: PropTypes.number,
+    labelPosition: PropTypes.oneOf(['left', 'top']),
+    onChange: PropTypes.func,
+    onSubmit: PropTypes.func,
+    submitButtonText: PropTypes.string,
+    working: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -63,7 +64,7 @@ export default class Form extends React.Component {
         new Map({
           valid: true,
           validationError: '',
-        })
+        }),
       ),
     });
   }
