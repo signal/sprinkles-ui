@@ -29,6 +29,7 @@ export default class DataTable extends Base {
         Use date for any dates, must be pure date (Yes: 10/20/1994 No: Updated: 10/20/1994)
       */
       formatter: PropTypes.oneOf(['date']),
+      getSortValue: PropTypes.func,
     }),
     onClick: PropTypes.func,
     onHeaderClick: PropTypes.func,
@@ -126,12 +127,14 @@ export default class DataTable extends Base {
          +(a < b) || +(a === b) - 1,
     };
 
+    const { getSortValue = value => value } = this.props.orderBy;
+
     return mappedRecords.sort((a, b) => {
       switch (this.props.orderBy.formatter) {
         case 'date':
           return ops[this.props.orderBy.direction](new Date(a.value), new Date(b.value));
         default:
-          return ops[this.props.orderBy.direction](a.value, b.value);
+          return ops[this.props.orderBy.direction](getSortValue(a.value), getSortValue(b.value));
       }
     });
   }

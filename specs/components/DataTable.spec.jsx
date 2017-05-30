@@ -252,6 +252,30 @@ describe('DataTable', function () {
       });
   });
 
+  it('Sorts records with custom getSortValue', () => {
+    const getSortValue = value => (value.props ? value.props.children : value);
+    this.loadTable(
+      {
+        columns: {
+          order: ['name', 'color'],
+        },
+        headers: this.headers,
+        records: [{
+          name: 'Ryan Balla',
+          color: 'Blue',
+        },
+        {
+          name: <a href="http://signal.co">Signal Digital</a>,
+          color: 'Red',
+        }],
+        orderBy: {
+          column: 'name',
+          direction: 'desc',
+          getSortValue,
+        },
+      });
+  });
+
   /**
    * Documentation (Markdown)
    */
@@ -265,9 +289,10 @@ describe('DataTable', function () {
   - **recordInclusion** *PropTypes.object* (optional) maps to key of record, used to limit what is displayed
   - **onClick** *PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
   - **orderBy** *PropTypes.shape* (optional)
-    - **column** *PropTypes.string (optional) column of data to order by
-    - **direction** *PropTypes.oneOf (optional) 'asc' or 'desc'
-    - **formatter** *PropTypes.oneOf (optional) 'date' specify a way to format column data for sorting
+    - **column** *PropTypes.string* (optional) column of data to order by
+    - **direction** *PropTypes.oneOf* (optional) 'asc' or 'desc'
+    - **formatter** *PropTypes.oneOf* (optional) 'date' specify a way to format column data for sorting
+    - **getSortValue** *PropTypes.func* (optional) a function that takes column data and returns a value to be used for sorting, needed for non-primitive data types, like React Components.
   - **selectedRows** *PropTypes.arrayOf(PropTypes.number)* select rows based on index
   - **returnAllRecordsOnClick** *PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
   - **filterRecords**  *PropTypes.object* key/ value set of data to filter the records against. If multiple values are supplied, it's considered an OR not an AND

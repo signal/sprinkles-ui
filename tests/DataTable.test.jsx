@@ -70,6 +70,7 @@ let rows;
 let cell;
 
 const mockHandleClick = jest.fn();
+const getSortValue = value => (value.props ? value.props.children : value);
 const renderTable = (props) => {
   tableComponent = ReactTestUtils.renderIntoDocument(
     <DataTable
@@ -587,5 +588,39 @@ describe('Table', () => {
     expect(cell(0, 0).textContent).toBe('2015/12/05 15:06');
     expect(cell(1, 0).textContent).toBe('2016/02/18 17:09');
     expect(cell(2, 0).textContent).toBe('2016/10/18 17:09');
+  });
+
+  it('Sorts records with custom getSortValue ascending', () => {
+    renderTable({
+      headers,
+      records: [
+        { name: <a href="foo.com">Foo</a> },
+        { name: 'Bar' },
+      ],
+      orderBy: {
+        column: 'name',
+        direction: 'asc',
+        getSortValue,
+      },
+    });
+    expect(cell(0, 0).textContent).toContain('Bar');
+    expect(cell(1, 0).textContent).toContain('Foo');
+  });
+
+  it('Sorts records with non-primitive data types using getSortValue', () => {
+    renderTable({
+      headers,
+      records: [
+        { name: <a href="foo.com">Foo</a> },
+        { name: <a href="bar.com">Bar</a> },
+      ],
+      orderBy: {
+        column: 'name',
+        direction: 'desc',
+        getSortValue,
+      },
+    });
+    expect(cell(0, 0).textContent).toContain('Foo');
+    expect(cell(1, 0).textContent).toContain('Bar');
   });
 });
