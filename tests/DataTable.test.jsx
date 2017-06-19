@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 import { BackgroundColors } from '../src/shared/colors';
 import DataTable from '../src/components/DataTable';
+import { getGlamorStylesFromClassList } from './util';
 
 const headers = {
   name: 'Name',
@@ -179,7 +180,8 @@ describe('Table', () => {
       records,
       selectedRows: [0],
     });
-    expect(color(row(0).style.background).hexString())
+    const style = getGlamorStylesFromClassList(row(0).classList);
+    expect(color(style.background).hexString())
       .toBe(color(BackgroundColors.selected).hexString());
   });
 
@@ -188,9 +190,8 @@ describe('Table', () => {
       onClick: mockHandleClick,
       records,
     });
-    ReactTestUtils.Simulate.mouseOver(row(0));
-
-    expect(color(row(0).style.background).hexString())
+    const style = getGlamorStylesFromClassList(row(0).classList);
+    expect(color(style['&:hover'].background).hexString())
       .toBe(color(BackgroundColors.hover).hexString());
   });
 
@@ -344,9 +345,9 @@ describe('Table', () => {
       columns: { width: ['60%', '10%', '30%'] },
     });
 
-    expect(cell(0, 0).style.width).toBe('60%');
-    expect(cell(0, 1).style.width).toBe('10%');
-    expect(cell(0, 2).style.width).toBe('30%');
+    expect(getGlamorStylesFromClassList(cell(0, 0).classList).width).toBe('60%');
+    expect(getGlamorStylesFromClassList(cell(0, 1).classList).width).toBe('10%');
+    expect(getGlamorStylesFromClassList(cell(0, 2).classList).width).toBe('30%');
   });
 
   it('renders a table with columns in the order specified by records', () => {

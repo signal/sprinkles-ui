@@ -20,6 +20,8 @@
   "dependencies": {
     "color": "^0.11.3",
     "fuse.js": "^2.5.0",
+    "glamor": "^2.20.25",
+    "glamorous": "^3.23.2",
     "immutable": "^3.8.1",
     "prop-types": "^15.5.10",
     "react": "^15.3.1",
@@ -67,6 +69,7 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ],
+    "testPathIgnorePatterns": ["/util"],
     "moduleFileExtensions": [
       "js",
       "json",

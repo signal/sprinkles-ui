@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 import TableCell from '../src/components/TableCell';
+import { getGlamorStylesFromClassList } from './util';
 
 let tableCellComponent;
 let tableNode;
@@ -58,6 +59,7 @@ describe('TableCell', () => {
     renderCell({
       width: '10px',
     });
-    expect(tableCellNode.style.width).toBe('10px');
+    const style = getGlamorStylesFromClassList(tableCellNode.classList);
+    expect(style.width).toBe('10px');
   });
 });

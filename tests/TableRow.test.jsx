@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 import { BackgroundColors } from '../src/shared/colors';
 import TableRow from '../src/components/TableRow';
+import { getGlamorStylesFromClassList } from './util';
 
 let tableRowComponent;
 let tableNode;
@@ -42,8 +43,8 @@ describe('TableRow', () => {
       isHoverable: true,
       rowIndex: 0,
     });
-    ReactTestUtils.Simulate.mouseOver(tableRowNode);
-    expect(color(tableRowNode.style.background).hexString())
+    const style = getGlamorStylesFromClassList(tableRowNode.classList);
+    expect(color(style['&:hover'].background).hexString())
       .toBe(color(BackgroundColors.hover).hexString());
   });
   it('does render a selected effect for a table row element', () => {
@@ -51,8 +52,8 @@ describe('TableRow', () => {
       isSelected: true,
       rowIndex: 0,
     });
-    ReactTestUtils.Simulate.mouseOver(tableRowNode);
-    expect(color(tableRowNode.style.background).hexString())
+    const style = getGlamorStylesFromClassList(tableRowNode.classList);
+    expect(color(style.background).hexString())
       .toBe(color(BackgroundColors.selected).hexString());
   });
   it('does not render a hover or active effect for a table row element without these props', () => {
@@ -71,7 +72,8 @@ describe('TableRow', () => {
       rowIndex: 0,
       style: { background: '#888888' },
     });
-    expect(color(tableRowNode.style.background).hexString())
+    const style = getGlamorStylesFromClassList(tableRowNode.classList);
+    expect(color(style.background).hexString())
       .toBe(color('#888888').hexString());
   });
 });
