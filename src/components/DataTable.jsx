@@ -3,9 +3,9 @@
 /* eslint class-methods-use-this: "off" */
 
 import React from 'react';
-import reactCSS from 'reactcss';
 import color from 'color';
 import PropTypes from 'prop-types';
+import styledComonent from '../shared/styledComponent';
 import Base from './Base';
 import Checkbox from './Checkbox';
 import TableCell from './TableCell';
@@ -217,6 +217,7 @@ export default class DataTable extends Base {
   renderHeaderItems(style) {
     return (
       <TableRow
+        isHeader={true}
         rowIndex={0}
         style={style.Thead}
       >
@@ -265,7 +266,7 @@ export default class DataTable extends Base {
     );
   }
 
-  renderRow(style, row, i) {
+  renderRow(row, i) {
     const rowItems = Object.keys(row).map((item, ri) => this.renderItems(item, ri, row, i));
     const multiSelectItem = this.renderCheckBox(0, row, i);
     return rowItems.length > 0 ? (
@@ -303,90 +304,71 @@ export default class DataTable extends Base {
 
   renderRows(style, records) {
     const rowResults = records.length > 0 ?
-      records.map((item, i) => this.renderRow(style, item, i)) : [];
+      records.map((item, i) => this.renderRow(item, i)) : [];
     return rowResults[0] ? rowResults : this.renderNoResults();
   }
 
   render() {
     const clr = this.getColors();
     const records = this.processRecords();
-    const style = reactCSS({
-      default: {
-        selected: {
-          background: clr.backgroundColors.selected,
-        },
-        Table: {
-          border: 'none',
-          color: clr.textColors.primary,
-        },
-        Thead: {
-          background: clr.backgroundColors.tableHeader,
-          borderBottom: `1px solid ${clr.structuralColors.divider}`,
-        },
-        TheadSelected: {
-          background: color(clr.backgroundColors.tableHeader).darken(0.1).hexString(),
-          borderBottom: `1px solid ${clr.structuralColors.divider}`,
-          paddingRight: 10,
-        },
-        TheadArrowDown: {
-          borderLeft: '4px solid transparent',
-          borderRight: '4px solid transparent',
-          borderTop: '4px dashed',
-          color: clr.textColors.tableHeader,
-          display: 'inline-block',
-          marginLeft: 10,
-          marginRight: 10,
-          verticalAlign: 'middle',
-          height: 0,
-          width: 0,
-        },
-        TheadArrowUp: {
-          borderBottom: '4px dashed',
-          borderLeft: '4px solid transparent',
-          borderRight: '4px solid transparent',
-          color: clr.textColors.tableHeader,
-          display: 'inline-block',
-          marginLeft: 10,
-          marginRight: 10,
-          verticalAlign: 'middle',
-          height: 0,
-          width: 0,
-        },
-        TheadItems: {
-          background: clr.backgroundColors.tableHeader,
-          border: 'none',
-          color: clr.textColors.tableHeader,
-          padding: '20px',
-          fontWeight: 'bold',
-          textAlign: 'left',
-        },
-        TBodyItems: {
-          // reset any greedy styles
-          border: 'none',
-          borderBottom: `1px solid ${clr.structuralColors.divider}`,
-          color: clr.textColors.primary,
-          padding: '20px',
-        },
+    const style = {
+      Table: {
+        border: 'none',
+        color: clr.textColors.primary,
       },
-      hover: {
-        TableRow: {
-          background: clr.backgroundColors.hover,
-          cursor: 'Pointer',
-        },
+      Thead: {
+        background: clr.backgroundColors.tableHeader,
+        borderBottom: `1px solid ${clr.structuralColors.divider}`,
       },
-    }, {
-      hover: this.state.isRowHovering,
-    });
-
+      TheadSelected: {
+        background: color(clr.backgroundColors.tableHeader).darken(0.1).hexString(),
+        borderBottom: `1px solid ${clr.structuralColors.divider}`,
+        fontWeight: 'bold',
+        paddingRight: 10,
+      },
+      TheadArrowDown: {
+        borderLeft: '4px solid transparent',
+        borderRight: '4px solid transparent',
+        borderTop: '4px dashed',
+        color: clr.textColors.tableHeader,
+        display: 'inline-block',
+        marginLeft: 10,
+        marginRight: 10,
+        verticalAlign: 'middle',
+        height: 0,
+        width: 0,
+      },
+      TheadArrowUp: {
+        borderBottom: '4px dashed',
+        borderLeft: '4px solid transparent',
+        borderRight: '4px solid transparent',
+        color: clr.textColors.tableHeader,
+        display: 'inline-block',
+        marginLeft: 10,
+        marginRight: 10,
+        verticalAlign: 'middle',
+        height: 0,
+        width: 0,
+      },
+      TheadItems: {
+        background: clr.backgroundColors.tableHeader,
+        border: 'none',
+        color: clr.textColors.tableHeader,
+        padding: '20px',
+        fontWeight: 'bold',
+        textAlign: 'left',
+      },
+    };
+    const StyledTable = styledComonent('table', style.Table);
     return (
-      <table style={style.Table}>
+      <StyledTable>
         <thead>
           {this.renderHeaderItems(style)}
         </thead>
         <tbody>
           {this.renderRows(style, records)}
         </tbody>
-      </table>
+      </StyledTable>
     );
   }
 
