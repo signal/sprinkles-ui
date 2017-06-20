@@ -69,9 +69,6 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ],
-    "testPathIgnorePatterns": [
-      "/util"
-    ],
     "moduleFileExtensions": [
       "js",
       "json",
