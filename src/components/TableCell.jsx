@@ -20,12 +20,11 @@ export default class TableCell extends Base {
   displayName = 'TableCell';
 
   render() {
-    const tdStyle = { width: this.props.width };
     return (
       <td
         colSpan={this.props.colSpan}
         onClick={this.props.onClick}
-        style={tdStyle}
+        style={{ width: this.props.width }}
       >
         {this.props.children}
       </td>

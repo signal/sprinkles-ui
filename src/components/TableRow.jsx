@@ -16,17 +16,13 @@ export default class TableRow extends Base {
 
   render() {
     const { isHoverable, isSelected, style } = this.props;
-
     const classNames = [];
-
     if (isHoverable) {
       classNames.push('sui-hoverable');
     }
-
     if (isSelected) {
       classNames.push('sui-selected');
     }
-
     const className = classNames.join(' ');
     return (
       <tr
