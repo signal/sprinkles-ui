@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.4"></a>
+## [1.6.4](https://github.com/signal/sprinkles-ui/compare/v1.6.3...v1.6.4) (2017-06-20)
+
+
+### Bug Fixes
+
+* **component-DataTable:** Add Hover Effect to Segments Table Header Items ([#26](https://github.com/signal/sprinkles-ui/issues/26)) ([4282ba4](https://github.com/signal/sprinkles-ui/commit/4282ba4))
+
+
+
 <a name="1.6.3"></a>
 ## [1.6.3](https://github.com/signal/sprinkles-ui/compare/v1.6.2...v1.6.3) (2017-05-30)
 

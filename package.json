@@ -1,6 +1,6 @@
 {
   "name": "sprinkles-ui",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "A portable, customizable set of UI components",
   "main": "./lib/Sprinkles.js",
   "scripts": {
@@ -69,7 +69,9 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ],
-    "testPathIgnorePatterns": ["/util"],
+    "testPathIgnorePatterns": [
+      "/util"
+    ],
     "moduleFileExtensions": [
       "js",
       "json",
