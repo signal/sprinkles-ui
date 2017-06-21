@@ -183,18 +183,18 @@ export default class DataTable extends Base {
     this.props.onChange(rows);
   }
 
-  renderHeaderItem(style) {
+  renderHeaderItem() {
     const headers = this.processHeaders();
     const headerTitles = Object.keys(headers).map((header, i) => {
-      const arrowStyle = this.props.orderBy && this.props.orderBy.direction === 'asc'
-        ? style.TheadArrowUp : style.TheadArrowDown;
+      const arrowCSSClass = this.props.orderBy && this.props.orderBy.direction === 'asc'
+        ? 'sui-up' : 'sui-down';
       const isFilteredHeader = this.props.orderBy && this.props.orderBy.column === header;
       return (<th
         key={i}
         onClick={this.props.onHeaderClick.bind(this, header)}
-        style={(isFilteredHeader ? style.TheadSelected : style.TheadItems)}
+        className={(isFilteredHeader ? 'sui-filtered' : '')}
       >
-        {isFilteredHeader && <span style={arrowStyle} />}
+        {isFilteredHeader && <span className={arrowCSSClass} />}
         {headers[header]}
       </th>);
     },
@@ -203,7 +203,6 @@ export default class DataTable extends Base {
       <th
         key={0}
         onClick={this.handleSelectAll.bind(this)}
-        style={style.TheadItems}
       >
         <Checkbox
           ref={c => this.checkBoxHeaderRef = c}
@@ -214,14 +213,12 @@ export default class DataTable extends Base {
     return this.props.multiSelectable ? [selectAllHeader, headerTitles] : headerTitles;
   }
 
-  renderHeaderItems(style) {
+  renderHeaderItems() {
     return (
       <TableRow
-        isHeader={true}
         rowIndex={0}
-        style={style.Thead}
       >
-        {this.renderHeaderItem(style)}
+        {this.renderHeaderItem()}
       </TableRow>
     );
   }
@@ -302,7 +299,7 @@ export default class DataTable extends Base {
     );
   }
 
-  renderRows(style, records) {
+  renderRows(records) {
     const rowResults = records.length > 0 ?
       records.map((item, i) => this.renderRow(item, i)) : [];
     return rowResults[0] ? rowResults : this.renderNoResults();
@@ -315,58 +312,78 @@ export default class DataTable extends Base {
       Table: {
         border: 'none',
         color: clr.textColors.primary,
-      },
-      Thead: {
-        background: clr.backgroundColors.tableHeader,
-        borderBottom: `1px solid ${clr.structuralColors.divider}`,
-      },
-      TheadSelected: {
-        background: color(clr.backgroundColors.tableHeader).darken(0.1).hexString(),
-        borderBottom: `1px solid ${clr.structuralColors.divider}`,
-        fontWeight: 'bold',
-        paddingRight: 10,
-      },
-      TheadArrowDown: {
-        borderLeft: '4px solid transparent',
-        borderRight: '4px solid transparent',
-        borderTop: '4px dashed',
-        color: clr.textColors.tableHeader,
-        display: 'inline-block',
-        marginLeft: 10,
-        marginRight: 10,
-        verticalAlign: 'middle',
-        height: 0,
-        width: 0,
-      },
-      TheadArrowUp: {
-        borderBottom: '4px dashed',
-        borderLeft: '4px solid transparent',
-        borderRight: '4px solid transparent',
-        color: clr.textColors.tableHeader,
-        display: 'inline-block',
-        marginLeft: 10,
-        marginRight: 10,
-        verticalAlign: 'middle',
-        height: 0,
-        width: 0,
-      },
-      TheadItems: {
-        background: clr.backgroundColors.tableHeader,
-        border: 'none',
-        color: clr.textColors.tableHeader,
-        padding: '20px',
-        fontWeight: 'bold',
-        textAlign: 'left',
+        '& thead': {
+          '& tr': {
+            background: clr.backgroundColors.tableHeader,
+            borderBottom: `1px solid ${clr.structuralColors.divider}`,
+            '& th': {
+              background: clr.backgroundColors.tableHeader,
+              border: 'none',
+              color: clr.textColors.tableHeader,
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              padding: '20px',
+              textAlign: 'left',
+              '.sui-filtered': {
+                background: color(clr.backgroundColors.tableHeader).darken(0.1).hexString(),
+                borderBottom: `1px solid ${clr.structuralColors.divider}`,
+                fontWeight: 'bold',
+                paddingRight: 10,
+              },
+              '& .sui-down': {
+                borderLeft: '4px solid transparent',
+                borderRight: '4px solid transparent',
+                borderTop: '4px dashed',
+                color: clr.textColors.tableHeader,
+                display: 'inline-block',
+                height: 0,
+                marginLeft: 10,
+                marginRight: 10,
+                verticalAlign: 'middle',
+                width: 0,
+              },
+              '& .sui-up': {
+                borderBottom: '4px dashed',
+                borderLeft: '4px solid transparent',
+                borderRight: '4px solid transparent',
+                color: clr.textColors.tableHeader,
+                display: 'inline-block',
+                height: 0,
+                marginLeft: 10,
+                marginRight: 10,
+                verticalAlign: 'middle',
+                width: 0,
+              },
+            },
+          },
+        },
+        '& tr': {
+          '.sui-selected': {
+            background: clr.backgroundColors.selected,
+          },
+          '.sui-hoverable': {
+            ':hover': {
+              background: clr.backgroundColors.hover,
+              cursor: 'Pointer',
+            },
+          },
+          '& td': {
+            border: 'none',
+            borderBottom: `1px solid ${clr.structuralColors.divider}`,
+            color: clr.textColors.primary,
+            padding: '20px',
+          },
+        },
       },
     };
     const StyledTable = styledComonent('table', style.Table);
     return (
       <StyledTable>
         <thead>
-          {this.renderHeaderItems(style)}
+          {this.renderHeaderItems()}
         </thead>
         <tbody>
-          {this.renderRows(style, records)}
+          {this.renderRows(records)}
         </tbody>
       </StyledTable>
     );

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styledComonent from '../shared/styledComponent';
 import Base from './Base';
 
 export default class TableCell extends Base {
@@ -21,26 +20,14 @@ export default class TableCell extends Base {
   displayName = 'TableCell';
 
   render() {
-    const clr = this.getColors();
-    const style = {
-      TBodyItems: {
-        // reset any greedy styles
-        border: 'none',
-        borderBottom: `1px solid ${clr.structuralColors.divider}`,
-        color: clr.textColors.primary,
-        padding: '20px',
-      },
-    };
-
-    const tdStyle = Object.assign({}, style.TBodyItems, { width: this.props.width });
-    const StyledTD = styledComonent('td', tdStyle);
     return (
-      <StyledTD
+      <td
         colSpan={this.props.colSpan}
         onClick={this.props.onClick}
+        style={{ width: this.props.width }}
       >
         {this.props.children}
-      </StyledTD>
+      </td>
     );
   }
 }

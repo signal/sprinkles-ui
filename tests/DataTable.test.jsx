@@ -1,10 +1,7 @@
-import color from 'color';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import { BackgroundColors } from '../src/shared/colors';
 import DataTable from '../src/components/DataTable';
-import { getGlamorStylesFromClassList } from './util';
 
 const headers = {
   name: 'Name',
@@ -180,9 +177,7 @@ describe('Table', () => {
       records,
       selectedRows: [0],
     });
-    const style = getGlamorStylesFromClassList(row(0).classList);
-    expect(color(style.background).hexString())
-      .toBe(color(BackgroundColors.selected).hexString());
+    expect(row(0).classList.contains('sui-selected')).toBe(true);
   });
 
   it('does render a hover effect for a table row element with onClick event', () => {
@@ -190,9 +185,8 @@ describe('Table', () => {
       onClick: mockHandleClick,
       records,
     });
-    const style = getGlamorStylesFromClassList(row(0).classList);
-    expect(color(style['&:hover'].background).hexString())
-      .toBe(color(BackgroundColors.hover).hexString());
+    ReactTestUtils.Simulate.mouseOver(row(0));
+    expect(row(0).classList.contains('sui-hoverable')).toBe(true);
   });
 
   it('does not render a hover effect for a table row element without onClick event', () => {
@@ -345,9 +339,9 @@ describe('Table', () => {
       columns: { width: ['60%', '10%', '30%'] },
     });
 
-    expect(getGlamorStylesFromClassList(cell(0, 0).classList).width).toBe('60%');
-    expect(getGlamorStylesFromClassList(cell(0, 1).classList).width).toBe('10%');
-    expect(getGlamorStylesFromClassList(cell(0, 2).classList).width).toBe('30%');
+    expect(cell(0, 0).style.width).toBe('60%');
+    expect(cell(0, 1).style.width).toBe('10%');
+    expect(cell(0, 2).style.width).toBe('30%');
   });
 
   it('renders a table with columns in the order specified by records', () => {
