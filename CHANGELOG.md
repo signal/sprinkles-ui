@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/signal/sprinkles-ui/compare/v1.6.4...v1.7.0) (2017-06-21)
+
+
+### Features
+
+* **Component-DataTable:** Use Glamorous Relational CSS Selectors ([#27](https://github.com/signal/sprinkles-ui/issues/27)) ([79f3b2c](https://github.com/signal/sprinkles-ui/commit/79f3b2c))
+
+
+
 <a name="1.6.4"></a>
 ## [1.6.4](https://github.com/signal/sprinkles-ui/compare/v1.6.3...v1.6.4) (2017-06-20)
 
