@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/signal/sprinkles-ui/compare/v1.7.0...v1.8.0) (2017-06-30)
+
+
+### Features
+
+* **Component-Theme:** Exporting the Theme Component ([c2153be](https://github.com/signal/sprinkles-ui/commit/c2153be))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/signal/sprinkles-ui/compare/v1.6.4...v1.7.0) (2017-06-21)
 
