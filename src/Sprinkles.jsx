@@ -25,6 +25,7 @@ export SearchInput from './components/SearchInput';
 export SelectInput from './components/SelectInput';
 export Text from './components/Text';
 export TextInput from './components/TextInput';
+export Theme from './components/Theme';
 export TextListItem from './components/TextListItem';
 export VectorGraphic from './components/VectorGraphic';
 export Version from './components/Version';

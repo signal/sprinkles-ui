@@ -28,6 +28,7 @@ import {
   Text,
   TextInput,
   TextListItem,
+  Theme,
   VectorGraphic,
   Version,
   // colors
@@ -72,6 +73,7 @@ window.Sprinkles = {
   Text,
   TextInput,
   TextListItem,
+  Theme,
   VectorGraphic,
   Version,
   // colors
