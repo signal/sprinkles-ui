@@ -311,24 +311,25 @@ export default class DataTable extends Base {
     const style = {
       Table: {
         border: 'none',
+        borderRight: `1px solid ${clr.structuralColors.divider}`,
+        borderLeft: `1px solid ${clr.structuralColors.divider}`,
         color: clr.textColors.primary,
         '& thead': {
           '& tr': {
             background: clr.backgroundColors.tableHeader,
+            borderTop: `1px solid ${clr.structuralColors.divider}`,
             borderBottom: `1px solid ${clr.structuralColors.divider}`,
             '& th': {
               background: clr.backgroundColors.tableHeader,
               border: 'none',
               color: clr.textColors.tableHeader,
               cursor: 'pointer',
-              fontWeight: 'bold',
-              padding: '20px',
+              fontWeight: '600',
+              padding: '10px 20px',
               textAlign: 'left',
               '.sui-filtered': {
                 background: color(clr.backgroundColors.tableHeader).darken(0.1).hexString(),
                 borderBottom: `1px solid ${clr.structuralColors.divider}`,
-                fontWeight: 'bold',
-                paddingRight: 10,
               },
               '& .sui-down': {
                 borderLeft: '4px solid transparent',
@@ -337,8 +338,7 @@ export default class DataTable extends Base {
                 color: clr.textColors.tableHeader,
                 display: 'inline-block',
                 height: 0,
-                marginLeft: 10,
-                marginRight: 10,
+                marginRight: 5,
                 verticalAlign: 'middle',
                 width: 0,
               },
@@ -349,8 +349,7 @@ export default class DataTable extends Base {
                 color: clr.textColors.tableHeader,
                 display: 'inline-block',
                 height: 0,
-                marginLeft: 10,
-                marginRight: 10,
+                marginRight: 5,
                 verticalAlign: 'middle',
                 width: 0,
               },
@@ -371,7 +370,7 @@ export default class DataTable extends Base {
             border: 'none',
             borderBottom: `1px solid ${clr.structuralColors.divider}`,
             color: clr.textColors.primary,
-            padding: '20px',
+            padding: '10px 20px',
           },
         },
       },

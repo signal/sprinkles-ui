@@ -21,7 +21,7 @@ export const TextColors = {
   accent: '#3FA9E2',
   primaryNav: '#C5D0DE',
   selectedNavItem: '#FFF8F9',
-  tableHeader: '#616161',
+  tableHeader: '#000',
 };
 
 export const BackgroundColors = {
@@ -32,7 +32,7 @@ export const BackgroundColors = {
   secondary: '#F8FAFB',
   secondaryNav: '#5A5A5A',
   selected: '#CFF5F9',
-  tableHeader: '#EFEFEF',
+  tableHeader: '#F4F4F4',
 };
 
 export const FormColors = {
@@ -42,5 +42,5 @@ export const FormColors = {
 };
 
 export const StructuralColors = {
-  divider: '#E2E2E2',
+  divider: '#D6D6D6',
 };
