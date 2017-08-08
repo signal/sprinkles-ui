@@ -10,7 +10,9 @@ export default class Button extends Base {
 
   static propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     enabled: PropTypes.bool,
+    id: PropTypes.string,
     groupPosition: PropTypes.oneOf(['left', 'center', 'right']),
     onClick: PropTypes.func,
     text: PropTypes.string,
@@ -27,6 +29,8 @@ export default class Button extends Base {
   };
 
   static defaultProps = {
+    className: 'button',
+    id: '',
     enabled: true,
     working: false,
     text: 'Submit',
