@@ -3,6 +3,7 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import stylePropType from 'react-style-proptype';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 import Base from './Base';
 
 export default class Button extends Base {
@@ -10,7 +11,9 @@ export default class Button extends Base {
 
   static propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     enabled: PropTypes.bool,
+    id: PropTypes.string,
     groupPosition: PropTypes.oneOf(['left', 'center', 'right']),
     onClick: PropTypes.func,
     text: PropTypes.string,
@@ -27,6 +30,8 @@ export default class Button extends Base {
   };
 
   static defaultProps = {
+    className: 'button',
+    id: shortid.generate(),
     enabled: true,
     working: false,
     text: 'Submit',
@@ -166,6 +171,8 @@ export default class Button extends Base {
     const buttonStyle = Object.assign({}, style.Button, this.props.style);
     return (
       <button
+        className={this.props.className}
+        id={this.props.id}
         disabled={this.props.working || !this.props.enabled}
         onClick={this.props.onClick}
         onMouseOut={this.handleMouseOut.bind(this)}
