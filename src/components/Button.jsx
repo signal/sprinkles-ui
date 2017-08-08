@@ -3,6 +3,7 @@ import React from 'react';
 import reactCSS from 'reactcss';
 import stylePropType from 'react-style-proptype';
 import PropTypes from 'prop-types';
+import shortid from 'shortid';
 import Base from './Base';
 
 export default class Button extends Base {
@@ -30,7 +31,7 @@ export default class Button extends Base {
 
   static defaultProps = {
     className: 'button',
-    id: '',
+    id: shortid.generate(),
     enabled: true,
     working: false,
     text: 'Submit',
