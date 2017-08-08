@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.3"></a>
+## [1.8.3](https://github.com/signal/sprinkles-ui/compare/v1.8.2...v1.8.3) (2017-08-08)
+
+
+### Bug Fixes
+
+* **Component-Button:** Adding className as prop to component ([#29](https://github.com/signal/sprinkles-ui/issues/29)) ([c2e7b7d](https://github.com/signal/sprinkles-ui/commit/c2e7b7d))
+* **Component-Button:** Renaming prop in Button component ([#30](https://github.com/signal/sprinkles-ui/issues/30)) ([b47d911](https://github.com/signal/sprinkles-ui/commit/b47d911))
+
+
+
 <a name="1.8.2"></a>
 ## [1.8.2](https://github.com/signal/sprinkles-ui/compare/v1.8.0...v1.8.2) (2017-08-04)
 
