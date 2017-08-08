@@ -11,7 +11,7 @@ export default class Button extends Base {
 
   static propTypes = {
     children: PropTypes.node,
-    className: PropTypes.string,
+    customClass: PropTypes.string,
     enabled: PropTypes.bool,
     id: PropTypes.string,
     groupPosition: PropTypes.oneOf(['left', 'center', 'right']),
@@ -30,7 +30,7 @@ export default class Button extends Base {
   };
 
   static defaultProps = {
-    className: 'button',
+    customClass: 'button',
     id: shortid.generate(),
     enabled: true,
     working: false,
@@ -171,7 +171,7 @@ export default class Button extends Base {
     const buttonStyle = Object.assign({}, style.Button, this.props.style);
     return (
       <button
-        className={this.props.className}
+        className={this.props.customClass}
         id={this.props.id}
         disabled={this.props.working || !this.props.enabled}
         onClick={this.props.onClick}
