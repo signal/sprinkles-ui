@@ -21,7 +21,7 @@ export default class TableCell extends Base {
 
   render() {
     return (
-      <td
+      <td  // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
         colSpan={this.props.colSpan}
         onClick={this.props.onClick}
         style={{ width: this.props.width }}

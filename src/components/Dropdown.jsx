@@ -64,14 +64,14 @@ export default class Dropdown extends Base {
     if (this.props.items.length === 0) {
       return null;
     }
-    return this.props.items.map((item, i) =>
+    return this.props.items.map((item, i) => (
       <ListItem
         key={i}
         onClick={this.handleClick.bind(this, item)}
       >
         <TextListItem text={item.label ? item.label : item.value} />
-      </ListItem>,
-    );
+      </ListItem>
+    ));
   }
 
   render() {

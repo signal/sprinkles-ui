@@ -16,7 +16,7 @@ describe('Colors', function () {
   `); // Markdown.
 
   before(() => {
-    const renderColor = (color) =>
+    const renderColor = (color) => (
       <div
         style={{
           backgroundColor: color,
@@ -25,8 +25,8 @@ describe('Colors', function () {
           width: 120,
           marginRight: 10,
         }}
-      />;
-    const renderLabel = (label) =>
+      />);
+    const renderLabel = (label) => (
       <div
         style={{
           flex: 1,
@@ -35,7 +35,7 @@ describe('Colors', function () {
         }}
       >
         <Text>{label}</Text>
-      </div>;
+      </div>);
 
     // Runs when the Suite loads.  Use this to host your component-under-test.
     this.component(

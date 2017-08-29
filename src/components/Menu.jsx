@@ -41,7 +41,7 @@ export default class Menu extends Base {
 
   renderChildren() {
     return React.Children.map(this.props.children, (topContainerDiv) =>
-      React.Children.map(topContainerDiv.props.children, (child, i) =>
+      React.Children.map(topContainerDiv.props.children, (child, i) => (
         <div>
           <List
             anchorOrigin={'bottom'}
@@ -52,7 +52,7 @@ export default class Menu extends Base {
             {this.renderListGroupItems(child.props.children)}
           </List>
           { i < (topContainerDiv.props.children.length - 1) ? <ListDivider /> : '' }
-        </div>,
+        </div>),
       ),
     );
   }

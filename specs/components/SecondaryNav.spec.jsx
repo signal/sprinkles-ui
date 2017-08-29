@@ -20,24 +20,24 @@ describe('SecondaryNav', function () {
     this.component(
       <SecondaryNav
         leftItems={
-          leftItems.map((item, i) =>
+          leftItems.map((item, i) => (
             <div
               key={i}
               style={itemStyle}
             >
               {item}
-            </div>,
-          )
+            </div>
+          ))
         }
         rightItems={
-          rightItems.map((item, i) =>
+          rightItems.map((item, i) => (
             <div
               key={i}
               style={itemStyle}
             >
               {item}
-            </div>,
-          )
+            </div>
+          ))
         }
       />,
     ).width('100%').height(60);
