@@ -109,7 +109,7 @@ export default class PrimaryNav extends Base {
   }
 
   renderNavItem() {
-    return this.props.navItems.map((item, i) =>
+    return this.props.navItems.map((item, i) => (
       <ListItem
         key={i}
         onClick={this.handleNavItemClick.bind(this, item.key)}
@@ -125,8 +125,8 @@ export default class PrimaryNav extends Base {
           urlPath={item.urlPath}
           width={item.width}
         />
-      </ListItem>,
-    );
+      </ListItem>
+    ));
   }
 
   renderExpandToggle(clr, style) {
