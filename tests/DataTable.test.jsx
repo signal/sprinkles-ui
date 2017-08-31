@@ -71,19 +71,7 @@ const mockHandleClick = jest.fn();
 const getSortValue = value => (value.props ? value.props.children : value);
 const renderTable = (props) => {
   tableComponent = ReactTestUtils.renderIntoDocument(
-    <DataTable
-      columns={props.columns}
-      headers={props.headers}
-      orderBy={props.orderBy}
-      onClick={props.onClick}
-      onChange={props.onChange}
-      filterRecords={props.filterRecords}
-      multiSelectable={props.multiSelectable}
-      records={props.records}
-      recordInclusion={props.recordInclusion}
-      returnAllRecordsOnClick={props.returnAllRecordsOnClick}
-      selectedRows={props.selectedRows}
-    />,
+    <DataTable {...props} />,
   );
   tableNode = ReactDOM.findDOMNode(tableComponent);
   tHead = tableNode.getElementsByTagName('thead')[0];
@@ -174,8 +162,9 @@ describe('Table', () => {
 
   it('Renders a Table with the first row selected', () => {
     renderTable({
+      multiSelectColumnName: 'name',
       records,
-      selectedRows: [0],
+      selectedRows: [records[0].name],
     });
     expect(row(0).classList.contains('sui-selected')).toBe(true);
   });
@@ -195,7 +184,6 @@ describe('Table', () => {
       records,
     });
     ReactTestUtils.Simulate.mouseOver(row(1));
-
     expect(row(1).style.background).toBe('');
   });
 
@@ -375,7 +363,7 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectable: true,
+      multiSelectColumnName: 'name',
     });
     expect(cell(0, 0).getElementsByTagName('input').length).toBe(1);
   });
@@ -385,12 +373,11 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectable: true,
+      multiSelectColumnName: 'name',
       onChange: mockHandleChange,
     });
     const checkBoxNode = tableComponent.checkBoxRefs[2].inputRef;
-    const result = [];
-    result[2] = records[2];
+    const result = [records[2].name];
     ReactTestUtils.Simulate.click(checkBoxNode);
     expect(mockHandleChange).toBeCalledWith(result);
   });
@@ -399,12 +386,12 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectable: true,
+      multiSelectColumnName: 'name',
       onChange: mockHandleChange,
     });
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
     ReactTestUtils.Simulate.click(checkBoxNode);
-    expect(mockHandleChange).toBeCalledWith(records);
+    expect(mockHandleChange).toBeCalledWith(records.map(record => record.name));
   });
 
   it('returns a change event when clicking anywhere within the select all checkbox th cell', () => {
@@ -412,12 +399,12 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectable: true,
+      multiSelectColumnName: 'name',
       onChange: mockHandleChange,
     });
     const selectAllTHNode = headerElement(0);
     ReactTestUtils.Simulate.click(selectAllTHNode);
-    expect(mockHandleChange).toBeCalledWith(records);
+    expect(mockHandleChange).toBeCalledWith(records.map(record => record.name));
   });
 
   it('returns a change event when filtering segments and select all is triggered', () => {
@@ -425,7 +412,7 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectable: true,
+      multiSelectColumnName: 'name',
       onChange: mockHandleChange,
       filterRecords: [{ status: 'Inactive' }],
     });
@@ -434,7 +421,7 @@ describe('Table', () => {
     expect(rows().length).toBe(2);
     expect(cell(0, 1).textContent).toBe('Frank');
     expect(cell(1, 1).textContent).toBe('Jose');
-    expect(mockHandleChange).toBeCalledWith([records[1], records[3]]);
+    expect(mockHandleChange).toBeCalledWith([records[1].name, records[3].name]);
   });
 
   it('selects a row when clicking anywhere within the checkbox cell', () => {
@@ -442,11 +429,10 @@ describe('Table', () => {
     renderTable({
       records,
       returnAllRecordsOnClick: true,
-      multiSelectable: true,
+      multiSelectColumnName: 'age',
       onChange: mockHandleChange,
     });
-    const result = [];
-    result[0] = records[0];
+    const result = [records[0].age];
 
     ReactTestUtils.Simulate.click(cell(0, 0));
     expect(mockHandleChange).toBeCalledWith(result);
@@ -466,7 +452,7 @@ describe('Table', () => {
       headers,
       records,
       filterRecords: [{ age: 125 }],
-      multiSelectable: true,
+      multiSelectColumnName: 'name',
     });
     expect(cell(0, 0).colSpan).toEqual('4');
   });
@@ -577,7 +563,7 @@ describe('Table', () => {
       orderBy: {
         column: 'date',
         direction: 'asc',
-        format: 'date',
+        formatter: 'date',
       },
     });
     expect(cell(0, 0).textContent).toBe('2015/12/05 15:06');
