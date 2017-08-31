@@ -46,43 +46,26 @@ describe('DataTable', function () {
   ## DataTable
   `); // Markdown.
 
+  const handleClick = (column, xCord, cellData, rowData, yCord) => {
+    console.log({
+      Column: column,
+      xCord,
+      'Cell Data': cellData,
+      'Row Data': rowData,
+      yCord,
+    });
+  };
   this.loadTable = (props) => {
-    const handleClick = (column, xCord, cellData, rowData, yCord) => {
-      console.log({
-        Column: column,
-        xCord,
-        'Cell Data': cellData,
-        'Row Data': rowData,
-        yCord,
-      });
-    };
     this.unload();
     this.component(
       <DataTable
-        columns={props.columns}
-        headers={props.headers}
-        filterRecords={props.filterRecords}
-        onClick={handleClick}
-        orderBy={props.orderBy}
-        records={
-          props.records
-        }
-        recordInclusion={props.recordInclusion}
-        selectedRows={props.selectedRows}
-        multiSelectable={props.multiSelectable}
-        onChange={props.onChange}
+        {...props}
       />,
     );
   };
 
   before(() => {
-    // Runs when the Suite loads.  Use this to host your component-under-test.
-    this.loadTable({
-      headers: this.headers,
-      records: this.records,
-      recordInclusion: this.recordInclusion,
-      filterRecords: this.filterRecords,
-    });
+    this.unload();
   });
 
   it('Has no records', () => {
@@ -97,18 +80,20 @@ describe('DataTable', function () {
     this.loadTable(
       {
         headers: this.headers,
+        multiSelectColumnName: 'name',
         records: this.records,
         recordInclusion: this.recordInclusion,
-        selectedRows: [row],
+        selectedRows: [this.records[row].name],
       });
   });
   it('Select multiple rows', () => {
     this.loadTable(
       {
         headers: this.headers,
+        multiSelectColumnName: 'name',
         records: this.records,
         recordInclusion: this.recordInclusion,
-        selectedRows: [2, 3],
+        selectedRows: [this.records[2].name, this.records[3].name],
       });
   });
   it('Exclude Age', () => {
@@ -132,7 +117,6 @@ describe('DataTable', function () {
       {
         headers: this.headers,
         records: this.records,
-        onClick: null,
       });
   });
   it('Add click handler', () => {
@@ -140,7 +124,7 @@ describe('DataTable', function () {
       {
         headers: this.headers,
         records: this.records,
-        onClick: true,
+        onClick: handleClick,
       });
   });
   it('Filters records', () => {
@@ -174,7 +158,7 @@ describe('DataTable', function () {
         headers: this.headers,
         records: this.records,
         filterRecords: [{ bar: 'foo' }],
-        multiSelectable: true,
+        multiSelectColumnName: 'name',
       });
   });
   it('Sets column width', () => {
@@ -206,7 +190,7 @@ describe('DataTable', function () {
         },
         headers: this.headers,
         records: this.records,
-        multiSelectable: true,
+        multiSelectColumnName: 'name',
         onChange: () => { console.log('Table changed'); },
       });
   });
@@ -223,7 +207,7 @@ describe('DataTable', function () {
           color: 'Blue',
           age: 100,
         }],
-        multiSelectable: true,
+        multiSelectColumnName: 'name',
         onChange: () => { console.log('Table changed'); },
       });
   });
@@ -286,6 +270,7 @@ describe('DataTable', function () {
     - **width** *PropTypes.array* (optional) sets the width of individual columns the value specified here. If a column is obmitted 'auto' is used.
   - **headers** *PropTypes.object* (optional) maps to key of record. Use to provide custom header text otherwise the key is used
   - **records** *PropTypes.object* key/ value set of data used to populate the table
+  - **multiSelectColumnName** *PropTypes.string* the value of this column should be a unique string, used to keep track of selected rows.
   - **recordInclusion** *PropTypes.object* (optional) maps to key of record, used to limit what is displayed
   - **onClick** *PropTypes.function* (optional) used to take action on clicking, supplies row index, row data and cell data. When defined, a hover effect is applied to the row.
   - **orderBy** *PropTypes.shape* (optional)
@@ -293,7 +278,7 @@ describe('DataTable', function () {
     - **direction** *PropTypes.oneOf* (optional) 'asc' or 'desc'
     - **formatter** *PropTypes.oneOf* (optional) 'date' specify a way to format column data for sorting
     - **getSortValue** *PropTypes.func* (optional) a function that takes column data and returns a value to be used for sorting, needed for non-primitive data types, like React Components.
-  - **selectedRows** *PropTypes.arrayOf(PropTypes.number)* select rows based on index
+  - **selectedRows** *PropTypes.arrayOf(PropTypes.string)* an array of *multiSelectColumnName* values, used to identify rows.
   - **returnAllRecordsOnClick** *PropTypes.bool* (optional) returns all records for a row in the onClick argument regardless of record inclusion option
   - **filterRecords**  *PropTypes.object* key/ value set of data to filter the records against. If multiple values are supplied, it's considered an OR not an AND
   `);

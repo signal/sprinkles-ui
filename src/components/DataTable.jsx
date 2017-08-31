@@ -20,7 +20,7 @@ export default class DataTable extends Base {
     }),
     filterRecords: PropTypes.array,
     headers: PropTypes.object,
-    multiSelectable: PropTypes.bool,
+    multiSelectColumnName: PropTypes.string,
     noRecordsText: PropTypes.string,
     orderBy: PropTypes.shape({
       column: PropTypes.string,
@@ -38,12 +38,12 @@ export default class DataTable extends Base {
     recordInclusion: PropTypes.array,
     returnAllRecordsOnClick: PropTypes.bool,
     selectedColumn: PropTypes.string,
-    selectedRows: PropTypes.arrayOf(PropTypes.number),
+    selectedRows: PropTypes.arrayOf(PropTypes.string),
   }
 
   static defaultProps = {
     noRecordsText: 'No records found.',
-    multiSelectable: false,
+    multiSelectColumnName: '',
     onClick: () => {},
     onChange: () => {},
     onHeaderClick: () => {},
@@ -61,7 +61,7 @@ export default class DataTable extends Base {
     };
   }
 
-  includeSubRecords(record) {
+  includeSubRecords = (record) => {
     const filteredRecord = {};
     Object.getOwnPropertyNames(record).forEach((val) => {
       if (this.props.recordInclusion.indexOf(val) > -1) {
@@ -71,7 +71,7 @@ export default class DataTable extends Base {
     return filteredRecord;
   }
 
-  filteredSubRecords(record) {
+  filteredSubRecords = (record) => {
     let result = false;
     Object.getOwnPropertyNames(record).forEach((val) => {
       this.props.filterRecords.forEach((filterVal) => {
@@ -83,7 +83,7 @@ export default class DataTable extends Base {
     return result;
   }
 
-  sortRecords(record) {
+  sortRecords = (record) => {
     const newRecord = {};
     this.props.columns.order.forEach((val) => {
       newRecord[val] = record[val];
@@ -142,16 +142,13 @@ export default class DataTable extends Base {
   processRecords() {
     let processedRecords = this.props.records;
     if (this.props.recordInclusion) {
-      processedRecords = processedRecords.map((record) =>
-        this.includeSubRecords(record));
+      processedRecords = processedRecords.map(this.includeSubRecords);
     }
     if (this.props.filterRecords) {
-      processedRecords = processedRecords.filter((record) =>
-        this.filteredSubRecords(record));
+      processedRecords = processedRecords.filter(this.filteredSubRecords);
     }
     if (this.props.columns && this.props.columns.order) {
-      processedRecords = processedRecords.map((record) =>
-        this.sortRecords(record));
+      processedRecords = processedRecords.map(this.sortRecords);
     }
     if (this.props.orderBy) {
       const mappedColValues = processedRecords.map((record, i) => (
@@ -173,14 +170,16 @@ export default class DataTable extends Base {
     this.props.onClick(e.target, returnedData);
   }
 
-  handleSelectAll() {
-    this.props.onChange(this.processRecords());
+  handleSelectAll = () => {
+    const multiSelectColumnName = this.props.multiSelectColumnName;
+    const ids = this.processRecords()
+        .map(row => (multiSelectColumnName && row[multiSelectColumnName]))
+        .filter(row => !!row);
+    this.props.onChange(ids);
   }
 
-  handleRowSelect(row, yCord) {
-    const rows = [];
-    rows[yCord] = row;
-    this.props.onChange(rows);
+  handleRowSelect(id) {
+    this.props.onChange([id]);
   }
 
   renderHeaderItem() {
@@ -202,7 +201,7 @@ export default class DataTable extends Base {
     const selectAllHeader = (
       <th
         key={0}
-        onClick={this.handleSelectAll.bind(this)}
+        onClick={this.handleSelectAll}
       >
         <Checkbox
           ref={c => this.checkBoxHeaderRef = c}
@@ -210,7 +209,7 @@ export default class DataTable extends Base {
         />
       </th>
     );
-    return this.props.multiSelectable ? [selectAllHeader, headerTitles] : headerTitles;
+    return this.props.multiSelectColumnName ? [selectAllHeader, headerTitles] : headerTitles;
   }
 
   renderHeaderItems() {
@@ -223,13 +222,13 @@ export default class DataTable extends Base {
     );
   }
 
-  renderCheckBox(xCord, row, yCord) {
+  renderCheckBox(xCord, row, id) {
     this.checkBoxRefs = [];
-    const shouldBeChecked = this.props.selectedRows.indexOf(yCord) > -1;
+    const shouldBeChecked = this.props.selectedRows.indexOf(id) > -1;
     return (
       <TableCell
         key={xCord}
-        onClick={this.handleRowSelect.bind(this, row, yCord)}
+        onClick={this.handleRowSelect.bind(this, id)}
       >
         <Checkbox
           checked={shouldBeChecked}
@@ -265,15 +264,17 @@ export default class DataTable extends Base {
 
   renderRow(row, i) {
     const rowItems = Object.keys(row).map((item, ri) => this.renderItems(item, ri, row, i));
-    const multiSelectItem = this.renderCheckBox(0, row, i);
+    const multiSelectColumnName = this.props.multiSelectColumnName;
+    const multiSelectId = multiSelectColumnName && row[multiSelectColumnName];
+    const multiSelectItem = this.renderCheckBox(0, row, multiSelectId);
     return rowItems.length > 0 ? (
       <TableRow
         key={`row-${i}`}
         isHoverable={typeof (this.props.onClick) === 'function'}
-        isSelected={this.props.selectedRows.indexOf(i) > -1}
+        isSelected={this.props.selectedRows.indexOf(multiSelectId) > -1}
         rowIndex={i}
       >
-        { this.props.multiSelectable ? multiSelectItem : undefined }
+        { multiSelectColumnName ? multiSelectItem : undefined }
         { rowItems }
       </TableRow>
     ) : null;
@@ -282,7 +283,7 @@ export default class DataTable extends Base {
   renderNoResults() {
     let colSpan = Object.keys(this.processHeaders()).length;
     /* We need to add an element to account for the checkbox column for multiselect */
-    if (this.props.multiSelectable) {
+    if (this.props.multiSelectColumnName) {
       colSpan += 1;
     }
 
