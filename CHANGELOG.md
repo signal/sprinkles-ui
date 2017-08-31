@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.4"></a>
+## [1.8.4](https://github.com/signal/sprinkles-ui/compare/v1.8.3...v1.8.4) (2017-08-31)
+
+
+### Bug Fixes
+
+* **Component-DataTable:** use a user provided column for identifying selected rows. ([#39](https://github.com/signal/sprinkles-ui/issues/39)) ([862608c](https://github.com/signal/sprinkles-ui/commit/862608c))
+
+
+
 <a name="1.8.3"></a>
 ## [1.8.3](https://github.com/signal/sprinkles-ui/compare/v1.8.2...v1.8.3) (2017-08-08)
 
