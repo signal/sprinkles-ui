@@ -162,7 +162,7 @@ describe('Table', () => {
 
   it('Renders a Table with the first row selected', () => {
     renderTable({
-      multiSelectColumnName: 'name',
+      multiselectRowKey: 'name',
       records,
       selectedRows: [records[0].name],
     });
@@ -363,7 +363,7 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectColumnName: 'name',
+      multiselectRowKey: 'name',
     });
     expect(cell(0, 0).getElementsByTagName('input').length).toBe(1);
   });
@@ -373,7 +373,7 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectColumnName: 'name',
+      multiselectRowKey: 'name',
       onChange: mockHandleChange,
     });
     const checkBoxNode = tableComponent.checkBoxRefs[2].inputRef;
@@ -386,7 +386,7 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectColumnName: 'name',
+      multiselectRowKey: 'name',
       onChange: mockHandleChange,
     });
     const checkBoxNode = tableComponent.checkBoxHeaderRef.inputRef;
@@ -399,7 +399,7 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectColumnName: 'name',
+      multiselectRowKey: 'name',
       onChange: mockHandleChange,
     });
     const selectAllTHNode = headerElement(0);
@@ -412,7 +412,7 @@ describe('Table', () => {
     renderTable({
       headers,
       records,
-      multiSelectColumnName: 'name',
+      multiselectRowKey: 'name',
       onChange: mockHandleChange,
       filterRecords: [{ status: 'Inactive' }],
     });
@@ -429,7 +429,7 @@ describe('Table', () => {
     renderTable({
       records,
       returnAllRecordsOnClick: true,
-      multiSelectColumnName: 'age',
+      multiselectRowKey: 'age',
       onChange: mockHandleChange,
     });
     const result = [records[0].age];
@@ -452,7 +452,7 @@ describe('Table', () => {
       headers,
       records,
       filterRecords: [{ age: 125 }],
-      multiSelectColumnName: 'name',
+      multiselectRowKey: 'name',
     });
     expect(cell(0, 0).colSpan).toEqual('4');
   });
