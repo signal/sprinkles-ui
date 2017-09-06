@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.5"></a>
+## [1.8.5](https://github.com/signal/sprinkles-ui/compare/v1.8.4...v1.8.5) (2017-09-06)
+
+
+### Bug Fixes
+
+* **Polyfill-Node.remove:** polyfill for the Node.remove() method in Internet Explorer 9 and higher ([#41](https://github.com/signal/sprinkles-ui/issues/41)) ([ee520c8](https://github.com/signal/sprinkles-ui/commit/ee520c8))
+
+
+
 <a name="1.8.4"></a>
 ## [1.8.4](https://github.com/signal/sprinkles-ui/compare/v1.8.3...v1.8.4) (2017-08-31)
 
