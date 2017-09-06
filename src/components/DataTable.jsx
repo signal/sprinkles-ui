@@ -20,7 +20,7 @@ export default class DataTable extends Base {
     }),
     filterRecords: PropTypes.array,
     headers: PropTypes.object,
-    multiSelectColumnName: PropTypes.string,
+    multiselectRowKey: PropTypes.string,
     noRecordsText: PropTypes.string,
     orderBy: PropTypes.shape({
       column: PropTypes.string,
@@ -43,7 +43,7 @@ export default class DataTable extends Base {
 
   static defaultProps = {
     noRecordsText: 'No records found.',
-    multiSelectColumnName: '',
+    multiselectRowKey: '',
     onClick: () => {},
     onChange: () => {},
     onHeaderClick: () => {},
@@ -171,9 +171,9 @@ export default class DataTable extends Base {
   }
 
   handleSelectAll = () => {
-    const multiSelectColumnName = this.props.multiSelectColumnName;
+    const multiselectRowKey = this.props.multiselectRowKey;
     const ids = this.processRecords()
-        .map(row => (multiSelectColumnName && row[multiSelectColumnName]))
+        .map(row => (multiselectRowKey && row[multiselectRowKey]))
         .filter(row => !!row);
     this.props.onChange(ids);
   }
@@ -209,7 +209,7 @@ export default class DataTable extends Base {
         />
       </th>
     );
-    return this.props.multiSelectColumnName ? [selectAllHeader, headerTitles] : headerTitles;
+    return this.props.multiselectRowKey ? [selectAllHeader, headerTitles] : headerTitles;
   }
 
   renderHeaderItems() {
@@ -264,8 +264,8 @@ export default class DataTable extends Base {
 
   renderRow(row, i) {
     const rowItems = Object.keys(row).map((item, ri) => this.renderItems(item, ri, row, i));
-    const multiSelectColumnName = this.props.multiSelectColumnName;
-    const multiSelectId = multiSelectColumnName && row[multiSelectColumnName];
+    const multiselectRowKey = this.props.multiselectRowKey;
+    const multiSelectId = multiselectRowKey && row[multiselectRowKey];
     const multiSelectItem = this.renderCheckBox(0, row, multiSelectId);
     return rowItems.length > 0 ? (
       <TableRow
@@ -274,7 +274,7 @@ export default class DataTable extends Base {
         isSelected={this.props.selectedRows.indexOf(multiSelectId) > -1}
         rowIndex={i}
       >
-        { multiSelectColumnName ? multiSelectItem : undefined }
+        { multiselectRowKey ? multiSelectItem : undefined }
         { rowItems }
       </TableRow>
     ) : null;
@@ -283,7 +283,7 @@ export default class DataTable extends Base {
   renderNoResults() {
     let colSpan = Object.keys(this.processHeaders()).length;
     /* We need to add an element to account for the checkbox column for multiselect */
-    if (this.props.multiSelectColumnName) {
+    if (this.props.multiselectRowKey) {
       colSpan += 1;
     }
 
