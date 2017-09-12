@@ -1,3 +1,5 @@
+import './shared/removePolyfill';
+
 export Alert from './components/Alert';
 export Breadcrumbs from './components/Breadcrumbs';
 export BulletedList from './components/BulletedList';
