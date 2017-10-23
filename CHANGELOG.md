@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.7"></a>
+## [1.8.7](https://github.com/signal/sprinkles-ui/compare/v1.8.6...v1.8.7) (2017-10-23)
+
+
+### Bug Fixes
+
+* **Component-DataTable:** DataTable onClick defaults to null, preventing hover ([#43](https://github.com/signal/sprinkles-ui/issues/43)) ([69d4e25](https://github.com/signal/sprinkles-ui/commit/69d4e25))
+
+
+
 <a name="1.8.6"></a>
 ## [1.8.6](https://github.com/signal/sprinkles-ui/compare/v1.8.5...v1.8.6) (2017-09-12)
 
