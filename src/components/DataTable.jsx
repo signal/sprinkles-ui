@@ -44,7 +44,7 @@ export default class DataTable extends Base {
   static defaultProps = {
     noRecordsText: 'No records found.',
     multiselectRowKey: '',
-    onClick: () => {},
+    onClick: null,
     onChange: () => {},
     onHeaderClick: () => {},
     records: [],
