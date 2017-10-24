@@ -164,10 +164,12 @@ export default class DataTable extends Base {
   }
 
   handleClick(data, e) {
-    const returnedData = Object.assign({}, data);
-    returnedData.row = this.props.returnAllRecordsOnClick && !this.props.filterRecords ?
-      this.props.records[data.yCord] : data.row;
-    this.props.onClick(e.target, returnedData);
+    if (this.props.onClick) {
+      const returnedData = Object.assign({}, data);
+      returnedData.row = this.props.returnAllRecordsOnClick && !this.props.filterRecords ?
+        this.props.records[data.yCord] : data.row;
+      this.props.onClick(e.target, returnedData);
+    }
   }
 
   handleSelectAll = () => {

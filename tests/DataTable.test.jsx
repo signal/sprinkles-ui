@@ -180,7 +180,6 @@ describe('Table', () => {
 
   it('does not render a hover effect for a table row element without onClick event', () => {
     renderTable({
-      onClick: null,
       records,
     });
     ReactTestUtils.Simulate.mouseOver(row(1));
