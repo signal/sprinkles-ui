@@ -164,12 +164,10 @@ export default class DataTable extends Base {
   }
 
   handleClick(data, e) {
-    if (this.props.onClick) {
-      const returnedData = Object.assign({}, data);
-      returnedData.row = this.props.returnAllRecordsOnClick && !this.props.filterRecords ?
-        this.props.records[data.yCord] : data.row;
-      this.props.onClick(e.target, returnedData);
-    }
+    const returnedData = Object.assign({}, data);
+    returnedData.row = this.props.returnAllRecordsOnClick && !this.props.filterRecords ?
+      this.props.records[data.yCord] : data.row;
+    this.props.onClick(e.target, returnedData);
   }
 
   handleSelectAll = () => {
@@ -247,7 +245,7 @@ export default class DataTable extends Base {
     return (
       <TableCell
         key={`${xCord}-${yCord}`}
-        onClick={this.handleClick.bind(this,
+        onClick={this.props.onClick && this.handleClick.bind(this,
           {
             columnKey,
             xCord,
