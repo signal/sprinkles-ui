@@ -245,7 +245,7 @@ export default class DataTable extends Base {
     return (
       <TableCell
         key={`${xCord}-${yCord}`}
-        onClick={this.handleClick.bind(this,
+        onClick={this.props.onClick && this.handleClick.bind(this,
           {
             columnKey,
             xCord,
