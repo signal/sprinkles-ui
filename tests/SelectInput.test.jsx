@@ -21,7 +21,8 @@ describe('SelectInput', () => {
     const selectInputComponent = ReactTestUtils.renderIntoDocument(
       <SelectInput />,
     );
-    expect(selectInputComponent.SelectInputRef.style.border)
+    const selectInputContainer = ReactTestUtils.findRenderedDOMComponentWithClass(selectInputComponent, 'SelectInputContainer');
+    expect(selectInputContainer.style.border)
       .toBe(`1px solid ${FormColors.border.toLowerCase()}`);
     const displayNode = ReactDOM.findDOMNode(selectInputComponent.displayRef);
     expect(displayNode.textContent).toBe('--');
@@ -165,8 +166,8 @@ describe('SelectInput', () => {
         status={'error'}
       />,
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
-    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
+    const selectInputContainer = ReactTestUtils.findRenderedDOMComponentWithClass(selectInputComponent, 'SelectInputContainer');
+    expect(selectInputContainer.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.danger}`);
   });
 
   it('Does render with an orange shadow on warning status', () => {
@@ -175,8 +176,8 @@ describe('SelectInput', () => {
         status={'warning'}
       />,
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
-    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.warning}`);
+    const selectInputContainer = ReactTestUtils.findRenderedDOMComponentWithClass(selectInputComponent, 'SelectInputContainer');
+    expect(selectInputContainer.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.warning}`);
   });
 
   it('Does render with a green shadow on success status', () => {
@@ -185,8 +186,8 @@ describe('SelectInput', () => {
         status={'success'}
       />,
     );
-    const selectInputNode = ReactDOM.findDOMNode(selectInputComponent.SelectInputRef);
-    expect(selectInputNode.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
+    const selectInputContainer = ReactTestUtils.findRenderedDOMComponentWithClass(selectInputComponent, 'SelectInputContainer');
+    expect(selectInputContainer.style.boxShadow).toBe(`0 0 3px 1px ${NoticeColors.success}`);
   });
 
   it('Does return a valid state when a value has been selected', () => {

@@ -61,20 +61,23 @@ export default class Popover extends React.Component {
       width: this.props.contentWidth ? this.props.contentWidth : triggerEl.width,
     };
   }
-
   updatePosition(triggerEl) {
     if (triggerEl) {
-      // temp. place content on the page so we can get the height
+          // temp. place content on the page so we can get the height
       const div = document.createElement('div');
       div.style.position = 'absolute';
       document.body.appendChild(div);
-      const component = ReactDOM.render(triggerEl, div);
-      const node = ReactDOM.findDOMNode(component);
-      const triggerElRect = node.getBoundingClientRect();
-      this.setState({
-        position: this.calculatePosition(triggerElRect),
+      const clonedTargetWithRref = React.cloneElement(triggerEl, {
+        ref: instance => {
+          if (instance) {
+            const node = ReactDOM.findDOMNode(instance);
+            const triggerElRect = node.getBoundingClientRect();
+            this.setState({ position: this.calculatePosition(triggerElRect) });
+            div.remove();
+          }
+        },
       });
-      div.remove();
+      ReactDOM.render(clonedTargetWithRref, div);
     }
   }
 
