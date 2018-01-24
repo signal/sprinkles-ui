@@ -153,7 +153,7 @@ export default class SelectInput extends Base {
     return (
       <div
         style={style.SelectInput}
-        ref={c => this.SelectInputRef = c}
+        className="SelectInputContainer"
       >
         {this.renderDisplay(clr, style)}
       </div>);
