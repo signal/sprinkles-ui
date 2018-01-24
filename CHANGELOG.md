@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.9"></a>
+## [1.8.9](https://github.com/signal/sprinkles-ui/compare/v1.8.8...v1.8.9) (2018-01-24)
+
+
+### Bug Fixes
+
+* **All-Components:** Fix for github security warning due to marked package. ([#48](https://github.com/signal/sprinkles-ui/issues/48)) ([0f94aa2](https://github.com/signal/sprinkles-ui/commit/0f94aa2))
+* **Popover:** Fix Popover react 16 JS error. ([#46](https://github.com/signal/sprinkles-ui/issues/46)) ([ac3f182](https://github.com/signal/sprinkles-ui/commit/ac3f182))
+
+
+
 <a name="1.8.8"></a>
 ## [1.8.8](https://github.com/signal/sprinkles-ui/compare/v1.8.7...v1.8.8) (2017-10-26)
 
