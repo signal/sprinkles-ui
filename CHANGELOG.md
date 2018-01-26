@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.10"></a>
+## [1.8.10](https://github.com/signal/sprinkles-ui/compare/v1.8.9...v1.8.10) (2018-01-26)
+
+
+### Bug Fixes
+
+* **All-Components:** Move react packages to dev dependencies ([#50](https://github.com/signal/sprinkles-ui/issues/50)) ([188ddd2](https://github.com/signal/sprinkles-ui/commit/188ddd2))
+
+
+
 <a name="1.8.9"></a>
 ## [1.8.9](https://github.com/signal/sprinkles-ui/compare/v1.8.8...v1.8.9) (2018-01-24)
 
