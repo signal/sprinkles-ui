@@ -20,7 +20,7 @@
       "max-len": ["error", {
         "code": 150,
         "ignoreStrings": true
-      }],
+      }]
     },
     "globals": {
       "before": true,
