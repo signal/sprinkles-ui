@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.11"></a>
+## [1.8.11](https://github.com/signal/sprinkles-ui/compare/v1.8.10...v1.8.11) (2018-01-26)
+
+
+### Bug Fixes
+
+* **TableRow:** Typo in propTypes ([#51](https://github.com/signal/sprinkles-ui/issues/51)) ([623c4e6](https://github.com/signal/sprinkles-ui/commit/623c4e6))
+
+
+
 <a name="1.8.10"></a>
 ## [1.8.10](https://github.com/signal/sprinkles-ui/compare/v1.8.9...v1.8.10) (2018-01-26)
 
