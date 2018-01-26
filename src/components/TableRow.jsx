@@ -5,7 +5,7 @@ import Base from './Base';
 
 export default class TableRow extends Base {
 
-  static PropTypes = {
+  static propTypes = {
     children: PropTypes.node,
     isHoverable: PropTypes.bool,
     isSelected: PropTypes.bool,
