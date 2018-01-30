@@ -4,10 +4,10 @@
 import React from 'react';
 import Form from '../../src/components/Form';
 import Field from '../../src/components/Field';
-import EmailInput from '../../src/components/EmailInput';
-import PasswordInput from '../../src/components/PasswordInput';
-import SelectInput from '../../src/components/SelectInput';
-import ToggleInput from '../../src/components/ToggleInput';
+import EmailInput from '../../src/components/deprecated/EmailInput';
+import PasswordInput from '../../src/components/deprecated/PasswordInput';
+import SelectInput from '../../src/components/deprecated/SelectInput';
+import ToggleInput from '../../src/components/deprecated/ToggleInput';
 import Text from '../../src/components/Text';
 
 
