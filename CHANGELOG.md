@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.12"></a>
+## [1.8.12](https://github.com/signal/sprinkles-ui/compare/v1.8.11...v1.8.12) (2018-01-30)
+
+
+### Bug Fixes
+
+* **SearchInput:** Assigning directly to this.state is deprecated in cwrp ([#52](https://github.com/signal/sprinkles-ui/issues/52)) ([1a2262f](https://github.com/signal/sprinkles-ui/commit/1a2262f))
+
+
+
 <a name="1.8.11"></a>
 ## [1.8.11](https://github.com/signal/sprinkles-ui/compare/v1.8.10...v1.8.11) (2018-01-26)
 
