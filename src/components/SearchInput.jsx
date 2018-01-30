@@ -60,10 +60,10 @@ export default class SearchInput extends TextInput {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.state = {
+    this.setState({
       combinedSearchSettings: Object.assign({},
         nextProps.searchSettings, this.defaultSearchSettings),
-    };
+    });
     this.setupFuse(nextProps);
   }
 
