@@ -437,6 +437,20 @@ describe('Table', () => {
     expect(mockHandleChange).toBeCalledWith(result);
   });
 
+  it('keeps track of the last clicked row', () => {
+    renderTable({
+      records,
+      returnAllRecordsOnClick: true,
+      multiselectRowKey: 'age',
+    });
+    const rowNumber = 1;
+    const result = records[rowNumber].age;
+
+    expect(tableComponent.state.lastChecked).toBe(null);
+    ReactTestUtils.Simulate.click(cell(rowNumber, 0));
+    expect(tableComponent.state.lastChecked).toBe(result);
+  });
+
   it('generates colSpan for no results', () => {
     renderTable({
       headers,
