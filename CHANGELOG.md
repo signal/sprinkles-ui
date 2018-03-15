@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.10.0"></a>
+# [1.10.0](https://github.com/signal/sprinkles-ui/compare/v1.9.0...v1.10.0) (2018-03-15)
+
+
+### Features
+
+* **Component-DataTable:** Add unchecking to multiselect ([#56](https://github.com/signal/sprinkles-ui/issues/56)) ([533a084](https://github.com/signal/sprinkles-ui/commit/533a084))
+
+
+
 <a name="1.9.0"></a>
 # [1.9.0](https://github.com/signal/sprinkles-ui/compare/v1.8.13...v1.9.0) (2018-03-15)
 
