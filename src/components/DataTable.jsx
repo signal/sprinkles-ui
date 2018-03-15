@@ -58,6 +58,7 @@ export default class DataTable extends Base {
     this.state = {
       hoveredRow: null,
       isRowHovering: false,
+      lastChecked: null,
     };
   }
 
@@ -178,8 +179,24 @@ export default class DataTable extends Base {
     this.props.onChange(ids);
   }
 
-  handleRowSelect(id) {
-    this.props.onChange([id]);
+  handleRowSelect(id, event) {
+    let range = [id];
+
+    if (event.shiftKey) {
+      const currentRecords = this.processRecords().map(item => item.guid);
+      const lastSelectedIdx = currentRecords.indexOf(this.state.lastChecked);
+      const currentSelectedIdx = currentRecords.indexOf(id);
+      const selectedRows = [...this.props.selectedRows, id];
+
+      range = currentRecords
+        .slice(
+          Math.min(lastSelectedIdx, currentSelectedIdx),
+          Math.max(lastSelectedIdx, currentSelectedIdx) + 1,
+        )
+        .filter(item => selectedRows.indexOf(item) === -1);
+    }
+    this.props.onChange(range);
+    this.setState({ lastChecked: id });
   }
 
   renderHeaderItem() {
