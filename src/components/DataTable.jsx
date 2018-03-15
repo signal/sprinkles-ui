@@ -186,14 +186,20 @@ export default class DataTable extends Base {
       const currentRecords = this.processRecords().map(item => item.guid);
       const lastSelectedIdx = currentRecords.indexOf(this.state.lastChecked);
       const currentSelectedIdx = currentRecords.indexOf(id);
-      const selectedRows = [...this.props.selectedRows, id];
+      const selectedRows = [...this.props.selectedRows];
 
       range = currentRecords
-        .slice(
-          Math.min(lastSelectedIdx, currentSelectedIdx),
-          Math.max(lastSelectedIdx, currentSelectedIdx) + 1,
-        )
-        .filter(item => selectedRows.indexOf(item) === -1);
+      .slice(
+        Math.min(lastSelectedIdx, currentSelectedIdx),
+        Math.max(lastSelectedIdx, currentSelectedIdx) + 1,
+      );
+
+      const isUnchecking = selectedRows.indexOf(id) === -1;
+      if (isUnchecking) {
+        range = range.filter(item => selectedRows.indexOf(item) === -1);
+      } else {
+        range = range.filter(item => selectedRows.indexOf(item) !== -1);
+      }
     }
     this.props.onChange(range);
     this.setState({ lastChecked: id });
