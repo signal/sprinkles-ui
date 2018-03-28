@@ -5,11 +5,79 @@
 import React from 'react';
 import color from 'color';
 import PropTypes from 'prop-types';
-import styledComonent from '../shared/styledComponent';
+import styledComponent from '../shared/styledComponent';
 import Base from './Base';
 import Checkbox from './Checkbox';
 import TableCell from './TableCell';
 import TableRow from './TableRow';
+
+const tableStyles = clr => ({
+  border: 'none',
+  borderRight: `1px solid ${clr.structuralColors.divider}`,
+  borderLeft: `1px solid ${clr.structuralColors.divider}`,
+  color: clr.textColors.primary,
+  '& thead': {
+    '& tr': {
+      background: clr.backgroundColors.tableHeader,
+      borderTop: `1px solid ${clr.structuralColors.divider}`,
+      borderBottom: `1px solid ${clr.structuralColors.divider}`,
+      '& th': {
+        background: clr.backgroundColors.tableHeader,
+        border: 'none',
+        color: clr.textColors.tableHeader,
+        cursor: 'pointer',
+        fontWeight: '600',
+        padding: '10px 20px',
+        textAlign: 'left',
+        '.sui-filtered': {
+          background: color(clr.backgroundColors.tableHeader)
+            .darken(0.1)
+            .hexString(),
+          borderBottom: `1px solid ${clr.structuralColors.divider}`,
+        },
+        '& .sui-down': {
+          borderLeft: '4px solid transparent',
+          borderRight: '4px solid transparent',
+          borderTop: '4px dashed',
+          color: clr.textColors.tableHeader,
+          display: 'inline-block',
+          height: 0,
+          marginRight: 5,
+          verticalAlign: 'middle',
+          width: 0,
+        },
+        '& .sui-up': {
+          borderBottom: '4px dashed',
+          borderLeft: '4px solid transparent',
+          borderRight: '4px solid transparent',
+          color: clr.textColors.tableHeader,
+          display: 'inline-block',
+          height: 0,
+          marginRight: 5,
+          verticalAlign: 'middle',
+          width: 0,
+        },
+      },
+    },
+  },
+  '& tr': {
+    '.sui-selected': {
+      background: clr.backgroundColors.selected,
+    },
+    '.sui-hoverable': {
+      ':hover': {
+        background: clr.backgroundColors.hover,
+        cursor: 'Pointer',
+      },
+    },
+    '& td': {
+      border: 'none',
+      borderBottom: `1px solid ${clr.structuralColors.divider}`,
+      color: clr.textColors.primary,
+      padding: '10px 20px',
+    },
+  },
+});
 
 export default class DataTable extends Base {
 
@@ -62,6 +130,10 @@ export default class DataTable extends Base {
     };
   }
 
+  componentWillMount() {
+    this.StyledTable = styledComponent('table', tableStyles(this.getColors()));
+  }
+
   includeSubRecords = (record) => {
     const filteredRecord = {};
     Object.getOwnPropertyNames(record).forEach((val) => {
@@ -72,17 +144,10 @@ export default class DataTable extends Base {
     return filteredRecord;
   }
 
-  filteredSubRecords = (record) => {
-    let result = false;
-    Object.getOwnPropertyNames(record).forEach((val) => {
-      this.props.filterRecords.forEach((filterVal) => {
-        if (filterVal[val] === record[val]) {
-          result = true;
-        }
-      });
-    });
-    return result;
-  }
+  filteredSubRecords = (fields) => (record) =>
+    fields.some((val) =>
+      this.props.filterRecords.some((filterVal) =>
+        (filterVal[val] === record[val])));
 
   sortRecords = (record) => {
     const newRecord = {};
@@ -146,7 +211,10 @@ export default class DataTable extends Base {
       processedRecords = processedRecords.map(this.includeSubRecords);
     }
     if (this.props.filterRecords) {
-      processedRecords = processedRecords.filter(this.filteredSubRecords);
+      const fields = Object.getOwnPropertyNames(processedRecords[0]);
+      processedRecords = processedRecords.filter(
+        this.filteredSubRecords(fields),
+      );
     }
     if (this.props.columns && this.props.columns.order) {
       processedRecords = processedRecords.map(this.sortRecords);
@@ -285,20 +353,21 @@ export default class DataTable extends Base {
     );
   }
 
-  renderRow(row, i) {
-    const rowItems = Object.keys(row).map((item, ri) => this.renderItems(item, ri, row, i));
+  renderRow(row, i, rowKeys, hoverable) {
     const multiselectRowKey = this.props.multiselectRowKey;
     const multiSelectId = multiselectRowKey && row[multiselectRowKey];
-    const multiSelectItem = this.renderCheckBox(0, row, multiSelectId);
-    return rowItems.length > 0 ? (
+    return rowKeys.length > 0 ? (
       <TableRow
         key={`row-${i}`}
-        isHoverable={typeof (this.props.onClick) === 'function'}
+        isHoverable={hoverable}
         isSelected={this.props.selectedRows.indexOf(multiSelectId) > -1}
         rowIndex={i}
+        rowKey={multiSelectId}
       >
-        { multiselectRowKey ? multiSelectItem : undefined }
-        { rowItems }
+        {multiselectRowKey ? this.renderCheckBox(0, row, multiSelectId) : undefined}
+        {rowKeys.map((item, ri) =>
+          this.renderItems(item, ri, row, i),
+        )}
       </TableRow>
     ) : null;
   }
@@ -324,92 +393,27 @@ export default class DataTable extends Base {
   }
 
   renderRows(records) {
-    const rowResults = records.length > 0 ?
-      records.map((item, i) => this.renderRow(item, i)) : [];
+    const rowKeys = records.length ? Object.keys(records[0]) : [];
+    const hoverable = typeof this.props.onClick === 'function';
+    const rowResults =
+      records.length > 0
+        ? records.map((item, i) => this.renderRow(item, i, rowKeys, hoverable))
+        : [];
     return rowResults[0] ? rowResults : this.renderNoResults();
   }
 
   render() {
-    const clr = this.getColors();
     const records = this.processRecords();
-    const style = {
-      Table: {
-        border: 'none',
-        borderRight: `1px solid ${clr.structuralColors.divider}`,
-        borderLeft: `1px solid ${clr.structuralColors.divider}`,
-        color: clr.textColors.primary,
-        '& thead': {
-          '& tr': {
-            background: clr.backgroundColors.tableHeader,
-            borderTop: `1px solid ${clr.structuralColors.divider}`,
-            borderBottom: `1px solid ${clr.structuralColors.divider}`,
-            '& th': {
-              background: clr.backgroundColors.tableHeader,
-              border: 'none',
-              color: clr.textColors.tableHeader,
-              cursor: 'pointer',
-              fontWeight: '600',
-              padding: '10px 20px',
-              textAlign: 'left',
-              '.sui-filtered': {
-                background: color(clr.backgroundColors.tableHeader).darken(0.1).hexString(),
-                borderBottom: `1px solid ${clr.structuralColors.divider}`,
-              },
-              '& .sui-down': {
-                borderLeft: '4px solid transparent',
-                borderRight: '4px solid transparent',
-                borderTop: '4px dashed',
-                color: clr.textColors.tableHeader,
-                display: 'inline-block',
-                height: 0,
-                marginRight: 5,
-                verticalAlign: 'middle',
-                width: 0,
-              },
-              '& .sui-up': {
-                borderBottom: '4px dashed',
-                borderLeft: '4px solid transparent',
-                borderRight: '4px solid transparent',
-                color: clr.textColors.tableHeader,
-                display: 'inline-block',
-                height: 0,
-                marginRight: 5,
-                verticalAlign: 'middle',
-                width: 0,
-              },
-            },
-          },
-        },
-        '& tr': {
-          '.sui-selected': {
-            background: clr.backgroundColors.selected,
-          },
-          '.sui-hoverable': {
-            ':hover': {
-              background: clr.backgroundColors.hover,
-              cursor: 'Pointer',
-            },
-          },
-          '& td': {
-            border: 'none',
-            borderBottom: `1px solid ${clr.structuralColors.divider}`,
-            color: clr.textColors.primary,
-            padding: '10px 20px',
-          },
-        },
-      },
-    };
-    const StyledTable = styledComonent('table', style.Table);
+
     return (
-      <StyledTable>
+      <this.StyledTable>
         <thead>
           {this.renderHeaderItems()}
         </thead>
         <tbody>
           {this.renderRows(records)}
         </tbody>
-      </StyledTable>
+      </this.StyledTable>
     );
   }
-
 }

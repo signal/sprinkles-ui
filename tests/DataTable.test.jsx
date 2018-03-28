@@ -146,7 +146,7 @@ describe('Table', () => {
 
   it('Does render a Table with cells', () => {
     const tRowCells = tBody.getElementsByTagName('td').length;
-    expect(tRowCells).toBe(21);
+    expect(tRowCells).toBe(20);
   });
 
   it('Renders a Table with limited data selected', () => {
