@@ -10,23 +10,28 @@ export default class TableRow extends Base {
     isHoverable: PropTypes.bool,
     isSelected: PropTypes.bool,
     style: stylePropType,
+    rowKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }
 
   displayName = 'TableRow';
 
+  shouldComponentUpdate(nextProps) {
+    // If rowKey is specified we can be smarter about re-drawing
+    return this.props.rowKey === undefined ||
+      this.props.rowKey !== nextProps.rowKey ||
+      nextProps.isSelected !== this.props.isSelected;
+  }
+
   render() {
     const { isHoverable, isSelected, style } = this.props;
-    const classNames = [];
-    if (isHoverable) {
-      classNames.push('sui-hoverable');
-    }
-    if (isSelected) {
-      classNames.push('sui-selected');
-    }
-    const className = classNames.join(' ');
+    const hoverableClass = isHoverable ? 'sui-hoverable' : '';
+    const selectedClass = isSelected ? 'sui-selected' : '';
     return (
       <tr
-        className={className}
+        className={`${hoverableClass} ${selectedClass}`}
         style={style}
       >
         { this.props.children }
