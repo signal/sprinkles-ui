@@ -20,18 +20,18 @@ export default class TableRow extends Base {
 
   shouldComponentUpdate(nextProps) {
     // If rowKey is specified we can be smarter about re-drawing
-    return this.props.rowKey === undefined ||
+    return !this.props.rowKey ||
       this.props.rowKey !== nextProps.rowKey ||
       nextProps.isSelected !== this.props.isSelected;
   }
 
   render() {
     const { isHoverable, isSelected, style } = this.props;
-    const hoverableClass = isHoverable ? 'sui-hoverable' : '';
+    const hoverableClass = isHoverable ? 'sui-hoverable ' : '';
     const selectedClass = isSelected ? 'sui-selected' : '';
     return (
       <tr
-        className={`${hoverableClass} ${selectedClass}`}
+        className={`${hoverableClass}${selectedClass}`}
         style={style}
       >
         { this.props.children }

@@ -210,7 +210,7 @@ export default class DataTable extends Base {
     if (this.props.recordInclusion) {
       processedRecords = processedRecords.map(this.includeSubRecords);
     }
-    if (this.props.filterRecords) {
+    if (this.props.filterRecords && processedRecords.length) {
       const fields = Object.getOwnPropertyNames(processedRecords[0]);
       processedRecords = processedRecords.filter(
         this.filteredSubRecords(fields),
