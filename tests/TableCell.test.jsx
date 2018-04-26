@@ -15,6 +15,7 @@ const renderCell = (props) => {
         <tr>
           <TableCell
             colSpan={theProps.colSpan}
+            level={theProps.level}
             onClick={theProps.onClick}
             width={theProps.width}
           >{theProps.children}
@@ -59,5 +60,11 @@ describe('TableCell', () => {
       width: '10px',
     });
     expect(tableCellNode.style.width).toBe('10px');
+  });
+  it('indents a child category', () => {
+    renderCell({
+      level: 2,
+    });
+    expect(tableCellNode.style.paddingLeft).toBe('40px');
   });
 });

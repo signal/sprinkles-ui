@@ -9,6 +9,7 @@ export default class TableCell extends Base {
   static propTypes = {
     colSpan: PropTypes.number,
     children: PropTypes.node,
+    level: PropTypes.number,
     onClick: PropTypes.func,
     width: PropTypes.string,
   }
@@ -20,11 +21,17 @@ export default class TableCell extends Base {
   displayName = 'TableCell';
 
   render() {
+    const style = { width: this.props.width };
+
+    if (this.props.level) {
+      style.paddingLeft = `${(20 * this.props.level)}px`;
+    }
     return (
       <td  // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
+        className={`row row-level-${this.props.level}`}
         colSpan={this.props.colSpan}
         onClick={this.props.onClick}
-        style={{ width: this.props.width }}
+        style={style}
       >
         {this.props.children}
       </td>

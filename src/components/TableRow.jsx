@@ -7,6 +7,7 @@ export default class TableRow extends Base {
 
   static propTypes = {
     children: PropTypes.node,
+    isCollapsed: PropTypes.bool,
     isHoverable: PropTypes.bool,
     isSelected: PropTypes.bool,
     style: stylePropType,
@@ -16,6 +17,9 @@ export default class TableRow extends Base {
     ]),
   }
 
+  static defaultProps = {
+    isCollapsed: false,
+  };
   displayName = 'TableRow';
 
   shouldComponentUpdate(nextProps) {
@@ -26,12 +30,21 @@ export default class TableRow extends Base {
   }
 
   render() {
-    const { isHoverable, isSelected, style } = this.props;
-    const hoverableClass = isHoverable ? 'sui-hoverable ' : '';
-    const selectedClass = isSelected ? 'sui-selected' : '';
+    const { isCollapsed, isHoverable, isSelected, style } = this.props;
+    const classNames = [];
+    if (isCollapsed) {
+      classNames.push('collapsed');
+    }
+    if (isHoverable) {
+      classNames.push('sui-hoverable');
+    }
+    if (isSelected) {
+      classNames.push('sui-selected');
+    }
+    const className = classNames.join(' ');
     return (
       <tr
-        className={`${hoverableClass}${selectedClass}`}
+        className={`${className}`}
         style={style}
       >
         { this.props.children }

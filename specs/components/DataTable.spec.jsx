@@ -16,30 +16,34 @@ describe('DataTable', function () {
     name: 'Sue',
     age: 25,
     color: 'blue',
+    level: 1,
   },
   {
     name: 'Rachel',
     age: 23,
     color: 'blue',
+    level: 1,
   },
   {
     name: 'Frank',
     age: 20,
     color: 'green',
+    level: 2,
   },
   {
     name: 'Larry',
     age: 39,
     color: 'red',
+    level: 3,
   },
   {
     name: 'Jose',
     age: 19,
     color: 'purple',
+    level: 1,
   },
   ];
-
-  this.recordInclusion = ['name', 'age'];
+  this.recordInclusion = ['name', 'age', 'level'];
   this.filterRecords = [{ color: 'blue', age: 25 }];
 
   this.header(`
@@ -73,6 +77,14 @@ describe('DataTable', function () {
       {
         headers: this.headers,
         records: [],
+      });
+  });
+  it('Renders hierarchical rows', () => {
+    this.loadTable(
+      {
+        headers: this.headers,
+        records: this.records,
+        recordInclusion: ['name', 'age', 'color', 'level'],
       });
   });
   it('Change selected row', () => {
@@ -227,6 +239,7 @@ describe('DataTable', function () {
   it('Order by age', () => {
     this.loadTable(
       {
+        hasSubRows: true,
         headers: this.headers,
         records: this.records,
         orderBy: {

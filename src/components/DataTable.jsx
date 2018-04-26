@@ -61,6 +61,9 @@ const tableStyles = clr => ({
     },
   },
   '& tr': {
+    '.collapsed': {
+      display: 'none',
+    },
     '.sui-selected': {
       background: clr.backgroundColors.selected,
     },
@@ -80,16 +83,20 @@ const tableStyles = clr => ({
 });
 
 export default class DataTable extends Base {
-
   static propTypes = {
     columns: PropTypes.shape({
       order: PropTypes.array,
       width: PropTypes.array,
     }),
+    collapsableChildren: PropTypes.array,
     filterRecords: PropTypes.array,
+    hasSubRows: PropTypes.bool, // record key has to be called level for now
     headers: PropTypes.object,
     multiselectRowKey: PropTypes.string,
     noRecordsText: PropTypes.string,
+    onChange: PropTypes.func,
+    onClick: PropTypes.func,
+    onHeaderClick: PropTypes.func,
     orderBy: PropTypes.shape({
       column: PropTypes.string,
       direction: PropTypes.oneOf(['asc', 'desc']),
@@ -99,23 +106,24 @@ export default class DataTable extends Base {
       formatter: PropTypes.oneOf(['date']),
       getSortValue: PropTypes.func,
     }),
-    onClick: PropTypes.func,
-    onHeaderClick: PropTypes.func,
-    onChange: PropTypes.func,
-    records: PropTypes.array,
     recordInclusion: PropTypes.array,
+    records: PropTypes.array,
+    restrictSort: PropTypes.bool,
     returnAllRecordsOnClick: PropTypes.bool,
     selectedColumn: PropTypes.string,
     selectedRows: PropTypes.arrayOf(PropTypes.string),
-  }
+  };
 
   static defaultProps = {
-    noRecordsText: 'No records found.',
+    collapsableChildren: [],
+    hasSubRows: false,
     multiselectRowKey: '',
-    onClick: null,
+    noRecordsText: 'No records found.',
     onChange: () => {},
+    onClick: null,
     onHeaderClick: () => {},
     records: [],
+    restrictSort: false,
     selectedRows: [],
   };
 
@@ -134,35 +142,42 @@ export default class DataTable extends Base {
     this.StyledTable = styledComponent('table', tableStyles(this.getColors()));
   }
 
-  includeSubRecords = (record) => {
+  includeSubRecords = record => {
     const filteredRecord = {};
-    Object.getOwnPropertyNames(record).forEach((val) => {
+    Object.getOwnPropertyNames(record).forEach(val => {
       if (this.props.recordInclusion.indexOf(val) > -1) {
         filteredRecord[val] = record[val];
       }
     });
     return filteredRecord;
-  }
+  };
 
   filteredSubRecords = (fields) => (record) =>
     fields.some((val) =>
       this.props.filterRecords.some((filterVal) =>
         (filterVal[val] === record[val])));
 
-  sortRecords = (record) => {
+  sortRecords = record => {
     const newRecord = {};
-    this.props.columns.order.forEach((val) => {
+    this.props.columns.order.forEach(val => {
       newRecord[val] = record[val];
     });
+    if (this.props.hasSubRows && record.level) {
+      newRecord.level = record.level;
+      newRecord.recordId = record.recordId;
+    }
     return newRecord;
-  }
+  };
 
   processHeaders() {
     let headers = this.props.headers;
+    if (headers && headers.level) {
+      delete headers.level;
+    }
     if (!headers) {
       const firstRowCopy = Object.assign({}, this.props.records[0]);
 
-      Object.keys(firstRowCopy).forEach((key) => {
+      Object.keys(firstRowCopy).forEach(key => {
         firstRowCopy[key] = key;
       });
 
@@ -172,13 +187,13 @@ export default class DataTable extends Base {
     if (this.props.columns && this.props.columns.order) {
       return this.sortRecords(headers);
     }
-
     if (this.props.recordInclusion) {
       const filteredHeaders = {};
-      this.props.recordInclusion.forEach((record) => {
-        filteredHeaders[record] = headers[record];
+      this.props.recordInclusion.forEach(record => {
+        if (record !== 'level') {
+          filteredHeaders[record] = headers[record];
+        }
       });
-
       return filteredHeaders;
     }
 
@@ -187,13 +202,15 @@ export default class DataTable extends Base {
 
   sortColumnRecords(mappedRecords) {
     const ops = {
-      asc: (a, b) =>
-         +(a > b) || +(a === b) - 1,
-      desc: (a, b) =>
-         +(a < b) || +(a === b) - 1,
+      asc: (a, b) => +(a > b) || +(a === b) - 1,
+      desc: (a, b) => +(a < b) || +(a === b) - 1,
     };
 
     const { getSortValue = value => value } = this.props.orderBy;
+
+    if (this.props.hasSubRows) {
+      return mappedRecords;
+    }
 
     return mappedRecords.sort((a, b) => {
       switch (this.props.orderBy.formatter) {
@@ -212,21 +229,19 @@ export default class DataTable extends Base {
     }
     if (this.props.filterRecords && processedRecords.length) {
       const fields = Object.getOwnPropertyNames(processedRecords[0]);
-      processedRecords = processedRecords.filter(
-        this.filteredSubRecords(fields),
-      );
+      processedRecords = processedRecords.filter(this.filteredSubRecords(fields));
     }
     if (this.props.columns && this.props.columns.order) {
       processedRecords = processedRecords.map(this.sortRecords);
     }
     if (this.props.orderBy) {
-      const mappedColValues = processedRecords.map((record, i) => (
-        { index: i, value: record[this.props.orderBy.column] }
-      ));
+      const mappedColValues = processedRecords.map((record, i) => ({
+        index: i,
+        level: record.level ? record.level : null,
+        value: record[this.props.orderBy.column],
+      }));
       const sortedColumnValues = this.sortColumnRecords(mappedColValues);
-      const orderdRecords = sortedColumnValues.map((el) =>
-        processedRecords[el.index],
-      );
+      const orderdRecords = sortedColumnValues.map(el => processedRecords[el.index]);
       processedRecords = orderdRecords;
     }
     return processedRecords;
@@ -234,18 +249,17 @@ export default class DataTable extends Base {
 
   handleClick(data, e) {
     const returnedData = Object.assign({}, data);
-    returnedData.row = this.props.returnAllRecordsOnClick && !this.props.filterRecords ?
-      this.props.records[data.yCord] : data.row;
+    returnedData.row = this.props.returnAllRecordsOnClick && !this.props.filterRecords ? this.props.records[data.yCord] : data.row;
     this.props.onClick(e.target, returnedData);
   }
 
   handleSelectAll = () => {
     const multiselectRowKey = this.props.multiselectRowKey;
     const ids = this.processRecords()
-        .map(row => (multiselectRowKey && row[multiselectRowKey]))
-        .filter(row => !!row);
+      .map(row => multiselectRowKey && row[multiselectRowKey])
+      .filter(row => !!row);
     this.props.onChange(ids);
-  }
+  };
 
   handleRowSelect(id, event) {
     let range = [id];
@@ -256,11 +270,7 @@ export default class DataTable extends Base {
       const currentSelectedIdx = currentRecords.indexOf(id);
       const selectedRows = [...this.props.selectedRows];
 
-      range = currentRecords
-      .slice(
-        Math.min(lastSelectedIdx, currentSelectedIdx),
-        Math.max(lastSelectedIdx, currentSelectedIdx) + 1,
-      );
+      range = currentRecords.slice(Math.min(lastSelectedIdx, currentSelectedIdx), Math.max(lastSelectedIdx, currentSelectedIdx) + 1);
 
       const isUnchecking = selectedRows.indexOf(id) === -1;
       if (isUnchecking) {
@@ -276,76 +286,59 @@ export default class DataTable extends Base {
   renderHeaderItem() {
     const headers = this.processHeaders();
     const headerTitles = Object.keys(headers).map((header, i) => {
-      const arrowCSSClass = this.props.orderBy && this.props.orderBy.direction === 'asc'
-        ? 'sui-up' : 'sui-down';
+      const arrowCSSClass = this.props.orderBy && this.props.orderBy.direction === 'asc' ? 'sui-up' : 'sui-down';
       const isFilteredHeader = this.props.orderBy && this.props.orderBy.column === header;
-      return (<th
-        key={i}
-        onClick={this.props.onHeaderClick.bind(this, header)}
-        className={(isFilteredHeader ? 'sui-filtered' : '')}
-      >
-        {isFilteredHeader && <span className={arrowCSSClass} />}
-        {headers[header]}
-      </th>);
-    },
-    );
+      let handleHeaderSort = this.props.onHeaderClick.bind(this, header);
+      if (this.props.restrictSort && header !== this.props.orderBy.column) {
+        handleHeaderSort = () => {};
+      }
+      return (
+        <th key={i} onClick={handleHeaderSort} className={isFilteredHeader ? 'sui-filtered' : ''}>
+          {isFilteredHeader && <span className={arrowCSSClass} />}
+          {headers[header]}
+        </th>
+      );
+    });
     const selectAllHeader = (
-      <th
-        key={0}
-        onClick={this.handleSelectAll}
-      >
-        <Checkbox
-          ref={c => this.checkBoxHeaderRef = c}
-          checked={false}
-        />
+      <th key={0} onClick={this.handleSelectAll}>
+        <Checkbox ref={c => (this.checkBoxHeaderRef = c)} checked={false} />
       </th>
     );
     return this.props.multiselectRowKey ? [selectAllHeader, headerTitles] : headerTitles;
   }
 
   renderHeaderItems() {
-    return (
-      <TableRow
-        rowIndex={0}
-      >
-        {this.renderHeaderItem()}
-      </TableRow>
-    );
+    return <TableRow rowIndex={0}>{this.renderHeaderItem()}</TableRow>;
   }
 
   renderCheckBox(xCord, row, id) {
     this.checkBoxRefs = [];
     const shouldBeChecked = this.props.selectedRows.indexOf(id) > -1;
     return (
-      <TableCell
-        key={xCord}
-        onClick={this.handleRowSelect.bind(this, id)}
-      >
-        <Checkbox
-          checked={shouldBeChecked}
-          ref={(c) => this.checkBoxRefs.push(c)}
-        />
+      <TableCell key={xCord} onClick={this.handleRowSelect.bind(this, id)}>
+        <Checkbox checked={shouldBeChecked} ref={c => this.checkBoxRefs.push(c)} />
       </TableCell>
     );
   }
 
-  renderItems(columnKey, xCord, row, yCord) {
+  renderItems(columnKey, xCord, row, yCord, level, recordId) {
     const cellData = row[columnKey];
-    const cellWidth = (this.props.columns && this.props.columns.width)
-      ? this.props.columns.width[xCord] : 'auto';
+    const cellWidth = this.props.columns && this.props.columns.width ? this.props.columns.width[xCord] : 'auto';
     return (
       <TableCell
         key={`${xCord}-${yCord}`}
-        onClick={this.props.onClick && this.handleClick.bind(this,
-          {
-            columnKey,
-            xCord,
+        level={xCord === 0 ? level : null}
+        onClick={
+          this.props.onClick &&
+          this.handleClick.bind(this, {
             cellData,
+            columnKey,
+            recordId,
             row,
+            xCord,
             yCord,
-          },
-         )
-       }
+          })
+        }
         width={cellWidth}
       >
         {row[columnKey]}
@@ -353,21 +346,31 @@ export default class DataTable extends Base {
     );
   }
 
-  renderRow(row, i, rowKeys, hoverable) {
+  renderRow(r, i, rowKeys, hoverable) {
+    const row = r;
+    const level = row.level;
+    const recordId = row.recordId;
+    delete row.level;
+    delete row.recordId;
     const multiselectRowKey = this.props.multiselectRowKey;
     const multiSelectId = multiselectRowKey && row[multiselectRowKey];
+
     return rowKeys.length > 0 ? (
       <TableRow
-        key={`row-${i}`}
+        isCollapsed={!!this.props.collapsableChildren.find(id => id === recordId)}
         isHoverable={hoverable}
         isSelected={this.props.selectedRows.indexOf(multiSelectId) > -1}
+        key={`row-${i}`}
         rowIndex={i}
         rowKey={multiSelectId}
       >
         {multiselectRowKey ? this.renderCheckBox(0, row, multiSelectId) : undefined}
-        {rowKeys.map((item, ri) =>
-          this.renderItems(item, ri, row, i),
-        )}
+        {rowKeys.map((item, ri) => {
+          if (item !== 'level' && item !== 'recordId') {
+            return this.renderItems(item, ri, row, i, level, recordId);
+          }
+          return null;
+        })}
       </TableRow>
     ) : null;
   }
@@ -380,14 +383,8 @@ export default class DataTable extends Base {
     }
 
     return (
-      <TableRow
-        rowIndex={0}
-      >
-        <TableCell
-          colSpan={colSpan > 0 ? colSpan : 1}
-        >
-          {this.props.noRecordsText}
-        </TableCell>
+      <TableRow rowIndex={0}>
+        <TableCell colSpan={colSpan > 0 ? colSpan : 1}>{this.props.noRecordsText}</TableCell>
       </TableRow>
     );
   }
@@ -395,24 +392,16 @@ export default class DataTable extends Base {
   renderRows(records) {
     const rowKeys = records.length ? Object.keys(records[0]) : [];
     const hoverable = typeof this.props.onClick === 'function';
-    const rowResults =
-      records.length > 0
-        ? records.map((item, i) => this.renderRow(item, i, rowKeys, hoverable))
-        : [];
+    const rowResults = records.length > 0 ? records.map((item, i) => this.renderRow(item, i, rowKeys, hoverable)) : [];
     return rowResults[0] ? rowResults : this.renderNoResults();
   }
 
   render() {
     const records = this.processRecords();
-
     return (
       <this.StyledTable>
-        <thead>
-          {this.renderHeaderItems()}
-        </thead>
-        <tbody>
-          {this.renderRows(records)}
-        </tbody>
+        <thead>{this.renderHeaderItems()}</thead>
+        <tbody>{this.renderRows(records)}</tbody>
       </this.StyledTable>
     );
   }
