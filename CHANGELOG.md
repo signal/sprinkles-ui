@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://github.com/signal/sprinkles-ui/compare/v1.10.2...v1.11.0) (2018-04-26)
+
+
+### Features
+
+* **DataTable:** Add sub-rows handling based on records structure ([#59](https://github.com/signal/sprinkles-ui/issues/59)) ([8223516](https://github.com/signal/sprinkles-ui/commit/8223516))
+
+
+
 <a name="1.10.2"></a>
 ## [1.10.2](https://github.com/signal/sprinkles-ui/compare/v1.10.1...v1.10.2) (2018-03-28)
 
