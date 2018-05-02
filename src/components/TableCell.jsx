@@ -22,13 +22,15 @@ export default class TableCell extends Base {
 
   render() {
     const style = { width: this.props.width };
+    let levelClass = '';
 
     if (this.props.level) {
       style.paddingLeft = `${(20 * this.props.level)}px`;
+      levelClass = `row-level-${this.props.level}`;
     }
     return (
       <td  // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
-        className={`row row-level-${this.props.level}`}
+        className={`row ${levelClass}`}
         colSpan={this.props.colSpan}
         onClick={this.props.onClick}
         style={style}
