@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.11.1"></a>
+## [1.11.1](https://github.com/signal/sprinkles-ui/compare/v1.11.0...v1.11.1) (2018-05-02)
+
+
+### Bug Fixes
+
+* **DataTable:** Fix null/undefined in CSS class names for parent & subrows ([#60](https://github.com/signal/sprinkles-ui/issues/60)) ([3065eb1](https://github.com/signal/sprinkles-ui/commit/3065eb1))
+
+
+
 <a name="1.11.0"></a>
 # [1.11.0](https://github.com/signal/sprinkles-ui/compare/v1.10.2...v1.11.0) (2018-04-26)
 
